@@ -23,7 +23,6 @@ ARCHIVE: an object with every source and show in the Archive
 // relative path of the show audio folder, favicon, and Weird Waves button folder
 const paths = {
 	show: "./audio/shows/",
-	favicon: "./images/favicons/",
 	button: "./images/buttons/weird-waves-"
 };
 
@@ -44,11 +43,7 @@ let showIDs = window.localStorage.getItem("playlist") ? JSON.parse(window.localS
 =============== */
 
 // HTML elements
-const favicon = {
-	"SVG": document.head.querySelector('[rel~="icon"][href$=".svg"]'),
-	"ico": document.head.querySelector('[href$=".ico"]')
-},
-page = {
+const page = {
 	"radio": document.getElementById("radio-main"),
 	"playlist": document.getElementById("playlist"),
 	"playlistImportExport": document.getElementById("playlist-import-export"),
@@ -566,8 +561,7 @@ function switchTheme(themeName) {
 	swapClass("theme", themeName);
 	styles.theme = themeName;
 
-	favicon.SVG.href = paths.favicon + themeName + ".svg";
-	favicon.ico.href = paths.favicon + themeName + ".ico";
+	switchFavicon(themeName);
 
 	document.getElementById("weird-waves-button-png").src = paths.button + themeName + ".png";
 	document.getElementById("weird-waves-button-svg").src = paths.button + themeName + ".svg";
