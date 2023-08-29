@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Weird Waves</title>
+		<link>https://weirdwaves.net</link>
+		<atom:link href="https://weirdwaves.net/weirdwaves-feed.rss" rel="self" type="application/rss+xml" />
+		<description>Audio horror broadcasting online, from Old Time Radio to classic horror story audiobooks to freaky modern podcasts.</description>
+		<language>en-GB</language>
+		<ttl>1440</ttl>
+
+		<image>
+			<url>https://weirdwaves.net/images/social-card.png</url>
+			<title>Weird Waves</title>
+			<link>https://weirdwaves.net</link>
+			<width>64</width>
+			<height>64</height>
+		</image>
+
+		<item>
+			<title>Weird Waves News: 2023-08-29</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?91</guid>
+			<description>Refined the list of banger shows (defined in the archive part of the script, only relevant when you click the "Add random banger" button on the site).</description>
+			<pubDate>Tue, 29 Aug 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>Weird Waves News: 2023-08-28</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?90</guid>
+			<description>Tweaked subheading margin sizes for better readability.</description>
+			<pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>Weird Waves News: 2023-08-28</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?89</guid>
+			<description>Added a "copyright-safe" mode that ignores more-recent copyright material when adding random shows or the entire archive to the playlist.</description>
+			<pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>Weird Waves News: 2023-08-22</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?88</guid>
+			<description>Fixed a minor bug with the "Add series to playlist" buttons.</description>
+			<pubDate>Tue, 22 Aug 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>Weird Waves News: 2023-08-22</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?87</guid>
+			<description>Fixed a bad script link in the News Archive.</description>
+			<pubDate>Tue, 22 Aug 2023 00:00:00 +0000</pubDate>
+		</item>
+	</channel>
+</rss>
