@@ -403,7 +403,7 @@ function scrollToSeries(series) {
 
 // add entire archive to playlist; load top show
 function addArchive() {
-	getShowIDsFromPlaylist();
+	showIDs = [];
 	for (const series of archive) {
 		if (!settings.copyrightSafety || series.copyrightSafe) {
 			for (const show of series.shows) showIDs.push(series.code + "-" + show.code);
