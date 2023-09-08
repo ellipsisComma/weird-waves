@@ -14,7 +14,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style-2023-09-05.css" media="all">
+	<link rel="stylesheet" type="text/css" href="./style-2023-09-07.css" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -279,12 +279,18 @@
 	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
-	<dl id="stats-list"></dl>
-	<h4>Hours by source</h4>
+	<dl id="archive-stats-list"></dl>
+	<h4>Series stats</h4>
 	<svg id="loading-spinner-show-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
-	<dl id="series-show-stats"></dl>
+	<div id="series-stats-content" class="hidden">
+		<button id="series-stats-order-button" class="push-button" type="button" data-order="duration">Order by show counts</button>
+		<dl id="series-durations" class="series-stats-list">
+		</dl>
+		<dl id="series-show-counts" class="series-stats-list hidden">
+		</dl>
+	</div>
 </div><!--#about end-->
 
 
@@ -488,6 +494,6 @@
 
 
 
-<script src="./main-2023-09-05.js"></script>
+<script src="./main-2023-09-07.js"></script>
 </body>
 </html>

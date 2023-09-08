@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>Weird Waves News: 2023-09-07</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?94</guid>
+			<description>Added series show counts back in as another option for re-ordering the series stats list in the "About" section and corrected a minor typo in the Archive.</description>
+			<pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>Weird Waves News: 2023-09-05</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?93</guid>
@@ -42,13 +49,6 @@
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?90</guid>
 			<description>Tweaked subheading margin sizes for better readability.</description>
-			<pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>Weird Waves News: 2023-08-28</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?89</guid>
-			<description>Added a "copyright-safe" mode that ignores more-recent copyright material when adding random shows or the entire archive to the playlist.</description>
 			<pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
