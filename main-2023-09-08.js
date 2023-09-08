@@ -752,8 +752,7 @@ const archive = [
 	"blurb": "<p>A physicist suffers recurring nightmares of being hunted by sinister warriors outside an ancient city. Adapted from a story by Basil Copper.</p>",
 	"notes": "institutionalisation, racism",
 	"file": "Dream",
-	"duration": 1729,
-	"banger": true
+	"duration": 1729
 	},
 	{
 	"code": "41",
@@ -965,8 +964,7 @@ const archive = [
 	"heading": "#4: <cite>The Door to Saturn</cite>, part 1",
 	"blurb": "<p>An inquisitor and his occult quarry must unite to survive on an alien world. Read by Zilbethicus.</p>",
 	"file": "Saturn-pt1",
-	"duration": 1426,
-	"banger": true
+	"duration": 1426
 	},
 	{
 	"code": "5",
@@ -974,8 +972,7 @@ const archive = [
 	"blurb": "<p>An inquisitor and his occult quarry must unite to survive on an alien world. Read by Zilbethicus.</p>",
 	"notes": "alcohol",
 	"file": "Saturn-pt2",
-	"duration": 1978,
-	"banger": true
+	"duration": 1978
 	},
 	{
 	"code": "6",
@@ -2780,8 +2777,7 @@ const archive = [
 	"blurb": "<p>A void-cartographer gives up on survival when his ship is damaged, leaving it to the ship's <abbr class=\"unmodified-abbr\">AI</abbr> and an interstellar freakshow to restore his will to live.</p>",
 	"notes": "ableism, voice removal",
 	"file": "Syndrome",
-	"duration": 1673,
-	"banger": true
+	"duration": 1673
 	},
 	{
 	"code": "88",
@@ -2847,7 +2843,7 @@ const archive = [
 	"code": "059",
 	"heading": "#59: <cite>The Most Dangerous Game</cite>",
 	"blurb": "<p>A big-game hunter has the tables turned when he washes up on an island owned by a man-hunter. Starring Orson Welles.</p>",
-	"notes": "ableism, animal death, anti-Japanese slur, man devoured by dogs, stab death",
+	"notes": "ableism, animal death, man devoured by dogs, racism, stab death",
 	"file": "Game",
 	"duration": 1797,
 	"banger": true
