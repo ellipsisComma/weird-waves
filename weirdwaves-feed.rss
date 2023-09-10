@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>Weird Waves News: 2023-09-10</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?95</guid>
+			<description>Fully disabled first and last move-show buttons on playlist instead of just blocking the script for moving shows.</description>
+			<pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>Weird Waves News: 2023-09-07</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?94</guid>
@@ -43,13 +50,6 @@
 			<guid>https://weirdwaves.net/?91</guid>
 			<description>Refined the list of banger shows (defined in the archive part of the script, only relevant when you click the "Add random banger" button on the site).</description>
 			<pubDate>Tue, 29 Aug 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>Weird Waves News: 2023-08-28</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?90</guid>
-			<description>Tweaked subheading margin sizes for better readability.</description>
-			<pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
