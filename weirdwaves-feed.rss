@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>Weird Waves News: 2023-09-21</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?96</guid>
+			<description>Added buttons to the code-blocks in the Streaming section that copy their respective code-blocks to your clipboard.</description>
+			<pubDate>Thu, 21 Sep 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>Weird Waves News: 2023-09-10</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?95</guid>
@@ -43,13 +50,6 @@
 			<guid>https://weirdwaves.net/?92</guid>
 			<description>Added the total number of hours of audio in the site to the stats list.</description>
 			<pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>Weird Waves News: 2023-08-29</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?91</guid>
-			<description>Refined the list of banger shows (defined in the archive part of the script, only relevant when you click the "Add random banger" button on the site).</description>
-			<pubDate>Tue, 29 Aug 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>

@@ -14,7 +14,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style-2023-09-11.css" media="all">
+	<link rel="stylesheet" type="text/css" href="./style-2023-09-21.css" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -131,7 +131,7 @@
 
 
 <div id="radio">
-	<noscript>Sorry, this site requires javascript! Some content will be hidden, and the main function of the app (playing audio on a schedule) will not work.</noscript>
+	<noscript>Sorry, this site requires javascript! Some content will be hidden, and the audio app won't work.</noscript>
 	<div id="radio-main">
 		<svg id="loading-spinner-radio" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 			<use href="#svg-loading-spinner" />
@@ -308,29 +308,47 @@
 		<li>Right-click it and select &ldquo;Interact&rdquo; to use it just like you are now.</li>
 	</ol>
 	<p>To add more empty space above and below the radio, add this custom <abbr>CSS</abbr>:</p>
-	<pre class="code-block"><code>#radio {
+	<div id="code-block-margin" class="code-block">
+		<pre><code>#radio {
 	margin-block: 100vh;
 }</code></pre>
+		<div class="code-block-controls">
+			<button class="push-button icon-button clipboard-button" data-code-block="margin">Copy to clipboard</button>
+			<span class="copy-indicator hidden"></span>
+		</div>
+	</div>
 	<h4>Customising the theme</h4>
 	<p>Set the theme to &ldquo;Dark&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
-	<pre class="code-block"><code>.theme-dark {
+	<div id="code-block-theme" class="code-block">
+		<pre><code>.theme-dark {
 	--foreground-colour: [colour];
 	--background-colour: [colour];
 	--hot-detail-colour: [colour];
 	--cold-detail-colour: [colour];
 }</code></pre>
+		<div class="code-block-controls">
+			<button class="push-button icon-button clipboard-button" data-code-block="theme">Copy to clipboard</button>
+			<span class="copy-indicator hidden"></span>
+		</div>
+	</div>
 	<p>Replace the colours with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr>HTML</abbr> colour names, etc.</p>
 	<h4>Customising the font</h4>
 	<p>Set the font to &ldquo;Serif&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
-	<pre class="code-block"><code>.font-serif {
+	<div id="code-block-font" class="code-block">
+		<pre><code>.font-serif {
 	--font-stack: [font];
 }</code></pre>
+		<div class="code-block-controls">
+			<button class="push-button icon-button clipboard-button" data-code-block="font">Copy to clipboard</button>
+			<span class="copy-indicator hidden"></span>
+		</div>
+	</div>
 	<p>Replace the font with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings (the LibriVox selection and several other series in the Archive) are in the public domain.</p>
 	<p>The copyright status of old radio broadcasts is murky, but they're <i lang="la">de facto</i> public domain&mdash;any person or organisation who could press a claim is long dead or gone. This isn't legal advice, but&hellip; nobody (<abbr title="British Broadcasting Corporation">BBC</abbr> aside) cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude more-recent copyright series/sources when adding random shows or the entire archive to the playlist: <abbr class="unmodified-abbr" title="Clark Ashton Smith">CAS</abbr>iana, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
-	<button id="copyright-safety-toggle" class="toggle" type="button">exclude copyright-unsafe material</button>
+	<button id="copyright-safety-toggle" class="toggle" type="button">exclude potentially copyright-unsafe material</button>
 </div><!--#streaming end-->
 
 
@@ -438,44 +456,53 @@
 	<p>If you like Weird Waves, you might like some of these places too.</p>
 	<h3>Other stations</h3>
 	<ul class="flex-list">
-		<li><a href="https://www.djfullmoon.com" rel="external">&#127765;</a></li>
+		<li><a href="https://www.djfullmoon.com/" rel="external">&#127765;</a></li>
 		<li><a href="https://qc4.fiatlux.tk:8020/soyouz.aac" rel="external">Radio Soyouz</a> (<a href="https://qc4.fiatlux.tk:8020/soyouz.hq.aac" rel="external">128kbps</a>)</li>
 		<li><a href="https://wmbu.net/" rel="external"><img src="./images/misc/asahibotan2.png" alt="Asahi Denpa"></a></li>
 		<li><a href="https://bunglepaws.neocities.org/radio_new_vegas_gpt3.html" rel="external">Radio New Vegas <abbr title="Generative Pre-Trained Transformer">GPT</abbr></a></li>
 		<li><a href="https://kingposs.com/radio.html" rel="external"><img src="./images/misc/PossBadge.gif" alt="KingPossum (KP) Radio"></a></li>
 		<li><a href="https://www.polushon.com/" rel="external">Polushon</a></li>
 		<li><a href="https://repetitivestrain.neocities.org/" rel="external">Repetitive Strain</a></li>
-		<li><a href="https://punc.neocities.org" rel="external">PUNC</a></li>
+		<li><a href="https://punc.neocities.org/" rel="external">PUNC</a></li>
 		<li><a href="https://www.radioisaforeigncountry.org/" rel="external">Radio is a Foreign Country</a></li>
 	</ul>
 	<h3>Old Time Radio info</h3>
 	<ul class="flex-list">
-		<li><a href="https://www.otrplotspot.com" rel="external"><abbr>OTR</abbr> Plot Spot</a></li>
-		<li><a href="https://www.radioechoes.com" rel="external">Radio Echoes</a></li>
+		<li><a href="https://www.otrplotspot.com/" rel="external"><abbr>OTR</abbr> Plot Spot</a></li>
+		<li><a href="https://www.radioechoes.com/" rel="external">Radio Echoes</a></li>
 		<li><a href="https://web.archive.org/web/20230210154338/http://www.digitaldeliftp.com/" rel="external">The Digital Deli</a> (via Internet Archive)</li>
-		<li><a href="https://www.awakeatmidnight.com" rel="external">Awake at Midnight</a></li>
-		<li><a href="https://www.escape-suspense.com" rel="external"><cite>Escape</cite> and <cite>Suspense</cite>!</a></li>
-		<li><a href="https://www.otrsite.com" rel="external">The Vintage Radio Place</a></li>
+		<li><a href="https://www.awakeatmidnight.com/" rel="external">Awake at Midnight</a></li>
+		<li><a href="https://www.escape-suspense.com/" rel="external"><cite>Escape</cite> and <cite>Suspense</cite>!</a></li>
+		<li><a href="https://www.otrsite.com/" rel="external">The Vintage Radio Place</a></li>
 	</ul>
 	<h3>Toys, tools, apps, games</h3>
 	<ul class="flex-list">
 		<li><a href="https://aidn.jp/jingle"><abbr title="Automatic Composition">AC</abbr>-chan</a> (<a href="https://aidn.jp/jingle/e/dq3nt3h2" rel="external">&</a>)</li>
-		<li><cite><a href="https://puparium.neocities.org" rel="external">Puparium</a></cite></li>
-		<li><a href="https://www.ynoproject.net" rel="external"><abbr title="Yumi Nikki Online">YNO</abbr> Project</a></li>
+		<li><cite><a href="https://puparium.neocities.org/" rel="external">Puparium</a></cite></li>
+		<li><a href="https://www.ynoproject.net/" rel="external"><abbr title="Yumi Nikki Online">YNO</abbr> Project</a></li>
 		<li><a href="https://mynoise.net/NoiseMachines/dustyScratchedVinylNoiseGenerator.php" rel="external">Dust & Scratches</a></li>
-		<li><a href="https://mydora.restorativland.org" rel="external">Mydora</a></li>
-		<li><cite><a href="https://gatewaytodarkness.neocities.org" rel="external">Gateway to Darkness</a></cite></li>
+		<li><a href="https://mydora.restorativland.org/" rel="external">Mydora</a></li>
+		<li><cite><a href="https://gatewaytodarkness.neocities.org/" rel="external">Gateway to Darkness</a></cite></li>
+		<li><cite><a href="https://meatfang.neocities.org/" rel="external">meatfang</a></cite></li>
+	</ul>
+	<h3>Streamers</h3>
+	<ul class="flex-list">
+		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth<abbr class="unmodified-abbr">VT</abbr></a></li>
+		<li><a href="https://twitch.tv/grimmivt" rel="external">grimmi<abbr class="unmodified-abbr">VT</abbr></a></li>
+		<li><a href="https://twitch.tv/ecdycis" rel="external">Ecdysis</a></li>
 	</ul>
 	<h3>Anything else</h3>
 	<ul class="flex-list">
-		<li><a href="https://whitedesert.neocities.org" rel="external"><img src="./images/misc/whitedesertbutton.png" alt="White Desert"></a></li>
-		<li><a href="https://homevideohorrors.com" rel="external">Home Video Horrors</a></li>
-		<li><a href="https://horrorgifs.neocities.org" rel="external"><img src="./images/misc/hgs1.gif" alt="The Horror Gif Necronomicon"></a></li>
-		<li><a href="https://ngmi.neocities.org" rel="external"><img src="./images/misc/ngmibutton.gif" alt="N G M I"></a></li>
-		<li><a href="https://dreamsdoors.neocities.org" rel="external">Beyond Dream's Doors</a></li>
+		<li><a href="https://whitedesert.neocities.org/" rel="external"><img src="./images/misc/whitedesertbutton.png" alt="White Desert"></a></li>
+		<li><a href="https://homevideohorrors.com/" rel="external">Home Video Horrors</a></li>
+		<li><a href="https://horrorgifs.neocities.org/" rel="external"><img src="./images/misc/hgs1.gif" alt="The Horror Gif Necronomicon"></a></li>
+		<li><a href="https://ngmi.neocities.org/" rel="external"><img src="./images/misc/ngmibutton.gif" alt="N G M I"></a></li>
+		<li><a href="https://dreamsdoors.neocities.org/" rel="external">Beyond Dream's Doors</a></li>
 		<li><cite><a href="https://pseudopod.org/" rel="external">PseudoPod</a></cite></li>
-		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth<abbr class="unmodified-abbr">VT</abbr></a></li>
-		<li><a href="https://twitch.tv/grimmivt" rel="external">grimmi<abbr class="unmodified-abbr">VT</abbr></a></li>
+		<li><a href="https://doumyakutosi.tumblr.com/" rel="external">guru</a></li>
+		<li><a href="https://lairdbarronmappingproject.com/" rel="external">Laird Barron Mapping Project</a></li>
+		<li><cite><a href="https://watashi.neocities.org/" rel="external">Watashi</a></cite></li>
+		<li><a href="http://www.eldritchdark.com/" rel="external">Eldritch Dark</a></li>
 	</ul>
 	<h3>Weird Waves buttons</h3>
 	<ul id="weirdwaves-button-list" class="flex-list">
@@ -496,6 +523,6 @@
 
 
 
-<script src="./main-2023-09-10.js"></script>
+<script src="./main-2023-09-21.js"></script>
 </body>
 </html>
