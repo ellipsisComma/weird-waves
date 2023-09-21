@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 
 	<title>Weird Waves</title>
-	<meta name="author" 		content="Speak the Sky">
-	<meta name="description" 	content="Audio horror broadcasting online, from Old Time Radio to classic horror story audiobooks to freaky modern podcasts.">
+	<meta name="author" 		content="Speak the Sky/Murder_VT">
+	<meta name="description" 	content="Audio horror broadcasting online.">
 	<meta name="keywords" 		content="horror, audio, radio, weird, science fiction, fantasy">
 
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2" as="font" crossorigin="">
@@ -14,13 +14,13 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style-2023-06-06.css" media="all">
+	<link rel="stylesheet" type="text/css" href="./style-2023-09-21.css" media="all">
 
-	<link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
-	<link rel="shortcut icon" href="./images/favicon.ico">
+	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
+	<link rel="shortcut icon" href="./images/favicons/dark.ico">
 
 	<meta name="og:title"		content="Weird Waves">
-	<meta name="og:description"	content="Audio horror broadcasting online, from Old Time Radio to classic horror story audiobooks to freaky modern podcasts.">
+	<meta name="og:description"	content="Audio horror broadcasting online.">
 	<meta name="og:image" 		content="https://weirdwaves.net/images/social-card.png">
 	<meta name="twitter:card" 	content="summary">
 	<meta name="twitter:site" 	content="@speakthesky">
@@ -31,21 +31,31 @@
 
 
 <body class="theme-dark font-serif position-left">
-<script src="./utilities-2023-05-04.js"></script>
+<script src="./utilities-2023-08-30.js"></script>
 
 
 
 <svg id="svg-defs">
-<!--icons-->
-	<symbol id="svg-schedule">
+<!--menu icons-->
+	<symbol id="svg-booth">
 		<path class="svg-hot-stroke" d="M6 10a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
 		<path d="M6 7a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
 	</symbol>
-	<symbol id="svg-forecast">
-		<path class="svg-hot-stroke" d="M7 14l-2 6m4-6l-3 9m5-9l-2 6m4-6l-3 9m5-9l-2 6m4-6l-3 9m5-9l-2 6" />
-		<path d="M11 9a5 5 0 1 0-5 5h14a3 3 0 1 0 0-6a8 8 0 0 0-14-4" />
+	<symbol id="svg-archive">
+		<path d="M1 9l18-6 4 12-18 6zm4 12l2-4m3-1l1 3m5-5l1 3m2-4l4 2m-1-3l-18 6" />
+		<g class="svg-hot-stroke">
+			<circle cx="9" cy="13" r="1" />
+			<circle cx="15" cy="11" r="1" />
+		</g>
 	</symbol>
-	<symbol id="svg-news">
+	<symbol id="svg-about">
+		<path d="M15 2v6l2 15m1 0h-12m5 0v-4a1 1 0 0 1 2 0v4m-7 0m1 0l2-15v-6m-1 0a10 10 0 0 1 8 0zm0 6h8" />
+		<g class="svg-hot-stroke">
+			<path d="M1 2l22 6m0-6l-22 6" />
+			<circle cx="12" cy="5" r="1" />
+		</g>
+	</symbol>
+	<symbol id="svg-streaming">
 		<clipPath id="svg-tower-clip">
 			<use href="#svg-tower" />
 		</clipPath>
@@ -63,25 +73,6 @@
 		</g>
 		<use href="#svg-lightning-left" transform="scale(-1, 1) translate(-24, 0)" />
 	</symbol>
-	<symbol id="svg-about">
-		<path d="M15 2v6l2 15m1 0h-12m5 0v-4a1 1 0 0 1 2 0v4m-7 0m1 0l2-15v-6m-1 0a10 10 0 0 1 8 0zm0 6h8" />
-		<g class="svg-hot-stroke">
-			<path d="M1 2l22 6m0-6l-22 6" />
-			<circle cx="12" cy="5" r="1" />
-		</g>
-	</symbol>
-	<symbol id="svg-archive">
-		<path d="M1 9l18-6 4 12-18 6zm4 12l2-4m3-1l1 3m5-5l1 3m2-4l4 2m-1-3l-18 6" />
-		<g class="svg-hot-stroke">
-			<circle cx="9" cy="13" r="1" />
-			<circle cx="15" cy="11" r="1" />
-		</g>
-	</symbol>
-	<symbol id="svg-faq">
-		<path d="M4 1c2 0 3 2 3 6s-1 6-3 6s-3-2-3-6s1-6 3-6m0 9l3 3" />
-		<path d="M16 23v-6c0-4 1-6 3-6s3 2 3 6v6m0-4h-6" />
-		<path class="svg-hot-stroke" d="M21 1l-6 4 2 2-6 4 2 2-6 4 2 2-6 4" />
-	</symbol>
 	<symbol id="svg-settings">
 		<path class="svg-hot-stroke" d="M17 2v5m0 4v11" />
 		<circle cx="6" cy="6" r="4" />
@@ -93,16 +84,9 @@
 		<path class="svg-hot-stroke" d="M7 1l-3 10m4 0l3-10m1 3h-8m-1 4h8" />
 		<path d="M23 6a20 20 0 0 1-17 17a7 7 0 0 1-5-4a7 7 0 0 1 5-4l4 3a14 14 0 0 0 8-8l-3-4a7 7 0 0 1 4-5a7 7 0 0 1 4 5" />
 	</symbol>
-	<symbol id="svg-support">
-		<path d="M12 4c-2-4 -11,-4 -11,4a11 11 0 0 0 7 10m4-14c2-4 11,-4 11,4a11 11 0 0 1-7 10" />
-		<path class="svg-hot-stroke" d="M12 11c0 4-4 4-4 8a4 4 0 0 0 8 0c0-4-4-4-4-8" />
-	</symbol>
 	<symbol id="svg-links">
 		<path d="M12 2a10 10 0 0 0 0 20v-20a5 10 0 0 0 0 20m-10-10h15" />
 		<path class="svg-hot-stroke" d="M12 2a10 10 0 0 1 0 20a5 10 0 0 0 0-20" />
-	</symbol>
-	<symbol id="svg-random-show">
-		<path d="M8 22h-1a4 4 0 0 1 0-8zm-5-4l-1-8a10 9 0 0 1 20 0h-3a7 6 0 0 0-14 0h-3m20 0l-1 8m-5 4h1a4 4 0 0 0 0-8z" />
 	</symbol>
 	<symbol id="svg-rss">
 		<path d="M1 13a10 10 0 0 0 10 10zm2 2h6v6m-3-3l3-3m0-3a3 3 0 0 1 3 3m5 0a8 8 0 0 0 -8-8m0-5a13 13 0 0 1 13 13" />
@@ -114,6 +98,19 @@
 		<circle id="svg-toggle-thumb-top" cx="12" cy="10" r="9" />
 		<path id="svg-toggle-tick" d="M7 11l3 3 7-7" />
 	</defs>
+<!--playlist button icons-->
+	<symbol id="svg-remove">
+		<title>Remove show</title>
+		<path d="M2 2l8 8m0-8l-8 8" />
+	</symbol>
+	<symbol id="svg-move-up">
+		<title>Move show up</title>
+		<path d="M1 8l5-5 5 5" />
+	</symbol>
+	<symbol id="svg-move-down">
+		<title>Move show down</title>
+		<use href="#svg-move-up" transform="rotate(180) translate(-12 -12)" />
+	</symbol>
 <!--other-->
 	<symbol id="svg-waveform">
 		<path d="M1 12h94" />
@@ -134,28 +131,29 @@
 
 
 <div id="radio">
-	<noscript>Sorry, this site requires javascript! Some content will be hidden, and the main function of the app (playing audio on a schedule) will not work.</noscript>
-	<button id="tune-in-button" type="button" class="hidden">Tune in</button>
-	<svg id="loading-spinner-radio" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-		<use href="#svg-loading-spinner" />
-	</svg>
-	<div id="radio-main" class="hidden">
-		<p id="intermission-note" class="hidden">Intermission</p>
-		<div id="loaded-show"></div>
-		<div id="controls">
-			<div id="audio-controls">
-				<input id="volume-control" type="range" value="100">
-				<button id="mute-button" type="button">Mute</button>
+	<noscript>Sorry, this site requires javascript! Some content will be hidden, and the audio app won't work.</noscript>
+	<div id="radio-main">
+		<svg id="loading-spinner-radio" class="svg-icon loading-spinner" viewBox="0 0 24 24">
+			<use href="#svg-loading-spinner" />
+		</svg>
+		<div id="controls" class="hidden">
+			<div id="seek-controls">
+				<input id="seek-bar" type="range" value="0">
+				<span id="show-time"><time id="show-time-elapsed"></time> / <time id="show-time-total"></time></span>
 			</div>
-			<button id="tune-out-button" type="button">Tune out</button>
+			<div id="show-controls">
+				<button id="play-button" class="push-button" type="button">Play</button>
+				<button id="skip-button" class="push-button" type="button">Skip</button>
+			</div>
+			<div id="audio-controls">
+				<button id="mute-button" class="push-button" type="button">Mute</button>
+				<input id="volume-control" type="range" value="100">
+			</div>
 		</div>
-		<audio id="show"></audio>
-		<audio id="intermission" loop="">
-			<source src="./audio/intermissions/intermission.ogg" type="audio/ogg">
-			<source src="./audio/intermissions/intermission.wav" type="audio/wav">
-		</audio>
+		<div id="loaded-show"></div>
+		<audio id="show-audio"></audio>
 	</div>
-</div><!--#radio-container-->
+</div><!--#radio-container end-->
 
 
 
@@ -163,17 +161,13 @@
 <nav>
 	<div id="station-tabs">
 		<ul id="activity-areas">
-			<li><a href="#schedule">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-schedule" /></svg>
-				<span>Schedule</span>
+			<li><a href="#booth">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-booth" /></svg>
+				<span>Booth</span>
 			</a></li>
-			<li><a href="#forecast">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-forecast" /></svg>
-				<span>Forecast</span>
-			</a></li>
-			<li><a href="#news">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-news" /></svg>
-				<span>News</span>
+			<li><a href="#archive">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-archive" /></svg>
+				<span>Archive</span>
 			</a></li>
 		</ul>
 		<ul id="info-areas">
@@ -181,13 +175,9 @@
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-about" /></svg>
 				<span>About</span>
 			</a></li>
-			<li><a href="#archive">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-archive" /></svg>
-				<span>Archive</span>
-			</a></li>
-			<li><a href="#faq" rel="help">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-faq" /></svg>
-				<span><abbr title="Frequently Asked Questions">FAQ</abbr></span>
+			<li><a href="#streaming">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-streaming" /></svg>
+				<span>Streaming</span>
 			</a></li>
 			<li><a href="#settings">
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-settings" /></svg>
@@ -199,10 +189,6 @@
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-call-in" /></svg>
 				<span>Call In</span>
 			</a></li>
-			<li><a href="#support">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-support" /></svg>
-				<span>Support</span>
-			</a></li>
 			<li><a href="#links">
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-links" /></svg>
 				<span>Links</span>
@@ -210,12 +196,6 @@
 		</ul>
 	</div>
 	<ul id="file-links">
-		<li>
-			<a id="random-show-link" href="###">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-random-show" /></svg>
-				<span>Random</span>
-			</a>
-		</li>
 		<li>
 			<a href="./weirdwaves-feed.rss" type="application/rss+xml">
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-rss" /></svg>
@@ -227,91 +207,51 @@
 
 
 
-<div id="schedule">
-	<h2>Schedule: <span class="schedule-title"></span></h2>
-	<svg id="loading-spinner-schedule" class="svg-icon loading-spinner" viewBox="0 0 24 24">
+<div id="booth">
+	<h2>Booth</h2>
+	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
+	<svg id="loading-spinner-booth" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
-	<p class="schedule-description"></p>
-	<h3>Weekday (starting <time id="weekday-start"></time>)</h3>
-	<ol id="schedule-weekday" class="show-list"></ol>
-	<h3>Weekend (starting <time id="weekend-start"></time>)</h3>
-	<ol id="schedule-weekend" class="show-list"></ol>
-</div><!--#schedule end-->
-
-
-
-<div id="forecast">
-	<h2>Forecast</h2>
-	<svg id="loading-spinner-forecast" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-		<use href="#svg-loading-spinner" />
-	</svg>
-	<ol id="forecast-tables"></ol>
-</div><!--#forecast end-->
-
-
-
-<div id="news">
-	<h2>News</h2>
-	<ol class="news-list" reversed="">
-		<li>
-			<h3><time datetime="2023-06-26">26th June 2023</time>: Hiatus</h3>
-			<p>Weird Waves' weekly scheduling is now going on hiatus for the near-mid future. There'll be a repeating hiatus schedule with 24 shows cycling on weekdays and another 24 cycling on weekends, but it'll be the same shows each week. Thank you to everyone who's listened so far!</p>
-		</li>
-	</ol>
-	<hr>
-	<p>For older news, see the <a href="./news-archive.html">News Archive</a>.</p>
-</div><!--#news end-->
-
-
-
-<div id="about">
-	<h2>About</h2>
-	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! It has Old Time Radio (<abbr>OTR</abbr>) plays, audiobooks, and podcast stories. Shows start every hour on the hour; schedules start on Monday in the station's timezone (<abbr>UTC</abbr>).</p>
-	<p><strong>Tune in</strong> to listen! Alternatively, choose any show in the <a href="#archive">Archive</a> or click the <strong>Random</strong> link in the menu.</p>
-	<h3>Getting started</h3>
-	<p>The <a href="#schedule">Schedule</a> lists which shows are playing this week; the <a href="#forecast">Forecast</a> lists <em>when</em> they play. Check the other sections of the site to see what else there is!</p>
-	<h3>Staying updated</h3>
-	<p>Check the <a href="#call-in">Call In</a> section to find me elsewhere! I post schedules every Monday on social media and in the <strong><abbr>RSS</abbr></strong> feed, which also includes news updates.</p>
-	<h3>Content notes</h3>
-	<p>Find show-specific notes in the Radio, Schedule, and Archive.</p>
-	<p>There's also a few general ones: <strong>death</strong> and worse fates (this station's mostly for horror, after all) and <strong>implicit bigotry</strong> in the older sources (I weed out the worse ones, but the rest still reflect the baseline shittiness of their time).</p>
-	<h3>Streaming Weird Waves?</h3>
-	<p>If you're a streamer using the Weird Waves radio via a browser source, you can give it a neater, widget-like look by using a source width of 800px or less and applying this custom <abbr title="Cascading Style Sheets">CSS</abbr>:</p>
-	<pre class="code-block"><code>#radio {margin-block-end: 100vh;}</code></pre>
-	<p>You can either pick a colour scheme from the <a href="#settings">Settings</a> (by temporarily removing the default custom <abbr>CSS</abbr> that prevents you from scrolling while Interacting with the browser source), or customise the default theme by adding this custom <abbr>CSS</abbr> and replacing the colour codes with your own choices:</p>
-	<pre class="code-block"><code>.theme-dark {
-	--foreground-colour: #fdffdc;
-	--background-colour: #000627;
-	--hot-detail-colour: #ff6767;
-	--cold-detail-colour: #b9ab00;
-}</code></pre>
-	<p>Your stream software may have default custom <abbr>CSS</abbr> to make browser sources' backgrounds transparent so the sources blend in with your stream. You can delete this code to make the background visible again, e.g. by removing the following from the default custom <abbr>CSS</abbr> in <abbr title="Open Broadcaster Software">OBS</abbr>:</p>
-	<pre class="code-block"><code>background-color: rgba(0, 0, 0, 0);</code></pre>
-	<h3>Credits</h3>
-	<p>For shows, check the <a href="#archive">Archive</a>.</p>
-	<p>For fonts, check the <a href="#settings">Settings</a>.</p>
-	<p>The app is hosted on <a href="https://neocities.org" rel="external">Neocities</a>.</p>
-	<p>Everything else by <a href="https://speakthesky.com" rel="external me">Speak the Sky</a>!</p>
-	<h3>Stats</h3>
-	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-		<use href="#svg-loading-spinner" />
-	</svg>
-	<dl id="stats-list"></dl>
-	<h4>Shows by source</h4>
-	<svg id="loading-spinner-show-counts" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-		<use href="#svg-loading-spinner" />
-	</svg>
-	<dl id="series-show-counts" class="info-grid"></dl>
-</div><!--#about end-->
+	<div id="booth-contents" class="hidden">
+		<h3>Playlist</h3>
+		<ol id="playlist" class="show-list">
+		</ol>
+		<h4>Options</h4>
+		<ul class="flex-list">
+			<li><button id="random-show-button" class="push-button" type="button">Add random show</button></li>
+			<li><button id="random-banger-button" class="push-button" type="button">Add random banger</button></li>
+		</ul>
+		<ul class="flex-list">
+			<li><button id="shuffle-button" class="push-button" type="button">Shuffle playlist</button></li>
+			<li><button id="clear-button" class="push-button" type="button">Clear playlist</button></li>
+		</ul>
+		<div id="clear-playlist-options" class="hidden">
+			<p>Clear the playlist? This is irreversible.</p>
+			<ul class="flex-list">
+				<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
+				<li><button id="clear-cancel-button" class="push-button" type="button">Cancel</button></li>
+			</ul>
+		</div>
+		<h3>Import & export</h3>
+		<p>To export your playlist, copy the text below to a safe place. To import, paste the data back into the box, then click the button to rebuild the playlist. You can also use this to quickly re-order your playlist.</p>
+		<textarea id="playlist-import-export"></textarea>
+		<div id="import-error-message"></div>
+		<button id="import-button" class="push-button" type="button">Import</button>
+	</div>
+</div><!--#booth end-->
 
 
 
 <div id="archive">
 	<h2>Archive</h2>
+	<p>This list includes information about every show available on the site.</p>
 	<svg id="loading-spinner-archive-links" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
+	<ul class="flex-list">
+		<li><button id="add-archive-button" class="push-button hidden" type="button">Add entire archive to playlist</button></li>
+	</ul>
 	<ul id="archive-series-links" class="flex-list">
 	</ul>
 	<svg id="loading-spinner-archive" class="svg-icon loading-spinner" viewBox="0 0 24 24">
@@ -323,151 +263,137 @@
 
 
 
-<div id="faq">
-	<h2><abbr title="Frequently Asked Questions">FAQ</abbr></h2>
-	<h3>Shows</h3>
-	<ul>
-		<li>
-			<details>
-				<summary><h4>When do shows start?</h4></summary>
-				<p>Every hour on the hour.</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>How long do shows run for?</h4></summary>
-				<p>Most run 20-30 minutes. No show will run over one hour (longer shows will be split into smaller parts).</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>What if I miss a show?</h4></summary>
-				<p>Shows repeat during the week&mdash;check the <a href="#forecast">Forecast</a> to see exactly when shows play. Don't worry if you miss something completely: shows will be rerun in future, and whole weekly schedules might even be reused (if you're desperate, you can find the show's source link in the Archive and listen to it whenever you want).</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>When does the schedule start?</h4></summary>
-				<p>New schedules start at 12 a.m. on Monday in the <abbr>UTC</abbr>+0 timezone.</p>
-			</details>
-		</li>
-	</ul>
-	<h3>Help</h3>
-	<ul>
-		<li>
-			<details>
-				<summary><h4>I tuned in just before the hour started, but the show didn't start</h4></summary>
-				<p>Occasionally, if you tune in to an intermission, the last few seconds of the previous show will play before the intermission starts, no matter what time the show actually ended. If you tune in right before the start of the hour then those few seconds might overlap with&mdash;and block&mdash;the start of the next show.</p>
-				<p><strong>Solution:</strong> Try refreshing the page.</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>The Radio's playing a show that's not on the Forecast</h4></summary>
-				<p>There's a currently-unavoidable bug if you tune in <em>during</em> the last show on the Forecast (at the end of the week in the station's timezone) instead of tuning in <em>before</em> it starts and letting it start automatically.</p>
-				<p><strong>Solution:</strong> There isn't one. Just think of it as a teaser for next week, I guess.</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>I tuned in during/after a show, but it started from the beginning</h4></summary>
-				<p>This shouldn't happen at all and means a vital part of the station isn't running, or can't run, in your browser.</p>
-				<p><strong>Solution:</strong> Try refreshing the page, but you'll probably need to email me at the address given below this <abbr>FAQ</abbr>.</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>There's a message reading <q>Sorry, this site requires javascript!</q></h4></summary>
-				<p>Javascript's been disabled in your browser or on your device.</p>
-				<p><strong>Solution:</strong> If you've disabled javascript then you probably know how to enable it again. If not, look up how to enable javascript in your browser, on your current device.</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>The Schedule and Forecast are empty and there's no Radio</h4></summary>
-				<p>Either the script files didn't download correctly or they had a fatal error that stopped them from running.</p>
-				<p><strong>Solution:</strong> Try refreshing the page. If that fails, try a <strong>cache refresh</strong> (there are different keyboard shortcuts for this in each browser, on each operating system, so you'll have to look it up).</p>
-			</details>
-		</li>
-		<li>
-			<details>
-				<summary><h4>My settings reset every time I restart my browser</h4></summary>
-				<p>If you use strict privacy settings in your browser then it may not save this site's settings.</p>
-				<p><strong>Solution:</strong> Set an exception for this site in your browser's privacy settings.</p>
-			</details>
-		</li>
-	</ul>
-	<hr>
-	<p>Can't find the answers you're looking for? Solutions didn't fix your problems? Email <a href="mailto:maintenance@weirdwaves.net" rel="reply-to">maintenance@weirdwaves.net</a> with your questions.</p>
-</div><!--#faq end-->
+<div id="about">
+	<h2>About</h2>
+	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your playlist in the <a href="#booth">Booth</a>, and listen to them in the Radio. Have fun!</p>
+	<h3>News</h3>
+	<p>For site news, see the <a href="./news-archive.html">News Archive</a>. This is now rarely updated.</p>
+	<h3>Content notes</h3>
+	<p>Aside from specific notes in the <a href="#archive">Archive</a>, there's also a few general ones: <strong>death</strong> and worse fates (this station's mostly for horror) and <strong>implicit bigotry</strong> in the older sources (I weed out the worse ones, but the rest still reflect their time).</p>
+	<h3>Credits</h3>
+	<p>For shows, check the <a href="#archive">Archive</a>.</p>
+	<p>For fonts, check the <a href="#settings">Settings</a>.</p>
+	<p>The app is hosted on <a href="https://neocities.org" rel="external">Neocities</a>.</p>
+	<p>Everything else by <a href="https://speakthesky.com" rel="external me">Speak the Sky</a>/<a href="https://twitch.tv/murder_vt" rel="external me">Murder_VT</a>!</p>
+	<h3>Stats</h3>
+	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
+		<use href="#svg-loading-spinner" />
+	</svg>
+	<dl id="archive-stats-list"></dl>
+	<h4>Series stats</h4>
+	<svg id="loading-spinner-show-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
+		<use href="#svg-loading-spinner" />
+	</svg>
+	<div id="series-stats-content" class="hidden">
+		<button id="series-stats-order-button" class="push-button" type="button" data-order="duration">Order by show counts</button>
+		<dl id="series-durations" class="series-stats-list">
+		</dl>
+		<dl id="series-show-counts" class="series-stats-list hidden">
+		</dl>
+	</div>
+</div><!--#about end-->
+
+
+
+<div id="streaming">
+	<h2>Streaming</h2>
+	<p>This section covers how to use Weird Waves to provide audio background as a livestreamer, e.g. on Twitch. Make sure to check out the <a href="#settings">Settings</a> as well.</p>
+	<h3>Widget</h3>
+	<p>To use Weird Waves like a stream widget in software like <abbr title="Open Broadcaster Software">OBS</abbr>:</p>
+	<ol>
+		<li>Create a browser source.</li>
+		<li>Set its <abbr>URL</abbr> to <code>weirdwaves.net</code> .</li>
+		<li>Delete its default custom <abbr>CSS</abbr>.</li>
+		<li>Resize and crop it.</li>
+		<li>Right-click it and select &ldquo;Interact&rdquo; to use it just like you are now.</li>
+	</ol>
+	<p>To add more empty space above and below the radio, add this custom <abbr>CSS</abbr>:</p>
+	<div id="code-block-margin" class="code-block">
+		<pre><code>#radio {
+	margin-block: 100vh;
+}</code></pre>
+		<button class="push-button icon-button clipboard-button" data-code-block="margin">Copy to clipboard</button>
+	</div>
+	<h4>Customising the theme</h4>
+	<p>Set the theme to &ldquo;Dark&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
+	<div id="code-block-theme" class="code-block">
+		<pre><code>.theme-dark {
+	--foreground-colour: [colour];
+	--background-colour: [colour];
+	--hot-detail-colour: [colour];
+	--cold-detail-colour: [colour];
+}</code></pre>
+		<button class="push-button icon-button clipboard-button" data-code-block="theme">Copy to clipboard</button>
+	</div>
+	<p>Replace the colours with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr>HTML</abbr> colour names, etc.</p>
+	<h4>Customising the font</h4>
+	<p>Set the font to &ldquo;Serif&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
+	<div id="code-block-font" class="code-block">
+		<pre><code>.font-serif {
+	--font-stack: [font];
+}</code></pre>
+		<button class="push-button icon-button clipboard-button" data-code-block="font">Copy to clipboard</button>
+	</div>
+	<p>Replace the font with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
+	<h3>Copyright?</h3>
+	<p>All LibriVox recordings (the LibriVox selection and several other series in the Archive) are in the public domain.</p>
+	<p>The copyright status of old radio broadcasts is murky, but they're <i lang="la">de facto</i> public domain&mdash;any person or organisation who could press a claim is long dead or gone. This isn't legal advice, but&hellip; nobody (<abbr title="British Broadcasting Corporation">BBC</abbr> aside) cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
+	<p>If you're still concerned, switch on the following toggle to exclude more-recent copyright series/sources when adding random shows or the entire archive to the playlist: <abbr class="unmodified-abbr" title="Clark Ashton Smith">CAS</abbr>iana, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
+	<button id="copyright-safety-toggle" class="toggle" type="button">exclude potentially copyright-unsafe material</button>
+</div><!--#streaming end-->
 
 
 
 <div id="settings">
 	<h2>Settings</h2>
+	<p>Control how Weird Waves looks and functions here. Unless you prevent this site from storing data in your browser, these settings will be remembered when you return to Weird Waves.</p>
 	<ul>
 		<li>
-			<h3>Audio</h3>
-			<button id="mute-tune-in-toggle" class="toggle" type="button">mute audio when tuning in</button>
+			<h3>Radio</h3>
+			<button id="auto-play-toggle" class="toggle" type="button">start next show automatically when previous show ends</button>
 		</li>
 		<li>
 			<h3>Content notes</h3>
 			<button id="content-notes-toggle" class="toggle" type="button">open all content notes by default</button>
 		</li>
 		<li>
-			<h3>Forecast</h3>
-			<button id="primetime-toggle" class="toggle" type="button">activate personal primetime</button>
-			<form>
-				<div class="input-grid">
-					<label for="primetime-start">Start hour</label>
-					<input id="primetime-start" name="primetime-start" type="text" inputmode="numeric" class="hours-input" pattern="[01]?\d|2[0-3]" maxlength="2" value="0">
-					<span></span>
-					<label for="primetime-end">End hour</label>
-					<input id="primetime-end" name="primetime-end" type="text" inputmode="numeric" class="hours-input" pattern="[01]?\d|2[0-3]" maxlength="2" value="0">
-					<span></span>
-				</div>
-				<button id="primetime-update" type="button">Update</button>
-			</form>
-			<p>You can use &ldquo;personal primetime&rdquo; to mark a range of times each day on the Forecast. When active, enter the hours that primetime should start and end (in 24-hour format, e.g. &ldquo;17&rdquo; is 5 p.m.), then click the button to update the Forecast.</p>
-		</li>
-		<li>
 			<h3>Site theme</h3>
 			<ul id="theme-buttons" class="flex-list">
 				<li>
-					<button type="button" data-setting="dark" data-colours="fdffdc 000627 ff6767 b9ab00">Dark</button>
+					<button class="push-button" type="button" data-setting="dark" data-colours="fdffdc 000627 ff6767 b9ab00">Dark</button>
 				</li>
 				<li>
-					<button type="button" data-setting="goop" data-colours="e0ffe0 000 0a8 8a0">Goop</button>
+					<button class="push-button" type="button" data-setting="goop" data-colours="e0ffe0 000 0a8 8a0">Goop</button>
 				</li>
 				<li>
-					<button type="button" data-setting="flame" data-colours="f8f095 180000 fe1 ff6900">Flame</button>
+					<button class="push-button" type="button" data-setting="flame" data-colours="f8f095 180000 fe1 ff6900">Flame</button>
 				</li>
 				<li>
-					<button type="button" data-setting="plasm" data-colours="fff8ff 27003f 0f7 0df">Plasm</button>
+					<button class="push-button" type="button" data-setting="plasm" data-colours="fff8ff 27003f 0f7 0df">Plasm</button>
 				</li>
 				<li>
-					<button type="button" data-setting="moss" data-colours="def 234 8f2 a0dfa0">Moss</button>
+					<button class="push-button" type="button" data-setting="moss" data-colours="def 234 8f2 a0dfa0">Moss</button>
 				</li>
 				<li>
-					<button type="button" data-setting="darker" data-colours="bbb 111 fff">Darker</button>
+					<button class="push-button" type="button" data-setting="darker" data-colours="bbb 111 fff">Darker</button>
 				</li>
 				<li>
-					<button type="button" data-setting="light" data-colours="2a2a2a fff b60000 2a2aff">Light</button>
+					<button class="push-button" type="button" data-setting="light" data-colours="2a2a2a fff b60000 2a2aff">Light</button>
 				</li>
 				<li>
-					<button type="button" data-setting="wine" data-colours="215 f8f0c7 000 a30000">Wine</button>
+					<button class="push-button" type="button" data-setting="wine" data-colours="215 f8f0c7 000 a30000">Wine</button>
 				</li>
 				<li>
-					<button type="button" data-setting="ash" data-colours="33505a f6f7f8 d40 000">Ash</button>
+					<button class="push-button" type="button" data-setting="ash" data-colours="33505a f6f7f8 d40 000">Ash</button>
 				</li>
 				<li>
-					<button type="button" data-setting="dust" data-colours="56170e fff da2c43 404040">Dust</button>
+					<button class="push-button" type="button" data-setting="dust" data-colours="56170e fff da2c43 404040">Dust</button>
 				</li>
 				<li>
-					<button type="button" data-setting="mist" data-colours="2d2d2d f0faff 005e6e 545464">Mist</button>
+					<button class="push-button" type="button" data-setting="mist" data-colours="2d2d2d f0faff 005e6e 545464">Mist</button>
 				</li>
 				<li>
-					<button type="button" data-setting="silver" data-colours="444 eee 000">Silver</button>
+					<button class="push-button" type="button" data-setting="silver" data-colours="444 eee 000">Silver</button>
 				</li>
 			</ul>
 		</li>
@@ -475,10 +401,10 @@
 			<h3>Site font</h3>
 			<ul id="font-buttons" class="flex-list">
 				<li>
-					<button type="button" data-setting="serif" style="font-family:Bitter, Georgia, Garamond, 'Times New Roman', Times, serif">Serif</button>
+					<button class="push-button" type="button" data-setting="serif" style="font-family:Bitter, Georgia, Garamond, 'Times New Roman', Times, serif">Serif</button>
 				</li>
 				<li>
-					<button type="button" data-setting="sans" style="font-family:'Fira Sans', Tahoma, Verdana, 'Helvetica Neue', Helvetica, Arial, sans-serif">Sans</button>
+					<button class="push-button" type="button" data-setting="sans" style="font-family:'Fira Sans', Tahoma, Verdana, 'Helvetica Neue', Helvetica, Arial, sans-serif">Sans</button>
 				</li>
 			</ul>
 			<p>The serif font is <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a>. The sans-serif font is <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> by <a href="https://carrois.com/" rel="external">Carrois Type Design</a> and <a href="https://foundation.mozilla.org/" rel="external">the Mozilla Foundation</a>.</p>
@@ -487,10 +413,13 @@
 			<h3>Widescreen radio position</h3>
 			<ul id="position-buttons" class="flex-list">
 				<li>
-					<button type="button" data-setting="left">Left</button>
+					<button class="push-button" type="button" data-setting="left">Left</button>
 				</li>
 				<li>
-					<button type="button" data-setting="right">Right</button>
+					<button class="push-button" type="button" data-setting="top">Top</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-setting="right">Right</button>
 				</li>
 			</ul>
 		</li>
@@ -501,7 +430,7 @@
 
 <div id="call-in">
 	<h2>Call In</h2>
-	<p>Got questions, feedback, praise?</p>
+	<p>Got questions, feedback, feature requests?</p>
 	<ul class="flex-list">
 		<li><a href="https://twitter.com/speakthesky" rel="external me">Twitter</a></li>
 		<li><a href="https://dice.camp/@speakthesky" rel="external me">Mastodon</a></li>
@@ -513,61 +442,65 @@
 
 
 
-<div id="support">
-	<h2>Support</h2>
-	<p>Want to help pay for the station's (cheap) hosting?</p>
-	<ul class="flex-list">
-		<li><a href="https://neocities.org/site/weirdwaves" rel="external me">Tip me on Neocities</a></li>
-	</ul>
-</div><!--#support end-->
-
-
-
 <div id="links">
 	<h2>Links</h2>
+	<p>If you like Weird Waves, you might like some of these places too.</p>
 	<h3>Other stations</h3>
 	<ul class="flex-list">
-		<li><a href="https://www.djfullmoon.com" rel="external">&#127765;</a></li>
+		<li><a href="https://www.djfullmoon.com/" rel="external">&#127765;</a></li>
 		<li><a href="https://qc4.fiatlux.tk:8020/soyouz.aac" rel="external">Radio Soyouz</a> (<a href="https://qc4.fiatlux.tk:8020/soyouz.hq.aac" rel="external">128kbps</a>)</li>
-		<li><a href="https://wmbu.net/" rel="external"><img src="./images/buttons/asahibotan2.png" alt="Asahi Denpa"></a></li>
+		<li><a href="https://wmbu.net/" rel="external"><img src="./images/misc/asahibotan2.png" alt="Asahi Denpa"></a></li>
 		<li><a href="https://bunglepaws.neocities.org/radio_new_vegas_gpt3.html" rel="external">Radio New Vegas <abbr title="Generative Pre-Trained Transformer">GPT</abbr></a></li>
-		<li><a href="https://kingposs.com/radio.html" rel="external"><img src="./images/buttons/PossBadge.gif" alt="KingPossum (KP) Radio"></a></li>
+		<li><a href="https://kingposs.com/radio.html" rel="external"><img src="./images/misc/PossBadge.gif" alt="KingPossum (KP) Radio"></a></li>
 		<li><a href="https://www.polushon.com/" rel="external">Polushon</a></li>
 		<li><a href="https://repetitivestrain.neocities.org/" rel="external">Repetitive Strain</a></li>
-		<li><a href="https://punc.neocities.org" rel="external">PUNC</a></li>
+		<li><a href="https://punc.neocities.org/" rel="external">PUNC</a></li>
 		<li><a href="https://www.radioisaforeigncountry.org/" rel="external">Radio is a Foreign Country</a></li>
 	</ul>
 	<h3>Old Time Radio info</h3>
 	<ul class="flex-list">
-		<li><a href="https://www.otrplotspot.com" rel="external"><abbr>OTR</abbr> Plot Spot</a></li>
-		<li><a href="https://www.radioechoes.com" rel="external">Radio Echoes</a></li>
+		<li><a href="https://www.otrplotspot.com/" rel="external"><abbr>OTR</abbr> Plot Spot</a></li>
+		<li><a href="https://www.radioechoes.com/" rel="external">Radio Echoes</a></li>
 		<li><a href="https://web.archive.org/web/20230210154338/http://www.digitaldeliftp.com/" rel="external">The Digital Deli</a> (via Internet Archive)</li>
-		<li><a href="https://www.awakeatmidnight.com" rel="external">Awake at Midnight</a></li>
-		<li><a href="https://www.escape-suspense.com" rel="external"><cite>Escape</cite> and <cite>Suspense</cite>!</a></li>
-		<li><a href="https://www.otrsite.com" rel="external">The Vintage Radio Place</a></li>
+		<li><a href="https://www.awakeatmidnight.com/" rel="external">Awake at Midnight</a></li>
+		<li><a href="https://www.escape-suspense.com/" rel="external"><cite>Escape</cite> and <cite>Suspense</cite>!</a></li>
+		<li><a href="https://www.otrsite.com/" rel="external">The Vintage Radio Place</a></li>
 	</ul>
 	<h3>Toys, tools, apps, games</h3>
 	<ul class="flex-list">
 		<li><a href="https://aidn.jp/jingle"><abbr title="Automatic Composition">AC</abbr>-chan</a> (<a href="https://aidn.jp/jingle/e/dq3nt3h2" rel="external">&</a>)</li>
-		<li><cite><a href="https://puparium.neocities.org" rel="external">Puparium</a></cite></li>
-		<li><a href="https://www.ynoproject.net" rel="external"><abbr title="Yumi Nikki Online">YNO</abbr> Project</a></li>
+		<li><cite><a href="https://puparium.neocities.org/" rel="external">Puparium</a></cite></li>
+		<li><a href="https://www.ynoproject.net/" rel="external"><abbr title="Yumi Nikki Online">YNO</abbr> Project</a></li>
 		<li><a href="https://mynoise.net/NoiseMachines/dustyScratchedVinylNoiseGenerator.php" rel="external">Dust & Scratches</a></li>
-		<li><a href="https://mydora.restorativland.org" rel="external">Mydora</a></li>
-		<li><cite><a href="https://gatewaytodarkness.neocities.org" rel="external">Gateway to Darkness</a></cite></li>
+		<li><a href="https://mydora.restorativland.org/" rel="external">Mydora</a></li>
+		<li><cite><a href="https://gatewaytodarkness.neocities.org/" rel="external">Gateway to Darkness</a></cite></li>
+		<li><cite><a href="https://meatfang.neocities.org/" rel="external">meatfang</a></cite></li>
+	</ul>
+	<h3>Streamers</h3>
+	<ul class="flex-list">
+		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth<abbr class="unmodified-abbr">VT</abbr></a></li>
+		<li><a href="https://twitch.tv/grimmivt" rel="external">grimmi<abbr class="unmodified-abbr">VT</abbr></a></li>
+		<li><a href="https://twitch.tv/ecdycis" rel="external">Ecdysis</a></li>
 	</ul>
 	<h3>Anything else</h3>
 	<ul class="flex-list">
-		<li><a href="https://whitedesert.neocities.org" rel="external"><img src="./images/buttons/whitedesertbutton.png" alt="White Desert"></a></li>
-		<li><a href="https://homevideohorrors.com" rel="external">Home Video Horrors</a></li>
-		<li><a href="https://horrorgifs.neocities.org" rel="external"><img src="./images/buttons/hgs1.gif" alt="The Horror Gif Necronomicon"></a></li>
-		<li><a href="https://ngmi.neocities.org" rel="external"><img src="./images/buttons/ngmibutton.gif" alt="N G M I"></a></li>
-		<li><a href="https://dreamsdoors.neocities.org" rel="external">Beyond Dream's Doors</a></li>
+		<li><a href="https://whitedesert.neocities.org/" rel="external"><img src="./images/misc/whitedesertbutton.png" alt="White Desert"></a></li>
+		<li><a href="https://homevideohorrors.com/" rel="external">Home Video Horrors</a></li>
+		<li><a href="https://horrorgifs.neocities.org/" rel="external"><img src="./images/misc/hgs1.gif" alt="The Horror Gif Necronomicon"></a></li>
+		<li><a href="https://ngmi.neocities.org/" rel="external"><img src="./images/misc/ngmibutton.gif" alt="N G M I"></a></li>
+		<li><a href="https://dreamsdoors.neocities.org/" rel="external">Beyond Dream's Doors</a></li>
 		<li><cite><a href="https://pseudopod.org/" rel="external">PseudoPod</a></cite></li>
+		<li><a href="https://doumyakutosi.tumblr.com/" rel="external">guru</a></li>
+		<li><a href="https://lairdbarronmappingproject.com/" rel="external">Laird Barron Mapping Project</a></li>
+		<li><cite><a href="https://watashi.neocities.org/" rel="external">Watashi</a></cite></li>
+		<li><a href="http://www.eldritchdark.com/" rel="external">Eldritch Dark</a></li>
+		<li><cite><a href="https://lastdayonearth.neocities.org/" rel="external">The End of the Earth</a></cite></li>
+		<li><cite><a href="https://nowweareall.neocities.org/" rel="external">Now we are all&hellip; // Journey</a></cite></li>
 	</ul>
 	<h3>Weird Waves buttons</h3>
 	<ul id="weirdwaves-button-list" class="flex-list">
-		<li><img src="./images/weird-waves-button.png" alt="Weird Waves button, 88&times;31px PNG"><br>88&times;31px <abbr title="Portable Network Graphics">PNG</abbr></li>
-		<li><img src="./images/weird-waves-button.svg" alt="Weird Waves button, scalable vector graphics format" height="31"><br><abbr title="Scalable Vector Graphics">SVG</abbr></li>
+		<li><img id="weird-waves-button-png" src="./images/buttons/weird-waves-dark.png" alt="Weird Waves button, 88&times;31px PNG"><br>88&times;31px <abbr title="Portable Network Graphics">PNG</abbr></li>
+		<li><img id="weird-waves-button-svg" src="./images/buttons/weird-waves-dark.svg" alt="Weird Waves button, scalable vector graphics format" height="31"><br><abbr title="Scalable Vector Graphics">SVG</abbr></li>
 	</ul>
 </div><!--#links end-->
 
@@ -575,44 +508,14 @@
 
 <div id="welcome">
 	<h2>Welcome to Weird Waves!</h2>
-	<div>
-		<div>
-			<h3>What is this?</h3>
-			<p><strong>Weird Waves</strong> is an audio horror site that broadcasts radio plays, narrative podcasts, and audiobooks featuring the weird and the disturbing!</p>
-			<p><a href="#about">Read more</a></p>
-			<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
-			<h3>Latest news</h3>
-			<svg id="loading-spinner-recent-news" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-				<use href="#svg-loading-spinner" />
-			</svg>
-			<ol id="recent-news" reversed=""></ol>
-			<p><a href="#news">Read more</a></p>
-		</div>
-		<svg id="responsive-waveform" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
-		<div>
-			<h3>This week's schedule: <span class="schedule-title"></span></h3>
-			<svg id="loading-spinner-schedule-summary" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-				<use href="#svg-loading-spinner" />
-			</svg>
-			<p class="schedule-description"></p>
-			<p><a href="#schedule">Read more</a></p>
-			<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
-			<h3>Near forecast</h3>
-			<svg id="loading-spinner-upcoming-forecast" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-				<use href="#svg-loading-spinner" />
-			</svg>
-			<table class="time-table">
-				<tbody id="upcoming-forecast"></tbody>
-			</table>
-			<p><a href="#forecast">Read more</a></p>
-		</div>
-	</div>
+	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks featuring the weird and the disturbing!</p>
+	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 </div><!--#welcome end-->
 </div><!--#station-areas end-->
 </div><!--#container end-->
 
 
 
-<script src="./main-2023-06-26.js"></script>
+<script src="./main-2023-09-21.js"></script>
 </body>
 </html>

@@ -232,7 +232,7 @@ function loadShow() {
 
 		seekTime(0);
 		page.seekBar.value = 0;
-		page.showTimeTotal.textContent = getTimestampFromSeconds(page.audio.dataset.duration);
+		page.showTimeTotal.innerText = getTimestampFromSeconds(page.audio.dataset.duration);
 
 		console.log("loading show: " + show.dataset.file);
 	} else {
@@ -261,7 +261,7 @@ INTERFACE
 function updateSeekBar() {
 	if (!page.audio.paused) {
 		page.seekBar.value = page.audio.currentTime / page.audio.dataset.duration * 100;
-		page.showTimeElapsed.textContent = getTimestampFromSeconds(page.audio.currentTime);
+		page.showTimeElapsed.innerText = getTimestampFromSeconds(page.audio.currentTime);
 	}
 }
 
@@ -272,20 +272,20 @@ function goToAudioPosition(value) {
 
 // update displayed show time using seek bar
 function seekTime(value) {
-	page.showTimeElapsed.textContent = getTimestampFromSeconds(page.audio.dataset.duration * value / 100);
+	page.showTimeElapsed.innerText = getTimestampFromSeconds(page.audio.dataset.duration * value / 100);
 }
 
 // play audio
 function playAudio() {
 	page.audio.play();
-	page.playButton.textContent = "Pause";
+	page.playButton.innerText = "Pause";
 	updateTimeInterval = setInterval(updateSeekBar, 1000);
 }
 
 // pause audio
 function pauseAudio() {
 	page.audio.pause();
-	page.playButton.textContent = "Play";
+	page.playButton.innerText = "Play";
 	clearInterval(updateTimeInterval);
 }
 
@@ -299,10 +299,10 @@ function playPauseAudio() {
 function muteUnmuteAudio() {
 	if (page.audio.muted) {
 		page.audio.muted = false;
-		page.muteButton.textContent = "Mute";
+		page.muteButton.innerText = "Mute";
 	} else {
 		page.audio.muted = true;
-		page.muteButton.textContent = "Unmute";
+		page.muteButton.innerText = "Unmute";
 	}
 }
 
@@ -440,13 +440,13 @@ function reorderSeriesStats() {
 		page.seriesDurations.classList.add("hidden");
 		page.seriesShowCounts.classList.remove("hidden");
 
-		page.seriesStatsOrderButton.textContent = "Order by total hours";
+		page.seriesStatsOrderButton.innerText = "Order by total hours";
 		page.seriesStatsOrderButton.dataset.order = "show-count";
 	} else {
 		page.seriesDurations.classList.remove("hidden");
 		page.seriesShowCounts.classList.add("hidden");
 
-		page.seriesStatsOrderButton.textContent = "Order by show counts";
+		page.seriesStatsOrderButton.innerText = "Order by show counts";
 		page.seriesStatsOrderButton.dataset.order = "duration";
 	}
 }
@@ -454,14 +454,16 @@ function reorderSeriesStats() {
 /* STREAMING */
 
 // copy code-block code to clipboard
-function copyCodeToClipboard(name) {
-	const codeblock = document.getElementById("code-block-" + name);
+function copyCodeToClipboard(button) {
+	const codeblock = document.getElementById("code-block-" + button.dataset.codeBlock);
 
-	navigator.clipboard.writeText(codeblock.querySelector("code").textContent);
+	navigator.clipboard.writeText(codeblock.querySelector("code").innerText);
 
-	codeblock.querySelector(".copy-indicator").classList.remove("hidden");
+	button.innerText = "Copied to clipboard";
+	button.setAttribute("aria-pressed", "true");
 	setTimeout(() => {
-		codeblock.querySelector(".copy-indicator").classList.add("hidden");
+		button.innerText = "Copy to clipboard";
+		button.setAttribute("aria-pressed", "false");
 	}, 2000);
 }
 
@@ -680,7 +682,7 @@ page.addArchiveButton.addEventListener("click", () => addArchive());
 page.seriesStatsOrderButton.addEventListener("click", () => reorderSeriesStats());
 
 // streaming interface events
-document.querySelectorAll(".clipboard-button").forEach(button => button.addEventListener("click", () => copyCodeToClipboard(button.dataset.codeBlock)));
+document.querySelectorAll(".clipboard-button").forEach(button => button.addEventListener("click", () => copyCodeToClipboard(button)));
 
 // settings interface events (general)
 document.getElementById("auto-play-toggle").addEventListener("click", () => toggleAutoPlay());
