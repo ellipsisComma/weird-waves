@@ -400,18 +400,6 @@ button {
 	background-color: var(--foreground-colour);
 	tab-size: 4ch;
 }
-.code-block-controls {
-	display: flex;
-	flex-direction: row;
-	gap: 0.5em;
-	align-items: center;
-}
-.copy-indicator {
-	color: var(--cold-detail-colour);
-}
-.copy-indicator::after {
-	content: "Copied";
-}
 
 
 
