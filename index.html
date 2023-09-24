@@ -14,7 +14,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style-2023-09-21.css" media="all">
+	<link rel="stylesheet" type="text/css" href="./style-2023-09-24.css" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -210,34 +210,35 @@
 <div id="booth">
 	<h2>Booth</h2>
 	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
+	<h3>Playlist</h3>
 	<svg id="loading-spinner-booth" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
 	<div id="booth-contents" class="hidden">
-		<h3>Playlist</h3>
-		<ol id="playlist" class="show-list">
-		</ol>
-		<h4>Options</h4>
-		<ul class="flex-list">
-			<li><button id="random-show-button" class="push-button" type="button">Add random show</button></li>
-			<li><button id="random-banger-button" class="push-button" type="button">Add random banger</button></li>
-		</ul>
-		<ul class="flex-list">
-			<li><button id="shuffle-button" class="push-button" type="button">Shuffle playlist</button></li>
-			<li><button id="clear-button" class="push-button" type="button">Clear playlist</button></li>
-		</ul>
-		<div id="clear-playlist-options" class="hidden">
-			<p>Clear the playlist? This is irreversible.</p>
-			<ul class="flex-list">
-				<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
-				<li><button id="clear-cancel-button" class="push-button" type="button">Cancel</button></li>
+		<div id="playlist-and-controls">
+			<ul id="playlist-controls" class="flex-list">
+				<li><button id="random-show-button" class="push-button" type="button">+ Show</button></li>
+				<li><button id="random-banger-button" class="push-button" type="button">+ Banger</button></li>
+				<li><button id="shuffle-button" class="push-button" type="button">Shuffle</button></li>
+				<li><button id="clear-button" class="push-button" type="button">Clear</button></li>
+				<li id="clear-playlist-controls" class="hidden">
+					<p>Clear<br>playlist?</p>
+					<ul class="flex-list">
+						<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
+						<li><button id="clear-cancel-button" class="push-button" type="button">Cancel</button></li>
+					</ul>
+				</li>
 			</ul>
+			<ol id="playlist" class="show-list">
+			</ol>
 		</div>
-		<h3>Import & export</h3>
-		<p>To export your playlist, copy the text below to a safe place. To import, paste the data back into the box, then click the button to rebuild the playlist. You can also use this to quickly re-order your playlist.</p>
-		<textarea id="playlist-import-export"></textarea>
-		<div id="import-error-message"></div>
-		<button id="import-button" class="push-button" type="button">Import</button>
+		<div id="playlist-import-export">
+			<h3>Import & export</h3>
+			<p>To export your playlist, copy the text below to a safe place. To import, paste the data back into the box, then click the button to rebuild the playlist. You can also use this to quickly re-order your playlist.</p>
+			<textarea id="playlist-import-export-data"></textarea>
+			<div id="import-error-message"></div>
+			<button id="import-button" class="push-button" type="button">Import</button>
+		</div>
 	</div>
 </div><!--#booth end-->
 
@@ -516,6 +517,6 @@
 
 
 
-<script src="./main-2023-09-23.js"></script>
+<script src="./main-2023-09-24.js"></script>
 </body>
 </html>
