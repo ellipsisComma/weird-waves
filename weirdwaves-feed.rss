@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>Weird Waves News: 2023-09-26</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?98</guid>
+			<description>Tweaked a bunch of stuff behind the scenes and a few things in front (removed one setting, add another, changed where a few things are, etc.).</description>
+			<pubDate>Tue, 26 Sep 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>Weird Waves News: 2023-09-24</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?97</guid>
@@ -43,13 +50,6 @@
 			<guid>https://weirdwaves.net/?94</guid>
 			<description>Added series show counts back in as another option for re-ordering the series stats list in the "About" section and corrected a minor typo in the Archive.</description>
 			<pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>Weird Waves News: 2023-09-05</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?93</guid>
-			<description>Switched the stats list from displaying the number of shows per series to the total duration of the series in hours, sorted by duration.</description>
-			<pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
