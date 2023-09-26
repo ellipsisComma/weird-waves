@@ -14,7 +14,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style-2023-09-24.css" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2023-09-26" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -31,7 +31,7 @@
 
 
 <body class="theme-dark font-serif position-left">
-<script src="./utilities-2023-08-30.js"></script>
+<script src="./utilities.js?v=2023-08-30"></script>
 
 
 
@@ -91,13 +91,40 @@
 	<symbol id="svg-rss">
 		<path d="M1 13a10 10 0 0 0 10 10zm2 2h6v6m-3-3l3-3m0-3a3 3 0 0 1 3 3m5 0a8 8 0 0 0 -8-8m0-5a13 13 0 0 1 13 13" />
 	</symbol>
-<!--toggle switch parts-->
+<!--various icon and toggle parts-->
 	<defs>
 		<path id="svg-toggle-track" d="M10 14h28" />
 		<path id="svg-toggle-thumb-side" d="M3 10v4a9 9 0 0 0 18 0v-4z" />
 		<circle id="svg-toggle-thumb-top" cx="12" cy="10" r="9" />
 		<path id="svg-toggle-tick" d="M7 11l3 3 7-7" />
+		<path id="svg-play-triangle" d="M2 2v14l14-7z" />
+		<path id="svg-speaker" d="M4 7h-2v4h2l4 5h2v-14h-2z" />
+		<path id="svg-chevron" d="M1 8l5-5 5 5" />
 	</defs>
+<!--radio button icons-->
+	<symbol id="svg-play">
+		<title>Play show</title>
+		<use href="#svg-play-triangle" />
+	</symbol>
+	<symbol id="svg-pause">
+		<title>Pause show</title>
+		<path d="M2 2h5v14h-5zm9 0h5v14h-5z" />
+	</symbol>
+	<symbol id="svg-skip">
+		<title>Skip show</title>
+		<use href="#svg-play-triangle" />
+		<path d="M16 2v14" />
+	</symbol>
+	<symbol id="svg-mute">
+		<title>Mute audio</title>
+		<use href="#svg-speaker" />
+		<path d="M12 7l4 4m-4 0l4-4" />
+	</symbol>
+	<symbol id="svg-unmute">
+		<title>Unmute audio</title>
+		<use href="#svg-speaker" />
+		<path d="M12 7v4m2 2v-8m2-2v12" />
+	</symbol>
 <!--playlist button icons-->
 	<symbol id="svg-remove">
 		<title>Remove show</title>
@@ -105,11 +132,11 @@
 	</symbol>
 	<symbol id="svg-move-up">
 		<title>Move show up</title>
-		<path d="M1 8l5-5 5 5" />
+		<use href="#svg-chevron" />
 	</symbol>
 	<symbol id="svg-move-down">
 		<title>Move show down</title>
-		<use href="#svg-move-up" transform="rotate(180) translate(-12 -12)" />
+		<use href="#svg-chevron" transform="rotate(180) translate(-12 -12)" />
 	</symbol>
 <!--other-->
 	<symbol id="svg-waveform">
@@ -136,17 +163,22 @@
 		<svg id="loading-spinner-radio" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 			<use href="#svg-loading-spinner" />
 		</svg>
-		<div id="controls" class="hidden">
+		<div id="controls" class="icon-button-set" hidden="">
 			<div id="seek-controls">
 				<input id="seek-bar" type="range" value="0">
 				<span id="show-time"><time id="show-time-elapsed"></time> / <time id="show-time-total"></time></span>
 			</div>
 			<div id="show-controls">
-				<button id="play-button" class="push-button" type="button">Play</button>
-				<button id="skip-button" class="push-button" type="button">Skip</button>
+				<button id="play-button" class="push-button" type="button">
+					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
+				</button>
+				<button id="skip-button" class="push-button" type="button">
+					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-skip" /></svg>
+				</button>
 			</div>
 			<div id="audio-controls">
-				<button id="mute-button" class="push-button" type="button">Mute</button>
+				<button id="mute-button" class="push-button" type="button">
+					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg></button>
 				<input id="volume-control" type="range" value="100">
 			</div>
 		</div>
@@ -159,49 +191,39 @@
 
 <div id="station-areas">
 <nav>
-	<div id="station-tabs">
-		<ul id="activity-areas">
-			<li><a href="#booth">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-booth" /></svg>
-				<span>Booth</span>
-			</a></li>
-			<li><a href="#archive">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-archive" /></svg>
-				<span>Archive</span>
-			</a></li>
-		</ul>
-		<ul id="info-areas">
-			<li><a href="#about">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-about" /></svg>
-				<span>About</span>
-			</a></li>
-			<li><a href="#streaming">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-streaming" /></svg>
-				<span>Streaming</span>
-			</a></li>
-			<li><a href="#settings">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-settings" /></svg>
-				<span>Settings</span>
-			</a></li>
-		</ul>
-		<ul id="external-areas">
-			<li><a href="#call-in">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-call-in" /></svg>
-				<span>Call In</span>
-			</a></li>
-			<li><a href="#links">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-links" /></svg>
-				<span>Links</span>
-			</a></li>
-		</ul>
-	</div>
-	<ul id="file-links">
-		<li>
-			<a href="./weirdwaves-feed.rss" type="application/rss+xml">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-rss" /></svg>
-				<span><abbr>RSS</abbr></span>
-			</a>
-		</li>
+	<ul id="activity-areas">
+		<li><a href="#booth">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-booth" /></svg>
+			<span>Booth</span>
+		</a></li>
+		<li><a href="#archive">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-archive" /></svg>
+			<span>Archive</span>
+		</a></li>
+	</ul>
+	<ul id="info-areas">
+		<li><a href="#about">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-about" /></svg>
+			<span>About</span>
+		</a></li>
+		<li><a href="#streaming">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-streaming" /></svg>
+			<span>Streaming</span>
+		</a></li>
+		<li><a href="#settings">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-settings" /></svg>
+			<span>Settings</span>
+		</a></li>
+	</ul>
+	<ul id="external-areas">
+		<li><a href="#call-in">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-call-in" /></svg>
+			<span>Call In</span>
+		</a></li>
+		<li><a href="#links">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-links" /></svg>
+			<span>Links</span>
+		</a></li>
 	</ul>
 </nav>
 
@@ -214,15 +236,15 @@
 	<svg id="loading-spinner-booth" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
-	<div id="booth-contents" class="hidden">
+	<div id="booth-contents" hidden="">
 		<div id="playlist-and-controls">
 			<ul id="playlist-controls" class="flex-list">
 				<li><button id="random-show-button" class="push-button" type="button">+ Show</button></li>
 				<li><button id="random-banger-button" class="push-button" type="button">+ Banger</button></li>
 				<li><button id="shuffle-button" class="push-button" type="button">Shuffle</button></li>
 				<li><button id="clear-button" class="push-button" type="button">Clear</button></li>
-				<li id="clear-playlist-controls" class="hidden">
-					<p>Clear<br>playlist?</p>
+				<li id="clear-playlist-controls" hidden="">
+					<p>Clear playlist?</p>
 					<ul class="flex-list">
 						<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
 						<li><button id="clear-cancel-button" class="push-button" type="button">Cancel</button></li>
@@ -251,7 +273,7 @@
 		<use href="#svg-loading-spinner" />
 	</svg>
 	<ul class="flex-list">
-		<li><button id="add-archive-button" class="push-button hidden" type="button">Add entire archive to playlist</button></li>
+		<li><button id="add-archive-button" class="push-button" type="button" hidden="">Add entire archive to playlist</button></li>
 	</ul>
 	<ul id="archive-series-links" class="flex-list">
 	</ul>
@@ -267,31 +289,20 @@
 <div id="about">
 	<h2>About</h2>
 	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your playlist in the <a href="#booth">Booth</a>, and listen to them in the Radio. Have fun!</p>
-	<h3>News</h3>
-	<p>For site news, see the <a href="./news-archive.html">News Archive</a>. This is now rarely updated.</p>
-	<h3>Content notes</h3>
-	<p>Aside from specific notes in the <a href="#archive">Archive</a>, there's also a few general ones: <strong>death</strong> and worse fates (this station's mostly for horror) and <strong>implicit bigotry</strong> in the older sources (I weed out the worse ones, but the rest still reflect their time).</p>
-	<h3>Credits</h3>
-	<p>For shows, check the <a href="#archive">Archive</a>.</p>
-	<p>For fonts, check the <a href="#settings">Settings</a>.</p>
-	<p>The app is hosted on <a href="https://neocities.org" rel="external">Neocities</a>.</p>
-	<p>Everything else by <a href="https://speakthesky.com" rel="external me">Speak the Sky</a>/<a href="https://twitch.tv/murder_vt" rel="external me">Murder_VT</a>!</p>
-	<h3>Stats</h3>
+	<p>Right now the Archive has:</p>
 	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
-	<dl id="archive-stats-list"></dl>
-	<h4>Series stats</h4>
-	<svg id="loading-spinner-show-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
-		<use href="#svg-loading-spinner" />
-	</svg>
-	<div id="series-stats-content" class="hidden">
-		<button id="series-stats-order-button" class="push-button" type="button" data-order="duration">Order by show counts</button>
-		<dl id="series-durations" class="series-stats-list">
-		</dl>
-		<dl id="series-show-counts" class="series-stats-list hidden">
-		</dl>
-	</div>
+	<dl id="stats-list"></dl>
+	<h3>Content notes</h3>
+	<p>Aside from specific notes in the <a href="#archive">Archive</a>, there's also a few general ones: <strong>death</strong> and worse fates (this station's mostly for horror) and <strong>implicit bigotry</strong> in the older sources (I weed out the worse ones, but the rest still reflect their time).</p>
+	<h3>News</h3>
+	<p>For site news, see the <a href="./news-archive.html">News Archive</a> (<a href="./weirdwaves-feed.rss" type="application/rss+xml"><abbr title="Really Simple Syndication">RSS</abbr></a>). This is now less-often updated.</p>
+	<h3>Credits</h3>
+	<p>For shows, check the <a href="#archive">Archive</a>.</p>
+	<p>The serif font is <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a> and the sans-serif font is <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> by <a href="https://carrois.com/" rel="external">Carrois Type Design</a> and <a href="https://foundation.mozilla.org/" rel="external">the Mozilla Foundation</a>.</p>
+	<p>The app is hosted on <a href="https://neocities.org" rel="external">Neocities</a>.</p>
+	<p>Everything else by <a href="https://speakthesky.com" rel="external me">Speak the Sky</a>/<a href="https://twitch.tv/murder_vt" rel="external me">Murder_VT</a>!</p>
 </div><!--#about end-->
 
 
@@ -299,7 +310,7 @@
 <div id="streaming">
 	<h2>Streaming</h2>
 	<p>This section covers how to use Weird Waves to provide audio background as a livestreamer, e.g. on Twitch. Make sure to check out the <a href="#settings">Settings</a> as well.</p>
-	<h3>Widget</h3>
+	<h3>Making a widget</h3>
 	<p>To use Weird Waves like a stream widget in software like <abbr title="Open Broadcaster Software">OBS</abbr>:</p>
 	<ol>
 		<li>Create a browser source.</li>
@@ -308,14 +319,15 @@
 		<li>Resize and crop it.</li>
 		<li>Right-click it and select &ldquo;Interact&rdquo; to use it just like you are now.</li>
 	</ol>
-	<p>To add more empty space above and below the radio, add this custom <abbr>CSS</abbr>:</p>
+	<h3>Isolating the radio</h3>
+	<p>Use this custom <abbr>CSS</abbr> to add empty space above and below the radio, for easier cropping:</p>
 	<div id="code-block-margin" class="code-block">
 		<pre><code>#radio {
 	margin-block: 100vh;
 }</code></pre>
 		<button class="push-button icon-button clipboard-button" data-code-block="margin">Copy to clipboard</button>
 	</div>
-	<h4>Customising the theme</h4>
+	<h3>Customising the theme</h3>
 	<p>Set the theme to &ldquo;Dark&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
 	<div id="code-block-theme" class="code-block">
 		<pre><code>.theme-dark {
@@ -327,7 +339,7 @@
 		<button class="push-button icon-button clipboard-button" data-code-block="theme">Copy to clipboard</button>
 	</div>
 	<p>Replace the colours with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr>HTML</abbr> colour names, etc.</p>
-	<h4>Customising the font</h4>
+	<h3>Customising the font</h3>
 	<p>Set the font to &ldquo;Serif&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
 	<div id="code-block-font" class="code-block">
 		<pre><code>.font-serif {
@@ -351,6 +363,10 @@
 	<ul>
 		<li>
 			<h3>Radio</h3>
+			<button id="flat-radio-toggle" class="toggle" type="button">hide show info in Radio</button>
+		</li>
+		<li>
+			<h3>Playlist</h3>
 			<button id="auto-play-toggle" class="toggle" type="button">start next show automatically when previous show ends</button>
 		</li>
 		<li>
@@ -408,21 +424,6 @@
 					<button class="push-button" type="button" data-setting="sans" style="font-family:'Fira Sans', Tahoma, Verdana, 'Helvetica Neue', Helvetica, Arial, sans-serif">Sans</button>
 				</li>
 			</ul>
-			<p>The serif font is <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a>. The sans-serif font is <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> by <a href="https://carrois.com/" rel="external">Carrois Type Design</a> and <a href="https://foundation.mozilla.org/" rel="external">the Mozilla Foundation</a>.</p>
-		</li>
-		<li>
-			<h3>Widescreen radio position</h3>
-			<ul id="position-buttons" class="flex-list">
-				<li>
-					<button class="push-button" type="button" data-setting="left">Left</button>
-				</li>
-				<li>
-					<button class="push-button" type="button" data-setting="top">Top</button>
-				</li>
-				<li>
-					<button class="push-button" type="button" data-setting="right">Right</button>
-				</li>
-			</ul>
 		</li>
 	</ul>
 </div><!--#settings end-->
@@ -457,6 +458,7 @@
 		<li><a href="https://repetitivestrain.neocities.org/" rel="external">Repetitive Strain</a></li>
 		<li><a href="https://punc.neocities.org/" rel="external">PUNC</a></li>
 		<li><a href="https://www.radioisaforeigncountry.org/" rel="external">Radio is a Foreign Country</a></li>
+		<li><a href="https://nolife-radio.com/" rel="external">NoLife-Radio</a></li>
 	</ul>
 	<h3>Old Time Radio info</h3>
 	<ul class="flex-list">
@@ -517,6 +519,6 @@
 
 
 
-<script src="./main-2023-09-24.js"></script>
+<script src="./main.js?v=2023-09-26"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style-2023-09-24.css" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2023-09-26" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -31,7 +31,7 @@
 
 
 <body class="theme-dark font-serif position-left">
-<script src="./utilities-2023-08-30.js"></script>
+<script src="./utilities.js?v=2023-08-30"></script>
 
 
 
@@ -48,30 +48,20 @@
 
 
 
-<div id="radio">No radio in the news archive, sorry!</div>
+<div id="radio">Follow the news with the Weird Waves <a href="./weirdwaves-feed.rss" type="application/rss+xml"><abbr>RSS</abbr></a></div>
 
 
 
 <div id="station-areas">
 <nav>
-	<div id="station-tabs">
-		<ul id="info-areas">
-			<li><a href="#timeline"><span>Timeline</span></a></li>
-		</ul>
-		<ul id="development-areas">
-			<li><a href="#alpha"><span>Alpha</span></a></li>
-			<li><a href="#beta"><span>Beta</span></a></li>
-			<li><a href="#gamma"><span>Gamma</span></a></li>
-			<li><a href="#delta"><span>Delta</span></a></li>
-		</ul>
-	</div>
-	<ul id="file-links">
-		<li>
-			<a href="./weirdwaves-feed.rss" type="application/rss+xml">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-rss" /></svg>
-				<span>RSS</span>
-			</a>
-		</li>
+	<ul id="info-areas">
+		<li><a href="#timeline"><span>Timeline</span></a></li>
+	</ul>
+	<ul id="development-areas">
+		<li><a href="#alpha"><span>Alpha</span></a></li>
+		<li><a href="#beta"><span>Beta</span></a></li>
+		<li><a href="#gamma"><span>Gamma</span></a></li>
+		<li><a href="#delta"><span>Delta</span></a></li>
 	</ul>
 </nav>
 
@@ -80,19 +70,19 @@
 <div id="timeline">
 	<h2>Timeline</h2>
 	<dl>
-		<dt>Alpha (2022)&hellip;</dt>
+		<dt>Alpha&hellip;</dt>
 		<dd>
 			<p>&hellip;where I wrote the script that runs the app, built up the main 10 sections (Schedule, Forecast, News, About, Archive, <abbr>FAQ</abbr>, Settings, Call In, Support, and Links), designed the basic layout and colour scheme, added the first 100 shows to the Archive (actually 104, by accident), and, finally, moved the site to static hosting at Neocities.</p>
 		</dd>
-		<dt>Beta (2022&ndash;2023)&hellip;</dt>
+		<dt>Beta&hellip;</dt>
 		<dd>
 			<p>&hellip;where I started talking about the site on social media and worked my way up to 260 shows, while tightening up the basic script, fixing bugs, and adding some new features to make the site more useable (colour theme picker, landing page, personal primetime).</p>
 		</dd>
-		<dt>Gamma (2023)&hellip;</dt>
+		<dt>Gamma&hellip;</dt>
 		<dd>
 			<p>&hellip;where I made the final tweaks and fixes to the site and worked up to 366 shows (after cutting many shows, making the original goals of 520, then 500, pretty much impossible).</p>
 		</dd>
-		<dt>Delta (2023)&hellip;</dt>
+		<dt>Delta&hellip;</dt>
 		<dd>
 			<p>&hellip;where I transformed Weird Waves from a fake radio with scheduled shows to a more conventional audio player where you can choose shows from the Archive, add them to a playlist in the Booth, and play them when you want in the Radio (during this change I also cut and changed the main sections of the site to Booth, Archive, About, Streaming, Settings, Call In, and Links).</p>
 		</dd>
@@ -103,8 +93,6 @@
 
 <div id="alpha">
 	<h2>Alpha</h2>
-	<p>This covers the alpha period, late June to the start of October in 2022.</p>
-	<hr>
 	<ol class="news-list">
 		<li>
 			<h3><time datetime="2022-07-22">22nd Jul 2022</time>: Blog post</h3>
@@ -270,7 +258,7 @@
 			<h3><time datetime="2022-09-18">18th Sep 2022</time>: Settings update</h3>
 			<p>There are now three settings, cleanly laid-out and with a neat toggle-switch effect&mdash;the third, new one sets whether audio's muted when you tune in. Widescreen mode's also been tweaked a little and there've been a couple other minor changes to the script.</p>
 			<p>The non-toggle buttons are missing a bit of styling right now, since I undid the default styling but haven't finished re-styling them. The toggle buttons could probably also do with a little bit of extra styling, but I'm not 100% on that.</p>
-			<p>Looking back at the goal I set on the 26th of August: I've got 68/100 shows, styling and layout are roughly done (done for the beta, anyway) with a few exceptions (nav menu on narrow windows/devices, FAQ structure, little tweaks to news and a couple other things), and the RSS feed is halfway there (I just need to start writing new items). To-do list before October:</p>
+			<p>Looking back at the goal I set on the 26th of August: I've got 68/100 shows, styling and layout are roughly done (done for the beta, anyway) with a few exceptions (nav bar on narrow windows/devices, FAQ structure, little tweaks to news and a couple other things), and the RSS feed is halfway there (I just need to start writing new items). To-do list before October:</p>
 			<ul>
 				<li>fix nav links on narrow windows/devices</li>
 				<li>improve FAQ structure with disclosure widgets</li>
@@ -414,8 +402,6 @@
 
 <div id="beta">
 	<h2>Beta</h2>
-	<p>This covers the beta period, October 2022 to early February 2023.</p>
-	<hr>
 	<ol class="news-list">
 		<li>
 			<h3><time datetime="2022-10-03">3rd Oct 2022</time> (a): Fixing a timing bug</h3>
@@ -612,7 +598,7 @@
 			<p>From LibriVox:</p>
 			<ul>
 				<li>#7, <cite>The Night Wire</cite></li>
-				<li>#8, <cite><abbr class="unmodified-abbr" title="To Be Or Not To Be">2 B R 0 2 B</abbr></cite></li>
+				<li>#8, <cite><abbr title="To Be Or Not To Be">2 B R 0 2 B</abbr></cite></li>
 				<li>#9, <cite>The Lord of Cities</cite></li>
 			</ul>
 			<p>From <cite><abbr>SCP</abbr> Archives</cite>:</p>
@@ -647,7 +633,7 @@
 		<li>
 			<h3><time datetime="2022-11-30">30th Nov 2022</time>: Chatbox removal, random show link, more new shows</h3>
 			<p>First, I didn't like how the look of the Cbox chatbox clashed with the look of the site, or how it messed with looping around the page using keyboard navigation. So, I removed it (it didn't get any traffic in the ~2 weeks it was up, anyway).</p>
-			<p>Second, I added another link at the bottom of the nav menu&mdash;a link that takes you to a random show (specifically, it takes you straight to the file, no chance to see the blurb etc.). It's super-simple and I might fix up the version I made that takes you to a show in the archive instead (but then I'll have to slightly change the way navigating between sections works, so&hellip;).</p>
+			<p>Second, I added another link at the bottom of the nav bar&mdash;a link that takes you to a random show (specifically, it takes you straight to the file, no chance to see the blurb etc.). It's super-simple and I might fix up the version I made that takes you to a show in the archive instead (but then I'll have to slightly change the way navigating between sections works, so&hellip;).</p>
 			<p>The new shows are all from <cite>Dimension X</cite> again:</p>
 			<ul>
 				<li>#14, <cite>Mars Is Heaven!</cite></li>
@@ -687,7 +673,7 @@
 			<p>And from a new series, <cite>The Black Mass</cite>, a 1960s anthology of fantasy and gothic and cosmic horror:</p>
 			<ul>
 				<li>#4, <cite>Nightmare</cite></li>
-				<li>#13, <cite>The Imp of the Perverse</cite> and <cite><abbr class="unmodified-abbr" title="manuscript">MS.</abbr> Found in a Bottle</cite></li>
+				<li>#13, <cite>The Imp of the Perverse</cite> and <cite><abbr title="manuscript">MS.</abbr> Found in a Bottle</cite></li>
 				<li>#16, <cite>Atrophy</cite></li>
 			</ul>
 		</li>
@@ -841,15 +827,13 @@
 
 <div id="gamma">
 	<h2>Gamma</h2>
-	<p>This covers the gamma period, early February to early June 2023.</p>
-	<hr>
 	<ol class="news-list">
 		<li>
 			<h3><time datetime="2023-02-10">10th Feb 2023</time>: New shows</h3>
 			<p>More LibriVox shows:</p>
 			<ul>
 				<li>#19, <cite>Carcassonne</cite></li>
-				<li>#20, <cite>The Facts in the Case of <abbr class="unmodified-abbr" title="Monsieur">M.</abbr> Valdemar</cite></li>
+				<li>#20, <cite>The Facts in the Case of <abbr title="Monsieur">M.</abbr> Valdemar</cite></li>
 				<li>#21, <cite>Imprisoned with the Pharoahs</cite>, part 1</li>
 				<li>#22, <cite>Imprisoned with the Pharoahs</cite>, part 2</li>
 				<li>#23, <cite>A Hunger Artist</cite></li>
@@ -1363,7 +1347,7 @@
 				<li>#4, <cite>The Demon Tree</cite></li>
 				<li>#18, <cite>Pennsylvania Turnpike</cite></li>
 			</ul>
-			<p>I've also added various readings of the works of Clark Ashton Smith under the heading &ldquo;<abbr class="unmodified-abbr" title="Clark Ashton Smith">CAS</abbr>iana&rdquo;:</p>
+			<p>I've also added various readings of the works of Clark Ashton Smith under the heading &ldquo;<abbr title="Clark Ashton Smith">CAS</abbr>iana&rdquo;:</p>
 			<ul>
 				<li>#1, <cite>The City of the Singing Flame</cite>, part 1</li>
 				<li>#2, <cite>The City of the Singing Flame</cite>, part 2</li>
@@ -1405,8 +1389,6 @@
 
 <div id="delta">
 	<h2>Delta</h2>
-	<p>This covers the delta period, late June to early September 2023.</p>
-	<hr>
 	<ol class="news-list">
 		<li>
 			<h3><time datetime="2023-06-26">26th Jun 2023</time>: Hiatus</h3>
@@ -1585,6 +1567,18 @@
 			<h3><time datetime="2023-09-24">24th Sep 2023</time>: Improved playlist controls and refined bangers</h3>
 			<p>The playlist controls (add show, add banger, shuffle, and clear) now appear on the left of the playlist and are sticky (so they stay in view as you scroll down the page), instead of being after the playlist (making it tedious to reach them).</p>
 			<p>I also cut a few more shows from the bangers list.</p>
+		</li>
+		<li>
+			<h3><time datetime="2023-09-26">26th Sep 2023</time>: Behind-the-scenes tweaks</h3>
+			<p>I just updated the site with a bunch of behind-the-scenes changes that mostly don't affect how it looks or acts from the front, but here're the bigger changes you can actually see:</p>
+			<ul>
+				<li>the audio control buttons now have icons instead of texts</li>
+				<li>the <abbr>RSS</abbr> link's now in the About section and News Archive, not the nav bar</li>
+				<li>the playlist controls are above instead of beside the playlist</li>
+				<li>the About section's been re-arranged, the series stats are gone, and the font credits are now in here, not Settings</li>
+				<li>the widescreen radio position setting's been removed (in widescreen display, the radio's always on the left now)</li>
+				<li>a new setting's been added that hides show info in the radio</li>
+			</ul>
 		</li>
 	</ol>
 </div>
