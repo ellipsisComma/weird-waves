@@ -478,7 +478,7 @@ function toggleFlatRadio() {
 	settings.flatRadio = !settings.flatRadio;
 	switchToggle("flat-radio-toggle", "flatRadio", settings.flatRadio);
 
-	page.loadedShow.querySelector(".show-info").toggleAttribute("hidden", settings.flatRadio);
+	page.loadedShow.querySelector(".show-info")?.toggleAttribute("hidden", settings.flatRadio);
 }
 
 // toggle between auto-playing (true) and not (false) a newly-loaded show when the previous show ends
