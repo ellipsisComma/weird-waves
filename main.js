@@ -122,7 +122,7 @@ function getShowIDsFromPlaylist() {
 function buildPlaylistEntryFromID(ID) {
 	const show = {},
 	showInArchive = document.getElementById(ID),
-	seriesInArchive = showInArchive.parentElement.parentElement;
+	seriesInArchive = showInArchive.closest("#series-list > li");
 
 	show.id = ID;
 	show.file = showInArchive.dataset.file;
