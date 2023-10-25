@@ -18,8 +18,8 @@ for (const [style, option] of Object.entries(styles)) document.body.classList.ad
 // store path to favicons and references for .svg and .ico favicon elements
 const faviconPath = "./images/favicons/",
 favicon = {
-	"SVG": document.head.querySelector('[rel~="icon"][href$=".svg"]'),
-	"ico": document.head.querySelector('[href$=".ico"]')
+	"SVG": document.querySelector('[rel~="icon"][href$=".svg"]'),
+	"ico": document.querySelector('[href$=".ico"]')
 };
 
 // switch favicon to match style
@@ -39,15 +39,12 @@ document.addEventListener("DOMContentLoaded", () => switchFavicon(styles.theme))
 function changeDocumentTitle() {
 	const title = document.querySelector("title");
 
-	document.querySelector('[aria-current="page"]')?.removeAttribute('tabindex');
-	document.querySelector('[aria-current="page"]')?.removeAttribute('aria-current');
+	document.querySelector('[aria-current="page"]')?.removeAttribute("aria-current");
 
 	const navLink = document.querySelector('nav [href="' + window.location.hash + '"]');
 	if (navLink) {
 		document.title = navLink.innerText + " / " + title.dataset.original;
-
-		navLink.setAttribute('aria-current', 'page');
-		navLink.setAttribute('tabindex', '-1');
+		navLink.setAttribute("aria-current", "page");
 	} else document.title = title.dataset.original;
 }
 
@@ -56,4 +53,4 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.querySelector("title").setAttribute("data-original", document.title);
 	changeDocumentTitle();
 });
-window.addEventListener("hashchange", () => changeDocumentTitle());
+window.addEventListener("hashchange", changeDocumentTitle);

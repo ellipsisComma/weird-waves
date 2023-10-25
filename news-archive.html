@@ -14,7 +14,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2023-09-26" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2023-10-22" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -48,7 +48,9 @@
 
 
 
-<div id="radio">Follow the news with the Weird Waves <a href="./weirdwaves-feed.rss" type="application/rss+xml"><abbr>RSS</abbr></a></div>
+<div id="radio">
+	<p>Follow the news: Weird Waves <a href="./weirdwaves-feed.rss" type="application/rss+xml"><abbr>RSS</abbr></a></p>
+</div>
 
 
 
@@ -1579,6 +1581,31 @@
 				<li>the widescreen radio position setting's been removed (in widescreen display, the radio's always on the left now)</li>
 				<li>a new setting's been added that hides show info in the radio</li>
 			</ul>
+		</li>
+		<li>
+			<h3><time datetime="2023-10-14">14th Oct 2023</time>: Returning some shows to the Archive</h3>
+			<p>I added a few shows back into the Archive that I deleted in the big shift to the playlist version of Weird Waves:</p>
+			<ul>
+				<li><cite>Dimension X</cite> #14: <cite>Mars Is Heaven!</cite></li>
+				<li><cite>Mindwebs</cite> #131: <cite>The Racer</cite></li>
+				<li><cite>Quiet, Please</cite> #46: <cite>Clarissa</cite></li>
+				<li><cite>Quiet, Please</cite> #100: <cite>The Little Morning</cite></li>
+				<li><cite>X Minus One</cite> #92: <cite>The Seventh Victim</cite></li>
+			</ul>
+		</li>
+		<li>
+			<h3><time datetime="2023-10-19">19th Oct 2023</time>: <cite>Mercury Theatre</cite> copyright status</h3>
+			<p><cite>The Mercury Theatre</cite> is now included in the set of potentially copyright-unsafe series/sources, as I recently found that a twitch video where I played some shows from that source was muted during those shows.</p>
+			<p>I'm also looking into how to fix <cite>Mindwebs</cite> shows in <abbr title="Open Broadcaster Software">OBS</abbr> (almost all its episodes fail to play beyond the first 8 seconds when Weird Waves is loaded as a browser source in <abbr>OBS</abbr> and not loaded as a webpage in an actual browser).</p>
+		</li>
+		<li>
+			<h3><time datetime="2023-10-21">21st Oct 2023</time>: New <cite>Mindwebs</cite> files</h3>
+			<p>I just re-exported and re-uploaded all the <cite>Mindwebs</cite> show files using the same settings as (most) of the other files in the Archive. This slightly reduces the quality, but <abbr>OBS</abbr> (streaming software) seems to be able to handle them better (almost all the old files would freeze 8 seconds in, but none of the new ones did when I tested during a livestream).</p>
+		</li>
+		<li>
+			<h3><time datetime="2023-10-"> Oct 2023</time>: Big behind-the-scenes changes</h3>
+			<p>I just pushed a majorly-updated version of Weird Waves&mdash;but most of the changes were just refactoring the code. It does the same stuff, but sometimes with different (faster or more maintainable) processes. That said there are a few actual changes.</p>
+			<p>Firstly, the series links at the top of the Archive are now regular links thanks to Firefox finally implementing the <code>:has()</code> selector. Secondly, the import-export area no longer automatically updates with your show IDs following every change made to the playlist; instead, you click the new &ldquo;Export&rdquo; button to get your current playlist.</p>
 		</li>
 	</ol>
 </div>

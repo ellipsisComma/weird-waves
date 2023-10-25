@@ -4,15 +4,21 @@
 SCRIPT CONTROLS: an interface to change the app's behaviour (only really useful if running your own)
 PARAMETERS: internal parameters (probably don't need to be changed)
 FUNCTIONS
-	TIMING: transforming and writing timestamps
-	PLAYLIST: getting show IDs, building the playlist
-	SHOWS: loading shows into the radio
-	INTERFACE: radio (controlling current show), booth (editing the playlist), archive (adding shows/series/archive to playlist), settings (changing settings and style)
-	PAGE CONSTRUCTION: building page sections and content (e.g. the Archive)
-	DISPLAY: updating site display according to display (style and font) settings
+	UTILITY: general and misc. applications	
+	PLAYLIST: building and altering the playlist
+	SHOWS: adding, moving, removing, and loading shows
+	RADIO: audio interface
+	SETTINGS: changing settings and displaying the results
+	PAGE CONSTRUCTION: building page sections and content (e.g. the archive)
 EVENTS: event listeners
 ARCHIVE: an object with every source and show in the Archive
 */
+
+/*
+Known issues (not major):
+ > if a playlist with one item is loaded from localStorage, the show is loaded into the radio twice (once by addShow() for being added to an empty playlist and once at the end of updatePlaylist(), which is called on pageload and loads the show if (among other conditions) the original playlist had no items on it
+*/
+
 
 
 
@@ -26,15 +32,34 @@ const paths = {
 	button: "./images/buttons/weird-waves-"
 };
 
+// initialised settings from storage and set default values if not set
 const settings = window.localStorage.getItem("settings") ? JSON.parse(window.localStorage.getItem("settings")) : {};
 settings.copyrightSafety ??= false;
 settings.flatRadio ??= false;
 settings.autoPlayNextShow ??= true;
 settings.notesOpen ??= false;
 
-// prepare empty playlist and read stored playlist show IDs from storage (if there are any)
-const playlist = [];
-let showIDs = window.localStorage.getItem("playlist") ? JSON.parse(window.localStorage.getItem("playlist")) : [];
+// options for theme, font etc., with displayed names and underlying codes
+const styleOptions = {
+	"themes": [
+		{"name": "Dark",	"code": "dark"},
+		{"name": "Goop",	"code": "goop"},
+		{"name": "Flame",	"code": "flame"},
+		{"name": "Plasm",	"code": "plasm"},
+		{"name": "Moss",	"code": "moss"},
+		{"name": "Darker",	"code": "darker"},
+		{"name": "Light",	"code": "light"},
+		{"name": "Wine",	"code": "wine"},
+		{"name": "Ash",		"code": "ash"},
+		{"name": "Dust",	"code": "dust"},
+		{"name": "Mist",	"code": "mist"},
+		{"name": "Silver",	"code": "silver"}
+	],
+	"fonts": [
+		{"name": "Serif",	"code": "serif"},
+		{"name": "Sans",	"code": "sans"}
+	]
+};
 
 
 
@@ -42,44 +67,58 @@ let showIDs = window.localStorage.getItem("playlist") ? JSON.parse(window.localS
 	PARAMETERS
 =============== */
 
-// HTML elements
+// HTML elements (or templated HTML elements) and their IDs
 const page = {
-	"loadedShow": document.getElementById("loaded-show"),
-	"controls": document.getElementById("controls"),
-	"seekBar": document.getElementById("seek-bar"),
-	"showTimeElapsed": document.getElementById("show-time-elapsed"),
-	"showTimeTotal": document.getElementById("show-time-total"),
-	"playButton": document.getElementById("play-button"),
-	"skipButton": document.getElementById("skip-button"),
-	"muteButton": document.getElementById("mute-button"),
-	"volumeControl": document.getElementById("volume-control"),
-	"audio": document.getElementById("show-audio"),
+// radio
+	"loadedShow": "loaded-show",
+	"controls": "controls",
+	"seekBar": "seek-bar",
+	"showTimeElapsed": "show-time-elapsed",
+	"showTimeTotal": "show-time-total",
+	"playButton": "play-button",
+	"skipButton": "skip-button",
+	"muteButton": "mute-button",
+	"volumeControl": "volume-control",
+	"audio": "show-audio",
 
-	"playlist": document.getElementById("playlist"),
-	"clearButton": document.getElementById("clear-button"),
-	"clearPlaylistControls": document.getElementById("clear-playlist-controls"),
-	"playlistImportExport": document.getElementById("playlist-import-export-data"),
-	"importErrorMessage": document.getElementById("import-error-message"),
+// booth
+	"playlist": "playlist",
+	"playlistControls": "playlist-controls",
+	"clearButton": "clear-button",
+	"clearPlaylistControls": "clear-playlist-controls",
+	"importExport": "import-export-data",
+	"importErrorMessage": "import-error-message",
 
-	"addArchiveButton": document.getElementById("add-archive-button"),
+// archive
+	"seriesList": "series-list",
 
-	"themeButtons": document.querySelectorAll("#theme-buttons button"),
-	"fontButtons": document.querySelectorAll("#font-buttons button"),
+// settings
+	"themeButtons": "theme-buttons",
+	"fontButtons": "font-buttons",
 
-	"weirdWavesButtonPNG": document.getElementById("weird-waves-button-png"),
-	"weirdWavesButtonSVG": document.getElementById("weird-waves-button-svg")
+// links
+	"weirdWavesButtonPNG": "weird-waves-button-png",
+	"weirdWavesButtonSVG": "weird-waves-button-svg"
+},
+templateHTML = {
+	"showPositionControls": "show-position-controls-template",
+	"invalidImportErrorMessage": "invalid-import-error-message-template",
+	"toggle": "toggle-template",
+	"themeButton": "theme-button-template",
+	"fontButton": "font-button-template"
 };
+
+for (const element of Object.keys(page)) page[element] = document.getElementById(page[element]);
+for (const element of Object.keys(templateHTML)) templateHTML[element] = document.getElementById(templateHTML[element]);
+
+// prepare playlist show IDs from storage (if there are any)
+let playlistIDs = window.localStorage.getItem("playlist") ? JSON.parse(window.localStorage.getItem("playlist")) : [];
 
 // sets of show IDs to select from when adding random shows to playlist
 const showIDSets = {
-	"all": {
-		"safe": [],
-		"unsafe": []
-	},
-	"banger": {
-		"safe": [],
-		"unsafe": []
-	}
+	"all": {"safe": [], "any": []},
+	"bangers": {"safe": [], "any": []},
+	"series": {}
 };
 
 let updateTimeInterval;
@@ -90,9 +129,26 @@ let updateTimeInterval;
 	FUNCTIONS
 ============== */
 
-/* ---
-TIMING
---- */
+/* ----
+UTILITY
+---- */
+
+// add an object of data-attributes to an element
+Element.prototype.setData = function (data) {
+	for (const attr of Object.keys(data)) this.setAttribute("data-" + attr, data[attr]);
+}
+
+// copy code-block code to clipboard
+function copyCodeToClipboard(button) {
+	navigator.clipboard.writeText(button.closest(".code-block").querySelector("code").innerText);
+
+	button.innerText = "Copied to clipboard";
+	button.setAttribute("aria-pressed", "true");
+	setTimeout(() => {
+		button.innerText = "Copy to clipboard";
+		button.setAttribute("aria-pressed", "false");
+	}, 2000);
+}
 
 // pad single-digit second or minute numbers with a leading 0
 function padTime(timeNum) {
@@ -112,130 +168,220 @@ function setTimestampFromSeconds(element, time) {
 PLAYLIST
 ----- */
 
-// get show IDs from a fleshed-out playlist object (when unloading page or modifying playlist)
-function getShowIDsFromPlaylist() {
-	showIDs = [];
-	for (const show of playlist) showIDs.push(show.id);
-}
-
-// build out playlist object entry from show ID
-function buildPlaylistEntryFromID(ID) {
-	const show = {},
-	showInArchive = document.getElementById(ID),
-	seriesInArchive = showInArchive.closest("#series-list > li");
-
-	show.id = ID;
-	show.file = showInArchive.dataset.file;
-	show.series = seriesInArchive.querySelector(".series-heading").innerHTML;
-	show.title = showInArchive.querySelector(".show-heading").innerHTML;
-	show.info = showInArchive.querySelector(".show-info").innerHTML;
-	show.source = seriesInArchive.querySelector(".series-source").outerHTML;
-	show.duration = showInArchive.dataset.duration;
-
-	return show;
-}
-
-// build out playlist <li>, including controls for removing and moving items, from playlist object
-function buildPlaylistShowHTML(show) {
-	let HTML = "";
-
-	HTML += '<ul class="show-position-controls icon-button-set">' +
-'<li><button class="push-button up-button" type="button" data-id="' + show.id + '"><svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg></button></li>' +
-'<li><button class="push-button remove-button" type="button" data-id="' + show.id + '"><svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg></button></li>' +
-'<li><button class="push-button down-button" type="button" data-id="' + show.id + '"><svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg></button></li></ul>';
-	HTML += '<div class="playlist-item" data-file="' + show.id + '-' + show.file + '" data-duration="' + show.duration + '"><h4 class="show-heading">' + show.series + " " + show.title + '</h4>' +
-'<div class="show-info">' + show.info + show.source + "</div>";
-	HTML += "</div>";
-
-	return "<li>" + HTML + "</li>";
-}
-
-// write entire playlist into Booth
-function loadPlaylistFromShowIDs(source) {
-	console.log("loading playlist: " + source);
-
-	playlist.length = 0;
-
-	let playlistHTML = "";
-
-	showIDs = [...new Set(showIDs.reverse())];
-	showIDs.reverse();
-
-	document.querySelectorAll("#archive .add-show-button").forEach(button => button.setAttribute("aria-pressed", "false"));
-
-	for (const ID of showIDs) {
-		document.querySelector("#" + ID + " .add-show-button").setAttribute("aria-pressed", "true");
-		playlist.push(buildPlaylistEntryFromID(ID));
-	}
-	for (const show of playlist) playlistHTML += buildPlaylistShowHTML(show);
-
-	page.playlist.innerHTML = playlistHTML;
-	if (showIDs.length > 0) {
-		page.playlist.querySelector(".up-button").setAttribute("disabled", "");
-		page.playlist.querySelector(":scope > :last-child .down-button").setAttribute("disabled", "");
-	}
-	page.playlistImportExport.value = showIDs.join("\n");
-
-// add event listeners for playlist controls
-	document.querySelectorAll(".remove-button").forEach(button => button.addEventListener("click", () => removeShow(button.dataset.id)));
-	document.querySelectorAll(".up-button").forEach(button => button.addEventListener("click", () => moveShow(button.dataset.id, -1)));
-	document.querySelectorAll(".down-button").forEach(button => button.addEventListener("click", () => moveShow(button.dataset.id, 1)));
-
-// honour stored notes visibility setting (if set)
-	document.querySelectorAll("#playlist .content-notes").forEach(notes => notes.toggleAttribute("open", settings.notesOpen));
-
-// reveal show controls if there's a show to control
-	page.controls.toggleAttribute("hidden", playlist.length === 0);
+// reorder HTML playlist following playlist object (show IDs)
+function reorderPlaylist() {
+	for (const id of playlistIDs) page.playlist.appendChild(page.playlist.querySelector('[data-id="' + id + '"]'));
 }
 
 // import playlist from textarea contents (after trimming start, interior, and ending newlines), or empty the array if textarea is empty; load the top show and pause it to update play/pause button state; if any invalid show IDs present in textarea lines, display error message instead
-function importPlaylist() {
-	showIDs = page.playlistImportExport.value !== "" ? page.playlistImportExport.value.replace(/\n+/g,"\n").replace(/ /g,"").trim().split("\n") : [];
+function updatePlaylist(oldIDs, newIDs) {
+	const addedIDs = newIDs.filter(id => !oldIDs.includes(id)),
+	removedIDs = oldIDs.filter(id => !newIDs.includes(id)),
+	invalidIDs = newIDs.filter(id => !document.getElementById(id));
 
-	const invalidShowIDs = [];
-
-	for (const ID of showIDs) {
-		if (!document.getElementById(ID)) invalidShowIDs.push(ID);
+// if attempting to import 1+ invalid IDs, list invalid IDs in error message and abort
+	if (invalidIDs.length > 0) {
+		clearImportErrors();
+		page.importExport.value = newIDs.join("\n");
+		page.importErrorMessage.appendChild(templateHTML.invalidImportErrorMessage.content.cloneNode(true));
+		const invalidIDsList = page.importErrorMessage.querySelector("ul");
+		for (const ID of invalidIDs) invalidIDsList.appendChild(document.createElement("li")).textContent = ID;
+		page.importErrorMessage.scrollIntoView();
+		return;
 	}
 
-	if (invalidShowIDs.length > 0) page.importErrorMessage.innerHTML = "<p>Invalid show ID(s):</p><ul><li>" + invalidShowIDs.join("</li><li>") + "</li></ul>";
-	else {
-		page.importErrorMessage.innerHTML = "";
-		loadPlaylistFromShowIDs("import");
-	}
+	for (const id of addedIDs) addShow(id);
+	for (const id of removedIDs) removeShow(id);
 
+	playlistIDs = newIDs;
+	reorderPlaylist();
+	page.importExport.value = "";
+	clearImportErrors();
+
+	if ((playlistIDs.length > 0 && oldIDs[0] !== playlistIDs[0]) || oldIDs.length === 0) loadShow();
+}
+
+// shuffle playlist if it has at least 2 entries, then load top show (if it's different after shuffling)
+function shufflePlaylist() {
+	if (playlistIDs.length <= 1) return;
+
+	const originalLoadedID = page.playlist.firstElementChild.dataset.id;
+	let i = playlistIDs.length;
+
+	while (i > 0) {
+		const r = Math.floor(Math.random() * i--);
+		if (r < i) [playlistIDs[r], playlistIDs[i]] = [playlistIDs[i], playlistIDs[r]];
+	}
+	reorderPlaylist();
+
+	if (playlistIDs[0] !== originalLoadedID) loadShow();
+}
+
+// reveal controls for clearing playlist
+function revealClearPlaylistControls() {
+	page.clearButton.setAttribute("aria-pressed", "true");
+	page.clearPlaylistControls.removeAttribute("hidden");
+	page.clearPlaylistControls.focus();
+}
+
+// hide controls for clearing playlist
+function hideClearPlaylistControls() {
+	page.clearButton.setAttribute("aria-pressed", "false");
+	page.clearPlaylistControls.setAttribute("hidden", "");
+}
+
+// clear playlist and hide clear controls again, then load show (i.e. nothing)
+function clearPlaylist() {
+	for (const id of playlistIDs) document.querySelector('#' + id + ' [data-action="add-show"][aria-pressed="true"]')?.setAttribute("aria-pressed", "false");
+	playlistIDs = [];
+	page.playlist.replaceChildren();
+	hideClearPlaylistControls();
 	loadShow();
-	pauseAudio();
+}
+
+// list playlist of show IDs line-by-line in import-export box
+function exportPlaylist() {
+	page.importExport.value = playlistIDs.join("\n");
+}
+
+// remove content of import error message
+function clearImportErrors() {
+	page.importErrorMessage.textContent = "";
+	page.importErrorMessage.replaceChildren();
+}
+
+function importPlaylist() {
+	if (page.importExport.value.trim() !== "") updatePlaylist(playlistIDs, page.importExport.value.replace(/\n\n+/g,"\n").replace(/ /g,"").trim().split("\n"));
+	else page.importErrorMessage.textContent = "Invalid import: no show IDs.";
 }
 
 /* --
 SHOWS
 -- */
 
+/* ADDING */
+
+// add show to playlist; if playlist was previously empty, load top show
+function addShow(id) {
+	if (playlistIDs.includes(id)) {
+		const originalIndex = playlistIDs.indexOf(id);
+		playlistIDs.splice(originalIndex, 1);
+
+		if (page.playlist.querySelector('[data-id="' + id + '"]')) {
+			page.playlist.appendChild(page.playlist.children[originalIndex]);
+			playlistIDs.push(id);
+			console.log("re-added show: " + id);
+			if (originalIndex === 0) loadShow();
+			return;
+		}
+	}
+	playlistIDs.push(id);
+
+// find show and series in archive
+	const showInArchive = document.getElementById(id),
+	seriesInArchive = document.getElementById("archive-" + id.split("-")[0]);
+
+// build new show element and clone in show position controls and show content
+	const newShow = page.playlist.appendChild(document.createElement("li"));
+	newShow.appendChild(templateHTML.showPositionControls.content.cloneNode(true));
+	for (const button of newShow.querySelectorAll("button")) button.dataset.target = id;
+	newShow.appendChild(showInArchive.querySelector(".show-info").cloneNode(true));
+
+// transfer remaining show info
+	const newShowHeading = newShow.querySelector(".show-heading");
+	newShowHeading.innerHTML = seriesInArchive.querySelector(".series-heading").innerHTML + " " + newShowHeading.innerHTML;
+	newShow.querySelector(".show-content").appendChild(seriesInArchive.querySelector(".series-source").cloneNode(true));
+	newShow.setData({
+		"id": id,
+		"file": showInArchive.dataset.file,
+		"duration": showInArchive.dataset.duration
+	});
+
+// add show to playlist in booth and mark as added in archive
+	page.playlist.appendChild(newShow);
+	showInArchive.querySelector('[data-action="add-show"]').setAttribute("aria-pressed", "true");
+
+// update show info and elements for playlist
+	console.log("added show: " + id);
+
+	if (page.playlist.children.length === 1) loadShow();
+}
+
+// add entire archive to playlist
+function addArchive() {
+	updatePlaylist(playlistIDs, settings.copyrightSafety ? showIDSets.all.safe : showIDSets.all.any);
+}
+
+// add entire series to playlist
+function addSeries(seriesCode) {
+	const seriesIDs = [];
+	for (const showCode of showIDSets.series[seriesCode]) seriesIDs.push(seriesCode + "-" + showCode);
+	updatePlaylist(playlistIDs, [...playlistIDs.filter(id => !seriesIDs.includes(id)), ...seriesIDs]);
+}
+
+// add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
+function addRandomShow(showType = "all") {
+	const pool = showIDSets[showType][settings.copyrightSafety ? "safe" : "any"],
+	id = pool[Math.floor(Math.random() * pool.length)];
+
+	addShow(id);
+
+	window.scrollTo(0, page.playlist.lastElementChild.offsetTop - page.playlistControls.clientHeight);
+}
+
+/* MANIPULATING */
+
+// move show up/down in playlist; if the first show on the playlist was moved, load the new top show
+function moveShow(id, move) {
+	const index = playlistIDs.indexOf(id),
+	target = page.playlist.children[index],
+	swap = page.playlist.children[index + move];
+
+	[playlistIDs[index], playlistIDs[index + move]] = [playlistIDs[index + move], playlistIDs[index]];
+	if (move > 0) target.before(swap);
+	else swap.before(target);
+
+	if (index === 0 || index + move === 0) loadShow();
+}
+
+// remove show from playlist in object and HTML and update import-export text accordingly; if the first show on the playlist was removed, load the new top show
+function removeShow(id) {
+	const index = playlistIDs.indexOf(id);
+
+	page.playlist.children[index]?.remove();
+	playlistIDs.splice(index, 1);
+	document.getElementById(id).querySelector('[data-action="add-show"]').setAttribute("aria-pressed", "false");
+
+	if (index === 0) loadShow();
+
+	console.log("removed show: " + id);
+}
+
 // write show parts onto page and load show audio file; if playlist is empty, remove audio and show content and hide controls
 function loadShow() {
 	pauseAudio();
+	page.loadedShow.replaceChildren();
 
-	if (playlist.length > 0) {
-		const show = page.playlist.querySelector(".playlist-item");
+	if (playlistIDs.length > 0) {
+		const show = page.playlist.firstElementChild;
 
-		page.audio.src = paths.show + show.dataset.file + ".mp3";
-
+		page.audio.src = paths.show + show.dataset.id + "-" + show.dataset.file + ".mp3";
 		page.audio.setAttribute("data-duration", show.dataset.duration);
 
-		page.loadedShow.innerHTML = show.innerHTML.replace(/(<!<\/)h4/g,"\1h2");
-
-		if (settings.flatRadio) page.loadedShow.querySelector(".show-info").setAttribute("hidden", "");
-		else document.querySelector('#loaded-show .content-notes')?.toggleAttribute("open", settings.notesOpen);
+		const loadedShowHeading = page.loadedShow.appendChild(document.createElement("h2"));
+		loadedShowHeading.classList.add("show-heading");
+		loadedShowHeading.innerHTML = show.querySelector(".show-heading").innerHTML;
+		page.loadedShow.appendChild(show.querySelector(".show-content").cloneNode(true));
+		page.controls.removeAttribute("hidden");
 
 		seekTime(0);
 		page.seekBar.value = 0;
 		setTimestampFromSeconds(page.showTimeTotal, page.audio.dataset.duration);
 
-		console.log("loading show: " + show.dataset.file);
+		console.log("loaded show: " + show.dataset.id + "-" + show.dataset.file);
 	} else {
 		page.audio.removeAttribute("src");
-		page.loadedShow.innerHTML = "";
+		page.controls.setAttribute("hidden", "");
 
 		console.log("reached end of playlist");
 	}
@@ -243,17 +389,15 @@ function loadShow() {
 
 // replace loaded show with next show on playlist, or empty-playlist message if none
 function loadNextShow() {
-	removeShow(page.playlist.querySelector(".remove-button").dataset.id);
+	removeShow(page.playlist.children[0].dataset.id);
 	page.seekBar.value = 0;
 
 	if (page.audio.hasAttribute("src") && settings.autoPlayNextShow) playAudio();
 }
 
-/* ------
-INTERFACE
------- */
-
-/* RADIO */
+/* --
+RADIO
+-- */
 
 // if audio is playing, update seek bar and time-elapsed
 function updateSeekBar() {
@@ -313,144 +457,9 @@ function setVolume(newVolume) {
 	if (page.audio.muted) muteUnmuteAudio();
 }
 
-/* BOOTH */
-
-// remove show from playlist in object and HTML and update import-export text accordingly; if the first show on the playlist was removed, load the new top show
-function removeShow(id) {
-	const removedShowIndex = playlist.findIndex(show => show.id === id);
-
-	playlist.splice(removedShowIndex,1);
-	getShowIDsFromPlaylist();
-	loadPlaylistFromShowIDs("remove");
-
-	if (removedShowIndex === 0) loadShow();
-}
-
-// move show up/down in playlist and update import-export text accordingly; if the first show on the playlist was moved, load the new top show
-function moveShow(id, move) {
-	const showIndex = playlist.findIndex(show => show.id === id);
-
-	[playlist[showIndex + move], playlist[showIndex]] = [playlist[showIndex], playlist[showIndex + move]];
-	getShowIDsFromPlaylist();
-	loadPlaylistFromShowIDs("move");
-
-	if (showIndex === 0 || showIndex + move === 0) loadShow();
-}
-
-// add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
-function addRandomShow(showType = "all") {
-	const showIDPool = settings.copyrightSafety ? showIDSets[showType].safe : showIDSets[showType].safe.concat(showIDSets[showType].unsafe),
-	id = showIDPool[Math.floor(Math.random() * showIDPool.length)];
-
-	getShowIDsFromPlaylist();
-	const showNotOnList = !showIDs.includes(id);
-	showIDs.push(id);
-	loadPlaylistFromShowIDs("random show");
-
-	if (showNotOnList) {
-		window.scrollBy({
-			"top": document.querySelector("#playlist > :last-child").scrollHeight,
-			"left": 0,
-			"behavior": "instant"
-		});
-	}
-
-	if (playlist.length === 1) loadShow();
-}
-
-// shuffle playlist, then load top show
-function shufflePlaylist() {
-	getShowIDsFromPlaylist();
-
-	let i = showIDs.length;
-
-	while (i > 0) {
-		const randomID = Math.floor(Math.random() * --i);
-		[showIDs[randomID], showIDs[i]] = [showIDs[i], showIDs[randomID]];
-	}
-
-	loadPlaylistFromShowIDs("shuffle");
-
-	loadShow();
-}
-
-// reveal controls for clearing playlist
-function revealClearPlaylistControls() {
-	page.clearButton.setAttribute("aria-pressed", "true");
-	page.clearPlaylistControls.removeAttribute("hidden");
-	page.clearPlaylistControls.focus();
-}
-
-// hide controls for clearing playlist
-function hideClearPlaylistControls() {
-	page.clearButton.setAttribute("aria-pressed", "false");
-	page.clearPlaylistControls.setAttribute("hidden", "");
-}
-
-// clear playlist and hide clear controls again, then load show (i.e. nothing)
-function clearPlaylist() {
-	showIDs = [];
-	loadPlaylistFromShowIDs("clear");
-	hideClearPlaylistControls();
-	loadShow();
-}
-
-/* ARCHIVE */
-
-// scroll to a series when clicking its link in the archive series nav list
-function scrollToSeries(series) {
-	document.getElementById("archive-" + series).focus(); // when Firefox adds :has(), remove this function and the tabindex from archive series' <h3>s created in buildArchive()
-	document.getElementById("archive-" + series).scrollIntoView(true);
-}
-
-// add entire archive to playlist; load top show
-function addArchive() {
-	showIDs = [];
-	for (const series of archive) {
-		if (!settings.copyrightSafety || series.copyrightSafe) {
-			for (const show of series.shows) showIDs.push(series.code + "-" + show.code);
-		}
-	}
-	loadPlaylistFromShowIDs("add archive");
-	loadShow();
-}
-
-// add entire series to playlist; if playlist was previously empty, load top show
-function addSeries(code) {
-	const showsInSeries = document.getElementById("archive-" + code).querySelectorAll(".show-list > li"),
-	loadedShowID = showIDs[0];
-	
-	getShowIDsFromPlaylist();
-	for (const show of showsInSeries) showIDs.push(show.id);
-	loadPlaylistFromShowIDs("add series");
-	if (playlist.length === showsInSeries.length || loadedShowID === showsInSeries[0].id) loadShow();
-}
-
-// add show to playlist; if playlist was previously empty, load top show
-function addShow(id) {
-	getShowIDsFromPlaylist();
-	showIDs.push(id);
-	loadPlaylistFromShowIDs("add show");
-	if (playlist.length === 1) loadShow();
-}
-
-/* STREAMING */
-
-// copy code-block code to clipboard
-function copyCodeToClipboard(button) {
-	const codeblock = document.getElementById("code-block-" + button.dataset.codeBlock);
-
-	navigator.clipboard.writeText(codeblock.querySelector("code").innerText);
-
-	button.innerText = "Copied to clipboard";
-	button.setAttribute("aria-pressed", "true");
-	setTimeout(() => {
-		button.innerText = "Copy to clipboard";
-		button.setAttribute("aria-pressed", "false");
-	}, 2000);
-}
-
-/* SETTINGS */
+/* -----
+SETTINGS
+----- */
 
 // initialise a toggle switch with a stored or default value
 function initialiseToggle(id, toggled) {
@@ -461,8 +470,7 @@ function initialiseToggle(id, toggled) {
 function switchToggle(id, key, value) {
 	const button = document.getElementById(id);
 
-	if (button.getAttribute("aria-pressed") === "false") button.setAttribute("aria-pressed", "true");
-	else button.setAttribute("aria-pressed", "false");
+	button.setAttribute("aria-pressed", button.getAttribute("aria-pressed") === "false" ? "true" : "false");
 
 	settings[key] = value;
 }
@@ -473,12 +481,12 @@ function toggleCopyrightSafety() {
 	switchToggle("copyright-safety-toggle", "copyrightSafety", settings.copyrightSafety);
 }
 
-// toggle between hiding and showing show-info in Radio
+// toggle between hiding and showing show-content in Radio
 function toggleFlatRadio() {
 	settings.flatRadio = !settings.flatRadio;
 	switchToggle("flat-radio-toggle", "flatRadio", settings.flatRadio);
 
-	page.loadedShow.querySelector(".show-info")?.toggleAttribute("hidden", settings.flatRadio);
+	page.loadedShow.classList.toggle("flat-radio", settings.flatRadio);
 }
 
 // toggle between auto-playing (true) and not (false) a newly-loaded show when the previous show ends
@@ -495,108 +503,144 @@ function toggleContentNotes() {
 	document.querySelectorAll(".content-notes").forEach(notes => notes.toggleAttribute("open", settings.notesOpen));
 }
 
+// update setting and setting buttons according to chosen value
+function updateSetting(setting, value) {
+	document.body.classList.replace(setting + "-" + styles[setting], setting + "-" + value);
+	page[setting + "Buttons"].querySelector('[aria-pressed="true"]')?.removeAttribute("aria-pressed");
+	page[setting + "Buttons"].querySelector("[data-" + setting + '="' + value + '"]').setAttribute("aria-pressed", "true");
+	styles[setting] = value;
+}
+
+// switch between different colour themes
+function switchTheme(theme) {
+	updateSetting("theme", theme);
+
+	switchFavicon(theme);
+
+	page.weirdWavesButtonPNG.src = paths.button + theme + ".png";
+	page.weirdWavesButtonSVG.src = paths.button + theme + ".svg";
+}
+
+// switch between different fonts
+function switchFont(font) {
+	updateSetting("font", font);
+}
+
 /* --------------
 PAGE CONSTRUCTION
 -------------- */
 
 // build archive onto page
 function buildArchive() {
+	const stats = {
+		"series": archive.length,
+		"shows": 0,
+		"duration": 0
+	};
 	let archiveHTML = "",
 	archiveLinksHTML = "";
 
 	for (const series of archive) {
-		archiveLinksHTML += '<li><a href="#archive" data-series="' + series.code + '">' + series.heading + '</a></li>';
+		stats.shows += series.shows.length;
+		showIDSets.series[series.code] = [];
 
-		archiveHTML += '<li id="archive-' + series.code + '" tabindex="0"><header>' +
-'<h3 class="series-heading">' + series.heading + '</h3><div class="series-info">' +
+		archiveLinksHTML += '<li><a href="#archive-' + series.code + '">' + series.heading + '</a></li>';
+
+		archiveHTML += '<li id="archive-' + series.code + '"><header>' +
+'<h3 class="series-heading">' + series.heading + '</h3><div class="series-content">' +
 series.blurb +
 '<p class="series-source">source: ' + series.source + '</p></div>' +
-'<button class="push-button add-series-button" type="button" data-code="' + series.code + '">Add series to playlist</button>' +
+'<button class="push-button" type="button" data-target="' + series.code + '" data-action="add-series">Add series to playlist</button>' +
 '</header><ol class="show-list">';
 
 		for (const show of series.shows) {
-			const showID = series.code + "-" + show.code,
+			stats.duration += show.duration;
+
+			const id = series.code + "-" + show.code,
 			copyrightCategory = series.copyrightSafe ? "safe" : "unsafe";
 
-			showIDSets.all[copyrightCategory].push(showID);
-			if (show.banger) showIDSets.banger[copyrightCategory].push(showID);
+			showIDSets.all.any.push(id);
+			if (series.copyrightSafe) showIDSets.all.safe.push(id);
+			if (show.banger) showIDSets.bangers.any.push(id);
+			if (series.copyrightSafe && show.banger) showIDSets.bangers.safe.push(id);
+			showIDSets.series[series.code].push(show.code);
 
-			archiveHTML += '<li id="' + showID + '" data-file="' + show.file + '" data-duration="' + show.duration + '">' +
+			archiveHTML += '<li id="' + id + '" data-file="' + show.file + '" data-duration="' + show.duration + '"><div class="show-info">' +
 '<h4 class="show-heading">' + show.heading + '</h4>' +
-'<div class="show-info">' + show.blurb;
-			if (show.notes) archiveHTML += '<details class="content-notes"><summary>Content notes </summary>' + show.notes + '</details>';
-			archiveHTML += "</div>";
-			archiveHTML += '<button class="push-button add-show-button" type="button" data-id="' + showID + '" aria-pressed="false">Add to playlist</button>';
-			archiveHTML += "</li>";
+'<div class="show-content">' + show.blurb;
+			if (show.notes) archiveHTML += '<details class="content-notes"' + (settings.notesOpen ? ' open' : "") + "><summary>Content notes </summary>" + show.notes + '</details>';
+			archiveHTML += "</div></div>" +
+'<button class="push-button" type="button" data-target="' + id + '" data-action="add-show" aria-pressed="false">Add to playlist</button></li>';
 		}
 
 		archiveHTML += '</ol></li>';
 	}
 
-	document.getElementById("loading-spinner-archive")?.remove();
-	document.getElementById("series-list").innerHTML = archiveHTML;
-	page.addArchiveButton.removeAttribute("hidden");
+// remove archive object (once used by this function, it has no further purpose)
+	archive.length = 0;
 
-	document.querySelectorAll("#archive .add-series-button").forEach(button => button.addEventListener("click", () => addSeries(button.dataset.code)));
-	document.querySelectorAll("#archive .add-show-button").forEach(button => button.addEventListener("click", () => addShow(button.dataset.id)));
-
-	document.getElementById("loading-spinner-archive-links")?.remove();
+// render archive links and archive, then add delegated click-events for add-series and open all content notes if user setting applies
 	document.getElementById("archive-series-links").innerHTML = archiveLinksHTML;
-	document.querySelectorAll("#archive-series-links a").forEach(link => link.addEventListener("click", () => setTimeout(scrollToSeries, 1, link.dataset.series)));
-}
+	page.seriesList.innerHTML = archiveHTML;
+	page.seriesList.addEventListener("click", (event) => {
+		switch (event.target.dataset.action) {
+		case "add-series": addSeries(event.target.dataset.target); break;
+		case "add-show": addShow(event.target.dataset.target); break;
+		}
+	});
 
-// count series and shows in archive and hours of audio total
-function countStats() {
-	let totalCount = 0,
-	totalDuration = 0;
+	document.getElementById("loading-spinner-archive")?.remove();
+	document.getElementById("archive-contents").removeAttribute("hidden");
 
-	for (const series of archive) {
-		totalCount += series.shows.length;
-		for (const show of series.shows) totalDuration += show.duration;
-	}
-
+// add series stats to stats-list
 	document.getElementById("loading-spinner-stats")?.remove();
-	document.getElementById("stats-list").innerHTML = "<div><dt>sources</dt><dd>" + archive.length + "</dd></div>" +
-"<div><dt>shows</dt><dd>" + totalCount + "</dd></div>" +
-"<div><dt>hours of audio</dt><dd>" + Math.round(totalDuration / 3600) + "</dd></div>";
+	document.getElementById("stats-list").innerHTML = "<div><dt>sources</dt><dd>" + stats.series + "</dd></div>" +
+"<div><dt>shows</dt><dd>" + stats.shows + "</dd></div>" +
+"<div><dt>hours of audio</dt><dd>" + Math.round(stats.duration / 3600) + "</dd></div>";
 }
 
-/* ----
-DISPLAY
----- */
-
-// take reference to button element and string "true" or "false"
-function setButtonState(button, state) {
-	button.setAttribute("aria-pressed", state);
-	if (state === "true") button.setAttribute("tabindex", "-1");
-	else button.removeAttribute("tabindex");
-}
-
-// swap user-setting class on root element
-function swapClass(settingName, newSetting) {
-	for (const button of page[settingName+"Buttons"]) {
-		setButtonState(button, button.dataset.setting === newSetting ? "true" : "false");
+// build toggle switches
+function buildToggles() {
+	for (const toggle of document.querySelectorAll(".toggle")) {
+		toggle.innerHTML = "<span>" + toggle.innerHTML + "</span>";
+		toggle.insertBefore(templateHTML.toggle.content.cloneNode(true), toggle.firstElementChild);
 	}
-
-	document.body.classList.remove(settingName+"-"+styles[settingName]);
-	document.body.classList.add(settingName+"-"+newSetting);
 }
 
-// switch between different colour themes
-function switchTheme(themeName) {
-	swapClass("theme", themeName);
-	styles.theme = themeName;
+// build out theme buttons with names, codes, and demo palettes
+function buildThemeButtons() {
+	const colours = ["fore", "back", "hot", "cold"];
+	for (const theme of styleOptions.themes) {
+		page.themeButtons.appendChild(templateHTML.themeButton.content.cloneNode(true));
 
-	switchFavicon(themeName);
+		const button = page.themeButtons.lastElementChild.querySelector("button");
+		button.setAttribute("data-theme", theme.code);
+		button.setAttribute("aria-pressed", "false");
+		button.querySelector(".item-label").textContent = theme.name;
 
-	page.weirdWavesButtonPNG.src = paths.button + themeName + ".png";
-	page.weirdWavesButtonSVG.src = paths.button + themeName + ".svg";
+		const palette = button.querySelector(".palette");
+		palette.classList.add("theme-" + theme.code);
+		for (const colour of colours) {
+			palette.appendChild(document.createElement("span")).style.backgroundColor = "var(--" + colour + "-colour)";
+		}
+	}
+	document.getElementById("loading-spinner-theme-buttons")?.remove();
+	page.themeButtons.removeAttribute("hidden");
 }
 
-// switch between different font families (and stacks)
-function switchFont(fontName) {
-	swapClass("font", fontName);
-	styles.font = fontName;
+// build out font buttons with names, codes, and font displays
+function buildFontButtons() {
+	for (const font of styleOptions.fonts) {
+		page.fontButtons.appendChild(templateHTML.fontButton.content.cloneNode(true));
+		const button = page.fontButtons.lastElementChild.querySelector("button");
+		button.classList.add("font-" + font.code);
+		button.setAttribute("data-font", font.code);
+		button.setAttribute("aria-pressed", "false");
+		button.style.fontFamily = "var(--font-stack)";
+		button.textContent = font.name;
+	}
+	document.getElementById("loading-spinner-font-buttons")?.remove();
+	page.fontButtons.removeAttribute("hidden");
 }
 
 
@@ -606,7 +650,7 @@ function switchFont(fontName) {
 =========== */
 
 // radio audio events
-page.audio.addEventListener("ended", () => loadNextShow());
+page.audio.addEventListener("ended", loadNextShow);
 
 // radio interface events
 page.seekBar.addEventListener("change", () => {
@@ -617,83 +661,85 @@ page.seekBar.addEventListener("input", () => {
 	seekTime(page.seekBar.value);
 	clearInterval(updateTimeInterval);
 });
-page.playButton.addEventListener("click", () => playPauseAudio());
-page.skipButton.addEventListener("click", () => loadNextShow());
-page.muteButton.addEventListener("click", () => muteUnmuteAudio());
+page.playButton.addEventListener("click", playPauseAudio);
+page.skipButton.addEventListener("click", loadNextShow);
+page.muteButton.addEventListener("click", muteUnmuteAudio);
 page.volumeControl.addEventListener("input", () => setVolume(page.volumeControl.value / 100));
 
 // playlist interface events
 document.getElementById("random-show-button").addEventListener("click", () => addRandomShow());
-document.getElementById("random-banger-button").addEventListener("click", () => addRandomShow("banger"));
-document.getElementById("shuffle-button").addEventListener("click", () => shufflePlaylist());
-page.clearButton.addEventListener("click", () => revealClearPlaylistControls());
-document.getElementById("clear-cancel-button").addEventListener("click", () => hideClearPlaylistControls());
-document.getElementById("clear-confirm-button").addEventListener("click", () => clearPlaylist());
-document.getElementById("import-button").addEventListener("click", () => importPlaylist());
+document.getElementById("random-banger-button").addEventListener("click", () => addRandomShow("bangers"));
+document.getElementById("shuffle-button").addEventListener("click", shufflePlaylist);
+page.clearButton.addEventListener("click", revealClearPlaylistControls);
+document.getElementById("clear-cancel-button").addEventListener("click", hideClearPlaylistControls);
+document.getElementById("clear-confirm-button").addEventListener("click", clearPlaylist);
+page.playlist.addEventListener("click", (event) => {
+	switch (event.target.dataset.action) {
+	case "remove": removeShow(event.target.dataset.target); break;
+	case "move-up": moveShow(event.target.dataset.target, -1); break;
+	case "move-down": moveShow(event.target.dataset.target, 1); break;
+	}
+});
+document.getElementById("export-button").addEventListener("click", exportPlaylist);
+document.getElementById("import-button").addEventListener("click", importPlaylist);
 
 // archive interface events (excluding those dependent on the archive HTML being generated beforehand)
-page.addArchiveButton.addEventListener("click", () => addArchive());
+document.getElementById("add-archive-button").addEventListener("click", addArchive);
 
 // streaming interface events
-document.querySelectorAll(".clipboard-button").forEach(button => button.addEventListener("click", () => copyCodeToClipboard(button)));
+document.querySelectorAll('[data-action="clipboard"]').forEach(button => button.addEventListener("click", () => copyCodeToClipboard(button)));
 
 // settings interface events (general)
-document.getElementById("copyright-safety-toggle").addEventListener("click", () => toggleCopyrightSafety());
-document.getElementById("flat-radio-toggle").addEventListener("click", () => toggleFlatRadio());
-document.getElementById("auto-play-toggle").addEventListener("click", () => toggleAutoPlay());
-document.getElementById("content-notes-toggle").addEventListener("click", () => toggleContentNotes());
+document.getElementById("copyright-safety-toggle").addEventListener("click", toggleCopyrightSafety);
+document.getElementById("flat-radio-toggle").addEventListener("click", toggleFlatRadio);
+document.getElementById("auto-play-toggle").addEventListener("click", toggleAutoPlay);
+document.getElementById("content-notes-toggle").addEventListener("click", toggleContentNotes);
 
 // settings interface events (styling)
-page.themeButtons.forEach(button => button.addEventListener("click", () => switchTheme(button.dataset.setting)));
-page.fontButtons.forEach(button => button.addEventListener("click", () => switchFont(button.dataset.setting)));
+page.themeButtons.addEventListener("click", (event) => {
+	if (event.target.tagName === "BUTTON") switchTheme(event.target.dataset.theme);
+});
+page.fontButtons.addEventListener("click", (event) => {
+	if (event.target.tagName === "BUTTON") switchFont(event.target.dataset.font);
+});
 
 // on pageload, execute various tasks
 document.addEventListener("DOMContentLoaded", () => {
-
 /* BUILD ARCHIVE */
 	buildArchive();
 
-/* FETCH PLAYLIST */
-	loadPlaylistFromShowIDs("storage");
+/* LOAD PLAYLIST */
+	if (playlistIDs.length > 0) {
+		console.log("loaded playlist from storage");
+		updatePlaylist([], playlistIDs);
+	}
 	document.getElementById("loading-spinner-booth")?.remove();
 	document.getElementById("booth-contents").removeAttribute("hidden");
-
-/* LOAD FIRST SHOW IN, IF PLAYLIST HAS ENTRIES */
-	document.getElementById("loading-spinner-radio")?.remove();
-	loadShow();
 
 /* MANIPULATE PAGE CONTENT */
 // set seek bar value to 0
 	page.seekBar.value = 0;
 
-// set archive content notes status according to user preference/default setting
-	document.querySelectorAll("#archive .content-notes").forEach(notes => notes.toggleAttribute("open", settings.notesOpen));
-
-// write show count data list
-	countStats();
-
-// switch theme and font (during pageload this is mainly just pressing the matching buttons and marking the rest unpressed)
-	switchTheme(styles.theme);
-	switchFont(styles.font);
-
 /* BUTTON CONSTRUCTION */
-// build out theme buttons
-	for (const button of page.themeButtons) button.innerHTML = '<span class="palette"><span style="background-color:#' + button.dataset.colours.split(" ").join('"></span><span style="background-color:#') + '"></span></span>' + button.innerText + '';
-// build out toggle buttons
-	const toggleButtons = document.querySelectorAll(".toggle");
-
-	for (const toggle of toggleButtons) toggle.innerHTML = '<svg class="svg-icon" viewBox="0 0 48 24"><use href="#svg-toggle-track" /><g class="svg-toggle-thumb"><use href="#svg-toggle-thumb-side" /><use href="#svg-toggle-thumb-top" /><use href="#svg-toggle-tick" /></g></svg><span>' + toggle.innerText + '</span>';
+// build out theme and font buttons and build and initialise toggles
+	buildToggles();
+	buildThemeButtons();
+	buildFontButtons();
 
 	initialiseToggle("copyright-safety-toggle", settings.copyrightSafety);
 	initialiseToggle("flat-radio-toggle", settings.flatRadio);
 	initialiseToggle("auto-play-toggle", settings.autoPlayNextShow);
 	initialiseToggle("content-notes-toggle", settings.notesOpen);
+
+// set radio display and switch theme and font (utilities.js handles the actual theme/font classes during pageload, so this is just to make sure the corresponding buttons start pressed)
+	page.loadedShow.classList.toggle("flat-radio", settings.flatRadio);
+	switchTheme(styles.theme);
+	switchFont(styles.font);
 });
 
 // on closing window/browser tab, record user settings and styles to localStorage
 window.addEventListener("unload", () => {
-	getShowIDsFromPlaylist();
-	window.localStorage.setItem("playlist", JSON.stringify(showIDs));
+	window.localStorage.setItem("playlist", JSON.stringify(playlistIDs));
 	window.localStorage.setItem("settings", JSON.stringify(settings));
 	window.localStorage.setItem("styles", JSON.stringify(styles));
 });
@@ -711,7 +757,7 @@ const archive = [
 "blurb": "<p>A 1968&ndash;70 anthology of supernatural dramas and horror stories adapted by the writer Michael McCabe and broadcast by the first commercial radio station in South Africa: Springbok Radio.</p>",
 "source": "<a href=\"https://radioechoes.com/?page=series&genre=OTR-Thriller&series=Beyond%20Midnight\" rel=\"external\">Radio Echoes</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "13",
 	"heading": "#13: <cite>Lanceford House</cite><!--episode name on Radio Echoes is incorrect-->",
@@ -742,7 +788,7 @@ const archive = [
 "blurb": "<p>A 1937&ndash;39 horror anthology hosted and narrated by the insane organist of a derelict church (played by Ted Osbourne); only two episodes survive.</p>",
 "source": "<a href=\"https://www.radioechoes.com/?page=series&genre=OTR-Thriller&series=The%20Black%20Chapel\" rel=\"external\">Radio Echoes</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "X",
 	"heading": "#X: <cite>The Mahogany Coffin</cite>",
@@ -760,7 +806,7 @@ const archive = [
 "blurb": "<p>A 1963&ndash;67 anthology of mostly gothic and cosmic horror stories adapted for radio, largely performed by Erik Bauersfeld.</p>",
 "source": "<a href=\"https://www.kpfahistory.info/black_mass_home.html\" rel=\"external\"><abbr title=\"Pacifica Radio\">KPFA</abbr> History</a><!--the site of John Whiting, technical producer-->",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "01",
 	"heading": "#1: <cite>All Hallows</cite>",
@@ -813,7 +859,7 @@ const archive = [
 	"heading": "#11: <cite>A Predicament</cite> and <cite>The Tell-Tale Heart</cite>",
 	"blurb": "<p>A murderer hears his victim's still-beating heart. A wealthy woman finds herself in a&hellip; predicament. Adapted from stories by Edgar Allen Poe.</p>",
 	"notes": "animal death, gore, obsession",
-	"file": "Predicament-Heart",
+	"file": "Predicament_Heart",
 	"duration": 1763
 	},
 	{
@@ -821,7 +867,7 @@ const archive = [
 	"heading": "#12: <cite>Disillusionment</cite> and <cite>The Feeder</cite>",
 	"blurb": "<p>A man lays out his philosophy of disenchantment. A patient's trapped in the void of his mind. Adapted from stories by Thomas Mann and Carl Linder.</p>",
 	"notes": "coma, homophobia, life support, sexual harassment",
-	"file": "Disillusionment-Feeder",
+	"file": "Disillusionment_Feeder",
 	"duration": 1585
 	},
 	{
@@ -829,7 +875,7 @@ const archive = [
 	"heading": "#14: <cite>The Imp of the Perverse</cite> and <cite><abbr title=\"Manuscript\">MS.</abbr> Found in a Bottle</cite>",
 	"blurb": "<p>A prisoner explains his philosophy of temptation. A sea-traveller describes his strange and deadly final journey. Adapted from stories by Edgar Allen Poe.</p>",
 	"notes": "being stranded at sea, darkness, drowning",
-	"file": "Imp-MS",
+	"file": "Imp_MS",
 	"duration": 1741
 	},
 	{
@@ -882,21 +928,21 @@ const archive = [
 	"code": "X1",
 	"heading": "X#1: <cite>The Haunter of the Dark</cite>, part 1",
 	"blurb": "<p>A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft.</p>",
-	"file": "Haunter-pt1",
+	"file": "Haunter_pt1",
 	"duration": 1681
 	},
 	{
 	"code": "X2",
 	"heading": "X#2: <cite>The Haunter of the Dark</cite>, part 2",
 	"blurb": "<p>A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft.</p>",
-	"file": "Haunter-pt2",
+	"file": "Haunter_pt2",
 	"duration": 1482
 	},
 	{
 	"code": "X5",
 	"heading": "X#5: <cite>Proof Positive</cite> and <cite>The Man in the Crowd</cite>",
 	"blurb": "<p>An esoteric researcher shows <q>proof positive</q> of life after death. A people-watcher stalks an unreadable man. Adapted from stories by Graham Greene and Edgar Allen Poe.</p>",
-	"file": "Proof-Crowd",
+	"file": "Proof_Crowd",
 	"duration": 1138
 	}
 ]
@@ -906,13 +952,13 @@ const archive = [
 "heading": "<abbr title=\"Clark Ashton Smith\">CAS</abbr>iana",
 "blurb": "<p>Collected readings of the weird fiction of Clark Ashton Smith.</p>",
 "source": "<a href=\"http://www.eldritchdark.com/writings/spoken-word/\" rel=\"external\">The Eldritch Dark</a>",
-"shows":[
+"shows": [
 	{
 	"code": "1",
 	"heading": "#1: <cite>The City of the Singing Flame</cite>, part 1",
 	"blurb": "<p>A writer walks between worlds to a city where people sacrifice themselves to a vast, singing flame. Read by Mike Cothran.</p>",
 	"notes": "self-destructive urges",
-	"file": "Flame-pt1",
+	"file": "Flame_pt1",
 	"duration": 2907
 	},
 	{
@@ -920,7 +966,7 @@ const archive = [
 	"heading": "#2: <cite>The City of the Singing Flame</cite>, part 2",
 	"blurb": "<p>A writer walks between worlds to a city where people sacrifice themselves to a vast, singing flame. Read by Mike Cothran.</p>",
 	"notes": "self-destructive urges",
-	"file": "Flame-pt2",
+	"file": "Flame_pt2",
 	"duration": 1779
 	},
 	{
@@ -928,14 +974,14 @@ const archive = [
 	"heading": "#3: <cite>The City of the Singing Flame</cite>, part 3",
 	"blurb": "<p>A writer walks between worlds to a city where people sacrifice themselves to a vast, singing flame. Read by Mike Cothran.</p>",
 	"notes": "self-destructive urges",
-	"file": "Flame-pt3",
+	"file": "Flame_pt3",
 	"duration": 1943
 	},
 	{
 	"code": "4",
 	"heading": "#4: <cite>The Door to Saturn</cite>, part 1",
 	"blurb": "<p>An inquisitor and his occult quarry must unite to survive on an alien world. Read by Zilbethicus.</p>",
-	"file": "Saturn-pt1",
+	"file": "Saturn_pt1",
 	"duration": 1426
 	},
 	{
@@ -943,7 +989,7 @@ const archive = [
 	"heading": "#5: <cite>The Door to Saturn</cite>, part 2",
 	"blurb": "<p>An inquisitor and his occult quarry must unite to survive on an alien world. Read by Zilbethicus.</p>",
 	"notes": "alcohol",
-	"file": "Saturn-pt2",
+	"file": "Saturn_pt2",
 	"duration": 1978
 	},
 	{
@@ -957,7 +1003,7 @@ const archive = [
 	"code": "7",
 	"heading": "#7: <cite>The Dark Eidolon</cite>, part 1",
 	"blurb": "<p>A necromancer takes exquisite revenge upon the ruler who wronged him. Read by Mike Cothran.</p>",
-	"file": "Eidolon-pt1",
+	"file": "Eidolon_pt1",
 	"duration": 2390
 	},
 	{
@@ -965,7 +1011,7 @@ const archive = [
 	"heading": "#8: <cite>The Dark Eidolon</cite>, part 2",
 	"blurb": "<p>A necromancer takes exquisite revenge upon the ruler who wronged him. Read by Mike Cothran.</p>",
 	"notes": "crush death, descriptions of gore, horse trampling, poisoning, possession",
-	"file": "Eidolon-pt2",
+	"file": "Eidolon_pt2",
 	"duration": 2576
 	},
 	{
@@ -983,7 +1029,7 @@ const archive = [
 "blurb": "<p>A brief 1956&ndash;57 revival of the <cite>Columbia Workshop</cite> series' experimental radio tradition.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_CBS_Radio_Workshop_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "66",
 	"heading": "#66: <cite>Nightmare</cite>",
@@ -1001,7 +1047,7 @@ const archive = [
 "blurb": "<p>A 1936&ndash;47 anthology of experimental radio plays organised by Irving Reis to push the narrative and technical boundaries of contemporary radio; succeeded by the <cite><abbr>CBS</abbr> Radio Workshop</cite>.</p>",
 "source": "<a href=\"https://www.radioechoes.com/?page=series&genre=OTR-Drama&series=Columbia%20Workshop\" rel=\"external\">Radio Echoes</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "A031",
 	"heading": "A#31: <cite>Danse Macabre</cite>",
@@ -1035,7 +1081,7 @@ const archive = [
 "blurb": "<p>A 1941&ndash;42 anthology of original horror stories and thrillers written by Scott Bishop, who also wrote for <cite>The Mysterious Traveler</cite>.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_Dark_Fantasy_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "04",
 	"heading": "#4: <cite>The Demon Tree</cite>",
@@ -1060,14 +1106,22 @@ const archive = [
 "blurb": "<p>(X X x x x&hellip;) A 1950&ndash;51 sci-fi anthology of originals and adaptations, mostly scripted by Ernest Kinoy and George Lefferts; the fore-runner to their later series <cite>X Minus One</cite>.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_Dimension_X_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "11",
 	"heading": "#11: <cite>There Will Come Soft Rains</cite> and <cite>Zero Hour</cite>",
 	"blurb": "<p>An automated house goes through the motions after nuclear holocaust. Children play &ldquo;invasion&rdquo;, a game with deadly consequences. Adapted from stories by Ray Bradbury.</p>",
 	"notes": "animal death, mentions of corporal punishment, fire, high-pitched sounds",
-	"file": "Rains-Zero",
+	"file": "Rains_Zero",
 	"duration": 1797
+	},
+	{
+	"code": "14",
+	"heading": "#14: <cite>Mars Is Heaven!</cite>",
+	"blurb": "<p>The first humans on Mars find the alien world is a lot more familiar&mdash;a lot more like home&mdash;than anyone expected. Adapted from a story by Ray Bradbury.</p>",
+	"notes": "alcohol, betrayal, food adverts, gunshots (8:50&ndash;8:53), Holocaust mention, uncanny valley",
+	"file": "Heaven",
+	"duration": 1758
 	},
 	{
 	"code": "15",
@@ -1159,7 +1213,7 @@ const archive = [
 "blurb": "<p>A 1947&ndash;54 anthology of escapist radio plays that shared its talent with the longer-running <cite>Suspense</cite>, and more often delved into the supernatural or science-fiction.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_Escape_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "006",
 	"heading": "#6: <cite>The Ring of Thoth</cite>",
@@ -1209,13 +1263,13 @@ const archive = [
 "blurb": "<p>A collection of fifty-one short tales of myth and fantasy by Lord Dunsany, first published in 1915 and read by Rosslyn Carlyle for LibriVox.</p>",
 "source": "<a href=\"https://librivox.org/fifty-one-tales-by-lord-dunsany\" rel=\"external\">LibriVox</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "1",
 	"heading": "part 1",
 	"blurb": "<p>From <cite>The Assignation</cite> to <cite>The Unpasturable Fields</cite>.</p>",
 	"notes": "fall death, poisoning, suicide",
-	"file": "starts-Assignation",
+	"file": "starts_Assignation",
 	"duration": 2139,
 	"banger": true
 	},
@@ -1223,7 +1277,7 @@ const archive = [
 	"code": "2",
 	"heading": "part 2",
 	"blurb": "<p>From <cite>The Worm and the Angel</cite> to <cite>Spring in Town</cite>.</p>",
-	"file": "starts-Angel",
+	"file": "starts_Angel",
 	"duration": 1854,
 	"banger": true
 	},
@@ -1231,7 +1285,7 @@ const archive = [
 	"code": "3",
 	"heading": "part 3",
 	"blurb": "<p>From <cite>How the Enemy Came to Thlunrana</cite> to <cite>The Reward</cite>.</p>",
-	"file": "starts-Enemy",
+	"file": "starts_Enemy",
 	"duration": 1834,
 	"banger": true
 	},
@@ -1240,7 +1294,7 @@ const archive = [
 	"heading": "part 4",
 	"blurb": "<p>From <cite>The Trouble in Leafy Green Street</cite> to <cite>The Tomb of Pan</cite>.</p>",
 	"notes": "animal sacrifice, lynching",
-	"file": "starts-Trouble",
+	"file": "starts_Trouble",
 	"duration": 2067,
 	"banger": true
 	}
@@ -1252,27 +1306,27 @@ const archive = [
 "blurb": "<p>A doctor lets the universe into a woman's brain. A village girl lures children into chaos. A seductress drives high society men to suicide. Written by Arthur Machen, first published in 1894, and read by Ethan Rampton for LibriVox.</p>",
 "source": "<a href=\"https://librivox.org/the-great-god-pan-by-arthur-machen\" rel=\"external\">LibriVox</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "1",
 	"heading": "part 1",
 	"blurb": "<p>Chapters 1 and 2: <cite>The Experiment</cite> and <cite>Mr. Clarke's Memoirs</cite>.</p>",
 	"notes": "ableism, brain surgery, child death?, child endangerment",
-	"file": "Experiment-Memoirs",
+	"file": "Experiment_Memoirs",
 	"duration": 1968
 	},
 	{
 	"code": "2",
 	"heading": "part 2",
 	"blurb": "<p>Chapters 3 and 4: <cite>The City of Resurrections</cite> and <cite>The Discovery in Paul Street</cite>.</p>",
-	"file": "City-Street",
+	"file": "City_Street",
 	"duration": 1745
 	},
 	{
 	"code": "3",
 	"heading": "part 3",
 	"blurb": "<p>Chapters 5 and 6: <cite>The Letter of Advice</cite> and <cite>The Suicides</cite>.</p>",
-	"file": "Letter-Suicides",
+	"file": "Letter_Suicides",
 	"duration": 1760
 	},
 	{
@@ -1280,7 +1334,7 @@ const archive = [
 	"heading": "part 4",
 	"blurb": "<p>Chapters 7 and 8: <cite>The Encounter in Soho</cite> and <cite>The Fragments</cite>.</p>",
 	"notes": "body horror",
-	"file": "Soho-Fragments",
+	"file": "Soho_Fragments",
 	"duration": 1659
 	}
 ]
@@ -1291,7 +1345,7 @@ const archive = [
 "blurb": "<p>A series of supernatural horror stories originally broadcast in Utah, later nationally syndicated in 1952&ndash;53. The series was written and directed by Richard Thorne.</p>",
 "source": "<a href=\"https://archive.org/details/470213ThePerfectScript\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "A21",
 	"heading": "A#21: <cite>The Judge's House</cite>",
@@ -1348,7 +1402,7 @@ const archive = [
 "blurb": "<p>A collection of eldritch horror stories from this classic collection, all revolving around an eerie symbol, a bizarre play, a mysterious abomination, and lost Carcosa. Written by Robert W.&thinsp;Chambers, first published in 1895, and read by Eva Staes for LibriVox.</p>",
 "source": "<a href=\"https://librivox.org/king-in-yellow-version-2-by-robert-w-chambers\" rel=\"external\">LibriVox</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "0",
 	"heading": "poems",
@@ -1361,7 +1415,7 @@ const archive = [
 	"heading": "1: <cite>The Repairer of Reputations</cite>, part 1",
 	"blurb": "<p>A man losing touch with reality plots to overthrow the aristocratic-fascist government and declare himself supreme leader.</p>",
 	"notes": "hallucination?, institutionalisation, mention of suicide",
-	"file": "Repairer-pt1",
+	"file": "Repairer_pt1",
 	"duration": 1416
 	},
 	{
@@ -1369,7 +1423,7 @@ const archive = [
 	"heading": "1: <cite>The Repairer of Reputations</cite>, part 2",
 	"blurb": "<p>A man losing touch with reality plots to overthrow the aristocratic-fascist government and declare himself supreme leader.</p>",
 	"notes": "ableism, hallucination, suicide",
-	"file": "Repairer-pt2",
+	"file": "Repairer_pt2",
 	"duration": 1774
 	},
 	{
@@ -1377,7 +1431,7 @@ const archive = [
 	"heading": "1: <cite>The Repairer of Reputations</cite>, part 3",
 	"blurb": "<p>A man losing touch with reality plots to overthrow the aristocratic-fascist government and declare himself supreme leader.</p>",
 	"notes": "animal attack, hallucination?, institutionalisation",
-	"file": "Repairer-pt3",
+	"file": "Repairer_pt3",
 	"duration": 1938
 	},
 	{
@@ -1411,7 +1465,7 @@ const archive = [
 "blurb": "<p>LibriVox is a catalogue of public domain audiobook readings, including a selection of weird fiction and horror classics from decades and centuries ago.</p>",
 "source": "<a href=\"https://librivox.org\" rel=\"external\">LibriVox</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "01",
 	"heading": "#1: <cite>The Nameless City</cite>",
@@ -1451,7 +1505,7 @@ const archive = [
 	"heading": "#5: Gods and Abominations (short works by Lovecraft)",
 	"blurb": "<p>Three short pieces by H.&thinsp;P.&thinsp;Lovecraft: <cite>What the Moon Brings</cite> (read by Dan Gurzynski), <cite>Dagon</cite> (read by Selim Jamil), and <cite>Nyarlathotep</cite> (read by Tom Hackett).</p><!--\"Nyarlathotep\" reader's name on LibriVox site (Tom Hackett) is different to the one given in the file (Peter Bianzo(?))-->",
 	"notes": "being stranded at sea, drowning, drugs, isolation, near-drowning, nightmares, racism, suicide planning, worms",
-	"file": "Moon-Dagon-Nyarlathotep",
+	"file": "Moon_Dagon_Nyarlathotep",
 	"duration": 1719
 	},
 	{
@@ -1482,7 +1536,7 @@ const archive = [
 	"heading": "#10: Gothic Origins (short works by Poe)",
 	"blurb": "<p>Two short pieces by Edgar Allen Poe: <cite>The Masque of the Red Death</cite> (read by Elise Dee) and <cite>The Cask of Amontillado</cite> (read by &ldquo;Caveat&rdquo;).</p>",
 	"notes": "betrayal, darkness, entombment",
-	"file": "Masque-Amontillado",
+	"file": "Masque_Amontillado",
 	"duration": 1764
 	},
 	{
@@ -1490,7 +1544,7 @@ const archive = [
 	"heading": "#12: Things That Talk (short works by Dunsany)",
 	"blurb": "<p>Three short pieces by Lord Dunsany: <cite>Blagdaross</cite> (read by Michele Fry), <cite>The Unhappy Body</cite> (read by Andrew Gaunce), and <cite>The Madness of Andlesprutz</cite> (read by Michele Fry).</p>",
 	"notes": "abandonment, overwork",
-	"file": "Blagdaross-Unhappy-Madness",
+	"file": "Blagdaross_Unhappy_Madness",
 	"duration": 1822
 	},
 	{
@@ -1519,7 +1573,7 @@ const archive = [
 	"code": "18",
 	"heading": "#18: Dreams and Nightmares (poems)",
 	"blurb": "<p>Collected poems on dreams and nightmares. Written by Seigfried Sassoon, Samuel Taylor Coleridge, Helen Hunt Jackson, Clark Ashton Smith, William Danby, and John James Piatt; read by Nemo, Algy Pug, Newgatenovelist, and Colleen McMahon.</p>",
-	"file": "Dreams-and-Nightmares",
+	"file": "Dreams_Nightmares",
 	"duration": 874
 	},
 	{
@@ -1543,7 +1597,7 @@ const archive = [
 	"heading": "#21: <cite>Imprisoned with the Pharoahs</cite>, part 1",
 	"blurb": "<p>A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&thinsp;P.&thinsp;Lovecraft with Houdini, read by Ben Tucker.</p>",
 	"notes": "betrayal, darkness, kidnapping, racism",
-	"file": "Pharoahs-pt1",
+	"file": "Pharoahs_pt1",
 	"duration": 1911
 	},
 	{
@@ -1551,7 +1605,7 @@ const archive = [
 	"heading": "#22: <cite>Imprisoned with the Pharoahs</cite>, part 2",
 	"blurb": "<p>A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&thinsp;P.&thinsp;Lovecraft with Houdini, read by Ben Tucker.</p>",
 	"notes": "betrayal, darkness, kidnapping, racism",
-	"file": "Pharoahs-pt2",
+	"file": "Pharoahs_pt2",
 	"duration": 2162
 	},
 	{
@@ -1573,7 +1627,7 @@ const archive = [
 	"code": "27",
 	"heading": "#27: Tales of Cities",
 	"blurb": "<p><cite>The Idle City</cite> (written by Lord Dunsany, read by Daniel Davison) and <cite>The City of My Dreams</cite> (written by Theodore Dreiser, read by Phil Schempf).</p>",
-	"file": "Idle-Dreams",
+	"file": "Idle_Dreams",
 	"duration": 1370
 	},
 	{
@@ -1639,7 +1693,7 @@ const archive = [
 	"code": "39",
 	"heading": "#39: Forgotten Gods (short works by Dunsany)",
 	"blurb": "<p>Three short pieces by Lord Dunsany, read by Sandra Cullum: <cite>The Gift of the Gods</cite>, <cite>An Archive of the Older Mysteries</cite>, and <cite>How the Office of Postman Fell Vacant in Otford-under-the-Wold</cite>.</p>",
-	"file": "Gift-Archive-Postman",
+	"file": "Gift_Archive_Postman",
 	"duration": 1171
 	},
 	{
@@ -1647,7 +1701,7 @@ const archive = [
 	"heading": "#40: Hauntings and Vanishings (short works by Bierce)",
 	"blurb": "<p>Three short pieces by Ambrose Bierce: <cite>The Spook House</cite> (read by Paul Sigel), <cite>A Cold Greeting</cite> (read by Steve Karafit), and <cite>An Inhabitant of Carcosa</cite> (read by G.&thinsp;C.&thinsp;Fournier).</p>",
 	"notes": "entombment",
-	"file": "Spook-Greeting-Carcosa",
+	"file": "Spook_Greeting_Carcosa",
 	"duration": 1484
 	},
 	{
@@ -1663,7 +1717,7 @@ const archive = [
 	"heading": "#42: Ancient Humanities (short works by Lovecraft)",
 	"blurb": "<p>Two short pieces by H.&thinsp;P.&thinsp;Lovecraft: <cite>Polaris</cite> (read by jpontoli) and <cite>The Outer Gods</cite> (read by Peter Yearsley).</p>",
 	"notes": "racism",
-	"file": "Polaris-Outer",
+	"file": "Polaris_Outer",
 	"duration": 1514,
 	"banger": true
 	},
@@ -1687,7 +1741,7 @@ const archive = [
 	"code": "45",
 	"heading": "#45: Power and Spectacle (short works by Kafka)",
 	"blurb": "<p>Three short pieces by Franz Kafka: <cite>Before the Law</cite> (read by Availle), <cite>Up in the Gallery</cite> (read by Adam Whybray), and <cite>An Imperial Message</cite> (read by SBE Iyyerwal).</p>",
-	"file": "Law-Gallery-Message",
+	"file": "Law_Gallery_Message",
 	"duration": 702
 	},
 	{
@@ -1702,7 +1756,7 @@ const archive = [
 	"code": "47",
 	"heading": "#47: Great and Little Ones (short works by Dunsany)",
 	"blurb": "<p>Three short pieces by Lord Dunsany: <cite>The Whirlpool</cite> (read by James Koss), <cite>The Hurricane</cite> (read by Rosslyn Carlyle), and <cite>On the Dry Land</cite> (read by Rosslyn Carlyle).</p>",
-	"file": "Whirlpool-Hurricane-Dry",
+	"file": "Whirlpool_Hurricane_Dry",
 	"duration": 1017
 	},
 	{
@@ -1720,7 +1774,7 @@ const archive = [
 "blurb": "<p>One of the earliest radio horror shows, started by Wyllis Cooper in 1934, later headed by Arch Oboler until 1947. Often more camp than scary, by modern standards.</p>",
 "source": "<a href=\"https://archive.org/details/LightsOutoldTimeRadio\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "A009",
 	"heading": "A#9: <cite>Money, Money, Money</cite>",
@@ -1730,11 +1784,11 @@ const archive = [
 	"duration": 1785
 	},
 	{
-	"code": "A040-A072-C09",
+	"code": "A040_A072_C09",
 	"heading": "A#40, A#72, and C#9: <cite>Lights Out</cite> fragments",
 	"blurb": "<p>A trio of short <cite>Lights Out</cite> episodes: <cite>Chicken Heart</cite>, <cite>The Dark</cite>, and <cite>The Day the Sun Exploded</cite>.</p>",
 	"notes": "body horror, plane crash, racism",
-	"file": "Chicken-Dark-Exploded",
+	"file": "Chicken_Dark_Exploded",
 	"duration": 1713,
 	"banger": true
 	},
@@ -1800,14 +1854,13 @@ const archive = [
 "heading": "<cite>The Mercury Theatre</cite>",
 "blurb": "<p>A 1938 extension of Orson Welles' Mercury Theatre to adapt classic fiction to the airwaves, with each show starring Welles himself in a major role.</p>",
 "source": "<a href=\"https://archive.org/details/OrsonWelles_MercuryTheatre\" rel=\"external\">Internet Archive</a>",
-"copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "01a",
 	"heading": "#1: <cite>Dracula</cite>, part 1",
 	"blurb": "<p>A solicitor, his wife, and her suitors band together with a vampire hunter to slay Count Dracula. Adapted from a story by Bram Stoker.</p>",
 	"notes": "confinement",
-	"file": "Dracula-pt1",
+	"file": "Dracula_pt1",
 	"duration": 1290
 	},
 	{
@@ -1815,15 +1868,15 @@ const archive = [
 	"heading": "#1: <cite>Dracula</cite>, part 2",
 	"blurb": "<p>A solicitor, his wife, and her suitors band together with a vampire hunter to slay Count Dracula. Adapted from a story by Bram Stoker.</p>",
 	"notes": "mind control",
-	"file": "Dracula-pt2",
+	"file": "Dracula_pt2",
 	"duration": 2262
 	},
 	{
 	"code": "17a",
 	"heading": "#17: <cite>The War of the Worlds</cite>, part 1",
 	"blurb": "<p>An adaptation of H.&thinsp;G.&thinsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.</p>",
-	"notes": "asphyxiation, cannon-fire (30:39, 30:55, 31:15, 31:49) poison-gassing",
-	"file": "Worlds-pt1",
+	"notes": "asphyxiation, cannon-fire (30:39, 30:55, 31:15, 31:49), poison-gassing",
+	"file": "Worlds_pt1",
 	"duration": 2451,
 	"banger": true
 	},
@@ -1832,7 +1885,7 @@ const archive = [
 	"heading": "#17: <cite>The War of the Worlds</cite>, part 2",
 	"blurb": "<p>An adaptation of H.&thinsp;G.&thinsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.</p>",
 	"notes": "asphyxiation, plane crash, poison-gassing",
-	"file": "Worlds-pt2",
+	"file": "Worlds_pt2",
 	"duration": 1146,
 	"banger": true
 	}
@@ -1843,7 +1896,7 @@ const archive = [
 "heading": "<cite>Mindwebs</cite>",
 "blurb": "<p>A 1975&ndash;84 series of sci-fi, fantasy, and horror short story readings by Michael Hanson, who also chose the often-jazzy musical accompaniment for each episode.</p>",
 "source": "<a href=\"https://archive.org/details/MindWebs_201410\" rel=\"external\">Internet Archive</a>",
-"shows":[
+"shows": [
 	{
 	"code": "001",
 	"heading": "#1: <cite>Carcinoma Angels</cite>",
@@ -1891,7 +1944,7 @@ const archive = [
 	"heading": "#26: <cite>Test</cite> and <cite>The Nine Billion Names of God</cite>",
 	"blurb": "<p>A man passes, then fails, a driving test. Technology helps Tibetan monks write the many names of god. Written by Theodore Thomas and Arthur C.&thinsp;Clarke.</p>",
 	"notes": "car crash, institutionalisation",
-	"file": "Test-Names",
+	"file": "Test_Names",
 	"duration": 1862,
 	"banger": true
 	},
@@ -1964,7 +2017,7 @@ const archive = [
 	"code": "076",
 	"heading": "#76: <cite>When We Went To See The End Of The World</cite>",
 	"blurb": "<p>Time-travelling tourists boast about seeing the end of the world&mdash;until they realise they didn't all see the <em>same</em> end&hellip; Written by Robert Silverberg.</p>",
-	"file": "End",
+	"file": "See",
 	"duration": 1868
 	},
 	{
@@ -1972,7 +2025,7 @@ const archive = [
 	"heading": "#82: <cite>The Plot is the Thing</cite> and <cite>Midnight Express</cite>",
 	"blurb": "<p>Doctors lobotomise a <abbr title=\"television\">TV</abbr>-obsessed woman, with bizarre results. A young man meets his childhood terror. Written by Robert Block and Alfred Noyes.</p>",
 	"notes": "derealisation, injection, institutionalisation, lobotomy, nightmares, racism",
-	"file": "Plot-Express",
+	"file": "Plot_Express",
 	"duration": 1804,
 	"banger": true
 	},
@@ -1997,7 +2050,7 @@ const archive = [
 	"heading": "#95: <cite>Winter Housekeeping</cite> and <cite>The Public Hating</cite>",
 	"blurb": "<p>A woman takes heavy measures against the poison of ageing. Mass telekinesis is used in horrific new executions. Written by Molly Daniel and Steve Allen.</p>",
 	"notes": "asphyxiation, obsession",
-	"file": "Winter-Hating",
+	"file": "Winter_Hating",
 	"duration": 1850
 	},
 	{
@@ -2005,7 +2058,7 @@ const archive = [
 	"heading": "#99: <cite>Ghosts</cite> and <cite>The Diggers</cite>",
 	"blurb": "<p>Robots struggle with reproduction. A woman seeks the mysterious Diggers for love of mystery itself. Written by Robert F.&thinsp;Young and Don Stern.</p>",
 	"notes": "suicide",
-	"file": "Ghosts-Diggers",
+	"file": "Ghosts_Diggers",
 	"duration": 1819
 	},
 	{
@@ -2019,7 +2072,7 @@ const archive = [
 	"code": "106",
 	"heading": "#106: <cite>Deaf Listener</cite> and <cite>Shall the Dust Praise Thee?</cite>",
 	"blurb": "<p>A telepath employed to detect alien life makes a critical error. The Day of Reckoning suffers a hitch. Written by Rachel Payes and Damon Knight.</p>",
-	"file": "Listener-Dust",
+	"file": "Listener_Dust",
 	"duration": 1846
 	},
 	{
@@ -2027,7 +2080,7 @@ const archive = [
 	"heading": "#110: <cite>Appointment at Noon</cite> and <cite>Man in a Quandary</cite>",
 	"blurb": "<p>A suspicious man has a suspicious visitor. Someone writes to an advice column for help with a unique problem. Written by Eric Russell and L.&thinsp;J.&thinsp;Stecher.</p>",
 	"notes": "ableism",
-	"file": "Noon-Quandary",
+	"file": "Noon_Quandary",
 	"duration": 1852
 	},
 	{
@@ -2069,6 +2122,14 @@ const archive = [
 	"file": "Rules",
 	"duration": 1821,
 	"banger": true
+	},
+	{
+	"code": "131",
+	"heading": "#131: <cite>The Racer</cite>",
+	"blurb": "<p>One of the greatest drivers of a near-future death race comes to grips with how people really feel about his murderous deeds. Written by Ib Melchior.</p>",
+	"notes": "animal deaths, car crash",
+	"file": "Racer",
+	"duration": 1781
 	},
 	{
 	"code": "133",
@@ -2145,7 +2206,7 @@ const archive = [
 	"code": "237",
 	"heading": "#237: <cite>The Star</cite> and <cite>The Gift</cite>",
 	"blurb": "<p>An apocalyptic blaze&mdash;a guiding star. A boy receives a wondrous Christmas gift. Written by Arthur C.&thinsp;Clarke and Ray Bradbury.</p>",
-	"file": "Star-Gift",
+	"file": "Star_Gift",
 	"duration": 1773
 	}
 ]
@@ -2156,7 +2217,7 @@ const archive = [
 "blurb": "<p>A 1943&ndash;52 anthology of horror stories hosted and narrated by the titular Mysterious Traveler riding a train racing through the night.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_Mysterious_Traveler_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "111",
 	"heading": "#111: <cite>The Locomotive Ghost</cite>",
@@ -2181,7 +2242,7 @@ const archive = [
 "heading": "<cite>Nightfall</cite>",
 "blurb": "<p>A 1980&ndash;83 Canadian series of original and adapted horror stories created by Bill Howell.</p>",
 "source": "<a href=\"https://archive.org/details/CBC_NightfallOTR\" rel=\"external\">Internet Archive</a>",
-"shows":[
+"shows": [
 	{
 	"code": "003",
 	"heading": "#3: <cite>Welcome to Homerville</cite>",
@@ -2247,61 +2308,61 @@ const archive = [
 "blurb": "<p>Lord Dunsany's mythology cycle of weird and terrible gods and their deeds and misdeeds: <cite>The Gods of Pegāna</cite> (1905), <cite>Time and the Gods</cite> (1906), and the dream-stories collected in <cite>Tales of Three Hemispheres</cite> (1919).</p>",
 "source": "<a href=\"https://librivox.org\" rel=\"external\">LibriVox</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "01",
 	"heading": "book 1: <cite>The Gods of Pegāna</cite>, part 1",
 	"blurb": "<p>From the preface to <cite>Revolt of the Home Gods</cite>. Read by Jason Mills.</p>",
-	"file": "GoP-1",
+	"file": "GoP_1",
 	"duration": 2261
 	},
 	{
 	"code": "02",
 	"heading": "book 1: <cite>The Gods of Pegāna</cite>, part 2",
 	"blurb": "<p>From <cite>Of Dorozhand</cite> to <cite>Of How the Gods Whelmed Sidith</cite>. Read by Jason Mills.</p>",
-	"file": "GoP-2",
+	"file": "GoP_2",
 	"duration": 1708
 	},
 	{
 	"code": "03",
 	"heading": "book 1: <cite>The Gods of Pegāna</cite>, part 3",
 	"blurb": "<p>From <cite>Of How Imbaun Became High Prophet in Aradec of All the Gods Save One</cite> to <cite>The Bird of Doom and the End</cite>. Read by Jason Mills.</p>",
-	"file": "GoP-3",
+	"file": "GoP_3",
 	"duration": 1731
 	},
 	{
 	"code": "04",
 	"heading": "book 2: <cite>Time and the Gods</cite>, part 1",
 	"blurb": "<p>From the preface to <cite>A Legend of the Dawn</cite>. Read by KentF.</p>",
-	"file": "TG-1",
+	"file": "TG_1",
 	"duration": 1889
 	},
 	{
 	"code": "05",
 	"heading": "book 2: <cite>Time and the Gods</cite>, part 2",
 	"blurb": "<p>From <cite>The Vengeance of Men</cite> to <cite>The Caves of Kai</cite>. Read by KentF, RedToby, and hefyd.</p>",
-	"file": "TG-2",
+	"file": "TG_2",
 	"duration": 2233
 	},
 	{
 	"code": "06",
 	"heading": "book 2: <cite>Time and the Gods</cite>, part 3",
 	"blurb": "<p>From <cite>The Sorrow of Search</cite> to <cite>For the Honour of the Gods</cite>. Read by Le Scal and hefyd.</p>",
-	"file": "TG-3",
+	"file": "TG_3",
 	"duration": 2238
 	},
 	{
 	"code": "07",
 	"heading": "book 2: <cite>Time and the Gods</cite>, part 4",
 	"blurb": "<p>From <cite>Night and Morning</cite> to <cite>The South Wind</cite>. Read by Måns Broo.</p>",
-	"file": "TG-4",
+	"file": "TG_4",
 	"duration": 1445
 	},
 	{
 	"code": "08",
 	"heading": "book 2: <cite>Time and the Gods</cite>, part 5",
 	"blurb": "<p>From <cite>In the Land of Time</cite> to <cite>The Dreams of the Prophet</cite>. Read by RedToby and hefyd.</p>",
-	"file": "TG-5",
+	"file": "TG_5",
 	"duration": 2274
 	},
 	{
@@ -2309,7 +2370,7 @@ const archive = [
 	"heading": "book 2: <cite>Time and the Gods</cite>, part 6",
 	"blurb": "<p><cite>The Journey of the King</cite>, parts &#x2160;&ndash;&#x2166;. Read by Kevin McAsh, Måns Broo, and Robin Cotter.</p>",
 	"notes": "alcohol",
-	"file": "TG-6",
+	"file": "TG_6",
 	"duration": 2485
 	},
 	{
@@ -2317,7 +2378,7 @@ const archive = [
 	"heading": "book 2: <cite>Time and the Gods</cite>, part 7",
 	"blurb": "<p><cite>The Journey of the King</cite>, parts &#x2167;&ndash;&#x216a;. Readings by Robin Cotter and Elmensdorp.</p>",
 	"notes": "alcohol",
-	"file": "TG-7",
+	"file": "TG_7",
 	"duration": 2346
 	},
 	{
@@ -2354,7 +2415,7 @@ const archive = [
 "blurb": "<p>A 1947&ndash;49 radio horror anthology written by Wyllis Cooper. It starred radio announcer Ernest Chappell (his only acting role), who often spoke informally and directly to the audience.</p>",
 "source": "<a href=\"https://www.quietplease.org\" rel=\"external\">quietplease.org</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "001",
 	"heading": "#1: <cite>Nothing Behind the Door</cite>",
@@ -2475,6 +2536,13 @@ const archive = [
 	"blurb": "<p>A graveyard shift radio <abbr title=\"disc jockey\">DJ</abbr> has an unusual visitor&mdash;a news-reader who reads the future.</p>",
 	"file": "Twelve",
 	"duration": 1791
+	},
+	{
+	"code": "046",
+	"heading": "#46: <cite>Clarissa</cite>",
+	"blurb": "<p>A man seeks lodging at a decrepit house inhabited by an ancient father and his unseen daughter.</p>",
+	"file": "Clarissa",
+	"duration": 1751
 	},
 	{
 	"code": "047",
@@ -2631,6 +2699,14 @@ const archive = [
 	"duration": 1763
 	},
 	{
+	"code": "100",
+	"heading": "#100: <cite>The Little Morning</cite>",
+	"blurb": "<p>A hitch-hiker returns to his old home taht burnt down with his beloved inside to sing the song they promised to duet on every birthday.</p>",
+	"notes": "drowning, suicide",
+	"file": "Morning",
+	"duration": 1706
+	},
+	{
 	"code": "103",
 	"heading": "#103: <cite>Tanglefoot</cite>",
 	"blurb": "<p>A man breeds giant flies whose hunger grows in proportion&hellip; and out of control.</p>",
@@ -2653,7 +2729,7 @@ const archive = [
 "blurb": "<p>A 1948&ndash;50 anthology of original radio dramas and adaptations, including a few with a touch of the supernatural.</p>",
 "source": "<a href=\"https://archive.org/details/radio_city_playhouse_202008\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "58",
 	"heading": "#58: <cite>The Wind</cite>",
@@ -2670,13 +2746,13 @@ const archive = [
 "heading": "<cite>Seeing Ear Theater</cite>",
 "blurb": "<p>A turn-of-the-millennium online sci-fi and horror radio play revival that produced both originals and adaptations.</p><!--episode numbers are taken from the internet archive (from actual file names, not the numbers in the audio player's file list), but may be incorrect-->",
 "source": "<a href=\"https://archive.org/details/SETheater\" rel=\"external\">Internet Archive</a>",
-"shows":[
+"shows": [
 	{
 	"code": "12",
 	"heading": "#12: <cite>An Elevator and a Pole</cite>, part 1",
 	"blurb": "<p>One group gathers round a weird pole in the middle of nowhere; another's stuck in an elevator. They all struggle to understand and control their fates.</p>",
 	"notes": "broken neck, mental breakdown, falling elevator",
-	"file": "Pole-pt1",
+	"file": "Pole_pt1",
 	"duration": 1729,
 	"banger": true
 	},
@@ -2685,7 +2761,7 @@ const archive = [
 	"heading": "#13: <cite>An Elevator and a Pole</cite>, part 2",
 	"blurb": "<p>One group gathers round a weird pole in the middle of nowhere; another's stuck in an elevator. They all struggle to understand and control their fates.</p>",
 	"notes": "descriptions of gore, fall death, vomiting, suicide",
-	"file": "Pole-pt2",
+	"file": "Pole_pt2",
 	"duration": 1666,
 	"banger": true
 	},
@@ -2701,7 +2777,7 @@ const archive = [
 	"code": "29",
 	"heading": "#29: <cite>Facade</cite>",
 	"blurb": "<p>Young hotshot advertisers snort their dead friend's ashes to receive creative inspiration, to bring her back, to help their pitches, to take over their lives.</p>",
-	"notes": "ableism, addiction, car accident, human sacrifice, possession",
+	"notes": "ableism, addiction, car accident, human sacrifice, possession, sexual exploitation",
 	"file": "Facade",
 	"duration": 1940,
 	"banger": true
@@ -2724,7 +2800,7 @@ const archive = [
 	"duration": 2201
 	},
 	{
-	"code": "43-44",
+	"code": "43_44",
 	"heading": "#43 and #44: <cite>Emily 501</cite>",
 	"blurb": "<p>An exo-archaeologist discovers that the ancient language she's found isn't as dead as it seems.</p>",
 	"notes": "body horror, language loss, mental breakdown",
@@ -2733,7 +2809,7 @@ const archive = [
 	"banger": true
 	},
 	{
-	"code": "53-54",
+	"code": "53_54",
 	"heading": "#53 and #54: <cite>Propagation of Light in a Vacuum</cite>",
 	"blurb": "<p>A space traveller struggles to stay sane in the world beyond the speed of light&mdash;with the help of his imaginary wife.</p>",
 	"notes": "drug overdose, murder-suicide, stabbing, starvation",
@@ -2764,13 +2840,13 @@ const archive = [
 "blurb": "<p>A 1956&ndash;57 anthology of short horror stories read by actor Nelson Olmsted after tightening budgets started to make full radio dramas infeasible.</p>",
 "source": "<a href=\"https://archive.org/details/sleep_no_more_radio\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "05",
 	"heading": "#5: <cite>Over the Hill</cite> and <cite>The Man in the Black Hat</cite>",
 	"blurb": "<p>A delusional man &ldquo;escapes&rdquo; his nagging wife. A gambler meets a stranger who gives him unnatural luck. Written by Michael Fessier.</p>",
 	"notes": "guillotine death, implied domestic violence",
-	"file": "Hill-Hat",
+	"file": "Hill_Hat",
 	"duration": 1458
 	},
 	{
@@ -2778,7 +2854,7 @@ const archive = [
 	"heading": "#15: <cite>Thus I Refute Beelzy</cite><!--Note: show title in source uses the wrong name (\"Bealsley\" instead of \"Beelzy\")--> and <cite>The Bookshop</cite>",
 	"blurb": "<p>A boy's imaginary friend takes offense at his cruel father. A struggling writer finds a shop of impossible books. Written by John Collier and Nelson S.&thinsp;Bond.</p>",
 	"notes": "child abuse, dismemberment, traffic accident",
-	"file": "Beelzy-Book",
+	"file": "Beelzy_Book",
 	"duration": 1713,
 	"banger": true
 	},
@@ -2787,7 +2863,7 @@ const archive = [
 	"heading": "#17: <cite>The Woman in Gray</cite> and <cite>A Suspicious Gift</cite>",
 	"blurb": "<p>A man invents a spectre of hatred. A stranger gives a too-perfect gift. Written by Walker G.&thinsp;Everett and Algernon Blackwood.</p>",
 	"notes": "apparent suicide, fall death, traffic accidents",
-	"file": "Gray-Gift",
+	"file": "Gray_Gift",
 	"duration": 1713
 	}
 ]
@@ -2798,13 +2874,13 @@ const archive = [
 "blurb": "<p>A 1940&ndash;62 anthology made by a bevy of talent. Most shows featured ordinary people thrust into suspenseful&mdash;even supernatural&mdash;situations.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_Suspense_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "011",
 	"heading": "#11: <cite>The Hitch-Hiker</cite>",
 	"blurb": "<p>A man driving across the <abbr>US</abbr> sees the same hitch-hiker calling for him again and again&hellip; and again&hellip; Written by Lucille Fletcher, introduction by and starring Orson Welles.</p>",
 	"notes": "car crash, obsession, traffic death",
-	"file": "Hitch-hiker",
+	"file": "Hitch",
 	"duration": 1752,
 	"banger": true
 	},
@@ -2830,7 +2906,7 @@ const archive = [
 	"heading": "#92: <cite>Donovan's Brain</cite>, part 1",
 	"blurb": "<p>A scientist rescues a wealthy businessman's life by preserving his brain&mdash;only to fall under its malign sway. Starring Orson Welles.</p>",
 	"notes": "alcohol adverts, animal bite, animal death, animal experimentation, betrayal, human experimentation, institutionalisation, mind control, paranoia",
-	"file": "Donovan-pt1",
+	"file": "Donovan_pt1",
 	"duration": 1767
 	},
 	{
@@ -2838,7 +2914,7 @@ const archive = [
 	"heading": "#93: <cite>Donovan's Brain</cite>, part 2",
 	"blurb": "<p>A scientist rescues a wealthy businessman's life by preserving his brain&mdash;only to fall under its malign sway. Starring Orson Welles.</p>",
 	"notes": "alcohol adverts, betrayal, human experimentation, institutionalisation, mind control, injection, non-consensual surgery, strangulation, suicide?",
-	"file": "Donovan-pt2",
+	"file": "Donovan_pt2",
 	"duration": 1758
 	},
 	{
@@ -3015,7 +3091,7 @@ const archive = [
 "blurb": "<p>A 1964&ndash;65 anthology of radio dramas broadcast by the <abbr title=\"American Broadcasting Company\">ABC</abbr> in an attempted revival of the radio play tradition after the rise of television.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_Theater_Five_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "106",
 	"heading": "#106: <cite>Five Strangers</cite>",
@@ -3041,7 +3117,7 @@ const archive = [
 "blurb": "<p>A 1943&ndash;45 anthology that adapted classic horror and supernatural tales to the airwaves, with low budgets limiting the use of music and sound effects.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_Weird_Circle_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "43",
 	"heading": "#43: <cite>The Bell Tower</cite>",
@@ -3067,7 +3143,7 @@ const archive = [
 "blurb": "<p>Two travellers become trapped on a river island in an eerie sea of willows where the walls of reality are fragile and vast things peer through. Written by Algernon Blackwood, first published in 1907, and read by Phil Chenevart for LibriVox.</p>",
 "source": "<a href=\"https://librivox.org/the-willows-by-algernon-blackwood-2\" rel=\"external\">LibriVox</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "1",
 	"heading": "part 1",
@@ -3104,7 +3180,7 @@ const archive = [
 "blurb": "<p>The first broadcast horror anthology (from 1931&ndash;38), written by Alonzo Deen Cole and hosted by the witch &ldquo;Old Nancy&rdquo; and her black cat, Satan.</p>",
 "source": "<a href=\"https://radioechoes.com/?page=series&genre=OTR-Thriller&series=The%20Witchs%20Tale\" rel=\"external\">Radio Echoes</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "041",
 	"heading": "#41: <cite>The Wonderful Bottle</cite>",
@@ -3129,7 +3205,7 @@ const archive = [
 "blurb": "<p>A mostly-lost anthology of radio stories probably broadcast in the 1940s, narrated by &ldquo;the Man with Book and Pipe&rdquo;; only one episode survives.</p>",
 "source": "<a href=\"https://archive.org/details/UniqueOldTimeRadioEpisodes/With+Book+and+Pipe+1943.mp3\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "X",
 	"heading": "#X: <cite>The Graveyard Rats</cite>",
@@ -3147,7 +3223,7 @@ const archive = [
 "blurb": "<p>5, 4, 3, 2&hellip; X minus 1. A 1955&ndash;58 anthology of original and adapted sci-fi stories, mostly scripted by Ernest Kinoy and George Lefferts; the successor to their earlier series <cite>Dimension X</cite>.</p>",
 "source": "<a href=\"https://archive.org/details/OTRR_X_Minus_One_Singles\" rel=\"external\">Internet Archive</a>",
 "copyrightSafe": true,
-"shows":[
+"shows": [
 	{
 	"code": "037",
 	"heading": "#37: <cite>The Cave of Night</cite>",
@@ -3214,6 +3290,14 @@ const archive = [
 	"file": "Colony",
 	"duration": 1782,
 	"banger": true
+	},
+	{
+	"code": "092",
+	"heading": "#92: <cite>The Seventh Victim</cite>",
+	"blurb": "<p>After the last World War, peace is kept via man-hunt bloodsport, but not every contender is up to the task. Adapted from a story by Robert Sheckley.</p>",
+	"notes": "betrayal, gunshots (2:32&ndash;52, 04:25&ndash;26, 11:46&ndash;48, 20:56)",
+	"file": "Victim",
+	"duration": 1333
 	},
 	{
 	"code": "101",
