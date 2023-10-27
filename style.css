@@ -5,16 +5,14 @@ FONTS
 GENERAL
 RADIO
 NAV
-AREAS
+SECTIONS
 
 BOOTH
 ARCHIVE
 ABOUT
 STREAMING
 SETTINGS
-CALL IN/LINKS/WELCOME
-
-NEWS ARCHIVE
+CALL IN/LINKS/CREDITS/WELCOME
 
 RESPONSIVITY
 	breakpoints:
@@ -34,7 +32,7 @@ RESPONSIVITY
 	--gap-size: 10px;
 	--main-column-padding: calc(2 * var(--gap-size));
 
-	--nav-link-transition-duration: 0.3s;
+	--seek-bar-thumb-size: 1em;
 	--toggle-transition-duration: 0.5s;
 	--control-depth: 0.3em;
 
@@ -131,6 +129,8 @@ RESPONSIVITY
 	FONTS
 ========== */
 
+/* SERIF */
+
 @font-face {
 	font-family: Bitter;
 	font-weight: normal;
@@ -167,6 +167,8 @@ RESPONSIVITY
 		url("./fonts/bitter-bold-italic-weirdwaves.woff2") format("woff2"),
 		url("./fonts/bitter-bold-italic-weirdwaves.woff") format("woff");
 }
+
+/* SANS */
 
 @font-face {
 	font-family: "Fira Sans";
@@ -385,6 +387,22 @@ button * {
 .icon-button-set button:active > .svg-icon {
 	stroke: var(--cold-colour);
 }
+.loading-spinner {
+	display: block;
+	margin-inline: auto;
+	animation-name: spinner;
+	animation-duration: 0.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+@keyframes spinner {
+	from {
+		transform: rotate(0turn);
+	}
+	to {
+		transform: rotate(1turn);
+	}
+}
 
 
 
@@ -415,7 +433,7 @@ h2.show-heading {
 #loaded-show > .show-content {
 	padding-inline-end: var(--gap-size);
 }
-.flat-radio .show-content {
+.flat-radio > .show-content {
 	display: none;
 }
 #controls {
@@ -504,10 +522,10 @@ input[type="range"]::-webkit-slider-thumb {
 	box-shadow: 0 var(--control-depth) var(--hot-colour);
 }
 #seek-bar::-webkit-slider-thumb {
-	inline-size: 1em;
-	block-size: 1em;
+	inline-size: var(--seek-bar-thumb-size);
+	block-size: var(--seek-bar-thumb-size);
 	border-radius: 50%;
-	transform: translateY(-0.8em); /*half block-size plus --control-depth*/
+	transform: translateY(calc(-1 * calc(var(--seek-bar-thumb-size) / 2 + var(--control-depth))));
 }
 #volume-control::-webkit-slider-thumb {
 	inline-size: 0.75em;
@@ -521,22 +539,6 @@ input[type="range"]:active::-webkit-slider-thumb {
 input[type="range"]:active::-webkit-slider-runnable-track {
 	background-color: var(--cold-colour);
 	block-size: var(--line-width);
-}
-.loading-spinner {
-	display: block;
-	margin-inline: auto;
-	animation-name: spinner;
-	animation-duration: 0.5s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-}
-@keyframes spinner {
-	from {
-		transform: rotate(0turn);
-	}
-	to {
-		transform: rotate(1turn);
-	}
 }
 
 
@@ -573,47 +575,30 @@ nav a {
 	text-decoration: none;
 	user-select: none;
 }
+nav a[href$=".rss"] {
+	color: var(--hot-colour);
+}
 nav a[href^="#"] {
 	outline-width: calc(var(--line-width) / 2);
 	outline-style: solid;
 	outline-color: transparent;
 	outline-offset: 0;
 	transition-property: outline-width, outline-color, outline-offset;
-	transition-duration: var(--nav-link-transition-duration);
+	transition-duration: 0.3s;
 }
 nav a[href^="#"]:is(:hover, :focus, [aria-current="page"]) {
 	outline-width: var(--line-width);
 	outline-color: var(--fore-colour);
 	outline-offset: 0.2em;
 }
-/*START of tab controls outline transition fix for Safari*/
-nav a[href^="#"] {
-	position: relative;
-}
-nav a[href^="#"]::before {
-	content: "";
-	inline-size: 100%;
-	block-size: 100%;
-	position: absolute;
-	inset-block-start: 0;
-	inset-inline-start: 0;
-	display: block;
-	transition-duration: var(--nav-link-transition-duration);
-}
-nav a[href^="#"]:is(:hover, :focus)::before {
-	inline-size: calc(100% + 1px);
-	block-size: calc(100% + 1px);
-}
-/*END*/
 nav a > span {
 	white-space: nowrap;
 }
 nav [aria-current="page"] {
 	transition-property: unset;
-	transition-duration: unset;
 }
 nav a[href^="#"]:is(:link, :visited, :active) {
-	color: inherit;
+	color: unset;
 }
 .svg-hot-stroke {
 	stroke: var(--hot-colour);
@@ -621,21 +606,21 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 
 
 
-/* ==========
-	AREAS
-========== */
+/* =============
+	SECTIONS
+============= */
 
-#station-areas > div {
+#page-sections > div {
 	display: none;
 	margin-block-end: 1em;
 }
-#station-areas > :last-child {
+#page-sections > :last-child {
 	display: block;
 }
-#station-areas > :is(div:target, div:has(:target)) {
+#page-sections > :is(div:target, div:has(:target)) {
 	display: block;
 }
-#station-areas > :is(div:target, div:has(:target)) ~ :last-child {
+#page-sections > :is(div:target, div:has(:target)) ~ :last-child {
 	display: none;
 }
 
@@ -653,7 +638,7 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 	gap: var(--gap-size);
 }
 #playlist > li:not(:first-child) {
-	padding-block-start: 1em; /* uses padding instead of margin because margin isn't included in Element.scrollHeight */
+	margin-block-start: 1em;
 }
 .show-position-controls {
 	flex-direction: column;
@@ -699,6 +684,7 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 	background-color: unset;
 	border-width: var(--line-width);
 	border-style: solid;
+	border-color: var(--fore-colour);
 	resize: none;
 }
 #import-error-message {
@@ -807,7 +793,6 @@ button[data-action="add-show"] {
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: flex-end;
-	align-items: center;
 }
 #stats-list dd {
 	margin-inline-start: 0;
@@ -897,11 +882,11 @@ use[href="#svg-toggle-tick"] {
 
 
 
-/* ==========================
-	CALL IN/LINKS/WELCOME
-========================== */
+/* ==================================
+	CALL IN/LINKS/CREDITS/WELCOME
+================================== */
 
-#call-in, #links, #welcome {
+#call-in, #links, #credits, #welcome {
 	text-align: center;
 }
 .flex-list [rel~="external"]::after {
@@ -909,24 +894,6 @@ use[href="#svg-toggle-tick"] {
 }
 .waveform-spacer {
 	margin-inline: auto;
-}
-
-
-
-/* =================
-	NEWS ARCHIVE
-================= */
-
-.news-list {
-	margin-inline-start: 1em;
-	padding-inline-start: 0;
-	list-style-type: none;
-}
-.news-list > :first-child > h3 {
-	margin-block-start: 0;
-}
-.news-list h3 {
-	margin-inline-start: calc(-1em * var(--h3-em-ratio));
 }
 
 
@@ -1022,8 +989,9 @@ use[href="#svg-toggle-tick"] {
 		max-inline-size: var(--widescreen-max-inline-size);
 		display: grid;
 		grid-template:
-			"	radio	heading	"
-			"	radio	areas	";
+			"	radio	heading		"
+			"	radio	nav			"
+			"	radio	sections	";
 		column-gap: var(--gap-size);
 	}
 	h1 {
@@ -1054,9 +1022,13 @@ use[href="#svg-toggle-tick"] {
 			"	show-controls	audio-controls	";
 		grid-template-columns: auto min-content;
 	}
-/* AREAS */
-	#station-areas {
-		grid-area: areas;
+/* NAV */
+	nav {
+		grid-area: nav;
+	}
+/* SECTIONS */
+	#page-sections {
+		grid-area: sections;
 		inline-size: calc(var(--main-column-max-inline-size) - 2 * var(--main-column-padding));
 	}
 }

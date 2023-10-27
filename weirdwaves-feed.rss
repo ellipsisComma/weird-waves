@@ -4,7 +4,7 @@
 		<title>Weird Waves</title>
 		<link>https://weirdwaves.net</link>
 		<atom:link href="https://weirdwaves.net/weirdwaves-feed.rss" rel="self" type="application/rss+xml" />
-		<description>Audio horror broadcasting online, from Old Time Radio to classic horror story audiobooks to freaky modern podcasts.</description>
+		<description>Audio horror broadcasting online, from Old Time Radio to freaky modern podcasts.</description>
 		<language>en-GB</language>
 		<ttl>1440</ttl>
 
@@ -17,39 +17,25 @@
 		</image>
 
 		<item>
-			<title>Weird Waves News: 2023-09-26</title>
+			<title>News: 2023-10-27</title>
 			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?98</guid>
-			<description>Tweaked a bunch of stuff behind the scenes and a few things in front (removed one setting, add another, changed where a few things are, etc.).</description>
-			<pubDate>Tue, 26 Sep 2023 00:00:00 +0000</pubDate>
+			<guid>https://weirdwaves.net/?102</guid>
+			<description>Removed the News Archive (it was mostly-useless info at this point in time anyway, just old records of when I added/removed shows and noted minor features/bugfixes); changed how playlist export works so instead of the textbox automatically filling with your playlist's show IDs on any change you need to click the "Export" button to load the list into the textbox; replaced the hacky links to individual series in the Archive with actual links (and a polyfill for browsers that don't yet support the :has() selector), and did a MAJOR overhaul of the codebase that mostly isn't apparent from the front. This RSS feed is now the only place where news updates will be written (if there even are any more regular news updates—I think that's pretty unlikely). Any future news updates'll probably be just me adding some new shows now and then, tweaking content notes, or updating the info about which shows are known/possible copyright risks on streaming services.</description>
+			<pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
 		</item>
 		<item>
-			<title>Weird Waves News: 2023-09-24</title>
+			<title>News: 2023-10-21</title>
 			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?97</guid>
-			<description>Updated playlist controls to appear on the left of the playlist instead of below.</description>
-			<pubDate>Sun, 24 Sep 2023 00:00:00 +0000</pubDate>
+			<guid>https://weirdwaves.net/?101</guid>
+			<description>Updated all the Mindwebs files to work better with OBS (instead of freezing around 8 seconds in).</description>
+			<pubDate>Sat, 21 Oct 2023 00:00:00 +0000</pubDate>
 		</item>
 		<item>
-			<title>Weird Waves News: 2023-09-21</title>
+			<title>News: 2023-10-19</title>
 			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?96</guid>
-			<description>Added buttons to the code-blocks in the Streaming section that copy their respective code-blocks to your clipboard.</description>
-			<pubDate>Thu, 21 Sep 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>Weird Waves News: 2023-09-10</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?95</guid>
-			<description>Fully disabled first and last move-show buttons on playlist instead of just blocking the script for moving shows.</description>
+			<guid>https://weirdwaves.net/?100</guid>
+			<description>Added "The Mercury Theatre" to the set of potentially copyright-unsafe series/sources, and also started looking into "Mindwebs" shows failing to play fully when Weird Waves is run in streaming software like OBS.</description>
 			<pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>Weird Waves News: 2023-09-07</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?94</guid>
-			<description>Added series show counts back in as another option for re-ordering the series stats list in the "About" section and corrected a minor typo in the Archive.</description>
-			<pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>

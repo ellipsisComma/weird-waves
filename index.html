@@ -12,9 +12,13 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2" as="font" crossorigin="">
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2" as="font" crossorigin="">
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-regular-weirdwaves.woff2" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-bold-weirdwaves.woff2" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-italic-weirdwaves.woff2" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2023-10-22" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2023-10-27" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -30,8 +34,8 @@
 
 
 
-<body class="theme-dark font-serif position-left">
-<script src="./utilities.js?v=2023-08-30"></script>
+<body class="theme-dark font-serif">
+<script src="./initialisation.js?v=2023-10-27"></script>
 
 
 
@@ -47,6 +51,9 @@
 			<circle cx="9" cy="13" r="1" />
 			<circle cx="15" cy="11" r="1" />
 		</g>
+	</symbol>
+	<symbol id="svg-rss">
+		<path class="svg-hot-stroke" d="M1 13a10 10 0 0 0 10 10zm2 2h6v6m-3-3l3-3m0-3a3 3 0 0 1 3 3m5 0a8 8 0 0 0 -8-8m0-5a13 13 0 0 1 13 13" />
 	</symbol>
 	<symbol id="svg-about">
 		<path d="M15 2v6l2 15m1 0h-12m5 0v-4a1 1 0 0 1 2 0v4m-7 0m1 0l2-15v-6m-1 0a10 10 0 0 1 8 0zm0 6h8" />
@@ -88,8 +95,9 @@
 		<path d="M12 2a10 10 0 0 0 0 20v-20a5 10 0 0 0 0 20m-10-10h15" />
 		<path class="svg-hot-stroke" d="M12 2a10 10 0 0 1 0 20a5 10 0 0 0 0-20" />
 	</symbol>
-	<symbol id="svg-rss">
-		<path d="M1 13a10 10 0 0 0 10 10zm2 2h6v6m-3-3l3-3m0-3a3 3 0 0 1 3 3m5 0a8 8 0 0 0 -8-8m0-5a13 13 0 0 1 13 13" />
+	<symbol id="svg-credits">
+		<path d="M12 4c-2-4 -11,-4 -11,4a11 11 0 0 0 7 10m4-14c2-4 11,-4 11,4a11 11 0 0 1-7 10" />
+		<path class="svg-hot-stroke" d="M12 11c0 4-4 4-4 8a4 4 0 0 0 8 0c0-4-4-4-4-8" />
 	</symbol>
 <!--various icon and toggle parts-->
 	<defs>
@@ -144,6 +152,7 @@
 		<path id="flip" class="svg-hot-stroke" d="M12 12l3,1 3,-2 3,2 3,-3 3,4 3,-5 3,6 3,-8 3,12 3,-15 3,19 3,-22 3,22 3,-19 3,15 3,-12 3,8 3,-6 3,5 3,-4 3,3 3,-2 3,2 3,-1" />
 	</symbol>
 	<symbol id="svg-loading-spinner">
+		<title>Loading</title>
 		<circle cx="12" cy="12" r="11" />
 		<circle cx="12" cy="12" r="4" />
 		<path class="svg-hot-stroke" d="M12 3l1 3h-2z" />
@@ -152,52 +161,68 @@
 
 
 
-<template id="show-position-controls-template">
-	<ul class="show-position-controls icon-button-set">
+<div id="html-templates">
+	<template id="nav-link-template">
 		<li>
-			<button class="push-button" type="button" data-action="move-up">
-				<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
+			<a>
+				<svg class="svg-icon" viewBox="0 0 24 24"><use /></svg>
+				<span></span>
+			</a>
+		</li>
+	</template>
+	<template id="show-position-controls-template">
+		<ul class="show-position-controls icon-button-set">
+			<li>
+				<button class="push-button" type="button" data-action="move-up">
+					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
+				</button>
+			</li>
+			<li>
+				<button class="push-button" type="button" data-action="remove">
+					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg>
+				</button>
+			</li>
+			<li>
+				<button class="push-button" type="button" data-action="move-down">
+					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg>
+				</button>
+			</li>
+		</ul>
+	</template>
+	<template id="invalid-ids-import-error-message-template">
+		<p>Invalid show ID(s):</p>
+		<ul></ul>
+	</template>
+	<template id="toggle-template">
+		<svg class="svg-icon" viewBox="0 0 48 24">
+			<use href="#svg-toggle-track" />
+			<g class="svg-toggle-thumb">
+				<use href="#svg-toggle-thumb-side" />
+				<use href="#svg-toggle-thumb-top" />
+				<use href="#svg-toggle-tick" />
+			</g>
+		</svg>
+		<span></span>
+	</template>
+	<template id="theme-button-template">
+		<li>
+			<button class="push-button" type="button" aria-pressed="false">
+				<span class="palette">
+					<span style="background-color:var(--fore-colour)"></span>
+					<span style="background-color:var(--back-colour)"></span>
+					<span style="background-color:var(--hot-colour)"></span>
+					<span style="background-color:var(--cold-colour)"></span>
+				</span>
+				<span></span>
 			</button>
 		</li>
+	</template>
+	<template id="font-button-template">
 		<li>
-			<button class="push-button" type="button" data-action="remove">
-				<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg>
-			</button>
+			<button class="push-button" type="button" style="font-family:var(--font-stack);" aria-pressed="false"></button>
 		</li>
-		<li>
-			<button class="push-button" type="button" data-action="move-down">
-				<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg>
-			</button>
-		</li>
-	</ul>
-</template>
-<template id="invalid-import-error-message-template">
-	<p>Invalid show ID(s):</p>
-	<ul></ul>
-</template>
-<template id="toggle-template">
-	<svg class="svg-icon" viewBox="0 0 48 24">
-		<use href="#svg-toggle-track" />
-		<g class="svg-toggle-thumb">
-			<use href="#svg-toggle-thumb-side" />
-			<use href="#svg-toggle-thumb-top" />
-			<use href="#svg-toggle-tick" />
-		</g>
-	</svg>
-</template>
-<template id="theme-button-template">
-	<li>
-		<button class="push-button" type="button">
-			<span class="palette"></span>
-			<span class="item-label"></span>
-		</button>
-	</li>
-</template>
-<template id="font-button-template">
-	<li>
-		<button class="push-button" type="button"></button>
-	</li>
-</template>
+	</template>
+</div>
 
 
 
@@ -235,46 +260,18 @@
 
 
 
-<div id="station-areas">
 <nav>
-	<ul id="activity-areas">
-		<li><a href="#booth">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-booth" /></svg>
-			<span>Booth</span>
-		</a></li>
-		<li><a href="#archive">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-archive" /></svg>
-			<span>Archive</span>
-		</a></li>
-	</ul>
-	<ul id="info-areas">
-		<li><a href="#about">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-about" /></svg>
-			<span>About</span>
-		</a></li>
-		<li><a href="#streaming">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-streaming" /></svg>
-			<span>Streaming</span>
-		</a></li>
-		<li><a href="#settings">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-settings" /></svg>
-			<span>Settings</span>
-		</a></li>
-	</ul>
-	<ul id="external-areas">
-		<li><a href="#call-in">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-call-in" /></svg>
-			<span>Call In</span>
-		</a></li>
-		<li><a href="#links">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-links" /></svg>
-			<span>Links</span>
-		</a></li>
-	</ul>
+	<svg id="loading-spinner-nav" class="svg-icon loading-spinner" viewBox="0 0 24 24">
+		<use href="#svg-loading-spinner" />
+	</svg>
+	<ul id="activity-sections"></ul>
+	<ul id="info-sections"></ul>
+	<ul id="external-sections"></ul>
 </nav>
 
 
 
+<div id="page-sections">
 <div id="booth">
 	<h2>Booth</h2>
 	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
@@ -340,16 +337,22 @@
 	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24">
 		<use href="#svg-loading-spinner" />
 	</svg>
-	<dl id="stats-list"></dl>
+	<dl id="stats-list">
+		<div>
+			<dt>sources</dt>
+			<dd id="stats-sources"></dd>
+		</div>
+		<div>
+			<dt>shows</dt>
+			<dd id="stats-shows"></dd>
+		</div>
+		<div>
+			<dt>hours of audio</dt>
+			<dd id="stats-duration"></dd>
+		</div>
+	</dl>
 	<h3>Content notes</h3>
 	<p>Aside from specific notes in the <a href="#archive">Archive</a>, there's also a few general ones: <strong>death</strong> and worse fates (this station's mostly for horror) and <strong>implicit bigotry</strong> in the older sources (I weed out the worse ones, but the rest still reflect their time).</p>
-	<h3>News</h3>
-	<p>For site news, see the <a href="./news-archive.html">News Archive</a> (<a href="./weirdwaves-feed.rss" type="application/rss+xml"><abbr title="Really Simple Syndication">RSS</abbr></a>). This is now less-often updated.</p>
-	<h3>Credits</h3>
-	<p>For shows, check the <a href="#archive">Archive</a>.</p>
-	<p>The serif font is <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a> and the sans-serif font is <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> by <a href="https://carrois.com/" rel="external">Carrois Type Design</a> and <a href="https://foundation.mozilla.org/" rel="external">the Mozilla Foundation</a>.</p>
-	<p>The app is hosted on <a href="https://neocities.org" rel="external">Neocities</a>.</p>
-	<p>Everything else by <a href="https://speakthesky.com" rel="external me">Speak the Sky</a>/<a href="https://twitch.tv/murder_vt" rel="external me">Murder_VT</a>!</p>
 </div><!--#about end-->
 
 
@@ -398,7 +401,7 @@
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings (the LibriVox selection and several other series in the Archive) are in the public domain.</p>
 	<p>The copyright status of old radio broadcasts is murky, but they're <i lang="la">de facto</i> public domain&mdash;any person or organisation who could press a claim is long dead or gone. This isn't legal advice, but&hellip; nobody (<abbr title="British Broadcasting Corporation">BBC</abbr> aside) cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
-	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr class="unmodified-abbr" title="Clark Ashton Smith">CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
+	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr title="Clark Ashton Smith">CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<button id="copyright-safety-toggle" class="toggle" type="button">exclude copyright-unsafe material</button>
 	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are confirmed to be muted on twitch due to copyright claims. The others are included as possible, but unconfirmed copyright risks.</p>
 </div><!--#streaming end-->
@@ -407,7 +410,7 @@
 
 <div id="settings">
 	<h2>Settings</h2>
-	<p>Control how Weird Waves looks and functions here. Unless you prevent this site from storing data in your browser, these settings will be remembered when you return to Weird Waves.</p>
+	<p>Control how Weird Waves looks and functions here.</p>
 	<ul>
 		<li>
 			<h3>Radio</h3>
@@ -456,7 +459,7 @@
 
 <div id="links">
 	<h2>Links</h2>
-	<p>If you like Weird Waves, you might like some of these places too.</p>
+	<p>If you like Weird Waves, you might like some of these places too:</p>
 	<h3>Other stations</h3>
 	<ul class="flex-list">
 		<li><a href="https://www.djfullmoon.com/" rel="external">&#127765;</a></li>
@@ -488,8 +491,8 @@
 	</ul>
 	<h3>Streamers</h3>
 	<ul class="flex-list">
-		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth<abbr class="unmodified-abbr">VT</abbr></a></li>
-		<li><a href="https://twitch.tv/grimmivt" rel="external">grimmi<abbr class="unmodified-abbr">VT</abbr></a></li>
+		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth<abbr>VT</abbr></a></li>
+		<li><a href="https://twitch.tv/grimmivt" rel="external">grimmi<abbr>VT</abbr></a></li>
 		<li><a href="https://twitch.tv/ecdycis" rel="external">Ecdysis</a></li>
 	</ul>
 	<h3>Anything else</h3>
@@ -519,16 +522,32 @@
 
 
 
+<div id="credits">
+	<h2>Credits</h2>
+	<p>Want to know where things came from?</p>
+	<h3>Shows</h3>
+	<p>Check the <a href="#archive">Archive</a></p>
+	<h3>Fonts</h3>
+	<p>Serif font: <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a></p>
+	<p>Sans-serif font: <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> by <a href="https://carrois.com/" rel="external">Carrois Type Design</a> and <a href="https://foundation.mozilla.org/" rel="external">the Mozilla Foundation</a></p>
+	<h3>Hosting</h3>
+	<p><a href="https://neocities.org" rel="external">Neocities</a></p>
+	<h3>Everything else</h3>
+	<p>Me: <a href="https://speakthesky.com" rel="external me">Speak the Sky</a>/<a href="https://twitch.tv/murder_vt" rel="external me">Murder_VT</a>!</p>
+</div>
+
+
+
 <div id="welcome">
 	<h2>Welcome to Weird Waves!</h2>
-	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks featuring the weird and the disturbing!</p>
+	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks!</p>
 	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 </div><!--#welcome end-->
-</div><!--#station-areas end-->
+</div><!--#page-sections end-->
 </div><!--#container end-->
 
 
 
-<script src="./main.js?v=2023-10-22"></script>
+<script src="./main.js?v=2023-10-27"></script>
 </body>
 </html>

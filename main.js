@@ -28,8 +28,9 @@ Known issues (not major):
 
 // relative path of the show audio folder, favicon, and Weird Waves button folder
 const paths = {
-	show: "./audio/shows/",
-	button: "./images/buttons/weird-waves-"
+	"show": "./audio/shows/",
+	"button": "./images/buttons/weird-waves-",
+	"favicon": "./images/favicons/"
 };
 
 // initialised settings from storage and set default values if not set
@@ -42,22 +43,22 @@ settings.notesOpen ??= false;
 // options for theme, font etc., with displayed names and underlying codes
 const styleOptions = {
 	"themes": [
-		{"name": "Dark",	"code": "dark"},
-		{"name": "Goop",	"code": "goop"},
-		{"name": "Flame",	"code": "flame"},
-		{"name": "Plasm",	"code": "plasm"},
-		{"name": "Moss",	"code": "moss"},
-		{"name": "Darker",	"code": "darker"},
-		{"name": "Light",	"code": "light"},
-		{"name": "Wine",	"code": "wine"},
-		{"name": "Ash",		"code": "ash"},
-		{"name": "Dust",	"code": "dust"},
-		{"name": "Mist",	"code": "mist"},
-		{"name": "Silver",	"code": "silver"}
+		{	"name": "Dark",		"code": "dark"		},
+		{	"name": "Goop",		"code": "goop"		},
+		{	"name": "Flame",	"code": "flame"		},
+		{	"name": "Plasm",	"code": "plasm"		},
+		{	"name": "Moss",		"code": "moss"		},
+		{	"name": "Darker",	"code": "darker"	},
+		{	"name": "Light",	"code": "light"		},
+		{	"name": "Wine",		"code": "wine"		},
+		{	"name": "Ash",		"code": "ash"		},
+		{	"name": "Dust",		"code": "dust"		},
+		{	"name": "Mist",		"code": "mist"		},
+		{	"name": "Silver",	"code": "silver"	}
 	],
 	"fonts": [
-		{"name": "Serif",	"code": "serif"},
-		{"name": "Sans",	"code": "sans"}
+		{	"name": "Serif",	"code": "serif"	},
+		{	"name": "Sans",		"code": "sans"	}
 	]
 };
 
@@ -69,6 +70,11 @@ const styleOptions = {
 
 // HTML elements (or templated HTML elements) and their IDs
 const page = {
+// head
+	"title": document.querySelector("title"),
+	"SVGFavicon": document.querySelector('[rel~="icon"][href$=".svg"]'),
+	"icoFavicon": document.querySelector('[href$=".ico"]'),
+
 // radio
 	"loadedShow": "loaded-show",
 	"controls": "controls",
@@ -101,15 +107,16 @@ const page = {
 	"weirdWavesButtonSVG": "weird-waves-button-svg"
 },
 templateHTML = {
-	"showPositionControls": "show-position-controls-template",
-	"invalidImportErrorMessage": "invalid-import-error-message-template",
-	"toggle": "toggle-template",
-	"themeButton": "theme-button-template",
-	"fontButton": "font-button-template"
+	"navLink": "nav-link",
+	"showPositionControls": "show-position-controls",
+	"invalidIDsImportErrorMessage": "invalid-ids-import-error-message",
+	"toggle": "toggle",
+	"themeButton": "theme-button",
+	"fontButton": "font-button"
 };
 
-for (const element of Object.keys(page)) page[element] = document.getElementById(page[element]);
-for (const element of Object.keys(templateHTML)) templateHTML[element] = document.getElementById(templateHTML[element]);
+for (const [ref, element] of Object.entries(page)) if (typeof element === "string") page[ref] = document.getElementById(element);
+for (const [ref, element] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(element + "-template");
 
 // prepare playlist show IDs from storage (if there are any)
 let playlistIDs = window.localStorage.getItem("playlist") ? JSON.parse(window.localStorage.getItem("playlist")) : [];
@@ -133,9 +140,20 @@ let updateTimeInterval;
 UTILITY
 ---- */
 
-// add an object of data-attributes to an element
-Element.prototype.setData = function (data) {
-	for (const attr of Object.keys(data)) this.setAttribute("data-" + attr, data[attr]);
+// add an object of attributes to an Element (excluding class for practical reasons)
+Element.prototype.setAttributes = function (attrs) {
+	for (const [attr, value] of Object.entries(attrs)) this.setAttribute(attr, value);
+}
+
+// remove an array of attributes from an Element
+Element.prototype.removeAttributes = function (attrs) {
+	for (const attr of attrs) this.removeAttribute(attr);
+}
+
+// set a string to be an HTML element's innerHTML or textContent depending on whether it includes HTML entities or possible HTML tags
+HTMLElement.prototype.setContent = function (text) {
+	if (text.match(/&#?\w+;/) || text.match(/<[a-z]|<\w+>|\/>|<\//)) this.innerHTML = text;
+	else this.textContent = text;
 }
 
 // copy code-block code to clipboard
@@ -164,6 +182,24 @@ function setTimestampFromSeconds(element, time) {
 	element.setAttribute("datetime", "00:" + minutes + ":" + seconds);
 }
 
+/* -------
+NAVIGATION
+------- */
+
+// update title and currently-marked nav-link depending on hash
+function navigateToSection() {
+// find section that hash target is or is inside (use querySelector, not getElementById, because it can directly take window.location.hash instead of having to remove #)
+	const section = document.querySelector(window.location.hash)?.closest("#page-sections > *");
+
+// if the targeted section exists, switch aria-current to target's nav-link and update title accordingly, else return to default page title
+	if (section) {
+		const navLink = document.querySelector('nav [href="#' + section.id + '"]');
+		document.querySelector('[aria-current="page"]')?.removeAttribute("aria-current");
+		document.title = navLink.innerText + " / " + page.title.dataset.original;
+		navLink.setAttribute("aria-current", "page");
+	} else document.title = page.title.dataset.original;
+}
+
 /* -----
 PLAYLIST
 ----- */
@@ -183,7 +219,7 @@ function updatePlaylist(oldIDs, newIDs) {
 	if (invalidIDs.length > 0) {
 		clearImportErrors();
 		page.importExport.value = newIDs.join("\n");
-		page.importErrorMessage.appendChild(templateHTML.invalidImportErrorMessage.content.cloneNode(true));
+		page.importErrorMessage.appendChild(templateHTML.invalidIDsImportErrorMessage.content.cloneNode(true));
 		const invalidIDsList = page.importErrorMessage.querySelector("ul");
 		for (const ID of invalidIDs) invalidIDsList.appendChild(document.createElement("li")).textContent = ID;
 		page.importErrorMessage.scrollIntoView();
@@ -291,10 +327,10 @@ function addShow(id) {
 	const newShowHeading = newShow.querySelector(".show-heading");
 	newShowHeading.innerHTML = seriesInArchive.querySelector(".series-heading").innerHTML + " " + newShowHeading.innerHTML;
 	newShow.querySelector(".show-content").appendChild(seriesInArchive.querySelector(".series-source").cloneNode(true));
-	newShow.setData({
-		"id": id,
-		"file": showInArchive.dataset.file,
-		"duration": showInArchive.dataset.duration
+	newShow.setAttributes({
+		"data-id": id,
+		"data-file": showInArchive.dataset.file,
+		"data-duration": showInArchive.dataset.duration
 	});
 
 // add show to playlist in booth and mark as added in archive
@@ -350,7 +386,7 @@ function removeShow(id) {
 
 	page.playlist.children[index]?.remove();
 	playlistIDs.splice(index, 1);
-	document.getElementById(id).querySelector('[data-action="add-show"]').setAttribute("aria-pressed", "false");
+	document.querySelector("#" + id + ' [data-action="add-show"]').setAttribute("aria-pressed", "false");
 
 	if (index === 0) loadShow();
 
@@ -515,7 +551,8 @@ function updateSetting(setting, value) {
 function switchTheme(theme) {
 	updateSetting("theme", theme);
 
-	switchFavicon(theme);
+	page.SVGFavicon.href = paths.favicon + theme + ".svg";
+	page.icoFavicon.href = paths.favicon + theme + ".ico";
 
 	page.weirdWavesButtonPNG.src = paths.button + theme + ".png";
 	page.weirdWavesButtonSVG.src = paths.button + theme + ".svg";
@@ -529,6 +566,43 @@ function switchFont(font) {
 /* --------------
 PAGE CONSTRUCTION
 -------------- */
+
+// build nav menu
+function buildNavLinks() {
+	const navLinks = {
+		"activity": [
+			{	"name": "Booth", 			"code": "booth"		},
+			{	"name": "Archive", 			"code": "archive"	},
+			{	"name": '<abbr title="Really Simple Syndication">RSS</abbr>', "code": "rss", 		"href": "./weirdwaves-feed.rss", 	"attrs": {"type": "application/rss+xml"}	}
+		],
+		"info": [
+			{	"name": "About", 			"code": "about"		},
+			{	"name": "Streaming", 		"code": "streaming"	},
+			{	"name": "Settings", 		"code": "settings"	}
+		],
+		"external": [
+			{	"name": "Call In", 			"code": "call-in"	},
+			{	"name": "Links", 			"code": "links"		},
+			{	"name": "Credits", 			"code": "credits"	}
+		]
+	};
+
+	for (const [section, links] of Object.entries(navLinks)) {
+		const list = document.getElementById(section + "-sections");
+		for (const link of links) {
+			list.appendChild(templateHTML.navLink.content.cloneNode(true));
+			newLink = list.lastElementChild.firstElementChild;
+
+			newLink.href = link.href ?? "#" + link.code;
+			newLink.setAttributes(link.attrs ?? {});
+			newLink.querySelector("use").setAttribute("href", "#svg-" + link.code);
+			newLink.querySelector("span").setContent(link.name);
+		}
+	}
+
+	document.getElementById("loading-spinner-nav")?.remove();
+	document.querySelector("nav").removeAttribute("hidden");
+}
 
 // build archive onto page
 function buildArchive() {
@@ -583,9 +657,11 @@ series.blurb +
 	document.getElementById("archive-series-links").innerHTML = archiveLinksHTML;
 	page.seriesList.innerHTML = archiveHTML;
 	page.seriesList.addEventListener("click", (event) => {
-		switch (event.target.dataset.action) {
-		case "add-series": addSeries(event.target.dataset.target); break;
-		case "add-show": addShow(event.target.dataset.target); break;
+		if (event.target.getAttribute("aria-pressed") === "false") {
+			switch (event.target.dataset.action) {
+			case "add-series": addSeries(event.target.dataset.target); break;
+			case "add-show": addShow(event.target.dataset.target); break;
+			}
 		}
 	});
 
@@ -594,16 +670,18 @@ series.blurb +
 
 // add series stats to stats-list
 	document.getElementById("loading-spinner-stats")?.remove();
-	document.getElementById("stats-list").innerHTML = "<div><dt>sources</dt><dd>" + stats.series + "</dd></div>" +
-"<div><dt>shows</dt><dd>" + stats.shows + "</dd></div>" +
-"<div><dt>hours of audio</dt><dd>" + Math.round(stats.duration / 3600) + "</dd></div>";
+	document.getElementById("stats-sources").textContent = stats.series;
+	document.getElementById("stats-shows").textContent = stats.shows;
+	document.getElementById("stats-duration").textContent = Math.round(stats.duration / 3600);
+	
 }
 
 // build toggle switches
 function buildToggles() {
 	for (const toggle of document.querySelectorAll(".toggle")) {
-		toggle.innerHTML = "<span>" + toggle.innerHTML + "</span>";
-		toggle.insertBefore(templateHTML.toggle.content.cloneNode(true), toggle.firstElementChild);
+		const label = toggle.innerHTML;
+		toggle.replaceChildren(templateHTML.toggle.content.cloneNode(true));
+		toggle.lastElementChild.setContent(label);
 	}
 }
 
@@ -615,14 +693,9 @@ function buildThemeButtons() {
 
 		const button = page.themeButtons.lastElementChild.querySelector("button");
 		button.setAttribute("data-theme", theme.code);
-		button.setAttribute("aria-pressed", "false");
-		button.querySelector(".item-label").textContent = theme.name;
+		button.lastElementChild.setContent(theme.name);
 
-		const palette = button.querySelector(".palette");
-		palette.classList.add("theme-" + theme.code);
-		for (const colour of colours) {
-			palette.appendChild(document.createElement("span")).style.backgroundColor = "var(--" + colour + "-colour)";
-		}
+		button.querySelector(".palette").classList.add("theme-" + theme.code);
 	}
 	document.getElementById("loading-spinner-theme-buttons")?.remove();
 	page.themeButtons.removeAttribute("hidden");
@@ -635,9 +708,7 @@ function buildFontButtons() {
 		const button = page.fontButtons.lastElementChild.querySelector("button");
 		button.classList.add("font-" + font.code);
 		button.setAttribute("data-font", font.code);
-		button.setAttribute("aria-pressed", "false");
-		button.style.fontFamily = "var(--font-stack)";
-		button.textContent = font.name;
+		button.setContent(font.name);
 	}
 	document.getElementById("loading-spinner-font-buttons")?.remove();
 	page.fontButtons.removeAttribute("hidden");
@@ -648,6 +719,9 @@ function buildFontButtons() {
 /* ===========
 	EVENTS
 =========== */
+
+// nav events
+window.addEventListener("hashchange", navigateToSection);
 
 // radio audio events
 page.audio.addEventListener("ended", loadNextShow);
@@ -697,14 +771,17 @@ document.getElementById("content-notes-toggle").addEventListener("click", toggle
 
 // settings interface events (styling)
 page.themeButtons.addEventListener("click", (event) => {
-	if (event.target.tagName === "BUTTON") switchTheme(event.target.dataset.theme);
+	if (event.target.tagName === "BUTTON" && event.target.getAttribute("aria-pressed") !== "true") switchTheme(event.target.dataset.theme);
 });
 page.fontButtons.addEventListener("click", (event) => {
-	if (event.target.tagName === "BUTTON") switchFont(event.target.dataset.font);
+	if (event.target.tagName === "BUTTON" && event.target.getAttribute("aria-pressed") !== "true") switchFont(event.target.dataset.font);
 });
 
 // on pageload, execute various tasks
 document.addEventListener("DOMContentLoaded", () => {
+/* BUILD NAV LINKS */
+	buildNavLinks();
+
 /* BUILD ARCHIVE */
 	buildArchive();
 
@@ -735,6 +812,36 @@ document.addEventListener("DOMContentLoaded", () => {
 	page.loadedShow.classList.toggle("flat-radio", settings.flatRadio);
 	switchTheme(styles.theme);
 	switchFont(styles.font);
+
+/* UPDATE PAGE HEAD DATA */
+	page.title.setAttribute("data-original", document.title);
+	if (window.location.hash) navigateToSection();
+
+/* -----------------------------------
+FOR BROWSERS THAT DON'T SUPPORT :HAS()
+----------------------------------- */
+
+// build alternate set of links
+	function buildAltArchiveSeriesLinks() {
+		const links = document.querySelectorAll("#archive-series-links a");
+
+		for (let i = 0; i < links.length; i++) {
+			links[i].setAttribute("data-series", links[i].href.split("-")[1]);
+			links[i].href = "#archive";
+			links[i].addEventListener("click", () => setTimeout(scrollToSeries, 1, links[i].dataset.series));
+
+			page.seriesList.children[i].setAttribute("tabindex", "0");
+		}
+	}
+
+// scroll to a series when clicking its link in the archive series nav list
+	function scrollToSeries(series) {
+		document.getElementById("archive-" + series).focus();
+		document.getElementById("archive-" + series).scrollIntoView(true);
+	}
+
+// if browser doesn't support :has(:target) selector, replace series links with old hack
+	if (!CSS.supports("selector(:has(:target))")) buildAltArchiveSeriesLinks();
 });
 
 // on closing window/browser tab, record user settings and styles to localStorage
