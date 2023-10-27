@@ -222,9 +222,6 @@ RESPONSIVITY
 ::after {
 	box-sizing: border-box;
 }
-html {
-	scroll-behavior: smooth;
-}
 body {
 	margin: 0;
 	color: var(--fore-colour);
@@ -1030,10 +1027,5 @@ use[href="#svg-toggle-tick"] {
 	#page-sections {
 		grid-area: sections;
 		inline-size: calc(var(--main-column-max-inline-size) - 2 * var(--main-column-padding));
-	}
-}
-@media (prefers-reduced-motion) {
-	html {
-		scroll-behavior: auto;
 	}
 }
