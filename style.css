@@ -806,7 +806,6 @@ button[data-action="add-show"] {
 ============== */
 
 .code-block {
-	display: block;
 	margin-block-end: calc(var(--gap-size) + var(--control-depth));
 	padding-block: 0.3em;
 	padding-inline: 0.5em;
