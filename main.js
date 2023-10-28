@@ -156,18 +156,6 @@ HTMLElement.prototype.setContent = function (text) {
 	else this.textContent = text;
 }
 
-// copy code-block code to clipboard
-function copyCodeToClipboard(button) {
-	navigator.clipboard.writeText(button.closest(".code-block").querySelector("code").innerText);
-
-	button.innerText = "Copied to clipboard";
-	button.setAttribute("aria-pressed", "true");
-	setTimeout(() => {
-		button.innerText = "Copy to clipboard";
-		button.setAttribute("aria-pressed", "false");
-	}, 2000);
-}
-
 // pad single-digit second or minute numbers with a leading 0
 function padTime(timeNum) {
 	return (timeNum < 10) ? "0" + timeNum : String(timeNum);
@@ -759,9 +747,6 @@ document.getElementById("import-button").addEventListener("click", importPlaylis
 
 // archive interface events (excluding those dependent on the archive HTML being generated beforehand)
 document.getElementById("add-archive-button").addEventListener("click", addArchive);
-
-// streaming interface events
-document.querySelectorAll('[data-action="clipboard"]').forEach(button => button.addEventListener("click", () => copyCodeToClipboard(button)));
 
 // settings interface events (general)
 document.getElementById("copyright-safety-toggle").addEventListener("click", toggleCopyrightSafety);
