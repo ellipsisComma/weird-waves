@@ -527,11 +527,17 @@ function toggleContentNotes() {
 	document.querySelectorAll(".content-notes").forEach(notes => notes.toggleAttribute("open", settings.notesOpen));
 }
 
+// set button state
+function setButtonState(setting, value, state) {
+	page[setting + "Buttons"].querySelector("[data-" + setting + '="' + value + '"]').setAttribute("aria-pressed", state);
+}
+
 // update setting and setting buttons according to chosen value
 function updateSetting(setting, value) {
+	setButtonState(setting, styles[setting], "false");
+	setButtonState(setting, value, "true");
+
 	document.body.classList.replace(setting + "-" + styles[setting], setting + "-" + value);
-	page[setting + "Buttons"].querySelector('[aria-pressed="true"]')?.removeAttribute("aria-pressed");
-	page[setting + "Buttons"].querySelector("[data-" + setting + '="' + value + '"]').setAttribute("aria-pressed", "true");
 	styles[setting] = value;
 }
 
@@ -561,7 +567,7 @@ function buildNavLinks() {
 		"activity": [
 			{	"name": "Booth", 			"code": "booth"		},
 			{	"name": "Archive", 			"code": "archive"	},
-			{	"name": '<abbr title="Really Simple Syndication">RSS</abbr>', "code": "rss", 		"href": "./weirdwaves-feed.rss", 	"attrs": {"type": "application/rss+xml"}	}
+			{	"name": '<abbr title="Really Simple Syndication">RSS</abbr>', "code": "rss", 		"href": "./feed.rss", 	"attrs": {"type": "application/rss+xml"}	}
 		],
 		"info": [
 			{	"name": "About", 			"code": "about"		},
