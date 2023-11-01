@@ -796,8 +796,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// import playlist
 	if (playlistIDs.length > 0) {
+		if (playlistIDs[0].split("-").length === 2) playlistIDs.length = 0; // deletes playlist if stored playlist has any old-style show IDs
+		else updatePlaylist([], playlistIDs);
 		console.log("loaded playlist from storage");
-		updatePlaylist([], playlistIDs);
 	}
 	document.getElementById("loading-spinner-booth")?.remove();
 	document.getElementById("booth-contents").removeAttribute("hidden");
