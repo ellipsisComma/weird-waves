@@ -364,7 +364,6 @@ button * {
 }
 .push-button[aria-pressed="true"] {
 	pointer-events: none;
-	user-select: none;
 }
 .icon-button-set {
 	display: flex;
@@ -640,10 +639,7 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 .show-position-controls {
 	flex-direction: column;
 }
-:first-child > .show-position-controls > :first-child {
-	visibility: hidden;
-}
-:last-child > .show-position-controls > :last-child {
+#playlist > :first-child [data-action="move-up"], #playlist > :last-child [data-action="move-down"] {
 	visibility: hidden;
 }
 #playlist-controls {
@@ -811,7 +807,7 @@ button[data-action="add-show"] {
 	padding-inline: 0.5em;
 	color: var(--back-colour);
 	background-color: var(--fore-colour);
-	tab-size: 4ch;
+	tab-size: 2ch;
 	user-select: all;
 }
 
@@ -903,8 +899,7 @@ use[href="#svg-toggle-tick"] {
 	body {
 		font-size: 1.2em;
 	}
-	h1,
-	h2:not(.show-heading) {
+	h1, h2:not(.show-heading) {
 		text-shadow: 0.07em 0.07em 0 var(--back-colour), -0.05em -0.05em 0 var(--back-colour), 0.1em 0.09em 0 var(--fore-colour);
 	}
 	nav a {
@@ -917,19 +912,23 @@ use[href="#svg-toggle-tick"] {
 	.show-position-controls .svg-icon {
 		block-size: 1em;
 	}
+	.code-block {
+		tab-size: 4ch;
+	}
 	.palette {
 		inline-size: 4em;
 	}
 }
 @media (min-width: 600px) {
-/* RADIO */
+	/* RADIO */
 	#controls {
 		grid-template: 
 			"	seek-controls	show-controls	audio-controls	";
 		grid-template-columns: auto min-content min-content;
 		column-gap: calc(var(--gap-size) * 3);
 	}
-/* NAV */
+
+	/* NAV */
 	nav {
 		display: block;
 		font-size: unset;
@@ -939,13 +938,13 @@ use[href="#svg-toggle-tick"] {
 		margin-inline: auto;
 		flex-direction: row;
 	}
-}
 @media (min-width: 700px) {
-/* RADIO */
+	/* RADIO */
 	h2.show-heading {
 		display: inline-block;
 	}
-/* ARCHIVE */
+
+	/* ARCHIVE */
 	#series-list {
 		border-block-end-width: var(--line-width);
 		border-block-end-style: solid;
@@ -981,7 +980,7 @@ use[href="#svg-toggle-tick"] {
 	}
 }
 @media (min-width: 1240px) {
-/* GENERAL */
+	/* GENERAL */
 	#container {
 		max-inline-size: var(--widescreen-max-inline-size);
 		display: grid;
@@ -994,7 +993,8 @@ use[href="#svg-toggle-tick"] {
 	h1 {
 		grid-area: heading;
 	}
-/* RADIO */
+
+	/* RADIO */
 	#radio {
 		align-self: start;
 		position: sticky;
@@ -1019,11 +1019,13 @@ use[href="#svg-toggle-tick"] {
 			"	show-controls	audio-controls	";
 		grid-template-columns: auto min-content;
 	}
-/* NAV */
+
+	/* NAV */
 	nav {
 		grid-area: nav;
 	}
-/* SECTIONS */
+
+	/* SECTIONS */
 	#page-sections {
 		grid-area: sections;
 		inline-size: calc(var(--main-column-max-inline-size) - 2 * var(--main-column-padding));
