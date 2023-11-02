@@ -40,7 +40,6 @@ RESPONSIVITY
 
 	--h3-font-size-raw: 1.25;
 	--h3-font-size: calc(1em * var(--h3-font-size-raw));
-	--h3-em-ratio: calc(1 / var(--h3-font-size-raw));
 }
 /* THEMES */
 .theme-dark {
