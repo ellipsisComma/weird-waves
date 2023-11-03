@@ -37,9 +37,6 @@ RESPONSIVITY
 	--control-depth: 0.3em;
 
 	--line-width: 1px;
-
-	--h3-font-size-raw: 1.25;
-	--h3-font-size: calc(1em * var(--h3-font-size-raw));
 }
 /* THEMES */
 .theme-dark {
