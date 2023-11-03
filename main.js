@@ -684,7 +684,6 @@ series.blurb +
 	document.getElementById("stats-sources").textContent = stats.series;
 	document.getElementById("stats-shows").textContent = stats.shows;
 	document.getElementById("stats-duration").textContent = Math.round(stats.duration / 3600);
-	
 }
 
 // build toggle switches
