@@ -106,6 +106,9 @@ const page = {
 	"volumeControl": "volume-control",
 	"audio": "show-audio",
 
+	// nav
+	"nav": document.querySelector("nav"),
+
 	// booth
 	"playlist": "playlist",
 	"playlistControls": "playlist-controls",
@@ -602,7 +605,9 @@ PAGE CONSTRUCTION
 // build nav menu
 function buildNavLinks() {
 	for (const [section, links] of Object.entries(navLinks)) {
-		const list = document.getElementById(section + "-sections");
+		const list = document.createElement("ul");
+		list.id = section + "-sections";
+
 		for (const link of links) {
 			list.appendChild(templateHTML.navLink.content.cloneNode(true));
 			newLink = list.lastElementChild.firstElementChild;
@@ -612,6 +617,8 @@ function buildNavLinks() {
 			newLink.querySelector("use").setAttribute("href", "#svg-" + link.code);
 			newLink.querySelector("span").setContent(link.name);
 		}
+
+		page.nav.appendChild(list);
 	}
 
 	document.getElementById("loading-spinner-nav")?.remove();
