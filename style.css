@@ -1017,7 +1017,7 @@ use[href="#svg-toggle-tick"] {
 	}
 
 	/* NAV */
-	nav {
+	#nav-container {
 		grid-area: nav;
 	}
 

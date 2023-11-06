@@ -622,6 +622,7 @@ function buildNavLinks() {
 	}
 
 	document.getElementById("loading-spinner-nav")?.remove();
+	page.nav.removeAttribute("hidden");
 }
 
 // build archive onto page
