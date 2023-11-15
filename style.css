@@ -802,7 +802,7 @@ code {
 }
 .code-block {
 	display: block;
-	margin-block-end: calc(var(--gap-size) + var(--control-depth));
+	margin-block: 1em;
 	padding-block: 0.3em;
 	padding-inline: 0.5em;
 	color: var(--back-colour);
