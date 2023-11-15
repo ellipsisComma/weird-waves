@@ -797,14 +797,19 @@ button[data-action="add-show"] {
 	STREAMING
 ============== */
 
+code {
+	user-select: all;
+}
 .code-block {
+	display: block;
 	margin-block-end: calc(var(--gap-size) + var(--control-depth));
 	padding-block: 0.3em;
 	padding-inline: 0.5em;
 	color: var(--back-colour);
 	background-color: var(--fore-colour);
 	tab-size: 2ch;
-	user-select: all;
+	overflow-x: auto;
+	white-space: pre;
 }
 
 
