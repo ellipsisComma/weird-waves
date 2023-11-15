@@ -133,8 +133,7 @@ RESPONSIVITY
 	font-style: normal;
 	font-display: swap;
 	src:
-		url("./fonts/bitter-regular-weirdwaves.woff2") format("woff2"),
-		url("./fonts/bitter-regular-weirdwaves.woff") format("woff");
+		url("./fonts/bitter-regular-weirdwaves.woff2") format("woff2");
 }
 @font-face {
 	font-family: Bitter;
@@ -142,8 +141,7 @@ RESPONSIVITY
 	font-style: normal;
 	font-display: swap;
 	src:
-		url("./fonts/bitter-bold-weirdwaves.woff2") format("woff2"),
-		url("./fonts/bitter-bold-weirdwaves.woff") format("woff");
+		url("./fonts/bitter-bold-weirdwaves.woff2") format("woff2");
 }
 @font-face {
 	font-family: Bitter;
@@ -151,8 +149,7 @@ RESPONSIVITY
 	font-style: italic;
 	font-display: swap;
 	src:
-		url("./fonts/bitter-italic-weirdwaves.woff2") format("woff2"),
-		url("./fonts/bitter-italic-weirdwaves.woff") format("woff");
+		url("./fonts/bitter-italic-weirdwaves.woff2") format("woff2");
 }
 @font-face {
 	font-family: Bitter;
@@ -160,8 +157,7 @@ RESPONSIVITY
 	font-style: italic;
 	font-display: swap;
 	src:
-		url("./fonts/bitter-bold-italic-weirdwaves.woff2") format("woff2"),
-		url("./fonts/bitter-bold-italic-weirdwaves.woff") format("woff");
+		url("./fonts/bitter-bold-italic-weirdwaves.woff2") format("woff2");
 }
 
 /* SANS */
@@ -174,8 +170,7 @@ RESPONSIVITY
 	font-feature-settings: "zero" 1;
 	font-display: swap;
 	src:
-		url("./fonts/fira-sans-regular-weirdwaves.woff2") format("woff2"),
-		url("./fonts/fira-sans-regular-weirdwaves.woff") format("woff");
+		url("./fonts/fira-sans-regular-weirdwaves.woff2") format("woff2");
 }
 @font-face {
 	font-family: "Fira Sans";
@@ -183,8 +178,7 @@ RESPONSIVITY
 	font-style: normal;
 	font-display: swap;
 	src:
-		url("./fonts/fira-sans-bold-weirdwaves.woff2") format("woff2"),
-		url("./fonts/fira-sans-bold-weirdwaves.woff") format("woff");
+		url("./fonts/fira-sans-bold-weirdwaves.woff2") format("woff2");
 }
 @font-face {
 	font-family: "Fira Sans";
@@ -194,8 +188,7 @@ RESPONSIVITY
 	font-feature-settings: "zero" 1;
 	font-display: swap;
 	src:
-		url("./fonts/fira-sans-italic-weirdwaves.woff2") format("woff2"),
-		url("./fonts/fira-sans-italic-weirdwaves.woff") format("woff");
+		url("./fonts/fira-sans-italic-weirdwaves.woff2") format("woff2");
 }
 @font-face {
 	font-family: "Fira Sans";
@@ -203,8 +196,7 @@ RESPONSIVITY
 	font-style: italic;
 	font-display: swap;
 	src:
-		url("./fonts/fira-sans-bold-italic-weirdwaves.woff2") format("woff2"),
-		url("./fonts/fira-sans-bold-italic-weirdwaves.woff") format("woff");
+		url("./fonts/fira-sans-bold-italic-weirdwaves.woff2") format("woff2");
 }
 
 
