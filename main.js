@@ -565,11 +565,8 @@ function pressButton(button) {
 
 // update setting and setting buttons according to chosen value
 function updateSetting(setting, value) {
-	const oldButton = page[setting + "Buttons"].querySelector("[data-" + setting + '="' + styles[setting] + '"]'),
-	newButton = page[setting + "Buttons"].querySelector("[data-" + setting + '="' + value + '"]');
-
-	unpressButton(oldButton);
-	pressButton(newButton);
+	unpressButton(page[setting + "Buttons"].querySelector("[data-" + setting + '="' + styles[setting] + '"]'));
+	pressButton(page[setting + "Buttons"].querySelector("[data-" + setting + '="' + value + '"]'));
 
 	document.body.classList.replace(setting + "-" + styles[setting], setting + "-" + value);
 	styles[setting] = value;
