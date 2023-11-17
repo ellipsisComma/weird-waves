@@ -594,17 +594,17 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 	SECTIONS
 ============= */
 
-#page-sections > div {
+#page-sections > * {
 	display: none;
 	margin-block-end: 1em;
 }
 #page-sections > :last-child {
 	display: block;
 }
-#page-sections > :is(div:target, div:has(:target)) {
+#page-sections > :is(:target, :has(:target)) {
 	display: block;
 }
-#page-sections > :is(div:target, div:has(:target)) ~ :last-child {
+#page-sections > :is(:target, :has(:target)) ~ :last-child {
 	display: none;
 }
 
@@ -915,8 +915,7 @@ use[href="#svg-toggle-tick"] {
 @media (min-width: 600px) {
 	/* RADIO */
 	#controls {
-		grid-template: 
-			"	seek-controls	show-controls	audio-controls	";
+		grid-template: unset;
 		grid-template-columns: auto min-content min-content;
 		column-gap: calc(var(--gap-size) * 3);
 	}
