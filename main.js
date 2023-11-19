@@ -671,7 +671,7 @@ series.blurb +
 	// render archive links and archive, then add delegated click-events for add-series and open all content notes if user setting applies
 	document.getElementById("archive-series-links").innerHTML = archiveLinksHTML;
 	page.seriesList.innerHTML = archiveHTML;
-	page.seriesList.addEventListener("click", (event) => {
+	page.seriesList.addEventListener("click", () => {
 		if (!event.target.getAttribute("disabled")) {
 			switch (event.target.dataset.action) {
 			case "add-series": addSeries(event.target.dataset.target); break;
@@ -761,7 +761,7 @@ document.getElementById("shuffle-button").addEventListener("click", shufflePlayl
 page.clearButton.addEventListener("click", revealClearPlaylistControls);
 document.getElementById("clear-cancel-button").addEventListener("click", hideClearPlaylistControls);
 document.getElementById("clear-confirm-button").addEventListener("click", clearPlaylist);
-page.playlist.addEventListener("click", (event) => {
+page.playlist.addEventListener("click", () => {
 	switch (event.target.dataset.action) {
 	case "move-up": moveShow(event.target.dataset.target, -1); break;
 	case "remove": removeShow(event.target.dataset.target); break;
@@ -781,10 +781,10 @@ document.getElementById("auto-play-toggle").addEventListener("click", toggleAuto
 document.getElementById("content-notes-toggle").addEventListener("click", toggleContentNotes);
 
 // settings interface events (styling)
-page.themeButtons.addEventListener("click", (event) => {
+page.themeButtons.addEventListener("click", () => {
 	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchTheme(event.target.dataset.theme);
 });
-page.fontButtons.addEventListener("click", (event) => {
+page.fontButtons.addEventListener("click", () => {
 	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchFont(event.target.dataset.font);
 });
 
