@@ -718,6 +718,9 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 	margin-block-start: 0.3em;
 	font-size: 0.75em;
 }
+.series-source::before {
+	content: "source: ";
+}
 .show-list {
 	list-style-type: none;
 	margin-inline: var(--gap-size);

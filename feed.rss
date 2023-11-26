@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2023-11-26</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?105</guid>
+			<description>Added download links for all shows in the Archive (and did the final major behind-the-scenes changes to how the Archive's built).</description>
+			<pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2023-11-01</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?104</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?103</guid>
 			<description>The code-blocks in the Streaming section are simpler now—no buttons, but if you click anywhere in the code-block it selects all the contents.</description>
 			<pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2023-10-27</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?102</guid>
-			<description>Removed the News Archive (it was mostly-useless info at this point in time anyway, just old records of when I added/removed shows and noted minor features/bugfixes); changed how playlist export works so instead of the textbox automatically filling with your playlist's show IDs on any change you need to click the "Export" button to load the list into the textbox; replaced the hacky links to individual series in the Archive with actual links (and a polyfill for browsers that don't yet support the :has() selector), and did a MAJOR overhaul of the codebase that mostly isn't apparent from the front. This RSS feed is now the only place where news updates will be written (if there even are any more regular news updates—I think that's pretty unlikely). Any future news updates'll probably be just me adding some new shows now and then, tweaking content notes, or updating the info about which shows are known/possible copyright risks on streaming services.</description>
-			<pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>

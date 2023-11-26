@@ -158,28 +158,30 @@
 
 
 <div id="html-templates">
+	<!--nav-->
 	<template id="nav-link-template">
 		<li>
-			<a>
-				<svg class="svg-icon" viewBox="0 0 24 24"><use /></svg>
+			<a href="">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="" /></svg>
 				<span></span>
 			</a>
 		</li>
 	</template>
+	<!--booth-->
 	<template id="show-position-controls-template">
 		<ul class="show-position-controls icon-button-set">
 			<li>
-				<button class="push-button" type="button" data-action="move-up">
+				<button class="push-button" type="button" data-action="move-up" data-target="">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="remove">
+				<button class="push-button" type="button" data-action="remove" data-target="">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="move-down">
+				<button class="push-button" type="button" data-action="move-down" data-target="">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg>
 				</button>
 			</li>
@@ -189,6 +191,36 @@
 		<p>Invalid show ID(s):</p>
 		<ul></ul>
 	</template>
+	<!--archive-->
+	<template id="archive-series-template">
+		<li id="">
+			<header>
+				<h3 class="series-heading"></h3>
+				<div class="series-content">
+					<p class="series-blurb"></p>
+					<p class="series-source"></p>
+				</div>
+				<button class="push-button" type="button" data-target="" data-action="add-series">Add series to playlist</button>
+			</header>
+			<ol class="show-list"></ol>
+		</li>
+	</template>
+	<template id="archive-show-template">
+		<li id="" data-duration="">
+			<div class="show-info">
+				<h4 class="show-heading"></h4>
+				<div class="show-content">
+					<p class="show-blurb"></p>
+					<details class="content-notes">
+						<summary>Content notes</summary>
+						<span></span>
+					</details>
+				</div>
+			</div>
+			<button class="push-button" type="button" data-target="" data-action="add-show" aria-pressed="false">Add to playlist</button> or <a class="show-download" href="">Download</a>
+		</li>
+	</template>
+	<!--settings-->
 	<template id="toggle-template">
 		<svg class="svg-icon" viewBox="0 0 48 24">
 			<use href="#svg-toggle-track" />
@@ -202,7 +234,7 @@
 	</template>
 	<template id="theme-button-template">
 		<li>
-			<button class="push-button" type="button" aria-pressed="false">
+			<button class="push-button" type="button" data-theme="" aria-pressed="false">
 				<span class="palette">
 					<span style="background-color:var(--fore-colour)"></span>
 					<span style="background-color:var(--back-colour)"></span>
@@ -215,7 +247,7 @@
 	</template>
 	<template id="font-button-template">
 		<li>
-			<button class="push-button" type="button" style="font-family:var(--font-stack);" aria-pressed="false"></button>
+			<button class="push-button" type="button" data-font="" style="font-family:var(--font-stack);" aria-pressed="false"></button>
 		</li>
 	</template>
 </div><!--#html-templates end-->
@@ -519,6 +551,6 @@
 
 
 
-<script src="./main.js?v=2023-11-19"></script>
+<script src="./main.js?v=2023-11-26"></script>
 </body>
 </html>
