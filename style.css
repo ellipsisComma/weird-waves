@@ -414,7 +414,7 @@ h2.show-heading {
 }
 #controls {
 	display: grid;
-	grid-template: 
+	grid-template:
 		"	seek-controls	seek-controls	"
 		"	show-controls	audio-controls	";
 	grid-template-columns: auto min-content;
@@ -1001,7 +1001,7 @@ use[href="#svg-toggle-tick"] {
 	}
 	#controls {
 		margin: var(--gap-size);
-		grid-template: 
+		grid-template:
 			"	seek-controls	seek-controls	"
 			"	show-controls	audio-controls	";
 		grid-template-columns: auto min-content;

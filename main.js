@@ -4,7 +4,7 @@
 SCRIPT CONTROLS: an interface to change the app's behaviour (only really useful if running your own)
 PARAMETERS: internal parameters (probably don't need to be changed)
 FUNCTIONS
-	UTILITY: general and misc. applications	
+	UTILITY: general and misc. applications
 	PLAYLIST: building and altering the playlist
 	SHOWS: adding, moving, removing, and loading shows
 	RADIO: audio interface
