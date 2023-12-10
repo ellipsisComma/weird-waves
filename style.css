@@ -372,9 +372,6 @@ button * {
 	animation-timing-function: linear;
 }
 @keyframes spinner {
-	from {
-		transform: rotate(0turn);
-	}
 	to {
 		transform: rotate(1turn);
 	}
