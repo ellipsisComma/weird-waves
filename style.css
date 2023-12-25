@@ -590,10 +590,12 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 #page-sections > :last-child {
 	display: block;
 }
-#page-sections > :is(:target, :has(:target)) {
+#page-sections > :target,
+#page-sections > :has(:target) {
 	display: block;
 }
-#page-sections > :is(:target, :has(:target)) ~ :last-child {
+#page-sections > :target ~ :last-child,
+#page-sections > :has(:target) ~ :last-child {
 	display: none;
 }
 

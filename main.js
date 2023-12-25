@@ -1,4 +1,4 @@
-/*jshint esversion: 6*/
+/*jshint esversion: 11*/
 
 /*
 SCRIPT CONTROLS: an interface to change the app's behaviour (only really useful if running your own)
@@ -176,28 +176,23 @@ UTILITY
 // add an object of attributes to an Element (excluding class for practical reasons)
 Element.prototype.setAttributes = function (attrs) {
 	for (const [attr, value] of Object.entries(attrs)) this.setAttribute(attr, value);
-}
+};
 
 // remove an array of attributes from an Element
 Element.prototype.removeAttributes = function (attrs) {
 	for (const attr of attrs) this.removeAttribute(attr);
-}
+};
 
 // set a string to be an HTML element's innerHTML or textContent depending on whether it includes HTML entities, tags, and/or comments
 HTMLElement.prototype.setContent = function (text) {
 	if (text.match(/&#?\w+;/) || text.match(/<[a-z]|<\w+>|\/>|<\//) || text.match(/<!--/)) this.innerHTML = text;
 	else this.textContent = text;
-}
-
-// pad single-digit second or minute numbers with a leading 0
-function padTime(timeNum) {
-	return (timeNum < 10) ? "0" + timeNum : String(timeNum);
-}
+};
 
 // take in a time in seconds (can be a non-integer) and output a timestamp in minutes and seconds
 function setTimestampFromSeconds(element, time) {
-	const minutes = padTime(Math.floor((time % 3600) / 60)),
-	seconds = padTime(Math.floor(time % 60));
+	const minutes = Math.floor((time % 3600) / 60).toString().padStart(2, "0"),
+	seconds = Math.floor(time % 60).toString().padStart(2, "0");
 
 	element.innerText = minutes + ":" + seconds;
 	element.setAttribute("datetime", "00:" + minutes + ":" + seconds);
@@ -211,7 +206,7 @@ NAVIGATION
 function navigateToSection() {
 	// find section that hash target is or is inside (use querySelector, not getElementById, because it can directly take window.location.hash instead of having to remove #)
 	const section = document.querySelector(window.location.hash)?.closest("#page-sections > *");
-
+console.log(section);
 	// if the targeted section exists, switch aria-current to target's nav-link and update title accordingly, else return to default page title
 	if (section) {
 		const navLink = document.querySelector('nav [href="#' + section.id + '"]');
@@ -618,7 +613,7 @@ function buildNavLinks() {
 
 		for (const link of links) {
 			list.appendChild(templateHTML.navLink.content.cloneNode(true));
-			newLink = list.lastElementChild.firstElementChild;
+			const newLink = list.lastElementChild.firstElementChild;
 
 			newLink.href = link.href ?? "#" + link.code;
 			newLink.setAttributes(link.attrs ?? {});
@@ -640,7 +635,6 @@ function buildArchive() {
 		"shows": 0,
 		"duration": 0
 	};
-	let archiveLinksHTML = "";
 
 	for (const series of archive) {
 		stats.shows += series.shows.length;
@@ -664,8 +658,7 @@ function buildArchive() {
 		for (const show of series.shows) {
 			stats.duration += show.duration;
 
-			const id = series.code + "-" + show.code,
-			copyrightCategory = series.copyrightSafe ? "safe" : "unsafe";
+			const id = series.code + "-" + show.code;
 
 			showIDSets.all.any.push(id);
 			if (series.copyrightSafe) showIDSets.all.safe.push(id);
@@ -675,7 +668,7 @@ function buildArchive() {
 
 			// add show details to series' show list
 			newSeriesShows.appendChild(templateHTML.archiveShow.content.cloneNode(true));
-			newShow = newSeriesShows.lastElementChild;
+			const newShow = newSeriesShows.lastElementChild;
 			newShow.id = id;
 			newShow.dataset.duration = show.duration;
 			newShow.querySelector(".show-heading").setContent(show.heading);
@@ -724,7 +717,6 @@ function buildToggles() {
 
 // build out theme buttons with names, codes, and demo palettes
 function buildThemeButtons() {
-	const colours = ["fore", "back", "hot", "cold"];
 	for (const theme of styleOptions.themes) {
 		page.themeButtons.appendChild(templateHTML.themeButton.content.cloneNode(true));
 
@@ -845,8 +837,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// clear out setup variables
 	archive.length = 0;
-	for (const key of Object.keys(styleOptions)) delete styleOptions[key];
-	for (const key of Object.keys(navLinks)) delete navLinks[key];
+	for (const obj of [styleOptions, navLinks]) for (const key of Object.keys(obj)) delete obj[key];
 
 /* ----------------
 POLYFILL FOR :HAS()
