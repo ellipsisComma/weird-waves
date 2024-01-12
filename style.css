@@ -909,8 +909,8 @@ use[href="#svg-toggle-tick"] {
 @media (min-width: 600px) {
 	/* RADIO */
 	#controls {
-		grid-template: unset;
-		grid-template-columns: auto min-content min-content;
+		grid-template: 
+			"seek-controls	show-controls	audio-controls" / auto min-content min-content;
 		column-gap: calc(var(--gap-size) * 3);
 	}
 
