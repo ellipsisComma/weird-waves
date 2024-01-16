@@ -296,10 +296,10 @@ summary::-webkit-details-marker {
 	color: var(--cold-colour);
 }
 .content-notes > summary::after {
-	content: "(click to show)";
+	content: " (click to show)";
 }
 .content-notes[open] > summary::after {
-	content: "(click to hide):\00a0";
+	content: " (click to hide):\00a0";
 }
 .svg-icon {
 	display: block;
