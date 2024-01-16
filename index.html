@@ -17,7 +17,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-01-12" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-01-16" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -235,12 +235,7 @@
 	<template id="theme-button-template">
 		<li>
 			<button class="push-button" type="button" data-theme="" aria-pressed="false">
-				<span class="palette">
-					<span style="background-color:var(--fore-colour)"></span>
-					<span style="background-color:var(--back-colour)"></span>
-					<span style="background-color:var(--hot-colour)"></span>
-					<span style="background-color:var(--cold-colour)"></span>
-				</span>
+				<span class="palette"></span>
 				<span></span>
 			</button>
 		</li>
@@ -390,27 +385,23 @@
 	<code class="code-block">#radio {
 	margin-block: 100vh;
 }</code>
-	<h3>Customising the theme</h3>
-	<p>Set the theme to &ldquo;Dark&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
+	<h3>Customising the theme and font</h3>
+	<p>Set the theme to &ldquo;Dark&rdquo; and font to &ldquo;Serif&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
 	<code class="code-block">.theme-dark {
 	--foreground-colour: [colour];
 	--background-colour: [colour];
 	--hot-detail-colour: [colour];
 	--cold-detail-colour: [colour];
-}</code>
-	<p>Replace <code>[colour]</code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr>HTML</abbr> colour names, etc.</p>
-	<h3>Customising the font</h3>
-	<p>Set the font to &ldquo;Serif&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
-	<code class="code-block">.font-serif {
+}
+.font-serif {
 	--font-stack: [font];
 }</code>
-	<p>Replace <code>[font]</code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
+	<p>Replace <code>[colour]</code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr>HTML</abbr> colour names, etc. Replace <code>[font]</code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
 	<h3>Copyright?</h3>
-	<p>All LibriVox recordings (the LibriVox selection and several other series in the Archive) are in the public domain.</p>
-	<p>The copyright status of old radio broadcasts is murky, but they're <i lang="la">de facto</i> public domain&mdash;any person or organisation who could press a claim is long dead or gone. This isn't legal advice, but&hellip; nobody (<abbr title="British Broadcasting Corporation">BBC</abbr> aside) cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
+	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr title="Clark Ashton Smith">CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<button id="copyright-safety-toggle" class="toggle" type="button">exclude copyright-unsafe material</button>
-	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are confirmed to be muted on twitch due to copyright claims. The others are included as possible, but unconfirmed copyright risks.</p>
+	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on twitch due to copyright claims. The others are included as possible, but unconfirmed copyright risks.</p>
 </div><!--#streaming end-->
 
 
@@ -467,12 +458,10 @@
 	<ul class="flex-list">
 		<li><a href="https://www.djfullmoon.com/" rel="external">&#127765;</a></li>
 		<li><a href="https://qc4.fiatlux.tk:8020/soyouz.aac" rel="external">Radio Soyouz</a> (<a href="https://qc4.fiatlux.tk:8020/soyouz.hq.aac" rel="external">128kbps</a>)</li>
-		<li><a href="https://wmbu.net/" rel="external"><img src="./images/misc/asahibotan2.png" alt="Asahi Denpa"></a></li>
-		<li><a href="https://bunglepaws.neocities.org/radio_new_vegas_gpt3.html" rel="external">Radio New Vegas <abbr title="Generative Pre-Trained Transformer">GPT</abbr></a></li>
-		<li><a href="https://kingposs.com/radio.html" rel="external"><img src="./images/misc/PossBadge.gif" alt="KingPossum (KP) Radio"></a></li>
+		<li><a href="https://wmbu.net/" rel="external">Wave <abbr title="Mary Baldwin University">MBU</abbr></a></li>
+		<li><a href="https://kingposs.com/radio.html" rel="external"><abbr>KP</abbr> Radio</a></li>
 		<li><a href="https://www.polushon.com/" rel="external">Polushon</a></li>
 		<li><a href="https://repetitivestrain.neocities.org/" rel="external">Repetitive Strain</a></li>
-		<li><a href="https://punc.neocities.org/" rel="external">PUNC</a></li>
 		<li><a href="https://www.radioisaforeigncountry.org/" rel="external">Radio is a Foreign Country</a></li>
 		<li><a href="https://nolife-radio.com/" rel="external">NoLife-Radio</a></li>
 	</ul>
@@ -500,12 +489,12 @@
 	</ul>
 	<h3>Anything else</h3>
 	<ul class="flex-list">
-		<li><a href="https://whitedesert.neocities.org/" rel="external"><img src="./images/misc/whitedesertbutton.png" alt="White Desert"></a></li>
+		<li><a href="https://whitedesert.neocities.org/" rel="external">White Desert</a></li>
 		<li><a href="https://homevideohorrors.com/" rel="external">Home Video Horrors</a></li>
-		<li><a href="https://horrorgifs.neocities.org/" rel="external"><img src="./images/misc/hgs1.gif" alt="The Horror Gif Necronomicon"></a></li>
-		<li><a href="https://ngmi.neocities.org/" rel="external"><img src="./images/misc/ngmibutton.gif" alt="N G M I"></a></li>
+		<li><a href="https://horrorgifs.neocities.org/" rel="external">The Horror Gif Necronomicon</a></li>
+		<li><a href="https://ngmi.neocities.org/" rel="external"><abbr title="Not Gonna Make It Work">NGMI</abbr>.work</a></li>
 		<li><a href="https://dreamsdoors.neocities.org/" rel="external">Beyond Dream's Doors</a></li>
-		<li><cite><a href="https://pseudopod.org/" rel="external">PseudoPod</a></cite></li>
+		<li><a href="https://pseudopod.org/" rel="external">PseudoPod</a></li>
 		<li><a href="https://doumyakutosi.tumblr.com/" rel="external">guru</a></li>
 		<li><a href="https://lairdbarronmappingproject.com/" rel="external">Laird Barron Mapping Project</a></li>
 		<li><cite><a href="https://watashi.neocities.org/" rel="external">Watashi</a></cite></li>
@@ -515,11 +504,6 @@
 		<li><cite><a href="https://puparium.neocities.org/" rel="external">Puparium</a></cite></li>
 		<li><cite><a href="https://gatewaytodarkness.neocities.org/" rel="external">Gateway to Darkness</a></cite></li>
 		<li><cite><a href="https://meatfang.neocities.org/" rel="external">meatfang</a></cite></li>
-	</ul>
-	<h3>Weird Waves buttons</h3>
-	<ul id="weirdwaves-button-list" class="flex-list">
-		<li><img id="weird-waves-button-png" src="./images/buttons/serif/dark/weird-waves-button.png" alt="Weird Waves button, 88&times;31px PNG"><br>88&times;31px <abbr title="Portable Network Graphics">PNG</abbr></li>
-		<li><img id="weird-waves-button-svg" src="./images/buttons/serif/dark/weird-waves-button.svg" alt="Weird Waves button, scalable vector graphics format" height="31"><br><abbr title="Scalable Vector Graphics">SVG</abbr></li>
 	</ul>
 </div><!--#links end-->
 
@@ -551,6 +535,6 @@
 
 
 
-<script src="./main.js?v=2023-12-25"></script>
+<script src="./main.js?v=2024-01-16"></script>
 </body>
 </html>

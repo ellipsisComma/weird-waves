@@ -590,12 +590,12 @@ nav a[href^="#"]:is(:link, :visited, :active) {
 #page-sections > :last-child {
 	display: block;
 }
-#page-sections > :target,
-#page-sections > :has(:target) {
+#page-sections > div:target,
+#page-sections > div:has(:target) {
 	display: block;
 }
-#page-sections > :target ~ :last-child,
-#page-sections > :has(:target) ~ :last-child {
+#page-sections > div:target ~ :last-child,
+#page-sections > div:has(:target) ~ :last-child {
 	display: none;
 }
 
@@ -849,15 +849,16 @@ use[href="#svg-toggle-tick"] {
 [aria-pressed="true"] use[href="#svg-toggle-tick"] {
 	opacity: 1;
 }
-.palette {
+#theme-buttons button {
 	display: flex;
-	inline-size: 12em;
-	margin-block-end: 0.5em;
-	border: inherit;
+	flex-direction: column;
+	gap: 0.5em;
 }
-.palette > span {
+.palette {
 	block-size: 1em;
-	flex-grow: 1;
+	inline-size: 12em;
+	border: inherit;
+	background-image: linear-gradient(90deg, var(--fore-colour) 25%, var(--back-colour) 25% 50%, var(--hot-colour) 50% 75%, var(--cold-colour) 75%);
 }
 
 

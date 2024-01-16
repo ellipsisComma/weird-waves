@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-01-15</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?108</guid>
+			<description>Fixed the same damn bug from Christmas. For some reason the offline copy of the site worked fine, but the online version didn't, despite being exactly the same code run by exactly the same web browser. This should now be fixed. I've also made a few other tweaks, the most easily-seen being that I've cut the button images (both the site's own buttons and the few other buttons in the Links section).</description>
+			<pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-01-12</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?107</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?106</guid>
 			<description>Fixed a bizarre bug that only affected this site and basically stopped the site from properly navigating to each section unless you refreshed the page first. Now back to Christmas...</description>
 			<pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2023-11-26</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?105</guid>
-			<description>Added download links for all shows in the Archive (and did the final major behind-the-scenes changes to how the Archive's built).</description>
-			<pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>

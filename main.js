@@ -29,7 +29,6 @@ Known issues (not major):
 // relative paths of the show audio folder, favicon, and Weird Waves button folder, and the file extension for show files
 const paths = {
 	"show": "./audio/shows/",
-	"button": "./images/buttons/",
 	"favicon": "./images/favicons/"
 },
 showFileExtension = ".mp3";
@@ -124,11 +123,7 @@ const page = {
 
 	// settings
 	"themeButtons": "theme-buttons",
-	"fontButtons": "font-buttons",
-
-	// links
-	"weirdWavesButtonPNG": "weird-waves-button-png",
-	"weirdWavesButtonSVG": "weird-waves-button-svg"
+	"fontButtons": "font-buttons"
 },
 templateHTML = {
 	// nav
@@ -206,7 +201,7 @@ NAVIGATION
 function navigateToSection() {
 	// find section that hash target is or is inside (use querySelector, not getElementById, because it can directly take window.location.hash instead of having to remove #)
 	const section = document.querySelector(window.location.hash)?.closest("#page-sections > *");
-console.log(section);
+
 	// if the targeted section exists, switch aria-current to target's nav-link and update title accordingly, else return to default page title
 	if (section) {
 		const navLink = document.querySelector('nav [href="#' + section.id + '"]');
@@ -584,21 +579,11 @@ function switchTheme(theme) {
 
 	page.SVGFavicon.href = paths.favicon + theme + "/favicon.svg";
 	page.icoFavicon.href = paths.favicon + theme + "/favicon.ico";
-
-	updateSiteButtons();
 }
 
 // switch between different fonts
 function switchFont(font) {
 	updateSetting("font", font);
-
-	updateSiteButtons();
-}
-
-// function update weird waves site buttons
-function updateSiteButtons() {
-	page.weirdWavesButtonPNG.src = paths.button + styles.font + "/" + styles.theme + "/weird-waves-button.png";
-	page.weirdWavesButtonSVG.src = paths.button + styles.font + "/" + styles.theme + "/weird-waves-button.svg";
 }
 
 /* --------------
@@ -676,7 +661,7 @@ function buildArchive() {
 
 			// if show has content notes, add them to show-info, otherwise remove empty content notes element
 			const contentNotes = newShow.querySelector(".content-notes");
-			if (show.shotes) {
+			if (show.notes) {
 				contentNotes.open = settings.notesOpen;
 				contentNotes.querySelector("span").setContent(show.notes);
 			} else contentNotes.remove();
@@ -699,7 +684,7 @@ function buildArchive() {
 	document.getElementById("loading-spinner-archive")?.remove();
 	document.getElementById("archive-contents").removeAttribute("hidden");
 
-// add series stats to stats-list
+	// add series stats to stats-list
 	document.getElementById("loading-spinner-stats")?.remove();
 	document.getElementById("stats-sources").textContent = stats.series;
 	document.getElementById("stats-shows").textContent = stats.shows;
@@ -955,7 +940,7 @@ const archive = [
 	{
 	"code": "07-Oil",
 	"heading": "#7: <cite>Oil of Dog</cite>",
-	"blurb": "A young man helps his father make <i>dog oil</i> and his mother dispose of <i>unwanted babies</i>&mdash;and combines his duties to disastrous effect. Adapted from a story by Ambrose Bierce.",
+	"blurb": "A young man helps his father make dog oil and his mother dispose of unwanted babies&mdash;and combines his duties to disastrous effect. Adapted from a story by Ambrose Bierce.",
 	"notes": "animal abuse, infanticide, kidnapping, murder-suicide",
 	"duration": 793,
 	"banger": true
@@ -1049,7 +1034,7 @@ const archive = [
 	{
 	"code": "X5-Proof_Crowd",
 	"heading": "X#5: <cite>Proof Positive</cite> and <cite>The Man in the Crowd</cite>",
-	"blurb": "An esoteric researcher shows <q>proof positive</q> of life after death. A people-watcher stalks an unreadable man. Adapted from stories by Graham Greene and Edgar Allen Poe.",
+	"blurb": "An esoteric researcher shows proof positive of life after death. A people-watcher stalks an unreadable man. Adapted from stories by Graham Greene and Edgar Allen Poe.",
 	"duration": 1138
 	}
 ]
@@ -1216,7 +1201,7 @@ const archive = [
 	{
 	"code": "15-Moon",
 	"heading": "#15: <cite>The Man in the Moon</cite>",
-	"blurb": "The <abbr>US</abbr> Missing Persons Bureau receives calls for help&mdash;beamed straight from the moon.",
+	"blurb": "The Missing Persons Bureau receives calls for help&mdash;beamed straight from the moon.",
 	"notes": "abduction, betrayal, food adverts, gunshots (20:00), sanism",
 	"duration": 1813
 	},
@@ -1237,7 +1222,7 @@ const archive = [
 	{
 	"code": "25-Sanitorium",
 	"heading": "#25: <cite>Dr. Grimshaw's Sanitorium</cite>",
-	"blurb": "A patient vanishes from a sanitarium&mdash;the doctors say he's dead, but a <abbr title=\"private investigator\">PI</abbr>'s not so sure. Adapted from a story by Fletcher Pratt.",
+	"blurb": "A patient vanishes from a sanitorium&mdash;the doctors say he's dead, but a detective's not so sure. Adapted from a story by Fletcher Pratt.",
 	"notes": "ableism, alcoholism, betrayal, animal attack, car crash, human experiments, injection, mention of suicide, Naziism, non-consensual surgery, sanism",
 	"duration": 1823
 	},
@@ -1800,7 +1785,7 @@ const archive = [
 	{
 	"code": "A040_A072_C09-Chicken_Dark_Exploded",
 	"heading": "A#40, A#72, and C#9: <cite>Lights Out</cite> fragments",
-	"blurb": "A trio of short <cite>Lights Out</cite> episodes: <cite>Chicken Heart</cite>, <cite>The Dark</cite>, and <cite>The Day the Sun Exploded</cite>.",
+	"blurb": "A trio of short pieces: <cite>Chicken Heart</cite>, <cite>The Dark</cite>, and <cite>The Day the Sun Exploded</cite>.",
 	"notes": "body horror, plane crash, racism",
 	"duration": 1713,
 	"banger": true
@@ -2010,7 +1995,7 @@ const archive = [
 	{
 	"code": "082-Plot_Express",
 	"heading": "#82: <cite>The Plot is the Thing</cite> and <cite>Midnight Express</cite>",
-	"blurb": "Doctors lobotomise a <abbr title=\"television\">TV</abbr>-obsessed woman, with bizarre results. A young man meets his childhood terror. Written by Robert Block and Alfred Noyes.",
+	"blurb": "Doctors lobotomise a film-obsessed woman, with bizarre results. A young man meets his childhood terror. Written by Robert Block and Alfred Noyes.",
 	"notes": "derealisation, injection, institutionalisation, lobotomy, nightmares, racism",
 	"duration": 1804,
 	"banger": true
@@ -2360,14 +2345,14 @@ const archive = [
 	{
 	"code": "001-Nothing",
 	"heading": "#1: <cite>Nothing Behind the Door</cite>",
-	"blurb": "Bank robbers try to hide the money in a mountain shed that contains nothing. Literally <em>nothing</em>.",
+	"blurb": "Bank robbers try to hide the money in a mountain shed that contains&mdash;literally&mdash;nothing.",
 	"duration": 1770,
 	"banger": true
 	},
 	{
 	"code": "006-Tomorrow",
 	"heading": "#6: <cite>I Remember Tomorrow</cite>",
-	"blurb": "A time-traveller explains why three criminals <em>must</em> be stopped&mdash;and why <em>you</em> will stop them.",
+	"blurb": "A time-traveller explains why three criminals must be stopped&mdash;and why <em>you</em> will stop them.",
 	"notes": "alcohol, betrayal, gunshots (26:16)",
 	"duration": 1688
 	},
@@ -2381,7 +2366,7 @@ const archive = [
 	{
 	"code": "009-Mile",
 	"heading": "#9: <cite>A Mile High and a Mile Deep</cite> (script read)",
-	"blurb": "The Earth takes its due in the mines far below Butte, Montana&mdash;the city <q>a mile high and a mile deep</q>. An amateur reading of this lost episode's script.",
+	"blurb": "The Earth takes its due in the mines far below Butte, Montana&mdash;the city a mile high and a mile deep. An amateur reading of this lost episode's script.",
 	"notes": "claustrophobia, darkness",
 	"duration": 1615,
 	"banger": true
@@ -2446,7 +2431,7 @@ const archive = [
 	{
 	"code": "040-Send",
 	"heading": "#40: <cite>Never Send to Know</cite>",
-	"blurb": "A ghost hires a skeptical <abbr>PI</abbr> to solve his own murder.",
+	"blurb": "A ghost hires a detective to solve his own murder.",
 	"notes": "blood, gunshot (2:20), implied suicide",
 	"duration": 1715
 	},
@@ -2585,7 +2570,7 @@ const archive = [
 	{
 	"code": "088-Ideas",
 	"heading": "#88: <cite>Where Do You Get Your Ideas?</cite>",
-	"blurb": "Wyllis Cooper, the series' writer, meets a barfly who wonders where he gets his ideas&mdash;and <em>insists</em> Cooper listens to his own strange story.",
+	"blurb": "Wyllis Cooper, the series' writer, meets a barfly who wonders where he gets his ideas&mdash;and insists Cooper listens to his own strange story.",
 	"notes": "gunshot (12:25)",
 	"duration": 1499
 	},
@@ -2607,7 +2592,7 @@ const archive = [
 	{
 	"code": "100-Morning",
 	"heading": "#100: <cite>The Little Morning</cite>",
-	"blurb": "A hitch-hiker returns to his old home taht burnt down with his beloved inside to sing the song they promised to duet on every birthday.",
+	"blurb": "A hitch-hiker returns to his old home that burnt down with his beloved inside to sing the song they promised to duet on every birthday.",
 	"notes": "drowning, suicide",
 	"duration": 1706
 	},
@@ -2767,7 +2752,7 @@ const archive = [
 	{
 	"code": "011-Hitch",
 	"heading": "#11: <cite>The Hitch-Hiker</cite>",
-	"blurb": "A man driving across the <abbr>US</abbr> sees the same hitch-hiker calling for him again and again&hellip; and again&hellip; Written by Lucille Fletcher, introduction by and starring Orson Welles.",
+	"blurb": "A man sees the same hitch-hiker calling for him again and again&hellip; and again&hellip; Written by Lucille Fletcher, introduction by and starring Orson Welles.",
 	"notes": "car crash, obsession, traffic death",
 	"duration": 1752,
 	"banger": true
@@ -2966,7 +2951,7 @@ const archive = [
 	{
 	"code": "154-Honey",
 	"heading": "#154: <cite>The Land of Milk and Honey</cite>",
-	"blurb": "A sinner ends up in heaven, where he gets all he ever wanted and never has to lift a finger&mdash;an exasperating paradise.",
+	"blurb": "A sinner ends up in heaven, where he gets all he ever wanted&mdash;an exasperating paradise.",
 	"notes": "alcohol, betrayal, gunshots (5:32, 17:08)",
 	"duration": 1249,
 	"banger": true
@@ -3040,7 +3025,7 @@ const archive = [
 	{
 	"code": "041-Bottle",
 	"heading": "#41: <cite>The Wonderful Bottle</cite>",
-	"blurb": "A tramp buys a bottle that grants any wish&mdash;but his soul's forfeit if he can't sell it for <em>less</em> than he paid for it. Adapted from a story by Robert Louis Stevenson.",
+	"blurb": "A tramp buys a bottle that grants any wish&mdash;but his soul's forfeit unless he sells it for less than he paid. Adapted from a story by Robert Louis Stevenson.",
 	"notes": "leprosy, parental death",
 	"duration": 1775
 	},
@@ -3080,7 +3065,7 @@ const archive = [
 	{
 	"code": "037-Cave",
 	"heading": "#37: <cite>The Cave of Night</cite>",
-	"blurb": "The world unites to rescue an astronaut adrift in <q>the cave of night</q>&mdash;but he may not want to return. Adapted from a story by James E.&thinsp;Gunn.",
+	"blurb": "The world unites to rescue an astronaut adrift in the void&mdash;but he may not want to return. Adapted from a story by James E.&thinsp;Gunn.",
 	"notes": "suicide",
 	"duration": 1700,
 	"banger": true
@@ -3088,7 +3073,7 @@ const archive = [
 	{
 	"code": "039-Skulking",
 	"heading": "#39: <cite>Skulking Permit</cite>",
-	"blurb": "A utopian space colony cut off from Earth proves they're a model of Earth culture, including an official criminal. Adapted from a story by Robert Sheckley.",
+	"blurb": "A utopian space colony cut off from Earth proves it's a model of Earth culture, including an official criminal. Adapted from a story by Robert Sheckley.",
 	"notes": "gunshots (12:31, 22:07)",
 	"duration": 1738,
 	"banger": true

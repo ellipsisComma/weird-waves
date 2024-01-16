@@ -1,4 +1,4 @@
-/*jshint esversion: 6*/
+/*jshint esversion: 11*/
 
 // initialise user-selected (or default) site display settings
 const styles = JSON.parse(window.localStorage.getItem("styles")) ?? {};
