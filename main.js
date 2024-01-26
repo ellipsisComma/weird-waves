@@ -90,40 +90,40 @@ const navLinks = {
 // HTML elements (or templated HTML elements) and their IDs
 const page = {
 	// head
-	"title": document.querySelector("title"),
-	"SVGFavicon": document.querySelector('[rel~="icon"][href$=".svg"]'),
-	"icoFavicon": document.querySelector('[href$=".ico"]'),
+	"title": "title",
+	"SVGFavicon": '[rel~="icon"][href$=".svg"]',
+	"icoFavicon": '[href$=".ico"]',
 
 	// radio
-	"loadedShow": "loaded-show",
-	"controls": "controls",
-	"seekBar": "seek-bar",
-	"showTimeElapsed": "show-time-elapsed",
-	"showTimeTotal": "show-time-total",
-	"playButton": "play-button",
-	"skipButton": "skip-button",
-	"muteButton": "mute-button",
-	"volumeControl": "volume-control",
-	"audio": "show-audio",
+	"loadedShow": "#loaded-show",
+	"controls": "#controls",
+	"seekBar": "#seek-bar",
+	"showTimeElapsed": "#show-time-elapsed",
+	"showTimeTotal": "#show-time-total",
+	"playButton": "#play-button",
+	"skipButton": "#skip-button",
+	"muteButton": "#mute-button",
+	"volumeControl": "#volume-control",
+	"audio": "#show-audio",
 
 	// nav
-	"nav": document.querySelector("nav"),
+	"nav": "nav",
 
 	// booth
-	"playlist": "playlist",
-	"playlistControls": "playlist-controls",
-	"clearButton": "clear-button",
-	"clearPlaylistControls": "clear-playlist-controls",
-	"importExport": "import-export-data",
-	"importErrorMessage": "import-error-message",
+	"playlist": "#playlist",
+	"playlistControls": "#playlist-controls",
+	"clearButton": "#clear-button",
+	"clearPlaylistControls": "#clear-playlist-controls",
+	"importExport": "#import-export-data",
+	"importErrorMessage": "#import-error-message",
 
 	// archive
-	"seriesLinks": "archive-series-links",
-	"seriesList": "series-list",
+	"seriesLinks": "#archive-series-links",
+	"seriesList": "#series-list",
 
 	// settings
-	"themeButtons": "theme-buttons",
-	"fontButtons": "font-buttons"
+	"themeButtons": "#theme-buttons",
+	"fontButtons": "#font-buttons"
 },
 templateHTML = {
 	// nav
@@ -143,8 +143,9 @@ templateHTML = {
 	"fontButton": "font-button"
 };
 
-for (const [ref, element] of Object.entries(page)) if (typeof element === "string") page[ref] = document.getElementById(element);
-for (const [ref, element] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(element + "-template");
+// build out page and templateHTML objects
+for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelector(query);
+for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(id + "-template");
 
 // prepare playlist show IDs from storage (if there are any)
 let playlistIDs = window.localStorage.getItem("playlist") ? JSON.parse(window.localStorage.getItem("playlist")) : [];
@@ -823,32 +824,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	// clear out setup variables
 	archive.length = 0;
 	for (const obj of [styleOptions, navLinks]) for (const key of Object.keys(obj)) delete obj[key];
-
-/* ----------------
-POLYFILL FOR :HAS()
----------------- */
-
-	// build alternate set of links
-	function buildAltArchiveSeriesLinks() {
-		const links = document.querySelectorAll("#archive-series-links a");
-
-		for (let i = 0; i < links.length; i++) {
-			links[i].setAttribute("data-series", links[i].href.split("-")[1]);
-			links[i].href = "#archive";
-			links[i].addEventListener("click", () => setTimeout(scrollToSeries, 1, links[i].dataset.series));
-
-			page.seriesList.children[i].setAttribute("tabindex", "0");
-		}
-	}
-
-	// scroll to a series when clicking its link in the archive series nav list
-	function scrollToSeries(series) {
-		document.getElementById("archive-" + series).focus();
-		document.getElementById("archive-" + series).scrollIntoView(true);
-	}
-
-	// if browser doesn't support :has(:target) selector, replace series links with old hack
-	if (!CSS.supports("selector(:has(:target))")) buildAltArchiveSeriesLinks();
 });
 
 // on closing window/browser tab, record user settings and styles to localStorage
