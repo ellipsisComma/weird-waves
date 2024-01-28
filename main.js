@@ -578,8 +578,8 @@ function updateSetting(setting, value) {
 function switchTheme(theme) {
 	updateSetting("theme", theme);
 
-	page.SVGFavicon.href = paths.favicon + "favicon-" + theme + ".svg";
-	page.icoFavicon.href = paths.favicon + "favicon-" + theme + ".ico";
+	page.SVGFavicon.href = paths.favicon + theme + ".svg";
+	page.icoFavicon.href = paths.favicon + theme + ".ico";
 }
 
 // switch between different fonts

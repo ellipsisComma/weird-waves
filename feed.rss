@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-01-28</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?110</guid>
+			<description>Weird Waves is officially finished! There may be small future changes (e.g. adding new links to the Links section, like I just did now), but as a rule it's done.</description>
+			<pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-01-26</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?109</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?108</guid>
 			<description>Fixed the same damn bug from Christmas. For some reason the offline copy of the site worked fine, but the online version didn't, despite being exactly the same code run by exactly the same web browser. This should now be fixed. I've also made a few other tweaks, the most easily-seen being that I've cut the button images (both the site's own buttons and the few other buttons in the Links section).</description>
 			<pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2024-01-12</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?107</guid>
-			<description>Fixed a layout error in the radio the mid-width layout.</description>
-			<pubDate>Fri, 12 Jan 2024 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
