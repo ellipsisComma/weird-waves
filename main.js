@@ -839,6 +839,8 @@ window.addEventListener("unload", () => {
 	ARCHIVE
 ============ */
 
+// bitrate: constant 24kbps; sample rate: 22050Hz
+
 const archive = [
 {
 "code": "ByM",
@@ -1740,6 +1742,13 @@ const archive = [
 	"heading": "#48: <cite>Gaffer Death</cite>",
 	"blurb": "The German folktale telling of a doctor whose godfather is Death himself. Compiled by Charles John Tibbitts, read by Craig Campbell.",
 	"duration": 426
+	},
+	{
+	"code": "49-Yondo",
+	"heading": "#49: <cite>The Abominations of Yondo</cite>",
+	"blurb": "A prisoner is released into a wasteland haunted by wild demons and grotesques. Written by Clark Ashton Smith, read by Ben Tucker.",
+	"duration": 995,
+	"banger": true
 	}
 ]
 },

@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-02-18</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?111</guid>
+			<description>Added one new show: The Abominations of Yondo, by Clark Ashton Smith, in the LibriVox selection.</description>
+			<pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-01-28</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?110</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?109</guid>
 			<description>Firefox finally added support for the :has() selector last month so I can remove a polyfill for that (which I've wanted to do since the first few months of making Weird Waves). I was going to make a bunch of other changes to the code to bring it in line with my current standards, but then I realised I don't care and it doesn't matter because Weird Waves works as-is and I'd rather not waste my time.</description>
 			<pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2024-01-15</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?108</guid>
-			<description>Fixed the same damn bug from Christmas. For some reason the offline copy of the site worked fine, but the online version didn't, despite being exactly the same code run by exactly the same web browser. This should now be fixed. I've also made a few other tweaks, the most easily-seen being that I've cut the button images (both the site's own buttons and the few other buttons in the Links section).</description>
-			<pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
