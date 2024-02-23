@@ -827,7 +827,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // on closing window/browser tab, record user settings and styles to localStorage
-window.addEventListener("unload", () => {
+window.addEventListener("beforeunload", () => {
 	window.localStorage.setItem("playlist", JSON.stringify(playlistIDs));
 	window.localStorage.setItem("settings", JSON.stringify(settings));
 	window.localStorage.setItem("styles", JSON.stringify(styles));
