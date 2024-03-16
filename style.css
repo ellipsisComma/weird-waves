@@ -163,7 +163,6 @@ RESPONSIVITY
 	font-weight: normal;
 	font-style: normal;
 	font-variant-numeric: slashed-zero;
-	font-feature-settings: "zero" 1;
 	font-display: swap;
 	src: url("./fonts/fira-sans-regular-weirdwaves.woff2") format("woff2");
 }
@@ -179,7 +178,6 @@ RESPONSIVITY
 	font-weight: normal;
 	font-style: italic;
 	font-variant-numeric: slashed-zero;
-	font-feature-settings: "zero" 1;
 	font-display: swap;
 	src: url("./fonts/fira-sans-italic-weirdwaves.woff2") format("woff2");
 }
@@ -250,7 +248,6 @@ h3 + * {
 }
 time {
 	font-variant-numeric: tabular-nums;
-	font-feature-settings: "tnum" 1;
 }
 .flex-list {
 	display: flex;
