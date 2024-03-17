@@ -668,7 +668,6 @@ function buildArchive() {
 			} else contentNotes.remove();
 
 			newShow.querySelector('[data-action="add-show"]').dataset.target = id;
-			newShow.querySelector(".show-download").href = paths.show + id + showFileExtension;
 		}
 	}
 
