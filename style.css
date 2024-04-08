@@ -39,83 +39,83 @@ RESPONSIVITY
 	--line-width: 1px;
 }
 /* THEMES */
-.theme-dark {
+[data-theme="dark"] {
 	--fore-colour: #fdffdc;
 	--back-colour: #000627;
 	--hot-colour: #ff6767;
 	--cold-colour: #b9ab00;
 }
-.theme-goop {
+[data-theme="goop"] {
 	--fore-colour: #e0ffe0;
 	--back-colour: #000;
 	--hot-colour: #0a8;
 	--cold-colour: #8a0;
 }
-.theme-flame {
+[data-theme="flame"] {
 	--fore-colour: #f8f095;
 	--back-colour: #180000;
 	--hot-colour: #fe1;
 	--cold-colour: #ff6900;
 }
-.theme-plasm {
+[data-theme="plasm"] {
 	--fore-colour: #fff8ff;
 	--back-colour: #27003f;
 	--hot-colour: #0f7;
 	--cold-colour: #0df;
 }
-.theme-moss {
+[data-theme="moss"] {
 	--fore-colour: #def;
 	--back-colour: #234;
 	--hot-colour: #8f2;
 	--cold-colour: #a0dfa0;
 }
-.theme-darker {
+[data-theme="darker"] {
 	--fore-colour: #bbb;
 	--back-colour: #111;
 	--hot-colour: #fff;
 	--cold-colour: #fff;
 }
-.theme-light {
+[data-theme="light"] {
 	--fore-colour: #2a2a2a;
 	--back-colour: #fff;
 	--hot-colour: #b60000;
 	--cold-colour: #2a2aff;
 }
-.theme-wine {
+[data-theme="wine"] {
 	--fore-colour: #215;
 	--back-colour: #f8f0c7;
 	--hot-colour: #000;
 	--cold-colour: #a30000;
 }
-.theme-ash {
+[data-theme="ash"] {
 	--fore-colour: #33505a;
 	--back-colour: #f6f7f8;
 	--hot-colour: #d40;
 	--cold-colour: #000;
 }
-.theme-dust {
+[data-theme="dust"] {
 	--fore-colour: #56170e;
 	--back-colour: #fff;
 	--hot-colour: #da2c43;
 	--cold-colour: #404040;
 }
-.theme-mist {
+[data-theme="mist"] {
 	--fore-colour: #2d2d2d;
 	--back-colour: #f0faff;
 	--hot-colour: #005e6e;
 	--cold-colour: #545464;
 }
-.theme-silver {
+[data-theme="silver"] {
 	--fore-colour: #444;
 	--back-colour: #eee;
 	--hot-colour: #000;
 	--cold-colour: #000;
 }
 /* FONTS */
-.font-serif {
+[data-font="serif"] {
 	--font-stack: Bitter, Georgia, Garamond, "Times New Roman", Times, serif;
 }
-.font-sans {
+[data-font="sans"] {
 	--font-stack: "Fira Sans", Tahoma, Verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -331,6 +331,7 @@ button * {
 	border-style: solid;
 	border-color: var(--hot-colour);
 	box-shadow: 0 var(--control-depth) var(--hot-colour);
+	align-items: center;
 }
 .push-button:is(:active, [aria-pressed="true"]) {
 	position: relative;

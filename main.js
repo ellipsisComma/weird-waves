@@ -414,7 +414,7 @@ function loadShow() {
 		const show = page.playlist.firstElementChild;
 
 		page.audio.src = paths.show + show.dataset.id + showFileExtension;
-		page.audio.setAttribute("data-duration", show.dataset.duration);
+		page.audio.dataset.duration = show.dataset.duration;
 
 		const loadedShowHeading = page.loadedShow.appendChild(document.createElement("h2"));
 		loadedShowHeading.classList.add("show-heading");
@@ -567,10 +567,10 @@ function pressButton(button) {
 
 // update setting and setting buttons according to chosen value
 function updateSetting(setting, value) {
-	unpressButton(page[setting + "Buttons"].querySelector("[data-" + setting + '="' + styles[setting] + '"]'));
-	pressButton(page[setting + "Buttons"].querySelector("[data-" + setting + '="' + value + '"]'));
+	unpressButton(page[setting + "Buttons"].querySelector("[data-selected-" + setting + '="' + styles[setting] + '"]'));
+	pressButton(page[setting + "Buttons"].querySelector("[data-selected-" + setting + '="' + value + '"]'));
 
-	document.body.classList.replace(setting + "-" + styles[setting], setting + "-" + value);
+	document.body.dataset[setting] = value;
 	styles[setting] = value;
 }
 
@@ -706,10 +706,10 @@ function buildThemeButtons() {
 		page.themeButtons.appendChild(templateHTML.themeButton.content.cloneNode(true));
 
 		const button = page.themeButtons.lastElementChild.querySelector("button");
-		button.setAttribute("data-theme", theme.code);
+		button.dataset.selectedTheme = theme.code;
 		button.lastElementChild.setContent(theme.name);
 
-		button.querySelector(".palette").classList.add("theme-" + theme.code);
+		button.querySelector(".palette").dataset.theme = theme.code;
 	}
 	document.getElementById("loading-spinner-theme-buttons")?.remove();
 	page.themeButtons.removeAttribute("hidden");
@@ -721,7 +721,8 @@ function buildFontButtons() {
 		page.fontButtons.appendChild(templateHTML.fontButton.content.cloneNode(true));
 		const button = page.fontButtons.lastElementChild.querySelector("button");
 		button.classList.add("font-" + font.code);
-		button.setAttribute("data-font", font.code);
+		button.dataset.selectedFont = font.code;
+		button.dataset.font = font.code;
 		button.setContent(font.name);
 	}
 	document.getElementById("loading-spinner-font-buttons")?.remove();
@@ -782,7 +783,7 @@ document.getElementById("content-notes-toggle").addEventListener("click", toggle
 
 // settings interface events (styling)
 page.themeButtons.addEventListener("click", () => {
-	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchTheme(event.target.dataset.theme);
+	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchTheme(event.target.dataset.selectedTheme);
 });
 page.fontButtons.addEventListener("click", () => {
 	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchFont(event.target.dataset.font);
@@ -817,7 +818,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	page.loadedShow.classList.toggle("flat-radio", settings.flatRadio);
 
 	// update page head data
-	page.title.setAttribute("data-original", document.title);
+	page.title.dataset.original = document.title;
 	if (window.location.hash) navigateToSection();
 
 	// clear out setup variables
