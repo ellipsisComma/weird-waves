@@ -4,4 +4,4 @@
 const styles = JSON.parse(window.localStorage.getItem("styles")) ?? {};
 styles.theme ??= "dark";
 styles.font ??= "serif";
-for (const [style, option] of Object.entries(styles)) document.body.setAttribute("data-" + style, option);
+for (const [style, option] of Object.entries(styles)) document.body.dataset[style] = option;
