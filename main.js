@@ -200,6 +200,8 @@ NAVIGATION
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
+	if (window.location.hash.length == 0) return;
+
 	// find section that hash target is or is inside (use querySelector, not getElementById, because it can directly take window.location.hash instead of having to remove #)
 	const section = document.querySelector(window.location.hash)?.closest("#page-sections > *");
 
