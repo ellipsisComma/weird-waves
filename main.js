@@ -788,7 +788,7 @@ page.themeButtons.addEventListener("click", () => {
 	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchTheme(event.target.dataset.selectedTheme);
 });
 page.fontButtons.addEventListener("click", () => {
-	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchFont(event.target.dataset.font);
+	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchFont(event.target.dataset.selectedFnt);
 });
 
 // on pageload, execute various tasks
