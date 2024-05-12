@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-05-12</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?112</guid>
+			<description>Fixed a font rendering problem in Chrome and Safari (and possibly other non-Firefox browsers) on MacOS, in which text was displayed with more space above than below.</description>
+			<pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-02-18</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?111</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?110</guid>
 			<description>Weird Waves is officially finished! There may be small future changes (e.g. adding new links to the Links section, like I just did now), but as a rule it's done.</description>
 			<pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2024-01-26</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?109</guid>
-			<description>Firefox finally added support for the :has() selector last month so I can remove a polyfill for that (which I've wanted to do since the first few months of making Weird Waves). I was going to make a bunch of other changes to the code to bring it in line with my current standards, but then I realised I don't care and it doesn't matter because Weird Waves works as-is and I'd rather not waste my time.</description>
-			<pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
