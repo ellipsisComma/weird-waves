@@ -788,7 +788,7 @@ page.themeButtons.addEventListener("click", () => {
 	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchTheme(event.target.dataset.selectedTheme);
 });
 page.fontButtons.addEventListener("click", () => {
-	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchFont(event.target.dataset.selectedFnt);
+	if (event.target.tagName === "BUTTON" && !event.target.getAttribute("disabled")) switchFont(event.target.dataset.selectedFont);
 });
 
 // on pageload, execute various tasks
@@ -1248,6 +1248,99 @@ const archive = [
 	"notes": "alcohol, cult belief, mental breakdown",
 	"duration": 1827,
 	"banger": true
+	}
+]
+},
+{
+"code": "DQ",
+"heading": "<cite>The Dream-Quest</cite>",
+"blurb": "H.&thinsp;P.&thinsp;Lovecraft's 1926 novella <cite>The Dream-Quest of Unknown Kadath</cite>, which tells the story of the writer and dreamer Randolph Carter's journey through the Dreamlands in search of its gods and a wondrous unknown city, read by Maureen S.&thinsp;O'Brien.",
+"source": "<a href=\"https://archive.org/details/LovecraftKadath\" rel=\"external\">Internet Archive</a>",
+"copyrightSafe": true,
+"shows": [
+	{
+	"code": "01-Search",
+	"heading": "part 1",
+	"blurb": "<cite>The search for the sunset city</cite>.",
+	"duration": 1743
+	},
+	{
+	"code": "02-Caravan",
+	"heading": "part 2",
+	"blurb": "<cite>Caravan to the sea</cite>.",
+	"duration": 2076
+	},
+	{
+	"code": "03-Face",
+	"heading": "part 3",
+	"blurb": "<cite>The face on Ngranek</cite>.",
+	"duration": 2233
+	},
+	{
+	"code": "04-Ghouls",
+	"heading": "part 4",
+	"blurb": "<cite>Dholes. Ghouls. Gugs. Ghasts.</cite>",
+	"duration": 1829
+	},
+	{
+	"code": "05-Thran",
+	"heading": "part 5",
+	"blurb": "<cite>Traveling to Thran</cite>.",
+	"duration": 967
+	},
+	{
+	"code": "06-Kuranes",
+	"heading": "part 6",
+	"blurb": "<cite>Reunion with Kuranes</cite>.",
+	"duration": 1423
+	},
+	{
+	"code": "07-Inquanok",
+	"heading": "part 7",
+	"blurb": "<cite>Inquanok</cite>.",
+	"duration": 1473
+	},
+	{
+	"code": "08-Onyx",
+	"heading": "part 8",
+	"blurb": "<cite>Onyx not quarried by men</cite>.",
+	"duration": 2137
+	},
+	{
+	"code": "09-Sarkomand",
+	"heading": "part 9",
+	"blurb": "<cite>Raid on Sarkomand</cite>.",
+	"duration": 1253
+	},
+	{
+	"code": "10-Island",
+	"heading": "part 10",
+	"blurb": "<cite>Raid on the moonbeast island</cite>.",
+	"duration": 1340
+	},
+	{
+	"code": "11-Army",
+	"heading": "part 11",
+	"blurb": "<cite>The Ghoulish army escort</cite>.",
+	"duration": 1135
+	},
+	{
+	"code": "12-Northward",
+	"heading": "part 12",
+	"blurb": "<cite>The rush Northward</cite>.",
+	"duration": 822
+	},
+	{
+	"code": "13-Directions",
+	"heading": "part 13",
+	"blurb": "<cite>Directions</cite>.",
+	"duration": 1221
+	},
+	{
+	"code": "14-City",
+	"heading": "part 14",
+	"blurb": "<cite>To the sunset city</cite>.",
+	"duration": 688
 	}
 ]
 },
@@ -1751,6 +1844,46 @@ const archive = [
 	"blurb": "A prisoner is released into a wasteland haunted by wild demons and grotesques. Written by Clark Ashton Smith, read by Ben Tucker.",
 	"duration": 995,
 	"banger": true
+	},
+	{
+	"code": "50-Chair_Blood",
+	"heading": "#50: Human Brutality",
+	"blurb": "<cite>The Chair</cite> (written by Harry E.&thinsp;Mereness, read by &ldquo;Desearls&rdquo;) and <cite>The City of Blood</cite> (written by Anna Bonus Kingsford, read by Claudia Caldi).",
+	"notes": "domestic abuse, electrocution",
+	"duration": 1049
+	},
+	{
+	"code": "51-Safe",
+	"heading": "#51: <cite>The Man Who Wanted To Be Safe</cite>",
+	"blurb": "A man builds a safe and quiet paradise in his own home. Written by Alice Brown, read by &ldquo;Aileen&rdquo;.",
+	"duration": 1049
+	},
+	{
+	"code": "52-Beyond",
+	"heading": "#52: <cite>From Beyond</cite>",
+	"blurb": "A scientist builds a machine to allow humans to see the unfathomable world beyond our own. Written by H.&thinsp;P.&thinsp;Lovecraft, read by Andrew Busto.",
+	"notes": "betrayal",
+	"duration": 1288
+	},
+	{
+	"code": "53-Moonstone",
+	"heading": "#53: <cite>The Moonstone Mass</cite>",
+	"blurb": "Dark heavens and brilliant ice drive a polar explorer to madness. Written by Harriet Prescott Spofford, read by Ben Tucker.",
+	"notes": "animal death, isolation",
+	"duration": 2032
+	},
+	{
+	"code": "54-Over",
+	"heading": "#54: <cite>Over the Wire</cite>",
+	"blurb": "A trio of telegraph operators guide a gold-laden train through a blizzard, while dangers wait in the storm. Written by Eugene Jones, read by Dan Gurzynski.",
+	"duration": 1517
+	},
+	{
+	"code": "55-Dark",
+	"heading": "#55: <cite>In the Dark</cite>",
+	"blurb": "An industrialist sneaks into his chemical plant in the dead of night to make a deadly confession. Written by Dale Clark<!--under the name Ronal Kayser-->, read by &ldquo;sdlavender&rdquo;.",
+	"notes": "adultery, blackmail, disfigurement, suicide",
+	"duration": 1065
 	}
 ]
 },
@@ -2229,7 +2362,7 @@ const archive = [
 },
 {
 "code": "PC",
-"heading": "the Pegāna Cycle",
+"heading": "The Pegāna Cycle",
 "blurb": "Lord Dunsany's mythology cycle of weird and terrible gods and their deeds and misdeeds: <cite>The Gods of Pegāna</cite> (1905), <cite>Time and the Gods</cite> (1906), and the dream-stories collected in <cite>Tales of Three Hemispheres</cite> (1919).",
 "source": "<a href=\"https://librivox.org\" rel=\"external\">LibriVox</a>",
 "copyrightSafe": true,

@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-05-26</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?113</guid>
+			<description>Added a new series, the Dream-Quest of Unknown Kadath by H. P. Lovecraft (read by Maureen S. O'Brien), and a few new shows to the LibroVox selection, starting with #50 (a 2-parter named "Human Brutality").</description>
+			<pubDate>Sun, 26 May 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-05-12</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?112</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?111</guid>
 			<description>Added one new show: The Abominations of Yondo, by Clark Ashton Smith, in the LibriVox selection.</description>
 			<pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2024-01-28</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?110</guid>
-			<description>Weird Waves is officially finished! There may be small future changes (e.g. adding new links to the Links section, like I just did now), but as a rule it's done.</description>
-			<pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
