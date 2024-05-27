@@ -1855,7 +1855,7 @@ const archive = [
 	{
 	"code": "51-Safe",
 	"heading": "#51: <cite>The Man Who Wanted To Be Safe</cite>",
-	"blurb": "A man builds a safe and quiet paradise in his own home. Written by Alice Brown, read by &ldquo;Aileen&rdquo;.",
+	"blurb": "A man builds a safe and quiet paradise in his own home. Written by Alice Brown, read by Aileen.",
 	"duration": 1049
 	},
 	{
@@ -1881,7 +1881,7 @@ const archive = [
 	{
 	"code": "55-Dark",
 	"heading": "#55: <cite>In the Dark</cite>",
-	"blurb": "An industrialist sneaks into his chemical plant in the dead of night to make a deadly confession. Written by Dale Clark<!--under the name Ronal Kayser-->, read by &ldquo;sdlavender&rdquo;.",
+	"blurb": "An industrialist sneaks into his chemical plant in the dead of night to make a deadly confession. Written by Dale Clark<!--under the name Ronal Kayser-->, read by sdlavender.",
 	"notes": "adultery, blackmail, disfigurement, suicide",
 	"duration": 1065
 	}
