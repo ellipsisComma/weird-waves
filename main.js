@@ -1637,7 +1637,7 @@ const archive = [
 	{
 	"code": "10-Masque_Amontillado",
 	"heading": "#10: Gothic Origins (short works by Poe)",
-	"blurb": "Two short pieces by Edgar Allen Poe: <cite>The Masque of the Red Death</cite> (read by Elise Dee) and <cite>The Cask of Amontillado</cite> (read by &ldquo;Caveat&rdquo;).",
+	"blurb": "Two short pieces by Edgar Allen Poe: <cite>The Masque of the Red Death</cite> (read by Elise Dee) and <cite>The Cask of Amontillado</cite> (read by Caveat).",
 	"notes": "betrayal, darkness, entombment",
 	"duration": 1764
 	},
@@ -1848,7 +1848,7 @@ const archive = [
 	{
 	"code": "50-Chair_Blood",
 	"heading": "#50: Human Brutality",
-	"blurb": "<cite>The Chair</cite> (written by Harry E.&thinsp;Mereness, read by &ldquo;Desearls&rdquo;) and <cite>The City of Blood</cite> (written by Anna Bonus Kingsford, read by Claudia Caldi).",
+	"blurb": "<cite>The Chair</cite> (written by Harry E.&thinsp;Mereness, read by Desearls) and <cite>The City of Blood</cite> (written by Anna Bonus Kingsford, read by Claudia Caldi).",
 	"notes": "domestic abuse, electrocution",
 	"duration": 1049
 	},
