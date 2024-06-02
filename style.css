@@ -874,6 +874,9 @@ use[href="#svg-toggle-tick"] {
 .waveform-spacer {
 	margin-inline: auto;
 }
+#featured-show > :first-child {
+	margin-block-start: 1em;
+}
 
 
 

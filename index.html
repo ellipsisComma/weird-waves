@@ -17,7 +17,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-04-08" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-02" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -332,7 +332,7 @@
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
 	<svg id="loading-spinner-archive" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
-	<div id="archive-contents">
+	<div id="archive-contents" hidden="">
 		<ul class="flex-list">
 			<li><button id="add-archive-button" class="push-button" type="button">Add entire archive to playlist</button></li>
 		</ul>
@@ -348,7 +348,7 @@
 	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your playlist in the <a href="#booth">Booth</a>, and listen to them in the Radio. Have fun!</p>
 	<p>The Archive contains:</p>
 	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
-	<dl id="stats-list">
+	<dl id="stats-list" hidden="">
 		<div>
 			<dt>sources</dt>
 			<dd id="stats-sources"></dd>
@@ -529,12 +529,16 @@
 	<h2>Welcome to Weird Waves!</h2>
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks!</p>
 	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+	<div id="featured-show">
+		<h3>Why not try&hellip;</h3>
+		<svg id="loading-spinner-feature" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+	</div>
 </div><!--#welcome end-->
 </div><!--#page-sections end-->
 </div><!--#container end-->
 
 
 
-<script src="./main.js?v=2024-05-27"></script>
+<script src="./main.js?v=2024-06-02"></script>
 </body>
 </html>

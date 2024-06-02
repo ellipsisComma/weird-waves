@@ -4,7 +4,7 @@
 		<title>Weird Waves</title>
 		<link>https://weirdwaves.net</link>
 		<atom:link href="https://weirdwaves.net/feed.rss" rel="self" type="application/rss+xml" />
-		<description>Audio horror broadcasting online, from Old Time Radio to freaky modern podcasts.</description>
+		<description>Audio horror broadcasting online.</description>
 		<language>en-GB</language>
 		<ttl>1440</ttl>
 
@@ -16,6 +16,13 @@
 			<height>64</height>
 		</image>
 
+		<item>
+			<title>News: 2024-06-02</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?114</guid>
+			<description>Added a new "featured show" feature that adds a single, random banger from the Archive to the welcome page and lets you add it to the playlist from there. Hopefully this'll give new visitors an easier time getting into Weird  Waves (the new playlist version of the app was always gonna be harder to get started with, because unlike the scheduled version there's no way to have shows pushed at you; you gotta search yourself).</description>
+			<pubDate>Sun, 02 Jun 2024 00:00:00 +0000</pubDate>
+		</item>
 		<item>
 			<title>News: 2024-05-26</title>
 			<link>https://weirdwaves.net/</link>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?112</guid>
 			<description>Fixed a font rendering problem in Chrome and Safari (and possibly other non-Firefox browsers) on MacOS, in which text was displayed with more space above than below.</description>
 			<pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2024-02-18</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?111</guid>
-			<description>Added one new show: The Abominations of Yondo, by Clark Ashton Smith, in the LibriVox selection.</description>
-			<pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
