@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-06-03</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?113</guid>
+			<description>Fixed a bug with the audio seek bar where it would "resist" following your cursor when you clicked and dragged (it instead stuck to the current audio position), if you'd previously clicked it while the audio was paused. Also fixed a bug where a nav link would visually stay selected if you clicked one of them and then clicked Back to go to the welcome sub-page again.</description>
+			<pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-06-02</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?114</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?113</guid>
 			<description>Added a new series, the Dream-Quest of Unknown Kadath by H. P. Lovecraft (read by Maureen S. O'Brien), and a few new shows to the LibriVox selection, starting with #50 (a 2-parter named "Human Brutality").</description>
 			<pubDate>Sun, 26 May 2024 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2024-05-12</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?112</guid>
-			<description>Fixed a font rendering problem in Chrome and Safari (and possibly other non-Firefox browsers) on MacOS, in which text was displayed with more space above than below.</description>
-			<pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>

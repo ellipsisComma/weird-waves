@@ -225,7 +225,10 @@ NAVIGATION
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
-	if (window.location.hash.length == 0) return;
+	if (window.location.hash.length == 0) {
+		document.querySelector('[aria-current="page"]')?.removeAttribute("aria-current");
+		return;
+	}
 
 	// find section that hash target is or is inside (use querySelector, not getElementById, because it can directly take window.location.hash instead of having to remove #)
 	const section = document.querySelector(window.location.hash)?.closest("#page-sections > *");
@@ -787,7 +790,7 @@ page.audio.addEventListener("ended", loadNextShow);
 // radio interface events
 page.seekBar.addEventListener("change", () => {
 	goToAudioPosition(page.seekBar.value);
-	updateTimeInterval = setInterval(updateSeekBar, 1000);
+	if (!page.audio.paused) updateTimeInterval = setInterval(updateSeekBar, 1000);
 });
 page.seekBar.addEventListener("input", () => {
 	seekTime(page.seekBar.value);
