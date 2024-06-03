@@ -227,6 +227,7 @@ NAVIGATION
 function navigateToSection() {
 	if (window.location.hash.length == 0) {
 		document.querySelector('[aria-current="page"]')?.removeAttribute("aria-current");
+		document.title = page.title.dataset.original;
 		return;
 	}
 
