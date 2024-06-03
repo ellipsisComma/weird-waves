@@ -19,7 +19,7 @@
 		<item>
 			<title>News: 2024-06-03</title>
 			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?113</guid>
+			<guid>https://weirdwaves.net/?115</guid>
 			<description>Fixed a bug with the audio seek bar where it would "resist" following your cursor when you clicked and dragged (it instead stuck to the current audio position), if you'd previously clicked it while the audio was paused. Also fixed a bug where a nav link would visually stay selected if you clicked one of them and then clicked Back to go to the welcome sub-page again.</description>
 			<pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
 		</item>
