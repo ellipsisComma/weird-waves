@@ -240,7 +240,10 @@ function navigateToSection() {
 		document.querySelector('[aria-current="page"]')?.removeAttribute("aria-current");
 		document.title = (navLink.dataset.title ?? navLink.innerText) + " / " + page.title.dataset.original;
 		navLink.setAttribute("aria-current", "page");
-	} else document.title = page.title.dataset.original;
+	} else {
+		window.location.hash = "";
+		navigateToSection();
+	}
 }
 
 /* -----
