@@ -1779,7 +1779,7 @@ const archive = [
 	},{
 	"code": "52-Beyond",
 	"heading": "#52: <cite>From Beyond</cite>",
-	"blurb": "A scientist builds a machine to allow humans to see the unfathomable world beyond our own. Written by H.&thinsp;P.&thinsp;Lovecraft, read by Andrew Busto.",
+	"blurb": "An unstable scientist builds a machine to let humans see the unfathomable. Written by H.&thinsp;P.&thinsp;Lovecraft, read by Andrew Busto.",
 	"notes": "betrayal",
 	"duration": 1288
 	},{

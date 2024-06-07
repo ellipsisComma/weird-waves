@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-06-07</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?116</guid>
+			<description>Added a bunch of new links, mostly for webcomics, but one for another radio station: VRChat Pirate Radio, a follow-up to the defunct Radio New Vegas GPT (which I previously linked and removed).</description>
+			<pubDate>Fri, 07 Jun 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-06-03</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?115</guid>
@@ -29,13 +36,6 @@
 			<guid>https://weirdwaves.net/?114</guid>
 			<description>Added a new "featured show" feature that adds a single, random banger from the Archive to the welcome page and lets you add it to the playlist from there. Hopefully this'll give new visitors an easier time getting into Weird  Waves (the new playlist version of the app was always gonna be harder to get started with, because unlike the scheduled version there's no way to have shows pushed at you; you gotta search yourself).</description>
 			<pubDate>Sun, 02 Jun 2024 00:00:00 +0000</pubDate>
-		</item>
-		<item>
-			<title>News: 2024-05-26</title>
-			<link>https://weirdwaves.net/</link>
-			<guid>https://weirdwaves.net/?113</guid>
-			<description>Added a new series, the Dream-Quest of Unknown Kadath by H. P. Lovecraft (read by Maureen S. O'Brien), and a few new shows to the LibriVox selection, starting with #50 (a 2-parter named "Human Brutality").</description>
-			<pubDate>Sun, 26 May 2024 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
