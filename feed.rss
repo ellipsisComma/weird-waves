@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-06-08</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?117</guid>
+			<description>Added 6 new themes in the Settings section.</description>
+			<pubDate>Sat, 08 Jun 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-06-07</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?116</guid>
@@ -36,6 +43,90 @@
 			<guid>https://weirdwaves.net/?114</guid>
 			<description>Added a new "featured show" feature that adds a single, random banger from the Archive to the welcome page and lets you add it to the playlist from there. Hopefully this'll give new visitors an easier time getting into Weird  Waves (the new playlist version of the app was always gonna be harder to get started with, because unlike the scheduled version there's no way to have shows pushed at you; you gotta search yourself).</description>
 			<pubDate>Sun, 02 Jun 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2024-05-26</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?113</guid>
+			<description>Added a new series, the Dream-Quest of Unknown Kadath by H. P. Lovecraft (read by Maureen S. O'Brien), and a few new shows to the LibriVox selection, starting with #50 (a 2-parter named "Human Brutality").</description>
+			<pubDate>Sun, 26 May 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2024-05-12</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?112</guid>
+			<description>Fixed a font rendering problem in Chrome and Safari (and possibly other non-Firefox browsers) on MacOS, in which text was displayed with more space above than below.</description>
+			<pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
+		</item>
+			<item>
+			<title>News: 2024-02-18</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?111</guid>
+			<description>Added one new show: The Abominations of Yondo, by Clark Ashton Smith, in the LibriVox selection.</description>
+			<pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2024-01-28</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?110</guid>
+			<description>Weird Waves is officially finished! There may be small future changes (e.g. adding new links to the Links section, like I just did now), but as a rule it's done.</description>
+			<pubDate>Sun, 28 Jan 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2024-01-26</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?109</guid>
+			<description>Firefox finally added support for the :has() selector last month so I can remove a polyfill for that (which I've wanted to do since the first few months of making Weird Waves). I was going to make a bunch of other changes to the code to bring it in line with my current standards, but then I realised I don't care and it doesn't matter because Weird Waves works as-is and I'd rather not waste my time.</description>
+			<pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2024-01-15</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?108</guid>
+			<description>Fixed the same damn bug from Christmas. For some reason the offline copy of the site worked fine, but the online version didn't, despite being exactly the same code run by exactly the same web browser. This should now be fixed. I've also made a few other tweaks, the most easily-seen being that I've cut the button images (both the site's own buttons and the few other buttons in the Links section).</description>
+			<pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2024-01-12</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?107</guid>
+			<description>Fixed a layout error in the radio the mid-width layout.</description>
+			<pubDate>Fri, 12 Jan 2024 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2023-12-25</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?106</guid>
+			<description>Fixed a bizarre bug that only affected this site and basically stopped the site from properly navigating to each section unless you refreshed the page first. Now back to Christmas...</description>
+			<pubDate>Mon, 25 Dec 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2023-11-26</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?105</guid>
+			<description>Added download links for all shows in the Archive (and did the final major behind-the-scenes changes to how the Archive's built).</description>
+			<pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2023-11-01</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?104</guid>
+			<description>Changed the codes for all shows to include not only the show number within the series, but also the rest of the filename. This unfortunately breaks currently-existing playlists, but should make import/export clearer (it'll be easier to see which item in the import/export textbox corresponds to which show in the playlist). I also added alternate site buttons with the sans-serif font (Fira Sans), links to the font licenses, and a few other minor changes. This is probably the last set of significant changes to the site.</description>
+			<pubDate>Wed, 01 Nov 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2023-10-28</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?103</guid>
+			<description>The code-blocks in the Streaming section are simpler now—no buttons, but if you click anywhere in the code-block it selects all the contents.</description>
+			<pubDate>Sat, 28 Oct 2023 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>News: 2023-10-27</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?102</guid>
+			<description>Removed the News Archive (it was mostly-useless info at this point in time anyway, just old records of when I added/removed shows and noted minor features/bugfixes); changed how playlist export works so instead of the textbox automatically filling with your playlist's show IDs on any change you need to click the "Export" button to load the list into the textbox; replaced the hacky links to individual series in the Archive with actual links (and a polyfill for browsers that don't yet support the :has() selector), and did a MAJOR overhaul of the codebase that mostly isn't apparent from the front. This RSS feed is now the only place where news updates will be written (if there even are any more regular news updates—I think that's pretty unlikely). Any future news updates'll probably be just me adding some new shows now and then, tweaking content notes, or updating the info about which shows are known/possible copyright risks on streaming services.</description>
+			<pubDate>Fri, 27 Oct 2023 00:00:00 +0000</pubDate>
 		</item>
 	</channel>
 </rss>
