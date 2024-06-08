@@ -111,6 +111,42 @@ RESPONSIVITY
 	--hot-colour: #000;
 	--cold-colour: #000;
 }
+[data-theme="pico"] {
+	--fore-colour: #00e436;
+	--back-colour: #000;
+	--hot-colour: #ff004d;
+	--cold-colour: #29adff;
+}
+[data-theme="sepia"] {
+	--fore-colour: #270a02;
+	--back-colour: #ffe8bc;
+	--hot-colour: #704214;
+	--cold-colour: #704214;
+}
+[data-theme="abyss"] {
+	--fore-colour: #ffa8a8;
+	--back-colour: #01101f;
+	--hot-colour: #ff6c7a;
+	--cold-colour: #ea70ca;
+}
+[data-theme="retro"] {
+	--fore-colour: #c7eb40;
+	--back-colour: #0a290a;
+	--hot-colour: #8bbd1a;
+	--cold-colour: #8bbd1a;
+}
+[data-theme="marrow"] {
+	--fore-colour: #ffe5c4;
+	--back-colour: #260000;
+	--hot-colour: #ea5c73;
+	--cold-colour: #f5e07b;
+}
+[data-theme="org"] {
+	--fore-colour: #211e20;
+	--back-colour: #e9efec;
+	--hot-colour: #880808;
+	--cold-colour: #880808;
+}
 /* FONTS */
 [data-font="serif"] {
 	--font-stack: Bitter, Georgia, Garamond, "Times New Roman", Times, serif;
