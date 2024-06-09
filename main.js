@@ -54,7 +54,13 @@ const styleOptions = {
 		{	"name": "Ash",		"code": "ash"		},
 		{	"name": "Dust",		"code": "dust"		},
 		{	"name": "Mist",		"code": "mist"		},
-		{	"name": "Silver",	"code": "silver"	}
+		{	"name": "Silver",	"code": "silver"	},
+		{	"name": "Pico",		"code": "pico"		},
+		{	"name": "Sepia",	"code": "sepia"		},
+		{	"name": "Abyss",	"code": "abyss"		},
+		{	"name": "Retro",	"code": "retro"		},
+		{	"name": "Marrow",	"code": "marrow"	},
+		{	"name": "Org",		"code": "org"		}
 	],
 	"fonts": [
 		{	"name": "Serif",	"code": "serif"	},
@@ -494,6 +500,7 @@ function seekTime(value) {
 // play audio
 function playAudio() {
 	page.audio.play();
+	page.playButton.ariaLabel = "Pause show";
 	page.playButton.querySelector("use").setAttribute("href", "#svg-pause");
 	updateTimeInterval = setInterval(updateSeekBar, 1000);
 }
@@ -502,6 +509,7 @@ function playAudio() {
 function pauseAudio() {
 	updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update
 	page.audio.pause();
+	page.playButton.ariaLabel = "Play show";
 	page.playButton.querySelector("use").setAttribute("href", "#svg-play");
 	clearInterval(updateTimeInterval);
 }
@@ -516,10 +524,12 @@ function playPauseAudio() {
 function muteUnmuteAudio() {
 	if (page.audio.muted) {
 		page.audio.muted = false;
+		page.muteButton.ariaLabel = "Mute audio";
 		page.muteButton.querySelector("use").setAttribute("href", "#svg-mute");
 		page.volumeControl.value = page.audio.volume * 100;
 	} else {
 		page.audio.muted = true;
+		page.muteButton.ariaLabel = "Unmute audio";
 		page.muteButton.querySelector("use").setAttribute("href", "#svg-unmute");
 		page.volumeControl.value = 0;
 	}

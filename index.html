@@ -107,39 +107,31 @@
 	</defs>
 <!--radio button icons-->
 	<symbol id="svg-play">
-		<title>Play show</title>
 		<use href="#svg-play-triangle" />
 	</symbol>
 	<symbol id="svg-pause">
-		<title>Pause show</title>
 		<path d="M2 2h5v14h-5zm9 0h5v14h-5z" />
 	</symbol>
 	<symbol id="svg-skip">
-		<title>Skip show</title>
 		<use href="#svg-play-triangle" />
 		<path d="M16 2v14" />
 	</symbol>
 	<symbol id="svg-mute">
-		<title>Mute audio</title>
 		<use href="#svg-speaker" />
 		<path d="M12 7l4 4m-4 0l4-4" />
 	</symbol>
 	<symbol id="svg-unmute">
-		<title>Unmute audio</title>
 		<use href="#svg-speaker" />
 		<path d="M12 7v4m2 2v-8m2-2v12" />
 	</symbol>
 <!--playlist button icons-->
 	<symbol id="svg-remove">
-		<title>Remove show</title>
 		<path d="M2 2l8 8m0-8l-8 8" />
 	</symbol>
 	<symbol id="svg-move-up">
-		<title>Move show up</title>
 		<use href="#svg-chevron" />
 	</symbol>
 	<symbol id="svg-move-down">
-		<title>Move show down</title>
 		<use href="#svg-chevron" transform="rotate(180) translate(-12 -12)" />
 	</symbol>
 <!--other-->
@@ -148,7 +140,6 @@
 		<path id="flip" class="svg-hot-stroke" d="M12 12l3,1 3,-2 3,2 3,-3 3,4 3,-5 3,6 3,-8 3,12 3,-15 3,19 3,-22 3,22 3,-19 3,15 3,-12 3,8 3,-6 3,5 3,-4 3,3 3,-2 3,2 3,-1" />
 	</symbol>
 	<symbol id="svg-loading-spinner">
-		<title>Loading</title>
 		<circle cx="12" cy="12" r="11" />
 		<circle cx="12" cy="12" r="4" />
 		<path class="svg-hot-stroke" d="M12 3l1 3h-2z" />
@@ -171,17 +162,17 @@
 	<template id="show-position-controls-template">
 		<ul class="show-position-controls icon-button-set">
 			<li>
-				<button class="push-button" type="button" data-action="move-up" data-target="">
+				<button class="push-button" type="button" data-action="move-up" data-target="" aria-label="Move show up">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="remove" data-target="">
+				<button class="push-button" type="button" data-action="remove" data-target="" aria-label="Remove show">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="move-down" data-target="">
+				<button class="push-button" type="button" data-action="move-down" data-target="" aria-label="Move show down">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg>
 				</button>
 			</li>
@@ -234,7 +225,7 @@
 	</template>
 	<template id="theme-button-template">
 		<li>
-			<button class="push-button" type="button" data-theme="" aria-pressed="false">
+			<button class="push-button" type="button" aria-pressed="false">
 				<span class="palette"></span>
 				<span></span>
 			</button>
@@ -263,16 +254,17 @@
 				<span id="show-time"><time id="show-time-elapsed"></time> / <time id="show-time-total"></time></span>
 			</div>
 			<div id="show-controls">
-				<button id="play-button" class="push-button" type="button">
+				<button id="play-button" class="push-button" type="button" aria-label="Play show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
 				</button>
-				<button id="skip-button" class="push-button" type="button">
+				<button id="skip-button" class="push-button" type="button" aria-label="Skip show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-skip" /></svg>
 				</button>
 			</div>
 			<div id="audio-controls">
-				<button id="mute-button" class="push-button" type="button">
-					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg></button>
+				<button id="mute-button" class="push-button" type="button" aria-label="Mute audio">
+					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
+				</button>
 				<input id="volume-control" type="range" value="100">
 			</div>
 		</div>
@@ -284,7 +276,7 @@
 
 
 <div id="nav-container">
-	<svg id="loading-spinner-nav" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+	<svg id="loading-spinner-nav" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading navigation"><use href="#svg-loading-spinner" /></svg>
 	<nav hidden=""></nav>
 </div><!--#nav-container end-->
 
@@ -295,7 +287,7 @@
 	<h2>Booth</h2>
 	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
 	<h3>Playlist</h3>
-	<svg id="loading-spinner-booth" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+	<svg id="loading-spinner-booth" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading Booth"><use href="#svg-loading-spinner" /></svg>
 	<div id="booth-contents" hidden="">
 		<div id="playlist-and-controls">
 			<ul id="playlist-controls" class="flex-list">
@@ -331,7 +323,7 @@
 <div id="archive">
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
-	<svg id="loading-spinner-archive" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+	<svg id="loading-spinner-archive" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading Archive"><use href="#svg-loading-spinner" /></svg>
 	<div id="archive-contents" hidden="">
 		<ul class="flex-list">
 			<li><button id="add-archive-button" class="push-button" type="button">Add entire archive to playlist</button></li>
@@ -347,7 +339,7 @@
 	<h2>About</h2>
 	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your playlist in the <a href="#booth">Booth</a>, and listen to them in the Radio. Have fun!</p>
 	<p>The Archive contains:</p>
-	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading site statistics"><use href="#svg-loading-spinner" /></svg>
 	<dl id="stats-list" hidden="">
 		<div>
 			<dt>sources</dt>
@@ -365,7 +357,7 @@
 	<h3>Content notes</h3>
 	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older sources.</p>
 	<h3>Latest update</h3>
-	<p><time datetime="2024-07-08">8th of June, 2024</time>: 6 new site themes were added in <a href="#settings">Settings</a> (Pico, Sepia, Abyss, Retro, Marrow, and Org).</p>
+	<p><time datetime="2024-07-09">9th of June, 2024</time>: Improved the accessibility of the site's icon buttons and loading spinners by using <code>aria-label</code> attributes instead of <code>title</code> elements.</p>
 	<p>For older news, see the <a href="./feed.rss"><abbr>RSS</abbr> feed</a>.</p>
 </div><!--#about end-->
 
@@ -373,7 +365,7 @@
 
 <div id="streaming">
 	<h2>Streaming</h2>
-	<p>This section covers how to use Weird Waves as a livestream widget, e.g. on Twitch. This information is irrelevant if you're not displaying Weird Waves visually on-stream. Either way, make sure to check out the <a href="#settings">Settings</a> as well.</p>
+	<p>This section covers how to use Weird Waves as a livestream widget, e.g. on <a href="https://twitch.tv/" rel="external">Twitch</a>. This information is irrelevant if you're not displaying Weird Waves visually on-stream. Either way, make sure to check out the <a href="#settings">Settings</a> as well.</p>
 	<h3>Making a widget</h3>
 	<p>To use Weird Waves like a stream widget in software like <abbr title="Open Broadcaster Software">OBS</abbr>:</p>
 	<ol>
@@ -404,7 +396,7 @@
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr title="Clark Ashton Smith">CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<button id="copyright-safety-toggle" class="toggle" type="button">exclude copyright-unsafe material</button>
-	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
+	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
 </div><!--#streaming end-->
 
 
@@ -427,12 +419,12 @@
 		</li>
 		<li>
 			<h3>Site theme</h3>
-			<svg id="loading-spinner-theme-buttons" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+			<svg id="loading-spinner-theme-buttons" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading theme options"><use href="#svg-loading-spinner" /></svg>
 			<ul id="theme-buttons" class="flex-list" hidden=""></ul>
 		</li>
 		<li>
 			<h3>Site font</h3>
-			<svg id="loading-spinner-font-buttons" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+			<svg id="loading-spinner-font-buttons" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading font options"><use href="#svg-loading-spinner" /></svg>
 			<ul id="font-buttons" class="flex-list" hidden=""></ul>
 		</li>
 	</ul>
@@ -553,7 +545,7 @@
 	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<div id="featured-show">
 		<h3>Why not try&hellip;</h3>
-		<svg id="loading-spinner-feature" class="svg-icon loading-spinner" viewBox="0 0 24 24"><use href="#svg-loading-spinner" /></svg>
+		<svg id="loading-spinner-feature" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading featured show"><use href="#svg-loading-spinner" /></svg>
 	</div>
 </div><!--#welcome end-->
 </div><!--#page-sections end-->
@@ -561,6 +553,6 @@
 
 
 
-<script src="./main.js?v=2024-06-08"></script>
+<script src="./main.js?v=2024-06-09"></script>
 </body>
 </html>
