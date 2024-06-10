@@ -499,6 +499,7 @@ function seekTime(value) {
 	setTimestampFromSeconds(page.showTimeElapsed, page.audio.dataset.duration * value / 100);
 }
 
+// hide a pressed button and reveal another
 function swapButtons(button1, button2) {
 	button1.setAttribute("hidden", "");
 	button2.removeAttribute("hidden");
