@@ -253,22 +253,28 @@
 				<input id="seek-bar" type="range" value="0">
 				<span id="show-time"><time id="show-time-elapsed"></time> / <time id="show-time-total"></time></span>
 			</div>
-			<div id="show-controls">
+			<div id="show-controls" aria-live="assertive">
 				<button id="play-button" class="push-button" type="button" aria-label="Play show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
+				</button>
+				<button id="pause-button" class="push-button" type="button" aria-label="Pause show" hidden="">
+					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-pause" /></svg>
 				</button>
 				<button id="skip-button" class="push-button" type="button" aria-label="Skip show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-skip" /></svg>
 				</button>
 			</div>
-			<div id="audio-controls">
+			<div id="audio-controls" aria-live="assertive">
 				<button id="mute-button" class="push-button" type="button" aria-label="Mute audio">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
+				</button>
+				<button id="unmute-button" class="push-button" type="button" aria-label="Unmute audio" hidden="">
+					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-unmute" /></svg>
 				</button>
 				<input id="volume-control" type="range" value="100">
 			</div>
 		</div>
-		<div id="loaded-show"></div>
+		<div id="loaded-show" aria-live="assertive"></div>
 		<audio id="show-audio"></audio>
 	</div>
 </div><!--#radio end-->
@@ -553,6 +559,6 @@
 
 
 
-<script src="./main.js?v=2024-06-09"></script>
+<script src="./main.js?v=2024-06-10"></script>
 </body>
 </html>

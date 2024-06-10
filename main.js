@@ -107,8 +107,10 @@ const page = {
 	"showTimeElapsed": "#show-time-elapsed",
 	"showTimeTotal": "#show-time-total",
 	"playButton": "#play-button",
+	"pauseButton": "#pause-button",
 	"skipButton": "#skip-button",
 	"muteButton": "#mute-button",
+	"unmuteButton": "#unmute-button",
 	"volumeControl": "#volume-control",
 	"audio": "#show-audio",
 
@@ -497,11 +499,15 @@ function seekTime(value) {
 	setTimestampFromSeconds(page.showTimeElapsed, page.audio.dataset.duration * value / 100);
 }
 
+function swapButtons(button1, button2) {
+	button1.setAttribute("hidden", "");
+	button2.removeAttribute("hidden");
+}
+
 // play audio
 function playAudio() {
 	page.audio.play();
-	page.playButton.ariaLabel = "Pause show";
-	page.playButton.querySelector("use").setAttribute("href", "#svg-pause");
+	swapButtons(page.playButton, page.pauseButton);
 	updateTimeInterval = setInterval(updateSeekBar, 1000);
 }
 
@@ -509,36 +515,28 @@ function playAudio() {
 function pauseAudio() {
 	updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update
 	page.audio.pause();
-	page.playButton.ariaLabel = "Play show";
-	page.playButton.querySelector("use").setAttribute("href", "#svg-play");
+	swapButtons(page.pauseButton, page.playButton);
 	clearInterval(updateTimeInterval);
 }
 
-// play/pause audio when play/pause button is pushed
-function playPauseAudio() {
-	if (page.audio.paused) playAudio();
-	else pauseAudio();
+// mute audio
+function muteAudio() {
+	page.audio.muted = true;
+	swapButtons(page.muteButton, page.unmuteButton);
+	page.volumeControl.value = 0;
 }
 
-// mute/unmute audio
-function muteUnmuteAudio() {
-	if (page.audio.muted) {
-		page.audio.muted = false;
-		page.muteButton.ariaLabel = "Mute audio";
-		page.muteButton.querySelector("use").setAttribute("href", "#svg-mute");
-		page.volumeControl.value = page.audio.volume * 100;
-	} else {
-		page.audio.muted = true;
-		page.muteButton.ariaLabel = "Unmute audio";
-		page.muteButton.querySelector("use").setAttribute("href", "#svg-unmute");
-		page.volumeControl.value = 0;
-	}
+// unmute audio
+function unmuteAudio() {
+	page.audio.muted = false;
+	swapButtons(page.unmuteButton, page.muteButton);
+	page.volumeControl.value = page.audio.volume * 100;
 }
 
 // set audio volume
 function setVolume(newVolume) {
 	page.audio.volume = newVolume;
-	if (page.audio.muted) muteUnmuteAudio();
+	if (page.audio.muted) unmuteAudio();
 }
 
 /* -----
@@ -810,9 +808,11 @@ page.seekBar.addEventListener("input", () => {
 	seekTime(page.seekBar.value);
 	clearInterval(updateTimeInterval);
 });
-page.playButton.addEventListener("click", playPauseAudio);
+page.playButton.addEventListener("click", playAudio);
+page.pauseButton.addEventListener("click", pauseAudio);
 page.skipButton.addEventListener("click", loadNextShow);
-page.muteButton.addEventListener("click", muteUnmuteAudio);
+page.muteButton.addEventListener("click", muteAudio);
+page.unmuteButton.addEventListener("click", unmuteAudio);
 page.volumeControl.addEventListener("input", () => setVolume(page.volumeControl.value / 100));
 
 // playlist interface events
