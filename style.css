@@ -282,7 +282,7 @@ h3 {
 		margin-block-start: 0;
 	}
 }
-time {
+time:not([datetime]) {
 	font-variant-numeric: tabular-nums;
 }
 .flex-list {
