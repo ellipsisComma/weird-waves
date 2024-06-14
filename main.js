@@ -16,7 +16,13 @@ ARCHIVE: an object with every source and show in the Archive
 
 /*
 Known issues (not major):
- > if a playlist with one item is loaded from localStorage, the show is loaded into the radio twice (once by addShow() for being added to an empty playlist and once at the end of updatePlaylist(), which is called on pageload and loads the show if (among other conditions) the original playlist had no items on it
+*	if a playlist with one item is loaded from localStorage, the show is loaded into 
+	the radio twice (once by addShow() for being added to an empty playlist and once 
+	at the end of updatePlaylist(), which is called on pageload and loads the show if 
+	(among other conditions) the original playlist had no items on it (the original 
+	playlist doesn't have any items on pageload).
+		CURRENT ACTION: none, it's a minor problem with very low cost and fixing it would 
+		require adding at least one argument to at least one function.
 */
 
 
@@ -208,11 +214,6 @@ function setTimestampFromSeconds(element, time) {
 	element.setAttribute(`datetime`, `00:${minutes}:${seconds}`);
 }
 
-// get element references for a show and its series in the Archive
-function getShowAndSeries(id) {
-	return [document.getElementById(id), document.getElementById(`archive-${id.split(`-`)[0]}`)];
-}
-
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type) {
 	const pool = showIDSets[type][settings.copyrightSafety ? `safe` : `any`];
@@ -368,8 +369,10 @@ function addShow(id) {
 	playlistIDs.push(id);
 
 	// build new show element and clone in show position controls and show content from Archive
-	[showInArchive, seriesInArchive] = getShowAndSeries(id);
-	const newShow = page.playlist.appendChild(document.createElement(`li`));
+	const showInArchive = document.getElementById(id),
+	seriesInArchive = document.getElementById(`archive-${id.split(`-`)[0]}`),
+	newShow = page.playlist.appendChild(document.createElement(`li`));
+
 	newShow.appendChild(templateHTML.showPositionControls.content.cloneNode(true));
 	for (const button of newShow.querySelectorAll(`button`)) button.dataset.target = id;
 	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
@@ -627,6 +630,8 @@ PAGE CONSTRUCTION
 
 // build nav menu
 function buildNavLinks() {
+	page.nav.replaceChildren();
+
 	for (const [section, links] of Object.entries(navLinks)) {
 		const list = document.createElement(`ul`);
 		list.id = `${section}-sections`;
@@ -650,6 +655,9 @@ function buildNavLinks() {
 
 // build archive onto page
 function buildArchive() {
+	page.seriesLinks.replaceChildren();
+	page.seriesList.replaceChildren();
+
 	const stats = {
 		"series": archive.length,
 		"shows": 0,
@@ -728,7 +736,7 @@ function buildArchive() {
 
 // build toggle switches
 function buildToggles() {
-	for (const toggle of document.querySelectorAll(`.toggle`)) {
+	for (const toggle of document.querySelectorAll(`.toggle:not(:has(svg))`)) {
 		const label = toggle.innerHTML;
 		toggle.replaceChildren(templateHTML.toggle.content.cloneNode(true));
 		toggle.lastElementChild.setContent(label);
@@ -737,6 +745,8 @@ function buildToggles() {
 
 // build out theme buttons with names, codes, and demo palettes
 function buildThemeButtons() {
+	page.themeButtons.replaceChildren();
+
 	for (const theme of styleOptions.themes) {
 		page.themeButtons.appendChild(templateHTML.themeButton.content.cloneNode(true));
 
@@ -752,6 +762,8 @@ function buildThemeButtons() {
 
 // build out font buttons with names, codes, and font displays
 function buildFontButtons() {
+	page.fontButtons.replaceChildren();
+
 	for (const font of styleOptions.fonts) {
 		page.fontButtons.appendChild(templateHTML.fontButton.content.cloneNode(true));
 		const button = page.fontButtons.lastElementChild.querySelector(`button`);
@@ -769,20 +781,21 @@ function buildFeaturedShow() {
 	const id = getRandomShowID(`bangers`);
 
 	// build out featured show HTML from show and series in Archive
-	[showInArchive, seriesInArchive] = getShowAndSeries(id);
-	const featuredShow = showInArchive.querySelector(`.show-info`).cloneNode(true),
+	const showInArchive = document.getElementById(id),
+	seriesInArchive = document.getElementById(`archive-${id.split(`-`)[0]}`),
+	featuredShow = showInArchive.querySelector(`.show-info`).cloneNode(true),
 	addShowButton = showInArchive.querySelector(`[data-action="add-show"]`).cloneNode(true);
+
 	expandShowInfo(featuredShow, seriesInArchive);
 
 	// add click event for adding featured show to playlist and removing it from welcome area
 	addShowButton.addEventListener(`click`, () => {
 		addShow(addShowButton.dataset.target);
-		page.featuredShow.remove();
+		document.getElementById(`featured-show-container`).remove();
 	});
 
 	// build new show element and clone in show content and add-button
-	page.featuredShow.appendChild(featuredShow);
-	page.featuredShow.appendChild(addShowButton);
+	page.featuredShow.replaceChildren(featuredShow, addShowButton);
 	document.getElementById(`loading-spinner-feature`)?.remove();
 	page.featuredShow.removeAttribute(`hidden`);
 }
@@ -861,8 +874,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 	// import playlist
 	if (playlistIDs.length > 0) {
-		if (playlistIDs[0].split(`-`).length === 2) playlistIDs.length = 0; // deletes playlist if stored playlist has any old-style show IDs
-		else updatePlaylist([], playlistIDs);
+		updatePlaylist([], playlistIDs);
 		console.log(`loaded playlist from storage`);
 	}
 	document.getElementById(`loading-spinner-booth`)?.remove();
