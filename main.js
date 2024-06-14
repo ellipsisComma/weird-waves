@@ -72,7 +72,7 @@ const navLinks = {
 	"activity": [
 		{	"name": `Booth`, 			"code": `booth`		},
 		{	"name": `Archive`, 			"code": `archive`	},
-		{	"name": `<abbr title="Really Simple Syndication">RSS</abbr>`, "code": `rss`, "href": `./feed.rss`, "attrs": {"type": `application/rss+xml`}	}
+		{	"name": `<abbr title="Really Simple Syndication / RDF Site Summary">RSS</abbr>`, "code": `rss`, "href": `./feed.rss`, "attrs": {"type": `application/rss+xml`}	}
 	],
 	"info": [
 		{	"name": `About`, 			"code": `about`		},

@@ -17,7 +17,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-13" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-14" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -241,7 +241,9 @@
 
 
 <div id="container">
-<h1>Weird Waves</h1>
+<header>
+	<h1>Weird Waves</h1>
+</header>
 
 
 
@@ -250,7 +252,7 @@
 	<div id="radio-main">
 		<div id="controls" class="icon-button-set" hidden="">
 			<div id="seek-controls">
-				<input id="seek-bar" type="range" value="0">
+				<input id="seek-bar" type="range" value="0" aria-label="Go to time in show">
 				<span id="show-time"><time class="timestamp" id="show-time-elapsed"></time> / <time class="timestamp" id="show-time-total"></time></span>
 			</div>
 			<div id="show-controls" aria-live="assertive">
@@ -271,7 +273,7 @@
 				<button id="unmute-button" class="push-button" type="button" aria-label="Unmute audio" hidden="">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-unmute" /></svg>
 				</button>
-				<input id="volume-control" type="range" value="100">
+				<input id="volume-control" type="range" value="100" aria-label="Volume">
 			</div>
 		</div>
 		<div id="loaded-show" aria-live="assertive"></div>
@@ -288,7 +290,7 @@
 
 
 
-<div id="page-sections">
+<main id="page-sections">
 <div id="booth">
 	<h2>Booth</h2>
 	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
@@ -314,7 +316,7 @@
 		<div id="playlist-import-export">
 			<h3>Import & export</h3>
 			<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the list to a safe place. To import, paste the data back into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
-			<textarea id="import-export-data"></textarea>
+			<textarea id="import-export-data" aria-label="Import/export playlist IDs"></textarea>
 			<div id="import-error-message"></div>
 			<ul class="flex-list">
 				<li><button id="export-button" class="push-button" type="button">Export</button></li>
@@ -555,11 +557,11 @@
 		<svg id="loading-spinner-feature" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading featured show"><use href="#svg-loading-spinner" /></svg>
 	</div>
 </div><!--#welcome end-->
-</div><!--#page-sections end-->
+</main>
 </div><!--#container end-->
 
 
 
-<script src="./main.js?v=2024-06-13"></script>
+<script src="./main.js?v=2024-06-14"></script>
 </body>
 </html>

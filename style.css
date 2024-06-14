@@ -629,7 +629,7 @@ nav {
 	SECTIONS
 ============= */
 
-#page-sections {
+main {
 	& > * {
 		display: none;
 		margin-block-end: 1em;
@@ -1035,7 +1035,7 @@ use[href="#svg-toggle-tick"] {
 			"	radio	sections	";
 		column-gap: var(--gap-size);
 	}
-	h1 {
+	header {
 		grid-area: heading;
 	}
 
@@ -1071,7 +1071,7 @@ use[href="#svg-toggle-tick"] {
 	}
 
 	/* SECTIONS */
-	#page-sections {
+	main {
 		grid-area: sections;
 		inline-size: calc(var(--main-column-max-inline-size) - 2 * var(--main-column-padding));
 	}
