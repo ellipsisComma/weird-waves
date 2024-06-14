@@ -232,14 +232,14 @@ NAVIGATION
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
-	if (window.location.hash.length == 0) {
+	if (window.location.hash.length === 0) {
 		document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
 		document.title = page.title.dataset.original;
 		return;
 	}
 
 	// find section that hash target is or is inside (use querySelector, not getElementById, because it can directly take window.location.hash instead of having to remove #)
-	const section = document.querySelector(window.location.hash)?.closest(`#page-sections > *`);
+	const section = document.querySelector(window.location.hash)?.closest(`main > *`);
 
 	// if the targeted section exists, switch aria-current to target's nav-link and update title accordingly, else return to default page title
 	if (section) {
