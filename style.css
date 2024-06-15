@@ -447,7 +447,7 @@ button {
 	inline-size: 100%;
 }
 :is(#loaded-show, #playlist):empty::after {
-	content: "Playlist is empty!\A Add shows using Booth or Archive.";
+	content: "Playlist is empty!\A Add shows in Booth or Archive.";
 	display: block;
 	font-style: italic;
 	text-align: center;
