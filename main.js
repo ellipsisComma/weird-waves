@@ -452,7 +452,7 @@ function loadShow() {
 		page.audio.src = `${paths.show}${show.dataset.id}${showFileExtension}`;
 		page.audio.dataset.duration = show.dataset.duration;
 
-		const loadedShowHeading = page.loadedShow.appendChild(document.createElement(`h2`));
+		const loadedShowHeading = page.loadedShow.appendChild(document.createElement(`h3`));
 		loadedShowHeading.classList.add(`show-heading`);
 		loadedShowHeading.innerHTML = show.querySelector(`.show-heading`).innerHTML;
 		page.loadedShow.appendChild(show.querySelector(`.show-content`).cloneNode(true));

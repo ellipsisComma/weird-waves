@@ -228,6 +228,22 @@ RESPONSIVITY
 
 
 /* ============
+	UTILITY
+============ */
+
+.screen-reader-only {
+	clip: rect(0 0 0 0); 
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap; 
+	width: 1px;
+}
+
+
+
+/* ============
 	GENERAL
 ============ */
 
@@ -427,16 +443,17 @@ button {
 	justify-content: center;
 	align-items: center;
 }
-#radio {
+#radio-app {
 	inline-size: 100%;
 }
 :is(#loaded-show, #playlist):empty::after {
-	content: "Playlist is empty!";
+	content: "Playlist is empty!\A Add shows using Booth or Archive.";
 	display: block;
 	font-style: italic;
 	text-align: center;
 	margin-block-start: 0.5em;
 	margin-block-end: 0.3em;
+	white-space: pre;
 }
 h2.show-heading {
 	display: block;
@@ -1035,7 +1052,7 @@ use[href="#svg-toggle-tick"] {
 			"	radio	sections	";
 		column-gap: var(--gap-size);
 	}
-	header {
+	#container > header {
 		grid-area: heading;
 	}
 
@@ -1047,7 +1064,7 @@ use[href="#svg-toggle-tick"] {
 		inset-block-start: var(--gap-size);
 		grid-area: radio;
 	}
-	#radio {
+	#radio-app {
 		overflow-y: auto;
 		max-block-size: calc(100vh - calc(2 * var(--gap-size)));
 		border-width: var(--line-width);
