@@ -541,7 +541,7 @@ input[type="range"] {
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 		transform: translateY(calc(var(--control-depth) * -1));
 	}
-	&:active {
+	&:is(:active, :focus) {
 		&::-moz-range-thumb {
 			border-color: var(--cold-colour);
 			box-shadow: 0 var(--control-depth) var(--cold-colour);
@@ -566,7 +566,7 @@ input[type="range"] {
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 	}
 }
-input[type="range"]:active {
+input[type="range"]:is(:active, :focus) {
 	&::-webkit-slider-thumb {
 		border-color: var(--cold-colour);
 		box-shadow: 0 var(--control-depth) var(--cold-colour);
