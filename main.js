@@ -199,7 +199,12 @@ Element.prototype.removeAttributes = function (attrs) {
 
 // set a string to be an HTML element's innerHTML or textContent depending on whether it includes HTML entities, tags, and/or comments
 HTMLElement.prototype.setContent = function (text) {
-	if (text.match(/&#?\w+;/) || text.match(/<[a-z]|<\w+>|\/>|<\//) || text.match(/<!--/)) this.innerHTML = text;
+	const regex = {
+		"escapes": /&#?\w+;/,
+		"elements": /<[a-z]|\/>|<\//,
+		"comments": /<!--/
+	};
+	if (regex.escapes.test(text) || regex.elements.test(text) || regex.comments.test(text)) this.innerHTML = text;
 	else this.textContent = text;
 };
 
@@ -2632,7 +2637,7 @@ const archive = [
 	},{
 	"code": `85-Syndrome`,
 	"heading": `#85: <cite>The Oblivion Syndrome</cite>`,
-	"blurb": `A void-cartographer gives up on survival when his ship is damaged, leaving it to the ship's <abbr>AI</abbr> and an interstellar freakshow to restore his will to live.`,
+	"blurb": `A void-cartographer gives up on survival when his ship is damaged, leaving it to the ship's <abbr title="artificial intelligence">AI</abbr> and an interstellar freakshow to restore his will to live.`,
 	"notes": `ableism, voice removal`,
 	"duration": 1673
 	},{
