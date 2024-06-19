@@ -596,24 +596,24 @@ function toggleContentNotes() {
 // set a button's state to unpressed
 function unpressButton(button) {
 	button?.setAttribute(`aria-pressed`, `false`);
-	button?.removeAttribute(`disabled`);
+	button?.removeAttribute(`aria-disabled`);
 }
 
 // set a button's state to pressed
 function pressButton(button) {
 	button?.setAttributes({
 		"aria-pressed": `true`,
-		"disabled": ``
+		"aria-disabled": `true`
 	});
 }
 
 // update setting and setting buttons according to chosen value
-function updateSetting(setting, value) {
-	unpressButton(page[`${setting}Buttons`].querySelector(`[data-selected-${setting}="${styles[setting]}"]`));
-	pressButton(page[`${setting}Buttons`].querySelector(`[data-selected-${setting}="${value}"]`));
+function updateSetting(name, option) {
+	unpressButton(page[`${name}Buttons`].querySelector(`[aria-pressed="true"]`));
+	pressButton(page[`${name}Buttons`].querySelector(`[data-option="${option}"]`));
 
-	document.body.dataset[setting] = value;
-	styles[setting] = value;
+	document.body.dataset[name] = option;
+	styles[name] = option;
 }
 
 // switch between different colour themes
@@ -720,7 +720,7 @@ function buildArchive() {
 
 	// add delegated click-events for add-series
 	page.seriesList.addEventListener(`click`, () => {
-		if (!event.target.getAttribute(`disabled`)) {
+		if (!event.target.hasAttribute(`aria-disabled`)) {
 			switch (event.target.dataset.action) {
 			case `add-series`: addSeries(event.target.dataset.target); break;
 			case `add-show`: addShow(event.target.dataset.target); break;
@@ -756,7 +756,7 @@ function buildThemeButtons() {
 		page.themeButtons.appendChild(templateHTML.themeButton.content.cloneNode(true));
 
 		const button = page.themeButtons.lastElementChild.querySelector(`button`);
-		button.dataset.selectedTheme = theme.code;
+		button.dataset.option = theme.code;
 		button.lastElementChild.setContent(theme.name);
 
 		button.querySelector(`.palette`).dataset.theme = theme.code;
@@ -773,7 +773,7 @@ function buildFontButtons() {
 		page.fontButtons.appendChild(templateHTML.fontButton.content.cloneNode(true));
 		const button = page.fontButtons.lastElementChild.querySelector(`button`);
 		button.classList.add(`font-${font.code}`);
-		button.dataset.selectedFont = font.code;
+		button.dataset.option = font.code;
 		button.dataset.font = font.code;
 		button.setContent(font.name);
 	}
@@ -837,7 +837,9 @@ page.volumeControl.addEventListener(`input`, () => setVolume(page.volumeControl.
 document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow());
 document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`bangers`));
 document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
-page.clearButton.addEventListener(`click`, revealClearPlaylistControls);
+page.clearButton.addEventListener(`click`, () => {
+	if (!page.clearButton.hasAttribute(`aria-disabled`)) revealClearPlaylistControls();
+});
 document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
 document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
 page.playlist.addEventListener(`click`, () => {
@@ -861,10 +863,10 @@ document.getElementById(`content-notes-toggle`).addEventListener(`click`, toggle
 
 // settings interface events (styling)
 page.themeButtons.addEventListener(`click`, () => {
-	if (event.target.tagName === `BUTTON` && !event.target.getAttribute(`disabled`)) switchTheme(event.target.dataset.selectedTheme);
+	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) switchTheme(event.target.dataset.option);
 });
 page.fontButtons.addEventListener(`click`, () => {
-	if (event.target.tagName === `BUTTON` && !event.target.getAttribute(`disabled`)) switchFont(event.target.dataset.selectedFont);
+	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) switchFont(event.target.dataset.option);
 });
 
 // on pageload, execute various tasks

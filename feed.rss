@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-06-19</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?122</guid>
+			<description>Improved the accessibility of pressed buttons (e.g. the buttons for the selected theme and font, which stay pressed when clicked) so they're still focusable and can still be read in order, instead of being completely disabled.</description>
+			<pubDate>Wed, 19 Jun 2024 00:00:01 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-06-15</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?121</guid>
