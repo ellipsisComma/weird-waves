@@ -159,8 +159,7 @@ const showIDSets = {
 	"series": {}
 };
 
-let playlistIDs = [],
-updateTimeInterval;
+let updateTimeInterval;
 
 
 
@@ -212,6 +211,11 @@ function getRandomShowID(type) {
 	return pool[Math.floor(Math.random() * pool.length)];
 }
 
+// get show element on playlist
+function getShowOnPlaylist(id) {
+	return page.playlist.querySelector(`:scope > [data-id="${id}"]`);
+}
+
 // add series name to show heading element and add series source to element info (for playlist and featured show)
 function expandShowInfo(showHTML, seriesInArchive) {
 	const showHeading = showHTML.querySelector(`.show-heading`);
@@ -250,40 +254,13 @@ function navigateToSection() {
 PLAYLIST
 ----- */
 
-// reorder HTML playlist following playlist object (show IDs)
-function reorderPlaylist() {
-	for (const id of playlistIDs) page.playlist.appendChild(page.playlist.querySelector(`[data-id="${id}"]`));
-}
-
-// update playlist to use a different (possibly-overlapping) list
-function updatePlaylist(newIDs, allowLoad = true) {
-	const originalLoadedID = playlistIDs[0],
-	addedIDs = newIDs.filter(id => !playlistIDs.includes(id)),
-	removedIDs = playlistIDs.filter(id => !newIDs.includes(id));
-
-	for (const id of addedIDs) addShow(id);
-	for (const id of removedIDs) removeShow(id);
-
-	playlistIDs = newIDs;
-	reorderPlaylist();
-
-	if (allowLoad && playlistIDs[0] !== originalLoadedID) loadShow();
-}
-
 // shuffle playlist if it has at least 2 entries, then load top show (if it's different after shuffling)
 function shufflePlaylist() {
-	if (playlistIDs.length <= 1) return;
+	let i = page.playlist.children.length;
+	if (i < 2) return;
 
-	const originalLoadedID = playlistIDs[0];
-	let i = playlistIDs.length;
-
-	while (i > 0) {
-		const r = Math.floor(Math.random() * i--);
-		if (r < i) [playlistIDs[r], playlistIDs[i]] = [playlistIDs[i], playlistIDs[r]];
-	}
-	reorderPlaylist();
-
-	if (playlistIDs[0] !== originalLoadedID) loadShow();
+	while (i > 0) page.playlist.appendChild(page.playlist.children[Math.floor(Math.random() * i--)]);
+	loadShow();
 }
 
 // reveal controls for clearing playlist
@@ -301,10 +278,11 @@ function hideClearPlaylistControls() {
 
 // clear playlist and hide clear controls again, then load show (i.e. nothing)
 function clearPlaylist() {
-	for (const id of playlistIDs) unpressButton(document.querySelector(`#${id} [data-action="add-show"]`));
-	playlistIDs = [];
-	page.playlist.replaceChildren();
-	hideClearPlaylistControls();
+	if (page.playlist.children.length > 0) {
+		for (const button of page.seriesList.querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)) unpressButton(button);
+		page.playlist.replaceChildren();
+	}
+	if (!page.clearPlaylistControls.hidden) hideClearPlaylistControls();
 	loadShow();
 }
 
@@ -316,8 +294,10 @@ function clearImportErrors() {
 
 // list playlist of show IDs line-by-line in import-export box
 function exportPlaylist() {
+	const exportIDs = [];
 	clearImportErrors();
-	page.importExport.value = playlistIDs.join(`\n`);
+	for (const show of page.playlist.children) exportIDs.push(show.dataset.id);
+	page.importExport.value = exportIDs.join(`\n`);
 }
 
 // import playlist from textbox
@@ -332,12 +312,13 @@ function importPlaylist() {
 		invalidIDs = importIDs.filter(id => !document.getElementById(id));
 
 		if (invalidIDs.length === 0) {
-			updatePlaylist([...new Set(importIDs.reverse())].reverse(), playlistIDs.length > 0);
+			clearPlaylist();
+			for (const id of importIDs) addShow(id);
 			page.importExport.value = ``;
 		} else {
 			page.importErrorMessage.appendChild(templateHTML.invalidIDsImportErrorMessage.content.cloneNode(true));
 			const invalidIDsList = page.importErrorMessage.querySelector(`ul`);
-			for (const ID of invalidIDs) invalidIDsList.appendChild(document.createElement(`li`)).textContent = ID;
+			for (const id of invalidIDs) invalidIDsList.appendChild(document.createElement(`li`)).textContent = id;
 			page.importErrorMessage.scrollIntoView();
 		}
 	} else page.importErrorMessage.textContent = `Invalid import: no show IDs.`;
@@ -351,19 +332,14 @@ SHOWS
 
 // add show to playlist; if playlist was previously empty, load top show
 function addShow(id) {
-	if (playlistIDs.includes(id)) {
-		const originalIndex = playlistIDs.indexOf(id);
-		playlistIDs.splice(originalIndex, 1);
+	const showOnPlaylist = getShowOnPlaylist(id);
 
-		if (page.playlist.querySelector(`[data-id="${id}"]`)) {
-			page.playlist.appendChild(page.playlist.children[originalIndex]);
-			playlistIDs.push(id);
-			console.log(`re-added show: ${id}`);
-			if (originalIndex === 0) loadShow();
-			return;
-		}
+	if (showOnPlaylist) {
+		page.playlist.appendChild(showOnPlaylist);
+		loadShow();
+		console.log(`re-added show: ${id}`);
+		return;
 	}
-	playlistIDs.push(id);
 
 	// build new show element and clone in show position controls and show content from Archive
 	const showInArchive = document.getElementById(id),
@@ -388,19 +364,21 @@ function addShow(id) {
 	// update show info and elements for playlist
 	console.log(`added show: ${id}`);
 
-	if (page.playlist.children.length === 1) loadShow();
+	loadShow();
 }
 
 // add entire archive to playlist
 function addArchive() {
-	updatePlaylist(settings.copyrightSafety ? showIDSets.all.safe : showIDSets.all.any);
+	clearPlaylist();
+	for (const id of settings.copyrightSafety ? showIDSets.all.safe : showIDSets.all.any) addShow(id);
+	loadShow();
 }
 
 // add entire series to playlist
 function addSeries(seriesCode) {
 	const seriesIDs = [];
-	for (const showCode of showIDSets.series[seriesCode]) seriesIDs.push(`${seriesCode}-${showCode}`);
-	updatePlaylist([...playlistIDs.filter(id => !seriesIDs.includes(id)), ...seriesIDs]);
+	for (const showCode of showIDSets.series[seriesCode]) addShow(`${seriesCode}-${showCode}`);
+	loadShow();
 }
 
 // add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
@@ -414,37 +392,33 @@ function addRandomShow(showType = `all`) {
 
 // move show up/down in playlist; if the first show on the playlist was moved, load the new top show
 function moveShow(id, move) {
-	const index = playlistIDs.indexOf(id),
-	target = page.playlist.children[index],
-	swap = page.playlist.children[index + move];
+	const target = getShowOnPlaylist(id);
 
-	[playlistIDs[index], playlistIDs[index + move]] = [playlistIDs[index + move], playlistIDs[index]];
-	if (move > 0) target.before(swap);
-	else swap.before(target);
+	if (move > 0) target.nextElementSibling.after(target);
+	else target.previousElementSibling.before(target);
 
-	if (index === 0 || index + move === 0) loadShow();
+	loadShow();
 }
 
 // remove show from playlist in object and HTML and update import-export text accordingly; if the first show on the playlist was removed, load the new top show
 function removeShow(id) {
-	const index = playlistIDs.indexOf(id);
+	getShowOnPlaylist(id)?.remove();
 
-	page.playlist.children[index]?.remove();
-	playlistIDs.splice(index, 1);
 	unpressButton(document.querySelector(`#${id} [data-action="add-show"]`));
 
-	console.log(`removed show: ${id}`);
-
-	if (index === 0) loadShow();
+	loadShow();
 }
 
 // write show parts onto page and load show audio file; if playlist is empty, remove audio and show content and hide controls
 function loadShow() {
+	if (page.playlist.children.length > 0 && page.playlist.firstElementChild.dataset.id === page.loadedShow.dataset.id) return;
+
 	pauseAudio();
 	page.loadedShow.replaceChildren();
 
-	if (playlistIDs.length > 0) {
+	if (playlist.children.length > 0) {
 		const show = page.playlist.firstElementChild;
+		page.loadedShow.dataset.id = page.playlist.firstElementChild.dataset.id;
 
 		page.audio.src = `${paths.show}${show.dataset.id}${showFileExtension}`;
 		page.audio.dataset.duration = show.dataset.duration;
@@ -461,16 +435,15 @@ function loadShow() {
 
 		console.log(`loaded show: ${show.dataset.id}`);
 	} else {
-		page.audio.removeAttribute(`src`);
+		page.audio.removeAttributes([`src`, `data-duration`]);
 		page.controls.setAttribute(`hidden`, ``);
-
-		console.log(`reached end of playlist`);
+		page.loadedShow.removeAttribute(`data-id`);
 	}
 }
 
 // replace loaded show with next show on playlist, or empty-playlist message if none
 function loadNextShow() {
-	removeShow(page.playlist.children[0].dataset.id);
+	removeShow(page.playlist.firstElementChild.dataset.id);
 	page.seekBar.value = 0;
 
 	if (page.audio.hasAttribute(`src`) && settings.autoPlayNextShow) playAudio();
@@ -486,11 +459,6 @@ function updateSeekBar() {
 		page.seekBar.value = page.audio.currentTime / page.audio.dataset.duration * 100;
 		setTimestampFromSeconds(page.showTimeElapsed, page.audio.currentTime);
 	}
-}
-
-// set audio position using seek bar
-function goToAudioPosition(value) {
-	page.audio.currentTime = page.audio.dataset.duration * value / 100;
 }
 
 // update displayed show time using seek bar
@@ -811,7 +779,7 @@ page.audio.addEventListener(`ended`, loadNextShow);
 
 // radio interface events
 page.seekBar.addEventListener(`change`, () => {
-	goToAudioPosition(page.seekBar.value);
+	page.audio.currentTime = page.audio.dataset.duration * page.seekBar.value / 100;
 	if (!page.audio.paused) updateTimeInterval = setInterval(updateSeekBar, 1000);
 });
 page.seekBar.addEventListener(`input`, () => {
@@ -871,10 +839,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	buildFontButtons();
 	buildFeaturedShow();
 
-	// import playlist and prepare playlist show IDs from storage (if there are any)
-	const storedPlaylistIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)) : [];
-	if (storedPlaylistIDs.length > 0) {
-		updatePlaylist(storedPlaylistIDs, false);
+	// import playlist and prepare playlist show IDs from storage (if there are any), simultaneously removing invalid IDs by checking against all IDs
+	const storedIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)).filter(id => showIDSets.all.any.includes(id)) : [];
+	if (storedIDs.length > 0) {
+		for (const id of storedIDs) addShow(id);
 		console.log(`loaded playlist from storage`);
 	}
 	document.getElementById(`loading-spinner-booth`)?.remove();
@@ -901,6 +869,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 // on closing window/browser tab, record user settings and styles to localStorage
 window.addEventListener(`beforeunload`, () => {
+	const playlistIDs = [];
+	for (const show of page.playlist.children) playlistIDs.push(show.dataset.id);
 	window.localStorage.setItem(`playlist`, JSON.stringify(playlistIDs));
 	window.localStorage.setItem(`settings`, JSON.stringify(settings));
 	window.localStorage.setItem(`styles`, JSON.stringify(styles));

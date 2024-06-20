@@ -366,7 +366,7 @@
 	<h3>Content notes</h3>
 	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older sources.</p>
 	<h3>Latest update</h3>
-	<p><time datetime="2024-07-15">15th of June, 2024</time>: Hopefully exposed the radio area to screen reader apps better using a (visually) hidden heading, and added various new radio station <a href="#links">Links</a>.</p>
+	<p><time datetime="2024-07-21">21st of June, 2024</time>: Weird Waves no longer works as a browser source in streaming software (see <a href="#streaming">Streaming</a>). The last confirmed time it worked as a browser source was the end of last October.</p>
 	<p>For older news, see the <a href="./feed.rss"><abbr>RSS</abbr> feed</a>.</p>
 </div><!--#about end-->
 
@@ -374,7 +374,9 @@
 
 <div id="streaming">
 	<h2>Streaming</h2>
-	<p>This section covers how to use Weird Waves as a livestream widget, e.g. on <a href="https://twitch.tv/" rel="external">Twitch</a>. This information is irrelevant if you're not displaying Weird Waves visually on-stream. Either way, make sure to check out the <a href="#settings">Settings</a> as well.</p>
+	<p><strong>Warning:</strong> Weird Waves no longer works as a browser source in <abbr>OBS</abbr>, because the outdated version of the Chrome web browser <abbr>OBS</abbr> uses to run browser sources doesn't support several modern features of this site's code. However, you can still open Weird Waves in your web browser and play audio to desktop form there. The notes on copyright at the end of this section are as relevant as before.</p>
+	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+	<p>This section covers how to use Weird Waves as a livestream widget, e.g. on <a href="https://twitch.tv/" rel="external">Twitch</a>. This information is mostly irrelevant if you're not displaying Weird Waves visually on-stream. Either way, make sure to check out the <a href="#settings">Settings</a> as well.</p>
 	<h3>Making a widget</h3>
 	<p>To use Weird Waves like a stream widget in software like <abbr title="Open Broadcaster Software">OBS</abbr>:</p>
 	<ol>
@@ -567,6 +569,6 @@
 
 
 
-<script src="./main.js?v=2024-06-20"></script>
+<script src="./main.js?v=2024-06-21"></script>
 </body>
 </html>
