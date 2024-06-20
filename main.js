@@ -14,17 +14,6 @@ EVENTS: event listeners
 ARCHIVE: an object with every source and show in the Archive
 */
 
-/*
-Known issues (not major):
-*	if a playlist with one item is loaded from localStorage, the show is loaded into 
-	the radio twice (once by addShow() for being added to an empty playlist and once 
-	at the end of updatePlaylist(), which is called on pageload and loads the show if 
-	(among other conditions) the original playlist had no items on it (the original 
-	playlist doesn't have any items on pageload).
-		CURRENT ACTION: none, it's a minor problem with very low cost and fixing it would 
-		require adding at least one argument to at least one function.
-*/
-
 
 
 /* ====================
@@ -163,9 +152,6 @@ templateHTML = {
 for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelector(query);
 for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(`${id}-template`);
 
-// prepare playlist show IDs from storage (if there are any)
-let playlistIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)) : [];
-
 // sets of show IDs to select from when adding random shows to playlist
 const showIDSets = {
 	"all": {"safe": [], "any": []},
@@ -173,7 +159,8 @@ const showIDSets = {
 	"series": {}
 };
 
-let updateTimeInterval;
+let playlistIDs = [],
+updateTimeInterval;
 
 
 
@@ -268,39 +255,26 @@ function reorderPlaylist() {
 	for (const id of playlistIDs) page.playlist.appendChild(page.playlist.querySelector(`[data-id="${id}"]`));
 }
 
-// import playlist from textarea contents (after trimming start, interior, and ending newlines), or empty the array if textarea is empty; load the top show and pause it to update play/pause button state; if any invalid show IDs present in textarea lines, display error message instead
-function updatePlaylist(oldIDs, newIDs) {
-	const addedIDs = newIDs.filter(id => !oldIDs.includes(id)),
-	removedIDs = oldIDs.filter(id => !newIDs.includes(id)),
-	invalidIDs = newIDs.filter(id => !document.getElementById(id));
-
-	// if attempting to import 1+ invalid IDs, list invalid IDs in error message and abort
-	if (invalidIDs.length > 0) {
-		clearImportErrors();
-		page.importExport.value = newIDs.join(`\n`);
-		page.importErrorMessage.appendChild(templateHTML.invalidIDsImportErrorMessage.content.cloneNode(true));
-		const invalidIDsList = page.importErrorMessage.querySelector(`ul`);
-		for (const ID of invalidIDs) invalidIDsList.appendChild(document.createElement(`li`)).textContent = ID;
-		page.importErrorMessage.scrollIntoView();
-		return;
-	}
+// update playlist to use a different (possibly-overlapping) list
+function updatePlaylist(newIDs, allowLoad = true) {
+	const originalLoadedID = playlistIDs[0],
+	addedIDs = newIDs.filter(id => !playlistIDs.includes(id)),
+	removedIDs = playlistIDs.filter(id => !newIDs.includes(id));
 
 	for (const id of addedIDs) addShow(id);
 	for (const id of removedIDs) removeShow(id);
 
 	playlistIDs = newIDs;
 	reorderPlaylist();
-	page.importExport.value = ``;
-	clearImportErrors();
 
-	if ((playlistIDs.length > 0 && oldIDs[0] !== playlistIDs[0]) || oldIDs.length === 0) loadShow();
+	if (allowLoad && playlistIDs[0] !== originalLoadedID) loadShow();
 }
 
 // shuffle playlist if it has at least 2 entries, then load top show (if it's different after shuffling)
 function shufflePlaylist() {
 	if (playlistIDs.length <= 1) return;
 
-	const originalLoadedID = page.playlist.firstElementChild.dataset.id;
+	const originalLoadedID = playlistIDs[0];
 	let i = playlistIDs.length;
 
 	while (i > 0) {
@@ -334,21 +308,39 @@ function clearPlaylist() {
 	loadShow();
 }
 
-// list playlist of show IDs line-by-line in import-export box
-function exportPlaylist() {
-	page.importExport.value = playlistIDs.join(`\n`);
-}
-
-// remove content of import error message
+// clear import errors
 function clearImportErrors() {
 	page.importErrorMessage.textContent = ``;
 	page.importErrorMessage.replaceChildren();
 }
 
+// list playlist of show IDs line-by-line in import-export box
+function exportPlaylist() {
+	clearImportErrors();
+	page.importExport.value = playlistIDs.join(`\n`);
+}
+
 // import playlist from textbox
 function importPlaylist() {
-	if (page.importExport.value.trim() !== ``) updatePlaylist(playlistIDs, page.importExport.value.replace(/\n\n+/g, `\n`).replace(/ /g, ``).trim().split(`\n`));
-	else page.importErrorMessage.textContent = `Invalid import: no show IDs.`;
+	const importList = page.importExport.value.replace(/\n\n+/g, `\n`).replace(/ /g, ``).trim();
+
+	clearImportErrors();
+
+	// if attempting to import IDs, validate them and either present invalid IDs or update playlist; if import box is empty, clear playlist
+	if (importList.length > 0) {
+		const importIDs = importList.split(`\n`),
+		invalidIDs = importIDs.filter(id => !document.getElementById(id));
+
+		if (invalidIDs.length === 0) {
+			updatePlaylist([...new Set(importIDs.reverse())].reverse(), playlistIDs.length > 0);
+			page.importExport.value = ``;
+		} else {
+			page.importErrorMessage.appendChild(templateHTML.invalidIDsImportErrorMessage.content.cloneNode(true));
+			const invalidIDsList = page.importErrorMessage.querySelector(`ul`);
+			for (const ID of invalidIDs) invalidIDsList.appendChild(document.createElement(`li`)).textContent = ID;
+			page.importErrorMessage.scrollIntoView();
+		}
+	} else page.importErrorMessage.textContent = `Invalid import: no show IDs.`;
 }
 
 /* --
@@ -401,14 +393,14 @@ function addShow(id) {
 
 // add entire archive to playlist
 function addArchive() {
-	updatePlaylist(playlistIDs, settings.copyrightSafety ? showIDSets.all.safe : showIDSets.all.any);
+	updatePlaylist(settings.copyrightSafety ? showIDSets.all.safe : showIDSets.all.any);
 }
 
 // add entire series to playlist
 function addSeries(seriesCode) {
 	const seriesIDs = [];
 	for (const showCode of showIDSets.series[seriesCode]) seriesIDs.push(`${seriesCode}-${showCode}`);
-	updatePlaylist(playlistIDs, [...playlistIDs.filter(id => !seriesIDs.includes(id)), ...seriesIDs]);
+	updatePlaylist([...playlistIDs.filter(id => !seriesIDs.includes(id)), ...seriesIDs]);
 }
 
 // add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
@@ -879,9 +871,10 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	buildFontButtons();
 	buildFeaturedShow();
 
-	// import playlist
-	if (playlistIDs.length > 0) {
-		updatePlaylist([], playlistIDs);
+	// import playlist and prepare playlist show IDs from storage (if there are any)
+	const storedPlaylistIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)) : [];
+	if (storedPlaylistIDs.length > 0) {
+		updatePlaylist(storedPlaylistIDs, false);
 		console.log(`loaded playlist from storage`);
 	}
 	document.getElementById(`loading-spinner-booth`)?.remove();

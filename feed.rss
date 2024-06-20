@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>News: 2024-06-20</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?123</guid>
+			<description>I've finally fixed an annoying, but more-or-less harmless bug where the app would load the top show twice when it reloaded a stored playlist.</description>
+			<pubDate>Thu, 20 Jun 2024 00:00:01 +0000</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-06-19</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?122</guid>
