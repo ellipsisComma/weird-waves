@@ -17,10 +17,17 @@
 		</image>
 
 		<item>
+			<title>News: 2024-06-22</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?125</guid>
+			<description>Okay, I couldn't leave the OBS situation like that, so I went back and pulled up the code from the last time I know Weird Waves worked on stream (thank God for version control, I guess) and cut it down into a streamlined version with only the Booth, Archive, and Settings (with the copyright safety toggle from the Streaming section added to the Settings section). I also overhauled the Streaming section on the main site. The stream widget version's available at https://weirdwaves.net/stream/widget.html, and it shares stored settings and styles with the web version (though they use different playlists, due to the widget's outdated code).</description>
+			<pubDate>Sat, 22 Jun 2024 00:00:00 +0100</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-06-21</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?124</guid>
-			<description>I've made a large behind-the-scenes change that shouldn't affect anyone's regular experience of the site. However, in a much more niche, but serious, discovery, I've found that Weird Waves no longer works as a browser source in the broadcast software OBS (parts of the javascript and CSS are too modern for OBS' outdated mini-browser). It's a real pain trying to figure out what the problem is, because OBS makes it unreasonably hard to see what's happening under a browser source's hood, so I've just added a note to the Streaming section of the site explaining the situation (and that there's no real solution).</description>
+			<description>I've made a large behind-the-scenes change that shouldn't affect anyone's regular experience of the site. However, in a much more niche, but serious, discovery, I've found that Weird Waves no longer works as a browser source in the broadcast software OBS (parts of the JavaScript and CSS are too modern for OBS' outdated mini-browser). It's a real pain trying to figure out what the problem is, because OBS makes it unreasonably hard to see what's happening under a browser source's hood, so I've just added a note to the Streaming section of the site explaining the situation (and that there's no real solution).</description>
 			<pubDate>Fri, 21 Jun 2024 00:00:00 +0100</pubDate>
 		</item>
 		<item>

@@ -11,13 +11,9 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2" as="font" crossorigin="">
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2" as="font" crossorigin="">
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-regular-weirdwaves.woff2" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-bold-weirdwaves.woff2" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-italic-weirdwaves.woff2" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/fira-sans-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-15c" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-22" media="all">
 
 	<link rel="icon" href="./images/favicons/dark.svg" type="image/svg+xml">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -137,12 +133,7 @@
 <!--other-->
 	<symbol id="svg-waveform">
 		<path d="M1 12h94" />
-		<path id="flip" class="svg-hot-stroke" d="M12 12l3,1 3,-2 3,2 3,-3 3,4 3,-5 3,6 3,-8 3,12 3,-15 3,19 3,-22 3,22 3,-19 3,15 3,-12 3,8 3,-6 3,5 3,-4 3,3 3,-2 3,2 3,-1" />
-	</symbol>
-	<symbol id="svg-loading-spinner">
-		<circle cx="12" cy="12" r="11" />
-		<circle cx="12" cy="12" r="4" />
-		<path class="svg-hot-stroke" d="M12 3l1 3h-2z" />
+		<path class="svg-hot-stroke" d="M12 12l3,1 3,-2 3,2 3,-3 3,4 3,-5 3,6 3,-8 3,12 3,-15 3,19 3,-22 3,22 3,-19 3,15 3,-12 3,8 3,-6 3,5 3,-4 3,3 3,-2 3,2 3,-1" />
 	</symbol>
 </svg><!--#svg-defs end-->
 
@@ -249,13 +240,13 @@
 
 <div id="radio-container">
 	<h2 id="radio" class="screen-reader-only">Radio</h2>
-	<noscript>Sorry, this site requires javascript! Some content will be hidden, and the audio app won't work.</noscript>
+	<noscript>Sorry, this site requires JavaScript! Some content will be hidden, and the audio app won't work.</noscript>
 	<div id="radio-app">
 		<div id="controls" class="icon-button-set" hidden="">
 			<div id="seek-controls">
 				<input id="seek-bar" type="range" value="0" aria-label="Go to time in show">
 				<span id="show-time"><time class="timestamp" id="show-time-elapsed"></time> / <time class="timestamp" id="show-time-total"></time></span>
-			</div>
+			</div><!--#seek-controls end-->
 			<div id="show-controls" aria-live="assertive">
 				<button id="play-button" class="push-button" type="button" aria-label="Play show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
@@ -266,7 +257,7 @@
 				<button id="skip-button" class="push-button" type="button" aria-label="Skip show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-skip" /></svg>
 				</button>
-			</div>
+			</div><!--#show-controls end-->
 			<div id="audio-controls" aria-live="assertive">
 				<button id="mute-button" class="push-button" type="button" aria-label="Mute audio">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
@@ -275,19 +266,16 @@
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-unmute" /></svg>
 				</button>
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
-			</div>
+			</div><!--#audio-controls end-->
 		</div>
 		<div id="loaded-show" aria-live="assertive"></div>
 		<audio id="show-audio"></audio>
-	</div><!--#radio end-->
+	</div><!--#radio-app end-->
 </div><!--#radio-container end-->
 
 
 
-<div id="nav-container">
-	<svg id="loading-spinner-nav" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading navigation"><use href="#svg-loading-spinner" /></svg>
-	<nav hidden=""></nav>
-</div><!--#nav-container end-->
+<nav></nav>
 
 
 
@@ -296,35 +284,32 @@
 	<h2>Booth</h2>
 	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
 	<h3>Playlist</h3>
-	<svg id="loading-spinner-booth" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading Booth"><use href="#svg-loading-spinner" /></svg>
-	<div id="booth-contents" hidden="">
-		<div id="playlist-and-controls">
-			<ul id="playlist-controls" class="flex-list">
-				<li><button id="random-show-button" class="push-button" type="button">+ Show</button></li>
-				<li><button id="random-banger-button" class="push-button" type="button">+ Banger</button></li>
-				<li><button id="shuffle-button" class="push-button" type="button">Shuffle</button></li>
-				<li><button id="clear-button" class="push-button" type="button" aria-pressed="false">Clear</button></li>
-				<li id="clear-playlist-controls" hidden="">
-					<p>Clear playlist?</p>
-					<ul class="flex-list">
-						<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
-						<li><button id="clear-cancel-button" class="push-button" type="button">Cancel</button></li>
-					</ul>
-				</li>
-			</ul>
-			<ol id="playlist" class="show-list"></ol>
-		</div>
-		<div id="playlist-import-export" aria-live="assertive">
-			<h3>Import & export</h3>
-			<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
-			<textarea id="import-export-data" aria-label="Import/export playlist data"></textarea>
-			<div id="import-error-message"></div>
-			<ul class="flex-list">
-				<li><button id="export-button" class="push-button" type="button">Export</button></li>
-				<li><button id="import-button" class="push-button" type="button">Import</button></li>
-			</ul>
-		</div>
-	</div>
+	<div id="playlist-and-controls">
+		<ul id="playlist-controls" class="flex-list">
+			<li><button id="random-show-button" class="push-button" type="button">+ Show</button></li>
+			<li><button id="random-banger-button" class="push-button" type="button">+ Banger</button></li>
+			<li><button id="shuffle-button" class="push-button" type="button">Shuffle</button></li>
+			<li><button id="clear-button" class="push-button" type="button" aria-pressed="false">Clear</button></li>
+			<li id="clear-playlist-controls" hidden="">
+				<p>Clear playlist?</p>
+				<ul class="flex-list">
+					<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
+					<li><button id="clear-cancel-button" class="push-button" type="button">Cancel</button></li>
+				</ul>
+			</li><!--#clear-playlist-controls end-->
+		</ul><!--#playlist-controls end-->
+		<ol id="playlist" class="show-list"></ol>
+	</div><!--#playlist-and-controls end-->
+	<div id="playlist-import-export" aria-live="assertive">
+		<h3>Import & export</h3>
+		<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
+		<textarea id="import-export-data" aria-label="Import/export playlist data"></textarea>
+		<div id="import-error-message"></div>
+		<ul class="flex-list">
+			<li><button id="export-button" class="push-button" type="button">Export</button></li>
+			<li><button id="import-button" class="push-button" type="button">Import</button></li>
+		</ul>
+	</div><!--#playlist-import-export end-->
 </div><!--#booth end-->
 
 
@@ -332,14 +317,11 @@
 <div id="archive">
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
-	<svg id="loading-spinner-archive" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading Archive"><use href="#svg-loading-spinner" /></svg>
-	<div id="archive-contents" hidden="">
-		<ul class="flex-list">
-			<li><button id="add-archive-button" class="push-button" type="button">Add entire archive to playlist</button></li>
-		</ul>
-		<ol id="archive-series-links" class="flex-list"></ol>
-		<ol id="series-list"></ol>
-	</div>
+	<ul class="flex-list">
+		<li><button id="add-archive-button" class="push-button" type="button">Add entire archive to playlist</button></li>
+	</ul>
+	<ol id="archive-series-links" class="flex-list"></ol>
+	<ol id="series-list"></ol>
 </div><!--#archive end-->
 
 
@@ -348,8 +330,7 @@
 	<h2>About</h2>
 	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your playlist in the <a href="#booth">Booth</a>, and listen to them in the <a href="#radio">Radio</a>. Have fun!</p>
 	<p>The Archive contains:</p>
-	<svg id="loading-spinner-stats" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading site statistics"><use href="#svg-loading-spinner" /></svg>
-	<dl id="stats-list" hidden="">
+	<dl id="stats-list">
 		<div>
 			<dt>sources</dt>
 			<dd id="stats-sources"></dd>
@@ -362,11 +343,11 @@
 			<dt>hours of audio</dt>
 			<dd id="stats-duration"></dd>
 		</div>
-	</dl>
+	</dl><!--#stats-list end-->
 	<h3>Content notes</h3>
 	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older sources.</p>
 	<h3>Latest update</h3>
-	<p><time datetime="2024-07-21">21st of June, 2024</time>: Weird Waves no longer works as a browser source in streaming software (see <a href="#streaming">Streaming</a>). The last confirmed time it worked as a browser source was the end of last October.</p>
+	<p><time datetime="2024-07-21">21st of June, 2024</time>: I've replaced the loading spinners with a single overlay that fades out after the page is fully built.</p>
 	<p>For older news, see the <a href="./feed.rss"><abbr>RSS</abbr> feed</a>.</p>
 </div><!--#about end-->
 
@@ -374,38 +355,32 @@
 
 <div id="streaming">
 	<h2>Streaming</h2>
-	<p><strong>Warning:</strong> Weird Waves no longer works as a browser source in <abbr>OBS</abbr>, because the outdated version of the Chrome web browser <abbr>OBS</abbr> uses to run browser sources doesn't support several modern features of this site's code. However, you can still open Weird Waves in your web browser and play audio to desktop form there. The notes on copyright at the end of this section are as relevant as before.</p>
+	<p>This section covers how to use Weird Waves as a livestream widget, e.g. on sites like <a href="https://twitch.tv/" rel="external">Twitch</a>, via broadcast software like <abbr title="Open Broadcaster Software">OBS</abbr>. Most of this is only relevant if you want to show Weird Waves visually on-stream. Either way, make sure to check the <a href="#settings">Settings</a> too.</p>
 	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
-	<p>This section covers how to use Weird Waves as a livestream widget, e.g. on <a href="https://twitch.tv/" rel="external">Twitch</a>. This information is mostly irrelevant if you're not displaying Weird Waves visually on-stream. Either way, make sure to check out the <a href="#settings">Settings</a> as well.</p>
+	<p><strong>Note:</strong> The Weird Waves stream widget is slightly outdated compared to the web version, as <abbr>OBS</abbr> uses outdated software to run browser sources. However, it looks and works roughly the same.</p>
 	<h3>Making a widget</h3>
-	<p>To use Weird Waves like a stream widget in software like <abbr title="Open Broadcaster Software">OBS</abbr>:</p>
 	<ol>
 		<li>Create a browser source.</li>
-		<li>Set its <abbr>URL</abbr> to <code>https://weirdwaves.net</code>.</li>
-		<li>Delete its default custom <abbr>CSS</abbr>.</li>
+		<li>Set its <abbr>URL</abbr> to <code>https://weirdwaves.net/stream/widget.html</code>.</li>
+		<li>Delete its default custom <abbr title="Cascading Style Sheets">CSS</abbr>.</li>
 		<li>Resize and crop it.</li>
 		<li>Right-click it and select &ldquo;Interact&rdquo; to use it just like you are now.</li>
 	</ol>
-	<h3>Isolating the radio</h3>
-	<p>Use this custom <abbr>CSS</abbr> to add empty space above and below the radio, for easier cropping:</p>
-	<code class="code-block">#radio {
-	margin-block: 100vh;
-}</code>
-	<h3>Customising the theme and font</h3>
+	<h3>Customising the style</h3>
 	<p>Set the theme to &ldquo;Dark&rdquo; and font to &ldquo;Serif&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
 	<code class="code-block">.theme-dark {
-	--foreground-colour: [colour];
-	--background-colour: [colour];
-	--hot-detail-colour: [colour];
-	--cold-detail-colour: [colour];
+	--fore-colour: [colour];
+	--back-colour: [colour];
+	--hot-colour: [colour];
+	--cold-colour: [colour];
 }
 .font-serif {
 	--font-stack: [font];
 }</code>
-	<p>Replace <code>[colour]</code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr>HTML</abbr> colour names, etc. Replace <code>[font]</code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
+	<p>Replace <code>[colour]</code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr title="HyperText Markup Language">HTML</abbr> colour names, etc. Replace <code>[font]</code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
-	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr title="Clark Ashton Smith">CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
+	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<button id="copyright-safety-toggle" class="toggle" type="button">exclude copyright-unsafe material</button>
 	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
 </div><!--#streaming end-->
@@ -430,13 +405,11 @@
 		</li>
 		<li>
 			<h3>Site theme</h3>
-			<svg id="loading-spinner-theme-buttons" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading theme options"><use href="#svg-loading-spinner" /></svg>
-			<ul id="theme-buttons" class="flex-list" hidden=""></ul>
+			<ul id="theme-buttons" class="flex-list"></ul>
 		</li>
 		<li>
 			<h3>Site font</h3>
-			<svg id="loading-spinner-font-buttons" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading font options"><use href="#svg-loading-spinner" /></svg>
-			<ul id="font-buttons" class="flex-list" hidden=""></ul>
+			<ul id="font-buttons" class="flex-list"></ul>
 		</li>
 	</ul>
 </div><!--#settings end-->
@@ -560,7 +533,6 @@
 	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<div id="featured-show-container">
 		<h3>Why not try&hellip;</h3>
-		<svg id="loading-spinner-feature" class="svg-icon loading-spinner" viewBox="0 0 24 24" aria-label="Loading featured show"><use href="#svg-loading-spinner" /></svg>
 		<div id="featured-show"></div>
 	</div>
 </div><!--#welcome end-->
@@ -569,6 +541,7 @@
 
 
 
-<script src="./main.js?v=2024-06-21"></script>
+<script src="./archive.js?v=2024-06-22"></script>
+<script src="./main.js?v=2024-06-22"></script>
 </body>
 </html>

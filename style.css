@@ -417,25 +417,12 @@ button {
 		stroke: var(--hot-colour);
 	}
 }
-.loading-spinner {
-	display: block;
-	margin-inline: auto;
-	animation-name: spinner;
-	animation-duration: 0.5s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-}
-@keyframes spinner {
-	to {
-		transform: rotate(1turn);
-	}
-}
 
 
 
-/* ===========
+/* ==========
 	RADIO
-============ */
+========== */
 
 #radio-container {
 	display: flex;
@@ -470,8 +457,7 @@ h2.show-heading {
 	display: grid;
 	grid-template:
 		"	seek-controls	seek-controls	"
-		"	show-controls	audio-controls	";
-	grid-template-columns: auto min-content;
+		"	show-controls	audio-controls	" / auto min-content;
 	margin-block-end: var(--gap-size);
 	row-gap: calc(var(--gap-size) + var(--control-depth));
 	& > div {
@@ -1058,11 +1044,11 @@ use[href="#svg-toggle-tick"] {
 
 	/* RADIO */
 	#radio-container {
+		grid-area: radio;
 		align-self: start;
 		position: sticky;
 		inline-size: calc(var(--widescreen-max-inline-size) - var(--main-column-max-inline-size) - var(--gap-size));
 		inset-block-start: var(--gap-size);
-		grid-area: radio;
 	}
 	#radio-app {
 		overflow-y: auto;
@@ -1078,12 +1064,11 @@ use[href="#svg-toggle-tick"] {
 		margin: var(--gap-size);
 		grid-template:
 			"	seek-controls	seek-controls	"
-			"	show-controls	audio-controls	";
-		grid-template-columns: auto min-content;
+			"	show-controls	audio-controls	" / auto min-content;
 	}
 
 	/* NAV */
-	#nav-container {
+	nav {
 		grid-area: nav;
 	}
 
