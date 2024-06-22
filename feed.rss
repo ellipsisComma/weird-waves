@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Weird Waves</title>
-		<link>https://weirdwaves.net</link>
+		<link>https://weirdwaves.net/</link>
 		<atom:link href="https://weirdwaves.net/feed.rss" rel="self" type="application/rss+xml" />
 		<description>Audio horror broadcasting online.</description>
 		<language>en-GB</language>
@@ -11,7 +11,7 @@
 		<image>
 			<url>https://weirdwaves.net/images/social-card.png</url>
 			<title>Weird Waves</title>
-			<link>https://weirdwaves.net</link>
+			<link>https://weirdwaves.net/</link>
 			<width>64</width>
 			<height>64</height>
 		</image>
