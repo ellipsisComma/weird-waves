@@ -38,7 +38,9 @@ RESPONSIVITY
 
 	--line-width: 1px;
 }
+
 /* THEMES */
+
 [data-theme="dark"] {
 	--fore-colour: #fdffdc;
 	--back-colour: #000627;
@@ -147,7 +149,9 @@ RESPONSIVITY
 	--hot-colour: #880808;
 	--cold-colour: #880808;
 }
+
 /* FONTS */
+
 [data-font="serif"] {
 	--font-stack: Bitter, Georgia, Garamond, "Times New Roman", Times, serif;
 }
