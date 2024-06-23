@@ -205,8 +205,8 @@ HTMLElement.prototype.cloneChildren = function () {
 
 // take in a time in seconds (can be a non-integer) and output a timestamp in minutes and seconds
 function setTimestampFromSeconds(element, time) {
-	const minutes = Math.floor((time % 3600) / 60).toString().padStart(2, `0`),
-	seconds = Math.floor(time % 60).toString().padStart(2, `0`);
+	const minutes = Math.floor((parseInt(time) % 3600) / 60).toString().padStart(2, `0`),
+	seconds = Math.floor(parseInt(time) % 60).toString().padStart(2, `0`);
 
 	element.innerText = `${minutes}:${seconds}`;
 	element.setAttribute(`datetime`, `00:${minutes}:${seconds}`);
@@ -416,6 +416,8 @@ function removeShow(id) {
 
 	unpressButton(document.querySelector(`#${id} [data-action="add-show"]`));
 
+	console.log(`removed show: ${id}`);
+
 	loadShow();
 }
 
@@ -446,6 +448,7 @@ function loadShow() {
 		console.log(`loaded show: ${show.dataset.id}`);
 	} else {
 		page.audio.removeAttributes([`src`, `data-duration`]);
+		for (const time of [`Elapsed`, `Total`]) setTimestampFromSeconds(page[`showTime${time}`], "0");
 		page.controls.setAttribute(`hidden`, ``);
 		page.loadedShow.removeAttribute(`data-id`);
 	}
