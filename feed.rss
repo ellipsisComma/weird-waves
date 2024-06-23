@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Weird Waves</title>
@@ -16,6 +16,13 @@
 			<height>64</height>
 		</image>
 
+		<item>
+			<title>News: 2024-06-23</title>
+			<link>https://weirdwaves.net/</link>
+			<guid>https://weirdwaves.net/?126</guid>
+			<description>Added various new links (mostly radio stations, and one webcomic). I think the latest burst of activity on this site's mostly over, now that I've fixed all the long-term issues (a few accessibility and rendering problems, a few persistent low-level bugs, leftover code improvements, and the stream widget).</description>
+			<pubDate>Sun, 23 Jun 2024 00:00:00 +0100</pubDate>
+		</item>
 		<item>
 			<title>News: 2024-06-22</title>
 			<link>https://weirdwaves.net/</link>

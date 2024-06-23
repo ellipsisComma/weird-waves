@@ -183,7 +183,7 @@ Element.prototype.removeAttributes = function (attrs) {
 	for (const attr of attrs) this.removeAttribute(attr);
 };
 
-// set a string to be an HTML element's innerHTML or textContent depending on whether it includes HTML entities, tags, and/or comments
+// set a string to be an element's innerHTML or textContent depending on whether it includes HTML entities, tags, and/or comments
 HTMLElement.prototype.setContent = function (text) {
 	const regex = {
 		"escapes": /&#?\w+;/,
@@ -192,6 +192,13 @@ HTMLElement.prototype.setContent = function (text) {
 	};
 	if (regex.escapes.test(text) || regex.elements.test(text) || regex.comments.test(text)) this.innerHTML = text;
 	else this.textContent = text;
+};
+
+// create an array of nodes cloned from the target
+HTMLElement.prototype.cloneChildren = function () {
+	const clones = [];
+	for (const node of this.childNodes) clones.push(node.cloneNode(true));
+	return clones;
 };
 
 /* APP */
@@ -217,10 +224,14 @@ function getShowOnPlaylist(id) {
 }
 
 // add series name to show heading element and add series source to element info (for playlist and featured show)
-function expandShowInfo(showHTML, seriesInArchive) {
-	const showHeading = showHTML.querySelector(`.show-heading`);
-	showHeading.innerHTML = `${seriesInArchive.querySelector(`.series-heading`).innerHTML} ${showHeading.innerHTML}`;
-	showHTML.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
+function expandShowInfo(show, seriesInArchive) {
+	const showHeading = show.querySelector(`.show-heading`);
+	showHeading.replaceChildren(
+		...seriesInArchive.querySelector(`.series-heading`).cloneChildren(),
+		document.createTextNode(` `),
+		...showHeading.cloneChildren()
+	);
+	show.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
 }
 
 /* -------
@@ -424,7 +435,7 @@ function loadShow() {
 
 		const loadedShowHeading = page.loadedShow.appendChild(document.createElement(`h3`));
 		loadedShowHeading.classList.add(`show-heading`);
-		loadedShowHeading.innerHTML = show.querySelector(`.show-heading`).innerHTML;
+		loadedShowHeading.replaceChildren(...show.querySelector(`.show-heading`).cloneChildren());
 		page.loadedShow.appendChild(show.querySelector(`.show-content`).cloneNode(true));
 		page.controls.removeAttribute(`hidden`);
 
@@ -692,10 +703,10 @@ function buildArchive() {
 
 // build toggle switches
 function buildToggles() {
-	for (const toggle of document.querySelectorAll(`.toggle:not(:has(svg))`)) {
-		const label = toggle.innerHTML;
+	for (const toggle of document.querySelectorAll(`.toggle`)) {
+		const label = toggle.cloneChildren();
 		toggle.replaceChildren(templateHTML.toggle.content.cloneNode(true));
-		toggle.lastElementChild.setContent(label);
+		toggle.lastElementChild.replaceChildren(...label);
 	}
 }
 
