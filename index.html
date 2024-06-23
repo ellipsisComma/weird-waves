@@ -6,13 +6,13 @@
 	<title>Weird Waves</title>
 	<meta name="description" 	content="Audio horror broadcasting online.">
 
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-22" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-23" media="all">
 
 	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -223,7 +223,7 @@
 	</template>
 	<template id="font-button-template">
 		<li>
-			<button class="push-button" type="button" data-option="" data-font="" style="font-family:var(--font-stack);" aria-pressed="false"></button>
+			<button class="push-button" type="button" data-option="" data-font="" style="font-family:var(--font-stack);" aria-pressed="false"></button><!--style attribute necessary to over-ride font settings, despite also adding data-font attribute-->
 		</li>
 	</template>
 </div><!--#html-templates end-->
@@ -237,14 +237,15 @@
 
 
 
-<div id="radio-container">
+<div id="sidebar">
 	<h2 id="radio" class="screen-reader-only">Radio</h2>
 	<noscript>Sorry, this site requires JavaScript! Some content will be hidden, and the audio app won't work.</noscript>
 	<div id="radio-app">
+		<h3 class="screen-reader-only">Radio controls</h3>
 		<div id="controls" class="icon-button-set" hidden="">
 			<div id="seek-controls">
 				<input id="seek-bar" type="range" value="0" aria-label="Go to time in show">
-				<span id="show-time"><time class="timestamp" id="show-time-elapsed" datetime="00:00:00">00:00</time> / <time class="timestamp" id="show-time-total" datetime="00:00:00">00:00</time></span>
+				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
 			</div><!--#seek-controls end-->
 			<div id="show-controls" aria-live="assertive">
 				<button id="play-button" class="push-button" type="button" aria-label="Play show">
@@ -267,6 +268,7 @@
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
 			</div><!--#audio-controls end-->
 		</div>
+		<h3 class="screen-reader-only">Loaded show</h3>
 		<div id="loaded-show" aria-live="assertive"></div>
 		<audio id="show-audio"></audio>
 	</div><!--#radio-app end-->
@@ -346,7 +348,7 @@
 	<h3>Content notes</h3>
 	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older sources.</p>
 	<h3>Latest update</h3>
-	<p><time datetime="2024-07-21">21st of June, 2024</time>: I've replaced the loading spinners with a single overlay that fades out after the page is fully built.</p>
+	<p><time datetime="2024-07-23">23rd of June, 2024</time>: I've made a few accessibility tweaks and added some more links (mostly radio station links) in <a href="#links">Links</a>. The two remaining features I need to add are the page-load overlay (which I didn't get around to adding earlier this week) and some styling for the <abbr>RSS</abbr> feed (for which I'll need to change the feed's file-extension and <abbr title="Universal Resource Locator">URL</abbr>, which'll break all connections to the feed).</p>
 	<p>For older news, see the <a href="./feed.rss"><abbr>RSS</abbr> feed</a>.</p>
 </div><!--#about end-->
 
@@ -549,6 +551,6 @@
 
 
 <script src="./archive.js?v=2024-06-22"></script>
-<script src="./main.js?v=2024-06-24"></script>
+<script src="./main.js?v=2024-06-23b"></script>
 </body>
 </html>

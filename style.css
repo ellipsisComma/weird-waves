@@ -286,14 +286,12 @@ h1 {
 	font-feature-settings: "case" 1;
 }
 h2 {
+	margin-block-start: 0.2em;
+	padding-block-start: 20px;
 	font-size: 1.5em;
-	&:not(.show-heading) {
-		margin-block-start: 0.2em;
-		padding-block-start: 20px;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		font-feature-settings: "case" 1;
-	}
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	font-feature-settings: "case" 1;
 }
 h3 {
 	margin-block-start: 2.4em;
@@ -428,7 +426,7 @@ button {
 	RADIO
 ========== */
 
-#radio-container {
+#sidebar {
 	display: flex;
 	margin-block-start: var(--gap-size);
 	justify-content: center;
@@ -1047,7 +1045,7 @@ use[href="#svg-toggle-tick"] {
 	}
 
 	/* RADIO */
-	#radio-container {
+	#sidebar {
 		grid-area: radio;
 		align-self: start;
 		position: sticky;

@@ -206,10 +206,9 @@ HTMLElement.prototype.cloneChildren = function () {
 // take in a time in seconds (can be a non-integer) and output a timestamp in minutes and seconds
 function setTimestampFromSeconds(element, time) {
 	const minutes = Math.floor((parseInt(time) % 3600) / 60).toString().padStart(2, `0`),
-	seconds = Math.floor(parseInt(time) % 60).toString().padStart(2, `0`);
+	seconds = (parseInt(time) % 60).toString().padStart(2, `0`);
 
-	element.innerText = `${minutes}:${seconds}`;
-	element.setAttribute(`datetime`, `00:${minutes}:${seconds}`);
+	element.textContent = `${minutes}:${seconds}`;
 }
 
 // get show ID from a pool, adjusted for copyright safety
@@ -430,20 +429,18 @@ function loadShow() {
 
 	if (playlist.children.length > 0) {
 		const show = page.playlist.firstElementChild;
-		page.loadedShow.dataset.id = page.playlist.firstElementChild.dataset.id;
+		page.loadedShow.dataset.id = show.dataset.id;
 
 		page.audio.src = `${paths.show}${show.dataset.id}${showFileExtension}`;
 		page.audio.dataset.duration = show.dataset.duration;
 
-		const loadedShowHeading = page.loadedShow.appendChild(document.createElement(`h3`));
-		loadedShowHeading.classList.add(`show-heading`);
-		loadedShowHeading.replaceChildren(...show.querySelector(`.show-heading`).cloneChildren());
-		page.loadedShow.appendChild(show.querySelector(`.show-content`).cloneNode(true));
-		page.controls.removeAttribute(`hidden`);
+		page.loadedShow.replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
 
 		seekTime(0);
 		page.seekBar.value = 0;
 		setTimestampFromSeconds(page.showTimeTotal, page.audio.dataset.duration);
+
+		page.controls.removeAttribute(`hidden`);
 
 		console.log(`loaded show: ${show.dataset.id}`);
 	} else {
