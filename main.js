@@ -96,7 +96,7 @@ const page = {
 
 	// radio
 	"loadedShow": `#loaded-show`,
-	"controls": `#controls`,
+	"controls": `#radio-controls`,
 	"seekBar": `#seek-bar`,
 	"showTimeElapsed": `#show-time-elapsed`,
 	"showTimeTotal": `#show-time-total`,
@@ -185,12 +185,8 @@ Element.prototype.removeAttributes = function (attrs) {
 
 // set a string to be an element's innerHTML or textContent depending on whether it includes HTML entities, tags, and/or comments
 HTMLElement.prototype.setContent = function (text) {
-	const regex = {
-		"escapes": /&#?\w+;/,
-		"elements": /<[a-z]|\/>|<\//,
-		"comments": /<!--/
-	};
-	if (regex.escapes.test(text) || regex.elements.test(text) || regex.comments.test(text)) this.innerHTML = text;
+	const HTMLRegex = /&#?\w+;|<[a-z]|\/>|<\/|<!--/;
+	if (HTMLRegex.test(text)) this.innerHTML = text;
 	else this.textContent = text;
 };
 
@@ -289,8 +285,8 @@ function hideClearPlaylistControls() {
 // clear playlist and hide clear controls again, then load show (i.e. nothing)
 function clearPlaylist() {
 	if (page.playlist.children.length > 0) {
-		for (const button of page.seriesList.querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)) unpressButton(button);
 		page.playlist.replaceChildren();
+		for (const button of page.seriesList.querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)) unpressButton(button);
 	}
 	if (!page.clearPlaylistControls.hidden) hideClearPlaylistControls();
 	loadShow();

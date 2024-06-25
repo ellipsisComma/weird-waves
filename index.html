@@ -12,7 +12,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-23" media="all">
+	<link rel="stylesheet" type="text/css" href="./style.css?v=2024-06-25" media="all">
 
 	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg">
 	<link rel="shortcut icon" href="./images/favicons/dark.ico">
@@ -237,12 +237,12 @@
 
 
 
-<div id="sidebar">
+<aside id="sidebar">
 	<h2 id="radio" class="screen-reader-only">Radio</h2>
 	<noscript>Sorry, this site requires JavaScript! Some content will be hidden, and the audio app won't work.</noscript>
 	<div id="radio-app">
 		<h3 class="screen-reader-only">Radio controls</h3>
-		<div id="controls" class="icon-button-set" hidden="">
+		<div id="radio-controls" class="icon-button-set" hidden="">
 			<div id="seek-controls">
 				<input id="seek-bar" type="range" value="0" aria-label="Go to time in show">
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
@@ -267,12 +267,12 @@
 				</button>
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
 			</div><!--#audio-controls end-->
-		</div>
+		</div><!--#radio-controls end-->
 		<h3 class="screen-reader-only">Loaded show</h3>
 		<div id="loaded-show" aria-live="assertive"></div>
 		<audio id="show-audio"></audio>
 	</div><!--#radio-app end-->
-</div><!--#radio-container end-->
+</aside><!--#sidebar end-->
 
 
 
@@ -551,6 +551,6 @@
 
 
 <script src="./archive.js?v=2024-06-22"></script>
-<script src="./main.js?v=2024-06-23b"></script>
+<script src="./main.js?v=2024-06-25"></script>
 </body>
 </html>
