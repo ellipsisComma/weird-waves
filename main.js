@@ -35,7 +35,7 @@ settings.autoPlayNextShow ??= true;
 settings.notesOpen ??= false;
 
 // options for theme, font etc., with displayed names and underlying codes
-const styleOptions = {
+let styleOptions = {
 	"themes": [
 		{	"name": `Dark`,		"code": `dark`		},
 		{	"name": `Goop`,		"code": `goop`		},
@@ -63,11 +63,11 @@ const styleOptions = {
 };
 
 // nav link names, codes, and optionally href (if not the code) and HTML attributes
-const navLinks = {
+let navLinks = {
 	"activity": [
 		{	"name": `Booth`, 			"code": `booth`		},
 		{	"name": `Archive`, 			"code": `archive`	},
-		{	"name": `<abbr title="Really Simple Syndication / RDF Site Summary">RSS</abbr>`, "code": `rss`, "href": `./feed.rss`, "attrs": {"type": `application/rss+xml`}	}
+		{	"name": `Feed`, 			"code": `feed`, 	"href": `./feed.xml`}
 	],
 	"info": [
 		{	"name": `About`, 			"code": `about`		},
@@ -227,33 +227,6 @@ function expandShowInfo(show, seriesInArchive) {
 		...showHeading.cloneChildren()
 	);
 	show.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
-}
-
-/* -------
-NAVIGATION
-------- */
-
-// update title and currently-marked nav-link depending on hash
-function navigateToSection() {
-	if (window.location.hash.length === 0) {
-		document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
-		document.title = page.title.dataset.original;
-		return;
-	}
-
-	// find section that hash target is or is inside (use querySelector, not getElementById, because it can directly take window.location.hash instead of having to remove #)
-	const section = document.querySelector(window.location.hash)?.closest(`main > *`);
-
-	// if the targeted section exists, switch aria-current to target's nav-link and update title accordingly, else return to default page title
-	if (section) {
-		const navLink = document.querySelector(`nav [href="#${section.id}"]`);
-		document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
-		document.title = `${navLink.dataset.title ?? navLink.innerText} / ${page.title.dataset.original}`;
-		navLink.setAttribute(`aria-current`, `page`);
-	} else {
-		window.location.hash = ``;
-		navigateToSection();
-	}
 }
 
 /* -----
@@ -578,7 +551,7 @@ function updateSetting(name, option) {
 	unpressButton(page[`${name}Buttons`].querySelector(`[aria-pressed="true"]`));
 	pressButton(page[`${name}Buttons`].querySelector(`[data-option="${option}"]`));
 
-	document.body.dataset[name] = option;
+	document.documentElement.dataset[name] = option;
 	styles[name] = option;
 }
 
@@ -762,9 +735,6 @@ function buildFeaturedShow() {
 	EVENTS
 =========== */
 
-// nav events
-window.addEventListener(`hashchange`, navigateToSection);
-
 // radio audio events
 page.audio.addEventListener(`ended`, loadNextShow);
 
@@ -852,8 +822,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	if (window.location.hash) navigateToSection();
 
 	// clear out setup variables
-	archive.length = 0;
-	for (const obj of [styleOptions, navLinks]) for (const key of Object.keys(obj)) delete obj[key];
+	archive = null;
+	styleOptions = null
+	navLinks = null;
 });
 
 // on closing window/browser tab, record user settings and styles to localStorage

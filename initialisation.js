@@ -4,4 +4,29 @@
 const styles = JSON.parse(window.localStorage.getItem(`styles`)) ?? {};
 styles.theme ??= `dark`;
 styles.font ??= `serif`;
-for (const [style, option] of Object.entries(styles)) document.body.dataset[style] = option;
+for (const [style, option] of Object.entries(styles)) document.documentElement.dataset[style] = option;
+
+// update title and currently-marked nav-link depending on hash
+function navigateToSection() {
+	if (window.location.hash.length === 0) {
+		document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
+		document.title = page.title.dataset.original;
+		return;
+	}
+
+	// find section that hash target is or is inside
+	const section = document.querySelector(window.location.hash)?.closest(`main > *`);
+
+	// if the targeted section exists, switch aria-current to target's nav-link and update title accordingly, else return to default page title
+	if (section) {
+		const navLink = document.querySelector(`nav [href="#${section.id}"]`);
+		document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
+		document.title = `${navLink.dataset.title ?? navLink.innerText} / ${page.title.dataset.original}`;
+		navLink.setAttribute(`aria-current`, `page`);
+	} else {
+		window.location.hash = ``;
+		navigateToSection();
+	}
+}
+
+window.addEventListener(`hashchange`, navigateToSection);

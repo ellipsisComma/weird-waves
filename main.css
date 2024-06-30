@@ -32,6 +32,8 @@ RESPONSIVITY
 	--gap-size: 10px;
 	--main-column-padding: calc(2 * var(--gap-size));
 
+	--meta-font-size: 0.75em;
+
 	--seek-bar-thumb-size: 1em;
 	--toggle-transition-duration: 0.5s;
 	--control-depth: 0.3em;
@@ -323,7 +325,9 @@ a:active {
 	color: var(--hot-colour);
 }
 [rel~="external"]::after {
-	content: "\00a0\2206";
+	content: "\00a0\2206"; /* non-breaking space + increment */
+	display: inline-block;
+	font-variant-position: super;
 }
 .uppercase {
 	text-transform: uppercase;
@@ -589,9 +593,6 @@ nav {
 		gap: 0.2em;
 		text-decoration: none;
 		user-select: none;
-		&[type$="/rss+xml"] {
-			color: var(--hot-colour);
-		}
 		&[href^="#"] {
 			outline-width: calc(var(--line-width) / 2);
 			outline-style: solid;
@@ -606,6 +607,17 @@ nav {
 			}
 			&:is(:active, :visited, :link) {
 				color: unset;
+			}
+		}
+		&:not([href^="#"]) {
+			&:link use {
+				stroke: var(--hot-colour);
+			}
+			&:visited use {
+				stroke: var(--cold-colour);
+			}
+			&:active use {
+				stroke: var(--hot-colour);
 			}
 		}
 		& > span {
@@ -756,7 +768,7 @@ main {
 }
 .series-source {
 	margin-block-start: 0.3em;
-	font-size: 0.75em;
+	font-size: var(--meta-font-size);
 	&::before {
 		content: "source: ";
 	}
