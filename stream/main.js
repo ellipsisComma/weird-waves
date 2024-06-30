@@ -36,7 +36,8 @@ EVENTS: event listeners
 
 // relative path of the show audio folder
 const paths = {
-	"show": "../audio/shows/"
+	"show": "../audio/shows/",
+	"favicon": "../images/favicons/"
 };
 
 // initialised settings from storage and set default values if not set
@@ -84,6 +85,8 @@ const styleOptions = {
 const page = {
 // head
 	"title": document.querySelector("title"),
+	"SVGFavicon": document.querySelector('[rel~="icon"][href$=".svg"]'),
+	"icoFavicon": document.querySelector('[href$=".ico"]'),
 
 // radio
 	"loadedShow": "loaded-show",
@@ -516,6 +519,9 @@ function updateSetting(setting, value) {
 // switch between different colour themes
 function switchTheme(theme) {
 	updateSetting("theme", theme);
+
+	page.SVGFavicon.href = paths.favicon + theme + ".svg";
+	page.icoFavicon.href = paths.favicon + theme + ".ico";
 }
 
 // switch between different fonts
