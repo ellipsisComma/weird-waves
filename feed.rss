@@ -17,6 +17,13 @@
 		</image>
 
 		<item>
+			<title>ALERT! Switch to the new feed!</title>
+			<link>https://weirdwaves.net/feed.xml</link>
+			<guid>https://weirdwaves.net/feed.xml</guid>
+			<description>I've moved Weird Waves' feed from RSS (this file) to Atom (a new file). The link in this feed entry is the link to the new feed—use it to update your aggregator. The RSS file will be deleted at the end of July, so if you're subscribed to this one then please switch over before then! Future updates will probably only be very occasional announcements of new shows. Also, the new feed uses some very neat tech to turn the raw feed file into a web page when you view it in the browser! Try it at the link provided with this update.</description>
+			<pubDate>Thu, 27 Jun 2024 00:00:00 +0100</pubDate>
+		</item>
+		<item>
 			<title>News: 2024-06-23</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?126</guid>
@@ -121,7 +128,7 @@
 			<description>Fixed a font rendering problem in Chrome and Safari (and possibly other non-Firefox browsers) on MacOS, in which text was displayed with more space above than below.</description>
 			<pubDate>Sun, 12 May 2024 00:00:00 +0100</pubDate>
 		</item>
-			<item>
+		<item>
 			<title>News: 2024-02-18</title>
 			<link>https://weirdwaves.net/</link>
 			<guid>https://weirdwaves.net/?111</guid>

@@ -2,7 +2,7 @@
 
 // bitrate: constant 24kbps; sample rate: 22050Hz
 
-const archive = [
+let archive = [
 {
 "code": `ByM`,
 "heading": `<cite>Beyond Midnight</cite>`,
