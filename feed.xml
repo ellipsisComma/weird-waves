@@ -10,7 +10,7 @@
 		<name><![CDATA[Weird Waves]]></name>
 	</author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-06-27T00:00:00+01:00</updated>
+	<updated>2024-06-30T00:00:00+01:00</updated>
 
 
 
@@ -23,8 +23,8 @@
 			<p>Unfortunately, this move forced me to change the feed's file extension from <code>.rss</code> to <code>.xml</code> so browsers open it as a page instead of trying to download the raw file. This'll break the connection for anyone subscribed to the old feed. I can't do anything about that other than put a big alert in the old file pointing people to the new one and wait a while before deleting it.</p>
 			<p>Finally, I changed the feed type from <abbr title="Really Simple Syndication / RDF Site Summary">RSS</abbr> to Atom, which is a slightly more robust spec. This isn't gonna cause problems, since basically any feed reader that can read the former can read the latter, but I did have to update a few little bits and pieces around the site.</p>			
 		]]></content>
-		<published>2024-06-27T00:00:00+01:00</published>
-		<updated>2024-06-27T00:00:00+01:00</updated>
+		<published>2024-06-30T00:00:00+01:00</published>
+		<updated>2024-06-30T00:00:00+01:00</updated>
 		<category term="bulletins" />
 	</entry>
 	<entry>
