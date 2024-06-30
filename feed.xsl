@@ -154,7 +154,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	</symbol>
 	<symbol id="svg-bulletins">
 		<path d="M4 20v-11a8-8 0 0 1 16 0v11m2 0v2h-20v-2z" />
-		<path class="svg-hot-stroke" d="M6 16v-6h2a2 2 0 0 1 0 4a2 2 0 0 1 2 2m2 0v-6m2 6v-6h2a2 2 0 0 1 0 4" />
+		<path class="svg-hot-stroke" d="M6 15v-6h2a2 2 0 0 1 0 4a2 2 0 0 1 2 2m2 0v-6m2 6v-6h2a2 2 0 0 1 0 4" />
 	</symbol>
 	<symbol id="svg-features">
 		<g id="svg-bulb">
@@ -291,6 +291,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 			</dd>
 		</div>
 	</dl>
+	<noscript>Sorry, this feed requires JavaScript to display properly! Without it, post titles and content will appear as raw markup, among other minor changes.</noscript>
 </div><!--#about end-->
 
 
@@ -298,7 +299,6 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 <div id="bulletins">
 	<h2>Bulletins</h2>
 	<p>Milestones, show announcements, and major decisions in the site's development.</p>
-	<p><strong>Note:</strong> New show announcements before 2024 have been removed from the Feed for brevity.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
 		<xsl:call-template name="list-posts">
