@@ -22,7 +22,7 @@ article ul > ::marker {
 	header {
 		margin-inline-start: -1em;
 		a::after {
-			content: "[#]";
+			content: "[link]";
 		}
 	}
 	& > :first-child h3 {
