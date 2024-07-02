@@ -336,16 +336,14 @@ abbr[title] {
 	text-decoration: none;
 	cursor: help;
 }
-summary {
+.content-notes > summary {
+	display: inline-block;
+	color: var(--hot-colour);
 	list-style-type: none;
 	cursor: pointer;
 	&::-webkit-details-marker {
 		display: none;
 	}
-}
-.content-notes > summary {
-	display: inline-block;
-	color: var(--hot-colour);
 	&::after {
 		content: " (click to show)";
 	}

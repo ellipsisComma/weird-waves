@@ -123,7 +123,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-06-28" />
+	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-02" />
 	<link rel="stylesheet" type="text/css" media="all" href="./feed.css?v=2024-07-01" />
 
 	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg" />
