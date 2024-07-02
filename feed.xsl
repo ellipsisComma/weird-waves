@@ -126,8 +126,8 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-02" />
 	<link rel="stylesheet" type="text/css" media="all" href="./feed.css?v=2024-07-01" />
 
-	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg" />
-	<link rel="shortcut icon" href="./images/favicons/dark.ico" />
+	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg" sizes="any" />
+	<link rel="icon" href="./images/favicons/dark.ico" sizes="48x48" />
 
 	<script src="./initialisation.js?v=2024-06-28"></script>
 </head>
