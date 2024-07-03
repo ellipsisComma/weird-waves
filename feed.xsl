@@ -40,16 +40,14 @@
 					<xsl:value-of select="$href" />
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:text>#</xsl:text>
-					<xsl:value-of select="$code" />
+					<xsl:value-of select="concat('#', $code)" />
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:attribute>
 		<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
 			<use>
 				<xsl:attribute name="href">
-					<xsl:text>#svg-</xsl:text>
-					<xsl:value-of select="$code" />
+					<xsl:value-of select="concat('#svg-', $code)" />
 				</xsl:attribute>
 			</use>
 		</svg>
@@ -145,10 +143,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 <xsl:template match="atom:feed">
 <html lang="en-GB" data-theme="dark" data-font="sans">
 <head>
-	<title>
-		<xsl:value-of select="atom:title" />
-		<xsl:text> Feed</xsl:text>
-	</title>
+	<title><xsl:value-of select="concat(atom:title, ' Feed')" /></title>
 
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2" as="font" crossorigin="" />
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2" as="font" crossorigin="" />
