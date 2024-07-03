@@ -1,6 +1,7 @@
 /*jshint esversion: 11*/
 
 // bitrate: constant 24kbps; sample rate: 22050Hz
+// banger = good show, but only the first show of a multi-show series will be tagged as a banger
 
 let archive = [
 {
@@ -498,21 +499,18 @@ let archive = [
 	"code": `2-starts_Angel`,
 	"heading": `part 2`,
 	"blurb": `From <cite>The Worm and the Angel</cite> to <cite>Spring in Town</cite>.`,
-	"duration": 1854,
-	"banger": true
+	"duration": 1854
 	},{
 	"code": `3-starts_Enemy`,
 	"heading": `part 3`,
 	"blurb": `From <cite>How the Enemy Came to Thlunrana</cite> to <cite>The Reward</cite>.`,
-	"duration": 1834,
-	"banger": true
+	"duration": 1834
 	},{
 	"code": `4-starts_Trouble`,
 	"heading": `part 4`,
 	"blurb": `From <cite>The Trouble in Leafy Green Street</cite> to <cite>The Tomb of Pan</cite>.`,
 	"notes": `animal sacrifice, lynching`,
-	"duration": 2067,
-	"banger": true
+	"duration": 2067
 	}
 ]
 },{
@@ -1004,8 +1002,7 @@ let archive = [
 	"heading": `#17: <cite>The War of the Worlds</cite>, part 2`,
 	"blurb": `An adaptation of H.&thinsp;G.&thinsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.`,
 	"notes": `asphyxiation, plane crash, poison-gassing`,
-	"duration": 1146,
-	"banger": true
+	"duration": 1146
 	}
 ]
 },{
@@ -1394,14 +1391,12 @@ let archive = [
 	"heading": `dreams: <cite>A Shop in Go-By Street</cite>`,
 	"blurb": `The dreamer returns to the Yann via a strange shop of myths and rareties, seeking his friends on the <i>Bird of the River</i>. Read by Ed Humpal.`,
 	"notes": `alcohol`,
-	"duration": 1216,
-	"banger": true
+	"duration": 1216
 	},{
 	"code": `13-Avenger`,
 	"heading": `dreams: <cite>The Avenger of Perdóndaris</cite>`,
 	"blurb": `The dreamer returns once more and visits the palace of Singanee, avenger of ruined Perdóndaris, and grows weary of dreams. Read by Ed Humpal.`,
-	"duration": 2068,
-	"banger": true
+	"duration": 2068
 	}
 ]
 },{
@@ -1434,8 +1429,7 @@ let archive = [
 	"heading": `#9: <cite>A Mile High and a Mile Deep</cite> (script read)`,
 	"blurb": `The Earth takes its due in the mines far below Butte, Montana&mdash;the city a mile high and a mile deep. An amateur reading of this lost episode's script.`,
 	"notes": `claustrophobia, darkness`,
-	"duration": 1615,
-	"banger": true
+	"duration": 1615
 	},{
 	"code": `019-Obscura`,
 	"heading": `#19: <cite>Camera Obscura</cite>`,
@@ -1676,8 +1670,7 @@ let archive = [
 	"heading": `#13: <cite>An Elevator and a Pole</cite>, part 2`,
 	"blurb": `One group gathers round a weird pole in the middle of nowhere; another's stuck in an elevator. They all struggle to understand and control their fates.`,
 	"notes": `descriptions of gore, fall death, vomiting, suicide`,
-	"duration": 1666,
-	"banger": true
+	"duration": 1666
 	},{
 	"code": `18-Titanic`,
 	"heading": `#18: <cite>Titanic Dreams</cite>`,

@@ -25,6 +25,39 @@
 <xsl:value-of select="count(atom:entry[atom:category/@term = $category])" />
 </xsl:template>
 
+
+
+<!--build specific nav-link-->
+<xsl:template name="build-nav-link">
+<xsl:param name="name" />
+<xsl:param name="code" />
+<xsl:param name="href" />
+<li>
+	<a>
+		<xsl:attribute name="href">
+			<xsl:choose>
+				<xsl:when test="$href != ''">
+					<xsl:value-of select="$href" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>#</xsl:text>
+					<xsl:value-of select="$code" />
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:attribute>
+		<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+			<use>
+				<xsl:attribute name="href">
+					<xsl:text>#svg-</xsl:text>
+					<xsl:value-of select="$code" />
+				</xsl:attribute>
+			</use>
+		</svg>
+		<span><xsl:value-of select="$name" /></span>
+	</a>
+</li>
+</xsl:template>
+
 <!--
 render all posts from a category, each including:
 	* a hash-link in the heading
@@ -123,8 +156,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-02" />
-	<link rel="stylesheet" type="text/css" media="all" href="./feed.css?v=2024-07-01" />
+	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-03" />
 
 	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg" sizes="any" />
 	<link rel="icon" href="./images/favicons/dark.ico" sizes="48x48" />
@@ -199,44 +231,38 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 
 <nav>
 	<ul id="general-sections">
-		<li>
-			<a href="#all-news">
-				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-all-news" /></svg>
-				<span>All News</span>
-			</a>
-		</li>
-		<li>
-			<a href="#about">
-				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24" ><use href="#svg-about" /></svg>
-				<span>About</span>
-			</a>
-		</li>
-		<li>
-			<a href="./index.html">
-				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-return" /></svg>
-				<span>Return</span>
-			</a>
-		</li>
+		<xsl:call-template name="build-nav-link">
+			<xsl:with-param name="name" select="'All News'" />
+			<xsl:with-param name="code" select="'all-news'" />
+			<xsl:with-param name="href" />
+		</xsl:call-template>
+		<xsl:call-template name="build-nav-link">
+			<xsl:with-param name="name" select="'About'" />
+			<xsl:with-param name="code" select="'about'" />
+			<xsl:with-param name="href" />
+		</xsl:call-template>
+		<xsl:call-template name="build-nav-link">
+			<xsl:with-param name="name" select="'Return'" />
+			<xsl:with-param name="code" select="'return'" />
+			<xsl:with-param name="href" select="'./index.html'" />
+		</xsl:call-template>
 	</ul><!--#general-sections end-->
 	<ul id="category-sections">
-		<li>
-			<a href="#bulletins">
-				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-bulletins" /></svg>
-				<span>Bulletins</span>
-			</a>
-		</li>
-		<li>
-			<a href="#features">
-				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-features" /></svg>
-				<span>Features</span>
-			</a>
-		</li>
-		<li>
-			<a href="#history">
-				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-history" /></svg>
-				<span>History</span>
-			</a>
-		</li>
+		<xsl:call-template name="build-nav-link">
+			<xsl:with-param name="name" select="'Bulletins'" />
+			<xsl:with-param name="code" select="'bulletins'" />
+			<xsl:with-param name="href" />
+		</xsl:call-template>
+		<xsl:call-template name="build-nav-link">
+			<xsl:with-param name="name" select="'Features'" />
+			<xsl:with-param name="code" select="'features'" />
+			<xsl:with-param name="href" />
+		</xsl:call-template>
+		<xsl:call-template name="build-nav-link">
+			<xsl:with-param name="name" select="'History'" />
+			<xsl:with-param name="code" select="'history'" />
+			<xsl:with-param name="href" />
+		</xsl:call-template>
 	</ul><!--#category-sections end-->
 </nav>
 
@@ -349,7 +375,23 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 
 
 
-<script src="./feed.js?V=2024-06-29b"></script>
+<script><![CDATA[
+// setup for navigateToSection()
+const page = {
+	"title": document.querySelector(`title`),
+	"nav": document.querySelector(`nav`)
+};
+page.title.dataset.original = document.title;
+if (window.location.hash) navigateToSection();
+
+// update favicons according to theme
+document.querySelector(`[rel~="icon"][href$=".svg"]`).href = `./images/favicons/${styles.theme}.svg`;
+document.querySelector(`[href$=".ico"]`).href = `./images/favicons/${styles.theme}.ico`;
+
+// re-parse elements from the parsed file that contain HTML (or SVG)
+const HTMLRegex = /&#?\w+;|<;[a-z]|\/>|<\/|<!--/;
+for (const content of document.querySelectorAll(`.contains-html`)) if (HTMLRegex.test(content.innerText)) content.innerHTML = content.innerText;
+]]></script>
 </body>
 </html>
 </xsl:template>

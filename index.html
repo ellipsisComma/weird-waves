@@ -12,7 +12,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-02" media="all">
+	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-03" media="all">
 
 	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg" sizes="any">
 	<link rel="icon" href="./images/favicons/dark.ico" sizes="48x48">
@@ -136,18 +136,19 @@
 
 
 
-<div id="html-templates">
-	<!--nav-->
-	<template id="nav-link-template">
-		<li>
-			<a href="">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="" /></svg>
-				<span></span>
-			</a>
-		</li>
-	</template>
-	<!--booth-->
-	<template id="show-position-controls-template">
+<!--html templates start-->
+<!--nav-->
+<template id="nav-link-template">
+	<li>
+		<a href="">
+			<svg class="svg-icon" viewBox="0 0 24 24"><use href="" /></svg>
+			<span></span>
+		</a>
+	</li>
+</template>
+<!--booth-->
+<template id="playlist-item-template">
+	<li dataset-id="" dataset-duration="">
 		<ul class="show-position-controls icon-button-set">
 			<li>
 				<button class="push-button" type="button" data-action="move-up" data-target="" aria-label="Move show up">
@@ -165,66 +166,62 @@
 				</button>
 			</li>
 		</ul>
-	</template>
-	<template id="invalid-ids-import-error-message-template">
-		<p>Invalid show ID(s):</p>
-		<ul></ul>
-	</template>
-	<!--archive-->
-	<template id="archive-series-template">
-		<li id="">
-			<header>
-				<h3 class="series-heading"></h3>
-				<div class="series-content">
-					<p class="series-blurb"></p>
-					<p class="series-source"></p>
-				</div>
-				<button class="push-button" type="button" data-target="" data-action="add-series">Add series to playlist</button>
-			</header>
-			<ol class="show-list"></ol>
-		</li>
-	</template>
-	<template id="archive-show-template">
-		<li id="" data-duration="">
-			<div class="show-info">
-				<h4 class="show-heading"></h4>
-				<div class="show-content">
-					<p class="show-blurb"></p>
-					<details class="content-notes">
-						<summary>Content notes</summary>
-						<span></span>
-					</details>
-				</div>
+		<div class="show-info"></div>
+	</li>
+</template>
+<!--archive-->
+<template id="archive-series-template">
+	<li id="">
+		<header>
+			<h3 class="series-heading"></h3>
+			<div class="series-content">
+				<p class="series-blurb"></p>
+				<p class="series-source"></p>
 			</div>
-			<button class="push-button" type="button" data-target="" data-action="add-show" aria-pressed="false">Add to playlist</button>
-		</li>
-	</template>
-	<!--settings-->
-	<template id="toggle-template">
-		<svg class="svg-icon" viewBox="0 0 48 24">
-			<use href="#svg-toggle-track" />
-			<g class="svg-toggle-thumb">
-				<use href="#svg-toggle-thumb-side" />
-				<use href="#svg-toggle-thumb-top" />
-				<use href="#svg-toggle-tick" />
-			</g>
-		</svg>
-		<span></span>
-	</template>
-	<template id="theme-button-template">
-		<li>
-			<button class="push-button" type="button" data-option="" aria-pressed="false">
-				<span class="palette" data-theme=""></span>
+			<button class="push-button" type="button" data-target="" data-action="add-series">Add series to playlist</button>
+		</header>
+		<ol class="show-list"></ol>
+	</li>
+</template>
+<template id="archive-show-template">
+	<li id="" data-duration="">
+		<h4 class="show-heading"></h4>
+		<div class="show-content">
+			<p class="show-blurb"></p>
+			<details class="content-notes">
+				<summary>Content notes</summary>
 				<span></span>
-			</button>
-		</li>
-	</template>
-	<template id="font-button-template">
-		<li>
-			<button class="push-button" type="button" data-option="" data-font="" style="font-family:var(--font-stack);" aria-pressed="false"></button><!--style attribute necessary to over-ride font settings, despite also adding data-font attribute-->
-		</li>
-	</template>
-</div><!--#html-templates end-->
+			</details>
+		</div>
+		<button class="push-button" type="button" data-target="" data-action="add-show" aria-pressed="false">Add to playlist</button>
+	</li>
+</template>
+<!--settings-->
+<template id="toggle-template">
+	<svg class="svg-icon" viewBox="0 0 48 24">
+		<use href="#svg-toggle-track" />
+		<g class="svg-toggle-thumb">
+			<use href="#svg-toggle-thumb-side" />
+			<use href="#svg-toggle-thumb-top" />
+			<use href="#svg-toggle-tick" />
+		</g>
+	</svg>
+	<span></span>
+</template>
+<template id="theme-button-template">
+	<li>
+		<button class="push-button" type="button" data-option="" aria-pressed="false">
+			<span class="palette" data-theme=""></span>
+			<span></span>
+		</button>
+	</li>
+</template>
+<template id="font-button-template">
+	<li>
+		<button class="push-button" type="button" data-option="" data-font="" style="font-family:var(--font-stack);" aria-pressed="false"></button><!--style attribute necessary to over-ride font settings, despite also adding data-font attribute-->
+	</li>
+</template>
+<!--html templates end-->
 
 
 
@@ -267,7 +264,7 @@
 			</div><!--#audio-controls end-->
 		</div><!--#radio-controls end-->
 		<h3 class="screen-reader-only">Loaded show</h3>
-		<div id="loaded-show" aria-live="assertive"></div>
+		<div id="loaded-show" aria-live="assertive" dataset-id=""></div>
 		<audio id="show-audio"></audio>
 	</div><!--#radio-app end-->
 </aside><!--#sidebar end-->
@@ -303,7 +300,10 @@
 		<h3>Import & export</h3>
 		<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
 		<textarea id="import-export-data" aria-label="Import/export playlist data"></textarea>
-		<div id="import-error-message"></div>
+		<div id="import-error-message" hidden="">
+			<p>Invalid show ID(s):</p>
+			<ul id="invalid-show-ids"></ul>
+		</div>
 		<ul class="flex-list">
 			<li><button id="export-button" class="push-button" type="button">Export</button></li>
 			<li><button id="import-button" class="push-button" type="button">Import</button></li>
@@ -534,10 +534,10 @@
 <div id="welcome">
 	<h2>Welcome to Weird Waves!</h2>
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks.</p>
-	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<div id="featured-show-container">
+		<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 		<h3>Why not try&hellip;</h3>
-		<div id="featured-show"></div>
+		<div id="featured-show" hidden=""></div>
 	</div>
 </div><!--#welcome end-->
 </main>
@@ -545,7 +545,7 @@
 
 
 
-<script src="./archive.js?v=2024-06-27"></script>
-<script src="./main.js?v=2024-07-02"></script>
+<script src="./archive.js?v=2024-07-03"></script>
+<script src="./main.js?v=2024-07-03"></script>
 </body>
 </html>
