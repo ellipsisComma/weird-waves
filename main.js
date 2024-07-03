@@ -11,7 +11,6 @@ FUNCTIONS
 	SETTINGS: changing settings and displaying the results
 	PAGE CONSTRUCTION: building page sections and content (e.g. the archive)
 EVENTS: event listeners
-ARCHIVE: an object with every source and show in the Archive
 */
 
 
@@ -96,7 +95,7 @@ const page = {
 
 	// radio
 	"loadedShow": `#loaded-show`,
-	"controls": `#radio-controls`,
+	"radioControls": `#radio-controls`,
 	"seekBar": `#seek-bar`,
 	"showTimeElapsed": `#show-time-elapsed`,
 	"showTimeTotal": `#show-time-total`,
@@ -118,6 +117,7 @@ const page = {
 	"clearPlaylistControls": `#clear-playlist-controls`,
 	"importExport": `#import-export-data`,
 	"importErrorMessage": `#import-error-message`,
+	"invalidShowIDs": `#invalid-show-ids`,
 
 	// archive
 	"seriesLinks": `#archive-series-links`,
@@ -135,8 +135,7 @@ templateHTML = {
 	"navLink": `nav-link`,
 
 	// booth
-	"showPositionControls": `show-position-controls`,
-	"invalidIDsImportErrorMessage": `invalid-ids-import-error-message`,
+	"playlistItem": `playlist-item`,
 
 	// archive
 	"archiveSeries": `archive-series`,
@@ -267,8 +266,8 @@ function clearPlaylist() {
 
 // clear import errors
 function clearImportErrors() {
-	page.importErrorMessage.textContent = ``;
-	page.importErrorMessage.replaceChildren();
+	page.importErrorMessage.setAttribute(`hidden`, ``);
+	page.invalidShowIDs.replaceChildren();
 }
 
 // list playlist of show IDs line-by-line in import-export box
@@ -281,26 +280,22 @@ function exportPlaylist() {
 
 // import playlist from textbox
 function importPlaylist() {
-	const importList = page.importExport.value.replace(/\n\n+/g, `\n`).replace(/ /g, ``).trim();
-
 	clearImportErrors();
 
 	// if attempting to import IDs, validate them and either present invalid IDs or update playlist; if import box is empty, clear playlist
-	if (importList.length > 0) {
-		const importIDs = importList.split(`\n`),
-		invalidIDs = importIDs.filter(id => !document.getElementById(id));
+	const importIDs = page.importExport.value.trim().replace(/\n\n+/g, `\n`).replace(/ /g, ``).split(`\n`),
+	invalidIDs = importIDs.filter(id => !document.getElementById(id));
 
-		if (invalidIDs.length === 0) {
-			clearPlaylist();
-			for (const id of importIDs) addShow(id);
-			page.importExport.value = ``;
-		} else {
-			page.importErrorMessage.appendChild(templateHTML.invalidIDsImportErrorMessage.content.cloneNode(true));
-			const invalidIDsList = page.importErrorMessage.querySelector(`ul`);
-			for (const id of invalidIDs) invalidIDsList.appendChild(document.createElement(`li`)).textContent = id;
-			page.importErrorMessage.scrollIntoView();
-		}
-	} else page.importErrorMessage.textContent = `Invalid import: no show IDs.`;
+	if (invalidIDs.length === 0) {
+		clearPlaylist();
+		for (const id of importIDs) addShow(id);
+		page.importExport.value = ``;
+		clearImportErrors();
+	} else {
+		for (const id of invalidIDs) page.invalidShowIDs.appendChild(document.createElement(`li`)).textContent = id;
+		page.importErrorMessage.removeAttribute(`hidden`);
+		page.importErrorMessage.scrollIntoView();
+	}
 }
 
 /* --
@@ -321,12 +316,13 @@ function addShow(id) {
 	}
 
 	// build new show element and clone in show position controls and show content from Archive
-	const showInArchive = document.getElementById(id),
-	newShow = page.playlist.appendChild(document.createElement(`li`));
+	const showInArchive = document.getElementById(id);
+	page.playlist.appendChild(templateHTML.playlistItem.content.cloneNode(true)),
+	newShow = page.playlist.lastElementChild;
 
-	newShow.appendChild(templateHTML.showPositionControls.content.cloneNode(true));
 	for (const button of newShow.querySelectorAll(`button`)) button.dataset.target = id;
-	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
+	newShow.lastElementChild.appendChild(showInArchive.querySelector(`.show-heading`).cloneNode(true));
+	newShow.lastElementChild.appendChild(showInArchive.querySelector(`.show-content`).cloneNode(true));
 
 	// transfer remaining show info
 	expandShowInfo(newShow, document.getElementById(`archive-${id.split(`-`)[0]}`));
@@ -354,15 +350,13 @@ function addArchive() {
 
 // add entire series to playlist
 function addSeries(seriesCode) {
-	const seriesIDs = [];
 	for (const showCode of showIDSets.series[seriesCode]) addShow(`${seriesCode}-${showCode}`);
 	loadShow();
 }
 
 // add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
-function addRandomShow(showType = `all`) {
+function addRandomShow(showType) {
 	addShow(getRandomShowID(showType));
-
 	window.scrollTo(0, page.playlist.lastElementChild.offsetTop - page.playlistControls.clientHeight);
 }
 
@@ -381,11 +375,8 @@ function moveShow(id, move) {
 // remove show from playlist; if the first show on the playlist was removed, load the new top show
 function removeShow(id) {
 	getShowOnPlaylist(id)?.remove();
-
 	unpressButton(document.querySelector(`#${id} [data-action="add-show"]`));
-
 	console.log(`removed show: ${id}`);
-
 	loadShow();
 }
 
@@ -396,27 +387,28 @@ function loadShow() {
 	pauseAudio();
 	page.loadedShow.replaceChildren();
 
-	if (playlist.children.length > 0) {
+	if (page.playlist.children.length > 0) {
 		const show = page.playlist.firstElementChild;
 		page.loadedShow.dataset.id = show.dataset.id;
 
+		// load audio file and show data
 		page.audio.src = `${paths.show}${show.dataset.id}${showFileExtension}`;
 		page.audio.dataset.duration = show.dataset.duration;
+		page.loadedShow.appendChild(show.querySelector(`.show-heading`).cloneNode(true));
+		page.loadedShow.appendChild(show.querySelector(`.show-content`).cloneNode(true));
 
-		page.loadedShow.replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
-
+		// reset and reveal radio controls
 		seekTime(0);
 		page.seekBar.value = 0;
 		setTimestampFromSeconds(page.showTimeTotal, page.audio.dataset.duration);
-
-		page.controls.removeAttribute(`hidden`);
+		page.radioControls.removeAttribute(`hidden`);
 
 		console.log(`loaded show: ${show.dataset.id}`);
 	} else {
 		page.audio.removeAttributes([`src`, `data-duration`]);
 		for (const time of [`Elapsed`, `Total`]) setTimestampFromSeconds(page[`showTime${time}`], "0");
-		page.controls.setAttribute(`hidden`, ``);
-		page.loadedShow.removeAttribute(`data-id`);
+		page.radioControls.setAttribute(`hidden`, ``);
+		page.loadedShow.setAttribute(`data-id`, ``);
 	}
 }
 
@@ -424,7 +416,6 @@ function loadShow() {
 function loadNextShow() {
 	removeShow(page.playlist.firstElementChild.dataset.id);
 	page.seekBar.value = 0;
-
 	if (page.audio.hasAttribute(`src`) && settings.autoPlayNextShow) playAudio();
 }
 
@@ -498,9 +489,7 @@ function initialiseToggle(id, toggled) {
 // switch a toggle from off/unpressed to on/pressed
 function switchToggle(id, key, value) {
 	const button = document.getElementById(`${id}-toggle`);
-
 	button.setAttribute(`aria-pressed`, button.getAttribute(`aria-pressed`) === `false` ? `true` : `false`);
-
 	settings[key] = value;
 }
 
@@ -514,7 +503,6 @@ function toggleCopyrightSafety() {
 function toggleFlatRadio() {
 	settings.flatRadio = !settings.flatRadio;
 	switchToggle(`flat-radio`, `flatRadio`, settings.flatRadio);
-
 	page.loadedShow.classList.toggle(`flat-radio`, settings.flatRadio);
 }
 
@@ -528,8 +516,7 @@ function toggleAutoPlay() {
 function toggleContentNotes() {
 	settings.notesOpen = !settings.notesOpen;
 	switchToggle(`content-notes`, `notesOpen`, settings.notesOpen);
-
-	document.querySelectorAll(`.content-notes`).forEach(notes => notes.toggleAttribute(`open`, settings.notesOpen));
+	for (const notes of document.querySelectorAll(`.content-notes`)) notes.toggleAttribute(`open`, settings.notesOpen);
 }
 
 // set a button's state to unpressed
@@ -558,7 +545,6 @@ function updateSetting(name, option) {
 // switch between different colour themes
 function switchTheme(theme) {
 	updateSetting(`theme`, theme);
-
 	page.SVGFavicon.href = `${paths.favicon}${theme}.svg`;
 	page.icoFavicon.href = `${paths.favicon}${theme}.ico`;
 }
@@ -578,14 +564,12 @@ function buildNavLinks() {
 
 	for (const [section, links] of Object.entries(navLinks)) {
 		const list = document.createElement(`ul`);
-		list.id = `${section}-sections`;
 
 		for (const link of links) {
 			list.appendChild(templateHTML.navLink.content.cloneNode(true));
 			const newLink = list.lastElementChild.firstElementChild;
 
 			newLink.href = link.href ?? `#${link.code}`;
-			newLink.setAttributes(link.attrs ?? {});
 			newLink.querySelector(`use`).setAttribute(`href`, `#svg-${link.code}`);
 			newLink.querySelector(`span`).setContent(link.name);
 		}
@@ -689,7 +673,6 @@ function buildThemeButtons() {
 		const button = page.themeButtons.lastElementChild.querySelector(`button`);
 		button.dataset.option = theme.code;
 		button.lastElementChild.setContent(theme.name);
-
 		button.querySelector(`.palette`).dataset.theme = theme.code;
 	}
 }
@@ -710,23 +693,21 @@ function buildFontButtons() {
 
 // add random banger to welcome page, including "add show" button as a call to action
 function buildFeaturedShow() {
-	const id = getRandomShowID(`bangers`);
+	const id = getRandomShowID(`bangers`),
+	showInArchive = document.getElementById(id);
 
 	// build out featured show HTML from show and series in Archive
-	const showInArchive = document.getElementById(id),
-	featuredShow = showInArchive.querySelector(`.show-info`).cloneNode(true),
-	addShowButton = showInArchive.querySelector(`[data-action="add-show"]`).cloneNode(true);
-
-	expandShowInfo(featuredShow, document.getElementById(`archive-${id.split(`-`)[0]}`));
+	page.featuredShow.replaceChildren(...showInArchive.cloneChildren());
+	expandShowInfo(page.featuredShow, document.getElementById(`archive-${id.split(`-`)[0]}`));
 
 	// add click event for adding featured show to playlist and removing it from welcome area
-	addShowButton.addEventListener(`click`, () => {
-		addShow(addShowButton.dataset.target);
+	page.featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
+		addShow(id);
 		document.getElementById(`featured-show-container`).remove();
 	});
 
 	// build new show element and clone in show content and add-button
-	page.featuredShow.replaceChildren(featuredShow, addShowButton);
+	page.featuredShow.removeAttribute(`hidden`);
 }
 
 
@@ -755,7 +736,7 @@ page.unmuteButton.addEventListener(`click`, unmuteAudio);
 page.volumeControl.addEventListener(`input`, () => setVolume(page.volumeControl.value / 100));
 
 // playlist interface events
-document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow());
+document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
 document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`bangers`));
 document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
 page.clearButton.addEventListener(`click`, () => {
@@ -823,7 +804,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 	// clear out setup variables
 	archive = null;
-	styleOptions = null
+	styleOptions = null;
 	navLinks = null;
 });
 
