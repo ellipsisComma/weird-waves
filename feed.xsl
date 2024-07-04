@@ -122,12 +122,12 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-04" />
+	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-05" />
 
-	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg" sizes="any" />
-	<link rel="icon" href="./images/favicons/dark.ico" sizes="48x48" />
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' /&gt;" sizes="any" />
+	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 
-	<script src="./initialisation.js?v=2024-06-28"></script>
+	<script src="./initialisation.js?v=2024-07-05"></script>
 </head>
 
 
@@ -351,14 +351,23 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 // setup for navigateToSection()
 const page = {
 	"title": document.querySelector(`title`),
-	"nav": document.querySelector(`nav`)
+	"favicon": document.querySelector(`[rel~="icon"][type="image/svg+xml"]`)
 };
 page.title.dataset.original = document.title;
 if (window.location.hash) navigateToSection();
 
 // update favicons according to theme
-document.querySelector(`[rel~="icon"][href$=".svg"]`).href = `./images/favicons/${styles.theme}.svg`;
-document.querySelector(`[href$=".ico"]`).href = `./images/favicons/${styles.theme}.ico`;
+setTimeout(() => {
+	let favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+		<rect x="-1" y="-1" width="28" height="28" fill="--back-colour" />
+		<path stroke="--hot-colour" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
+		<path stroke="--cold-colour" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
+	</svg>`;
+	for (const type of [`fore`, `back`, `hot`, `cold`]) {
+		favicon = favicon.replaceAll(`--${type}-colour`, getComputedStyle(document.documentElement).getPropertyValue(`--${type}-colour`));
+	}
+	page.favicon.href = `data:image/svg+xml,${favicon.replaceAll(`#`, `%23`)}`;
+}, 100);
 
 // re-parse elements from the parsed file that contain HTML (or SVG)
 const HTMLRegex = /&#?\w+;|<;[a-z]|\/>|<\/|<!--/;

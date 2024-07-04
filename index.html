@@ -11,17 +11,17 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-04" media="all">
+	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-05" media="all">
 
-	<link rel="icon" type="image/svg+xml" href="./images/favicons/dark.svg" sizes="any">
-	<link rel="icon" href="./images/favicons/dark.ico" sizes="48x48">
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' />" sizes="any">
+	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48">
 
 	<meta name="og:image" 		content="https://weirdwaves.net/images/social-card.png">
 	<meta name="twitter:card" 	content="summary">
 
 	<link rel="alternate" type="application/atom+xml" href="https://weirdwaves.net/feed.xml" title="News feed for Weird Waves">
 
-	<script src="./initialisation.js?v=2024-06-27"></script>
+	<script src="./initialisation.js?v=2024-07-05"></script>
 </head>
 
 
@@ -135,7 +135,7 @@
 
 
 
-<!--html templates start-->
+<!--html templates begin-->
 <!--booth-->
 <template id="playlist-item-template">
 	<li data-id="" dataset-duration="">
@@ -204,7 +204,7 @@
 		<h3 class="screen-reader-only">Radio controls</h3>
 		<div id="radio-controls" class="icon-button-set" hidden="">
 			<div id="seek-controls">
-				<input id="seek-bar" type="range" value="0" aria-label="Go to time in show">
+				<input id="seek-bar" type="range" value="0" data-seeking="false" aria-label="Go to time in show">
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
 			</div><!--#seek-controls end-->
 			<div id="show-controls" aria-live="assertive">
@@ -628,7 +628,7 @@
 		<li><a class="uppercase" href="https://punc.neocities.org/" rel="external">Punc</a></li>
 		<li><a href="https://jungletrain.net/" rel="external">Jungle Train</a></li>
 		<li><a href="https://somafm.com/" rel="external">Soma<abbr title="Frequency Modulation">FM</abbr></a></li>
-		<li><a href="https://rekt.network/" rel="external">RektNetwork</a></li></li>
+		<li><a href="https://rekt.network/" rel="external">RektNetwork</a></li>
 		<li><a href="http://www.hbr1.com/" rel="external"><abbr>HBR1</abbr> - Music on Futurenet</a></li>
 		<li><a href="https://www.mailta.pe/" rel="external">MailTape</a></li>
 		<li><a href="https://www.sanctuaryradio.com/" rel="external">Sanctuary Radio</a></li>
@@ -730,6 +730,6 @@
 
 
 <script src="./archive.js?v=2024-07-03"></script>
-<script src="./main.js?v=2024-07-04"></script>
+<script src="./main.js?v=2024-07-05"></script>
 </body>
 </html>

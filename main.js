@@ -19,12 +19,14 @@ EVENTS: event listeners
 	SCRIPT CONTROLS
 ==================== */
 
-// relative paths of the show audio folder, favicon, and Weird Waves button folder, and the file extension for show files
-const paths = {
-	"show": `./audio/shows/`,
-	"favicon": `./images/favicons/`
-},
-showFileExtension = `.mp3`;
+// show file relative path, show file extension, and favicon code
+const showFilePath = `./audio/shows/`,
+showFileExtension = `.mp3`,
+faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+	<rect x="-1" y="-1" width="28" height="28" fill="--back-colour" />
+	<path stroke="--hot-colour" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
+	<path stroke="--cold-colour" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
+</svg>`;
 
 // initialised settings from storage and set default values if not set
 const settings = window.localStorage.getItem(`settings`) ? JSON.parse(window.localStorage.getItem(`settings`)) : {};
@@ -43,8 +45,7 @@ settings.notesOpen ??= false;
 const page = {
 	// head
 	"title": `title`,
-	"SVGFavicon": `[rel~="icon"][href$=".svg"]`,
-	"icoFavicon": `[href$=".ico"]`,
+	"favicon": `[rel~="icon"][type="image/svg+xml"]`,
 
 	// radio
 	"loadedShow": `#loaded-show`,
@@ -89,15 +90,6 @@ templateHTML = {
 // build out page and templateHTML objects
 for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelector(query);
 for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(`${id}-template`);
-
-// sets of show IDs to select from when adding random shows to playlist
-const showIDSets = {
-	"all": {"safe": [], "any": []},
-	"bangers": {"safe": [], "any": []},
-	"series": {}
-};
-
-let updateTimeInterval;
 
 
 
@@ -146,9 +138,9 @@ function setTimestampFromSeconds(element, time) {
 }
 
 // get show ID from a pool, adjusted for copyright safety
-function getRandomShowID(type) {
-	const pool = showIDSets[type][settings.copyrightSafety ? `safe` : `any`];
-	return pool[Math.floor(Math.random() * pool.length)];
+function getRandomShowID(type = ``) {
+	const pool = document.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li${type === `banger` ? `[data-banger="true"]` : ``}`);
+	return pool[Math.floor(Math.random() * pool.length)].id;
 }
 
 // get show element on playlist
@@ -193,7 +185,7 @@ function hideClearPlaylistControls() {
 	page.clearPlaylistControls.hidden = true;
 }
 
-// clear playlist and hide clear controls again, then load show (i.e. nothing)
+// clear playlist and radio and hide clear controls again
 function clearPlaylist() {
 	if (page.playlist.children.length > 0) {
 		page.playlist.replaceChildren();
@@ -282,12 +274,12 @@ function addShow(id) {
 
 // add entire archive to playlist
 function addArchive() {
-	for (const id of settings.copyrightSafety ? showIDSets.all.safe : showIDSets.all.any) addShow(id);
+	for (const show of page.seriesList.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)) addShow(show.id);
 }
 
 // add entire series to playlist
 function addSeries(seriesCode) {
-	for (const id of showIDSets.series[seriesCode]) addShow(id);
+	for (const show of document.querySelectorAll(`#archive-${seriesCode} > .show-list > li`)) addShow(show.id);
 }
 
 // add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
@@ -298,7 +290,7 @@ function addRandomShow(showType) {
 
 /* MANIPULATING */
 
-// move show up/down in playlist; if the first show on the playlist was moved, load the new top show
+// move show up/down in playlist
 function moveShow(id, move) {
 	const target = getShowOnPlaylist(id);
 
@@ -308,7 +300,7 @@ function moveShow(id, move) {
 	loadShow();
 }
 
-// remove show from playlist; if the first show on the playlist was removed, load the new top show
+// remove show from playlist
 function removeShow(id) {
 	getShowOnPlaylist(id)?.remove();
 	unpressButton(document.querySelector(`#${id} [data-action="add-show"]`));
@@ -316,7 +308,7 @@ function removeShow(id) {
 	loadShow();
 }
 
-// write show parts onto page and load show audio file; if playlist is empty, remove audio and show content and hide controls
+// write show parts onto page and load show audio file; if playlist is empty, reset radio
 function loadShow() {
 	if (page.playlist.children.length > 0 && page.playlist.firstElementChild.dataset.id === page.loadedShow.dataset.id) return;
 
@@ -328,13 +320,13 @@ function loadShow() {
 		page.loadedShow.dataset.id = show.dataset.id;
 
 		// load audio file and show data
-		page.audio.src = `${paths.show}${show.dataset.id}${showFileExtension}`;
+		page.audio.src = `${showFilePath}${show.dataset.id}${showFileExtension}`;
 		page.audio.dataset.duration = show.dataset.duration;
 		page.loadedShow.appendChild(show.querySelector(`.show-heading`).cloneNode(true));
 		page.loadedShow.appendChild(show.querySelector(`.show-content`).cloneNode(true));
 
 		// reset and reveal radio controls
-		seekTime(0);
+		updateSeekTime(0);
 		page.seekBar.value = 0;
 		setTimestampFromSeconds(page.showTimeTotal, page.audio.dataset.duration);
 		page.radioControls.hidden = false;
@@ -348,7 +340,7 @@ function loadShow() {
 	}
 }
 
-// replace loaded show with next show on playlist, or empty-playlist message if none
+// replace loaded show with next show on playlist (or reset radio if playlist ends)
 function loadNextShow() {
 	removeShow(page.playlist.firstElementChild.dataset.id);
 	page.seekBar.value = 0;
@@ -361,14 +353,14 @@ RADIO
 
 // if audio is playing, update seek bar and time-elapsed
 function updateSeekBar() {
-	if (!page.audio.paused) {
+	if (!page.audio.paused && page.seekBar.dataset.seeking !== `true`) {
 		page.seekBar.value = page.audio.currentTime / page.audio.dataset.duration * 100;
 		setTimestampFromSeconds(page.showTimeElapsed, page.audio.currentTime);
 	}
 }
 
 // update displayed show time using seek bar
-function seekTime(value) {
+function updateSeekTime(value) {
 	setTimestampFromSeconds(page.showTimeElapsed, page.audio.dataset.duration * value / 100);
 }
 
@@ -382,15 +374,13 @@ function swapButtons(button1, button2) {
 function playAudio() {
 	page.audio.play();
 	swapButtons(page.playButton, page.pauseButton);
-	updateTimeInterval = setInterval(updateSeekBar, 1000);
 }
 
 // pause audio
 function pauseAudio() {
-	updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update
+	updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
 	page.audio.pause();
 	swapButtons(page.pauseButton, page.playButton);
-	clearInterval(updateTimeInterval);
 }
 
 // mute audio
@@ -428,13 +418,13 @@ function switchToggle(id) {
 	button.setAttribute(`aria-pressed`, button.getAttribute(`aria-pressed`) === `false` ? `true` : `false`);
 }
 
-// toggle between excluding (true) and including (false) copyright-unsafe material when adding random shows to playlist
+// toggle between excluding (true) and including (false) copyright-unsafe material when adding random shows or entire archive to playlist
 function toggleCopyrightSafety() {
 	settings.copyrightSafety = !settings.copyrightSafety;
 	switchToggle(`copyright-safety`);
 }
 
-// toggle between hiding and showing show-content in Radio
+// toggle between hiding (true) and showing (false) show-content in Radio
 function toggleFlatRadio() {
 	settings.flatRadio = !settings.flatRadio;
 	switchToggle(`flat-radio`);
@@ -468,7 +458,7 @@ function pressButton(button) {
 	});
 }
 
-// update setting and setting buttons according to chosen value
+// update setting and its buttons according to chosen value
 function updateSetting(name, option) {
 	unpressButton(page[`${name}Buttons`].querySelector(`[aria-pressed="true"]`));
 	pressButton(page[`${name}Buttons`].querySelector(`[data-option="${option}"]`));
@@ -480,8 +470,12 @@ function updateSetting(name, option) {
 // switch between different colour themes
 function switchTheme(theme) {
 	updateSetting(`theme`, theme);
-	page.SVGFavicon.href = `${paths.favicon}${theme}.svg`;
-	page.icoFavicon.href = `${paths.favicon}${theme}.ico`;
+
+	let faviconNew = faviconRaw;
+	for (const type of [`fore`, `back`, `hot`, `cold`]) {
+		faviconNew = faviconNew.replaceAll(`--${type}-colour`, getComputedStyle(document.documentElement).getPropertyValue(`--${type}-colour`));
+	}
+	page.favicon.href = `data:image/svg+xml,${faviconNew.replaceAll(`#`, `%23`)}`;
 }
 
 // switch between different fonts
@@ -506,7 +500,6 @@ function buildArchive() {
 
 	for (const series of archive) {
 		stats.shows += series.shows.length;
-		showIDSets.series[series.code] = [];
 
 		// add link pointing to series at top of archive
 		const newSeriesLink = page.seriesLinks.appendChild(document.createElement(`li`)).appendChild(document.createElement(`a`));
@@ -518,6 +511,7 @@ function buildArchive() {
 		const newSeries = page.seriesList.lastElementChild,
 		newSeriesShows = newSeries.querySelector(`.show-list`);
 		newSeries.id = `archive-${series.code}`;
+		if (series.copyrightSafe) newSeries.dataset.copyrightSafe = `true`;
 		newSeries.querySelector(`.series-heading`).setContent(series.heading);
 		newSeries.querySelector(`.series-blurb`).setContent(series.blurb);
 		newSeries.querySelector(`.series-source`).setContent(series.source);
@@ -528,16 +522,11 @@ function buildArchive() {
 
 			const id = `${series.code}-${show.code}`;
 
-			showIDSets.all.any.push(id);
-			if (series.copyrightSafe) showIDSets.all.safe.push(id);
-			if (show.banger) showIDSets.bangers.any.push(id);
-			if (series.copyrightSafe && show.banger) showIDSets.bangers.safe.push(id);
-			showIDSets.series[series.code].push(id);
-
 			// add show details to series' show list
 			newSeriesShows.appendChild(templateHTML.archiveShow.content.cloneNode(true));
 			const newShow = newSeriesShows.lastElementChild;
 			newShow.id = id;
+			if (show.banger) newShow.dataset.banger = `true`;
 			newShow.dataset.duration = show.duration;
 			newShow.querySelector(`.show-heading`).setContent(show.heading);
 			newShow.querySelector(`.show-blurb`).setContent(show.blurb);
@@ -569,9 +558,9 @@ function buildArchive() {
 	document.getElementById(`stats-duration`).textContent = Math.round(stats.duration / 3600);
 }
 
-// add random banger to welcome page, including "add show" button as a call to action
+// add random banger to welcome page, with "add show" button as call to action
 function buildFeaturedShow() {
-	const id = getRandomShowID(`bangers`),
+	const id = getRandomShowID(`banger`),
 	showInArchive = document.getElementById(id);
 
 	// build out featured show HTML from show and series in Archive
@@ -584,7 +573,7 @@ function buildFeaturedShow() {
 		document.getElementById(`featured-show-container`).remove();
 	});
 
-	// build new show element and clone in show content and add-button
+	// reveal featured show
 	page.featuredShow.hidden = false;
 }
 
@@ -599,12 +588,12 @@ page.audio.addEventListener(`ended`, loadNextShow);
 
 // radio interface events
 page.seekBar.addEventListener(`change`, () => {
+	page.seekBar.dataset.seeking = `false`;
 	page.audio.currentTime = page.audio.dataset.duration * page.seekBar.value / 100;
-	if (!page.audio.paused) updateTimeInterval = setInterval(updateSeekBar, 1000);
 });
 page.seekBar.addEventListener(`input`, () => {
-	seekTime(page.seekBar.value);
-	clearInterval(updateTimeInterval);
+	page.seekBar.dataset.seeking = `true`;
+	updateSeekTime(page.seekBar.value); // must set input.value as argument here
 });
 page.playButton.addEventListener(`click`, playAudio);
 page.pauseButton.addEventListener(`click`, pauseAudio);
@@ -614,8 +603,8 @@ page.unmuteButton.addEventListener(`click`, unmuteAudio);
 page.volumeControl.addEventListener(`input`, () => setVolume(page.volumeControl.value / 100));
 
 // booth interface events
-document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
-document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`bangers`));
+document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow());
+document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
 document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
 page.clearButton.addEventListener(`click`, () => {
 	if (!page.clearButton.hasAttribute(`aria-disabled`)) revealClearPlaylistControls();
@@ -653,8 +642,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	buildArchive();
 	buildFeaturedShow();
 
-	// import playlist and prepare playlist show IDs from storage (if there are any), simultaneously removing invalid IDs by checking against all IDs
-	const storedIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)).filter(id => showIDSets.all.any.includes(id)) : [];
+	// import playlist from storage, removing invalid IDs by checking against archive in DOM
+	const storedIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)).filter(id => document.querySelector(`#series-list .show-list > #${id}`)) : [];
 	if (storedIDs.length > 0) {
 		for (const id of storedIDs) addShow(id);
 		console.log(`loaded playlist from storage`);
@@ -669,6 +658,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	switchTheme(styles.theme);
 	switchFont(styles.font);
 	page.loadedShow.classList.toggle(`flat-radio`, settings.flatRadio);
+	page.audio.paused = true;
+	setInterval(updateSeekBar, 1000);
 
 	// update page head data
 	page.title.dataset.original = document.title;
