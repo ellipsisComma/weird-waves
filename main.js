@@ -1,8 +1,8 @@
 /*jshint esversion: 11*/
 
 /*
-SCRIPT CONTROLS: an interface to change the app's behaviour (only really useful if running your own)
-PARAMETERS: internal parameters (probably don't need to be changed)
+SCRIPT CONTROLS: settings global variables to control app behaviour (e.g. default settings)
+PARAMETERS: initialising internal parameters
 FUNCTIONS
 	UTILITY: general and misc. applications
 	PLAYLIST: building and altering the playlist
