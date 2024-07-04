@@ -27,35 +27,6 @@
 
 
 
-<!--build specific nav-link-->
-<xsl:template name="build-nav-link">
-<xsl:param name="name" />
-<xsl:param name="code" />
-<xsl:param name="href" />
-<li>
-	<a>
-		<xsl:attribute name="href">
-			<xsl:choose>
-				<xsl:when test="$href != ''">
-					<xsl:value-of select="$href" />
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="concat('#', $code)" />
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:attribute>
-		<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
-			<use>
-				<xsl:attribute name="href">
-					<xsl:value-of select="concat('#svg-', $code)" />
-				</xsl:attribute>
-			</use>
-		</svg>
-		<span><xsl:value-of select="$name" /></span>
-	</a>
-</li>
-</xsl:template>
-
 <!--
 render all posts from a category, each including:
 	* a hash-link in the heading
@@ -145,10 +116,10 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 <head>
 	<title><xsl:value-of select="concat(atom:title, ' Feed')" /></title>
 
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2" as="font" crossorigin="" />
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2" as="font" crossorigin="" />
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2" as="font" crossorigin="" />
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="" />
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
+	<link rel="preload" type="font/woff2?v=2024-06-07" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-04" />
@@ -226,38 +197,44 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 
 <nav>
 	<ul id="general-sections">
-		<xsl:call-template name="build-nav-link">
-			<xsl:with-param name="name" select="'All News'" />
-			<xsl:with-param name="code" select="'all-news'" />
-			<xsl:with-param name="href" />
-		</xsl:call-template>
-		<xsl:call-template name="build-nav-link">
-			<xsl:with-param name="name" select="'About'" />
-			<xsl:with-param name="code" select="'about'" />
-			<xsl:with-param name="href" />
-		</xsl:call-template>
-		<xsl:call-template name="build-nav-link">
-			<xsl:with-param name="name" select="'Return'" />
-			<xsl:with-param name="code" select="'return'" />
-			<xsl:with-param name="href" select="'./index.html'" />
-		</xsl:call-template>
+		<li>
+			<a href="#all-news">
+				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-all-news" /></svg>
+				<span>All News</span>
+			</a>
+		</li>
+		<li>
+			<a href="#about">
+				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24" ><use href="#svg-about" /></svg>
+				<span>About</span>
+			</a>
+		</li>
+		<li>
+			<a href="./index.html">
+				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-return" /></svg>
+				<span>Return</span>
+			</a>
+		</li>
 	</ul><!--#general-sections end-->
 	<ul id="category-sections">
-		<xsl:call-template name="build-nav-link">
-			<xsl:with-param name="name" select="'Bulletins'" />
-			<xsl:with-param name="code" select="'bulletins'" />
-			<xsl:with-param name="href" />
-		</xsl:call-template>
-		<xsl:call-template name="build-nav-link">
-			<xsl:with-param name="name" select="'Features'" />
-			<xsl:with-param name="code" select="'features'" />
-			<xsl:with-param name="href" />
-		</xsl:call-template>
-		<xsl:call-template name="build-nav-link">
-			<xsl:with-param name="name" select="'History'" />
-			<xsl:with-param name="code" select="'history'" />
-			<xsl:with-param name="href" />
-		</xsl:call-template>
+		<li>
+			<a href="#bulletins">
+				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-bulletins" /></svg>
+				<span>Bulletins</span>
+			</a>
+		</li>
+		<li>
+			<a href="#features">
+				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-features" /></svg>
+				<span>Features</span>
+			</a>
+		</li>
+		<li>
+			<a href="#history">
+				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-history" /></svg>
+				<span>History</span>
+			</a>
+		</li>
 	</ul><!--#category-sections end-->
 </nav>
 
