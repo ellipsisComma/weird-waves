@@ -119,7 +119,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
-	<link rel="preload" type="font/woff2?v=2024-06-07" href="./fonts/bitter-bold-italic-weirdwaves.woff2" as="font" crossorigin="" />
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-04" />
