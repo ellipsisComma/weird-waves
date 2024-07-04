@@ -60,9 +60,6 @@ const page = {
 	"volumeControl": `#volume-control`,
 	"audio": `#show-audio`,
 
-	// nav
-	"nav": `nav`,
-
 	// booth
 	"playlist": `#playlist`,
 	"playlistControls": `#playlist-controls`,
@@ -229,10 +226,10 @@ function importPlaylist() {
 	invalidIDs = importIDs.filter(id => !document.getElementById(id));
 
 	if (invalidIDs.length === 0) {
+		clearImportErrors();
 		clearPlaylist();
 		for (const id of importIDs) addShow(id);
 		page.importExport.value = ``;
-		clearImportErrors();
 	} else {
 		for (const id of invalidIDs) page.invalidShowIDs.appendChild(document.createElement(`li`)).textContent = id;
 		page.importErrorMessage.hidden = false;
