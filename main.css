@@ -913,6 +913,9 @@ use[href="#svg-toggle-tick"] {
 	border: inherit;
 	background-image: linear-gradient(90deg, var(--fore-colour) 25%, var(--back-colour) 25% 50%, var(--hot-colour) 50% 75%, var(--cold-colour) 75%);
 }
+#font-buttons button {
+	font-family: var(--font-stack);
+}
 
 
 
