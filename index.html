@@ -136,15 +136,6 @@
 
 
 <!--html templates start-->
-<!--nav-->
-<template id="nav-link-template">
-	<li>
-		<a href="">
-			<svg class="svg-icon" viewBox="0 0 24 24"><use href="" /></svg>
-			<span></span>
-		</a>
-	</li>
-</template>
 <!--booth-->
 <template id="playlist-item-template">
 	<li dataset-id="" dataset-duration="">
@@ -193,31 +184,6 @@
 			</details>
 		</div>
 		<button class="push-button" type="button" data-target="" data-action="add-show" aria-pressed="false">Add to playlist</button>
-	</li>
-</template>
-<!--settings-->
-<template id="toggle-template">
-	<svg class="svg-icon" viewBox="0 0 48 24">
-		<use href="#svg-toggle-track" />
-		<g class="svg-toggle-thumb">
-			<use href="#svg-toggle-thumb-side" />
-			<use href="#svg-toggle-thumb-top" />
-			<use href="#svg-toggle-tick" />
-		</g>
-	</svg>
-	<span></span>
-</template>
-<template id="theme-button-template">
-	<li>
-		<button class="push-button" type="button" data-option="" aria-pressed="false">
-			<span class="palette" data-theme=""></span>
-			<span></span>
-		</button>
-	</li>
-</template>
-<template id="font-button-template">
-	<li>
-		<button class="push-button" type="button" data-option="" data-font="" style="font-family:var(--font-stack);" aria-pressed="false"></button><!--style attribute necessary to over-ride font settings, despite also adding data-font attribute-->
 	</li>
 </template>
 <!--html templates end-->
@@ -270,7 +236,69 @@
 
 
 
-<nav></nav>
+<nav>
+	<ul id="activity-sections">
+		<li>
+			<a href="#booth">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-booth"></use></svg>
+				<span>Booth</span>
+			</a>
+		</li>
+		<li>
+			<a href="#archive">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-archive"></use></svg>
+				<span>Archive</span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="./feed.xml">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-feed"></use></svg>
+				<span>Feed</span>
+			</a>
+		</li>
+	</ul>
+	<ul id="info-sections">
+		<li>
+			<a href="#about">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-about"></use></svg>
+				<span>About</span>
+			</a>
+		</li>
+		<li>
+			<a href="#streaming">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-streaming"></use></svg>
+				<span>Streaming</span>
+			</a>
+		</li>
+		<li>
+			<a href="#settings">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-settings"></use></svg>
+				<span>Settings</span>
+			</a>
+		</li>
+	</ul>
+	<ul id="external-sections">
+		<li>
+			<a href="#call-in">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-call-in"></use></svg>
+				<span>Call In</span>
+			</a>
+		</li>
+		<li>
+			<a href="#links">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-links"></use></svg>
+				<span>Links</span>
+			</a>
+		</li>
+		<li>
+			<a href="#credits">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-credits"></use></svg>
+				<span>Credits</span>
+			</a>
+		</li>
+	</ul>
+</nav>
 
 
 
@@ -376,7 +404,17 @@
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
-	<button id="copyright-safety-toggle" class="toggle" type="button">exclude copyright-unsafe material</button>
+	<button id="copyright-safety-toggle" class="toggle" type="button">
+		<svg class="svg-icon" viewBox="0 0 48 24">
+			<use href="#svg-toggle-track" />
+			<g class="svg-toggle-thumb">
+				<use href="#svg-toggle-thumb-side" />
+				<use href="#svg-toggle-thumb-top" />
+				<use href="#svg-toggle-tick" />
+			</g>
+		</svg>
+		<span>exclude copyright-unsafe material</span>
+	</button>
 	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
 </div><!--#streaming end-->
 
@@ -388,23 +426,170 @@
 	<ul>
 		<li>
 			<h3>Radio</h3>
-			<button id="flat-radio-toggle" class="toggle" type="button">hide show info in Radio</button>
+			<button id="flat-radio-toggle" class="toggle" type="button">
+				<svg class="svg-icon" viewBox="0 0 48 24">
+					<use href="#svg-toggle-track" />
+					<g class="svg-toggle-thumb">
+						<use href="#svg-toggle-thumb-side" />
+						<use href="#svg-toggle-thumb-top" />
+						<use href="#svg-toggle-tick" />
+					</g>
+				</svg>
+				<span>hide show info in Radio</span>
+			</button>
 		</li>
 		<li>
 			<h3>Playlist</h3>
-			<button id="auto-play-toggle" class="toggle" type="button">start next show automatically when previous show ends</button>
+			<button id="auto-play-toggle" class="toggle" type="button">
+				<svg class="svg-icon" viewBox="0 0 48 24">
+					<use href="#svg-toggle-track" />
+					<g class="svg-toggle-thumb">
+						<use href="#svg-toggle-thumb-side" />
+						<use href="#svg-toggle-thumb-top" />
+						<use href="#svg-toggle-tick" />
+					</g>
+				</svg>
+				<span>start next show automatically when previous show ends</span></button>
 		</li>
 		<li>
 			<h3>Content notes</h3>
-			<button id="content-notes-toggle" class="toggle" type="button">open all content notes by default</button>
+			<button id="content-notes-toggle" class="toggle" type="button">
+				<svg class="svg-icon" viewBox="0 0 48 24">
+					<use href="#svg-toggle-track" />
+					<g class="svg-toggle-thumb">
+						<use href="#svg-toggle-thumb-side" />
+						<use href="#svg-toggle-thumb-top" />
+						<use href="#svg-toggle-tick" />
+					</g>
+				</svg>
+				<span>open all content notes by default</span>
+			</button>
 		</li>
 		<li>
 			<h3>Site theme</h3>
-			<ul id="theme-buttons" class="flex-list"></ul>
+			<ul id="theme-buttons" class="flex-list">
+				<li>
+					<button class="push-button" type="button" data-option="dark" aria-pressed="false">
+						<span class="palette" data-theme="dark"></span>
+						Dark
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="goop" aria-pressed="false">
+						<span class="palette" data-theme="goop"></span>
+						Goop
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="flame" aria-pressed="false">
+						<span class="palette" data-theme="flame"></span>
+						Flame
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="plasm" aria-pressed="false">
+						<span class="palette" data-theme="plasm"></span>
+						Plasm
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="moss" aria-pressed="false">
+						<span class="palette" data-theme="moss"></span>
+						Moss
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="darker" aria-pressed="false">
+						<span class="palette" data-theme="darker"></span>
+						Darker
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="light" aria-pressed="false">
+						<span class="palette" data-theme="light"></span>
+						Light
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="wine" aria-pressed="false">
+						<span class="palette" data-theme="wine"></span>
+						Wine
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="ash" aria-pressed="false">
+						<span class="palette" data-theme="ash"></span>
+						Ash
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="dust" aria-pressed="false">
+						<span class="palette" data-theme="dust"></span>
+						Dust
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="mist" aria-pressed="false">
+						<span class="palette" data-theme="mist"></span>
+						Mist
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="silver" aria-pressed="false">
+						<span class="palette" data-theme="silver"></span>
+						Silver
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="pico" aria-pressed="false">
+						<span class="palette" data-theme="pico"></span>
+						Pico
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="sepia" aria-pressed="false">
+						<span class="palette" data-theme="sepia"></span>
+						Sepia
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="abyss" aria-pressed="false">
+						<span class="palette" data-theme="abyss"></span>
+						Abyss
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="retro" aria-pressed="false">
+						<span class="palette" data-theme="retro"></span>
+						Retro
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="marrow" aria-pressed="false">
+						<span class="palette" data-theme="marrow"></span>
+						Marrow
+					</button>
+				</li>
+				<li>
+					<button class="push-button" type="button" data-option="org" aria-pressed="false">
+						<span class="palette" data-theme="org"></span>
+						Org
+					</button>
+				</li>
+			</ul>
 		</li>
 		<li>
 			<h3>Site font</h3>
-			<ul id="font-buttons" class="flex-list"></ul>
+			<ul id="font-buttons" class="flex-list">
+				<li>
+					<button class="push-button" type="button" data-option="serif" data-font="serif" aria-pressed="false">Serif</button>
+				</li>
+			
+				<li>
+					<button class="push-button" type="button" data-option="sans" data-font="sans" aria-pressed="false">Sans</button>
+				</li>
+
+			</ul>
 		</li>
 	</ul>
 </div><!--#settings end-->
@@ -545,6 +730,6 @@
 
 
 <script src="./archive.js?v=2024-07-03"></script>
-<script src="./main.js?v=2024-07-03"></script>
+<script src="./main.js?v=2024-07-04"></script>
 </body>
 </html>

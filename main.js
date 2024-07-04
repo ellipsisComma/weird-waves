@@ -33,53 +33,6 @@ settings.flatRadio ??= false;
 settings.autoPlayNextShow ??= true;
 settings.notesOpen ??= false;
 
-// options for theme, font etc., with displayed names and underlying codes
-let styleOptions = {
-	"themes": [
-		{	"name": `Dark`,		"code": `dark`		},
-		{	"name": `Goop`,		"code": `goop`		},
-		{	"name": `Flame`,	"code": `flame`		},
-		{	"name": `Plasm`,	"code": `plasm`		},
-		{	"name": `Moss`,		"code": `moss`		},
-		{	"name": `Darker`,	"code": `darker`	},
-		{	"name": `Light`,	"code": `light`		},
-		{	"name": `Wine`,		"code": `wine`		},
-		{	"name": `Ash`,		"code": `ash`		},
-		{	"name": `Dust`,		"code": `dust`		},
-		{	"name": `Mist`,		"code": `mist`		},
-		{	"name": `Silver`,	"code": `silver`	},
-		{	"name": `Pico`,		"code": `pico`		},
-		{	"name": `Sepia`,	"code": `sepia`		},
-		{	"name": `Abyss`,	"code": `abyss`		},
-		{	"name": `Retro`,	"code": `retro`		},
-		{	"name": `Marrow`,	"code": `marrow`	},
-		{	"name": `Org`,		"code": `org`		}
-	],
-	"fonts": [
-		{	"name": `Serif`,	"code": `serif`	},
-		{	"name": `Sans`,		"code": `sans`	}
-	]
-};
-
-// nav link names, codes, and optionally href (if not the code) and HTML attributes
-let navLinks = {
-	"activity": [
-		{	"name": `Booth`, 			"code": `booth`		},
-		{	"name": `Archive`, 			"code": `archive`	},
-		{	"name": `Feed`, 			"code": `feed`, 	"href": `./feed.xml`}
-	],
-	"info": [
-		{	"name": `About`, 			"code": `about`		},
-		{	"name": `Streaming`, 		"code": `streaming`	},
-		{	"name": `Settings`, 		"code": `settings`	}
-	],
-	"external": [
-		{	"name": `Call In`, 			"code": `call-in`	},
-		{	"name": `Links`, 			"code": `links`		},
-		{	"name": `Credits`, 			"code": `credits`	}
-	]
-};
-
 
 
 /* ===============
@@ -131,20 +84,9 @@ const page = {
 	"featuredShow": `#featured-show`
 },
 templateHTML = {
-	// nav
-	"navLink": `nav-link`,
-
-	// booth
 	"playlistItem": `playlist-item`,
-
-	// archive
 	"archiveSeries": `archive-series`,
 	"archiveShow": `archive-show`,
-
-	// settings
-	"toggle": `toggle`,
-	"themeButton": `theme-button`,
-	"fontButton": `font-button`
 };
 
 // build out page and templateHTML objects
@@ -244,14 +186,14 @@ function shufflePlaylist() {
 // reveal controls for clearing playlist
 function revealClearPlaylistControls() {
 	pressButton(page.clearButton);
-	page.clearPlaylistControls.removeAttribute(`hidden`);
+	page.clearPlaylistControls.hidden = false;
 	page.clearPlaylistControls.focus();
 }
 
 // hide controls for clearing playlist
 function hideClearPlaylistControls() {
 	unpressButton(page.clearButton);
-	page.clearPlaylistControls.setAttribute(`hidden`, ``);
+	page.clearPlaylistControls.hidden = true;
 }
 
 // clear playlist and hide clear controls again, then load show (i.e. nothing)
@@ -266,7 +208,7 @@ function clearPlaylist() {
 
 // clear import errors
 function clearImportErrors() {
-	page.importErrorMessage.setAttribute(`hidden`, ``);
+	page.importErrorMessage.hidden = true;
 	page.invalidShowIDs.replaceChildren();
 }
 
@@ -293,7 +235,7 @@ function importPlaylist() {
 		clearImportErrors();
 	} else {
 		for (const id of invalidIDs) page.invalidShowIDs.appendChild(document.createElement(`li`)).textContent = id;
-		page.importErrorMessage.removeAttribute(`hidden`);
+		page.importErrorMessage.hidden = false;
 		page.importErrorMessage.scrollIntoView();
 	}
 }
@@ -343,15 +285,12 @@ function addShow(id) {
 
 // add entire archive to playlist
 function addArchive() {
-	clearPlaylist();
 	for (const id of settings.copyrightSafety ? showIDSets.all.safe : showIDSets.all.any) addShow(id);
-	loadShow();
 }
 
 // add entire series to playlist
 function addSeries(seriesCode) {
-	for (const showCode of showIDSets.series[seriesCode]) addShow(`${seriesCode}-${showCode}`);
-	loadShow();
+	for (const id of showIDSets.series[seriesCode]) addShow(id);
 }
 
 // add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
@@ -401,13 +340,13 @@ function loadShow() {
 		seekTime(0);
 		page.seekBar.value = 0;
 		setTimestampFromSeconds(page.showTimeTotal, page.audio.dataset.duration);
-		page.radioControls.removeAttribute(`hidden`);
+		page.radioControls.hidden = false;
 
 		console.log(`loaded show: ${show.dataset.id}`);
 	} else {
 		page.audio.removeAttributes([`src`, `data-duration`]);
 		for (const time of [`Elapsed`, `Total`]) setTimestampFromSeconds(page[`showTime${time}`], "0");
-		page.radioControls.setAttribute(`hidden`, ``);
+		page.radioControls.hidden = true;
 		page.loadedShow.setAttribute(`data-id`, ``);
 	}
 }
@@ -438,8 +377,8 @@ function seekTime(value) {
 
 // hide a pressed button and reveal another
 function swapButtons(button1, button2) {
-	button1.setAttribute(`hidden`, ``);
-	button2.removeAttribute(`hidden`);
+	button1.hidden = true;
+	button2.hidden = false;
 }
 
 // play audio
@@ -487,35 +426,34 @@ function initialiseToggle(id, toggled) {
 }
 
 // switch a toggle from off/unpressed to on/pressed
-function switchToggle(id, key, value) {
+function switchToggle(id) {
 	const button = document.getElementById(`${id}-toggle`);
 	button.setAttribute(`aria-pressed`, button.getAttribute(`aria-pressed`) === `false` ? `true` : `false`);
-	settings[key] = value;
 }
 
 // toggle between excluding (true) and including (false) copyright-unsafe material when adding random shows to playlist
 function toggleCopyrightSafety() {
 	settings.copyrightSafety = !settings.copyrightSafety;
-	switchToggle(`copyright-safety`, `copyrightSafety`, settings.copyrightSafety);
+	switchToggle(`copyright-safety`);
 }
 
 // toggle between hiding and showing show-content in Radio
 function toggleFlatRadio() {
 	settings.flatRadio = !settings.flatRadio;
-	switchToggle(`flat-radio`, `flatRadio`, settings.flatRadio);
+	switchToggle(`flat-radio`);
 	page.loadedShow.classList.toggle(`flat-radio`, settings.flatRadio);
 }
 
 // toggle between auto-playing (true) and not (false) a newly-loaded show when the previous show ends
 function toggleAutoPlay() {
 	settings.autoPlayNextShow = !settings.autoPlayNextShow;
-	switchToggle(`auto-play`, `autoPlayNextShow`, settings.autoPlayNextShow);
+	switchToggle(`auto-play`);
 }
 
 // toggle between open (true) and closed (false) show content notes
 function toggleContentNotes() {
 	settings.notesOpen = !settings.notesOpen;
-	switchToggle(`content-notes`, `notesOpen`, settings.notesOpen);
+	switchToggle(`content-notes`);
 	for (const notes of document.querySelectorAll(`.content-notes`)) notes.toggleAttribute(`open`, settings.notesOpen);
 }
 
@@ -558,26 +496,6 @@ function switchFont(font) {
 PAGE CONSTRUCTION
 -------------- */
 
-// build nav menu
-function buildNavLinks() {
-	page.nav.replaceChildren();
-
-	for (const [section, links] of Object.entries(navLinks)) {
-		const list = document.createElement(`ul`);
-
-		for (const link of links) {
-			list.appendChild(templateHTML.navLink.content.cloneNode(true));
-			const newLink = list.lastElementChild.firstElementChild;
-
-			newLink.href = link.href ?? `#${link.code}`;
-			newLink.querySelector(`use`).setAttribute(`href`, `#svg-${link.code}`);
-			newLink.querySelector(`span`).setContent(link.name);
-		}
-
-		page.nav.appendChild(list);
-	}
-}
-
 // build archive onto page
 function buildArchive() {
 	page.seriesLinks.replaceChildren();
@@ -617,7 +535,7 @@ function buildArchive() {
 			if (series.copyrightSafe) showIDSets.all.safe.push(id);
 			if (show.banger) showIDSets.bangers.any.push(id);
 			if (series.copyrightSafe && show.banger) showIDSets.bangers.safe.push(id);
-			showIDSets.series[series.code].push(show.code);
+			showIDSets.series[series.code].push(id);
 
 			// add show details to series' show list
 			newSeriesShows.appendChild(templateHTML.archiveShow.content.cloneNode(true));
@@ -654,43 +572,6 @@ function buildArchive() {
 	document.getElementById(`stats-duration`).textContent = Math.round(stats.duration / 3600);
 }
 
-// build toggle switches
-function buildToggles() {
-	for (const toggle of document.querySelectorAll(`.toggle`)) {
-		const label = toggle.cloneChildren();
-		toggle.replaceChildren(templateHTML.toggle.content.cloneNode(true));
-		toggle.lastElementChild.replaceChildren(...label);
-	}
-}
-
-// build out theme buttons with names, codes, and demo palettes
-function buildThemeButtons() {
-	page.themeButtons.replaceChildren();
-
-	for (const theme of styleOptions.themes) {
-		page.themeButtons.appendChild(templateHTML.themeButton.content.cloneNode(true));
-
-		const button = page.themeButtons.lastElementChild.querySelector(`button`);
-		button.dataset.option = theme.code;
-		button.lastElementChild.setContent(theme.name);
-		button.querySelector(`.palette`).dataset.theme = theme.code;
-	}
-}
-
-// build out font buttons with names, codes, and font displays
-function buildFontButtons() {
-	page.fontButtons.replaceChildren();
-
-	for (const font of styleOptions.fonts) {
-		page.fontButtons.appendChild(templateHTML.fontButton.content.cloneNode(true));
-		const button = page.fontButtons.lastElementChild.querySelector(`button`);
-		button.classList.add(`font-${font.code}`);
-		button.dataset.option = font.code;
-		button.dataset.font = font.code;
-		button.setContent(font.name);
-	}
-}
-
 // add random banger to welcome page, including "add show" button as a call to action
 function buildFeaturedShow() {
 	const id = getRandomShowID(`bangers`),
@@ -707,7 +588,7 @@ function buildFeaturedShow() {
 	});
 
 	// build new show element and clone in show content and add-button
-	page.featuredShow.removeAttribute(`hidden`);
+	page.featuredShow.hidden = false;
 }
 
 
@@ -735,7 +616,7 @@ page.muteButton.addEventListener(`click`, muteAudio);
 page.unmuteButton.addEventListener(`click`, unmuteAudio);
 page.volumeControl.addEventListener(`input`, () => setVolume(page.volumeControl.value / 100));
 
-// playlist interface events
+// booth interface events
 document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
 document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`bangers`));
 document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
@@ -762,8 +643,6 @@ document.getElementById(`copyright-safety-toggle`).addEventListener(`click`, tog
 document.getElementById(`flat-radio-toggle`).addEventListener(`click`, toggleFlatRadio);
 document.getElementById(`auto-play-toggle`).addEventListener(`click`, toggleAutoPlay);
 document.getElementById(`content-notes-toggle`).addEventListener(`click`, toggleContentNotes);
-
-// settings interface events (styling)
 page.themeButtons.addEventListener(`click`, () => {
 	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) switchTheme(event.target.dataset.option);
 });
@@ -774,11 +653,7 @@ page.fontButtons.addEventListener(`click`, () => {
 // on pageload, execute various tasks
 document.addEventListener(`DOMContentLoaded`, () => {
 	// build various semi-static page sections
-	buildNavLinks();
 	buildArchive();
-	buildToggles();
-	buildThemeButtons();
-	buildFontButtons();
 	buildFeaturedShow();
 
 	// import playlist and prepare playlist show IDs from storage (if there are any), simultaneously removing invalid IDs by checking against all IDs
@@ -802,10 +677,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	page.title.dataset.original = document.title;
 	if (window.location.hash) navigateToSection();
 
-	// clear out setup variables
+	// clear out archive object
 	archive = null;
-	styleOptions = null;
-	navLinks = null;
 });
 
 // on closing window/browser tab, record user settings and styles to localStorage
