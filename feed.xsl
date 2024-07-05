@@ -8,12 +8,12 @@
 
 
 <!--convert atom timestamp to valid HTML id-->
-<xsl:template match="atom:published | atom:updated" mode="to-id">
+<xsl:template match="atom:published | atom:updated" mode="timestamp-to-id">
 <xsl:value-of select="translate(., ':+', '--')" />
 </xsl:template>
 
 <!--remove time part of atom timestamp-->
-<xsl:template match="atom:published | atom:updated" mode="to-date">
+<xsl:template match="atom:published | atom:updated" mode="timestamp-to-date">
 <time><xsl:value-of select="substring-before(., 'T')" /></time>
 </xsl:template>
 
@@ -33,7 +33,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<xsl:if test="$all-news = 'true'">
 		<xsl:attribute name="id">
 			<xsl:text>post-</xsl:text>
-			<xsl:apply-templates select="atom:updated" mode="to-id" />
+			<xsl:apply-templates select="atom:updated" mode="timestamp-to-id" />
 		</xsl:attribute>
 	</xsl:if>
 	<header>
@@ -45,16 +45,16 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			<a>
 				<xsl:attribute name="href">
 					<xsl:text>#post-</xsl:text>
-					<xsl:apply-templates select="atom:updated" mode="to-id" />
+					<xsl:apply-templates select="atom:updated" mode="timestamp-to-id" />
 				</xsl:attribute>
 			</a>
 		</h3>
 		<div class="post-times">
 			<xsl:text>posted </xsl:text>
-			<xsl:apply-templates select="atom:published" mode="to-date" />
+			<xsl:apply-templates select="atom:published" mode="timestamp-to-date" />
 			<xsl:if test="atom:published != atom:updated">
 				<xsl:text> / last updated </xsl:text>
-				<xsl:apply-templates select="atom:updated" mode="to-date" />
+				<xsl:apply-templates select="atom:updated" mode="timestamp-to-date" />
 			</xsl:if>
 		</div>
 	</header>
@@ -70,9 +70,9 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<a>
 		<xsl:attribute name="href">
 			<xsl:text>#post-</xsl:text>
-			<xsl:apply-templates select="atom:updated" mode="to-id" />
+			<xsl:apply-templates select="atom:updated" mode="timestamp-to-id" />
 		</xsl:attribute>
-		<xsl:apply-templates select="atom:updated" mode="to-date" />
+		<xsl:apply-templates select="atom:updated" mode="timestamp-to-date" />
 	</a>
 </dt>
 <dd><xsl:value-of select="atom:title" /></dd>
