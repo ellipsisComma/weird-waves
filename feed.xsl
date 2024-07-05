@@ -8,21 +8,13 @@
 
 
 <!--convert atom timestamp to valid HTML id-->
-<xsl:template name="timestamp-to-id">
-<xsl:param name="timestamp" />
-<xsl:value-of select="translate($timestamp, ':+', '--')" />
+<xsl:template match="atom:published | atom:updated" mode="to-id">
+<xsl:value-of select="translate(., ':+', '--')" />
 </xsl:template>
 
 <!--remove time part of atom timestamp-->
-<xsl:template name="timestamp-to-date">
-<xsl:param name="timestamp" />
-<xsl:value-of select="substring-before($timestamp, 'T')" />
-</xsl:template>
-
-<!--count posts with a given category (allows multiple category elements per post)-->
-<xsl:template name="count-posts-in-category">
-<xsl:param name="category" />
-<xsl:value-of select="count(atom:entry[atom:category/@term = $category])" />
+<xsl:template match="atom:published | atom:updated" mode="to-date">
+<time><xsl:value-of select="substring-before(., 'T')" /></time>
 </xsl:template>
 
 
@@ -33,79 +25,57 @@ render all posts from a category, each including:
 	* post title and content
 	* published/updated timestamps (only published timestamp if they're the same)
 
-append an HTML id if the category (passed as an argument) is "all", so hash-links on all copies of a post point to the copy of hte post in the all-news section
+append an HTML id if the template's applied to all news, so hash-links on all copies of a post point to the copy of the post in the all-news section
 -->
-<xsl:template name="list-posts">
-<xsl:param name="category" />
-<xsl:for-each select="atom:entry">
-	<xsl:if test="$category = 'all' or atom:category/@term = $category">
-		<li><article>
-			<xsl:if test="$category = 'all'">
-				<xsl:attribute name="id">
-					<xsl:text>post-</xsl:text>
-					<xsl:call-template name="timestamp-to-id">
-						<xsl:with-param name="timestamp" select="atom:updated" />
-					</xsl:call-template>
-				</xsl:attribute>
-			</xsl:if>
-			<header>
-				<h3>
-					<span class="contains-html">
-						<xsl:value-of select="atom:title" />
-					</span>
-					<xsl:text> </xsl:text>
-					<a>
-						<xsl:attribute name="href">
-							<xsl:text>#post-</xsl:text>
-							<xsl:call-template name="timestamp-to-id">
-								<xsl:with-param name="timestamp" select="atom:updated" />
-							</xsl:call-template>
-						</xsl:attribute>
-					</a>
-				</h3>
-				<div class="post-times">
-					<xsl:text>posted </xsl:text>
-					<time>
-						<xsl:call-template name="timestamp-to-date">
-							<xsl:with-param name="timestamp" select="atom:published" />
-						</xsl:call-template>
-					</time>
-					<xsl:if test="atom:published != atom:updated">
-						<xsl:text> / last updated </xsl:text>
-						<time>
-							<xsl:call-template name="timestamp-to-date">
-								<xsl:with-param name="timestamp" select="atom:updated" />
-							</xsl:call-template>
-						</time>
-					</xsl:if>
-				</div>
-			</header>
-			<div class="contains-html">
-				<xsl:value-of select="atom:content" />
-			</div>
-		</article></li>
+<xsl:template match="atom:entry" mode="list-posts">
+<xsl:param name="all-news" />
+<li><article>
+	<xsl:if test="$all-news = 'true'">
+		<xsl:attribute name="id">
+			<xsl:text>post-</xsl:text>
+			<xsl:apply-templates select="atom:updated" mode="to-id" />
+		</xsl:attribute>
 	</xsl:if>
-</xsl:for-each>
+	<header>
+		<h3>
+			<span class="contains-html">
+				<xsl:value-of select="atom:title" />
+			</span>
+			<xsl:text> </xsl:text>
+			<a>
+				<xsl:attribute name="href">
+					<xsl:text>#post-</xsl:text>
+					<xsl:apply-templates select="atom:updated" mode="to-id" />
+				</xsl:attribute>
+			</a>
+		</h3>
+		<div class="post-times">
+			<xsl:text>posted </xsl:text>
+			<xsl:apply-templates select="atom:published" mode="to-date" />
+			<xsl:if test="atom:published != atom:updated">
+				<xsl:text> / last updated </xsl:text>
+				<xsl:apply-templates select="atom:updated" mode="to-date" />
+			</xsl:if>
+		</div>
+	</header>
+	<div class="contains-html">
+		<xsl:value-of select="atom:content" />
+	</div>
+</article></li>
 </xsl:template>
 
 <!--list updated-timestamps and post headings for most recent posts-->
-<xsl:template name="latest-updated-posts-list">
-<xsl:for-each select="atom:entry[position() &lt;= $latest-updates-count]">
-	<dt>
-		<a>
-			<xsl:attribute name="href">
-				<xsl:text>#post-</xsl:text>
-				<xsl:call-template name="timestamp-to-id">
-					<xsl:with-param name="timestamp" select="atom:updated" />
-				</xsl:call-template>
-			</xsl:attribute>
-			<xsl:call-template name="timestamp-to-date">
-				<xsl:with-param name="timestamp" select="atom:updated" />
-			</xsl:call-template>
-		</a>
-	</dt>
-	<dd><xsl:value-of select="atom:title" /></dd>
-</xsl:for-each>
+<xsl:template match="atom:entry" mode="list-latest-updates">
+<dt>
+	<a>
+		<xsl:attribute name="href">
+			<xsl:text>#post-</xsl:text>
+			<xsl:apply-templates select="atom:updated" mode="to-id" />
+		</xsl:attribute>
+		<xsl:apply-templates select="atom:updated" mode="to-date" />
+	</a>
+</dt>
+<dd><xsl:value-of select="atom:title" /></dd>
 </xsl:template>
 
 
@@ -127,7 +97,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' /&gt;" sizes="any" />
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 
-	<script src="./initialisation.js?v=2024-07-05"></script>
+	<script src="./initialisation.js?v=2024-07-05b"></script>
 </head>
 
 
@@ -246,9 +216,9 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<p>All the news, all in one place.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
-		<xsl:call-template name="list-posts">
-			<xsl:with-param name="category" select="'all'" />
-		</xsl:call-template>
+		<xsl:apply-templates select="atom:entry" mode="list-posts">
+			<xsl:with-param name="all-news" select="'true'" />
+		</xsl:apply-templates>
 	</ol>
 </div><!--#all-new end-->
 
@@ -266,27 +236,15 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 		</div>
 		<div>
 			<dt>bulletins</dt>
-			<dd>
-				<xsl:call-template name="count-posts-in-category">
-					<xsl:with-param name="category" select="'bulletins'" />
-				</xsl:call-template>
-			</dd>
+			<dd><xsl:value-of select="count(atom:entry[atom:category/@term = 'bulletins'])" /></dd>
 		</div>
 		<div>
 			<dt>feature alerts</dt>
-			<dd>
-				<xsl:call-template name="count-posts-in-category">
-					<xsl:with-param name="category" select="'features'" />
-				</xsl:call-template>
-			</dd>
+			<dd><xsl:value-of select="count(atom:entry[atom:category/@term = 'features'])" /></dd>
 		</div>
 		<div>
 			<dt>blog posts</dt>
-			<dd>
-				<xsl:call-template name="count-posts-in-category">
-					<xsl:with-param name="category" select="'history'" />
-				</xsl:call-template>
-			</dd>
+			<dd><xsl:value-of select="count(atom:entry[atom:category/@term = 'history'])" /></dd>
 		</div>
 	</dl>
 	<noscript>Sorry, this feed requires JavaScript to display properly! Without it, post titles and content will appear as raw markup, among other minor changes.</noscript>
@@ -299,9 +257,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<p>Milestones, show announcements, and major decisions in the site's development.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
-		<xsl:call-template name="list-posts">
-			<xsl:with-param name="category" select="'bulletins'" />
-		</xsl:call-template>
+		<xsl:apply-templates select="atom:entry[atom:category/@term = 'bulletins']" mode="list-posts" />
 	</ol>
 </div><!--#bulletins end-->
 
@@ -312,9 +268,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<p>All the info on new features, bug fixes, and other tweaks to the site.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
-		<xsl:call-template name="list-posts">
-			<xsl:with-param name="category" select="'features'" />
-		</xsl:call-template>
+		<xsl:apply-templates select="atom:entry[atom:category/@term = 'features']" mode="list-posts" />
 	</ol>
 </div><!--#features end-->
 
@@ -325,9 +279,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<p>Blog posts (from a now-defunct blog) published before Weird Waves even had a News section or Feed.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
-		<xsl:call-template name="list-posts">
-			<xsl:with-param name="category" select="'history'" />
-		</xsl:call-template>
+		<xsl:apply-templates select="atom:entry[atom:category/@term = 'history']" mode="list-posts" />
 	</ol>
 </div><!--#history end-->
 
@@ -339,7 +291,7 @@ append an HTML id if the category (passed as an argument) is "all", so hash-link
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<h3>Latest updates</h3>
 	<dl id="latest-updates">
-		<xsl:call-template name="latest-updated-posts-list" />
+		<xsl:apply-templates select="atom:entry[position() &lt;= $latest-updates-count]" mode="list-latest-updates" />
 	</dl>
 </div><!--#welcome end-->
 </main>
