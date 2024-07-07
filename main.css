@@ -13,6 +13,7 @@ ABOUT
 STREAMING
 SETTINGS
 CALL IN/LINKS/CREDITS/WELCOME
+FEED
 
 RESPONSIVITY
 	breakpoints:
@@ -935,9 +936,6 @@ use[href="#svg-toggle-tick"] {
 		margin-block-start: 1em;
 	}
 }
-#featured-show-container > :first-child {
-	margin-block-start: 1em;
-}
 
 
 
@@ -972,8 +970,8 @@ use[href="#svg-toggle-tick"] {
 	& > :first-child h3 {
 		margin-block-start: 1em;
 	}
-	article ul > ::marker {
-		content: "\2013\00a0\00a0";
+	article ul > li {
+		list-style-type: "\2013\00a0\00a0";
 	}
 }
 .post-times {
