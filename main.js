@@ -89,7 +89,7 @@ templateHTML = {
 
 // build out page and templateHTML objects
 for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelector(query);
-for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(`${id}-template`);
+for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.querySelector(`#${id}-template`).content;
 
 
 
@@ -215,7 +215,7 @@ function importPlaylist() {
 
 	// if attempting to import IDs, validate them and either present invalid IDs or update playlist; if import box is empty, clear playlist
 	const importIDs = page.importExport.value.trim().replace(/\n\n+/g, `\n`).replace(/ /g, ``).split(`\n`),
-	invalidIDs = importIDs.filter(id => !document.getElementById(id));
+	invalidIDs = importIDs.filter(id => !document.querySelector(`#${id}`));
 
 	if (invalidIDs.length === 0) {
 		clearImportErrors();
@@ -247,8 +247,8 @@ function addShow(id) {
 	}
 
 	// build new show element and clone in show position controls and show content from Archive
-	const showInArchive = document.getElementById(id);
-	page.playlist.appendChild(templateHTML.playlistItem.content.cloneNode(true)),
+	const showInArchive = document.querySelector(`#${id}`);
+	page.playlist.appendChild(templateHTML.playlistItem.cloneNode(true)),
 	newShow = page.playlist.lastElementChild;
 
 	for (const button of newShow.querySelectorAll(`button`)) button.dataset.target = id;
@@ -256,7 +256,7 @@ function addShow(id) {
 	newShow.lastElementChild.appendChild(showInArchive.querySelector(`.show-content`).cloneNode(true));
 
 	// transfer remaining show info
-	expandShowInfo(newShow, document.getElementById(`archive-${id.split(`-`)[0]}`));
+	expandShowInfo(newShow, document.querySelector(`#archive-${id.split(`-`)[0]}`));
 	newShow.setAttributes({
 		"data-id": id,
 		"data-duration": showInArchive.dataset.duration
@@ -409,12 +409,12 @@ SETTINGS
 
 // initialise a toggle switch with a stored or default value
 function initialiseToggle(id, toggled) {
-	document.getElementById(id).setAttribute(`aria-pressed`, toggled ? `true` : `false`);
+	document.querySelector(`#${id}`).setAttribute(`aria-pressed`, toggled ? `true` : `false`);
 }
 
 // switch a toggle from off/unpressed to on/pressed
 function switchToggle(id) {
-	const button = document.getElementById(`${id}-toggle`);
+	const button = document.querySelector(`#${id}-toggle`);
 	button.setAttribute(`aria-pressed`, button.getAttribute(`aria-pressed`) === `false` ? `true` : `false`);
 }
 
@@ -507,7 +507,7 @@ function buildArchive() {
 		newSeriesLink.setContent(series.heading);
 
 		// add series details to series list
-		page.seriesList.appendChild(templateHTML.archiveSeries.content.cloneNode(true));
+		page.seriesList.appendChild(templateHTML.archiveSeries.cloneNode(true));
 		const newSeries = page.seriesList.lastElementChild,
 		newSeriesShows = newSeries.querySelector(`.show-list`);
 		newSeries.id = `archive-${series.code}`;
@@ -523,7 +523,7 @@ function buildArchive() {
 			const id = `${series.code}-${show.code}`;
 
 			// add show details to series' show list
-			newSeriesShows.appendChild(templateHTML.archiveShow.content.cloneNode(true));
+			newSeriesShows.appendChild(templateHTML.archiveShow.cloneNode(true));
 			const newShow = newSeriesShows.lastElementChild;
 			newShow.id = id;
 			if (show.banger) newShow.dataset.banger = `true`;
@@ -553,24 +553,24 @@ function buildArchive() {
 	});
 
 	// add series stats to stats-list
-	document.getElementById(`stats-sources`).textContent = stats.series;
-	document.getElementById(`stats-shows`).textContent = stats.shows;
-	document.getElementById(`stats-duration`).textContent = Math.round(stats.duration / 3600);
+	document.querySelector(`#stats-sources`).textContent = stats.series;
+	document.querySelector(`#stats-shows`).textContent = stats.shows;
+	document.querySelector(`#stats-duration`).textContent = Math.round(stats.duration / 3600);
 }
 
 // add random banger to welcome page, with "add show" button as call to action
 function buildFeaturedShow() {
 	const id = getRandomShowID(`banger`),
-	showInArchive = document.getElementById(id);
+	showInArchive = document.querySelector(`#${id}`);
 
 	// build out featured show HTML from show and series in Archive
 	page.featuredShow.replaceChildren(...showInArchive.cloneChildren());
-	expandShowInfo(page.featuredShow, document.getElementById(`archive-${id.split(`-`)[0]}`));
+	expandShowInfo(page.featuredShow, document.querySelector(`#archive-${id.split(`-`)[0]}`));
 
 	// add click event for adding featured show to playlist and removing it from welcome area
 	page.featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
 		addShow(id);
-		document.getElementById(`featured-show-container`).remove();
+		document.querySelector(`#featured-show-container`).remove();
 	});
 
 	// reveal featured show
@@ -603,14 +603,14 @@ page.unmuteButton.addEventListener(`click`, unmuteAudio);
 page.volumeControl.addEventListener(`input`, () => setVolume(page.volumeControl.value / 100));
 
 // booth interface events
-document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow());
-document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
-document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
+document.querySelector(`#random-show-button`).addEventListener(`click`, () => addRandomShow());
+document.querySelector(`#random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
+document.querySelector(`#shuffle-button`).addEventListener(`click`, shufflePlaylist);
 page.clearButton.addEventListener(`click`, () => {
 	if (!page.clearButton.hasAttribute(`aria-disabled`)) revealClearPlaylistControls();
 });
-document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
-document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
+document.querySelector(`#clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
+document.querySelector(`#clear-confirm-button`).addEventListener(`click`, clearPlaylist);
 page.playlist.addEventListener(`click`, () => {
 	switch (event.target.dataset.action) {
 	case `move-up`: moveShow(event.target.dataset.target, -1); break;
@@ -618,17 +618,17 @@ page.playlist.addEventListener(`click`, () => {
 	case `move-down`: moveShow(event.target.dataset.target, 1); break;
 	}
 });
-document.getElementById(`export-button`).addEventListener(`click`, exportPlaylist);
-document.getElementById(`import-button`).addEventListener(`click`, importPlaylist);
+document.querySelector(`#export-button`).addEventListener(`click`, exportPlaylist);
+document.querySelector(`#import-button`).addEventListener(`click`, importPlaylist);
 
 // archive interface events (excluding those dependent on the archive HTML being generated beforehand)
-document.getElementById(`add-archive-button`).addEventListener(`click`, addArchive);
+document.querySelector(`#add-archive-button`).addEventListener(`click`, addArchive);
 
 // settings interface events (general)
-document.getElementById(`copyright-safety-toggle`).addEventListener(`click`, toggleCopyrightSafety);
-document.getElementById(`flat-radio-toggle`).addEventListener(`click`, toggleFlatRadio);
-document.getElementById(`auto-play-toggle`).addEventListener(`click`, toggleAutoPlay);
-document.getElementById(`content-notes-toggle`).addEventListener(`click`, toggleContentNotes);
+document.querySelector(`#copyright-safety-toggle`).addEventListener(`click`, toggleCopyrightSafety);
+document.querySelector(`#flat-radio-toggle`).addEventListener(`click`, toggleFlatRadio);
+document.querySelector(`#auto-play-toggle`).addEventListener(`click`, toggleAutoPlay);
+document.querySelector(`#content-notes-toggle`).addEventListener(`click`, toggleContentNotes);
 page.themeButtons.addEventListener(`click`, () => {
 	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) switchTheme(event.target.dataset.option);
 });
