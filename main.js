@@ -45,7 +45,7 @@ settings.notesOpen ??= false;
 const page = {
 	// head
 	"title": `title`,
-	"favicon": `[rel~="icon"][type="image/svg+xml"]`,
+	"favicon": `[rel="icon"][type="image/svg+xml"]`,
 
 	// radio
 	"loadedShow": `#loaded-show`,
@@ -68,7 +68,6 @@ const page = {
 	"clearPlaylistControls": `#clear-playlist-controls`,
 	"importExport": `#import-export-data`,
 	"importErrorMessage": `#import-error-message`,
-	"invalidShowIDs": `#invalid-show-ids`,
 
 	// archive
 	"seriesLinks": `#archive-series-links`,
@@ -79,17 +78,12 @@ const page = {
 	"fontButtons": `#font-buttons`,
 
 	// welcome
+	"featuredShowContainer": `#featured-show-container`,
 	"featuredShow": `#featured-show`
-},
-templateHTML = {
-	"playlistItem": `playlist-item`,
-	"archiveSeries": `archive-series`,
-	"archiveShow": `archive-show`,
 };
 
-// build out page and templateHTML objects
+// build out page refs
 for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelector(query);
-for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.querySelector(`#${id}-template`).content;
 
 
 
@@ -103,7 +97,7 @@ UTILITY
 
 /* GENERAL */
 
-// add an object of attributes to an Element (excluding class for practical reasons)
+// add an object of attributes to an Element
 Element.prototype.setAttributes = function (attrs) {
 	for (const [attr, value] of Object.entries(attrs)) this.setAttribute(attr, value);
 };
@@ -120,16 +114,19 @@ HTMLElement.prototype.setContent = function (text) {
 	else this.textContent = text;
 };
 
-// create an array of nodes cloned from the target
-HTMLElement.prototype.cloneChildren = function () {
-	const clones = [];
-	for (const node of this.childNodes) clones.push(node.cloneNode(true));
-	return clones;
+// sum a numerical array
+Array.prototype.sum = function () {
+	return this.reduce((a, b) => a + b, 0);
 };
+
+// sum a numerical array that's an object property value
+Array.prototype.sumByKey = function (key) {
+	return this.reduce((a, b) => a + b[key], 0);
+}
 
 /* APP */
 
-// take in a time in seconds (can be a non-integer) and output a timestamp in minutes and seconds
+// convert time in seconds to minutes:seconds timestamp
 function setTimestampFromSeconds(element, time) {
 	const minutes = Math.floor((parseInt(time) % 3600) / 60).toString().padStart(2, `0`),
 	seconds = (parseInt(time) % 60).toString().padStart(2, `0`);
@@ -139,36 +136,30 @@ function setTimestampFromSeconds(element, time) {
 
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type = ``) {
-	const pool = document.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li${type === `banger` ? `[data-banger="true"]` : ``}`);
-	return pool[Math.floor(Math.random() * pool.length)].id;
+	const pool = page.seriesList.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li${type === `banger` ? `[data-banger="true"]` : ``}:not(:has([data-action="add-show"][aria-pressed="true"]))`);
+	return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)].id : ``;
+}
+
+// get show element in archive
+function getShowInArchive(id) {
+	return page.seriesList.querySelector(`.show-list > [id="${id.replace(`"`, `'`)}"]`);
 }
 
 // get show element on playlist
 function getShowOnPlaylist(id) {
-	return page.playlist.querySelector(`:scope > [data-id="${id}"]`);
-}
-
-// add series name to show heading element and add series source to element info (for playlist and featured show)
-function expandShowInfo(show, seriesInArchive) {
-	const showHeading = show.querySelector(`.show-heading`);
-	showHeading.replaceChildren(
-		...seriesInArchive.querySelector(`.series-heading`).cloneChildren(),
-		document.createTextNode(` `),
-		...showHeading.cloneChildren()
-	);
-	show.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
+	return page.playlist.querySelector(`:scope > [data-id="${id.replace(`"`, `'`)}"]`);
 }
 
 /* -----
 PLAYLIST
 ----- */
 
-// shuffle playlist if it has at least 2 entries, then load top show (if it's different after shuffling)
+// shuffle playlist if it has at least 2 entries
 function shufflePlaylist() {
 	let i = page.playlist.children.length;
 	if (i < 2) return;
 
-	while (i > 0) page.playlist.appendChild(page.playlist.children[Math.floor(Math.random() * i--)]);
+	while (i > 0) page.playlist.append(page.playlist.children[Math.floor(Math.random() * i--)]);
 	loadShow();
 }
 
@@ -185,7 +176,7 @@ function hideClearPlaylistControls() {
 	page.clearPlaylistControls.hidden = true;
 }
 
-// clear playlist and radio and hide clear controls again
+// clear playlist and hide clear controls again
 function clearPlaylist() {
 	if (page.playlist.children.length > 0) {
 		page.playlist.replaceChildren();
@@ -195,37 +186,49 @@ function clearPlaylist() {
 	loadShow();
 }
 
-// clear import errors
-function clearImportErrors() {
-	page.importErrorMessage.hidden = true;
-	page.invalidShowIDs.replaceChildren();
-}
-
 // list playlist of show IDs line-by-line in import-export box
 function exportPlaylist() {
 	const exportIDs = [];
-	clearImportErrors();
+	page.importErrorMessage.hidden = true;
 	for (const show of page.playlist.children) exportIDs.push(show.dataset.id);
 	page.importExport.value = exportIDs.join(`\n`);
 }
 
+function revealImportErrors(message) {
+	page.importErrorMessage.innerHTML = message;
+	page.importErrorMessage.hidden = false;
+	page.importErrorMessage.scrollIntoView();
+}
+
 // import playlist from textbox
 function importPlaylist() {
-	clearImportErrors();
+	page.importErrorMessage.hidden = true;
 
 	// if attempting to import IDs, validate them and either present invalid IDs or update playlist; if import box is empty, clear playlist
-	const importIDs = page.importExport.value.trim().replace(/\n\n+/g, `\n`).replace(/ /g, ``).split(`\n`),
-	invalidIDs = importIDs.filter(id => !document.querySelector(`#${id}`));
+	const importIDs = page.importExport.value.trim().length > 0
+		? [...new Set(page.importExport.value
+			.trim()
+			.replace(/\n\n+/g, `\n`)
+			.replace(/[ \t]/g, ``)
+			.split(`\n`))]
+		: [],
+	invalidIDs = importIDs.filter(id => !getShowInArchive(id));
+
+	page.importExport.value = ``;
 
 	if (invalidIDs.length === 0) {
-		clearImportErrors();
-		clearPlaylist();
-		for (const id of importIDs) addShow(id);
-		page.importExport.value = ``;
+		if (importIDs.length > 0) {
+			clearPlaylist();
+			for (const id of importIDs) addShow(id);
+		} else revealImportErrors(`<p>Invalid import: no show IDs.</p>`);
 	} else {
-		for (const id of invalidIDs) page.invalidShowIDs.appendChild(document.createElement(`li`)).textContent = id;
-		page.importErrorMessage.hidden = false;
-		page.importErrorMessage.scrollIntoView();
+		revealImportErrors(`
+		<p>Invalid import: Invalid show ID${invalidIDs.length > 1 ? `s` : ``}:</p>
+		<ul>
+			${invalidIDs.map(id => `<li>${id}</li>`).join(``)}
+		</ul>
+		`);
+		page.importExport.value = importIDs.join(`\n`);
 	}
 }
 
@@ -246,29 +249,40 @@ function addShow(id) {
 		return;
 	}
 
-	// build new show element and clone in show position controls and show content from Archive
-	const showInArchive = document.querySelector(`#${id}`);
-	page.playlist.appendChild(templateHTML.playlistItem.cloneNode(true)),
-	newShow = page.playlist.lastElementChild;
+	// build new playlist item
+	const showInArchive = getShowInArchive(id),
+	seriesInArchive = showInArchive.closest(`#series-list > li`),
+	newShow = page.playlist.appendChild(document.createElement(`li`)),
+	playlistShowControls = [
+		{	"code": `move-up`,		"label": `Move show up`		},
+		{	"code": `remove`,		"label": `Remove show`		},
+		{	"code": `move-down`,	"label": `Move show down`	}
+	];
 
-	for (const button of newShow.querySelectorAll(`button`)) button.dataset.target = id;
-	newShow.lastElementChild.appendChild(showInArchive.querySelector(`.show-heading`).cloneNode(true));
-	newShow.lastElementChild.appendChild(showInArchive.querySelector(`.show-content`).cloneNode(true));
+	newShow.outerHTML = `
+	<li data-id="${id}" data-duration="${showInArchive.dataset.duration}">
+		<ul class="show-position-controls icon-button-set">
+			${playlistShowControls.map(button => `
+			<li>
+				<button class="push-button" type="button" data-action="${button.code}" data-target="${id}" aria-label="${button.label}">
+					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-${button.code}" /></svg>
+				</button>
+			</li>
+			`).join(``)}
+		</ul>
+		<div class="show-info">
+			<h4 class="show-heading">${seriesInArchive.querySelector(`.series-heading`).innerHTML} ${showInArchive.querySelector(`.show-heading`).innerHTML}</h4>
+			<div class="show-content">
+				${showInArchive.querySelector(`.show-content`).innerHTML}
+				${seriesInArchive.querySelector(`.series-source`).outerHTML}
+			</div>
+		</div>
+	</li>
+	`;
 
-	// transfer remaining show info
-	expandShowInfo(newShow, document.querySelector(`#archive-${id.split(`-`)[0]}`));
-	newShow.setAttributes({
-		"data-id": id,
-		"data-duration": showInArchive.dataset.duration
-	});
-
-	// add show to playlist in booth and mark as added in archive
-	page.playlist.appendChild(newShow);
+	// update page
 	pressButton(showInArchive.querySelector(`[data-action="add-show"]`));
-
-	// update show info and elements for playlist
 	console.log(`added show: ${id}`);
-
 	loadShow();
 }
 
@@ -284,7 +298,8 @@ function addSeries(seriesCode) {
 
 // add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
 function addRandomShow(showType) {
-	addShow(getRandomShowID(showType));
+	const id = getRandomShowID(showType);
+	if (getShowInArchive(id)) addShow(id);
 	window.scrollTo(0, page.playlist.lastElementChild.offsetTop - page.playlistControls.clientHeight);
 }
 
@@ -303,7 +318,7 @@ function moveShow(id, move) {
 // remove show from playlist
 function removeShow(id) {
 	getShowOnPlaylist(id)?.remove();
-	unpressButton(document.querySelector(`#${id} [data-action="add-show"]`));
+	unpressButton(getShowInArchive(id).querySelector(`[data-action="add-show"]`));
 	console.log(`removed show: ${id}`);
 	loadShow();
 }
@@ -313,7 +328,6 @@ function loadShow() {
 	if (page.playlist.children.length > 0 && page.playlist.firstElementChild.dataset.id === page.loadedShow.dataset.id) return;
 
 	pauseAudio();
-	page.loadedShow.replaceChildren();
 
 	if (page.playlist.children.length > 0) {
 		const show = page.playlist.firstElementChild;
@@ -322,8 +336,7 @@ function loadShow() {
 		// load audio file and show data
 		page.audio.src = `${showFilePath}${show.dataset.id}${showFileExtension}`;
 		page.audio.dataset.duration = show.dataset.duration;
-		page.loadedShow.appendChild(show.querySelector(`.show-heading`).cloneNode(true));
-		page.loadedShow.appendChild(show.querySelector(`.show-content`).cloneNode(true));
+		page.loadedShow.innerHTML = show.querySelector(`.show-info`).innerHTML;
 
 		// reset and reveal radio controls
 		updateSeekTime(0);
@@ -333,6 +346,8 @@ function loadShow() {
 
 		console.log(`loaded show: ${show.dataset.id}`);
 	} else {
+		page.loadedShow.innerHTML = ``;
+		page.playlist.innerHTML = ``;
 		page.audio.removeAttributes([`src`, `data-duration`]);
 		for (const time of [`Elapsed`, `Total`]) setTimestampFromSeconds(page[`showTime${time}`], "0");
 		page.radioControls.hidden = true;
@@ -364,36 +379,34 @@ function updateSeekTime(value) {
 	setTimestampFromSeconds(page.showTimeElapsed, page.audio.dataset.duration * value / 100);
 }
 
-// hide a pressed button and reveal another
-function swapButtons(button1, button2) {
-	button1.hidden = true;
-	button2.hidden = false;
-}
-
 // play audio
 function playAudio() {
 	page.audio.play();
-	swapButtons(page.playButton, page.pauseButton);
+	page.playButton.hidden = true;
+	page.pauseButton.hidden = false;
 }
 
 // pause audio
 function pauseAudio() {
 	updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
 	page.audio.pause();
-	swapButtons(page.pauseButton, page.playButton);
+	page.pauseButton.hidden = true;
+	page.playButton.hidden = false;
 }
 
 // mute audio
 function muteAudio() {
 	page.audio.muted = true;
-	swapButtons(page.muteButton, page.unmuteButton);
+	page.muteButton.hidden = true;
+	page.unmuteButton.hidden = false;
 	page.volumeControl.value = 0;
 }
 
 // unmute audio
 function unmuteAudio() {
 	page.audio.muted = false;
-	swapButtons(page.unmuteButton, page.muteButton);
+	page.unmuteButton.hidden = true;
+	page.muteButton.hidden = false;
 	page.volumeControl.value = page.audio.volume * 100;
 }
 
@@ -489,58 +502,39 @@ PAGE CONSTRUCTION
 
 // build archive onto page
 function buildArchive() {
-	page.seriesLinks.replaceChildren();
-	page.seriesList.replaceChildren();
+	page.seriesLinks.innerHTML = archive.map(series => `
+	<li>
+		<a href="#archive-${series.code}">${series.heading}</a>
+	</li>
+	`).join(``);
 
-	const stats = {
-		"series": archive.length,
-		"shows": 0,
-		"duration": 0
-	};
-
-	for (const series of archive) {
-		stats.shows += series.shows.length;
-
-		// add link pointing to series at top of archive
-		const newSeriesLink = page.seriesLinks.appendChild(document.createElement(`li`)).appendChild(document.createElement(`a`));
-		newSeriesLink.href = `#archive-${series.code}`;
-		newSeriesLink.setContent(series.heading);
-
-		// add series details to series list
-		page.seriesList.appendChild(templateHTML.archiveSeries.cloneNode(true));
-		const newSeries = page.seriesList.lastElementChild,
-		newSeriesShows = newSeries.querySelector(`.show-list`);
-		newSeries.id = `archive-${series.code}`;
-		if (series.copyrightSafe) newSeries.dataset.copyrightSafe = `true`;
-		newSeries.querySelector(`.series-heading`).setContent(series.heading);
-		newSeries.querySelector(`.series-blurb`).setContent(series.blurb);
-		newSeries.querySelector(`.series-source`).setContent(series.source);
-		newSeries.querySelector(`[data-action="add-series"]`).dataset.target = series.code;
-
-		for (const show of series.shows) {
-			stats.duration += show.duration;
-
-			const id = `${series.code}-${show.code}`;
-
-			// add show details to series' show list
-			newSeriesShows.appendChild(templateHTML.archiveShow.cloneNode(true));
-			const newShow = newSeriesShows.lastElementChild;
-			newShow.id = id;
-			if (show.banger) newShow.dataset.banger = `true`;
-			newShow.dataset.duration = show.duration;
-			newShow.querySelector(`.show-heading`).setContent(show.heading);
-			newShow.querySelector(`.show-blurb`).setContent(show.blurb);
-
-			// if show has content notes, add them to show-info, otherwise remove empty content notes element
-			const contentNotes = newShow.querySelector(`.content-notes`);
-			if (show.notes) {
-				contentNotes.open = settings.notesOpen;
-				contentNotes.querySelector(`span`).setContent(show.notes);
-			} else contentNotes.remove();
-
-			newShow.querySelector(`[data-action="add-show"]`).dataset.target = id;
-		}
-	}
+	page.seriesList.innerHTML = archive.map(series => `
+	<li id="archive-${series.code}" data-copyright-safe="${series.copyrightSafe ? `true` : `false`}">
+		<header>
+			<h3 class="series-heading">${series.heading}</h3>
+			<div class="series-content">
+				<p>${series.blurb}</p>
+				<p class="series-source">source: ${series.source}</p>
+			</div>
+			<button class="push-button" type="button" data-target="${series.code}" data-action="add-series">Add series to playlist</button>
+		</header>
+		<ol class="show-list">
+			${series.shows.map(show =>
+			`<li id="${series.code}-${show.code}" data-duration="${show.duration}" data-banger="${show.banger ? `true` : `false`}">
+				<h4 class="show-heading">${show.heading}</h4>
+				<div class="show-content">
+					<p>${show.blurb}</p>
+					${show.notes ? `<details class="content-notes" ${settings.notesOpen ? `open=""` : ``}>
+						<summary>Content notes</summary>
+						${show.notes}
+					</details>` : ``}
+				</div>
+				<button class="push-button" type="button" data-target="${series.code}-${show.code}" data-action="add-show" aria-pressed="false">Add to playlist</button>
+			</li>
+			`).join(``)}
+		</ol>
+	</li>
+	`).join(``);
 
 	// add delegated click-events for add-series
 	page.seriesList.addEventListener(`click`, () => {
@@ -553,28 +547,39 @@ function buildArchive() {
 	});
 
 	// add series stats to stats-list
-	document.querySelector(`#stats-sources`).textContent = stats.series;
-	document.querySelector(`#stats-shows`).textContent = stats.shows;
-	document.querySelector(`#stats-duration`).textContent = Math.round(stats.duration / 3600);
+	for (const [name, value] of Object.entries({
+		"sources": archive.length,
+		"shows": archive.reduce((a, series) => a + series.shows.length, 0),
+		"duration": Math.round(archive.map(series => series.shows.sumByKey(`duration`)).sum() / 3600)
+	})) document.querySelector(`#stats-${name}`).textContent = value;
 }
 
 // add random banger to welcome page, with "add show" button as call to action
 function buildFeaturedShow() {
 	const id = getRandomShowID(`banger`),
-	showInArchive = document.querySelector(`#${id}`);
+	showInArchive = getShowInArchive(id);
 
-	// build out featured show HTML from show and series in Archive
-	page.featuredShow.replaceChildren(...showInArchive.cloneChildren());
-	expandShowInfo(page.featuredShow, document.querySelector(`#archive-${id.split(`-`)[0]}`));
+	if (!showInArchive) return;
+
+	const seriesInArchive = showInArchive.closest(`#series-list > li`);
+
+	page.featuredShow.innerHTML = `
+	<h4 class="show-heading">${seriesInArchive.querySelector(`.series-heading`).innerHTML} ${showInArchive.querySelector(`.show-heading`).innerHTML}</h4>
+	<div class="show-content">
+		${showInArchive.querySelector(`.show-content`).innerHTML}
+		${seriesInArchive.querySelector(`.series-source`).outerHTML}
+	</div>
+	${showInArchive.querySelector(`[data-action="add-show"]`).outerHTML}
+	`;
 
 	// add click event for adding featured show to playlist and removing it from welcome area
 	page.featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
 		addShow(id);
-		document.querySelector(`#featured-show-container`).remove();
+		page.featuredShowContainer.remove();
 	});
 
 	// reveal featured show
-	page.featuredShow.hidden = false;
+	page.featuredShowContainer.hidden = false;
 }
 
 
@@ -638,16 +643,14 @@ page.fontButtons.addEventListener(`click`, () => {
 
 // on pageload, execute various tasks
 document.addEventListener(`DOMContentLoaded`, () => {
-	// build various semi-static page sections
+	// build various page sections
 	buildArchive();
-	buildFeaturedShow();
-
-	// import playlist from storage, removing invalid IDs by checking against archive in DOM
-	const storedIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)).filter(id => document.querySelector(`#series-list .show-list > #${id}`)) : [];
+	const storedIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)).filter(id => page.seriesList.querySelector(`.show-list > #${id}`)) : [];
 	if (storedIDs.length > 0) {
 		for (const id of storedIDs) addShow(id);
 		console.log(`loaded playlist from storage`);
 	}
+	buildFeaturedShow();
 
 	// initialise radio, settings, and styles
 	page.seekBar.value = 0;

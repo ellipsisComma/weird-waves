@@ -6,14 +6,23 @@
 	<link rel="self" href="https://weirdwaves.net/feed.xml" />
 	<title>Weird Waves</title>
 	<subtitle type="html"><![CDATA[Audio horror broadcasting online.]]></subtitle>
-	<author>
-		<name><![CDATA[Weird Waves]]></name>
-	</author>
+	<author><name><![CDATA[Weird Waves]]></name></author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-07-05T00:00:00+01:00</updated>
+	<updated>2024-07-09T00:00:00+01:00</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?38</id>
+		<link rel="alternate" href="https://weirdwaves.net/" />
+		<title type="html"><![CDATA[Import/add-show bug-fixes]]></title>
+		<content type="html"><![CDATA[
+			<p>Fixed some bugs with importing shows or adding random shows using the &ldquo;+ Show/Banger&rdquo; buttons. These (mostly) didn't affect how the app worked, they just caused errors behind the scenes.</p>
+		]]></content>
+		<published>2024-07-09T00:00:00+01:00</published>
+		<updated>2024-07-09T00:00:00+01:00</updated>
+		<category term="features" />
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?37</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />

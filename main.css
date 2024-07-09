@@ -759,18 +759,9 @@ main {
 	color: var(--back-colour);
 	background-color: var(--fore-colour);
 }
-.series-heading {
-	font-size: 1.3em;
-	& + * {
-		margin-block-start: 0;
-	}
-}
 .series-source {
 	margin-block-start: 0.3em;
 	font-size: var(--meta-font-size);
-	&::before {
-		content: "source: ";
-	}
 }
 .show-list {
 	list-style-type: none;

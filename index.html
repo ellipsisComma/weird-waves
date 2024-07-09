@@ -11,7 +11,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-07" media="all">
+	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-09" media="all">
 
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' />" sizes="any">
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48">
@@ -132,61 +132,6 @@
 		<path class="svg-hot-stroke" d="M12 12l3,1 3,-2 3,2 3,-3 3,4 3,-5 3,6 3,-8 3,12 3,-15 3,19 3,-22 3,22 3,-19 3,15 3,-12 3,8 3,-6 3,5 3,-4 3,3 3,-2 3,2 3,-1" />
 	</symbol>
 </svg><!--#svg-defs end-->
-
-
-
-<!--html templates begin-->
-<!--booth-->
-<template id="playlist-item-template">
-	<li data-id="" dataset-duration="">
-		<ul class="show-position-controls icon-button-set">
-			<li>
-				<button class="push-button" type="button" data-action="move-up" data-target="" aria-label="Move show up">
-					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
-				</button>
-			</li>
-			<li>
-				<button class="push-button" type="button" data-action="remove" data-target="" aria-label="Remove show">
-					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg>
-				</button>
-			</li>
-			<li>
-				<button class="push-button" type="button" data-action="move-down" data-target="" aria-label="Move show down">
-					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg>
-				</button>
-			</li>
-		</ul>
-		<div class="show-info"></div>
-	</li>
-</template>
-<!--archive-->
-<template id="archive-series-template">
-	<li id="">
-		<header>
-			<h3 class="series-heading"></h3>
-			<div class="series-content">
-				<p class="series-blurb"></p>
-				<p class="series-source"></p>
-			</div>
-			<button class="push-button" type="button" data-target="" data-action="add-series">Add series to playlist</button>
-		</header>
-		<ol class="show-list"></ol>
-	</li>
-</template>
-<template id="archive-show-template">
-	<li id="" data-duration="">
-		<h4 class="show-heading"></h4>
-		<div class="show-content">
-			<p class="show-blurb"></p>
-			<details class="content-notes">
-				<summary>Content notes</summary>
-				<span></span>
-			</details>
-		</div>
-		<button class="push-button" type="button" data-target="" data-action="add-show" aria-pressed="false">Add to playlist</button>
-	</li>
-</template>
-<!--html templates end-->
 
 
 
@@ -327,10 +272,7 @@
 		<h3>Import & export</h3>
 		<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
 		<textarea id="import-export-data" aria-label="Import/export playlist data"></textarea>
-		<div id="import-error-message" hidden="">
-			<p>Invalid show ID(s):</p>
-			<ul id="invalid-show-ids"></ul>
-		</div>
+		<div id="import-error-message" hidden=""></div>
 		<ul class="flex-list">
 			<li><button id="export-button" class="push-button" type="button">Export</button></li>
 			<li><button id="import-button" class="push-button" type="button">Import</button></li>
@@ -584,11 +526,9 @@
 				<li>
 					<button class="push-button" type="button" data-option="serif" data-font="serif" aria-pressed="false">Serif</button>
 				</li>
-			
 				<li>
 					<button class="push-button" type="button" data-option="sans" data-font="sans" aria-pressed="false">Sans</button>
 				</li>
-
 			</ul>
 		</li>
 	</ul>
@@ -718,10 +658,10 @@
 <div id="welcome">
 	<h2>Welcome to Weird Waves!</h2>
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks.</p>
-	<div id="featured-show-container">
+	<div id="featured-show-container" hidden="">
 		<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 		<h3>Why not try&hellip;</h3>
-		<div id="featured-show" hidden=""></div>
+		<div id="featured-show"></div>
 	</div>
 </div><!--#welcome end-->
 </main>
@@ -730,6 +670,6 @@
 
 
 <script src="./archive.js?v=2024-07-03"></script>
-<script src="./main.js?v=2024-07-08"></script>
+<script src="./main.js?v=2024-07-09"></script>
 </body>
 </html>
