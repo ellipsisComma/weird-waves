@@ -78,7 +78,6 @@ const page = {
 	"fontButtons": `#font-buttons`,
 
 	// welcome
-	"featuredShowContainer": `#featured-show-container`,
 	"featuredShow": `#featured-show`
 };
 
@@ -559,11 +558,16 @@ function buildFeaturedShow() {
 	const id = getRandomShowID(`banger`),
 	showInArchive = getShowInArchive(id);
 
-	if (!showInArchive) return;
+	if (!showInArchive) {
+		page.featuredShow.hidden = true;
+		return;
+	}
 
 	const seriesInArchive = showInArchive.closest(`#series-list > li`);
 
 	page.featuredShow.innerHTML = `
+	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+	<h3>Why not try&hellip;</h3>
 	<h4 class="show-heading">${seriesInArchive.querySelector(`.series-heading`).innerHTML} ${showInArchive.querySelector(`.show-heading`).innerHTML}</h4>
 	<div class="show-content">
 		${showInArchive.querySelector(`.show-content`).innerHTML}
@@ -575,11 +579,8 @@ function buildFeaturedShow() {
 	// add click event for adding featured show to playlist and removing it from welcome area
 	page.featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
 		addShow(id);
-		page.featuredShowContainer.remove();
+		page.featuredShow.hidden = true;
 	});
-
-	// reveal featured show
-	page.featuredShowContainer.hidden = false;
 }
 
 

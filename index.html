@@ -5,10 +5,10 @@
 
 	<title>Weird Waves</title>
 
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
-	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="">
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin>
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin>
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin>
+	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-09" media="all">
@@ -147,7 +147,7 @@
 	<noscript>Sorry, this site requires JavaScript! Some content will be hidden, and the audio app won't work.</noscript>
 	<div id="radio-app">
 		<h3 class="screen-reader-only">Radio controls</h3>
-		<div id="radio-controls" class="icon-button-set" hidden="">
+		<div id="radio-controls" class="icon-button-set" hidden>
 			<div id="seek-controls">
 				<input id="seek-bar" type="range" value="0" data-seeking="false" aria-label="Go to time in show">
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
@@ -156,7 +156,7 @@
 				<button id="play-button" class="push-button" type="button" aria-label="Play show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
 				</button>
-				<button id="pause-button" class="push-button" type="button" aria-label="Pause show" hidden="">
+				<button id="pause-button" class="push-button" type="button" aria-label="Pause show" hidden>
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-pause" /></svg>
 				</button>
 				<button id="skip-button" class="push-button" type="button" aria-label="Skip show">
@@ -167,7 +167,7 @@
 				<button id="mute-button" class="push-button" type="button" aria-label="Mute audio">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
 				</button>
-				<button id="unmute-button" class="push-button" type="button" aria-label="Unmute audio" hidden="">
+				<button id="unmute-button" class="push-button" type="button" aria-label="Unmute audio" hidden>
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-unmute" /></svg>
 				</button>
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
@@ -258,7 +258,7 @@
 			<li><button id="random-banger-button" class="push-button" type="button">+ Banger</button></li>
 			<li><button id="shuffle-button" class="push-button" type="button">Shuffle</button></li>
 			<li><button id="clear-button" class="push-button" type="button" aria-pressed="false">Clear</button></li>
-			<li id="clear-playlist-controls" hidden="">
+			<li id="clear-playlist-controls" hidden>
 				<p>Clear playlist?</p>
 				<ul class="flex-list">
 					<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
@@ -272,7 +272,7 @@
 		<h3>Import & export</h3>
 		<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
 		<textarea id="import-export-data" aria-label="Import/export playlist data"></textarea>
-		<div id="import-error-message" hidden=""></div>
+		<div id="import-error-message" hidden></div>
 		<ul class="flex-list">
 			<li><button id="export-button" class="push-button" type="button">Export</button></li>
 			<li><button id="import-button" class="push-button" type="button">Import</button></li>
@@ -658,11 +658,7 @@
 <div id="welcome">
 	<h2>Welcome to Weird Waves!</h2>
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks.</p>
-	<div id="featured-show-container" hidden="">
-		<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
-		<h3>Why not try&hellip;</h3>
-		<div id="featured-show"></div>
-	</div>
+	<div id="featured-show"></div>
 </div><!--#welcome end-->
 </main>
 </div><!--#container end-->
@@ -670,6 +666,6 @@
 
 
 <script src="./archive.js?v=2024-07-03"></script>
-<script src="./main.js?v=2024-07-09"></script>
+<script src="./main.js?v=2024-07-09b"></script>
 </body>
 </html>
