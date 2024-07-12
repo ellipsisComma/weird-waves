@@ -94,12 +94,12 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-11" />
 
-	<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
-	<animate attributeName="opacity" values="1; 0; 0; 1" keyTimes="0; 0; 1; 1" dur="1s" repeatCount="1" />
-	<rect x="-1" y="-1" width="28" height="28" fill="%23000627" />
-	<path stroke="%23ff6767" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
-	<path stroke="%23b9ab00" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
-</svg>' sizes="any" />
+	<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"&gt;
+	&lt;animate attributeName="opacity" values="1; 0; 0; 1" keyTimes="0; 0; 1; 1" dur="1s" repeatCount="1" /&gt;
+	&lt;rect x="-1" y="-1" width="28" height="28" fill="%23000627" /&gt;
+	&lt;path stroke="%23ff6767" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" /&gt;
+	&lt;path stroke="%23b9ab00" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" /&gt;
+&lt;/svg&gt;' sizes="any" />
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 
 	<script src="./initialisation.js?v=2024-07-11"></script>
