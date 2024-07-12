@@ -106,13 +106,6 @@ Element.prototype.removeAttributes = function (attrs) {
 	for (const attr of attrs) this.removeAttribute(attr);
 };
 
-// set a string to be an element's innerHTML or textContent depending on whether it includes HTML entities, tags, and/or comments
-HTMLElement.prototype.setContent = function (text) {
-	const HTMLRegex = /&#?\w+;|<[a-z]|\/>|<\/|<!--/;
-	if (HTMLRegex.test(text)) this.innerHTML = text;
-	else this.textContent = text;
-};
-
 // sum a numerical array
 Array.prototype.sum = function () {
 	return this.reduce((a, b) => a + b, 0);
@@ -239,18 +232,22 @@ SHOWS
 
 // add show to playlist; if playlist was previously empty, load top show
 function addShow(id) {
-	const showOnPlaylist = getShowOnPlaylist(id);
+	const showInArchive = getShowInArchive(id);
+	if (!showInArchive) {
+		console.error(`attempted to add show with non-existent id: ${id}`);
+		return;
+	}
 
+	const showOnPlaylist = getShowOnPlaylist(id);
 	if (showOnPlaylist) {
-		page.playlist.appendChild(showOnPlaylist);
+		page.playlist.append(showOnPlaylist);
 		loadShow();
 		console.log(`re-added show: ${id}`);
 		return;
 	}
 
 	// build new playlist item
-	const showInArchive = getShowInArchive(id),
-	seriesInArchive = showInArchive.closest(`#series-list > li`),
+	const seriesInArchive = showInArchive.closest(`#series-list > li`),
 	newShow = page.playlist.appendChild(document.createElement(`li`)),
 	playlistShowControls = [
 		{	"code": `move-up`,		"label": `Move show up`		},
@@ -292,7 +289,7 @@ function addArchive() {
 
 // add entire series to playlist
 function addSeries(seriesCode) {
-	for (const show of document.querySelectorAll(`#archive-${seriesCode} > .show-list > li`)) addShow(show.id);
+	for (const show of page.seriesList.querySelectorAll(`#archive-${seriesCode} > .show-list > li`)) addShow(show.id);
 }
 
 // add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
@@ -308,8 +305,8 @@ function addRandomShow(showType) {
 function moveShow(id, move) {
 	const target = getShowOnPlaylist(id);
 
-	if (move > 0) target.nextElementSibling.after(target);
-	else target.previousElementSibling.before(target);
+	if (move > 0) target?.nextElementSibling?.after(target);
+	else if (move < 0) target?.previousElementSibling?.before(target);
 
 	loadShow();
 }
@@ -317,7 +314,7 @@ function moveShow(id, move) {
 // remove show from playlist
 function removeShow(id) {
 	getShowOnPlaylist(id)?.remove();
-	unpressButton(getShowInArchive(id).querySelector(`[data-action="add-show"]`));
+	unpressButton(getShowInArchive(id)?.querySelector(`[data-action="add-show"]`));
 	console.log(`removed show: ${id}`);
 	loadShow();
 }
@@ -345,12 +342,17 @@ function loadShow() {
 
 		console.log(`loaded show: ${show.dataset.id}`);
 	} else {
+		// empty loaded show and playlist
 		page.loadedShow.innerHTML = ``;
 		page.playlist.innerHTML = ``;
+
+		// reset radio
 		page.audio.removeAttributes([`src`, `data-duration`]);
 		for (const time of [`Elapsed`, `Total`]) setTimestampFromSeconds(page[`showTime${time}`], "0");
 		page.radioControls.hidden = true;
 		page.loadedShow.setAttribute(`data-id`, ``);
+
+		console.info(`reached end of playlist`);
 	}
 }
 
@@ -421,7 +423,8 @@ SETTINGS
 
 // initialise a toggle switch with a stored or default value
 function initialiseToggle(id, toggled) {
-	document.querySelector(`#${id}`).setAttribute(`aria-pressed`, toggled ? `true` : `false`);
+	document.querySelector(`#${id}-toggle`).setAttribute(`aria-pressed`, toggled ? `true` : `false`);
+	console.info(`initialised "${id}" toggle: ${toggled ? `on` : `off`}`);
 }
 
 // switch a toggle from off/unpressed to on/pressed
@@ -551,6 +554,9 @@ function buildArchive() {
 		"shows": archive.reduce((a, series) => a + series.shows.length, 0),
 		"duration": Math.round(archive.map(series => series.shows.sumByKey(`duration`)).sum() / 3600)
 	})) document.querySelector(`#stats-${name}`).textContent = value;
+
+	// clear archive object
+	archive = null;
 }
 
 // add random banger to welcome page, with "add show" button as call to action
@@ -644,33 +650,32 @@ page.fontButtons.addEventListener(`click`, () => {
 
 // on pageload, execute various tasks
 document.addEventListener(`DOMContentLoaded`, () => {
+	// initialise settings and styles
+	page.seekBar.value = 0;
+	initialiseToggle(`copyright-safety`, settings.copyrightSafety);
+	initialiseToggle(`flat-radio`, settings.flatRadio);
+	initialiseToggle(`auto-play`, settings.autoPlayNextShow);
+	initialiseToggle(`content-notes`, settings.notesOpen);
+	switchTheme(styles.theme);
+	switchFont(styles.font);
+
+	// initialise radio
+	page.loadedShow.classList.toggle(`flat-radio`, settings.flatRadio);
+	page.audio.paused = true;
+	setInterval(updateSeekBar, 1000);
+
 	// build various page sections
 	buildArchive();
 	const storedIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)).filter(id => page.seriesList.querySelector(`.show-list > #${id}`)) : [];
 	if (storedIDs.length > 0) {
 		for (const id of storedIDs) addShow(id);
-		console.log(`loaded playlist from storage`);
+		console.info(`loaded playlist from storage`);
 	}
 	buildFeaturedShow();
-
-	// initialise radio, settings, and styles
-	page.seekBar.value = 0;
-	initialiseToggle(`copyright-safety-toggle`, settings.copyrightSafety);
-	initialiseToggle(`flat-radio-toggle`, settings.flatRadio);
-	initialiseToggle(`auto-play-toggle`, settings.autoPlayNextShow);
-	initialiseToggle(`content-notes-toggle`, settings.notesOpen);
-	switchTheme(styles.theme);
-	switchFont(styles.font);
-	page.loadedShow.classList.toggle(`flat-radio`, settings.flatRadio);
-	page.audio.paused = true;
-	setInterval(updateSeekBar, 1000);
 
 	// update page head data
 	page.title.dataset.original = document.title;
 	if (window.location.hash) navigateToSection();
-
-	// clear out archive object
-	archive = null;
 });
 
 // on closing window/browser tab, record user settings and styles to localStorage

@@ -11,7 +11,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-09" media="all">
+	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-11" media="all">
 
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' />" sizes="any">
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48">
@@ -21,7 +21,7 @@
 
 	<link rel="alternate" type="application/atom+xml" href="https://weirdwaves.net/feed.xml" title="News feed for Weird Waves">
 
-	<script src="./initialisation.js?v=2024-07-05b"></script>
+	<script src="./initialisation.js?v=2024-07-11"></script>
 </head>
 
 
@@ -87,6 +87,7 @@
 		<path d="M12 4c-2-4 -11,-4 -11,4a11 11 0 0 0 7 10m4-14c2-4 11,-4 11,4a11 11 0 0 1-7 10" />
 		<path class="svg-hot-stroke" d="M12 11c0 4-4 4-4 8a4 4 0 0 0 8 0c0-4-4-4-4-8" />
 	</symbol>
+
 <!--various icon and toggle parts-->
 	<defs>
 		<path id="svg-toggle-track" d="M10 14h28" />
@@ -97,6 +98,7 @@
 		<path id="svg-speaker" d="M4 7h-2v4h2l4 5h2v-14h-2z" />
 		<path id="svg-chevron" d="M1 8l5-5 5 5" />
 	</defs>
+
 <!--radio button icons-->
 	<symbol id="svg-play">
 		<use href="#svg-play-triangle" />
@@ -116,6 +118,7 @@
 		<use href="#svg-speaker" />
 		<path d="M12 7v4m2 2v-8m2-2v12" />
 	</symbol>
+
 <!--playlist button icons-->
 	<symbol id="svg-remove">
 		<path d="M2 2l8 8m0-8l-8 8" />
@@ -126,6 +129,7 @@
 	<symbol id="svg-move-down">
 		<use href="#svg-chevron" transform="rotate(180) translate(-12 -12)" />
 	</symbol>
+
 <!--other-->
 	<symbol id="svg-waveform">
 		<path d="M1 12h94" />
@@ -173,6 +177,7 @@
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
 			</div><!--#audio-controls end-->
 		</div><!--#radio-controls end-->
+
 		<h3 class="screen-reader-only">Loaded show</h3>
 		<div id="loaded-show" aria-live="assertive" data-id=""></div>
 		<audio id="show-audio"></audio>
@@ -182,7 +187,7 @@
 
 
 <nav>
-	<ul id="activity-sections">
+	<ul>
 		<li>
 			<a href="#booth">
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-booth"></use></svg>
@@ -202,8 +207,9 @@
 				<span>Feed</span>
 			</a>
 		</li>
-	</ul><!--#activity-sections end-->
-	<ul id="info-sections">
+	</ul>
+
+	<ul>
 		<li>
 			<a href="#about">
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-about"></use></svg>
@@ -222,8 +228,9 @@
 				<span>Settings</span>
 			</a>
 		</li>
-	</ul><!--#info-sections end-->
-	<ul id="external-sections">
+	</ul>
+
+	<ul>
 		<li>
 			<a href="#call-in">
 				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-call-in"></use></svg>
@@ -242,7 +249,7 @@
 				<span>Credits</span>
 			</a>
 		</li>
-	</ul><!--#external-sections end-->
+	</ul>
 </nav>
 
 
@@ -251,6 +258,7 @@
 <div id="booth">
 	<h2>Booth</h2>
 	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
+
 	<h3>Playlist</h3>
 	<div id="playlist-and-controls">
 		<ul id="playlist-controls" class="flex-list">
@@ -268,16 +276,15 @@
 		</ul><!--#playlist-controls end-->
 		<ol id="playlist" class="show-list"></ol>
 	</div><!--#playlist-and-controls end-->
-	<div id="playlist-import-export" aria-live="assertive">
-		<h3>Import & export</h3>
-		<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
-		<textarea id="import-export-data" aria-label="Import/export playlist data"></textarea>
-		<div id="import-error-message" hidden></div>
-		<ul class="flex-list">
-			<li><button id="export-button" class="push-button" type="button">Export</button></li>
-			<li><button id="import-button" class="push-button" type="button">Import</button></li>
-		</ul>
-	</div><!--#playlist-import-export end-->
+
+	<h3>Import & export</h3>
+	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
+	<textarea id="import-export-data" aria-live="assertive" aria-label="Import/export playlist data"></textarea>
+	<div id="import-error-message" aria-live="assertive" hidden></div>
+	<ul class="flex-list">
+		<li><button id="export-button" class="push-button" type="button">Export</button></li>
+		<li><button id="import-button" class="push-button" type="button">Import</button></li>
+	</ul>
 </div><!--#booth end-->
 
 
@@ -312,6 +319,9 @@
 			<dd id="stats-duration"></dd>
 		</div>
 	</dl><!--#stats-list end-->
+
+
+
 	<h3>Content notes</h3>
 	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older sources.</p>
 </div><!--#about end-->
@@ -323,6 +333,7 @@
 	<p>This section covers how to use Weird Waves as a livestream widget via broadcast software like <a href="https://obsproject.com/" rel="external"><abbr title="Open Broadcaster Software">OBS</abbr></a>. Most of this only applies if you want to show Weird Waves visually on-stream. Either way, check the main <a href="#settings">Settings</a> too.</p>
 	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<p><strong>Note:</strong> The Weird Waves stream widget is slightly outdated compared to the web version, as <abbr>OBS</abbr> uses outdated software to run browser sources. However, it looks and works roughly the same.</p>
+
 	<h3>Making a widget</h3>
 	<ol>
 		<li>Create a browser source.</li>
@@ -343,6 +354,7 @@
 	--font-stack: [font];
 }</code>
 	<p>Replace <code>[colour]</code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr title="HyperText Markup Language">HTML</abbr> colour names, etc. Replace <code>[font]</code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
+
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
@@ -411,114 +423,60 @@
 			<h3>Site theme</h3>
 			<ul id="theme-buttons" class="flex-list">
 				<li>
-					<button class="push-button" type="button" data-option="dark" aria-pressed="false">
-						<span class="palette" data-theme="dark"></span>
-						Dark
-					</button>
+					<button class="push-button" type="button" data-option="dark" aria-pressed="false"><span class="palette" data-theme="dark"></span> Dark</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="goop" aria-pressed="false">
-						<span class="palette" data-theme="goop"></span>
-						Goop
-					</button>
+					<button class="push-button" type="button" data-option="goop" aria-pressed="false"><span class="palette" data-theme="goop"></span> Goop</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="flame" aria-pressed="false">
-						<span class="palette" data-theme="flame"></span>
-						Flame
-					</button>
+					<button class="push-button" type="button" data-option="flame" aria-pressed="false"><span class="palette" data-theme="flame"></span> Flame</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="plasm" aria-pressed="false">
-						<span class="palette" data-theme="plasm"></span>
-						Plasm
-					</button>
+					<button class="push-button" type="button" data-option="plasm" aria-pressed="false"><span class="palette" data-theme="plasm"></span> Plasm</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="moss" aria-pressed="false">
-						<span class="palette" data-theme="moss"></span>
-						Moss
-					</button>
+					<button class="push-button" type="button" data-option="moss" aria-pressed="false"><span class="palette" data-theme="moss"></span> Moss</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="darker" aria-pressed="false">
-						<span class="palette" data-theme="darker"></span>
-						Darker
-					</button>
+					<button class="push-button" type="button" data-option="darker" aria-pressed="false"><span class="palette" data-theme="darker"></span> Darker</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="light" aria-pressed="false">
-						<span class="palette" data-theme="light"></span>
-						Light
-					</button>
+					<button class="push-button" type="button" data-option="light" aria-pressed="false"><span class="palette" data-theme="light"></span> Light</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="wine" aria-pressed="false">
-						<span class="palette" data-theme="wine"></span>
-						Wine
-					</button>
+					<button class="push-button" type="button" data-option="wine" aria-pressed="false"><span class="palette" data-theme="wine"></span> Wine</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="ash" aria-pressed="false">
-						<span class="palette" data-theme="ash"></span>
-						Ash
-					</button>
+					<button class="push-button" type="button" data-option="ash" aria-pressed="false"><span class="palette" data-theme="ash"></span> Ash</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="dust" aria-pressed="false">
-						<span class="palette" data-theme="dust"></span>
-						Dust
-					</button>
+					<button class="push-button" type="button" data-option="dust" aria-pressed="false"><span class="palette" data-theme="dust"></span> Dust</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="mist" aria-pressed="false">
-						<span class="palette" data-theme="mist"></span>
-						Mist
-					</button>
+					<button class="push-button" type="button" data-option="mist" aria-pressed="false"><span class="palette" data-theme="mist"></span> Mist</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="silver" aria-pressed="false">
-						<span class="palette" data-theme="silver"></span>
-						Silver
-					</button>
+					<button class="push-button" type="button" data-option="silver" aria-pressed="false"><span class="palette" data-theme="silver"></span> Silver</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="pico" aria-pressed="false">
-						<span class="palette" data-theme="pico"></span>
-						Pico
-					</button>
+					<button class="push-button" type="button" data-option="pico" aria-pressed="false"><span class="palette" data-theme="pico"></span> Pico</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="sepia" aria-pressed="false">
-						<span class="palette" data-theme="sepia"></span>
-						Sepia
-					</button>
+					<button class="push-button" type="button" data-option="sepia" aria-pressed="false"><span class="palette" data-theme="sepia"></span> Sepia</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="abyss" aria-pressed="false">
-						<span class="palette" data-theme="abyss"></span>
-						Abyss
-					</button>
+					<button class="push-button" type="button" data-option="abyss" aria-pressed="false"><span class="palette" data-theme="abyss"></span> Abyss</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="retro" aria-pressed="false">
-						<span class="palette" data-theme="retro"></span>
-						Retro
-					</button>
+					<button class="push-button" type="button" data-option="retro" aria-pressed="false"><span class="palette" data-theme="retro"></span> Retro</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="marrow" aria-pressed="false">
-						<span class="palette" data-theme="marrow"></span>
-						Marrow
-					</button>
+					<button class="push-button" type="button" data-option="marrow" aria-pressed="false"><span class="palette" data-theme="marrow"></span> Marrow</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="org" aria-pressed="false">
-						<span class="palette" data-theme="org"></span>
-						Org
-					</button>
+					<button class="push-button" type="button" data-option="org" aria-pressed="false"><span class="palette" data-theme="org"></span> Org</button>
 				</li>
-			</ul>
+			</ul><!--#theme-buttons end-->
 		</li>
 		<li>
 			<h3>Site font</h3>
@@ -529,7 +487,7 @@
 				<li>
 					<button class="push-button" type="button" data-option="sans" data-font="sans" aria-pressed="false">Sans</button>
 				</li>
-			</ul>
+			</ul><!--#font-buttons end-->
 		</li>
 	</ul>
 </div><!--#settings end-->
@@ -550,6 +508,7 @@
 <div id="links">
 	<h2>Links</h2>
 	<p>If you like Weird Waves, you might like some of these places too:</p>
+
 	<h3>Other stations</h3>
 	<ul class="flex-list">
 		<li><a href="https://www.djfullmoon.com/" rel="external">&#127765;</a></li>
@@ -573,6 +532,7 @@
 		<li><a href="https://www.mailta.pe/" rel="external">MailTape</a></li>
 		<li><a href="https://www.sanctuaryradio.com/" rel="external">Sanctuary Radio</a></li>
 	</ul>
+
 	<h3>Old Time Radio info</h3>
 	<ul class="flex-list">
 		<li><a href="https://www.otrplotspot.com/" rel="external"><abbr>OTR</abbr> Plot Spot</a></li>
@@ -581,6 +541,7 @@
 		<li><a href="https://www.escape-suspense.com/" rel="external"><cite>Escape</cite> and <cite>Suspense</cite>!</a></li>
 		<li><a href="https://www.otrsite.com/" rel="external">The Vintage Radio Place</a></li>
 	</ul>
+
 	<h3>Toys, tools, apps, games</h3>
 	<ul class="flex-list">
 		<li><a href="https://aidn.jp/jingle" rel="external"><abbr title="Automatic Composition">AC</abbr>-chan</a> (<a href="https://aidn.jp/jingle/e/dq3nt3h2" rel="external">&</a>)</li>
@@ -589,6 +550,7 @@
 		<li><a href="https://mydora.restorativland.org/" rel="external">Mydora</a></li>
 		<li><cite><a href="https://allergott.neocities.org/" rel="external">In the Grave House</a></cite></li>
 	</ul>
+
 	<h3>Streamers</h3>
 	<ul class="flex-list">
 		<li><a href="https://twitch.tv/ecdycis" rel="external">Ecdysis</a></li>
@@ -597,6 +559,7 @@
 		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth<abbr>VT</abbr></a></li>
 		<li><a href="https://twitch.tv/vesper_awol" rel="external">Vesper_<abbr title="Absent Without Leave">AWOL</abbr></a></li>
 	</ul>
+
 	<h3>Webcomics</h3>
 	<ul class="flex-list">
 		<li><cite><a href="https://watashi.neocities.org/" rel="external">Watashi</a></cite></li>
@@ -618,6 +581,7 @@
 		<li><a href="https://www.emcarroll.com/" rel="external">E.&thinsp;M.&thinsp;Carroll</a></li>
 		<li><cite><a href="https://welcometoyurihellworld.neocities.org/" rel="external">Super Catgirl Tapeworm</a></cite></li>
 	</ul>
+
 	<h3>Anything else</h3>
 	<ul class="flex-list">
 		<li><a href="https://whitedesert.neocities.org/" rel="external">White Desert</a></li>
@@ -644,11 +608,14 @@
 <div id="credits">
 	<h2>Credits</h2>
 	<p>Want to know where things came from?</p>
+
 	<h3>Shows</h3>
 	<p>Check the <a href="#archive">Archive</a></p>
+
 	<h3>Fonts</h3>
 	<p>Serif font: <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> (<a href="./licenses/OFL-Bitter.txt"><abbr title="Open Font License">OFL</abbr></a>) by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a></p>
 	<p>Sans-serif font: <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> (<a href="./licenses/OFL-FiraSans.txt"><abbr>OFL</abbr></a>) by <a href="https://carrois.com/" rel="external">Carrois Type Design</a></p>
+
 	<h3>Hosting</h3>
 	<p><a href="https://neocities.org" rel="external">Neocities</a></p>
 </div><!--#credits end-->
@@ -666,6 +633,6 @@
 
 
 <script src="./archive.js?v=2024-07-03"></script>
-<script src="./main.js?v=2024-07-09b"></script>
+<script src="./main.js?v=2024-07-11"></script>
 </body>
 </html>

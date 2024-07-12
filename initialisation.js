@@ -5,6 +5,8 @@ const styles = JSON.parse(window.localStorage.getItem(`styles`)) ?? {};
 styles.theme ??= `dark`;
 styles.font ??= `serif`;
 for (const [style, option] of Object.entries(styles)) document.documentElement.dataset[style] = option;
+console.info(`initialised theme: ${styles.theme}`);
+console.info(`initialised font: ${styles.font}`);
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
@@ -26,6 +28,7 @@ function navigateToSection() {
 	} else {
 		window.location.hash = ``;
 		navigateToSection();
+		console.error(`attempted to navigate to non-existent page section: ${window.location.hash}`);
 	}
 }
 

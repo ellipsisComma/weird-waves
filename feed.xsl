@@ -92,12 +92,12 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-07" />
+	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-11" />
 
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' /&gt;" sizes="any" />
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 
-	<script src="./initialisation.js?v=2024-07-05b"></script>
+	<script src="./initialisation.js?v=2024-07-11"></script>
 </head>
 
 
@@ -139,6 +139,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		<path class="svg-hot-stroke" d="M7 14l-2 6m4-6l-3 9m5-9l-2 6m4-6l-3 9m5-9l-2 6m4-6l-3 9m5-9l-2 6" />
 		<path d="M11 9a5 5 0 1 0-5 5h14a3 3 0 1 0 0-6a8 8 0 0 0-14-4" />
 	</symbol>
+
 <!--other-->
 	<symbol id="svg-waveform">
 		<path d="M1 12h94" />
@@ -166,7 +167,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 
 
 <nav>
-	<ul id="general-sections">
+	<ul>
 		<li>
 			<a href="#all-news">
 				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-all-news" /></svg>
@@ -185,8 +186,9 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 				<span>Return</span>
 			</a>
 		</li>
-	</ul><!--#general-sections end-->
-	<ul id="category-sections">
+	</ul>
+
+	<ul>
 		<li>
 			<a href="#bulletins">
 				<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24"><use href="#svg-bulletins" /></svg>
@@ -205,7 +207,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 				<span>History</span>
 			</a>
 		</li>
-	</ul><!--#category-sections end-->
+	</ul>
 </nav>
 
 
