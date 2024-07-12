@@ -53,11 +53,9 @@ const page = {
 	"seekBar": `#seek-bar`,
 	"showTimeElapsed": `#show-time-elapsed`,
 	"showTimeTotal": `#show-time-total`,
-	"playButton": `#play-button`,
-	"pauseButton": `#pause-button`,
+	"playToggle": `#play-toggle`,
 	"skipButton": `#skip-button`,
-	"muteButton": `#mute-button`,
-	"unmuteButton": `#unmute-button`,
+	"muteToggle": `#mute-toggle`,
 	"volumeControl": `#volume-control`,
 	"audio": `#show-audio`,
 
@@ -323,7 +321,7 @@ function removeShow(id) {
 function loadShow() {
 	if (page.playlist.children.length > 0 && page.playlist.firstElementChild.dataset.id === page.loadedShow.dataset.id) return;
 
-	pauseAudio();
+	if (!page.audio.paused) togglePlay();
 
 	if (page.playlist.children.length > 0) {
 		const show = page.playlist.firstElementChild;
@@ -380,41 +378,39 @@ function updateSeekTime(value) {
 	setTimestampFromSeconds(page.showTimeElapsed, page.audio.dataset.duration * value / 100);
 }
 
-// play audio
-function playAudio() {
-	page.audio.play();
-	page.playButton.hidden = true;
-	page.pauseButton.hidden = false;
+// toggle audio play/pause
+function togglePlay() {
+	if (page.audio.paused) {
+		page.audio.play();
+		page.playToggle.ariaLabel = `Pause audio`;
+		page.playToggle.querySelector("use").setAttribute(`href`, `#svg-pause`);
+	} else {
+		updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
+		page.audio.pause();
+		page.playToggle.ariaLabel = `Play audio`;
+		page.playToggle.querySelector("use").setAttribute(`href`, `#svg-play`);
+	}
 }
 
-// pause audio
-function pauseAudio() {
-	updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
-	page.audio.pause();
-	page.pauseButton.hidden = true;
-	page.playButton.hidden = false;
-}
-
-// mute audio
-function muteAudio() {
-	page.audio.muted = true;
-	page.muteButton.hidden = true;
-	page.unmuteButton.hidden = false;
-	page.volumeControl.value = 0;
-}
-
-// unmute audio
-function unmuteAudio() {
-	page.audio.muted = false;
-	page.unmuteButton.hidden = true;
-	page.muteButton.hidden = false;
-	page.volumeControl.value = page.audio.volume * 100;
+// toggle audio mute/unmute
+function toggleMute() {
+	if (page.audio.muted) {
+		page.audio.muted = false;
+		page.muteToggle.ariaLabel = `Mute audio`;
+		page.muteToggle.querySelector("use").setAttribute(`href`, `#svg-mute`);
+		page.volumeControl.value = page.audio.volume * 100;
+	} else {
+		page.audio.muted = true;
+		page.muteToggle.ariaLabel = `Unmute audio`;
+		page.muteToggle.querySelector("use").setAttribute(`href`, `#svg-unmute`);
+		page.volumeControl.value = 0;
+	}
 }
 
 // set audio volume
 function setVolume(newVolume) {
 	page.audio.volume = newVolume;
-	if (page.audio.muted) unmuteAudio();
+	if (page.audio.muted) toggleMute();
 }
 
 /* -----
@@ -607,11 +603,9 @@ page.seekBar.addEventListener(`input`, () => {
 	page.seekBar.dataset.seeking = `true`;
 	updateSeekTime(page.seekBar.value); // must set input.value as argument here
 });
-page.playButton.addEventListener(`click`, playAudio);
-page.pauseButton.addEventListener(`click`, pauseAudio);
+page.playToggle.addEventListener(`click`, togglePlay);
 page.skipButton.addEventListener(`click`, loadNextShow);
-page.muteButton.addEventListener(`click`, muteAudio);
-page.unmuteButton.addEventListener(`click`, unmuteAudio);
+page.muteToggle.addEventListener(`click`, toggleMute);
 page.volumeControl.addEventListener(`input`, () => setVolume(page.volumeControl.value / 100));
 
 // booth interface events
@@ -651,7 +645,6 @@ page.fontButtons.addEventListener(`click`, () => {
 // on pageload, execute various tasks
 document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise settings and styles
-	page.seekBar.value = 0;
 	initialiseToggle(`copyright-safety`, settings.copyrightSafety);
 	initialiseToggle(`flat-radio`, settings.flatRadio);
 	initialiseToggle(`auto-play`, settings.autoPlayNextShow);
@@ -662,6 +655,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise radio
 	page.loadedShow.classList.toggle(`flat-radio`, settings.flatRadio);
 	page.audio.paused = true;
+	page.seekBar.value = 0;
+	setVolume(page.volumeControl.value / 100);
 	setInterval(updateSeekBar, 1000);
 
 	// build various page sections
@@ -680,6 +675,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 // on closing window/browser tab, record user settings and styles to localStorage
 window.addEventListener(`beforeunload`, () => {
+	if (page.audio.muted) page.volumeControl.value = page.audio.volume * 100; // if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
 	const playlistIDs = [];
 	for (const show of page.playlist.children) playlistIDs.push(show.dataset.id);
 	window.localStorage.setItem(`playlist`, JSON.stringify(playlistIDs));

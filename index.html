@@ -161,23 +161,17 @@
 				<input id="seek-bar" type="range" value="0" data-seeking="false" aria-label="Go to time in show">
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
 			</div><!--#seek-controls end-->
-			<div id="show-controls" aria-live="assertive">
-				<button id="play-button" class="push-button" type="button" aria-label="Play show">
+			<div id="show-controls">
+				<button id="play-toggle" class="push-button" type="button" aria-label="Play show" aria-live="polite">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
-				</button>
-				<button id="pause-button" class="push-button" type="button" aria-label="Pause show" hidden>
-					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-pause" /></svg>
 				</button>
 				<button id="skip-button" class="push-button" type="button" aria-label="Skip show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-skip" /></svg>
 				</button>
 			</div><!--#show-controls end-->
-			<div id="audio-controls" aria-live="assertive">
-				<button id="mute-button" class="push-button" type="button" aria-label="Mute audio">
+			<div id="audio-controls">
+				<button id="mute-toggle" class="push-button" type="button" aria-label="Mute audio" aria-live="polite">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
-				</button>
-				<button id="unmute-button" class="push-button" type="button" aria-label="Unmute audio" hidden>
-					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-unmute" /></svg>
 				</button>
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
 			</div><!--#audio-controls end-->
@@ -638,6 +632,6 @@
 
 
 <script src="./archive.js?v=2024-07-03"></script>
-<script src="./main.js?v=2024-07-11"></script>
+<script src="./main.js?v=2024-07-12"></script>
 </body>
 </html>
