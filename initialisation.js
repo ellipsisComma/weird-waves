@@ -2,8 +2,8 @@
 
 // initialise user-selected (or default) site display settings
 const styles = JSON.parse(window.localStorage.getItem(`styles`)) ?? {};
-styles.theme ??= `dark`;
-styles.font ??= `serif`;
+styles.theme ??= document.documentElement.dataset.theme;
+styles.font ??= document.documentElement.dataset.font;
 for (const [style, option] of Object.entries(styles)) document.documentElement.dataset[style] = option;
 console.info(`initialised theme: ${styles.theme}`);
 console.info(`initialised font: ${styles.font}`);

@@ -102,7 +102,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 &lt;/svg&gt;' sizes="any" />
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 
-	<script src="./initialisation.js?v=2024-07-11"></script>
+	<script src="./initialisation.js?v=2024-07-13"></script>
 </head>
 
 
