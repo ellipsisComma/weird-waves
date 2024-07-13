@@ -20,9 +20,9 @@ EVENTS: event listeners
 ==================== */
 
 // show file relative path, show file extension, and favicon code
-const showFilePath = `./audio/shows/`,
-showFileExtension = `.mp3`,
-faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+const showFilePath = `./audio/shows/`;
+const showFileExtension = `.mp3`;
+const faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
 	<rect x="-1" y="-1" width="28" height="28" fill="--back-colour" />
 	<path stroke="--hot-colour" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
 	<path stroke="--cold-colour" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
@@ -76,7 +76,7 @@ const page = {
 	"fontButtons": `#font-buttons`,
 
 	// welcome
-	"featuredShow": `#featured-show`
+	"featuredShow": `#featured-show`,
 };
 
 // build out page refs
@@ -118,8 +118,8 @@ Array.prototype.sumByKey = function (key) {
 
 // convert time in seconds to minutes:seconds timestamp
 function setTimestampFromSeconds(element, time) {
-	const minutes = Math.floor((parseInt(time) % 3600) / 60).toString().padStart(2, `0`),
-	seconds = (parseInt(time) % 60).toString().padStart(2, `0`);
+	const minutes = Math.floor((parseInt(time) % 3600) / 60).toString().padStart(2, `0`);
+	const seconds = (parseInt(time) % 60).toString().padStart(2, `0`);
 
 	element.textContent = `${minutes}:${seconds}`;
 }
@@ -196,13 +196,9 @@ function importPlaylist() {
 
 	// if attempting to import IDs, validate them and either present invalid IDs or update playlist; if import box is empty, clear playlist
 	const importIDs = page.importExport.value.trim().length > 0
-		? [...new Set(page.importExport.value
-			.trim()
-			.replace(/\n\n+/g, `\n`)
-			.replace(/[ \t]/g, ``)
-			.split(`\n`))]
-		: [],
-	invalidIDs = importIDs.filter(id => !getShowInArchive(id));
+		? [...new Set(page.importExport.value.trim().replace(/\n\n+/g, `\n`).replace(/[ \t]/g, ``).split(`\n`))]
+		: [];
+	const invalidIDs = importIDs.filter(id => !getShowInArchive(id));
 
 	page.importExport.value = ``;
 
@@ -245,12 +241,12 @@ function addShow(id) {
 	}
 
 	// build new playlist item
-	const seriesInArchive = showInArchive.closest(`#series-list > li`),
-	newShow = page.playlist.appendChild(document.createElement(`li`)),
-	playlistShowControls = [
+	const seriesInArchive = showInArchive.closest(`#series-list > li`);
+	const newShow = page.playlist.appendChild(document.createElement(`li`));
+	const playlistShowControls = [
 		{	"code": `move-up`,		"label": `Move show up`		},
 		{	"code": `remove`,		"label": `Remove show`		},
-		{	"code": `move-down`,	"label": `Move show down`	}
+		{	"code": `move-down`,	"label": `Move show down`	},
 	];
 
 	newShow.outerHTML = `
@@ -557,8 +553,8 @@ function buildArchive() {
 
 // add random banger to welcome page, with "add show" button as call to action
 function buildFeaturedShow() {
-	const id = getRandomShowID(`banger`),
-	showInArchive = getShowInArchive(id);
+	const id = getRandomShowID(`banger`);
+	const showInArchive = getShowInArchive(id);
 
 	if (!showInArchive) {
 		page.featuredShow.hidden = true;

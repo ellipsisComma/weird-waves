@@ -8,10 +8,21 @@
 	<subtitle type="html"><![CDATA[Audio horror broadcasting online.]]></subtitle>
 	<author><name><![CDATA[Weird Waves]]></name></author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-07-09T00:00:00+01:00</updated>
+	<updated>2024-07-14T00:00:00+01:00</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?39</id>
+		<link rel="alternate" href="https://weirdwaves.net/" />
+		<title type="html"><![CDATA[Theme changes]]></title>
+		<content type="html"><![CDATA[
+			<p>This one's been a long time coming: about half the themes have updated colours: small tweaks to one colour (Goop, Flame, Abyss, and Marrow); Silver's lightened up even more; Org's now green and grey; Dust's a lot more reddish; and the default Light theme's been overhauled completely. I felt like some were too similar and others just had minor or major problems.</p>
+		]]></content>
+		<published>2024-07-14T00:00:00+01:00</published>
+		<updated>2024-07-14T00:00:00+01:00</updated>
+		<category term="features" />
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?38</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
