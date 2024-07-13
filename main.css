@@ -1,6 +1,7 @@
 /*
 VARIABLES
 FONTS
+UTILITIES
 
 GENERAL
 RADIO
@@ -52,13 +53,13 @@ RESPONSIVITY
 }
 [data-theme="goop"] {
 	--fore-colour: #e0ffe0;
-	--back-colour: #000;
+	--back-colour: #021;
 	--hot-colour: #0a8;
 	--cold-colour: #8a0;
 }
 [data-theme="flame"] {
 	--fore-colour: #f8f095;
-	--back-colour: #180000;
+	--back-colour: #281800;
 	--hot-colour: #fe1;
 	--cold-colour: #ff6900;
 }
@@ -81,10 +82,10 @@ RESPONSIVITY
 	--cold-colour: #fff;
 }
 [data-theme="light"] {
-	--fore-colour: #2a2a2a;
-	--back-colour: #fff;
-	--hot-colour: #b60000;
-	--cold-colour: #2a2aff;
+	--fore-colour: #002a36;
+	--back-colour: #fffff0;
+	--hot-colour: #9b208b;
+	--cold-colour: #006363;
 }
 [data-theme="wine"] {
 	--fore-colour: #215;
@@ -100,9 +101,9 @@ RESPONSIVITY
 }
 [data-theme="dust"] {
 	--fore-colour: #56170e;
-	--back-colour: #fff;
-	--hot-colour: #da2c43;
-	--cold-colour: #404040;
+	--back-colour: #fed;
+	--hot-colour: #9d1b2d;
+	--cold-colour: #103050;
 }
 [data-theme="mist"] {
 	--fore-colour: #2d2d2d;
@@ -111,8 +112,8 @@ RESPONSIVITY
 	--cold-colour: #545464;
 }
 [data-theme="silver"] {
-	--fore-colour: #444;
-	--back-colour: #eee;
+	--fore-colour: #595959;
+	--back-colour: #fff;
 	--hot-colour: #000;
 	--cold-colour: #000;
 }
@@ -132,7 +133,7 @@ RESPONSIVITY
 	--fore-colour: #ffa8a8;
 	--back-colour: #01101f;
 	--hot-colour: #ff6c7a;
-	--cold-colour: #ea70ca;
+	--cold-colour: #e470ca;
 }
 [data-theme="retro"] {
 	--fore-colour: #c7eb40;
@@ -143,14 +144,14 @@ RESPONSIVITY
 [data-theme="marrow"] {
 	--fore-colour: #ffe5c4;
 	--back-colour: #260000;
-	--hot-colour: #ea5c73;
+	--hot-colour: #ff5773;
 	--cold-colour: #f5e07b;
 }
 [data-theme="org"] {
 	--fore-colour: #211e20;
 	--back-colour: #e9efec;
-	--hot-colour: #880808;
-	--cold-colour: #880808;
+	--hot-colour: #085808;
+	--cold-colour: #085808;
 }
 
 /* FONTS */
