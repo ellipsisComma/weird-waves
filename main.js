@@ -112,7 +112,7 @@ Array.prototype.sum = function () {
 // sum a numerical array that's an object property value
 Array.prototype.sumByKey = function (key) {
 	return this.reduce((a, b) => a + b[key], 0);
-}
+};
 
 /* APP */
 
@@ -242,7 +242,7 @@ function addShow(id) {
 
 	// build new playlist item
 	const seriesInArchive = showInArchive.closest(`#series-list > li`);
-	const newShow = page.playlist.appendChild(document.createElement(`li`));
+	const newShow = page.playlist.appendChild(document.createElement(`li`)); // must append before defining outerHTML, because outerHTML doesn't work on elements without parents
 	const playlistShowControls = [
 		{	"code": `move-up`,		"label": `Move show up`		},
 		{	"code": `remove`,		"label": `Remove show`		},
@@ -448,7 +448,7 @@ function toggleAutoPlay() {
 function toggleContentNotes() {
 	settings.notesOpen = !settings.notesOpen;
 	switchToggle(`content-notes`);
-	for (const notes of document.querySelectorAll(`.content-notes`)) notes.toggleAttribute(`open`, settings.notesOpen);
+	for (const notes of document.querySelectorAll(`.content-notes`)) notes.open = settings.notesOpen;
 }
 
 // set a button's state to unpressed
@@ -518,7 +518,7 @@ function buildArchive() {
 				<h4 class="show-heading">${show.heading}</h4>
 				<div class="show-content">
 					<p>${show.blurb}</p>
-					${show.notes ? `<details class="content-notes" ${settings.notesOpen ? `open=""` : ``}>
+					${show.notes ? `<details class="content-notes" ${settings.notesOpen ? `open` : ``}>
 						<summary>Content notes</summary>
 						${show.notes}
 					</details>` : ``}
