@@ -29,7 +29,7 @@ const faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" 
 </svg>`;
 
 // initialised settings from storage and set default values if not set
-const settings = window.localStorage.getItem(`settings`) ? JSON.parse(window.localStorage.getItem(`settings`)) : {};
+const settings = JSON.parse(window.localStorage.getItem(`settings`)) ?? {};
 settings.copyrightSafety ??= false;
 settings.flatRadio ??= false;
 settings.autoPlayNextShow ??= true;
@@ -45,7 +45,7 @@ settings.notesOpen ??= false;
 const page = {
 	// head
 	"title": `title`,
-	"favicon": `[rel="icon"][type="image/svg+xml"]`,
+	"SVGFavicon": `[rel="icon"][type="image/svg+xml"]`,
 
 	// radio
 	"loadedShow": `#loaded-show`,
@@ -104,24 +104,11 @@ Element.prototype.removeAttributes = function (attrs) {
 	for (const attr of attrs) this.removeAttribute(attr);
 };
 
-// sum a numerical array
-Array.prototype.sum = function () {
-	return this.reduce((a, b) => a + b, 0);
-};
-
-// sum a numerical array that's an object property value
-Array.prototype.sumByKey = function (key) {
-	return this.reduce((a, b) => a + b[key], 0);
-};
-
 /* APP */
 
 // convert time in seconds to minutes:seconds timestamp
 function setTimestampFromSeconds(element, time) {
-	const minutes = Math.floor((parseInt(time) % 3600) / 60).toString().padStart(2, `0`);
-	const seconds = (parseInt(time) % 60).toString().padStart(2, `0`);
-
-	element.textContent = `${minutes}:${seconds}`;
+	element.textContent = [time / 60, time % 60].map(t => Math.floor(t).toString().padStart(2, `0`)).join(`:`);
 }
 
 // get show ID from a pool, adjusted for copyright safety
@@ -138,6 +125,11 @@ function getShowInArchive(id) {
 // get show element on playlist
 function getShowOnPlaylist(id) {
 	return page.playlist.querySelector(`:scope > [data-id="${id.replace(`"`, `'`)}"]`);
+}
+
+// get array of all playlist show IDs
+function getPlaylistIDs() {
+	return [...page.playlist.children].map(show => show.dataset.id);
 }
 
 /* -----
@@ -170,18 +162,16 @@ function hideClearPlaylistControls() {
 function clearPlaylist() {
 	if (page.playlist.children.length > 0) {
 		page.playlist.replaceChildren();
-		for (const button of page.seriesList.querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)) unpressButton(button);
+		for (const button of page.seriesList.querySelectorAll(`[data-action="add-show"]`)) unpressButton(button);
+		loadShow();
 	}
 	if (!page.clearPlaylistControls.hidden) hideClearPlaylistControls();
-	loadShow();
 }
 
 // list playlist of show IDs line-by-line in import-export box
 function exportPlaylist() {
-	const exportIDs = [];
 	page.importErrorMessage.hidden = true;
-	for (const show of page.playlist.children) exportIDs.push(show.dataset.id);
-	page.importExport.value = exportIDs.join(`\n`);
+	page.importExport.value = getPlaylistIDs().join(`\n`);
 }
 
 function revealImportErrors(message) {
@@ -196,7 +186,7 @@ function importPlaylist() {
 
 	// if attempting to import IDs, validate them and either present invalid IDs or update playlist; if import box is empty, clear playlist
 	const importIDs = page.importExport.value.trim().length > 0
-		? [...new Set(page.importExport.value.trim().replace(/\n\n+/g, `\n`).replace(/[ \t]/g, ``).split(`\n`))]
+		? [...new Set(page.importExport.value.trim().replace(/[ \t]/g, ``).split(/\n+/))]
 		: [];
 	const invalidIDs = importIDs.filter(id => !getShowInArchive(id));
 
@@ -210,9 +200,7 @@ function importPlaylist() {
 	} else {
 		revealImportErrors(`
 		<p>Invalid import: Invalid show ID${invalidIDs.length > 1 ? `s` : ``}:</p>
-		<ul>
-			${invalidIDs.map(id => `<li>${id}</li>`).join(``)}
-		</ul>
+		<ul>${invalidIDs.map(id => `<li>${id}</li>`).join(``)}</ul>
 		`);
 		page.importExport.value = importIDs.join(`\n`);
 	}
@@ -242,33 +230,33 @@ function addShow(id) {
 
 	// build new playlist item
 	const seriesInArchive = showInArchive.closest(`#series-list > li`);
-	const newShow = page.playlist.appendChild(document.createElement(`li`)); // must append before defining outerHTML, because outerHTML doesn't work on elements without parents
+	const newShow = document.createElement(`li`);
 	const playlistShowControls = [
 		{	"code": `move-up`,		"label": `Move show up`		},
 		{	"code": `remove`,		"label": `Remove show`		},
 		{	"code": `move-down`,	"label": `Move show down`	},
 	];
 
-	newShow.outerHTML = `
-	<li data-id="${id}" data-duration="${showInArchive.dataset.duration}">
-		<ul class="show-position-controls icon-button-set">
-			${playlistShowControls.map(button => `
-			<li>
-				<button class="push-button" type="button" data-action="${button.code}" data-target="${id}" aria-label="${button.label}">
-					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-${button.code}" /></svg>
-				</button>
-			</li>
-			`).join(``)}
-		</ul>
-		<div class="show-info">
-			<h4 class="show-heading">${seriesInArchive.querySelector(`.series-heading`).innerHTML} ${showInArchive.querySelector(`.show-heading`).innerHTML}</h4>
-			<div class="show-content">
-				${showInArchive.querySelector(`.show-content`).innerHTML}
-				${seriesInArchive.querySelector(`.series-source`).outerHTML}
-			</div>
+	newShow.dataset.id = id;
+	newShow.innerHTML = `
+	<ul class="show-position-controls icon-button-set">
+		${playlistShowControls.map(button => `
+		<li>
+			<button class="push-button" type="button" data-action="${button.code}" data-target="${id}" aria-label="${button.label}">
+				<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-${button.code}" /></svg>
+			</button>
+		</li>
+		`).join(``)}
+	</ul>
+	<div class="show-info">
+		<h4 class="show-heading">${seriesInArchive.querySelector(`.series-heading`).innerHTML} ${showInArchive.querySelector(`.show-heading`).innerHTML}</h4>
+		<div class="show-content">
+			${showInArchive.querySelector(`.show-content`).innerHTML}
+			${seriesInArchive.querySelector(`.series-source`).outerHTML}
 		</div>
-	</li>
+	</div>
 	`;
+	page.playlist.appendChild(newShow);
 
 	// update page
 	pressButton(showInArchive.querySelector(`[data-action="add-show"]`));
@@ -286,10 +274,9 @@ function addSeries(seriesCode) {
 	for (const show of page.seriesList.querySelectorAll(`#archive-${seriesCode} > .show-list > li`)) addShow(show.id);
 }
 
-// add a random show or banger to the playlist; if adding a show to an empty playlist, load it into radio
+// add a random show or banger to the playlist
 function addRandomShow(showType) {
-	const id = getRandomShowID(showType);
-	if (getShowInArchive(id)) addShow(id);
+	addShow(getRandomShowID(showType));
 	window.scrollTo(0, page.playlist.lastElementChild.offsetTop - page.playlistControls.clientHeight);
 }
 
@@ -317,7 +304,7 @@ function removeShow(id) {
 function loadShow() {
 	if (page.playlist.children.length > 0 && page.playlist.firstElementChild.dataset.id === page.loadedShow.dataset.id) return;
 
-	if (!page.audio.paused) togglePlay();
+	setAudioToggle(page.playToggle, `Play audio`, `play`);
 
 	if (page.playlist.children.length > 0) {
 		const show = page.playlist.firstElementChild;
@@ -325,13 +312,12 @@ function loadShow() {
 
 		// load audio file and show data
 		page.audio.src = `${showFilePath}${show.dataset.id}${showFileExtension}`;
-		page.audio.dataset.duration = show.dataset.duration;
 		page.loadedShow.innerHTML = show.querySelector(`.show-info`).innerHTML;
 
 		// reset and reveal radio controls
-		updateSeekTime(0);
 		page.seekBar.value = 0;
-		setTimestampFromSeconds(page.showTimeTotal, page.audio.dataset.duration);
+		page.showTimeElapsed.textContent = `00:00`;
+		page.audio.addEventListener(`loadedmetadata`, () => setTimestampFromSeconds(page.showTimeTotal, page.audio.duration));
 		page.radioControls.hidden = false;
 
 		console.log(`loaded show: ${show.dataset.id}`);
@@ -341,12 +327,11 @@ function loadShow() {
 		page.playlist.innerHTML = ``;
 
 		// reset radio
-		page.audio.removeAttributes([`src`, `data-duration`]);
-		for (const time of [`Elapsed`, `Total`]) setTimestampFromSeconds(page[`showTime${time}`], "0");
+		page.audio.pause(); // otherwise audio continues playing
+		page.audio.removeAttribute(`src`);
+		for (const time of [`Elapsed`, `Total`]) page[`showTime${time}`].textContent = `00:00`;
 		page.radioControls.hidden = true;
 		page.loadedShow.setAttribute(`data-id`, ``);
-
-		console.info(`reached end of playlist`);
 	}
 }
 
@@ -354,7 +339,7 @@ function loadShow() {
 function loadNextShow() {
 	removeShow(page.playlist.firstElementChild.dataset.id);
 	page.seekBar.value = 0;
-	if (page.audio.hasAttribute(`src`) && settings.autoPlayNextShow) playAudio();
+	if (page.audio.hasAttribute(`src`) && settings.autoPlayNextShow && page.audio.paused) togglePlay();
 }
 
 /* --
@@ -364,27 +349,31 @@ RADIO
 // if audio is playing, update seek bar and time-elapsed
 function updateSeekBar() {
 	if (!page.audio.paused && page.seekBar.dataset.seeking !== `true`) {
-		page.seekBar.value = page.audio.currentTime / page.audio.dataset.duration * 100;
+		page.seekBar.value = page.audio.currentTime / page.audio.duration * 100;
 		setTimestampFromSeconds(page.showTimeElapsed, page.audio.currentTime);
 	}
 }
 
 // update displayed show time using seek bar
 function updateSeekTime(value) {
-	setTimestampFromSeconds(page.showTimeElapsed, page.audio.dataset.duration * value / 100);
+	setTimestampFromSeconds(page.showTimeElapsed, page.audio.duration * value / 100);
+}
+
+// set audio toggle icon and aria-label
+function setAudioToggle(toggle, label, code) {
+	toggle.ariaLabel = label;
+	toggle.querySelector(`use`).setAttribute(`href`, `#svg-${code}`);
 }
 
 // toggle audio play/pause
 function togglePlay() {
 	if (page.audio.paused) {
 		page.audio.play();
-		page.playToggle.ariaLabel = `Pause audio`;
-		page.playToggle.querySelector("use").setAttribute(`href`, `#svg-pause`);
+		setAudioToggle(page.playToggle, `Pause show`, `pause`);
 	} else {
 		updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
 		page.audio.pause();
-		page.playToggle.ariaLabel = `Play audio`;
-		page.playToggle.querySelector("use").setAttribute(`href`, `#svg-play`);
+		setAudioToggle(page.playToggle, `Play show`, `play`);
 	}
 }
 
@@ -392,13 +381,11 @@ function togglePlay() {
 function toggleMute() {
 	if (page.audio.muted) {
 		page.audio.muted = false;
-		page.muteToggle.ariaLabel = `Mute audio`;
-		page.muteToggle.querySelector("use").setAttribute(`href`, `#svg-mute`);
+		setAudioToggle(page.muteToggle, `Mute audio`, `mute`);
 		page.volumeControl.value = page.audio.volume * 100;
 	} else {
 		page.audio.muted = true;
-		page.muteToggle.ariaLabel = `Unmute audio`;
-		page.muteToggle.querySelector("use").setAttribute(`href`, `#svg-unmute`);
+		setAudioToggle(page.muteToggle, `Unmute audio`, `unmute`);
 		page.volumeControl.value = 0;
 	}
 }
@@ -482,7 +469,7 @@ function switchTheme(theme) {
 	for (const type of [`fore`, `back`, `hot`, `cold`]) {
 		faviconNew = faviconNew.replaceAll(`--${type}-colour`, getComputedStyle(document.documentElement).getPropertyValue(`--${type}-colour`));
 	}
-	page.favicon.href = `data:image/svg+xml,${faviconNew.replaceAll(`#`, `%23`)}`;
+	page.SVGFavicon.href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
 }
 
 // switch between different fonts
@@ -497,9 +484,7 @@ PAGE CONSTRUCTION
 // build archive onto page
 function buildArchive() {
 	page.seriesLinks.innerHTML = archive.map(series => `
-	<li>
-		<a href="#archive-${series.code}">${series.heading}</a>
-	</li>
+	<li><a href="#archive-${series.code}">${series.heading}</a></li>
 	`).join(``);
 
 	page.seriesList.innerHTML = archive.map(series => `
@@ -513,8 +498,8 @@ function buildArchive() {
 			<button class="push-button" type="button" data-target="${series.code}" data-action="add-series">Add series to playlist</button>
 		</header>
 		<ol class="show-list">
-			${series.shows.map(show =>
-			`<li id="${series.code}-${show.code}" data-duration="${show.duration}" data-banger="${show.banger ? `true` : `false`}">
+			${series.shows.map(show => `
+			<li id="${series.code}-${show.code}" data-banger="${show.banger ? `true` : `false`}">
 				<h4 class="show-heading">${show.heading}</h4>
 				<div class="show-content">
 					<p>${show.blurb}</p>
@@ -544,7 +529,6 @@ function buildArchive() {
 	for (const [name, value] of Object.entries({
 		"sources": archive.length,
 		"shows": archive.reduce((a, series) => a + series.shows.length, 0),
-		"duration": Math.round(archive.map(series => series.shows.sumByKey(`duration`)).sum() / 3600)
 	})) document.querySelector(`#stats-${name}`).textContent = value;
 
 	// clear archive object
@@ -593,7 +577,7 @@ page.audio.addEventListener(`ended`, loadNextShow);
 // radio interface events
 page.seekBar.addEventListener(`change`, () => {
 	page.seekBar.dataset.seeking = `false`;
-	page.audio.currentTime = page.audio.dataset.duration * page.seekBar.value / 100;
+	page.audio.currentTime = page.audio.duration * page.seekBar.value / 100;
 });
 page.seekBar.addEventListener(`input`, () => {
 	page.seekBar.dataset.seeking = `true`;
@@ -657,11 +641,8 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 	// build various page sections
 	buildArchive();
-	const storedIDs = window.localStorage.getItem(`playlist`) ? JSON.parse(window.localStorage.getItem(`playlist`)).filter(id => page.seriesList.querySelector(`.show-list > #${id}`)) : [];
-	if (storedIDs.length > 0) {
-		for (const id of storedIDs) addShow(id);
-		console.info(`loaded playlist from storage`);
-	}
+	for (const id of (JSON.parse(window.localStorage.getItem(`playlist`)) ?? []).filter(id => getShowInArchive(id))) addShow(id);
+	if (page.playlist.children.length > 0) console.info(`loaded playlist from storage`);
 	buildFeaturedShow();
 
 	// update page head data
@@ -672,9 +653,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 // on closing window/browser tab, record user settings and styles to localStorage
 window.addEventListener(`beforeunload`, () => {
 	if (page.audio.muted) page.volumeControl.value = page.audio.volume * 100; // if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
-	const playlistIDs = [];
-	for (const show of page.playlist.children) playlistIDs.push(show.dataset.id);
-	window.localStorage.setItem(`playlist`, JSON.stringify(playlistIDs));
+	window.localStorage.setItem(`playlist`, JSON.stringify(getPlaylistIDs()));
 	window.localStorage.setItem(`settings`, JSON.stringify(settings));
 	window.localStorage.setItem(`styles`, JSON.stringify(styles));
 });
