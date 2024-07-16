@@ -8,10 +8,21 @@
 	<subtitle type="html"><![CDATA[Audio horror broadcasting online.]]></subtitle>
 	<author><name><![CDATA[Weird Waves]]></name></author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-07-14T00:00:00+01:00</updated>
+	<updated>2024-07-16T00:00:00+01:00</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?40</id>
+		<link rel="alternate" href="https://weirdwaves.net/" />
+		<title type="html"><![CDATA[Tidying up and auto-play bug-fix]]></title>
+		<content type="html"><![CDATA[
+			<p>Fixed a bug caused by a recent code change that broke the auto-play setting. I've also streamlined the code a little, one side-effect of which is that the stats in <a href="./index.html#about">About</a> no longer include the total hours of audio in the archive.</p>
+		]]></content>
+		<published>2024-07-16T00:00:00+01:00</published>
+		<updated>2024-07-16T00:00:00+01:00</updated>
+		<category term="features" />
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?39</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
