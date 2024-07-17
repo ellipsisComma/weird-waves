@@ -54,14 +54,14 @@ RESPONSIVITY
 [data-theme="goop"] {
 	--fore-colour: #e0ffe0;
 	--back-colour: #021;
-	--hot-colour: #0a8;
-	--cold-colour: #8a0;
+	--hot-colour: #00bd97;
+	--cold-colour: #90b400;
 }
 [data-theme="flame"] {
 	--fore-colour: #f8f095;
 	--back-colour: #281800;
 	--hot-colour: #fe1;
-	--cold-colour: #ff6900;
+	--cold-colour: #ff842d;
 }
 [data-theme="plasm"] {
 	--fore-colour: #fff8ff;
@@ -133,7 +133,7 @@ RESPONSIVITY
 	--fore-colour: #ffa8a8;
 	--back-colour: #01101f;
 	--hot-colour: #ff6c7a;
-	--cold-colour: #e470ca;
+	--cold-colour: #e574cb;
 }
 [data-theme="retro"] {
 	--fore-colour: #c7eb40;

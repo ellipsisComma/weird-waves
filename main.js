@@ -29,7 +29,7 @@ const faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" 
 </svg>`;
 
 // initialised settings from storage and set default values if not set
-const settings = JSON.parse(window.localStorage.getItem(`settings`)) ?? {};
+const settings = retrieve(`settings`, {});
 settings.copyrightSafety ??= false;
 settings.flatRadio ??= false;
 settings.autoPlayNextShow ??= true;
@@ -92,20 +92,6 @@ for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelec
 UTILITY
 ---- */
 
-/* GENERAL */
-
-// add an object of attributes to an Element
-Element.prototype.setAttributes = function (attrs) {
-	for (const [attr, value] of Object.entries(attrs)) this.setAttribute(attr, value);
-};
-
-// remove an array of attributes from an Element
-Element.prototype.removeAttributes = function (attrs) {
-	for (const attr of attrs) this.removeAttribute(attr);
-};
-
-/* APP */
-
 // convert time in seconds to minutes:seconds timestamp
 function setTimestampFromSeconds(element, time) {
 	element.textContent = [time / 60, time % 60].map(t => Math.floor(t).toString().padStart(2, `0`)).join(`:`);
@@ -128,8 +114,8 @@ function getShowOnPlaylist(id) {
 }
 
 // get array of all playlist show IDs
-function getPlaylistIDs() {
-	return [...page.playlist.children].map(show => show.dataset.id);
+function getShowIDs(subset) {
+	return [...subset].map(show => show.dataset.id);
 }
 
 /* -----
@@ -162,7 +148,7 @@ function hideClearPlaylistControls() {
 function clearPlaylist() {
 	if (page.playlist.children.length > 0) {
 		page.playlist.replaceChildren();
-		for (const button of page.seriesList.querySelectorAll(`[data-action="add-show"]`)) unpressButton(button);
+		page.seriesList.querySelectorAll(`[data-action="add-show"]`).forEach(unpressButton);
 		loadShow();
 	}
 	if (!page.clearPlaylistControls.hidden) hideClearPlaylistControls();
@@ -171,7 +157,7 @@ function clearPlaylist() {
 // list playlist of show IDs line-by-line in import-export box
 function exportPlaylist() {
 	page.importErrorMessage.hidden = true;
-	page.importExport.value = getPlaylistIDs().join(`\n`);
+	page.importExport.value = getShowIDs(page.playlist.children).join(`\n`);
 }
 
 function revealImportErrors(message) {
@@ -195,7 +181,7 @@ function importPlaylist() {
 	if (invalidIDs.length === 0) {
 		if (importIDs.length > 0) {
 			clearPlaylist();
-			for (const id of importIDs) addShow(id);
+			importIDs.forEach(addShow);
 		} else revealImportErrors(`<p>Invalid import: no show IDs.</p>`);
 	} else {
 		revealImportErrors(`
@@ -238,15 +224,10 @@ function addShow(id) {
 	];
 
 	newShow.dataset.id = id;
+	playlistShowControls.forEach(button => button.target = id);
 	newShow.innerHTML = `
 	<ul class="show-position-controls icon-button-set">
-		${playlistShowControls.map(button => `
-		<li>
-			<button class="push-button" type="button" data-action="${button.code}" data-target="${id}" aria-label="${button.label}">
-				<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-${button.code}" /></svg>
-			</button>
-		</li>
-		`).join(``)}
+		${playlistShowControls.map(buildPlaylistShowControl).join(``)}
 	</ul>
 	<div class="show-info">
 		<h4 class="show-heading">${seriesInArchive.querySelector(`.series-heading`).innerHTML} ${showInArchive.querySelector(`.show-heading`).innerHTML}</h4>
@@ -266,12 +247,12 @@ function addShow(id) {
 
 // add entire archive to playlist
 function addArchive() {
-	for (const show of page.seriesList.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)) addShow(show.id);
+	getShowIDs(page.seriesList.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
 }
 
 // add entire series to playlist
 function addSeries(seriesCode) {
-	for (const show of page.seriesList.querySelectorAll(`#archive-${seriesCode} > .show-list > li`)) addShow(show.id);
+	getShowIDs(page.seriesList.querySelectorAll(`#archive-${seriesCode} > .show-list > li`)).forEach(addShow);
 }
 
 // add a random show or banger to the playlist
@@ -329,7 +310,8 @@ function loadShow() {
 		// reset radio
 		page.audio.pause(); // otherwise audio continues playing
 		page.audio.removeAttribute(`src`);
-		for (const time of [`Elapsed`, `Total`]) page[`showTime${time}`].textContent = `00:00`;
+		page.showTimeElapsed.textContent = `00:00`;
+		page.showTimeTotal.textContent = `00:00`;
 		page.radioControls.hidden = true;
 		page.loadedShow.setAttribute(`data-id`, ``);
 	}
@@ -435,21 +417,7 @@ function toggleAutoPlay() {
 function toggleContentNotes() {
 	settings.notesOpen = !settings.notesOpen;
 	switchToggle(`content-notes`);
-	for (const notes of document.querySelectorAll(`.content-notes`)) notes.open = settings.notesOpen;
-}
-
-// set a button's state to unpressed
-function unpressButton(button) {
-	button?.setAttribute(`aria-pressed`, `false`);
-	button?.removeAttribute(`aria-disabled`);
-}
-
-// set a button's state to pressed
-function pressButton(button) {
-	button?.setAttributes({
-		"aria-pressed": `true`,
-		"aria-disabled": `true`
-	});
+	document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = settings.notesOpen);
 }
 
 // update setting and its buttons according to chosen value
@@ -466,9 +434,7 @@ function switchTheme(theme) {
 	updateSetting(`theme`, theme);
 
 	let faviconNew = faviconRaw;
-	for (const type of [`fore`, `back`, `hot`, `cold`]) {
-		faviconNew = faviconNew.replaceAll(`--${type}-colour`, getComputedStyle(document.documentElement).getPropertyValue(`--${type}-colour`));
-	}
+	[`fore`, `back`, `hot`, `cold`].forEach(type => faviconNew = faviconNew.replaceAll(`--${type}-colour`, getStyle(`:root`, `--${type}-colour`)));
 	page.SVGFavicon.href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
 }
 
@@ -481,14 +447,35 @@ function switchFont(font) {
 PAGE CONSTRUCTION
 -------------- */
 
-// build archive onto page
-function buildArchive() {
-	page.seriesLinks.innerHTML = archive.map(series => `
-	<li><a href="#archive-${series.code}">${series.heading}</a></li>
-	`).join(``);
+function buildPlaylistShowControl(button) {
+	return `<li>
+		<button class="push-button" type="button" data-action="${button.code}" data-target="${button.target}" aria-label="${button.label}">
+			<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-${button.code}" /></svg>
+		</button>
+	</li>`;
+}
 
-	page.seriesList.innerHTML = archive.map(series => `
-	<li id="archive-${series.code}" data-copyright-safe="${series.copyrightSafe ? `true` : `false`}">
+function buildLink(series) {
+	return `<li><a href="#archive-${series.code}">${series.heading}</a></li>`;
+}
+
+function buildShow(show) {
+	return `<li id="${show.id}" data-id="${show.id}" data-banger="${show.banger ? `true` : `false`}">
+		<h4 class="show-heading">${show.heading}</h4>
+		<div class="show-content">
+			<p>${show.blurb}</p>
+			${show.notes ? `<details class="content-notes" ${settings.notesOpen ? `open` : ``}>
+				<summary>Content notes</summary>
+				${show.notes}
+			</details>` : ``}
+		</div>
+		<button class="push-button" type="button" data-target="${show.id}" data-action="add-show" aria-pressed="false">Add to playlist</button>
+	</li>`;
+}
+
+function buildSeries(series) {
+	series.shows.forEach(show => show.id = `${series.code}-${show.code}`);
+	return `<li id="archive-${series.code}" data-copyright-safe="${series.copyrightSafe ? `true` : `false`}">
 		<header>
 			<h3 class="series-heading">${series.heading}</h3>
 			<div class="series-content">
@@ -498,22 +485,15 @@ function buildArchive() {
 			<button class="push-button" type="button" data-target="${series.code}" data-action="add-series">Add series to playlist</button>
 		</header>
 		<ol class="show-list">
-			${series.shows.map(show => `
-			<li id="${series.code}-${show.code}" data-banger="${show.banger ? `true` : `false`}">
-				<h4 class="show-heading">${show.heading}</h4>
-				<div class="show-content">
-					<p>${show.blurb}</p>
-					${show.notes ? `<details class="content-notes" ${settings.notesOpen ? `open` : ``}>
-						<summary>Content notes</summary>
-						${show.notes}
-					</details>` : ``}
-				</div>
-				<button class="push-button" type="button" data-target="${series.code}-${show.code}" data-action="add-show" aria-pressed="false">Add to playlist</button>
-			</li>
-			`).join(``)}
+			${series.shows.map(buildShow).join(``)}
 		</ol>
-	</li>
-	`).join(``);
+	</li>`;
+}
+
+// build archive onto page
+function buildArchive() {
+	page.seriesLinks.innerHTML = archive.map(buildLink).join(``);
+	page.seriesList.innerHTML = archive.map(buildSeries).join(``);
 
 	// add delegated click-events for add-series
 	page.seriesList.addEventListener(`click`, () => {
@@ -641,7 +621,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 	// build various page sections
 	buildArchive();
-	for (const id of (JSON.parse(window.localStorage.getItem(`playlist`)) ?? []).filter(id => getShowInArchive(id))) addShow(id);
+	retrieve(`playlist`, []).filter(id => getShowInArchive(id)).forEach(addShow);
 	if (page.playlist.children.length > 0) console.info(`loaded playlist from storage`);
 	buildFeaturedShow();
 
@@ -653,7 +633,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 // on closing window/browser tab, record user settings and styles to localStorage
 window.addEventListener(`beforeunload`, () => {
 	if (page.audio.muted) page.volumeControl.value = page.audio.volume * 100; // if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
-	window.localStorage.setItem(`playlist`, JSON.stringify(getPlaylistIDs()));
-	window.localStorage.setItem(`settings`, JSON.stringify(settings));
-	window.localStorage.setItem(`styles`, JSON.stringify(styles));
+	store(`playlist`, getShowIDs(page.playlist.children));
+	store(`settings`, settings);
+	store(`styles`, styles);
 });
