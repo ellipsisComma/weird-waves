@@ -82,7 +82,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 
 <!--main output template-->
 <xsl:template match="atom:feed">
-<html lang="en-GB" data-theme="dark" data-font="sans">
+<html lang="en-GB" data-theme="dark" data-font="serif">
 <head>
 	<title><xsl:value-of select="concat(atom:title, ' Feed')" /></title>
 
@@ -92,17 +92,13 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-14" />
+	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-17" />
 
-	<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"&gt;
-	&lt;animate attributeName="opacity" values="1; 0; 0; 1" keyTimes="0; 0; 1; 1" dur="1s" repeatCount="1" /&gt;
-	&lt;rect x="-1" y="-1" width="28" height="28" fill="%23000627" /&gt;
-	&lt;path stroke="%23ff6767" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" /&gt;
-	&lt;path stroke="%23b9ab00" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" /&gt;
-&lt;/svg&gt;' sizes="any" />
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2026%2026%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%3E%3Canimate%20attributeName%3D%22opacity%22%20values%3D%221%3B%200%3B%200%3B%201%22%20keyTimes%3D%220%3B%200%3B%201%3B%201%22%20dur%3D%221s%22%20repeatCount%3D%221%22%2F%3E%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2228%22%20height%3D%2228%22%20fill%3D%22%23000627%22%2F%3E%3Cpath%20stroke%3D%22%23ff6767%22%20d%3D%22M7%2011a3%203%200%200%201%203%203a3%203%200%200%201%206%200a3%203%200%200%201%203-3%22%2F%3E%3Cpath%20stroke%3D%22%23b9ab00%22%20d%3D%22M7%208a6%206%200%200%201%2012%200v4a6%206%200%200%201-12%200zm12%203h3v1a9%209%200%200%201-18%200v-1h3m6%2010v3m-4%200h8%22%2F%3E%3C%2Fsvg%3E" sizes="any" />
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 
-	<script src="./initialisation.js?v=2024-07-13"></script>
+	<script src="./utilities.js?v=2024-07-17"></script>
+	<script src="./initialisation.js?v=2024-07-17"></script>
 </head>
 
 
@@ -322,10 +318,8 @@ setTimeout(() => {
 		<path stroke="--hot-colour" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
 		<path stroke="--cold-colour" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
 	</svg>`;
-	for (const type of [`fore`, `back`, `hot`, `cold`]) {
-		favicon = favicon.replaceAll(`--${type}-colour`, getComputedStyle(document.documentElement).getPropertyValue(`--${type}-colour`));
-	}
-	page.favicon.href = `data:image/svg+xml,${favicon.replaceAll(`#`, `%23`)}`;
+	[`fore`, `back`, `hot`, `cold`].forEach(type => favicon = favicon.replaceAll(`--${type}-colour`, getComputedStyle(document.documentElement).getPropertyValue(`--${type}-colour`)));
+	page.favicon.href = `data:image/svg+xml,${encodeURIComponent(favicon)}`;
 }, 100);
 
 // re-parse elements from the parsed file that contain HTML (or SVG)
