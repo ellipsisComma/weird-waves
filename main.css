@@ -34,7 +34,7 @@ RESPONSIVITY
 	--gap-size: 10px;
 	--main-column-padding: calc(2 * var(--gap-size));
 
-	--meta-font-size: 0.75em;
+	--meta-font-size: 0.7em;
 
 	--seek-bar-thumb-size: 1em;
 	--toggle-transition-duration: 0.5s;

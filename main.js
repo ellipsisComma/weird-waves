@@ -79,6 +79,7 @@ const page = {
 	"fontButtons": `#font-buttons`,
 
 	// welcome
+	"featuredShowContainer": `#featured-show-container`,
 	"featuredShow": `#featured-show`,
 };
 const templateHTML = {
@@ -473,6 +474,13 @@ function switchFont(font) {
 PAGE CONSTRUCTION
 -------------- */
 
+function buildSeriesLink(series) {
+	const newSeriesLink = page.seriesLinks.appendChild(document.createElement(`li`)).appendChild(document.createElement(`a`));
+	newSeriesLink.setAttribute(`href`, `#archive-${series.code}`);
+	newSeriesLink.setContent(series.heading);
+	return newSeriesLink;
+}
+
 // build HTML for archive show item
 function buildShow(show) {
 	// add show details to series' show list
@@ -500,10 +508,6 @@ function buildShow(show) {
 
 // build HTML for archive series item and its list of shows
 function buildSeries(series) {
-	const newSeriesLink = page.seriesLinks.appendChild(document.createElement(`li`)).appendChild(document.createElement(`a`));
-	newSeriesLink.setAttribute(`href`, `#archive-${series.code}`);
-	newSeriesLink.setContent(series.heading);
-
 	const templatedSeries = templateHTML.archiveSeries.cloneNode(true);
 	const newSeries = templatedSeries.querySelector(`li`);
 	const newSeriesShows = newSeries.querySelector(`.show-list`);
@@ -526,6 +530,7 @@ function buildSeries(series) {
 
 // build archive onto page
 function buildArchive() {
+	page.seriesLinks.replaceChildren(...archive.map(buildSeriesLink));
 	page.seriesList.replaceChildren(...archive.map(buildSeries));
 	page.seriesList.addEventListener(`click`, () => {
 		if (!event.target.hasAttribute(`aria-disabled`)) {
@@ -551,20 +556,20 @@ function buildArchive() {
 function buildFeaturedShow() {
 	const showInArchive = getShowInArchive(getRandomShowID(`banger`));
 	if (!showInArchive) {
-		page.featuredShow.remove();
+		console.warn(`can't feature show on welcome: all bangers already on playlist`);
 		return;
 	}
 
-	page.featuredShow.append(...showInArchive.cloneChildren());
+	page.featuredShow.replaceChildren(...showInArchive.cloneChildren());
 	expandShowInfo(page.featuredShow, showInArchive.closest(`#series-list > li`));
 
 	// add click event for adding featured show to playlist and removing it from welcome area
 	page.featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
 		addShow(event.target.dataset.target);
-		page.featuredShow.remove();
+		page.featuredShowContainer.hidden = true;
 	});
 
-	page.featuredShow.hidden = false;
+	page.featuredShowContainer.hidden = false;
 }
 
 
