@@ -52,7 +52,7 @@ let archive = [
 "code": `BkM`,
 "heading": `<cite>The Black Mass</cite>`,
 "blurb": `A 1963&ndash;67 anthology of mostly gothic and cosmic horror stories adapted for radio, largely performed by Erik Bauersfeld.`,
-"source": `<a href="https://www.kpfahistory.info/black_mass_home.html" rel="external"><abbr title="Pacifica Radio">KPFA</abbr> History</a><!--the site of John Whiting, technical producer-->`,
+"source": `<a href="https://www.kpfahistory.info/black_mass_home.html" rel="external"><abbr>KPFA</abbr> (Pacifica Radio) History</a><!--the site of John Whiting, technical producer-->`,
 "copyrightSafe": true,
 "shows": [
 	{
@@ -112,8 +112,8 @@ let archive = [
 	},
 	{
 	"code": `14-Imp_MS`,
-	"heading": `#14: <cite>The Imp of the Perverse</cite> + <cite><abbr title="Manuscript">MS.</abbr> Found in a Bottle</cite>`,
-	"blurb": `A prisoner explains his philosophy of temptation. A sea-traveller describes his strange and deadly final journey. Adapted from stories by Edgar Allen Poe.`,
+	"heading": `#14: <cite>The Imp of the Perverse</cite> + <cite><abbr>MS.</abbr> Found in a Bottle</cite>`,
+	"blurb": `A prisoner explains his philosophy of temptation. A sea-traveller writes a manuscript (<abbr>MS.</abbr>) detailing his strange and deadly final journey. Adapted from stories by Edgar Allen Poe.`,
 	"notes": `being stranded at sea, darkness, drowning`,
 	"duration": 1741
 	},
@@ -178,7 +178,7 @@ let archive = [
 ],},
 {
 "code": `CAS`,
-"heading": `<abbr title="Clark Ashton Smith">CAS</abbr>iana`,
+"heading": `<abbr>CAS</abbr> selection`,
 "blurb": `Collected readings of the weird fiction of Clark Ashton Smith.`,
 "source": `<a href="http://www.eldritchdark.com/writings/spoken-word/" rel="external">The Eldritch Dark</a>`,
 "shows": [
@@ -244,8 +244,8 @@ let archive = [
 ],},
 {
 "code": `CRW`,
-"heading": `<cite><abbr title="Columbia Broadcasting System">CBS</abbr> Radio Workshop</cite>`,
-"blurb": `A brief 1956&ndash;57 revival of the <cite>Columbia Workshop</cite> series' experimental radio tradition.`,
+"heading": `<cite><abbr>CBS</abbr> Radio Workshop</cite>`,
+"blurb": `A brief 1956&ndash;57 revival of the <cite>Columbia Workshop</cite> series' experimental radio tradition, by the Columbia Broadcasting System.`,
 "source": `<a href="https://archive.org/details/OTRR_CBS_Radio_Workshop_Singles" rel="external">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -767,7 +767,7 @@ let archive = [
 	},
 	{
 	"code": `08-Naught`,
-	"heading": `#8: <cite><abbr title="To Be Or Not To Be">2 B R 0 2 B</abbr></cite>`,
+	"heading": `#8: <cite><abbr aria-label="2 B R Nought 2 B">2 B R 0 2 B</abbr></cite>`,
 	"blurb": `In a future of immortality and severe population control, a father must find three people willing to die so his newborn triplets can be permitted to live. Written by Kurt Vonnegut, read by Alex Clarke.`,
 	"notes": `gun death, suicide, suicide ideation`,
 	"duration": 1080
@@ -826,7 +826,7 @@ let archive = [
 	},
 	{
 	"code": `20-Facts`,
-	"heading": `#20: <cite>The Facts in the Case of <abbr title="Monsieur">M.</abbr> Valdemar</cite>`,
+	"heading": `#20: <cite>The Facts in the Case of <abbr lang="fr" aria-label="Monsieur">M.</abbr> Valdemar</cite>`,
 	"blurb": `A mesmerist preserves a man beyond death. Written by Edgar Allen Poe, read by Tony Scheinman.`,
 	"notes": `extensive descriptions of gore, suicide`,
 	"duration": 1560
@@ -1697,7 +1697,7 @@ let archive = [
 	{
 	"code": `045-Twelve`,
 	"heading": `#45: <cite>12 to 5</cite>`,
-	"blurb": `A graveyard shift radio <abbr title="disc jockey">DJ</abbr> has an unusual visitor&mdash;a news-reader who reads the future.`,
+	"blurb": `A graveyard shift radio <abbr>DJ</abbr> has an unusual visitor&mdash;a news-reader who reads the future.`,
 	"duration": 1791
 	},
 	{
@@ -1947,7 +1947,7 @@ let archive = [
 	{
 	"code": `85-Syndrome`,
 	"heading": `#85: <cite>The Oblivion Syndrome</cite>`,
-	"blurb": `A void-cartographer gives up on survival when his ship is damaged, leaving it to the ship's <abbr title="artificial intelligence">AI</abbr> and an interstellar freakshow to restore his will to live.`,
+	"blurb": `A void-cartographer gives up on survival when his ship is damaged, leaving it to the ship's <abbr>AI</abbr> and an interstellar freakshow to restore his will to live.`,
 	"notes": `ableism, voice removal`,
 	"duration": 1673
 	},
@@ -2183,7 +2183,7 @@ let archive = [
 {
 "code": `TF`,
 "heading": `<cite>Theater 5</cite>`,
-"blurb": `A 1964&ndash;65 anthology of radio dramas broadcast by the <abbr title="American Broadcasting Company">ABC</abbr> in an attempted revival of the radio play tradition after the rise of television.`,
+"blurb": `A 1964&ndash;65 anthology of dramas presented by the American Broadcasting Company (<abbr>ABC</abbr>) in an attempted revival of the radio play tradition after the rise of television.`,
 "source": `<a href="https://archive.org/details/OTRR_Theater_Five_Singles" rel="external">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [

@@ -8,10 +8,21 @@
 	<subtitle type="html"><![CDATA[Audio horror broadcasting online.]]></subtitle>
 	<author><name><![CDATA[Weird Waves]]></name></author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-07-16T00:00:00+01:00</updated>
+	<updated>2024-07-19T00:00:00+01:00</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?41</id>
+		<link rel="alternate" href="https://weirdwaves.net/" />
+		<title type="html"><![CDATA[Putting a pin in Weird Waves]]></title>
+		<content type="html"><![CDATA[
+			<p>At some point I've gotta just stop. The site looks and works fine, has all the features I wanted, builds quickly and runs smoothly, and generally has solid code (semantic <abbr>HTML</abbr> and <abbr>CSS</abbr>, <em>relatively</em> readable JavaScript). Sure, I could keep tweaking the site forever a few times a week, making trivial improvements, but there's honestly so little I can do without just going in circles. Therefore, this is the really, truly final dev update on Weird Waves. I have other projects I need to focus on! When those go live, I might post about them here. Beyond that, don't expect to see any updates except the occasional new shows. It's time for me to get other shit done.</p>
+		]]></content>
+		<published>2024-07-19T00:00:00+01:00</published>
+		<updated>2024-07-19T00:00:00+01:00</updated>
+		<category term="bulletins" />
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?40</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
@@ -62,9 +73,9 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Meet the new News Archive]]></title>
 		<content type="html"><![CDATA[
-			<p>Thanks to the incredible power of the niche, obscure <abbr title="eXtensible Markup Language">XML</abbr>-based templating language <abbr title="eXtensible Stylesheet Language">XSLT</abbr>, you can see a preview of the news feed as a web page in your browser! In fact, if you clicked through to the Feed from the main Weird Waves page then you're looking at the preview right now. I decided to make the most of this change by fleshing out the feed with a lotta past posts, including some very early blog posts.</p>
+			<p>Thanks to the incredible power of the niche, obscure templating language eXtensible Stylesheet Language (<abbr>XSLT</abbr>), you can see a preview of the news feed as a web page in your browser! In fact, if you clicked through to the Feed from the main Weird Waves page then you're looking at the preview right now. I decided to make the most of this change by fleshing out the feed with a lotta past posts, including some very early blog posts.</p>
 			<p>Unfortunately, this move forced me to change the feed's file extension from <code>.rss</code> to <code>.xml</code> so browsers open it as a page instead of trying to download the raw file. This'll break the connection for anyone subscribed to the old feed. I can't do anything about that other than put a big alert in the old file pointing people to the new one and wait a while before deleting it.</p>
-			<p>Finally, I changed the feed type from <abbr title="Really Simple Syndication / RDF Site Summary">RSS</abbr> to Atom, which is a slightly more robust spec. This isn't gonna cause problems, since basically any feed reader that can read the former can read the latter, but I did have to update a few little bits and pieces around the site.</p>
+			<p>Finally, I changed the feed type from <abbr>RSS</abbr> to Atom, which is a slightly more robust spec. This isn't gonna cause problems, since basically any feed reader that can read the former can read the latter, but I did have to update a few little bits and pieces around the site.</p>
 		]]></content>
 		<published>2024-06-30T00:00:00+01:00</published>
 		<updated>2024-06-30T00:00:00+01:00</updated>
@@ -86,8 +97,8 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Stream widget]]></title>
 		<content type="html"><![CDATA[
-			<p>I've found that Weird Waves no longer works as a browser source in the broadcast software <abbr title="Open Broadcaster Software">OBS</abbr> (the code's too modern for <abbr>OBS</abbr>' outdated mini-browser). <abbr>OBS</abbr> makes it a pain to see what's happening under a browser source's hood, so I've just added a note to the Streaming section explaining the situation (and that there's no real solution).</p>
-			<p><strong>Update:</strong> Okay, I couldn't leave the <abbr title="Open Broadcaster Software">OBS</abbr> situation like that, so I pulled up the code from the last time I know Weird Waves worked on stream and cut it down to a <a href="https://weirdwaves.net/stream/widget.html">stream widget</a>. It shares stored settings etc. with the web version, but has a separate playlist, due to its outdated code.</p>
+			<p>I've found that Weird Waves no longer works as a browser source in the Open Broadcaster Software (<abbr>OBS</abbr>)&mdash;the code's too modern for <abbr>OBS</abbr>' outdated mini-browser and <abbr>OBS</abbr> makes it a pain to see what's happening under a browser source's hood, so I've just added a note to the Streaming section explaining the situation (and that there's no real solution).</p>
+			<p><strong>Update:</strong> Okay, I couldn't leave the <abbr>OBS</abbr> situation like that, so I pulled up the code from the last time I know Weird Waves worked on stream and cut it down to a <a href="https://weirdwaves.net/stream/widget.html">stream widget</a>. It shares stored settings etc. with the web version, but has a separate playlist, due to its outdated code.</p>
 		]]></content>
 		<published>2024-06-21T00:00:00+01:00</published>
 		<updated>2024-06-22T00:00:00+01:00</updated>
@@ -154,7 +165,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Fixed that goddamn font rendering bug]]></title>
 		<content type="html"><![CDATA[
-			<p>Fixed a font rendering problem in Chrome and Safari on <abbr title="Mac Operating System">MacOS</abbr>, in which text displayed with more space above than below.</p>
+			<p>Fixed a font rendering problem in Chrome and Safari on <abbr>MacOS</abbr>, in which text displayed with more space above than below.</p>
 		]]></content>
 		<published>2024-05-12T00:00:00+01:00</published>
 		<updated>2024-05-12T00:00:00+01:00</updated>
@@ -199,7 +210,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Shifting all news to the feed file]]></title>
 		<content type="html"><![CDATA[
-			<p>Removed the News Archive page. This <abbr title="Really Simple Syndication / RDF Site Summary">RSS</abbr> feed is now the only place I'll add news updates (if I even write any more regularly&mdash;I think that's pretty unlikely). Any future news updates'll probably be just me adding some new shows now and then, tweaking content notes, or updating the info about which shows are known/possible copyright risks on streaming services.</p>
+			<p>Removed the News Archive page. This <abbr>RSS</abbr> feed is now the only place I'll add news updates (if I even write any more regularly&mdash;I think that's pretty unlikely). Any future news updates'll probably be just me adding some new shows now and then, tweaking content notes, or updating the info about which shows are known/possible copyright risks on streaming services.</p>
 		]]></content>
 		<published>2023-10-27T00:00:00+01:00</published>
 		<updated>2023-10-27T00:00:00+01:00</updated>
@@ -234,7 +245,7 @@
 		<content type="html"><![CDATA[
 			<p>There are 366 shows in the Archive, meeting my goal, and I'm pretty happy with the site's content and features. It feels weird to say, after almost a year of work, but it's done.</p>
 			<p>What next? There's a few more schedules lined up through to the anniversary. After that, the weekly schedules'll go on hiatus. I wanna take a break from updates.</p>
-			<p>During the hiatus there'll a special schedule repeating each week: 24 shows on weekdays and another 24 on the weekend. They're the best on the site, picked from as many sources as possible. I hope you'll enjoy them as much as I do. I'll still check in to make sure the site hasn't broken, but I won't be making any kinda regular updates any more.</p>
+			<p>During the hiatus there'll a special schedule repeating each week: 24 shows on weekdays and another 24 on the weekend. They're the best on the site, picked from as many series as possible. I hope you'll enjoy them as much as I do. I'll still check in to make sure the site hasn't broken, but I won't be making any kinda regular updates any more.</p>
 			<p>Thank you to everyone who's checked out the site, listened in the Archive, and tuned into the radio so far! I've learnt a hell of a lot while making Weird Waves, and I'm really satisfied with how it turned out.</p>
 		]]></content>
 		<published>2023-06-07T00:00:00+01:00</published>
@@ -257,7 +268,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Goodbye chatbox, hello random shows]]></title>
 		<content type="html"><![CDATA[
-			<p>First, I didn't like how the look of the Cbox chatbox clashed with the look of the site, or how it messed with looping around the page using keyboard navigation, so I removed it (it didn't get any traffic in the time it was up, anyway).</p>
+			<p>First, I didn't like how the look of the <abbr>Cbox</abbr> chatbox clashed with the look of the site, or how it messed with looping around the page using keyboard navigation, so I removed it (it didn't get any traffic in the time it was up, anyway).</p>
 			<p>Second, I added a &ldquo;Random Show&rdquo; link that takes you directly to a random show's audio file.</p>
 		]]></content>
 		<published>2022-11-30T00:00:00+00:00</published>
@@ -269,7 +280,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Chatbox!]]></title>
 		<content type="html"><![CDATA[
-			<p>Added a CBox chatbox to the site (click the button in the bottom-right corner to open it up) and cut a few unnecessary (e.g. redundant, trivial) content notes.</p>
+			<p>Added a <abbr>CBox</abbr> chatbox to the site (click the button in the bottom-right corner to open it up) and cut a few unnecessary (e.g. redundant, trivial) content notes.</p>
 		]]></content>
 		<published>2022-11-14T00:00:01+00:00</published>
 		<updated>2022-11-14T00:00:01+00:00</updated>
@@ -278,7 +289,7 @@
 	<entry>
 		<id>https://weirdwaves.net/?17</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
-		<title type="html"><![CDATA[Font picker and personal primtetime]]></title>
+		<title type="html"><![CDATA[Font picker and personal primetime]]></title>
 		<content type="html"><![CDATA[
 			<p>Added a font picker! The default's the serif font <cite>Bitter</cite>; the new sans font's <cite>Fira Sans</cite>.</p>
 			<p>I've also added a &ldquo;personal primetime&rdquo; feature that lets you highlight a range of shows on the Forecast. To make adding this feature easier, I also forced the Forecast to update after every show. This also fixes an issue where the mini-Forecast on the landing page would only show the first 6 shows of the week if the Forecast was in static (non-updating) mode.</p>
@@ -349,7 +360,7 @@
 				<li>a <strong>theme picker</strong></li>
 				<li>a &ldquo;<strong>personal primetime</strong>&rdquo; setting taht lets you mark ranges of shows on the Forecast</li>
 				<li>a <strong>font size</strong> setting</li>
-				<li>custom <strong>web components/elements</strong> like collapsible list items for the <abbr title="Frequently-Asked Questions">FAQ</abbr> and toggle switches for the Settings section</li>
+				<li>custom <strong>web components/elements</strong> like collapsible list items for the <abbr>FAQ</abbr> and toggle switches for the Settings section</li>
 				<li>a proper <strong>News Archive</strong> page</li> 
 			</ul>
 		]]></content>
@@ -375,7 +386,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[RSS feed and some new on-site features]]></title>
 		<content type="html"><![CDATA[
-			<p>Here's the first <abbr title="Really Simple Syndication / RDF Site Summary">RSS</abbr> post for Weird Waves! I've also made some changes on the site itself: added a simple loading spinner for when the station's getting the schedule and tuning in; fixed a bug with the settings toggles; and moved all the old news to a news archive page.</p>
+			<p>Here's the first <abbr>RSS</abbr> post for Weird Waves! I've also made some changes on the site itself: added a simple loading spinner for when the station's getting the schedule and tuning in; fixed a bug with the settings toggles; and moved all the old news to a news archive page.</p>
 		]]></content>
 		<published>2022-10-02T00:00:00+01:00</published>
 		<updated>2022-10-02T00:00:00+01:00</updated>
@@ -387,7 +398,7 @@
 		<title type="html"><![CDATA[NeoCities move]]></title>
 		<content type="html"><![CDATA[
 			<p>The move to NeoCities hosting is in progress!</p>
-			<p><strong>Update:</strong> I'm having some <abbr title="HTTP Strict Transport Security">HSTS</abbr> trouble, but I think that's just on my end and should work itself out once my computer stops caching the address of the old hosting.</p>
+			<p><strong>Update:</strong> I'm having some <abbr>HTTP</abbr> Strict Transport Security (<abbr>HSTS</abbr>) trouble, but I think that's just on my end and should work itself out once my computer stops caching the address of the old hosting.</p>
 			<p><strong>Update:</strong> This morning the <abbr>HSTS</abbr> error went away, then came back an hour later. No matter what I try, <em>I</em> can't get through&mdash;but the issue doesn't affect anyone else. Guess I'm just gonna have to wait the full 24&ndash;48 hours to see if it fixes itself.</p>
 		]]></content>
 		<published>2022-09-30T00:00:00+01:00</published>
@@ -426,13 +437,13 @@
 			<p>I've cut the Archive's content per-show down to just the bare minimum (blurbs and content notes), which saves a bunch of data and overhead.</p>
 			<p><strong>Update:</strong> Intermission audio is gone. I figured I probably wouldn't change it using the option to do so in the schedule files and thought it'd be simpler to just get rid of it.</p>
 			<p><strong>Update:</strong> Added a new setting that toggles whether all content notes are automatically open or closed, styled nav links so the current section is outlined differently, and added a widescreen mode where the radio becomes a sidebar.</p>
-			<p><strong>Update:</strong> Added a new setting that lets you automatically mute audio when you tune in, so you get to see what's on before it plays, and I'm halfway there on the <abbr title="Really Simple Syndication / RDF Site Summary">RSS</abbr> feed (just gotta start adding items).</p>
+			<p><strong>Update:</strong> Added a new setting that lets you automatically mute audio when you tune in, so you get to see what's on before it plays, and I'm halfway there on the <abbr>RSS</abbr> feed (just gotta start adding items).</p>
 			<p>Here's a few things I want done before October:</p>
 			<ul>
 				<li>finish all nav icons</li>
 				<li>do the groundwork I need for the Call In and Support sections</li>
 				<li>make a proper favicon</li>
-				<li>tweak News and <abbr title="Frequently-Asked Questions">FAQ</abbr> layouts</li>
+				<li>tweak News and <abbr>FAQ</abbr> layouts</li>
 				<li>get the <abbr>RSS</abbr> feed going</li>
 				<li>add a loading spinner</li>
 			</ul>
@@ -457,7 +468,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Re-arranging the page]]></title>
 		<content type="html"><![CDATA[
-			<p>First, the content of the Stats section is now at the end of the About section. Second, the News is now on the top of the nav bar with the Schedule and Forecast (other sections that change regularly) and the Archive is in the middle with the other more-or-less static content (About, <abbr title="Frequently-Asked Questions">FAQ</abbr>, Settings). Links elsewhere (Contact, Support, and a catch-all Links) are on the bottom.</p>
+			<p>First, the content of the Stats section is now at the end of the About section. Second, the News is now on the top of the nav bar with the Schedule and Forecast (other sections that change regularly) and the Archive is in the middle with the other more-or-less static content (About, <abbr>FAQ</abbr>, Settings). Links elsewhere (Contact, Support, and a catch-all Links) are on the bottom.</p>
 		]]></content>
 		<published>2022-08-26T00:00:00+01:00</published>
 		<updated>2022-08-26T00:00:00+01:00</updated>
@@ -468,8 +479,8 @@
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="html"><![CDATA[Safari audio bugfix]]></title>
 		<content type="html"><![CDATA[
-			<p>Turns out Safari (at least on <abbr title="Mac Operating System">MacOS</abbr>) had an issue with getting audio file times, and, with the way the script was set up, the browser couldn't load a show from anywhere but the beginning (even if you tuned in halfway through). This is fixed now, at the cost of making all browsers take maybe up to a second to tune in.</p>
-			<p>I also did some broad layout. The Help section's been rolled into the <abbr title="Frequently-Asked Questions">FAQ</abbr> and I've added (still-empty) sections for contact links (Call In), tipping (Support), and all other links (Links), plus a basic Stats section that pulls data from the Archive to show things like how many sources and shows there are (maybe more complex stuff later).</p>
+			<p>Turns out Safari (at least on <abbr>MacOS</abbr>) had an issue with getting audio file times, and, with the way the script was set up, the browser couldn't load a show from anywhere but the beginning (even if you tuned in halfway through). This is fixed now, at the cost of making all browsers take maybe up to a second to tune in.</p>
+			<p>I also did some broad layout. The Help section's been rolled into the <abbr>FAQ</abbr> and I've added (still-empty) sections for contact links (Call In), tipping (Support), and all other links (Links), plus a basic Stats section that pulls data from the Archive to show things like how many series and shows there are (maybe more complex stuff later).</p>
 		]]></content>
 		<published>2022-08-10T00:00:00+01:00</published>
 		<updated>2022-08-10T00:00:00+01:00</updated>
@@ -478,7 +489,7 @@
 	<entry>
 		<id>https://weirdwaves.net/?2</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
-		<title type="html"><![CDATA[Blog Post: Weird Waves <abbr title="Work in Progress">WIP</abbr> 2: New Layout, New Shows]]></title>
+		<title type="html"><![CDATA[Blog Post: Weird Waves <abbr aria-label="Work in Progress">WIP</abbr> 2: New Layout, New Shows]]></title>
 		<content type="html"><![CDATA[
 			<p>Here's another little update on Weird Waves, since I did a little bit more work on it since the <a href="#post-2022-07-22T00-00-00-01-00">last post</a>!</p>
 			<p>The first thing is, it's got the barest skeleton of a layout now: sections in different tabs (but on the same page so the audio keeps running). Here are the different sections so far:</p>
@@ -493,13 +504,13 @@
 					<p><strong>Forecast</strong>, which has the big tables for exact showtimes every day, which <em>should</em> track your local timezone (but no matter where you are, the station should play the same show at a single point in time).</p>
 				</li>
 				<li>
-					<p><strong>Archive</strong>, which lists all the shows by series/source. Right now there are 2 sources, both radio play anthologies from the middle of last century: <cite>Quiet, Please</cite> and <cite>Suspense</cite>. There's a <code>position: sticky</code> sidebar on the left with the series info, then a list on the right side that has all the show details per series.</p>
+					<p><strong>Archive</strong>, which lists all the shows by series. Right now there are 2 series, both radio play anthologies from the middle of last century: <cite>Quiet, Please</cite> and <cite>Suspense</cite>. There's a <code>position: sticky</code> sidebar on the left with the series info, then a list on the right side that has all the show details per series.</p>
 				</li>
 				<li>
 					<p><strong>News</strong> (also the default section), which has some <i lang="la">lorem ipsum</i> test posts (probably way longer than most news updates I'd add).</p>
 				</li>
 				<li>
-					<p><strong><abbr title="Frequently Asked Questions">FAQ</abbr></strong>, which has some <i lang="la">lorem ipsum</i> test <abbr title="questions and answers">Q&A</abbr>s. Further along I'm probably gonna just show the site to a bunch of people and ask for any questions they have and see whether anything shakes out as <em>actually</em> frequently asked questions, but for now this is gonna be blank.</p>
+					<p><strong><abbr>FAQ</abbr></strong>, which has some <i lang="la">lorem ipsum</i> test <abbr>Q&A</abbr>s. Further along I'm probably gonna just show the site to a bunch of people and ask for any questions they have and see whether anything shakes out as <em>actually</em> frequently asked questions, but for now this is gonna be blank.</p>
 				</li>
 				<li>
 					<p><strong>Help</strong>, which has a few questions and answers for tech issues (which basically boil down to &ldquo;try refreshing the page&rdquo;).</p>
@@ -518,7 +529,7 @@
 	<entry>
 		<id>https://weirdwaves.net/?1</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
-		<title type="html"><![CDATA[Blog Post: Weird Waves <abbr title="Work in Progress">WIP</abbr>]]></title>
+		<title type="html"><![CDATA[Blog Post: Weird Waves <abbr aria-label="Work in Progress">WIP</abbr>]]></title>
 		<content type="html"><![CDATA[
 			<p>Here's a little javascript web app I'm working on: <a href="https://weirdwaves.net">Weird Waves</a>, a fake online radio station for horror audiobooks and radio plays! I dunno how far off the final app is. This post's just an explanation of how it works.</p>
 			<p><strong>The idea:</strong> What's a <q>fake online radio station</q>? I mean a simple web app that plays audio shows every hour on the hour&mdash;so simple it can run on static hosting (no need for server-side scripts or a database). You go to the site, you click a button labelled &ldquo;tune in&rdquo;, and it starts playing the current show in the schedule. It starts from the point in the show when you arrive, not the beginning of the show, and it plays the same show no matter what timezone you're in. For instance:</p>
@@ -531,7 +542,7 @@
 			<ul>
 				<li>episodes of old horror radio anthologies like <cite><a href="https://www.quietplease.org" rel="external">Quiet, Please</a></cite>, if they're public domain (or if they might as well be)</li>
 				<li>other radio series dedicated to the public domain, like <cite><a href="https://www.radioechoes.com/?page=series&genre=OTR-SciFi&series=Seeing%20Ear%20Theater" rel="external">Seeing Ear Theatre</a></cite> or <cite><a href="https://archive.org/details/Mindwebs_230" rel="external">Mind Webs</a></cite> (only some/a few of these episodes fit into &ldquo;horror&rdquo;, but there's a bunch of sci-fi ones too)</li>
-				<li>serial or anthology horror podcast episodes released under <abbr title="Creative commons">CC</abbr> licenses, like <cite><a href="https://rustyquill.com/show/the-magnus-archives/" rel="external">The Magnus Archives</a></cite>, <cite><a href="https://www.thesiltverses.com" rel="external">The Silt Verses</a></cite>, or <a href="https://pseudopod.org" rel="external">Pseudopod</a></li>
+				<li>serial or anthology horror podcast episodes released under Creative Commons (<abbr>CC</abbr>) licenses, like <cite><a href="https://rustyquill.com/show/the-magnus-archives/" rel="external">The Magnus Archives</a></cite>, <cite><a href="https://www.thesiltverses.com" rel="external">The Silt Verses</a></cite>, or <a href="https://pseudopod.org" rel="external">Pseudopod</a></li>
 				<li>horror audiobooks off places like <a href="https://librivox.org/" rel="external">LibriVox</a> (mixed quality, but some of them are decent), which have readings of older (mostly 19th/early 20th-century) novels and short stories</li>
 				<li>hopefully, book readings from people's youtube channels, if they're okay with it (again, mixed quality, but there's e.g. some real good dry readings of Thomas Ligotti's short stories)</li>
 			</ul>
@@ -619,7 +630,7 @@
 			<ul>
 				<li><strong>Forecast:</strong> lists of all the shows in the current schedule, split by whether they're in the weekday or weekend block, plus tables of the upcoming shows hour by hour.</li>
 				<li><strong>Archive:</strong> lists of all the metadata for every show and series that's been broadcast (or has been added on the current schedule): descriptions, sources, content notes, license info, that kinda stuff. The app pulls this to build the info for the currently-playing show and the forecast lists.</li>
-				<li><strong>About</strong>, <strong>News</strong>, and <strong><abbr title="Frequently-Asked Questions">FAQ</abbr></strong>: pretty much what they sound like.</li>
+				<li><strong>About</strong>, <strong>News</strong>, and <strong><abbr>FAQ</abbr></strong>: pretty much what they sound like.</li>
 				<li>a few other minor things</li>
 			</ul>
 			<p><strong>What comes next:</strong> The player's pretty much done, I think. It's ~11 KB of javascript, including explanatory comments, and I think all the moving parts are working. There's one thing I need to test with the forecast tables (at the end of each day in your timezone, the now-empty table should be removed from the page).</p>
