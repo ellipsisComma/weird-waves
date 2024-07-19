@@ -10,25 +10,14 @@ console.info(`initialised font: ${styles.font}`);
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
-	if (window.location.hash.length === 0) {
-		document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
-		document.title = page.title.dataset.original;
-		return;
-	}
+	document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
+	const section = document.querySelector(window.location.hash.length > 0 ? window.location.hash : null)?.closest(`main > *`); 
 
-	// find section that hash target is or is inside
-	const section = document.querySelector(window.location.hash)?.closest(`main > *`);
-
-	// if the targeted section exists, switch aria-current to target's nav-link and update title accordingly, else return to default page title
+	// if targeted section exists, switch aria-current to its nav-link and update document title
 	if (section) {
-		const navLink = document.querySelector(`nav [href="#${section.id}"]`);
-		document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
-		document.title = `${navLink.dataset.title ?? navLink.innerText} / ${page.title.dataset.original}`;
+		const navLink = document.querySelector(`nav a[href="#${section.id}"]`);
+		document.title = `${navLink.innerText} / ${page.title.dataset.original}`;
 		navLink.setAttribute(`aria-current`, `page`);
-	} else {
-		window.location.hash = ``;
-		navigateToSection();
-		console.error(`attempted to navigate to non-existent page section: ${window.location.hash}`);
 	}
 }
 

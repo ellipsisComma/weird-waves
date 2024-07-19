@@ -542,11 +542,10 @@ function buildArchive() {
 	});
 
 	// build out stats list
-	const stats = {
+	for (const [name, value] of Object.entries({
 		"series": archive.length,
 		"shows": archive.reduce((a, series) => a + series.shows.length, 0),
-	};
-	for (const [name, value] of Object.entries(stats)) document.getElementById(`stats-${name}`).textContent = value;
+	})) document.getElementById(`stats-${name}`).textContent = value;
 
 	// clear archive object
 	archive = null;
