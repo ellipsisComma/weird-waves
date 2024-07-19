@@ -75,7 +75,9 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		<xsl:apply-templates select="atom:updated" mode="timestamp-to-date" />
 	</a>
 </dt>
-<dd><xsl:value-of select="atom:title" /></dd>
+<dd class="contains-html">
+	<xsl:value-of select="atom:title" />
+</dd>
 </xsl:template>
 
 
@@ -92,12 +94,12 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-17" />
+	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-19" />
 
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2026%2026%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%3E%3Canimate%20attributeName%3D%22opacity%22%20values%3D%221%3B%200%3B%200%3B%201%22%20keyTimes%3D%220%3B%200%3B%201%3B%201%22%20dur%3D%221s%22%20repeatCount%3D%221%22%2F%3E%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2228%22%20height%3D%2228%22%20fill%3D%22%23000627%22%2F%3E%3Cpath%20stroke%3D%22%23ff6767%22%20d%3D%22M7%2011a3%203%200%200%201%203%203a3%203%200%200%201%206%200a3%203%200%200%201%203-3%22%2F%3E%3Cpath%20stroke%3D%22%23b9ab00%22%20d%3D%22M7%208a6%206%200%200%201%2012%200v4a6%206%200%200%201-12%200zm12%203h3v1a9%209%200%200%201-18%200v-1h3m6%2010v3m-4%200h8%22%2F%3E%3C%2Fsvg%3E" sizes="any" />
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 
-	<script src="./utilities.js?v=2024-07-17"></script>
+	<script src="./utilities.js?v=2024-07-19"></script>
 	<script src="./initialisation.js?v=2024-07-17"></script>
 </head>
 
@@ -158,11 +160,12 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 
 
 <aside id="sidebar">
-	<div id="feed-info">
-		<p>This is a preview of the Weird Waves news feed. Read in your browser or subscribe by copying its <abbr title="Universal Resource Locator">URL</abbr> into your feed reader:</p>
+	<section id="feed-info">
+		<h2 class="visually-hidden">Using this Feed</h2>
+		<p>This is a preview of the Weird Waves news feed. Read in your browser or subscribe by copying its <abbr>URL</abbr> into your feed reader:</p>
 		<p id="feed-url"><code>https://weirdwaves.net/feed.xml</code></p>
 		<p>New to feeds? They let you follow sites! Read <a href="https://aboutfeeds.com/" rel="external">About Feeds</a> for more info.</p>
-	</div>
+	</section>
 </aside><!--#sidebar end-->
 
 
@@ -214,7 +217,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 
 
 <main>
-<div id="all-news">
+<section id="all-news">
 	<h2>All News</h2>
 	<p>All the news, all in one place.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
@@ -223,14 +226,14 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			<xsl:with-param name="all-news" select="'true'" />
 		</xsl:apply-templates>
 	</ol>
-</div><!--#all-new end-->
+</section><!--#all-new end-->
 
 
 
-<div id="about">
+<section id="about">
 	<h2>About</h2>
 	<p>The Weird Waves Feed provides the station's old and current news! You can find all the posts in <a href="#all-news">All News</a>, or read by category in <a href="#bulletins">Bulletins</a>, <a href="#features">Features</a>, and <a href="#history">History</a>.</p>
-	<p>This latest version of the news is an <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" rel="external">Atom</a> feed that's converted into a web page in your browser using the niche, obscure templating language <a href="https://www.w3schools.com/xml/xml_xslt.asp" rel="external"><abbr title="eXtensible Stylesheet Language Transformations">XSLT</abbr></a>.</p>
+	<p>This latest version of the news is an <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" rel="external">Atom</a> feed that's converted into a web page in your browser using the niche, obscure templating language <a href="https://www.w3schools.com/xml/xml_xslt.asp" rel="external"><abbr>XSLT</abbr> (eXtensible Stylesheet Language Transformations)</a>.</p>
 	<p>The Feed contains:</p>
 	<dl id="stats-list">
 		<div>
@@ -251,44 +254,44 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		</div>
 	</dl>
 	<noscript>Sorry, this feed requires JavaScript to display properly! Without it, post titles and content will appear as raw markup, among other minor changes.</noscript>
-</div><!--#about end-->
+</section><!--#about end-->
 
 
 
-<div id="bulletins">
+<section id="bulletins">
 	<h2>Bulletins</h2>
 	<p>Milestones, show announcements, and major decisions in the site's development.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
 		<xsl:apply-templates select="atom:entry[atom:category/@term = 'bulletins']" mode="list-posts" />
 	</ol>
-</div><!--#bulletins end-->
+</section><!--#bulletins end-->
 
 
 
-<div id="features">
+<section id="features">
 	<h2>Features</h2>
 	<p>All the info on new features, bug fixes, and other tweaks to the site.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
 		<xsl:apply-templates select="atom:entry[atom:category/@term = 'features']" mode="list-posts" />
 	</ol>
-</div><!--#features end-->
+</section><!--#features end-->
 
 
 
-<div id="history">
+<section id="history">
 	<h2>History</h2>
 	<p>Blog posts (from a now-defunct blog) published before Weird Waves even had a News section or Feed.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<ol class="post-list" reversed="">
 		<xsl:apply-templates select="atom:entry[atom:category/@term = 'history']" mode="list-posts" />
 	</ol>
-</div><!--#history end-->
+</section><!--#history end-->
 
 
 
-<div id="welcome">
+<section id="welcome">
 	<h2>Welcome to the News Archive!</h2>
 	<p>This is a collection of announcements, features and bug-fixes, and even copies of blog posts from the earliest stages of Weird Waves.</p>
 	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
@@ -296,7 +299,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<dl id="latest-updates">
 		<xsl:apply-templates select="atom:entry[position() &lt;= $latest-updates-count]" mode="list-latest-updates" />
 	</dl>
-</div><!--#welcome end-->
+</section><!--#welcome end-->
 </main>
 </div><!--#container end-->
 

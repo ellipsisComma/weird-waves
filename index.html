@@ -11,7 +11,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-17" media="all">
+	<link rel="stylesheet" type="text/css" href="./main.css?v=2024-07-19" media="all">
 
 	<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2026%2026%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%3E%3Canimate%20attributeName%3D%22opacity%22%20values%3D%221%3B%200%3B%200%3B%201%22%20keyTimes%3D%220%3B%200%3B%201%3B%201%22%20dur%3D%221s%22%20repeatCount%3D%221%22%2F%3E%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2228%22%20height%3D%2228%22%20fill%3D%22%23000627%22%2F%3E%3Cpath%20stroke%3D%22%23ff6767%22%20d%3D%22M7%2011a3%203%200%200%201%203%203a3%203%200%200%201%206%200a3%203%200%200%201%203-3%22%2F%3E%3Cpath%20stroke%3D%22%23b9ab00%22%20d%3D%22M7%208a6%206%200%200%201%2012%200v4a6%206%200%200%201-12%200zm12%203h3v1a9%209%200%200%201-18%200v-1h3m6%2010v3m-4%200h8%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml" sizes="any">
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48">
@@ -21,7 +21,7 @@
 
 	<link rel="alternate" type="application/atom+xml" href="https://weirdwaves.net/feed.xml" title="News feed for Weird Waves">
 
-	<script src="./utilities.js?v=2024-07-17"></script>
+	<script src="./utilities.js?v=2024-07-19"></script>
 	<script src="./initialisation.js?v=2024-07-17"></script>
 </head>
 
@@ -140,6 +140,53 @@
 
 
 
+<!--html templates begin-->
+<!--booth-->
+<template id="playlist-item-control-template">
+	<li>
+		<button class="push-button" type="button" data-action="move-up" data-target="" aria-label="Move show up">
+			<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
+		</button>
+	</li>
+</template>
+<template id="playlist-item-template">
+	<li data-show-id="">
+		<ul class="show-position-controls icon-button-set"></ul>
+	</li>
+</template>
+<!--archive-->
+<template id="archive-series-template">
+	<li id="" data-series-id="">
+		<header>
+			<h3 class="series-heading"></h3>
+			<div class="series-content">
+				<p class="series-blurb"></p>
+				<p class="series-source"></p>
+			</div>
+			<button class="push-button" type="button" data-target="" data-action="add-series">Add series to playlist</button>
+		</header>
+		<ol class="show-list"></ol>
+	</li>
+</template>
+<template id="archive-show-template">
+	<li id="" data-show-id="" data-banger="">
+		<article class="show-info">
+			<h4 class="show-heading"></h4>
+			<div class="show-content">
+				<p class="show-blurb"></p>
+				<details class="content-notes">
+					<summary>Content notes</summary>
+					<span></span>
+				</details>
+			</div>
+		</article>
+		<button class="push-button" type="button" data-target="" data-action="add-show" aria-pressed="false">Add to playlist</button>
+	</li>
+</template>
+<!--html templates end-->
+
+
+
 <div id="container">
 <header>
 	<h1>Weird Waves</h1>
@@ -151,8 +198,8 @@
 	<h2 id="radio" class="visually-hidden">Radio</h2>
 	<noscript>Sorry, this site requires JavaScript! Some content will be hidden, and the audio app won't work.</noscript>
 	<div id="radio-app">
-		<h3 class="visually-hidden">Radio controls</h3>
-		<div id="radio-controls" class="icon-button-set" hidden>
+		<section id="radio-controls" class="icon-button-set" hidden>
+			<h3 class="visually-hidden">Radio controls</h3>
 			<div id="seek-controls">
 				<input id="seek-bar" type="range" value="0" data-seeking="false" aria-label="Go to time in show">
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
@@ -171,11 +218,13 @@
 				</button>
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
 			</div><!--#audio-controls end-->
-		</div><!--#radio-controls end-->
+		</section><!--#radio-controls end-->
 
-		<h3 class="visually-hidden">Loaded show</h3>
-		<div id="loaded-show" aria-live="assertive" data-id=""></div>
-		<audio id="show-audio"></audio>
+		<section>
+			<h3 class="visually-hidden">Loaded show</h3>
+			<article id="loaded-show" aria-live="assertive" data-show-id=""></article>
+			<audio id="show-audio"></audio>
+		</section>
 	</div><!--#radio-app end-->
 </aside><!--#sidebar end-->
 
@@ -250,7 +299,7 @@
 
 
 <main>
-<div id="booth">
+<section id="booth">
 	<h2>Booth</h2>
 	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
 
@@ -275,16 +324,19 @@
 	<h3>Import & export</h3>
 	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
 	<textarea id="import-export-data" aria-live="assertive" aria-label="Import/export playlist data"></textarea>
-	<div id="import-error-message" aria-live="assertive" hidden></div>
+	<div id="import-error-message" aria-live="assertive" hidden>
+		<p>Invalid show ID(s):</p>
+		<ul id="import-error-list"></ul>
+	</div>
 	<ul class="flex-list">
 		<li><button id="export-button" class="push-button" type="button">Export</button></li>
 		<li><button id="import-button" class="push-button" type="button">Import</button></li>
 	</ul>
-</div><!--#booth end-->
+</section><!--#booth end-->
 
 
 
-<div id="archive">
+<section id="archive">
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
 	<ul class="flex-list">
@@ -292,36 +344,36 @@
 	</ul>
 	<ol id="archive-series-links" class="flex-list"></ol>
 	<ol id="series-list"></ol>
-</div><!--#archive end-->
+</section><!--#archive end-->
 
 
 
-<div id="about">
+<section id="about">
 	<h2>About</h2>
 	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your playlist in the <a href="#booth">Booth</a>, and listen to them in the <a href="#radio">Radio</a>. Have fun!</p>
 	<p>The Archive contains:</p>
 	<dl id="stats-list">
 		<div>
-			<dt>sources</dt>
-			<dd id="stats-sources"></dd>
+			<dt>series</dt>
+			<dd id="stats-series"></dd>
 		</div>
 		<div>
 			<dt>shows</dt>
 			<dd id="stats-shows"></dd>
-		</div>
+		</div>	
 	</dl><!--#stats-list end-->
 
 
 
 	<h3>Content notes</h3>
-	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older sources.</p>
-</div><!--#about end-->
+	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older series.</p>
+</section><!--#about end-->
 
 
 
-<div id="streaming">
+<section id="streaming">
 	<h2>Streaming</h2>
-	<p>This section covers how to use Weird Waves as a livestream widget via broadcast software like <a href="https://obsproject.com/" rel="external"><abbr title="Open Broadcaster Software">OBS</abbr></a>. Most of this only applies if you want to show Weird Waves visually on-stream. Either way, check the main <a href="#settings">Settings</a> too.</p>
+	<p>This section covers how to use Weird Waves as a livestream widget via broadcast software like <a href="https://obsproject.com/" rel="external">Open Broadcaster Software (<abbr>OBS</abbr>)</a>. Most of this only applies if you want to show Weird Waves visually on-stream. Either way, check the main <a href="#settings">Settings</a> too.</p>
 	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<p><strong>Note:</strong> The Weird Waves stream widget is slightly outdated compared to the web version, as <abbr>OBS</abbr> uses outdated software to run browser sources. However, it looks and works roughly the same.</p>
 
@@ -329,7 +381,7 @@
 	<ol>
 		<li>Create a browser source.</li>
 		<li>Set its <abbr>URL</abbr> to <code>https://weirdwaves.net/stream/widget.html</code>.</li>
-		<li>Delete its default custom <abbr title="Cascading Style Sheets">CSS</abbr>.</li>
+		<li>Delete its default custom <abbr>CSS</abbr>.</li>
 		<li>Resize and crop it.</li>
 		<li>Right-click it and select &ldquo;Interact&rdquo; to use it just like you are now.</li>
 	</ol>
@@ -344,11 +396,11 @@
 .font-serif {
 	--font-stack: [font];
 }</code>
-	<p>Replace <code>[colour]</code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr title="Red Green Blue">RGB</abbr> values, <abbr title="HyperText Markup Language">HTML</abbr> colour names, etc. Replace <code>[font]</code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
+	<p>Replace <code>[colour]</code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr>RGB</abbr> values, <abbr>HTML</abbr> colour names, etc. Replace <code>[font]</code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
 
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
-	<p>If you're still concerned, switch on the following toggle to exclude certain series/sources when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr>iana, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
+	<p>If you're still concerned, switch on the following toggle to exclude certain series when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr> selection, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<button id="copyright-safety-toggle" class="toggle" type="button">
 		<svg class="svg-icon" viewBox="0 0 48 24">
 			<use href="#svg-toggle-track" />
@@ -361,11 +413,11 @@
 		<span>exclude copyright-unsafe material</span>
 	</button>
 	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
-</div><!--#streaming end-->
+</section><!--#streaming end-->
 
 
 
-<div id="settings">
+<section id="settings">
 	<h2>Settings</h2>
 	<p>Control how Weird Waves looks and functions here.</p>
 	<ul>
@@ -481,22 +533,22 @@
 			</ul><!--#font-buttons end-->
 		</li>
 	</ul>
-</div><!--#settings end-->
+</section><!--#settings end-->
 
 
 
-<div id="call-in">
+<section id="call-in">
 	<h2>Call In</h2>
 	<p>Got questions, feedback, requests?</p>
 	<ul class="flex-list">
 		<li><a href="https://neocities.org/site/weirdwaves" rel="external me">Neocities</a></li>
 		<li><a href="mailto:maintenance@weirdwaves.net" rel="reply-to me">maintenance@weirdwaves.net</a></li>
 	</ul>
-</div><!--#call-in end-->
+</section><!--#call-in end-->
 
 
 
-<div id="links">
+<section id="links">
 	<h2>Links</h2>
 	<p>If you like Weird Waves, you might like some of these places too:</p>
 
@@ -504,27 +556,27 @@
 	<ul class="flex-list">
 		<li><a href="https://www.djfullmoon.com/" rel="external">&#127765;</a></li>
 		<li><a href="https://qc4.fiatlux.tk:8020/soyouz.aac" rel="external">Radio Soyouz</a> (<a href="https://qc4.fiatlux.tk:8020/soyouz.hq.aac" rel="external">128kbps</a>)</li>
-		<li><a href="https://wmbu.neocities.org/" rel="external">Wave <abbr title="Mary Baldwin University">MBU</abbr></a></li>
+		<li><a href="https://wmbu.neocities.org/" rel="external">Wave <abbr>MBU</abbr></a></li>
 		<li><a href="https://kingposs.com/radio.html" rel="external"><abbr>KP</abbr> Radio</a></li>
 		<li><a href="https://www.polushon.com/" rel="external">Polushon</a></li>
 		<li><a href="https://repetitivestrain.neocities.org/" rel="external">Repetitive Strain</a></li>
 		<li><a href="https://www.radioisaforeigncountry.org/" rel="external">Radio is a Foreign Country</a></li>
 		<li><a href="https://nolife-radio.com/" rel="external">NoLife-Radio</a></li>
-		<li><a href="https://bungles.net/vrchat_pirate_radio" rel="external"><abbr title="Virtual Reality">VR</abbr>Chat Pirate Radio</a></li>
+		<li><a href="https://bungles.net/vrchat_pirate_radio" rel="external"><abbr>VR</abbr>Chat Pirate Radio</a></li>
 		<li><a href="https://plaza.one/" rel="external">Nightwave Plaza</a></li>
 		<li><a href="https://radio.dangeru.us/" rel="external">radi/u/</a></li>
 		<li><a href="https://bot-radio.com/" rel="external"><span class="uppercase">Bot</span> Radio</a></li>
 		<li><a href="https://radiomega.neocities.org/" rel="external">bringthenoise</a></li>
 		<li><a class="uppercase" href="https://punc.neocities.org/" rel="external">Punc</a></li>
 		<li><a href="https://jungletrain.net/" rel="external">Jungle Train</a></li>
-		<li><a href="https://somafm.com/" rel="external">Soma<abbr title="Frequency Modulation">FM</abbr></a></li>
+		<li><a href="https://somafm.com/" rel="external">Soma<abbr>FM</abbr></a></li>
 		<li><a href="https://rekt.network/" rel="external">RektNetwork</a></li>
 		<li><a href="http://www.hbr1.com/" rel="external"><abbr>HBR1</abbr> - Music on Futurenet</a></li>
 		<li><a href="https://www.mailta.pe/" rel="external">MailTape</a></li>
 		<li><a href="https://www.sanctuaryradio.com/" rel="external">Sanctuary Radio</a></li>
 	</ul>
 
-	<h3>Old Time Radio info</h3>
+	<h3>Old Time Radio (<abbr>OTR</abbr>) info</h3>
 	<ul class="flex-list">
 		<li><a href="https://www.otrplotspot.com/" rel="external"><abbr>OTR</abbr> Plot Spot</a></li>
 		<li><a href="https://web.archive.org/web/20230210154338/http://www.digitaldeliftp.com/" rel="external">The Digital Deli</a> (via Wayback Machine)</li>
@@ -535,7 +587,7 @@
 
 	<h3>Toys, tools, apps, games</h3>
 	<ul class="flex-list">
-		<li><a href="https://aidn.jp/jingle" rel="external"><abbr title="Automatic Composition">AC</abbr>-chan</a> (<a href="https://aidn.jp/jingle/e/dq3nt3h2" rel="external">&</a>)</li>
+		<li><a href="https://aidn.jp/jingle" rel="external"><abbr aria-label="Automatic Composition">AC</abbr>-chan</a> (<a href="https://aidn.jp/jingle/e/dq3nt3h2" rel="external">&</a>)</li>
 		<li><a href="https://www.ynoproject.net/" rel="external"><cite>Yumi Nikki</cite> Online Project</a></li>
 		<li><a href="https://mynoise.net/NoiseMachines/dustyScratchedVinylNoiseGenerator.php" rel="external">Dust & Scratches</a></li>
 		<li><a href="https://mydora.restorativland.org/" rel="external">Mydora</a></li>
@@ -546,9 +598,9 @@
 	<ul class="flex-list">
 		<li><a href="https://twitch.tv/ecdycis" rel="external">Ecdysis</a></li>
 		<li><a href="https://twitch.tv/ecto" rel="external">ecto</a></li>
-		<li><a href="https://twitch.tv/grimmivt" rel="external">Grimmi<abbr title="VTuber">VT</abbr></a></li>
-		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth<abbr>VT</abbr></a></li>
-		<li><a href="https://twitch.tv/vesper_awol" rel="external">Vesper_<abbr title="Absent Without Leave">AWOL</abbr></a></li>
+		<li><a href="https://twitch.tv/grimmivt" rel="external">Grimmi</a></li>
+		<li><a href="https://twitch.tv/kliffothvt" rel="external">Kliffoth</a></li>
+		<li><a href="https://twitch.tv/vesper_awol" rel="external">Vesper_<abbr>AWOL</abbr></a></li>
 	</ul>
 
 	<h3>Webcomics</h3>
@@ -578,7 +630,7 @@
 		<li><a href="https://whitedesert.neocities.org/" rel="external">White Desert</a></li>
 		<li><a href="https://homevideohorrors.com/" rel="external">Home Video Horrors</a></li>
 		<li><a href="https://horrorgifs.neocities.org/" rel="external">The Horror Gif Necronomicon</a></li>
-		<li><a href="https://ngmi.neocities.org/" rel="external"><abbr title="Not Gonna Make It Work">NGMI</abbr>.work</a></li>
+		<li><a href="https://ngmi.neocities.org/" rel="external"><abbr aria-label="Not Gonna Make It">NGMI</abbr>.work</a></li>
 		<li><a href="https://dreamsdoors.neocities.org/" rel="external">Beyond Dream's Doors</a></li>
 		<li><a href="https://pseudopod.org/" rel="external">PseudoPod</a></li>
 		<li><a href="https://doumyakutosi.tumblr.com/" rel="external">guru</a></li>
@@ -592,11 +644,11 @@
 		<li><a href="https://cptnsnshn.neocities.org/" rel="external">Along the Shore</a></li>
 		<li><a href="https://didyouhearthat.neocities.org/" rel="external">grandma</a></li>
 	</ul>
-</div><!--#links end-->
+</section><!--#links end-->
 
 
 
-<div id="credits">
+<section id="credits">
 	<h2>Credits</h2>
 	<p>Want to know where things came from?</p>
 
@@ -604,26 +656,29 @@
 	<p>Check the <a href="#archive">Archive</a></p>
 
 	<h3>Fonts</h3>
-	<p>Serif font: <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> (<a href="./licenses/OFL-Bitter.txt"><abbr title="Open Font License">OFL</abbr></a>) by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a></p>
-	<p>Sans-serif font: <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> (<a href="./licenses/OFL-FiraSans.txt"><abbr>OFL</abbr></a>) by <a href="https://carrois.com/" rel="external">Carrois Type Design</a></p>
+	<p>Serif font: <cite><a href="https://www.solmatas.com/bitter" rel="external">Bitter</a></cite> (<a href="./licenses/OFL-Bitter.txt">Open Font License</a>) by <a href="https://www.solmatas.com/" rel="external">Sol Matas</a></p>
+	<p>Sans-serif font: <cite><a href="https://mozilla.github.io/Fira/" rel="external">Fira Sans</a></cite> (<a href="./licenses/OFL-FiraSans.txt">Open Font License</a>) by <a href="https://carrois.com/" rel="external">Carrois Type Design</a></p>
 
 	<h3>Hosting</h3>
 	<p><a href="https://neocities.org" rel="external">Neocities</a></p>
-</div><!--#credits end-->
+</section><!--#credits end-->
 
 
 
-<div id="welcome">
+<section id="welcome">
 	<h2>Welcome to Weird Waves!</h2>
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks.</p>
-	<div id="featured-show"></div>
-</div><!--#welcome end-->
+	<div id="featured-show" hidden>
+		<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+		<h3>Why not try&hellip;</h3>
+	</div>
+</section><!--#welcome end-->
 </main>
 </div><!--#container end-->
 
 
 
-<script src="./archive.js?v=2024-07-17"></script>
-<script src="./main.js?v=2024-07-17"></script>
+<script src="./archive.js?v=2024-07-18"></script>
+<script src="./main.js?v=2024-07-19b"></script>
 </body>
 </html>

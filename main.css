@@ -714,6 +714,9 @@ main {
 #import-error-message {
 	color: var(--hot-colour);
 }
+#import-error-list {
+	word-break: break-all;
+}
 
 
 
