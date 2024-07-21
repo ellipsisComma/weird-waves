@@ -38,7 +38,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	</xsl:if>
 	<header>
 		<h3>
-			<span class="contains-html">
+			<span class="may-contain-html">
 				<xsl:value-of select="atom:title" />
 			</span>
 			<xsl:text> </xsl:text>
@@ -58,7 +58,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			</xsl:if>
 		</div>
 	</header>
-	<div class="contains-html">
+	<div class="may-contain-html">
 		<xsl:value-of select="atom:content" />
 	</div>
 </article></li>
@@ -75,7 +75,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		<xsl:apply-templates select="atom:updated" mode="timestamp-to-date" />
 	</a>
 </dt>
-<dd class="contains-html">
+<dd class="may-contain-html">
 	<xsl:value-of select="atom:title" />
 </dd>
 </xsl:template>
@@ -349,7 +349,7 @@ setTimeout(() => switchTheme(document.documentElement.dataset.theme), 100);
 
 // re-parse elements from the parsed file that contain HTML (or SVG)
 const HTMLRegex = /&#?\w+;|<;[a-z]|\/>|<\/|<!--/;
-for (const content of document.querySelectorAll(`.contains-html`)) if (HTMLRegex.test(content.innerText)) content.setContent(content.innerText);
+for (const content of document.querySelectorAll(`.may-contain-html`)) if (HTMLRegex.test(content.innerText)) content.setContent(content.innerText);
 ]]>
 
 // update styles if styles change in another browsing context
