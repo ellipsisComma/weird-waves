@@ -327,7 +327,8 @@ a:active {
 	color: var(--hot-colour);
 }
 [rel~="external"]::after {
-	content: "\00a0\2206"; /* non-breaking space + increment */
+	content: "\00a0 \2206";
+	content: "\00a0 \2206" / " (external link)"; /* non-breaking space + increment */
 	display: inline-block;
 	font-variant-position: super;
 }
@@ -816,7 +817,7 @@ button[data-action="add-show"] {
 		margin-inline-start: 0;
 		font-weight: bold;
 		&::after {
-			content: "\00a0";
+			content: "\00a0"; /* non-breaking space */
 		}
 	}
 }
@@ -975,7 +976,8 @@ use[href="#svg-toggle-tick"] {
 	font-variant-numeric: tabular-nums;
 	& > time {
 		&::before {
-			content: "\2022\00a0";
+			content: "\2022 \00a0";
+			content: "\2022 \00a0" / ""; /* bullet point + non-breaking space */
 			color: var(--cold-colour);
 		}
 		&:last-of-type::before {
