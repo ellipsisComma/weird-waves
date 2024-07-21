@@ -33,9 +33,9 @@ Element.prototype.cloneChildren = function () {
 	return [...this.childNodes].map(node => node.cloneNode(true));
 };
 
-// set a string to be an element's innerHTML or textContent depending on whether it includes HTML entities, tags, and/or comments
+// set a string to be an element's innerHTML if it includes HTML entities or unescaped angle brackets, otherwise set it as textContent
 HTMLElement.prototype.setContent = function (text) {
-	const HTMLRegex = /&#?\w+;|<[a-z]|\/>|<\/|<!--/;
+	const HTMLRegex = /<|>|&#?\w+;/;
 	if (HTMLRegex.test(text)) this.innerHTML = text;
 	else this.textContent = text;
 };
