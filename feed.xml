@@ -6,12 +6,38 @@
 	<link rel="self" href="https://weirdwaves.net/feed.xml" />
 	<title>Weird Waves</title>
 	<subtitle type="html"><![CDATA[Audio horror broadcasting online.]]></subtitle>
-	<author><name><![CDATA[Weird Waves]]></name></author>
+	<author>
+		<name><![CDATA[Weird Waves]]></name>
+	</author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-07-19T00:00:00+01:00</updated>
+	<updated>2024-07-21T00:00:01+01:00</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?43</id>
+		<link rel="alternate" href="https://weirdwaves.net/" />
+		<title type="html"><![CDATA[New show: <cite>The Machine Stops</cite>]]></title>
+		<content type="html"><![CDATA[
+			<p>Added a new series: <cite>The Machine Stops</cite>, by E.&thinsp;M&thinsp;Forster, from LibriVox, in 3 parts.</p>
+		]]></content>
+		<published>2024-07-21T00:00:01+01:00</published>
+		<updated>2024-07-21T00:00:01+01:00</updated>
+		<category term="bulletins" />
+	</entry>
+	<entry>
+		<id>https://weirdwaves.net/?42</id>
+		<link rel="alternate" href="https://weirdwaves.net/" />
+		<title type="html"><![CDATA[One last bug-fix for the road]]></title>
+		<content type="html"><![CDATA[
+			<p>The last big problem with the site is the way it stores and recalls your data (settings and playlist). If you opened Weird Waves in two tabs and changed theme in one, the change wouldn't cross over to the other. In fact, the theme would only be saved when you closed or refreshed the page, so if you had two pages open with different themes, and refreshed each page, both pages would stay with their own themes.</p>
+			<p>The problems with settings were, at worst, a little annoying, but the playlist was another matter. Changes made to the playlist in one tab wouldn't echo into other tabs, and the version that won out was the playlist in the last Weird Waves tab you closed/refreshed. For the most part I've ignored this, because the site's really just one page (with the feed on the side), so there's minimal need to have multiple tabs open, but just to be on the safe side I've closed this functional hole. Now, if you change your settings or playlist in one tab, the changes will immediately echo into all other open tabs (and settings/playlist are saved when the changes happen, not when you close/refresh). The easiest way to check this is to open two tabs, change the theme in one, and see the tab icon change in both.</p>
+			<p>This change doesn't affect the stream widget, which shouldn't be visited in-browser and has to store its playlist separately anyway due to using an older format.</p>
+		]]></content>
+		<published>2024-07-21T00:00:00+01:00</published>
+		<updated>2024-07-21T00:00:00+01:00</updated>
+		<category term="features" />
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?41</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
@@ -98,7 +124,7 @@
 		<title type="html"><![CDATA[Stream widget]]></title>
 		<content type="html"><![CDATA[
 			<p>I've found that Weird Waves no longer works as a browser source in the Open Broadcaster Software (<abbr>OBS</abbr>)&mdash;the code's too modern for <abbr>OBS</abbr>' outdated mini-browser and <abbr>OBS</abbr> makes it a pain to see what's happening under a browser source's hood, so I've just added a note to the Streaming section explaining the situation (and that there's no real solution).</p>
-			<p><strong>Update:</strong> Okay, I couldn't leave the <abbr>OBS</abbr> situation like that, so I pulled up the code from the last time I know Weird Waves worked on stream and cut it down to a <a href="https://weirdwaves.net/stream/widget.html">stream widget</a>. It shares stored settings etc. with the web version, but has a separate playlist, due to its outdated code.</p>
+			<p><strong>Update:</strong> Okay, I couldn't leave the <abbr>OBS</abbr> situation like that, so I pulled up the code from the last time I know Weird Waves worked on stream and cut it down to a stream widget (see <a href="./index.html#streaming">Streaming</a> for more info). It shares stored settings etc. with the web version, but has a separate playlist, due to its outdated code.</p>
 		]]></content>
 		<published>2024-06-21T00:00:00+01:00</published>
 		<updated>2024-06-22T00:00:00+01:00</updated>

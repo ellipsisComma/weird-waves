@@ -93,6 +93,9 @@ const templateHTML = {
 for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelector(query);
 for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(`${id}-template`).content;
 
+// record whether playlist is currently undergoing large changes
+let largeModifyingPlaylist = false;
+
 
 
 /* ==============
@@ -151,7 +154,11 @@ function shufflePlaylist() {
 	let i = page.playlist.children.length;
 	if (i < 2) return;
 
+	largeModifyingPlaylist = true;
 	while (i > 0) page.playlist.append(page.playlist.children[Math.floor(Math.random() * i--)]);
+	largeModifyingPlaylist = false;
+	store(`playlist`, getShowIDs(page.playlist.children));
+
 	loadShow();
 }
 
@@ -199,15 +206,27 @@ function importPlaylist() {
 
 	if (invalidIDs.length === 0) {
 		if (importIDs.length > 0) {
+			largeModifyingPlaylist = true;
 			clearPlaylist();
 			importIDs.forEach(addShow);
+			largeModifyingPlaylist = false;
+			store(`playlist`, getShowIDs(page.playlist.children));
 		}
 	} else {
-		for (const ID of invalidIDs) page.importErrorList.appendChild(document.createElement(`li`)).textContent = ID;
+		invalidIDs.forEach(ID => page.importErrorList.appendChild(document.createElement(`li`)).textContent = ID);
 		page.importExport.value = importIDs.join(`\n`);
 		page.importErrorMessage.hidden = false;
 		page.importErrorMessage.scrollIntoView();
 	}
+}
+
+// load playlist from local storage
+function loadPlaylist() {
+	largeModifyingPlaylist = true;
+	page.playlist.replaceChildren();
+	retrieve(`playlist`, []).filter(getShowInArchive).forEach(addShow);
+	largeModifyingPlaylist = false;
+	loadShow();
 }
 
 /* --
@@ -256,7 +275,7 @@ function addShow(ID) {
 	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
 	expandShowInfo(newShow, showInArchive.closest(`#series-list > li`));
 
-	// update page
+	// update page and stored data
 	page.playlist.appendChild(templatedShow);
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
 	console.log(`added show: ${ID}`);
@@ -265,12 +284,18 @@ function addShow(ID) {
 
 // add entire archive to playlist
 function addArchive() {
+	largeModifyingPlaylist = true;
 	getShowIDs(page.seriesList.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
+	largeModifyingPlaylist = false;
+	store(`playlist`, getShowIDs(page.playlist.children));
 }
 
 // add entire series to playlist
 function addSeries(code) {
+	largeModifyingPlaylist = true;
 	getShowIDs(page.seriesList.querySelectorAll(`:scope > [data-series-id="${code}"] > .show-list > li`)).forEach(addShow);
+	largeModifyingPlaylist = false;
+	store(`playlist`, getShowIDs(page.playlist.children));
 }
 
 // add a random show or banger to the playlist
@@ -288,16 +313,18 @@ function addRandomShow(showType) {
 function moveShow(ID, move) {
 	const target = getShowOnPlaylist(ID);
 
-	if (move > 0) target?.nextElementSibling?.after(target);
-	else if (move < 0) target?.previousElementSibling?.before(target);
+	if (move > 0) target.nextElementSibling?.after(target);
+	else if (move < 0) target.previousElementSibling?.before(target);
+	store(`playlist`, getShowIDs(page.playlist.children));
 
 	loadShow();
 }
 
 // remove show from playlist
 function removeShow(ID) {
-	getShowOnPlaylist(ID)?.remove();
-	getShowInArchive(ID)?.querySelector(`[data-action="add-show"]`).unpress();
+	getShowOnPlaylist(ID).remove();
+	getShowInArchive(ID).querySelector(`[data-action="add-show"]`).unpress();
+
 	console.log(`removed show: ${ID}`);
 	loadShow();
 }
@@ -409,35 +436,34 @@ function initialiseToggle(id, toggled) {
 	console.info(`initialised "${id}" toggle: ${toggled ? `on` : `off`}`);
 }
 
-// switch a toggle from off/unpressed to on/pressed
-function switchToggle(id) {
+// update setting, flip toggle, and update stored settings
+function updateSetting(name, id) {
 	const button = document.getElementById(`${id}-toggle`);
 	button.setAttribute(`aria-pressed`, button.getAttribute(`aria-pressed`) === `false` ? `true` : `false`);
+
+	settings[name] = !settings[name];
+	store(`settings`, settings);
 }
 
 // toggle between excluding (true) and including (false) copyright-unsafe material when adding random shows or entire archive to playlist
 function toggleCopyrightSafety() {
-	settings.copyrightSafety = !settings.copyrightSafety;
-	switchToggle(`copyright-safety`);
+	updateSetting(`copyrightSafety`, `copyright-safety`);
 }
 
 // toggle between hiding (true) and showing (false) show-content in Radio
 function toggleFlatRadio() {
-	settings.flatRadio = !settings.flatRadio;
-	switchToggle(`flat-radio`);
+	updateSetting(`flatRadio`, `flat-radio`);
 	page.loadedShow.classList.toggle(`flat-radio`, settings.flatRadio);
 }
 
 // toggle between auto-playing (true) and not (false) a newly-loaded show when the previous show ends
 function toggleAutoPlay() {
-	settings.autoPlayNextShow = !settings.autoPlayNextShow;
-	switchToggle(`auto-play`);
+	updateSetting(`autoPlayNextShow`, `auto-play`);
 }
 
 // toggle between open (true) and closed (false) show content notes
 function toggleContentNotes() {
-	settings.notesOpen = !settings.notesOpen;
-	switchToggle(`content-notes`);
+	updateSetting(`notesOpen`, `content-notes`);
 	document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = settings.notesOpen);
 }
 
@@ -449,11 +475,12 @@ function initialiseStyle(name, switchStyleFunc) {
 
 // update setting and its buttons according to chosen value
 function updateStyle(name, option) {
-	page[`${name}Buttons`].querySelector(`[aria-pressed="true"]`)?.unpress();
-	page[`${name}Buttons`].querySelector(`[data-option="${option}"]`)?.press();
+	page[`${name}Buttons`]?.querySelector(`[aria-pressed="true"]`)?.unpress();
+	page[`${name}Buttons`]?.querySelector(`[data-option="${option}"]`)?.press();
 
 	document.documentElement.dataset[name] = option;
 	styles[name] = option;
+	store(`styles`, styles);
 }
 
 // switch between different colour themes
@@ -650,19 +677,58 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 	// build various page sections
 	buildArchive();
-	retrieve(`playlist`, []).filter(getShowInArchive).forEach(addShow);
+	loadPlaylist();
 	if (page.playlist.children.length > 0) console.info(`loaded playlist from storage`);
 	buildFeaturedShow();
+	const playlistObserver = new MutationObserver(() => {
+		if (!largeModifyingPlaylist) store(`playlist`, getShowIDs(page.playlist.children));
+	});
+	playlistObserver.observe(page.playlist, {"childList": true});
 
 	// update page head data
 	page.title.dataset.original = document.title;
 	if (window.location.hash) navigateToSection();
 });
 
-// on closing window/browser tab, record user settings and styles to localStorage
+// on closing window/browser tab, preserve audio level
 window.addEventListener(`beforeunload`, () => {
-	if (page.audio.muted) page.volumeControl.value = page.audio.volume * 100; // if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
-	store(`playlist`, getShowIDs(page.playlist.children));
-	store(`settings`, settings);
-	store(`styles`, styles);
+	// if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
+	if (page.audio.muted) page.volumeControl.value = page.audio.volume * 100;
+});
+
+// update settings, styles, and playlist if styles change in another browsing context
+window.addEventListener(`storage`, () => {
+	const newValue = JSON.parse(event.newValue);
+	switch (event.key) {
+	case `settings`:
+		if (settings.copyrightSafety !== newValue.copyrightSafety) toggleCopyrightSafety();
+		if (settings.flatRadio !== newValue.flatRadio) toggleFlatRadio();
+		if (settings.autoPlayNextShow !== newValue.autoPlayNextShow) toggleAutoPlay();
+		if (settings.notesOpen !== newValue.notesOpen) toggleContentNotes();
+		console.info(`automatically matched settings change in another browsing context`);
+		break;
+	case `styles`:
+		if (styles.theme !== newValue.theme) switchTheme(newValue.theme);
+		if (styles.font !== newValue.font) switchFont(newValue.font);
+		console.info(`automatically matched style change in another browsing context`);
+		break;
+	case `playlist`:
+		/*
+		COULD use a broadcast channel instead of the mutation observer above,
+		and send instructions on actions to take (e.g. add this show, remove that show)
+		instead of fully clearing and rebuilding the playlist.
+
+		BUT: it's a lot more robust (if costly) to copy state instead of sending instructions,
+		and the state would have to be copied if the playlist was shuffled anyway
+		(or maybe shufflePlaylist could generate a seed to determine the reshuffled order,
+		and the channel message could include the same seed)
+		*/
+		loadPlaylist();
+		page.seriesList.querySelectorAll(`[data-action="add-show"]`).forEach(button => {
+			if (event.newValue.includes(button.dataset.target)) button.press();
+			else button.unpress();
+		})
+		console.info(`automatically matched playlist change in another browsing context`);
+		break;
+	}
 });
