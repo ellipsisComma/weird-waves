@@ -536,7 +536,7 @@
 					<p><strong>News</strong> (also the default section), which has some <i lang="la">lorem ipsum</i> test posts (probably way longer than most news updates I'd add).</p>
 				</li>
 				<li>
-					<p><strong><abbr>FAQ</abbr></strong>, which has some <i lang="la">lorem ipsum</i> test <abbr>Q&A</abbr>s. Further along I'm probably gonna just show the site to a bunch of people and ask for any questions they have and see whether anything shakes out as <em>actually</em> frequently asked questions, but for now this is gonna be blank.</p>
+					<p><strong><abbr>FAQ</abbr></strong>, which has some <i lang="la">lorem ipsum</i> test <abbr>Q&amp;A</abbr>s. Further along I'm probably gonna just show the site to a bunch of people and ask for any questions they have and see whether anything shakes out as <em>actually</em> frequently asked questions, but for now this is gonna be blank.</p>
 				</li>
 				<li>
 					<p><strong>Help</strong>, which has a few questions and answers for tech issues (which basically boil down to &ldquo;try refreshing the page&rdquo;).</p>
@@ -567,7 +567,7 @@
 			<p>What about those <q>horror audiobooks and radio plays</q>? Here's the kinda stuff I mean:</p>
 			<ul>
 				<li>episodes of old horror radio anthologies like <cite><a href="https://www.quietplease.org" rel="external">Quiet, Please</a></cite>, if they're public domain (or if they might as well be)</li>
-				<li>other radio series dedicated to the public domain, like <cite><a href="https://www.radioechoes.com/?page=series&genre=OTR-SciFi&series=Seeing%20Ear%20Theater" rel="external">Seeing Ear Theatre</a></cite> or <cite><a href="https://archive.org/details/Mindwebs_230" rel="external">Mind Webs</a></cite> (only some/a few of these episodes fit into &ldquo;horror&rdquo;, but there's a bunch of sci-fi ones too)</li>
+				<li>other radio series dedicated to the public domain, like <cite><a href="https://www.radioechoes.com/?page=series&amp;genre=OTR-SciFi&amp;series=Seeing%20Ear%20Theater" rel="external">Seeing Ear Theatre</a></cite> or <cite><a href="https://archive.org/details/Mindwebs_230" rel="external">Mind Webs</a></cite> (only some/a few of these episodes fit into &ldquo;horror&rdquo;, but there's a bunch of sci-fi ones too)</li>
 				<li>serial or anthology horror podcast episodes released under Creative Commons (<abbr>CC</abbr>) licenses, like <cite><a href="https://rustyquill.com/show/the-magnus-archives/" rel="external">The Magnus Archives</a></cite>, <cite><a href="https://www.thesiltverses.com" rel="external">The Silt Verses</a></cite>, or <a href="https://pseudopod.org" rel="external">Pseudopod</a></li>
 				<li>horror audiobooks off places like <a href="https://librivox.org/" rel="external">LibriVox</a> (mixed quality, but some of them are decent), which have readings of older (mostly 19th/early 20th-century) novels and short stories</li>
 				<li>hopefully, book readings from people's youtube channels, if they're okay with it (again, mixed quality, but there's e.g. some real good dry readings of Thomas Ligotti's short stories)</li>
