@@ -276,8 +276,8 @@ function addShow(ID) {
 	expandShowInfo(newShow, showInArchive.closest(`#series-list > li`));
 
 	// update page and stored data
-	page.playlist.appendChild(templatedShow);
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
+	page.playlist.appendChild(templatedShow);
 	console.log(`added show: ${ID}`);
 	loadShow();
 }
@@ -322,8 +322,8 @@ function moveShow(ID, move) {
 
 // remove show from playlist
 function removeShow(ID) {
-	getShowOnPlaylist(ID).remove();
 	getShowInArchive(ID).querySelector(`[data-action="add-show"]`).unpress();
+	getShowOnPlaylist(ID).remove();
 
 	console.log(`removed show: ${ID}`);
 	loadShow();
@@ -464,6 +464,7 @@ function toggleAutoPlay() {
 // toggle between open (true) and closed (false) show content notes
 function toggleContentNotes() {
 	updateSetting(`notesOpen`, `content-notes`);
+	templateHTML.archiveShow.querySelector(`.content-notes`).open = settings.notesOpen;
 	document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = settings.notesOpen);
 }
 
@@ -523,10 +524,8 @@ function buildShow(show) {
 
 	// if show has content notes, add them to show-info, otherwise remove empty content notes element
 	const contentNotes = newShow.querySelector(`.content-notes`);
-	if (show.notes) {
-		contentNotes.open = settings.notesOpen;
-		contentNotes.querySelector(`span`).setContent(show.notes);
-	} else contentNotes.remove();
+	if (show.notes) contentNotes.querySelector(`span`).setContent(show.notes);
+	else contentNotes.remove();
 
 	newShow.querySelector(`[data-action="add-show"]`).dataset.target = show.ID;
 
@@ -557,6 +556,8 @@ function buildSeries(series) {
 
 // build archive onto page
 function buildArchive() {
+	templateHTML.archiveShow.querySelector(`.content-notes`).open = settings.notesOpen;
+
 	page.seriesLinks.replaceChildren(...archive.map(buildSeriesLink));
 	page.seriesList.replaceChildren(...archive.map(buildSeries));
 	page.seriesList.addEventListener(`click`, () => {
@@ -580,12 +581,14 @@ function buildArchive() {
 
 // add random banger to welcome page, with "add show" button as call to action
 function buildFeaturedShow() {
-	const showInArchive = getShowInArchive(getRandomShowID(`banger`));
-	if (!showInArchive) {
+	const ID = getRandomShowID(`banger`);
+	if (ID === ``) {
 		console.warn(`can't feature show on welcome: all bangers already on playlist`);
 		return;
 	}
 
+	const showInArchive = getShowInArchive(ID);
+	page.featuredShow.dataset.showId = ID;
 	page.featuredShow.replaceChildren(...showInArchive.cloneChildren());
 	expandShowInfo(page.featuredShow, showInArchive.closest(`#series-list > li`));
 
