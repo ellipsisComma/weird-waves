@@ -77,10 +77,6 @@ const page = {
 	// settings
 	"themeButtons": `#theme-buttons`,
 	"fontButtons": `#font-buttons`,
-
-	// welcome
-	"featuredShowContainer": `#featured-show-container`,
-	"featuredShow": `#featured-show`,
 };
 const templateHTML = {
 	"playlistItemControl": `playlist-item-control`,
@@ -587,18 +583,20 @@ function buildFeaturedShow() {
 		return;
 	}
 
+	const container = document.getElementById(`featured-show-container`);
+	const featuredShow = document.getElementById(`featured-show`);
 	const showInArchive = getShowInArchive(ID);
-	page.featuredShow.dataset.showId = ID;
-	page.featuredShow.replaceChildren(...showInArchive.cloneChildren());
-	expandShowInfo(page.featuredShow, showInArchive.closest(`#series-list > li`));
+	featuredShow.dataset.showId = ID;
+	featuredShow.replaceChildren(...showInArchive.cloneChildren());
+	expandShowInfo(featuredShow, showInArchive.closest(`#series-list > li`));
 
 	// add click event for adding featured show to playlist and removing it from welcome area
-	page.featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
+	featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
 		addShow(event.target.dataset.target);
-		page.featuredShowContainer.hidden = true;
+		container.hidden = true;
 	});
 
-	page.featuredShowContainer.hidden = false;
+	container.hidden = false;
 }
 
 
@@ -690,7 +688,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 	// update page head data
 	page.title.dataset.original = document.title;
-	if (window.location.hash) navigateToSection();
+	if (location.hash) navigateToSection();
 });
 
 // on closing window/browser tab, preserve audio level

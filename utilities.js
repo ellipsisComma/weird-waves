@@ -64,8 +64,7 @@ Array.prototype.sum = function () {
 
 // work down through a multi-level array of objects, where one value is an array of objects, etc., using keys
 // example: arr.sumByKey(`author`, `book`, `wordcount`) would sum the wordcount across all of an author's books
-Array.prototype.sumByKey = function () {
-	const args = [...arguments];
+Array.prototype.sumByKey = function (...args) {
 	return this.reduce((a, b) => a + (
 		args.length > 1
 		? b[args[0]].sumByKey(...args.slice(1))
@@ -105,18 +104,18 @@ String.prototype.fromUnicode = function () {
 
 
 
-/* ===========
-	WINDOW
-=========== */
+/* ============
+	STORAGE
+============ */
 
 // get something from localStorage or set a default value if no value stored
 function retrieve(key, defaultValue) {
-	return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;
+	return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
 }
 
 // set something in localStorage
 function store(key, value) {
-	window.localStorage.setItem(key, JSON.stringify(value));
+	localStorage.setItem(key, JSON.stringify(value));
 }
 
 

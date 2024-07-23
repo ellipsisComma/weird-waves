@@ -11,7 +11,7 @@ console.info(`initialised font: ${styles.font}`);
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
 	document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
-	const section = document.querySelector(window.location.hash.length > 0 ? window.location.hash : null)?.closest(`main > *`); 
+	const section = document.querySelector(location.hash.length > 0 ? location.hash : null)?.closest(`main > *`); 
 
 	// if targeted section exists, switch aria-current to its nav-link and update document title
 	if (section) {
