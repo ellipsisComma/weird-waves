@@ -499,10 +499,11 @@ PAGE CONSTRUCTION
 -------------- */
 
 function buildSeriesLink(series) {
-	const newSeriesLink = page.seriesLinks.appendChild(document.createElement(`li`)).appendChild(document.createElement(`a`));
+	const newSeriesLinkItem = document.createElement(`li`);
+	const newSeriesLink = newSeriesLinkItem.appendChild(document.createElement(`a`));
 	newSeriesLink.setAttribute(`href`, `#archive-${series.code}`);
 	newSeriesLink.setContent(series.heading);
-	return newSeriesLink;
+	return newSeriesLinkItem;
 }
 
 // build HTML for archive show item
