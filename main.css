@@ -567,7 +567,7 @@ input[type="range"]:is(:active, :focus) {
 	NAV
 ======== */
 
-nav {
+#main-nav {
 	display: flex;
 	justify-content: space-evenly;
 	padding-block-start: 0.2em;
@@ -1016,7 +1016,7 @@ use[href="#svg-toggle-tick"] {
 	}
 
 	/* NAV */
-	nav a {
+	#main-nav a {
 		padding-block-end: 0.2em;
 		flex-direction: row;
 		& > span {
@@ -1043,7 +1043,7 @@ use[href="#svg-toggle-tick"] {
 	}
 
 	/* NAV */
-	nav {
+	#main-nav {
 		display: block;
 		font-size: unset;
 		& > ul {
@@ -1132,7 +1132,7 @@ use[href="#svg-toggle-tick"] {
 	}
 
 	/* NAV */
-	nav {
+	#main-nav {
 		grid-area: nav;
 	}
 

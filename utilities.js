@@ -89,22 +89,6 @@ Set.prototype.toggle = function (item) {
 
 
 /* ============
-	STRINGS
-============ */
-
-// convert a string to a string representation of its unicode, with a customisable prefix (\\u for general, \\ for CSS)
-String.prototype.toUnicode = function (prefix = `\\u`) {
-	return Array.from(this).map(ch => `${prefix}${ch.codePointAt(0).toString(16).padStart(4, `0`)}`).join(``);
-}
-
-// convert a string representation of standard unicode (i.e. prefixed "\u") to its actual string
-String.prototype.fromUnicode = function () {
-	return Array.from(this).map(ch => ch.charAt(0)).join(``);
-}
-
-
-
-/* ============
 	STORAGE
 ============ */
 

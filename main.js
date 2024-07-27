@@ -19,11 +19,7 @@ EVENTS: event listeners
 	SCRIPT CONTROLS
 ==================== */
 
-// show file relative path, show file extension, and favicon code
-const showData = {
-	"path": `./audio/shows/`,
-	"extension": `.mp3`,
-};
+// favicon code
 const faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
 	<rect x="-1" y="-1" width="28" height="28" fill="--back-colour" />
 	<path stroke="--hot-colour" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
@@ -90,7 +86,7 @@ for (const [ref, query] of Object.entries(page)) page[ref] = document.querySelec
 for (const [ref, id] of Object.entries(templateHTML)) templateHTML[ref] = document.getElementById(`${id}-template`).content;
 
 // record whether playlist is currently undergoing large changes
-let largeModifyingPlaylist = false;
+let makingLargePlaylistChanges = false;
 
 
 
@@ -104,7 +100,9 @@ UTILITY
 
 // convert time in seconds to minutes:seconds timestamp
 function setTimestampFromSeconds(element, time) {
-	element.textContent = [time / 60, time % 60].map(t => Math.floor(t).toString().padStart(2, `0`)).join(`:`);
+	const minutes = Math.floor(time / 60).toString().padStart(2, `0`);
+	const seconds = Math.floor(time % 60).toString().padStart(2, `0`);
+	element.textContent = `${minutes}:${seconds}`;
 }
 
 // get show ID from a pool, adjusted for copyright safety
@@ -115,15 +113,15 @@ function getRandomShowID(type = ``) {
 
 // get show element in archive
 function getShowInArchive(ID) {
-	return page.seriesList.querySelector(`.show-list > [data-show-id="${ID.toUnicode(`\\`)}"]`);
+	return page.seriesList.querySelector(`.show-list > [data-show-id="${ID}"]`);
 }
 
 // get show element on playlist
 function getShowOnPlaylist(ID) {
-	return page.playlist.querySelector(`:scope > [data-show-id="${ID.toUnicode(`\\`)}"]`);
+	return page.playlist.querySelector(`:scope > [data-show-id="${ID}"]`);
 }
 
-// get array of all playlist show IDs
+// get array of all show IDs, from a set of HTML show elements
 function getShowIDs(subset) {
 	return [...subset].map(show => show.dataset.showId);
 }
@@ -150,9 +148,9 @@ function shufflePlaylist() {
 	let i = page.playlist.children.length;
 	if (i < 2) return;
 
-	largeModifyingPlaylist = true;
+	makingLargePlaylistChanges = true;
 	while (i > 0) page.playlist.append(page.playlist.children[Math.floor(Math.random() * i--)]);
-	largeModifyingPlaylist = false;
+	makingLargePlaylistChanges = false;
 	store(`playlist`, getShowIDs(page.playlist.children));
 
 	loadShow();
@@ -175,7 +173,8 @@ function hideClearPlaylistControls() {
 function clearPlaylist() {
 	if (page.playlist.children.length > 0) {
 		page.playlist.replaceChildren();
-		page.seriesList.querySelectorAll(`[data-action="add-show"]`).forEach(button => button.unpress());
+		page.seriesList.querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)
+			.forEach(button => button.unpress());
 		loadShow();
 	}
 	if (!page.clearPlaylistControls.hidden) hideClearPlaylistControls();
@@ -189,25 +188,24 @@ function exportPlaylist() {
 
 // import playlist from textbox
 function importPlaylist() {
+	const importList = page.importExport.value.trim();
+	if (importList.length === 0) return;
+
 	page.importErrorMessage.hidden = true;
 	page.importErrorList.replaceChildren();
 
-	// if attempting to import IDs, validate them and either present invalid IDs or update playlist; if import box is empty, clear playlist
-	const importIDs = page.importExport.value.trim().length > 0
-		? [...new Set(page.importExport.value.trim().replace(/[^\S\n\r]/g, ``).split(/\n+/))]
-		: [];
-	const invalidIDs = importIDs.filter(ID => !getShowInArchive(ID));
+	const validIDRegex = /^[A-Z][A-Za-z]{1,2}-\w+-\w+$/m;
+	const importIDs = [...new Set(importList.replace(/[^\S\n\r]/g, ``).split(/\n+/))];
+	const invalidIDs = importIDs.filter(ID => !validIDRegex.test(ID) || !getShowInArchive(ID));
 
 	page.importExport.value = ``;
 
 	if (invalidIDs.length === 0) {
-		if (importIDs.length > 0) {
-			largeModifyingPlaylist = true;
-			clearPlaylist();
-			importIDs.forEach(addShow);
-			largeModifyingPlaylist = false;
-			store(`playlist`, getShowIDs(page.playlist.children));
-		}
+		makingLargePlaylistChanges = true;
+		clearPlaylist();
+		importIDs.forEach(addShow);
+		makingLargePlaylistChanges = false;
+		store(`playlist`, getShowIDs(page.playlist.children));
 	} else {
 		invalidIDs.forEach(ID => page.importErrorList.appendChild(document.createElement(`li`)).textContent = ID);
 		page.importExport.value = importIDs.join(`\n`);
@@ -218,10 +216,10 @@ function importPlaylist() {
 
 // load playlist from local storage
 function loadPlaylist() {
-	largeModifyingPlaylist = true;
+	makingLargePlaylistChanges = true;
 	page.playlist.replaceChildren();
 	retrieve(`playlist`, []).filter(getShowInArchive).forEach(addShow);
-	largeModifyingPlaylist = false;
+	makingLargePlaylistChanges = false;
 	loadShow();
 }
 
@@ -233,12 +231,6 @@ SHOWS
 
 // add show to playlist; if playlist was previously empty, load top show
 function addShow(ID) {
-	const showInArchive = getShowInArchive(ID);
-	if (!showInArchive) {
-		console.warn(`attempted to add show with non-existent ID: ${ID}`);
-		return;
-	}
-
 	const showOnPlaylist = getShowOnPlaylist(ID);
 	if (showOnPlaylist) {
 		page.playlist.append(showOnPlaylist);
@@ -247,50 +239,34 @@ function addShow(ID) {
 		return;
 	}
 
+	const showInArchive = getShowInArchive(ID);
+
 	// build new playlist item
-	const playlistItemControls = {
-		"move-up": "Move show up",
-		"remove": "Remove show",
-		"move-down": "Move show down",
-	};
 	const templatedShow = templateHTML.playlistItem.cloneNode(true);
 	const newShow = templatedShow.querySelector(`li`);
 	newShow.dataset.showId = ID;
-
-	for (const [code, label] of Object.entries(playlistItemControls)) {
-		const newControl = templateHTML.playlistItemControl.cloneNode(true);
-		const newButton = newControl.querySelector(`button`);
-		newButton.setAttributes({
-			"data-action": code,
-			"data-target": ID,
-			"aria-label": label,
-		});
-		newControl.querySelector(`use`).setAttribute(`href`, `#svg-${code}`);
-		newShow.querySelector(`.show-position-controls`).appendChild(newControl);
-	}
 	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
 	expandShowInfo(newShow, showInArchive.closest(`#series-list > li`));
 
 	// update page and stored data
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
 	page.playlist.appendChild(templatedShow);
-	console.log(`added show: ${ID}`);
 	loadShow();
 }
 
 // add entire archive to playlist
 function addArchive() {
-	largeModifyingPlaylist = true;
+	makingLargePlaylistChanges = true;
 	getShowIDs(page.seriesList.querySelectorAll(`${settings.copyrightSafety ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
-	largeModifyingPlaylist = false;
+	makingLargePlaylistChanges = false;
 	store(`playlist`, getShowIDs(page.playlist.children));
 }
 
 // add entire series to playlist
-function addSeries(code) {
-	largeModifyingPlaylist = true;
-	getShowIDs(page.seriesList.querySelectorAll(`:scope > [data-series-id="${code}"] > .show-list > li`)).forEach(addShow);
-	largeModifyingPlaylist = false;
+function addSeries(seriesInArchive) {
+	makingLargePlaylistChanges = true;
+	[...seriesInArchive.querySelectorAll(`.show-list > li`)].forEach(addShow);
+	makingLargePlaylistChanges = false;
 	store(`playlist`, getShowIDs(page.playlist.children));
 }
 
@@ -305,23 +281,22 @@ function addRandomShow(showType) {
 
 /* MANIPULATING */
 
-// move show up/down in playlist
-function moveShow(ID, move) {
-	const target = getShowOnPlaylist(ID);
-
-	if (move > 0) target.nextElementSibling?.after(target);
-	else if (move < 0) target.previousElementSibling?.before(target);
+function moveShowUp(target) {
+	target.previousElementSibling?.before(target);
 	store(`playlist`, getShowIDs(page.playlist.children));
+	loadShow();
+}
 
+function moveShowDown(target) {
+	target.nextElementSibling?.after(target);
+	store(`playlist`, getShowIDs(page.playlist.children));
 	loadShow();
 }
 
 // remove show from playlist
-function removeShow(ID) {
-	getShowInArchive(ID).querySelector(`[data-action="add-show"]`).unpress();
-	getShowOnPlaylist(ID).remove();
-
-	console.log(`removed show: ${ID}`);
+function removeShow(target) {
+	getShowInArchive(target.dataset.showId).querySelector(`[data-action="add-show"]`).unpress();
+	target.remove();
 	loadShow();
 }
 
@@ -337,7 +312,7 @@ function loadShow() {
 		page.loadedShow.dataset.showId = show.dataset.showId;
 
 		// load audio file and show data
-		page.audio.src = `${showData.path}${show.dataset.showId}${showData.extension}`;
+		page.audio.src = `./audio/shows/${show.dataset.showId}.mp3`;
 		page.loadedShow.replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
 
 		// reset and reveal radio controls
@@ -345,8 +320,6 @@ function loadShow() {
 		page.showTimeElapsed.textContent = `00:00`;
 		page.audio.addEventListener(`loadedmetadata`, () => setTimestampFromSeconds(page.showTimeTotal, page.audio.duration));
 		page.radioControls.hidden = false;
-
-		console.log(`loaded show: ${show.dataset.showId}`);
 	} else {
 		// empty loaded show and playlist
 		page.playlist.replaceChildren();
@@ -363,7 +336,7 @@ function loadShow() {
 
 // replace loaded show with next show on playlist (or reset radio if playlist ends)
 function loadNextShow() {
-	removeShow(page.playlist.firstElementChild.dataset.showId);
+	removeShow(page.playlist.firstElementChild);
 	page.seekBar.value = 0;
 	if (page.audio.hasAttribute(`src`) && settings.autoPlayNextShow && page.audio.paused) togglePlay();
 }
@@ -429,15 +402,13 @@ SETTINGS
 // initialise a toggle switch with a stored or default value
 function initialiseToggle(id, toggled) {
 	document.getElementById(`${id}-toggle`).setAttribute(`aria-pressed`, toggled ? `true` : `false`);
-	console.info(`initialised "${id}" toggle: ${toggled ? `on` : `off`}`);
 }
 
 // update setting, flip toggle, and update stored settings
 function updateSetting(name, id) {
-	const button = document.getElementById(`${id}-toggle`);
-	button.setAttribute(`aria-pressed`, button.getAttribute(`aria-pressed`) === `false` ? `true` : `false`);
-
 	settings[name] = !settings[name];
+	const button = document.getElementById(`${id}-toggle`);
+	button.setAttribute(`aria-pressed`, settings[name] ? `true` : `false`);
 	store(`settings`, settings);
 }
 
@@ -498,6 +469,7 @@ function switchFont(font) {
 PAGE CONSTRUCTION
 -------------- */
 
+// build an archive nav-link
 function buildSeriesLink(series) {
 	const newSeriesLinkItem = document.createElement(`li`);
 	const newSeriesLink = newSeriesLinkItem.appendChild(document.createElement(`a`));
@@ -533,10 +505,10 @@ function buildShow(show) {
 function buildSeries(series) {
 	const templatedSeries = templateHTML.archiveSeries.cloneNode(true);
 	const newSeries = templatedSeries.querySelector(`li`);
-	const newSeriesShows = newSeries.querySelector(`.show-list`);
 	newSeries.setAttributes({
 		"id": `archive-${series.code}`,
 		"data-series-id": series.code,
+		"data-copyright-safe": series.copyrightSafe ? `true` : `false`,
 	});
 
 	if (series.copyrightSafe) newSeries.dataset.copyrightSafe = `true`;
@@ -546,7 +518,7 @@ function buildSeries(series) {
 	newSeries.querySelector(`[data-action="add-series"]`).dataset.target = series.code;
 
 	series.shows.forEach(show => show.ID = `${series.code}-${show.code}`);
-	newSeriesShows.replaceChildren(...series.shows.map(buildShow));
+	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
 
 	return templatedSeries;	
 }
@@ -560,7 +532,7 @@ function buildArchive() {
 	page.seriesList.addEventListener(`click`, () => {
 		if (!event.target.hasAttribute(`aria-disabled`)) {
 			switch (event.target.dataset.action) {
-			case `add-series`: addSeries(event.target.dataset.target); break;
+			case `add-series`: addSeries(event.target.closest(`#series-list > li`)); break;
 			case `add-show`: addShow(event.target.dataset.target); break;
 			}
 		}
@@ -634,10 +606,11 @@ page.clearButton.addEventListener(`click`, () => {
 document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
 document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
 page.playlist.addEventListener(`click`, () => {
+	const target = event.target.closest(`#playlist > li`);
 	switch (event.target.dataset.action) {
-	case `move-up`: moveShow(event.target.dataset.target, -1); break;
-	case `remove`: removeShow(event.target.dataset.target); break;
-	case `move-down`: moveShow(event.target.dataset.target, 1); break;
+	case `move-up`: moveShowUp(target); break;
+	case `remove`: removeShow(target); break;
+	case `move-down`: moveShowDown(target); break;
 	}
 });
 document.getElementById(`export-button`).addEventListener(`click`, exportPlaylist);
@@ -654,7 +627,7 @@ for (const [toggle, func] of Object.entries({
 	"content-notes": toggleContentNotes,
 })) document.getElementById(`${toggle}-toggle`).addEventListener(`click`, func);
 page.themeButtons.addEventListener(`click`, () => {
-	if (!event.target.closest(`button`).hasAttribute(`aria-disabled`)) switchTheme(event.target.dataset.option);
+	if (event.target.tagName === `BUTTON` && !event.target.closest(`button`).hasAttribute(`aria-disabled`)) switchTheme(event.target.dataset.option);
 });
 page.fontButtons.addEventListener(`click`, () => {
 	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) switchFont(event.target.dataset.option);
@@ -680,10 +653,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// build various page sections
 	buildArchive();
 	loadPlaylist();
-	if (page.playlist.children.length > 0) console.info(`loaded playlist from storage`);
 	buildFeaturedShow();
 	const playlistObserver = new MutationObserver(() => {
-		if (!largeModifyingPlaylist) store(`playlist`, getShowIDs(page.playlist.children));
+		if (!makingLargePlaylistChanges) store(`playlist`, getShowIDs(page.playlist.children));
 	});
 	playlistObserver.observe(page.playlist, {"childList": true});
 
@@ -715,16 +687,8 @@ window.addEventListener(`storage`, () => {
 		console.info(`automatically matched style change in another browsing context`);
 		break;
 	case `playlist`:
-		/*
-		COULD use a broadcast channel instead of the mutation observer above,
-		and send instructions on actions to take (e.g. add this show, remove that show)
-		instead of fully clearing and rebuilding the playlist.
-
-		BUT: it's a lot more robust (if costly) to copy state instead of sending instructions,
-		and the state would have to be copied if the playlist was shuffled anyway
-		(or maybe shufflePlaylist could generate a seed to determine the reshuffled order,
-		and the channel message could include the same seed)
-		*/
+		// could do this with a broadcast channel instead of mutation observer + storage event
+		// however, that adds an extra tech and it'd be less robust than rebuilding the playlist from scratch
 		loadPlaylist();
 		page.seriesList.querySelectorAll(`[data-action="add-show"]`).forEach(button => {
 			if (event.newValue.includes(button.dataset.target)) button.press();
