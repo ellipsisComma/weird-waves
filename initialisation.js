@@ -1,10 +1,7 @@
 /*jshint esversion: 11*/
 
 // initialise user-selected (or default) site display settings
-const styles = retrieve(`styles`, {});
-styles.theme ??= document.documentElement.dataset.theme;
-styles.font ??= document.documentElement.dataset.font;
-for (const [style, option] of Object.entries(styles)) document.documentElement.dataset[style] = option;
+for (const [style, option] of Object.entries(retrieve(`styles`, {}))) document.documentElement.dataset[style] = option;
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
@@ -14,7 +11,7 @@ function navigateToSection() {
 	// if targeted section exists, switch aria-current to its nav-link and update document title
 	if (section) {
 		const navLink = document.querySelector(`nav a[href="#${section.id}"]`);
-		document.title = `${navLink.innerText} / ${page.title.dataset.original}`;
+		document.title = `${navLink.innerText} / ${page.get(`title`).dataset.original}`;
 		navLink.setAttribute(`aria-current`, `page`);
 	}
 }

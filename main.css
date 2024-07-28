@@ -260,6 +260,10 @@ RESPONSIVITY
 ::after {
 	box-sizing: border-box;
 }
+::selection {
+	color: var(--back-colour);
+	background-color: var(--cold-colour);
+}
 body {
 	margin: 0;
 	color: var(--fore-colour);
@@ -440,7 +444,7 @@ button {
 	font-style: italic;
 	text-align: center;
 	margin-block-start: 0.5em;
-	margin-block-end: 0.3em;
+	padding-block-end: 0.3em;
 	white-space: pre;
 }
 .show-content {
@@ -505,6 +509,7 @@ button {
 }
 input[type="range"] {
 	all: unset;
+	outline: revert;
 	cursor: pointer;
 	margin: 0;
 	font-size: 1em;
@@ -525,7 +530,7 @@ input[type="range"] {
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 		transform: translateY(calc(var(--control-depth) * -1));
 	}
-	&:is(:active, :focus) {
+	&:active {
 		&::-moz-range-thumb {
 			border-color: var(--cold-colour);
 			box-shadow: 0 var(--control-depth) var(--cold-colour);
@@ -550,7 +555,7 @@ input[type="range"] {
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 	}
 }
-input[type="range"]:is(:active, :focus) {
+input[type="range"]:active {
 	&::-webkit-slider-thumb {
 		border-color: var(--cold-colour);
 		box-shadow: 0 var(--control-depth) var(--cold-colour);
@@ -591,17 +596,12 @@ input[type="range"]:is(:active, :focus) {
 		padding-inline: 0.2em;
 		align-items: center;
 		gap: 0.2em;
-		text-decoration: none;
 		user-select: none;
 		&[href^="#"] {
-			outline-width: calc(var(--line-width) / 2);
-			outline-style: solid;
-			outline-color: transparent;
-			outline-offset: 0;
-			transition-property: outline-width, outline-color, outline-offset;
-			transition-duration: 0.3s;
-			&:is(:hover, :focus, [aria-current="page"]) {
+			text-decoration: none;
+			&:is(:hover, [aria-current="page"]) {
 				outline-width: var(--line-width);
+				outline-style: solid;
 				outline-color: var(--fore-colour);
 				outline-offset: 0.2em;
 			}
@@ -828,16 +828,13 @@ button[data-action="add-show"] {
 	STREAMING
 ============== */
 
-code {
-	user-select: all;
-}
 .code-block {
 	display: block;
 	margin-block: 1em;
-	padding-block: 0.3em;
-	padding-inline: 0.5em;
-	color: var(--back-colour);
-	background-color: var(--fore-colour);
+	padding-inline-start: var(--gap-size);
+	border-inline-start-width: var(--line-width);
+	border-inline-start-style: solid;
+	border-inline-start-color: var(--fore-colour);
 	tab-size: 2ch;
 	overflow-x: auto;
 	white-space: pre;
@@ -1012,7 +1009,7 @@ use[href="#svg-toggle-tick"] {
 		text-shadow: 0.07em 0.07em 0 var(--back-colour), -0.05em -0.05em 0 var(--back-colour), 0.1em 0.09em 0 var(--fore-colour);
 	}
 	.code-block {
-		tab-size: 4ch;
+		tab-size: 3ch;
 	}
 
 	/* NAV */
@@ -1035,6 +1032,11 @@ use[href="#svg-toggle-tick"] {
 	}
 }
 @media (min-width: 600px) {
+	/* GENERAL */
+	.code-block {
+		tab-size: 4ch;
+	}
+
 	/* RADIO */
 	#radio-controls {
 		grid-template:

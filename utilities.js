@@ -75,6 +75,19 @@ Array.prototype.sumByKey = function (...args) {
 
 
 
+/* ============
+	STRINGS
+============ */
+
+String.prototype.camelToKebab = function () {
+	return this.replaceAll(/([A-Z])/g, (match) => `-${match.toLowerCase()}`);
+}
+
+String.prototype.kebabToCamel = function () {
+	return this.replaceAll(/-([a-z])/g, (match) => match.slice(1).toUpperCase());
+}
+
+
 
 /* =========
 	SETS
