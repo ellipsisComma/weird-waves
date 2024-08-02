@@ -94,7 +94,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-28" />
+	<link rel="stylesheet" type="text/css" media="all" href="./main.css?v=2024-07-30" />
 
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2026%2026%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%3E%3Canimate%20attributeName%3D%22opacity%22%20values%3D%221%3B%200%3B%200%3B%201%22%20keyTimes%3D%220%3B%200%3B%201%3B%201%22%20dur%3D%221s%22%20repeatCount%3D%221%22%2F%3E%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2228%22%20height%3D%2228%22%20fill%3D%22%23000627%22%2F%3E%3Cpath%20stroke%3D%22%23ff6767%22%20d%3D%22M7%2011a3%203%200%200%201%203%203a3%203%200%200%201%206%200a3%203%200%200%201%203-3%22%2F%3E%3Cpath%20stroke%3D%22%23b9ab00%22%20d%3D%22M7%208a6%206%200%200%201%2012%200v4a6%206%200%200%201-12%200zm12%203h3v1a9%209%200%200%201-18%200v-1h3m6%2010v3m-4%200h8%22%2F%3E%3C%2Fsvg%3E" sizes="any" />
@@ -166,7 +166,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		<p>This is a preview of the Weird Waves news feed. Read in your browser or subscribe by copying its <abbr>URL</abbr> into your feed reader:</p>
 		<p id="feed-url"><code>https://weirdwaves.net/feed.xml</code></p>
 		<p>New to feeds? They let you follow sites! Read <a href="https://aboutfeeds.com/" rel="external">About Feeds</a> for more info.</p>
-	</section>
+	</section><!--#feed-info end-->
 </aside><!--#sidebar end-->
 
 
@@ -213,7 +213,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			</a>
 		</li>
 	</ul>
-</nav>
+</nav><!--#main-nav end-->
 
 
 
@@ -227,7 +227,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			<xsl:with-param name="all-news" select="'true'" />
 		</xsl:apply-templates>
 	</ol>
-</section><!--#all-new end-->
+</section><!--#all-news end-->
 
 
 
@@ -253,7 +253,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			<dt>blog posts</dt>
 			<dd><xsl:value-of select="count(atom:entry[atom:category/@term = 'history'])" /></dd>
 		</div>
-	</dl>
+	</dl><!--#stats-list end-->
 </section><!--#about end-->
 
 
@@ -298,7 +298,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<h3>Latest updates</h3>
 	<dl id="latest-updates">
 		<xsl:apply-templates select="atom:entry[position() &lt;= $latest-updates-count]" mode="list-latest-updates" />
-	</dl>
+	</dl><!--#latest-updates end-->
 </section><!--#welcome end-->
 </main>
 </div><!--#container end-->
@@ -368,5 +368,6 @@ window.addEventListener(`storage`, () => {
 </script>
 </body>
 </html>
+
 </xsl:template>
 </xsl:transform>
