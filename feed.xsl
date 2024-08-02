@@ -307,15 +307,14 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 
 <script><![CDATA[
 // HTML element references
-function pageRecord() {
+const page = (() => {
 	const elements = {};
 	return {
 		"setElement": (key, query) => elements[key] ??= document.querySelector(query),
 		"getElement": (key) => elements[key],
 	};
-}
+})();
 
-const page = pageRecord();
 page.setElement(`title`, `title`);
 page.setElement(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 
