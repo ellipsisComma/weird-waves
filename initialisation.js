@@ -11,7 +11,7 @@ function navigateToSection() {
 	// if targeted section exists, switch aria-current to its nav-link and update document title
 	if (section) {
 		const navLink = document.querySelector(`nav a[href="#${section.id}"]`);
-		document.title = `${navLink.innerText} / ${page.get(`title`).dataset.original}`;
+		document.title = `${navLink.innerText} / ${page.getElement(`title`).dataset.original}`;
 		navLink.setAttribute(`aria-current`, `page`);
 	}
 }

@@ -33,7 +33,7 @@ const settings = (() => {
 
 	function initialise() {
 		Object.keys(local).forEach(setToggle);
-		page.get(`loadedShow`).classList.toggle(`flat-radio`, settings.get(`flatRadio`));
+		page.getElement(`loadedShow`).classList.toggle(`flat-radio`, settings.getSetting(`flatRadio`));
 	}
 
 	function setToggle(setting) {
@@ -46,13 +46,13 @@ const settings = (() => {
 		setToggle(setting);
 		store(`settings`, local);
 
-		if (setting === `flatRadio`) page.get(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
-		else if (setting === `notesOpen`) document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = settings.get(`notesOpen`));
+		if (setting === `flatRadio`) page.getElement(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
+		else if (setting === `notesOpen`) document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = settings.getSetting(`notesOpen`));
 	}
 
 	return {
 		"initialise": () => initialise(),
-		"get": (setting) => local[setting],
+		"getSetting": (setting) => local[setting],
 		"toggle": (setting) => toggleSetting(setting),
 	};
 })();
@@ -75,7 +75,7 @@ const styles = (() => {
 	}
 
 	function setStyleButtons(style) {
-		const buttons = page.get(`${style}Buttons`);
+		const buttons = page.getElement(`${style}Buttons`);
 		if (!buttons) return;
 
 		buttons.querySelector(`[aria-pressed="true"]`)?.unpress();
@@ -92,7 +92,7 @@ const styles = (() => {
 	function updateFavicon() {
 		let faviconNew = faviconRaw;
 		[`fore`, `back`, `hot`, `cold`].forEach(type => faviconNew = faviconNew.replaceAll(`--${type}-colour`, getStyle(`:root`, `--${type}-colour`)));
-		page.get(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
+		page.getElement(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
 	}
 
 	function updateStyle(style, option) {
@@ -105,8 +105,8 @@ const styles = (() => {
 
 	return {
 		"initialise": () => initialise(),
-		"get": (style) => local[style],
-		"set": (style, option) => updateStyle(style, option),
+		"getStyle": (style) => local[style],
+		"setStyle": (style, option) => updateStyle(style, option),
 	};
 })();
 
@@ -120,57 +120,57 @@ const styles = (() => {
 const page = (() => {
 	const elements = {};
 	return {
-		"set": (key, query) => elements[key] ??= document.querySelector(query),
-		"get": (key) => elements[key],
+		"setElement": (key, query) => elements[key] ??= document.querySelector(query),
+		"getElement": (key) => elements[key],
 	};
 })();
 
 // head
-page.set(`title`, `title`);
-page.set(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
+page.setElement(`title`, `title`);
+page.setElement(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 
 // radio
-page.set(`loadedShow`, `#loaded-show`);
-page.set(`radioControls`, `#radio-controls`);
-page.set(`seekBar`, `#seek-bar`);
-page.set(`showTimeElapsed`, `#show-time-elapsed`);
-page.set(`showTimeTotal`, `#show-time-total`);
-page.set(`playToggle`, `#play-toggle`);
-page.set(`skipButton`, `#skip-button`);
-page.set(`muteToggle`, `#mute-toggle`);
-page.set(`volumeControl`, `#volume-control`);
-page.set(`audio`, `#show-audio`);
+page.setElement(`loadedShow`, `#loaded-show`);
+page.setElement(`radioControls`, `#radio-controls`);
+page.setElement(`seekBar`, `#seek-bar`);
+page.setElement(`showTimeElapsed`, `#show-time-elapsed`);
+page.setElement(`showTimeTotal`, `#show-time-total`);
+page.setElement(`playToggle`, `#play-toggle`);
+page.setElement(`skipButton`, `#skip-button`);
+page.setElement(`muteToggle`, `#mute-toggle`);
+page.setElement(`volumeControl`, `#volume-control`);
+page.setElement(`audio`, `#show-audio`);
 
 // booth
-page.set(`playlist`, `#playlist`);
-page.set(`playlistControls`, `#playlist-controls`);
-page.set(`clearButton`, `#clear-button`);
-page.set(`clearPlaylistControls`, `#clear-playlist-controls`);
-page.set(`importExport`, `#import-export-data`);
-page.set(`importErrorMessage`, `#import-error-message`);
-page.set(`importErrorList`, `#import-error-list`);
+page.setElement(`playlist`, `#playlist`);
+page.setElement(`playlistControls`, `#playlist-controls`);
+page.setElement(`clearButton`, `#clear-button`);
+page.setElement(`clearPlaylistControls`, `#clear-playlist-controls`);
+page.setElement(`importExport`, `#import-export-data`);
+page.setElement(`importErrorMessage`, `#import-error-message`);
+page.setElement(`importErrorList`, `#import-error-list`);
 
 // archive
-page.set(`seriesLinks`, `#archive-series-links`);
-page.set(`seriesList`, `#series-list`);
+page.setElement(`seriesLinks`, `#archive-series-links`);
+page.setElement(`seriesList`, `#series-list`);
 
 // settings
-page.set(`themeButtons`, `#theme-buttons`);
-page.set(`fontButtons`, `#font-buttons`);
+page.setElement(`themeButtons`, `#theme-buttons`);
+page.setElement(`fontButtons`, `#font-buttons`);
 
 // template HTML module: handles a collection of permanent template content doc fragments
 const templateHTML = (() => {
 	const templates = {};
 	return {
-		"set": (key, id) => templates[key] ??= document.getElementById(`${id}-template`)?.content,
-		"get": (key) => templates[key],
-		"clone": (key) => templates[key]?.cloneNode(true),
+		"setTemplate": (key, id) => templates[key] ??= document.getElementById(`${id}-template`)?.content,
+		"getTemplate": (key) => templates[key],
+		"cloneTemplate": (key) => templates[key]?.cloneNode(true),
 	};
 })();
 
-templateHTML.set(`playlistItem`, `playlist-item`);
-templateHTML.set(`archiveSeries`, `archive-series`);
-templateHTML.set(`archiveShow`, `archive-show`);
+templateHTML.setTemplate(`playlistItem`, `playlist-item`);
+templateHTML.setTemplate(`archiveSeries`, `archive-series`);
+templateHTML.setTemplate(`archiveShow`, `archive-show`);
 
 // record whether playlist is currently undergoing large changes
 let makingLargePlaylistChanges = false;
@@ -194,18 +194,18 @@ function setTimestampFromSeconds(element, time) {
 
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type = ``) {
-	const pool = page.get(`seriesList`).querySelectorAll(`${settings.get(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li${type === `banger` ? `[data-banger="true"]` : ``}:not(:has([data-action="add-show"][aria-pressed="true"]))`);
+	const pool = page.getElement(`seriesList`).querySelectorAll(`${settings.getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li${type === `banger` ? `[data-banger="true"]` : ``}:not(:has([data-action="add-show"][aria-pressed="true"]))`);
 	return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)].dataset.showId : ``;
 }
 
 // get show element in archive
 function getShowInArchive(ID) {
-	return page.get(`seriesList`).querySelector(`.show-list > [data-show-id="${ID}"]`);
+	return page.getElement(`seriesList`).querySelector(`.show-list > [data-show-id="${ID}"]`);
 }
 
 // get show element on playlist
 function getShowOnPlaylist(ID) {
-	return page.get(`playlist`).querySelector(`:scope > [data-show-id="${ID}"]`);
+	return page.getElement(`playlist`).querySelector(`:scope > [data-show-id="${ID}"]`);
 }
 
 // get array of all show IDs, from a set of HTML show elements
@@ -232,79 +232,79 @@ PLAYLIST
 
 // shuffle playlist if it has at least 2 entries
 function shufflePlaylist() {
-	let i = page.get(`playlist`).children.length;
+	let i = page.getElement(`playlist`).children.length;
 	if (i < 2) return;
 
 	makingLargePlaylistChanges = true;
-	while (i > 0) page.get(`playlist`).append(page.get(`playlist`).children[Math.floor(Math.random() * i--)]);
+	while (i > 0) page.getElement(`playlist`).append(page.getElement(`playlist`).children[Math.floor(Math.random() * i--)]);
 	makingLargePlaylistChanges = false;
-	store(`playlist`, getShowIDs(page.get(`playlist`).children));
+	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 
 	loadShow();
 }
 
 // reveal controls for clearing playlist
 function revealClearPlaylistControls() {
-	page.get(`clearButton`).press();
-	page.get(`clearPlaylistControls`).hidden = false;
-	page.get(`clearPlaylistControls`).focus();
+	page.getElement(`clearButton`).press();
+	page.getElement(`clearPlaylistControls`).hidden = false;
+	page.getElement(`clearPlaylistControls`).focus();
 }
 
 // hide controls for clearing playlist
 function hideClearPlaylistControls() {
-	page.get(`clearButton`).unpress();
-	page.get(`clearPlaylistControls`).hidden = true;
+	page.getElement(`clearButton`).unpress();
+	page.getElement(`clearPlaylistControls`).hidden = true;
 }
 
 // clear playlist and hide clear controls again
 function clearPlaylist() {
-	if (page.get(`playlist`).children.length > 0) {
-		page.get(`playlist`).replaceChildren();
-		page.get(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)
+	if (page.getElement(`playlist`).children.length > 0) {
+		page.getElement(`playlist`).replaceChildren();
+		page.getElement(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)
 			.forEach(button => button.unpress());
 		loadShow();
 	}
-	if (!page.get(`clearPlaylistControls`).hidden) hideClearPlaylistControls();
+	if (!page.getElement(`clearPlaylistControls`).hidden) hideClearPlaylistControls();
 }
 
 // list playlist of show IDs line-by-line in import-export box
 function exportPlaylist() {
-	page.get(`importErrorMessage`).hidden = true;
-	page.get(`importExport`).value = getShowIDs(page.get(`playlist`).children).join(`\n`);
+	page.getElement(`importErrorMessage`).hidden = true;
+	page.getElement(`importExport`).value = getShowIDs(page.getElement(`playlist`).children).join(`\n`);
 }
 
 // import playlist from textbox
 function importPlaylist() {
-	const importList = page.get(`importExport`).value.trim();
+	const importList = page.getElement(`importExport`).value.trim();
 	if (importList.length === 0) return;
 
-	page.get(`importErrorMessage`).hidden = true;
-	page.get(`importErrorList`).replaceChildren();
+	page.getElement(`importErrorMessage`).hidden = true;
+	page.getElement(`importErrorList`).replaceChildren();
 
 	const validIDRegex = /^[A-Z][A-Za-z]{1,2}-\w+-\w+$/m;
 	const importIDs = [...new Set(importList.replace(/[^\S\n\r]/g, ``).split(/\n+/))];
 	const invalidIDs = importIDs.filter(ID => !validIDRegex.test(ID) || !getShowInArchive(ID));
 
-	page.get(`importExport`).value = ``;
+	page.getElement(`importExport`).value = ``;
 
 	if (invalidIDs.length === 0) {
 		makingLargePlaylistChanges = true;
 		clearPlaylist();
 		importIDs.forEach(addShow);
 		makingLargePlaylistChanges = false;
-		store(`playlist`, getShowIDs(page.get(`playlist`).children));
+		store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 	} else {
-		invalidIDs.forEach(ID => page.get(`importErrorList`).appendChild(document.createElement(`li`)).textContent = ID);
-		page.get(`importExport`).value = importIDs.join(`\n`);
-		page.get(`importErrorMessage`).hidden = false;
-		page.get(`importErrorMessage`).scrollIntoView();
+		invalidIDs.forEach(ID => page.getElement(`importErrorList`).appendChild(document.createElement(`li`)).textContent = ID);
+		page.getElement(`importExport`).value = importIDs.join(`\n`);
+		page.getElement(`importErrorMessage`).hidden = false;
+		page.getElement(`importErrorMessage`).scrollIntoView();
 	}
 }
 
 // load playlist from local storage
 function loadPlaylist() {
 	makingLargePlaylistChanges = true;
-	page.get(`playlist`).replaceChildren();
+	page.getElement(`playlist`).replaceChildren();
 	retrieve(`playlist`, []).filter(getShowInArchive).forEach(addShow);
 	makingLargePlaylistChanges = false;
 	loadShow();
@@ -320,7 +320,7 @@ SHOWS
 function addShow(ID) {
 	const showOnPlaylist = getShowOnPlaylist(ID);
 	if (showOnPlaylist) {
-		page.get(`playlist`).append(showOnPlaylist);
+		page.getElement(`playlist`).append(showOnPlaylist);
 		loadShow();
 		console.log(`re-added show: ${ID}`);
 		return;
@@ -329,7 +329,7 @@ function addShow(ID) {
 	const showInArchive = getShowInArchive(ID);
 
 	// build new playlist item
-	const templatedShow = templateHTML.clone(`playlistItem`);
+	const templatedShow = templateHTML.cloneTemplate(`playlistItem`);
 	const newShow = templatedShow.querySelector(`li`);
 	newShow.dataset.showId = ID;
 	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
@@ -337,16 +337,16 @@ function addShow(ID) {
 
 	// update page and stored data
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
-	page.get(`playlist`).appendChild(templatedShow);
+	page.getElement(`playlist`).appendChild(templatedShow);
 	loadShow();
 }
 
 // add entire archive to playlist
 function addArchive() {
 	makingLargePlaylistChanges = true;
-	getShowIDs(page.get(`seriesList`).querySelectorAll(`${settings.get(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
+	getShowIDs(page.getElement(`seriesList`).querySelectorAll(`${settings.getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
 	makingLargePlaylistChanges = false;
-	store(`playlist`, getShowIDs(page.get(`playlist`).children));
+	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 }
 
 // add entire series to playlist
@@ -354,7 +354,7 @@ function addSeries(seriesInArchive) {
 	makingLargePlaylistChanges = true;
 	[...seriesInArchive.querySelectorAll(`.show-list > li`)].forEach(addShow);
 	makingLargePlaylistChanges = false;
-	store(`playlist`, getShowIDs(page.get(`playlist`).children));
+	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 }
 
 // add a random show or banger to the playlist
@@ -362,7 +362,7 @@ function addRandomShow(showType) {
 	const ID = getRandomShowID(showType);
 	if (ID !== ``) {
 		addShow(ID);
-		window.scrollTo(0, page.get(`playlist`).lastElementChild.offsetTop - page.get(`playlistControls`).clientHeight);
+		window.scrollTo(0, page.getElement(`playlist`).lastElementChild.offsetTop - page.getElement(`playlistControls`).clientHeight);
 	} else console.warn(`can't add new show of type "${showType}": all shows of that type already on playlist`);
 }
 
@@ -370,13 +370,13 @@ function addRandomShow(showType) {
 
 function moveShowUp(target) {
 	target.previousElementSibling?.before(target);
-	store(`playlist`, getShowIDs(page.get(`playlist`).children));
+	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 	loadShow();
 }
 
 function moveShowDown(target) {
 	target.nextElementSibling?.after(target);
-	store(`playlist`, getShowIDs(page.get(`playlist`).children));
+	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 	loadShow();
 }
 
@@ -389,43 +389,43 @@ function removeShow(target) {
 
 // write show parts onto page and load show audio file; if playlist is empty, reset radio
 function loadShow() {
-	if (page.get(`playlist`).children.length > 0 && page.get(`playlist`).firstElementChild.dataset.showId === page.get(`loadedShow`).dataset.showId) return;
+	if (page.getElement(`playlist`).children.length > 0 && page.getElement(`playlist`).firstElementChild.dataset.showId === page.getElement(`loadedShow`).dataset.showId) return;
 
-	setAudioToggle(page.get(`playToggle`), `Play audio`, `play`);
-	page.get(`loadedShow`).replaceChildren();
+	setAudioToggle(page.getElement(`playToggle`), `Play audio`, `play`);
+	page.getElement(`loadedShow`).replaceChildren();
 
-	if (page.get(`playlist`).children.length > 0) {
-		const show = page.get(`playlist`).firstElementChild;
-		page.get(`loadedShow`).dataset.showId = show.dataset.showId;
+	if (page.getElement(`playlist`).children.length > 0) {
+		const show = page.getElement(`playlist`).firstElementChild;
+		page.getElement(`loadedShow`).dataset.showId = show.dataset.showId;
 
 		// load audio file and show data
-		page.get(`audio`).src = showPath(show.dataset.showId);
-		page.get(`loadedShow`).replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
+		page.getElement(`audio`).src = showPath(show.dataset.showId);
+		page.getElement(`loadedShow`).replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
 
 		// reset and reveal radio controls
-		page.get(`seekBar`).value = 0;
-		page.get(`showTimeElapsed`).textContent = `00:00`;
-		page.get(`audio`).addEventListener(`loadedmetadata`, () => setTimestampFromSeconds(page.get(`showTimeTotal`), page.get(`audio`).duration));
-		page.get(`radioControls`).hidden = false;
+		page.getElement(`seekBar`).value = 0;
+		page.getElement(`showTimeElapsed`).textContent = `00:00`;
+		page.getElement(`audio`).addEventListener(`loadedmetadata`, () => setTimestampFromSeconds(page.getElement(`showTimeTotal`), page.getElement(`audio`).duration));
+		page.getElement(`radioControls`).hidden = false;
 	} else {
 		// empty loaded show and playlist
-		page.get(`playlist`).replaceChildren();
+		page.getElement(`playlist`).replaceChildren();
 
 		// reset radio
-		page.get(`audio`).pause(); // otherwise audio continues playing
-		page.get(`audio`).removeAttribute(`src`);
-		page.get(`showTimeElapsed`).textContent = `00:00`;
-		page.get(`showTimeTotal`).textContent = `00:00`;
-		page.get(`radioControls`).hidden = true;
-		page.get(`loadedShow`).setAttribute(`data-show-id`, ``);
+		page.getElement(`audio`).pause(); // otherwise audio continues playing
+		page.getElement(`audio`).removeAttribute(`src`);
+		page.getElement(`showTimeElapsed`).textContent = `00:00`;
+		page.getElement(`showTimeTotal`).textContent = `00:00`;
+		page.getElement(`radioControls`).hidden = true;
+		page.getElement(`loadedShow`).setAttribute(`data-show-id`, ``);
 	}
 }
 
 // replace loaded show with next show on playlist (or reset radio if playlist ends)
 function loadNextShow() {
-	removeShow(page.get(`playlist`).firstElementChild);
-	page.get(`seekBar`).value = 0;
-	if (page.get(`audio`).hasAttribute(`src`) && settings.get(`autoPlayNextShow`) && page.get(`audio`).paused) togglePlay();
+	removeShow(page.getElement(`playlist`).firstElementChild);
+	page.getElement(`seekBar`).value = 0;
+	if (page.getElement(`audio`).hasAttribute(`src`) && settings.getSetting(`autoPlayNextShow`) && page.getElement(`audio`).paused) togglePlay();
 }
 
 /* --
@@ -434,15 +434,15 @@ RADIO
 
 // if audio is playing, update seek bar and time-elapsed
 function updateSeekBar() {
-	if (!page.get(`audio`).paused && page.get(`seekBar`).dataset.seeking !== `true` && page.get(`audio`).currentTime && page.get(`audio`).duration) {
-		page.get(`seekBar`).value = page.get(`audio`).currentTime / page.get(`audio`).duration * 100;
-		setTimestampFromSeconds(page.get(`showTimeElapsed`), page.get(`audio`).currentTime);
+	if (!page.getElement(`audio`).paused && page.getElement(`seekBar`).dataset.seeking !== `true` && page.getElement(`audio`).currentTime && page.getElement(`audio`).duration) {
+		page.getElement(`seekBar`).value = page.getElement(`audio`).currentTime / page.getElement(`audio`).duration * 100;
+		setTimestampFromSeconds(page.getElement(`showTimeElapsed`), page.getElement(`audio`).currentTime);
 	}
 }
 
 // update displayed show time using seek bar
 function updateSeekTime(value) {
-	setTimestampFromSeconds(page.get(`showTimeElapsed`), page.get(`audio`).duration * value / 100);
+	setTimestampFromSeconds(page.getElement(`showTimeElapsed`), page.getElement(`audio`).duration * value / 100);
 }
 
 // set audio toggle icon and aria-label
@@ -453,33 +453,33 @@ function setAudioToggle(toggle, label, code) {
 
 // toggle audio play/pause
 function togglePlay() {
-	if (page.get(`audio`).paused) {
-		page.get(`audio`).play();
-		setAudioToggle(page.get(`playToggle`), `Pause show`, `pause`);
+	if (page.getElement(`audio`).paused) {
+		page.getElement(`audio`).play();
+		setAudioToggle(page.getElement(`playToggle`), `Pause show`, `pause`);
 	} else {
 		updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
-		page.get(`audio`).pause();
-		setAudioToggle(page.get(`playToggle`), `Play show`, `play`);
+		page.getElement(`audio`).pause();
+		setAudioToggle(page.getElement(`playToggle`), `Play show`, `play`);
 	}
 }
 
 // toggle audio mute/unmute
 function toggleMute() {
-	if (page.get(`audio`).muted) {
-		page.get(`audio`).muted = false;
-		setAudioToggle(page.get(`muteToggle`), `Mute audio`, `mute`);
-		page.get(`volumeControl`).value = page.get(`audio`).volume * 100;
+	if (page.getElement(`audio`).muted) {
+		page.getElement(`audio`).muted = false;
+		setAudioToggle(page.getElement(`muteToggle`), `Mute audio`, `mute`);
+		page.getElement(`volumeControl`).value = page.getElement(`audio`).volume * 100;
 	} else {
-		page.get(`audio`).muted = true;
-		setAudioToggle(page.get(`muteToggle`), `Unmute audio`, `unmute`);
-		page.get(`volumeControl`).value = 0;
+		page.getElement(`audio`).muted = true;
+		setAudioToggle(page.getElement(`muteToggle`), `Unmute audio`, `unmute`);
+		page.getElement(`volumeControl`).value = 0;
 	}
 }
 
 // set audio volume
 function setVolume(newVolume) {
-	page.get(`audio`).volume = newVolume;
-	if (page.get(`audio`).muted) toggleMute();
+	page.getElement(`audio`).volume = newVolume;
+	if (page.getElement(`audio`).muted) toggleMute();
 }
 
 /* --------------
@@ -498,7 +498,7 @@ function buildSeriesLink(series) {
 // build HTML for archive show item
 function buildShow(show) {
 	// add show details to series' show list
-	const templatedShow = templateHTML.clone(`archiveShow`);
+	const templatedShow = templateHTML.cloneTemplate(`archiveShow`);
 	const newShow = templatedShow.querySelector(`li`);
 	newShow.setAttributes({
 		"id": `archive-${show.ID}`,
@@ -520,7 +520,7 @@ function buildShow(show) {
 
 // build HTML for archive series item and its list of shows
 function buildSeries(series) {
-	const templatedSeries = templateHTML.clone(`archiveSeries`);
+	const templatedSeries = templateHTML.cloneTemplate(`archiveSeries`);
 	const newSeries = templatedSeries.querySelector(`li`);
 	newSeries.setAttributes({
 		"id": `archive-${series.code}`,
@@ -542,11 +542,11 @@ function buildSeries(series) {
 
 // build archive onto page
 function buildArchive() {
-	templateHTML.get(`archiveShow`).querySelector(`.content-notes`).open = settings.get(`notesOpen`);
+	templateHTML.getTemplate(`archiveShow`).querySelector(`.content-notes`).open = settings.getSetting(`notesOpen`);
 
-	page.get(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
-	page.get(`seriesList`).replaceChildren(...archive.map(buildSeries));
-	page.get(`seriesList`).addEventListener(`click`, () => {
+	page.getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
+	page.getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
+	page.getElement(`seriesList`).addEventListener(`click`, () => {
 		if (!event.target.hasAttribute(`aria-disabled`)) {
 			switch (event.target.dataset.action) {
 			case `add-series`: addSeries(event.target.closest(`#series-list > li`)); break;
@@ -596,33 +596,33 @@ function buildFeaturedShow() {
 =========== */
 
 // radio audio events
-page.get(`audio`).addEventListener(`ended`, loadNextShow);
+page.getElement(`audio`).addEventListener(`ended`, loadNextShow);
 
 // radio interface events
-page.get(`seekBar`).addEventListener(`change`, () => {
-	page.get(`seekBar`).dataset.seeking = `false`;
-	page.get(`audio`).currentTime = page.get(`audio`).duration * page.get(`seekBar`).value / 100;
+page.getElement(`seekBar`).addEventListener(`change`, () => {
+	page.getElement(`seekBar`).dataset.seeking = `false`;
+	page.getElement(`audio`).currentTime = page.getElement(`audio`).duration * page.getElement(`seekBar`).value / 100;
 });
-page.get(`seekBar`).addEventListener(`input`, () => {
-	page.get(`seekBar`).dataset.seeking = `true`;
-	updateSeekTime(page.get(`seekBar`).value); // must set input.value as argument here
+page.getElement(`seekBar`).addEventListener(`input`, () => {
+	page.getElement(`seekBar`).dataset.seeking = `true`;
+	updateSeekTime(page.getElement(`seekBar`).value); // must set input.value as argument here
 });
-page.get(`playToggle`).addEventListener(`click`, togglePlay);
-page.get(`skipButton`).addEventListener(`click`, loadNextShow);
-page.get(`muteToggle`).addEventListener(`click`, toggleMute);
-page.get(`volumeControl`).addEventListener(`input`, () => setVolume(page.get(`volumeControl`).value / 100));
+page.getElement(`playToggle`).addEventListener(`click`, togglePlay);
+page.getElement(`skipButton`).addEventListener(`click`, loadNextShow);
+page.getElement(`muteToggle`).addEventListener(`click`, toggleMute);
+page.getElement(`volumeControl`).addEventListener(`input`, () => setVolume(page.getElement(`volumeControl`).value / 100));
 
 // booth interface events
 document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
 document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
 document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
-page.get(`clearButton`).addEventListener(`click`, () => {
-	if (!page.get(`clearButton`).hasAttribute(`aria-disabled`)) revealClearPlaylistControls();
+page.getElement(`clearButton`).addEventListener(`click`, () => {
+	if (!page.getElement(`clearButton`).hasAttribute(`aria-disabled`)) revealClearPlaylistControls();
 });
 
 document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
 document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
-page.get(`playlist`).addEventListener(`click`, () => {
+page.getElement(`playlist`).addEventListener(`click`, () => {
 	const target = event.target.closest(`#playlist > li`);
 	switch (event.target.dataset.action) {
 	case `move-up`: moveShowUp(target); break;
@@ -640,11 +640,11 @@ document.getElementById(`add-archive-button`).addEventListener(`click`, addArchi
 for (const setting of [`copyrightSafety`, `flatRadio`, `autoPlayNextShow`, `notesOpen`]) {
 	document.getElementById(`${setting.camelToKebab()}-toggle`).addEventListener(`click`, () => settings.toggle(setting));
 }
-page.get(`themeButtons`).addEventListener(`click`, () => {
-	if (event.target.tagName === `BUTTON` && !event.target.closest(`button`).hasAttribute(`aria-disabled`)) styles.set(`theme`, event.target.dataset.option);
+page.getElement(`themeButtons`).addEventListener(`click`, () => {
+	if (event.target.tagName === `BUTTON` && !event.target.closest(`button`).hasAttribute(`aria-disabled`)) styles.setStyle(`theme`, event.target.dataset.option);
 });
-page.get(`fontButtons`).addEventListener(`click`, () => {
-	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) styles.set(`font`, event.target.dataset.option);
+page.getElement(`fontButtons`).addEventListener(`click`, () => {
+	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) styles.setStyle(`font`, event.target.dataset.option);
 });
 
 // on pageload, execute various tasks
@@ -654,9 +654,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	styles.initialise();
 
 	// initialise radio
-	page.get(`audio`).paused = true;
-	page.get(`seekBar`).value = 0;
-	setVolume(page.get(`volumeControl`).value / 100);
+	page.getElement(`audio`).paused = true;
+	page.getElement(`seekBar`).value = 0;
+	setVolume(page.getElement(`volumeControl`).value / 100);
 	setInterval(updateSeekBar, 1000);
 
 	// build various page sections
@@ -664,19 +664,19 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	loadPlaylist();
 	buildFeaturedShow();
 	const playlistObserver = new MutationObserver(() => {
-		if (!makingLargePlaylistChanges) store(`playlist`, getShowIDs(page.get(`playlist`).children));
+		if (!makingLargePlaylistChanges) store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 	});
-	playlistObserver.observe(page.get(`playlist`), {"childList": true});
+	playlistObserver.observe(page.getElement(`playlist`), {"childList": true});
 
 	// update page head data
-	page.get(`title`).dataset.original = document.title;
+	page.getElement(`title`).dataset.original = document.title;
 	if (location.hash) navigateToSection();
 });
 
 // on closing window/browser tab, preserve audio level
 window.addEventListener(`beforeunload`, () => {
 	// if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
-	if (page.get(`audio`).muted) page.get(`volumeControl`).value = page.get(`audio`).volume * 100;
+	if (page.getElement(`audio`).muted) page.getElement(`volumeControl`).value = page.getElement(`audio`).volume * 100;
 });
 
 // update settings, styles, and playlist if styles change in another browsing context
@@ -684,22 +684,22 @@ window.addEventListener(`storage`, () => {
 	const newValue = JSON.parse(event.newValue);
 	switch (event.key) {
 	case `settings`:
-		if (settings.get(`copyrightSafety`) !== newValue.copyrightSafety) settings.toggle(`copyrightSafety`);
-		if (settings.get(`flatRadio`) !== newValue.flatRadio) settings.toggle(`flatRadio`);
-		if (settings.get(`autoPlayNextShow`) !== newValue.autoPlayNextShow) settings.toggle(`autoPlayNextShow`);
-		if (settings.get(`notesOpen`) !== newValue.notesOpen) settings.toggle(`notesOpen`);
+		if (settings.getSetting(`copyrightSafety`) !== newValue.copyrightSafety) settings.toggle(`copyrightSafety`);
+		if (settings.getSetting(`flatRadio`) !== newValue.flatRadio) settings.toggle(`flatRadio`);
+		if (settings.getSetting(`autoPlayNextShow`) !== newValue.autoPlayNextShow) settings.toggle(`autoPlayNextShow`);
+		if (settings.getSetting(`notesOpen`) !== newValue.notesOpen) settings.toggle(`notesOpen`);
 		console.info(`automatically matched settings change in another browsing context`);
 		break;
 	case `styles`:
-		if (styles.get(`theme`) !== newValue.theme) styles.set(`theme`, newValue.theme);
-		if (styles.get(`font`) !== newValue.font) styles.set(`font`, newValue.font);
+		if (styles.getStyle(`theme`) !== newValue.theme) styles.setStyle(`theme`, newValue.theme);
+		if (styles.getStyle(`font`) !== newValue.font) styles.setStyle(`font`, newValue.font);
 		console.info(`automatically matched style change in another browsing context`);
 		break;
 	case `playlist`:
 		// could do this with a broadcast channel instead of mutation observer + storage event
 		// however, that adds an extra tech and it'd be less robust than rebuilding the playlist from scratch
 		loadPlaylist();
-		page.get(`seriesList`).querySelectorAll(`[data-action="add-show"]`).forEach(button => {
+		page.getElement(`seriesList`).querySelectorAll(`[data-action="add-show"]`).forEach(button => {
 			if (event.newValue.includes(button.dataset.target)) button.press();
 			else button.unpress();
 		})
