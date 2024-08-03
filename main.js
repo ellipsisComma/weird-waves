@@ -85,7 +85,6 @@ const styles = (() => {
 			const defaultButton = buttons.querySelector(`button`);
 			local[style] = defaultButton.dataset.option;
 			defaultButton.press();
-			if (style === `theme`) updateFavicon();
 		} else newButton.press();
 	}
 
