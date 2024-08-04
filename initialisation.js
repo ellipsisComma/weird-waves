@@ -1,7 +1,7 @@
 /*jshint esversion: 11*/
 
 // initialise user-selected (or default) site display settings
-for (const [style, option] of Object.entries(retrieve(`styles`, {}))) document.documentElement.dataset[style] = option;
+Object.entries(retrieve(`styles`, {})).forEach(([style, option]) => document.documentElement.dataset[style] = option);
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {

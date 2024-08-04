@@ -555,10 +555,10 @@ function buildArchive() {
 	});
 
 	// build out stats list
-	for (const [name, value] of Object.entries({
+	Object.entries({
 		"series": archive.length,
 		"shows": archive.reduce((a, series) => a + series.shows.length, 0),
-	})) document.getElementById(`stats-${name}`).textContent = value;
+	}).forEach(([name, value]) => document.getElementById(`stats-${name}`).textContent = value);
 
 	// clear archive object
 	archive = null;

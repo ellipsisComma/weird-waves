@@ -20,7 +20,7 @@ function make(element) {
 
 // add an object of attributes to an Element
 Element.prototype.setAttributes = function (attrs) {
-	for (const [attr, value] of Object.entries(attrs)) this.setAttribute(attr, value);
+	Object.entries(attrs).forEach(([name, value]) => this.setAttribute(name, value));
 };
 
 // remove an array of attributes from an Element
