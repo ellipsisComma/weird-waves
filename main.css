@@ -270,6 +270,7 @@ body {
 	background-color: var(--back-colour);
 	font-family: var(--font-stack);
 	line-height: 1.4;
+	accent-color: var(--cold-colour);
 }
 #container {
 	margin-inline: auto;
