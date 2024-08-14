@@ -17,6 +17,28 @@
 <time><xsl:value-of select="substring-before(., 'T')" /></time>
 </xsl:template>
 
+<!--copy an XHTML element and its attributes and text content, and any child elements recursively, to the output
+
+copy-children template taken from here by Keith M.: https://aoeex.com/phile/xslt-recursive-copy/ (I found this while searching for a way to do exactly what this does)-->
+<xsl:template name="copy-children">
+<xsl:param name="element" />
+<xsl:for-each select="$element/child::node()">
+	<xsl:choose>
+		<xsl:when test="self::text()">
+			<xsl:value-of select="self::node()"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:element name="{local-name()}">
+				<xsl:copy-of select="attribute::*" />
+				<xsl:call-template name="copy-children">
+					<xsl:with-param name="element" select="self::node()" />
+				</xsl:call-template>
+			</xsl:element>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:for-each>
+</xsl:template>
+
 
 
 <!--
@@ -38,9 +60,9 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	</xsl:if>
 	<header>
 		<h3>
-			<span class="may-contain-html">
-				<xsl:value-of select="atom:title" />
-			</span>
+			<xsl:call-template name="copy-children">
+				<xsl:with-param name="element" select="atom:title" />
+			</xsl:call-template>
 			<xsl:text> </xsl:text>
 			<a>
 				<xsl:attribute name="href">
@@ -58,8 +80,10 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			</xsl:if>
 		</div>
 	</header>
-	<div class="may-contain-html">
-		<xsl:value-of select="atom:content" />
+	<div>
+		<xsl:call-template name="copy-children">
+			<xsl:with-param name="element" select="atom:content" />
+		</xsl:call-template>
 	</div>
 </article></li>
 </xsl:template>
@@ -75,8 +99,10 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		<xsl:apply-templates select="atom:updated" mode="timestamp-to-date" />
 	</a>
 </dt>
-<dd class="may-contain-html">
-	<xsl:value-of select="atom:title" />
+<dd>
+	<xsl:call-template name="copy-children">
+		<xsl:with-param name="element" select="atom:title" />
+	</xsl:call-template>
 </dd>
 </xsl:template>
 
@@ -352,11 +378,6 @@ function switchFont(font) {
 // update favicons according to theme
 setTimeout(() => switchTheme(document.documentElement.dataset.theme), 100);
 
-// re-parse elements from the parsed file that contain HTML (or SVG)
-const HTMLRegex = /<|>|&#?\w+;/;
-for (const content of document.querySelectorAll(`.may-contain-html`)) if (HTMLRegex.test(content.innerText)) content.innerHTML = content.innerText;
-]]>
-
 // update styles if styles change in another browsing context
 window.addEventListener(`storage`, () => {
 	const newValue = JSON.parse(event.newValue);
@@ -366,7 +387,7 @@ window.addEventListener(`storage`, () => {
 		console.info(`automatically matched style change in another browsing context`);
 	}
 });
-</script>
+]]></script>
 </body>
 </html>
 
