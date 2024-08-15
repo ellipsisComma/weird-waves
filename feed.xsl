@@ -17,9 +17,11 @@
 <time><xsl:value-of select="substring-before(., 'T')" /></time>
 </xsl:template>
 
-<!--copy an XHTML element and its attributes and text content, and any child elements recursively, to the output
+<!--
+copy an XHTML element and its attributes and text content, and any child elements recursively, to the output (xsl:copy-of doesn't output correct HTML in Firefox due to incorrect local-name vs node-name vs tag-name)
 
-copy-children template taken from here by Keith M.: https://aoeex.com/phile/xslt-recursive-copy/ (I found this while searching for a way to do exactly what this does)-->
+copy-children template taken from here by Keith M.: https://aoeex.com/phile/xslt-recursive-copy/
+-->
 <xsl:template name="copy-children">
 <xsl:param name="element" />
 <xsl:for-each select="$element/child::node()">
