@@ -639,11 +639,10 @@ document.getElementById(`add-archive-button`).addEventListener(`click`, addArchi
 for (const setting of [`copyrightSafety`, `flatRadio`, `autoPlayNextShow`, `notesOpen`]) {
 	document.getElementById(`${setting.camelToKebab()}-toggle`).addEventListener(`click`, () => settings.toggle(setting));
 }
-page.getElement(`themeButtons`).addEventListener(`click`, () => {
-	if (event.target.tagName === `BUTTON` && !event.target.closest(`button`).hasAttribute(`aria-disabled`)) styles.setStyle(`theme`, event.target.dataset.option);
-});
-page.getElement(`fontButtons`).addEventListener(`click`, () => {
-	if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) styles.setStyle(`font`, event.target.dataset.option);
+[`theme`, `font`].forEach(style => {
+	page.getElement(`${style}Buttons`).addEventListener(`click`, () => {
+		if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) styles.setStyle(style, event.target.dataset.option);
+	});
 });
 
 // on pageload, execute various tasks
