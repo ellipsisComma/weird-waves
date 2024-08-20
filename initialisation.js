@@ -13,7 +13,7 @@ function navigateToSection() {
 		const navLink = document.querySelector(`nav a[href="#${section.id}"]`);
 		document.title = `${navLink.innerText} / ${page.getElement(`title`).dataset.original}`;
 		navLink.setAttribute(`aria-current`, `page`);
-	}
+	} else document.title = page.getElement(`title`).dataset.original;
 }
 
 window.addEventListener(`hashchange`, navigateToSection);

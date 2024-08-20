@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:atom="http://www.w3.org/2005/Atom">
+<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <xsl:output method="html" encoding="UTF-8" doctype-system="about:legacy-compat" />
 
 <!--manual variables-->
@@ -17,28 +17,9 @@
 <time><xsl:value-of select="substring-before(., 'T')" /></time>
 </xsl:template>
 
-<!--
-copy an XHTML element and its attributes and text content, and any child elements recursively, to the output (xsl:copy-of doesn't output correct HTML in Firefox due to incorrect local-name vs node-name vs tag-name)
-
-copy-children template taken from here by Keith M.: https://aoeex.com/phile/xslt-recursive-copy/
--->
-<xsl:template name="copy-children">
-<xsl:param name="element" />
-<xsl:for-each select="$element/child::node()">
-	<xsl:choose>
-		<xsl:when test="self::text()">
-			<xsl:value-of select="self::node()"/>
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:element name="{local-name()}">
-				<xsl:copy-of select="attribute::*" />
-				<xsl:call-template name="copy-children">
-					<xsl:with-param name="element" select="self::node()" />
-				</xsl:call-template>
-			</xsl:element>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:for-each>
+<!--deep copy of an xhtml-container's grandchildren-->
+<xsl:template match="*[@type = 'xhtml']">
+<xsl:copy-of select="xhtml:div/node()" />
 </xsl:template>
 
 
@@ -62,9 +43,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	</xsl:if>
 	<header>
 		<h3>
-			<xsl:call-template name="copy-children">
-				<xsl:with-param name="element" select="atom:title" />
-			</xsl:call-template>
+			<xsl:apply-templates select="atom:title" />
 			<xsl:text> </xsl:text>
 			<a>
 				<xsl:attribute name="href">
@@ -83,9 +62,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		</div>
 	</header>
 	<div>
-		<xsl:call-template name="copy-children">
-			<xsl:with-param name="element" select="atom:content" />
-		</xsl:call-template>
+		<xsl:apply-templates select="atom:content" />
 	</div>
 </article></li>
 </xsl:template>
@@ -102,9 +79,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	</a>
 </dt>
 <dd>
-	<xsl:call-template name="copy-children">
-		<xsl:with-param name="element" select="atom:title" />
-	</xsl:call-template>
+	<xsl:apply-templates select="atom:title" />
 </dd>
 </xsl:template>
 
@@ -128,7 +103,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2026%2026%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%3E%3Canimate%20attributeName%3D%22opacity%22%20values%3D%221%3B%200%3B%200%3B%201%22%20keyTimes%3D%220%3B%200%3B%201%3B%201%22%20dur%3D%221s%22%20repeatCount%3D%221%22%2F%3E%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2228%22%20height%3D%2228%22%20fill%3D%22%23000627%22%2F%3E%3Cpath%20stroke%3D%22%23ff6767%22%20d%3D%22M7%2011a3%203%200%200%201%203%203a3%203%200%200%201%206%200a3%203%200%200%201%203-3%22%2F%3E%3Cpath%20stroke%3D%22%23b9ab00%22%20d%3D%22M7%208a6%206%200%200%201%2012%200v4a6%206%200%200%201-12%200zm12%203h3v1a9%209%200%200%201-18%200v-1h3m6%2010v3m-4%200h8%22%2F%3E%3C%2Fsvg%3E" sizes="any" />
 
 	<script src="./utilities.js?v=2024-08-04"></script>
-	<script src="./initialisation.js?v=2024-08-04"></script>
+	<script src="./initialisation.js?v=2024-08-20"></script>
 </head>
 
 
