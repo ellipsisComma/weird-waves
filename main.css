@@ -240,8 +240,7 @@ RESPONSIVITY
 ============ */
 
 .visually-hidden {
-	clip: rect(0 0 0 0);
-	clip-path: inset(100%);
+	clip-path: inset(50%);
 	block-size: 1px;
 	inline-size: 1px;
 	overflow: hidden;
@@ -324,11 +323,17 @@ h3 {
 	justify-content: center;
 	gap: 1em;
 }
+a::selection, a *::selection {
+	background-color: var(--hot-colour);
+}
 a:link {
 	color: var(--hot-colour);
 }
 a:visited {
 	color: var(--cold-colour);
+	&::selection, & *::selection {
+		background-color: var(--cold-colour);
+	}
 }
 a:active {
 	color: var(--hot-colour);
@@ -598,9 +603,9 @@ input[type="range"]:active {
 		padding-inline: 0.2em;
 		align-items: center;
 		gap: 0.2em;
-		user-select: none;
 		&[href^="#"] {
 			text-decoration: none;
+			user-select: none;
 			&:is(:hover, [aria-current="page"]) {
 				outline-width: var(--line-width);
 				outline-style: solid;
@@ -1017,7 +1022,13 @@ use[href="#svg-toggle-tick"] {
 		font-size: 1.2em;
 	}
 	h1, h2 {
-		text-shadow: 0.07em 0.07em 0 var(--back-colour), -0.05em -0.05em 0 var(--back-colour), 0.1em 0.09em 0 var(--fore-colour);
+		--shadow-1: 0.07em 0.07em 0;
+		--shadow-2: -0.05em -0.05em 0;
+		--shadow-3: 0.1em 0.09em 0;
+		text-shadow: var(--shadow-1) var(--back-colour), var(--shadow-2) var(--back-colour), var(--shadow-3) var(--fore-colour);
+		&::selection {
+			text-shadow: var(--shadow-1) var(--cold-colour), var(--shadow-2) var(--cold-colour), var(--shadow-3) var(--back-colour);
+		}
 	}
 	.code-block {
 		tab-size: 3ch;
@@ -1123,7 +1134,7 @@ use[href="#svg-toggle-tick"] {
 	/* RADIO */
 	#sidebar {
 		grid-area: radio;
-		align-self: start;
+		block-size: max-content;
 		position: sticky;
 		inline-size: calc(var(--widescreen-max-inline-size) - var(--main-column-max-inline-size) - var(--gap-size));
 		inset-block-start: var(--gap-size);
