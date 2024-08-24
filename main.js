@@ -171,8 +171,12 @@ templateHTML.setTemplate(`playlistItem`, `playlist-item`);
 templateHTML.setTemplate(`archiveSeries`, `archive-series`);
 templateHTML.setTemplate(`archiveShow`, `archive-show`);
 
-// record whether playlist is currently undergoing large changes
-let makingLargePlaylistChanges = false;
+// mutation observer to store playlist changes
+const playlistObserver = new MutationObserver(storePlaylist);
+
+function connectPlaylistObserver() {
+	playlistObserver.observe(page.getElement(`playlist`), {"childList": true});
+}
 
 
 
@@ -223,6 +227,11 @@ function expandShowInfo(show, seriesInArchive) {
 	show.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
 }
 
+// store playlist as list of show IDs
+function storePlaylist() {
+	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
+}
+
 
 
 /* -----
@@ -234,10 +243,7 @@ function shufflePlaylist() {
 	let i = page.getElement(`playlist`).children.length;
 	if (i < 2) return;
 
-	makingLargePlaylistChanges = true;
 	while (i > 0) page.getElement(`playlist`).append(page.getElement(`playlist`).children[Math.floor(Math.random() * i--)]);
-	makingLargePlaylistChanges = false;
-	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 
 	loadShow();
 }
@@ -287,11 +293,8 @@ function importPlaylist() {
 	page.getElement(`importExport`).value = ``;
 
 	if (invalidIDs.length === 0) {
-		makingLargePlaylistChanges = true;
 		clearPlaylist();
 		importIDs.forEach(addShow);
-		makingLargePlaylistChanges = false;
-		store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 	} else {
 		invalidIDs.forEach(ID => page.getElement(`importErrorList`).appendChild(document.createElement(`li`)).textContent = ID);
 		page.getElement(`importExport`).value = importIDs.join(`\n`);
@@ -302,10 +305,8 @@ function importPlaylist() {
 
 // load playlist from local storage
 function loadPlaylist() {
-	makingLargePlaylistChanges = true;
 	page.getElement(`playlist`).replaceChildren();
 	retrieve(`playlist`, []).filter(getShowInArchive).forEach(addShow);
-	makingLargePlaylistChanges = false;
 	loadShow();
 }
 
@@ -342,18 +343,13 @@ function addShow(ID) {
 
 // add entire archive to playlist
 function addArchive() {
-	makingLargePlaylistChanges = true;
 	getShowIDs(page.getElement(`seriesList`).querySelectorAll(`${settings.getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
-	makingLargePlaylistChanges = false;
-	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
+	storePlaylist();
 }
 
 // add entire series to playlist
 function addSeries(seriesInArchive) {
-	makingLargePlaylistChanges = true;
-	[...seriesInArchive.querySelectorAll(`.show-list > li`)].forEach(addShow);
-	makingLargePlaylistChanges = false;
-	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
+	getShowIDs(seriesInArchive.querySelectorAll(`.show-list > li`)).forEach(addShow);
 }
 
 // add a random show or banger to the playlist
@@ -369,13 +365,11 @@ function addRandomShow(showType) {
 
 function moveShowUp(target) {
 	target.previousElementSibling?.before(target);
-	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 	loadShow();
 }
 
 function moveShowDown(target) {
 	target.nextElementSibling?.after(target);
-	store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
 	loadShow();
 }
 
@@ -661,10 +655,9 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	buildArchive();
 	loadPlaylist();
 	buildFeaturedShow();
-	const playlistObserver = new MutationObserver(() => {
-		if (!makingLargePlaylistChanges) store(`playlist`, getShowIDs(page.getElement(`playlist`).children));
-	});
-	playlistObserver.observe(page.getElement(`playlist`), {"childList": true});
+
+	// start watching for playlist changes
+	connectPlaylistObserver();
 
 	// update page head data
 	page.getElement(`title`).dataset.original = document.title;
@@ -696,7 +689,9 @@ window.addEventListener(`storage`, () => {
 	case `playlist`:
 		// could do this with a broadcast channel instead of mutation observer + storage event
 		// however, that adds an extra tech and it'd be less robust than rebuilding the playlist from scratch
+		playlistObserver.disconnect();
 		loadPlaylist();
+		connectPlaylistObserver();
 		page.getElement(`seriesList`).querySelectorAll(`[data-action="add-show"]`).forEach(button => {
 			if (event.newValue.includes(button.dataset.target)) button.press();
 			else button.unpress();
