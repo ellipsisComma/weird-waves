@@ -31,7 +31,8 @@ let archive = [
 	"blurb": `A man's fiancée is lost at sea; months later he finds the wreck, its calendar set to that very day. Adapted from a story by William Hope Hodgson.`,
 	"duration": 1677,
 	},
-],},
+],
+},
 {
 "code": `BC`,
 "heading": `<cite>The Black Chapel</cite>`,
@@ -47,7 +48,8 @@ let archive = [
 	"duration": 819,
 	"banger": true,
 	},
-],},
+],
+},
 {
 "code": `BkM`,
 "heading": `<cite>The Black Mass</cite>`,
@@ -175,7 +177,8 @@ let archive = [
 	"blurb": `An esoteric researcher shows proof positive of life after death. A people-watcher stalks an unreadable man. Adapted from stories by Graham Greene and Edgar Allen Poe.`,
 	"duration": 1138,
 	},
-],},
+],
+},
 {
 "code": `CAS`,
 "heading": `<abbr>CAS</abbr> selection`,
@@ -241,7 +244,8 @@ let archive = [
 	"blurb": `Seven of Smith's poems, read by the author himself: <cite>High Surf</cite>, <cite>Malediction</cite>, <cite>Desert Dweller</cite>, <cite>Seeker</cite>, <cite>Moly</cite>, <cite>Nada</cite>, and <cite>Don Quixote on Market Street</cite>.`,
 	"duration": 666,
 	},
-],},
+],
+},
 {
 "code": `CRW`,
 "heading": `<cite><abbr>CBS</abbr> Radio Workshop</cite>`,
@@ -257,7 +261,8 @@ let archive = [
 	"duration": 1483,
 	"banger": true,
 	},
-],},
+],
+},
 {
 "code": `CW`,
 "heading": `<cite>Columbia Workshop</cite>`,
@@ -287,7 +292,8 @@ let archive = [
 	"duration": 1691,
 	"banger": true,
 	},
-],},
+],
+},
 {
 "code": `DF`,
 "heading": `<cite>Dark Fantasy</cite>`,
@@ -309,7 +315,8 @@ let archive = [
 	"notes": `car crash, gunshot (22:41)`,
 	"duration": 1620,
 	},
-],},
+],
+},
 {
 "code": `DX`,
 "heading": `<cite>Dimension X</cite>`,
@@ -403,7 +410,8 @@ let archive = [
 	"duration": 1827,
 	"banger": true,
 	},
-],},
+],
+},
 {
 "code": `DQ`,
 "heading": `<cite>The Dream-Quest</cite>`,
@@ -495,7 +503,8 @@ let archive = [
 	"blurb": `<cite>To the sunset city</cite>.`,
 	"duration": 688,
 	},
-],},
+],
+},
 {
 "code": `Esc`,
 "heading": `<cite>Escape</cite>`,
@@ -539,7 +548,8 @@ let archive = [
 	"notes": `betrayal, malaria, eaten by piranhas`,
 	"duration": 1770,
 	},
-],},
+],
+},
 {
 "code": `FOT`,
 "heading": `<cite>Fifty-One Tales</cite>`,
@@ -574,7 +584,8 @@ let archive = [
 	"notes": `animal sacrifice, lynching`,
 	"duration": 2067,
 	},
-],},
+],
+},
 {
 "code": `GGP`,
 "heading": `<cite>The Great God Pan</cite>`,
@@ -608,7 +619,8 @@ let archive = [
 	"notes": `body horror`,
 	"duration": 1659,
 	},
-],},
+],
+},
 {
 "code": `HF`,
 "heading": `<cite>The Hall of Fantasy</cite>`,
@@ -658,7 +670,8 @@ let archive = [
 	"notes": `stalking`,
 	"duration": 1468,
 	},
-],},
+],
+},
 {
 "code": `KY`,
 "heading": `<cite>The King in Yellow</cite>`,
@@ -713,7 +726,8 @@ let archive = [
 	"blurb": `A painter and his model encounter an abomination after reading the banned play <cite>The King in Yellow</cite>.`,
 	"duration": 2671,
 	},
-],},
+],
+},
 {
 "code": `LV`,
 "heading": `LibriVox selection`,
@@ -1029,7 +1043,8 @@ let archive = [
 	"notes": `adultery, blackmail, disfigurement, suicide`,
 	"duration": 1065,
 	},
-],},
+],
+},
 {
 "code": `LO`,
 "heading": `<cite>Lights Out</cite>`,
@@ -1100,7 +1115,8 @@ let archive = [
 	"notes": `darkness`,
 	"duration": 1763,
 	},
-],},
+],
+},
 {
 "code": `MS`,
 "heading": `<cite>The Machine Stops</cite>`,
@@ -1127,7 +1143,8 @@ let archive = [
 	"blurb": `<cite>The Homeless</cite>.`,
 	"duration": 1424,
 	},
-],},
+],
+},
 {
 "code": `McT`,
 "heading": `<cite>The Mercury Theatre</cite>`,
@@ -1163,7 +1180,8 @@ let archive = [
 	"notes": `asphyxiation, plane crash, poison-gassing`,
 	"duration": 1146,
 	},
-],},
+],
+},
 {
 "code": `Mw`,
 "heading": `<cite>Mindwebs</cite>`,
@@ -1443,7 +1461,8 @@ let archive = [
 	"blurb": `An apocalyptic blaze&mdash;a guiding star. A boy receives a wondrous Christmas gift. Written by Arthur C.&thinsp;Clarke and Ray Bradbury.`,
 	"duration": 1773,
 	},
-],},
+],
+},
 {
 "code": `MsT`,
 "heading": `<cite>The Mysterious Traveler</cite>`,
@@ -1466,7 +1485,8 @@ let archive = [
 	"notes": `alcohol, fall death, gunshots (4:38&ndash;40, 4:50&ndash;53, 24:06)`,
 	"duration": 1735,
 	},
-],},
+],
+},
 {
 "code": `Nf`,
 "heading": `<cite>Nightfall</cite>`,
@@ -1523,7 +1543,8 @@ let archive = [
 	"notes": `arson, phone eavesdropping`,
 	"duration": 1680,
 	},
-],},
+],
+},
 {
 "code": `PC`,
 "heading": `The Pegāna Cycle`,
@@ -1614,7 +1635,8 @@ let archive = [
 	"blurb": `The dreamer returns once more and visits the palace of Singanee, avenger of ruined Perdóndaris, and grows weary of dreams. Read by Ed Humpal.`,
 	"duration": 2068,
 	},
-],},
+],
+},
 {
 "code": `QP`,
 "heading": `<cite>Quiet, Please</cite>`,
@@ -1888,7 +1910,8 @@ let archive = [
 	"blurb": `The last man alive tells a story of love, hate, bigotry, supremacism, and war&mdash;all-consuming war.`,
 	"duration": 1783,
 	},
-],},
+],
+},
 {
 "code": `RCP`,
 "heading": `<cite>Radio City Playhouse</cite>`,
@@ -1904,7 +1927,8 @@ let archive = [
 	"duration": 1747,
 	"banger": true,
 	},
-],},
+],
+},
 {
 "code": `SET`,
 "heading": `<cite>Seeing Ear Theater</cite>`,
@@ -1985,7 +2009,8 @@ let archive = [
 	"notes": `helplessness, live burial`,
 	"duration": 1205,
 	},
-],},
+],
+},
 {
 "code": `SNM`,
 "heading": `<cite>Sleep No More</cite>`,
@@ -2015,7 +2040,8 @@ let archive = [
 	"notes": `apparent suicide, fall death, traffic accidents`,
 	"duration": 1713,
 	},
-],},
+],
+},
 {
 "code": `Sus`,
 "heading": `<cite>Suspense</cite>`,
@@ -2206,7 +2232,8 @@ let archive = [
 	"notes": `explosion (20:02&ndash;20:09)`,
 	"duration": 1383,
 	},
-],},
+],
+},
 {
 "code": `TF`,
 "heading": `<cite>Theater 5</cite>`,
@@ -2229,7 +2256,8 @@ let archive = [
 	"duration": 1249,
 	"banger": true,
 	},
-],},
+],
+},
 {
 "code": `WC`,
 "heading": `<cite>The Weird Circle</cite>`,
@@ -2252,7 +2280,8 @@ let archive = [
 	"notes": `animal death, starvation`,
 	"duration": 1579,
 	},
-],},
+],
+},
 {
 "code": `Wil`,
 "heading": `<cite>The Willows</cite>`,
@@ -2284,7 +2313,8 @@ let archive = [
 	"blurb": `The horror strikes directly and the travellers confront a world beyond their own.`,
 	"duration": 1739,
 	},
-],},
+],
+},
 {
 "code": `WT`,
 "heading": `<cite>The Witch's Tale</cite>`,
@@ -2306,7 +2336,8 @@ let archive = [
 	"notes": `head wound, obsession, stab death`,
 	"duration": 1523,
 	},
-],},
+],
+},
 {
 "code": `WBP`,
 "heading": `<cite>With Book and Pipe</cite>`,
@@ -2322,7 +2353,8 @@ let archive = [
 	"duration": 860,
 	"banger": true,
 	},
-],},
+],
+},
 {
 "code": `XMO`,
 "heading": `<cite>X Minus One</cite>`,
@@ -2408,5 +2440,6 @@ let archive = [
 	"blurb": `The first astronauts on the moon find old footprints in the dust. Adapted from a story by Poul Anderson.`,
 	"duration": 1202,
 	},
-],},
+],
+},
 ];
