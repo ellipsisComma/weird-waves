@@ -68,10 +68,21 @@ Array.prototype.sumByKey = function (...args) {
 	return this.reduce((a, b) => a + (
 		args.length > 1
 		? b[args[0]].sumByKey(...args.slice(1))
-		: Array.isArray(b[args[0]])
+		: b[args[0]] instanceof Array
 			? b[args[0]].sum()
 			: b[args[0]]), 0);
 };
+
+
+
+/* ============
+	OBJECTS
+============ */
+
+// check whether a variable is a standard associative-array/key-value-pair object (e.g. as created by an object literal)
+function isObject(variable) {
+	return variable instanceof Object && variable.constructor === Object;
+}
 
 
 
