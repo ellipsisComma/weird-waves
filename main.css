@@ -323,7 +323,7 @@ h3 {
 	justify-content: center;
 	gap: 1em;
 }
-a::selection, a *::selection {
+:is(a, a *)::selection {
 	background-color: var(--hot-colour);
 }
 a:link {
@@ -331,7 +331,7 @@ a:link {
 }
 a:visited {
 	color: var(--cold-colour);
-	&::selection, & *::selection {
+	:is(&, & *)::selection {
 		background-color: var(--cold-colour);
 	}
 }
