@@ -87,7 +87,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 
 <!--main output template-->
 <xsl:template match="atom:feed">
-<html lang="en-GB" data-theme="dark" data-font="serif">
+<html lang="en-GB" data-theme="dark" data-font="serif" dir="auto">
 <head>
 	<title><xsl:value-of select="concat(atom:title, ' Feed')" /></title>
 
