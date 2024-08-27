@@ -36,7 +36,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<link rel="alternate" href="https://weirdwaves.net/" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Right-to-left script support</div></title>
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
-			<p>Made a few small tweaks to support right-to-left scripts (e.g. if someone translates Weird Waves using a machine translation app). Toggle switch thumbs and theme palettes are flipped left-to-right, and text should follow the script's typical direction (so if the page is shown in its default script, Latin, then it'll display left-to-right, and if it's displayed in e.g. Arabic, it'll display right-to-left).</p>
+			<p>Made a few small tweaks to support right-to-left scripts (e.g. if someone translates Weird Waves using a machine translation app). Toggle switch thumbs and theme palettes are flipped horizontally, and text should follow the script's typical direction (so if the page is shown in its default script, Latin, then it'll display left-to-right, and if it's displayed in e.g. Arabic, it'll display right-to-left).</p>
 		</div></content>
 		<published>2024-08-27T00:00:01+01:00</published>
 		<updated>2024-08-27T00:00:01+01:00</updated>
