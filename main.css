@@ -606,14 +606,14 @@ input[type="range"]:active {
 		&[href^="#"] {
 			text-decoration: none;
 			user-select: none;
-			&:is(:hover, [aria-current="page"]) {
-				outline-width: var(--line-width);
-				outline-style: solid;
-				outline-color: var(--fore-colour);
-				outline-offset: 0.2em;
-			}
-			&:is(:active, :visited, :link) {
+			&:is(:link, :visited) {
 				color: unset;
+			}
+			&[aria-current="page"] {
+				color: var(--cold-colour);
+			}
+			&:is(:hover, :focus, :active) {
+				color: var(--hot-colour);
 			}
 		}
 		&:not([href^="#"]) {
