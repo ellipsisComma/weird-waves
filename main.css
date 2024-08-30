@@ -106,10 +106,10 @@ RESPONSIVITY
 	--cold-colour: #103050;
 }
 [data-theme="mist"] {
-	--fore-colour: #2d2d2d;
+	--fore-colour: #000;
 	--back-colour: #f0faff;
-	--hot-colour: #005e6e;
-	--cold-colour: #545464;
+	--hot-colour: #005b6d;
+	--cold-colour: #344ea4;
 }
 [data-theme="silver"] {
 	--fore-colour: #595959;
