@@ -7,10 +7,10 @@
 	<title>Weird Waves</title>
 	<subtitle type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Audio horror broadcasting online.</div></subtitle>
 	<author>
-		<name>Weird Waves</name>
+		<name>CDVR</name>
 	</author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-07-21T00:00:01+01:00</updated>
+	<updated>2024-09-02T00:00:01+01:00</updated>
 
 
 
@@ -31,6 +31,17 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?45</id>
+		<link rel="alternate" href="https://weirdwaves.net/" />
+		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Privacy-friendly analytics via GoatCounter</div></title>
+		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
+			<p>Weird Waves now uses <a href="https://www.goatcounter.com/" rel="external">GoatCounter</a> for analytics&#x2014;it's privacy-friendly and just provides basic anonymised analytics that are more complex that the site's current hosting provides. This is only a test: if GoatCounter doesn't receive any hits, I'll remove the script link.</p>
+		</div></content>
+		<published>2024-09-02T00:00:01+01:00</published>
+		<updated>2024-09-02T00:00:01+01:00</updated>
+		<category term="features" />
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?44</id>
 		<link rel="alternate" href="https://weirdwaves.net/" />
