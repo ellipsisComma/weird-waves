@@ -356,8 +356,8 @@ document.documentElement.addEventListener(`transitionend`, updateFavicon);
 window.addEventListener(`storage`, () => {
 	const newValue = JSON.parse(event.newValue);
 	if (event.key === `styles`) {
-		if (document.documentElement.dataset.theme !== newValue.theme) updateStyle(`theme`, theme);
-		if (document.documentElement.dataset.font !== newValue.font) updateStyle(`font`, font);
+		if (document.documentElement.dataset.theme !== newValue.theme) updateStyle(`theme`, newValue.theme);
+		if (document.documentElement.dataset.font !== newValue.font) updateStyle(`font`, newValue.font);
 		console.info(`automatically matched style change in another browsing context`);
 	}
 });

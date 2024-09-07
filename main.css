@@ -287,6 +287,7 @@ DEFAULTS
 	--line-width: 1px;
 	transition-property: --fore-colour, --back-colour, --hot-colour, --cold-colour;
 	transition-duration: 1s;
+	transition-timing-function: ease-in;
 }
 
 /* ----------
