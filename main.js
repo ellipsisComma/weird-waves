@@ -99,7 +99,7 @@ const styles = (() => {
 		setStyleButtons(style);
 		document.documentElement.dataset[style] = local[style];
 		store(`styles`, local);
-		if (style === `theme`) updateFavicon();
+		if (style === `theme`) document.documentElement.addEventListener(`transitionend`, updateFavicon);
 	}
 
 	return {
