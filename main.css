@@ -1,49 +1,68 @@
 /*
-VARIABLES
-FONTS
+USER
+	THEME
+	FONTS
+
+RESET
+
 UTILITIES
 
-GENERAL
-RADIO
-NAV
-SECTIONS
-
-BOOTH
-ARCHIVE
-ABOUT
-STREAMING
-SETTINGS
-CALL IN/LINKS/CREDITS/WELCOME
-FEED
-
-RESPONSIVITY
-	breakpoints:
-	500px+
-	600px+
-	700px+
-	1240px+
+DEFAULTS
+	VARIABLES
+	FONTS
+	
+	GENERAL
+	RADIO
+	NAV
+	SECTIONS
+	
+	BOOTH
+	ARCHIVE
+	ABOUT
+	STREAMING
+	SETTINGS
+	CALL IN/LINKS/CREDITS/WELCOME
+	FEED
 */
 
-/* ==============
-	VARIABLES
-============== */
+@layer reset, defaults, user, utilities;
 
-:root {
-	--widescreen-max-inline-size: 1200px;
-	--main-column-max-inline-size: 800px;
-	--gap-size: 10px;
-	--main-column-padding: calc(2 * var(--gap-size));
 
-	--meta-font-size: 0.7em;
 
-	--seek-bar-thumb-size: 1em;
-	--toggle-transition-duration: 0.5s;
-	--control-depth: 0.3em;
+/* ====================================
+	USER
+==================================== */
 
-	--line-width: 1px;
+@layer user {
+
+/* -----------
+	THEMES
+----------- */
+
+/* PROPERTIES */
+
+@property --fore-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: black;
+}
+@property --back-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: white;
+}
+@property --hot-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: blue;
+}
+@property --cold-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: purple;
 }
 
-/* THEMES */
+/* THEME VARIABLES */
 
 [data-theme="dark"] {
 	--fore-colour: #fdffdc;
@@ -190,7 +209,9 @@ RESPONSIVITY
 	--cold-colour: #829bd2;
 }
 
-/* FONTS */
+/* -------------------
+	FONT VARIABLES
+------------------- */
 
 [data-font="serif"] {
 	--font-stack: Bitter, Georgia, Garamond, "Times New Roman", Times, serif;
@@ -199,11 +220,78 @@ RESPONSIVITY
 	--font-stack: "Fira Sans", Tahoma, Verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+/* ====================== END USER */ }
 
 
-/* ==========
+
+/* ====================================
+	RESET
+==================================== */
+
+@layer reset {
+
+*,
+::before,
+::after {
+	box-sizing: border-box;
+}
+
+/* ===================== END RESET */ }
+
+
+
+/* ====================================
+	UTILITIES
+==================================== */
+
+@layer utilities {
+
+[hidden] {
+	display: none;
+}
+.visually-hidden {
+	clip-path: inset(50%);
+	block-size: 1px;
+	inline-size: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+}
+
+/* ================= END UTILITIES */ }
+
+
+
+/* ====================================
+	DEFAULTS
+==================================== */
+
+@layer defaults {
+
+/* --------------
+	VARIABLES
+-------------- */
+
+:root {
+	--widescreen-max-inline-size: 1200px;
+	--main-column-max-inline-size: 800px;
+	--gap-size: 10px;
+	--main-column-padding: calc(2 * var(--gap-size));
+
+	--meta-font-size: 0.7em;
+
+	--seek-bar-thumb-size: 1em;
+	--toggle-transition-duration: 0.5s;
+	--control-depth: 0.3em;
+
+	--line-width: 1px;
+	transition-property: --fore-colour, --back-colour, --hot-colour, --cold-colour;
+	transition-duration: 1s;
+}
+
+/* ----------
 	FONTS
-========== */
+---------- */
 
 /* SERIF */
 
@@ -269,32 +357,10 @@ RESPONSIVITY
 	src: url("./fonts/fira-sans-bold-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 
-
-
-/* ============
-	UTILITY
-============ */
-
-.visually-hidden {
-	clip-path: inset(50%);
-	block-size: 1px;
-	inline-size: 1px;
-	overflow: hidden;
-	position: absolute;
-	white-space: nowrap;
-}
-
-
-
-/* ============
+/* ------------
 	GENERAL
-============ */
+------------ */
 
-*,
-::before,
-::after {
-	box-sizing: border-box;
-}
 ::selection {
 	color: var(--back-colour);
 	background-color: var(--cold-colour);
@@ -375,8 +441,8 @@ a:active {
 	color: var(--hot-colour);
 }
 [rel~="external"]::after {
-	content: "\a0 \2206";
-	content: "\a0 \2206" / " (external link)"; /* non-breaking space + increment */
+	content: "\2206";
+	content: "\2206" / " (external link)"; /* increment */
 	display: inline-block;
 	font-variant-position: super;
 }
@@ -467,11 +533,9 @@ button {
 	}
 }
 
-
-
-/* ==========
+/* ----------
 	RADIO
-========== */
+---------- */
 
 #sidebar {
 	display: flex;
@@ -609,11 +673,9 @@ input[type="range"]:active {
 	}
 }
 
-
-
-/* ========
+/* --------
 	NAV
-======== */
+-------- */
 
 #main-nav {
 	display: flex;
@@ -675,11 +737,9 @@ input[type="range"]:active {
 	stroke: var(--hot-colour);
 }
 
-
-
-/* =============
+/* -------------
 	SECTIONS
-============= */
+------------- */
 
 main {
 	& > *,
@@ -694,11 +754,9 @@ main {
 	}
 }
 
-
-
-/* ==========
+/* ----------
 	BOOTH
-========== */
+---------- */
 
 #playlist {
 	margin-block: 0;
@@ -762,11 +820,9 @@ main {
 	word-break: break-all;
 }
 
-
-
-/* ============
+/* ------------
 	ARCHIVE
-============ */
+------------ */
 
 #series-list {
 	padding-inline-start: 0;
@@ -840,11 +896,9 @@ button[data-action="add-show"] {
 	margin-inline-start: var(--gap-size);
 }
 
-
-
-/* ==========
+/* ----------
 	ABOUT
-========== */
+---------- */
 
 #stats-list {
 	display: flex;
@@ -865,11 +919,9 @@ button[data-action="add-show"] {
 	}
 }
 
-
-
-/* ==============
+/* --------------
 	STREAMING
-============== */
+-------------- */
 
 .code-block {
 	display: block;
@@ -885,9 +937,9 @@ button[data-action="add-show"] {
 
 
 
-/* =============
+/* -------------
 	SETTINGS
-============= */
+------------- */
 
 #settings > ul {
 	padding-inline-start: 0;
@@ -963,11 +1015,9 @@ use[href="#svg-toggle-tick"] {
 	font-family: var(--font-stack);
 }
 
-
-
-/* ==================================
+/* ----------------------------------
 	CALL IN/LINKS/CREDITS/WELCOME
-================================== */
+---------------------------------- */
 
 #call-in, #links, #credits, #welcome {
 	text-align: center;
@@ -982,11 +1032,9 @@ use[href="#svg-toggle-tick"] {
 	}
 }
 
-
-
-/* =========
+/* ---------
 	FEED
-========= */
+--------- */
 
 #feed-info {
 	margin-block-end: 0.3em;
@@ -1046,11 +1094,9 @@ use[href="#svg-toggle-tick"] {
 	}
 }
 
-
-
-/* =================
+/* -----------------
 	RESPONSIVITY
-================= */
+----------------- */
 
 @media (min-width: 500px) {
 	/* GENERAL */
@@ -1217,3 +1263,5 @@ use[href="#svg-toggle-tick"] {
 		text-align: center;
 	}
 }
+
+/* ================== END DEFAULTS */ }
