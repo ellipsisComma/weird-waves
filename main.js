@@ -615,6 +615,11 @@ page.getElement(`clearButton`).addEventListener(`click`, () => {
 
 document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
 document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
+[`playlist-controls`, `data-controls`].forEach(id => {
+	document.getElementById(id).addEventListener(`click`, () => {
+		if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) hideClearPlaylistControls();
+	});
+});
 page.getElement(`playlist`).addEventListener(`click`, () => {
 	const target = event.target.closest(`#playlist > li`);
 	switch (event.target.dataset.action) {
@@ -644,6 +649,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise settings and styles
 	settings.initialise();
 	styles.initialise();
+	document.documentElement.style.setProperty(`--theme-transition-duration`, `1s`);
 
 	// initialise radio
 	page.getElement(`audio`).paused = true;

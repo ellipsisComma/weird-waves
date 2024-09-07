@@ -346,9 +346,10 @@ function updateFavicon() {
 	page.getElement(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
 }
 
-// update favicons according to theme
+// update favicons and allow smooth transitions according to theme
 setTimeout(() => {
 	updateFavicon();
+	document.documentElement.style.setProperty(`--theme-transition-duration`, `1s`);
 }, 100);
 document.documentElement.addEventListener(`transitionend`, updateFavicon);
 

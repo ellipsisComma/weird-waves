@@ -285,8 +285,10 @@ DEFAULTS
 	--control-depth: 0.3em;
 
 	--line-width: 1px;
+
+	--theme-transition-duration: 0;
 	transition-property: --fore-colour, --back-colour, --hot-colour, --cold-colour;
-	transition-duration: 1s;
+	transition-duration: var(--theme-transition-duration);
 }
 
 /* ----------
