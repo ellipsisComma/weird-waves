@@ -339,29 +339,25 @@ function updateStyle(name, option) {
 	document.documentElement.dataset[name] = option;
 }
 
-// switch between different colour themes
-function switchTheme(theme) {
-	updateStyle(`theme`, theme);
-
+// switch favicon
+function updateFavicon() {
 	let faviconNew = faviconRaw;
 	[`fore`, `back`, `hot`, `cold`].forEach(type => faviconNew = faviconNew.replaceAll(`--${type}-colour`, getStyle(`:root`, `--${type}-colour`)));
 	page.getElement(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
 }
 
-// switch between different fonts
-function switchFont(font) {
-	updateStyle(`font`, font);
-}
-
 // update favicons according to theme
-setTimeout(() => switchTheme(document.documentElement.dataset.theme), 100);
+setTimeout(() => {
+	updateFavicon();
+}, 100);
+document.documentElement.addEventListener(`transitionend`, updateFavicon);
 
 // update styles if styles change in another browsing context
 window.addEventListener(`storage`, () => {
 	const newValue = JSON.parse(event.newValue);
 	if (event.key === `styles`) {
-		if (document.documentElement.dataset.theme !== newValue.theme) switchTheme(newValue.theme);
-		if (document.documentElement.dataset.font !== newValue.font) switchFont(newValue.font);
+		if (document.documentElement.dataset.theme !== newValue.theme) updateStyle(`theme`, theme);
+		if (document.documentElement.dataset.font !== newValue.font) updateStyle(`font`, font);
 		console.info(`automatically matched style change in another browsing context`);
 	}
 });
