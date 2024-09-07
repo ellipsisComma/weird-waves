@@ -72,6 +72,7 @@ const styles = (() => {
 	function initialise() {
 		Object.keys(local).forEach(setStyleButtons)
 		updateFavicon();
+		document.documentElement.addEventListener(`transitionend`, updateFavicon);
 	}
 
 	function setStyleButtons(style) {
@@ -100,8 +101,6 @@ const styles = (() => {
 		document.documentElement.dataset[style] = local[style];
 		store(`styles`, local);
 	}
-
-	document.documentElement.addEventListener(`transitionend`, updateFavicon);
 
 	return {
 		"initialise": () => initialise(),
