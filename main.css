@@ -422,7 +422,7 @@ h3 {
 	flex-wrap: wrap;
 	margin-block: 1em;
 	padding-inline-start: 0;
-	list-style-type: none;
+	list-style-type: "";
 	align-items: center;
 	justify-content: center;
 	gap: 1em;
@@ -458,7 +458,7 @@ abbr[title] {
 .content-notes > summary {
 	display: inline-block;
 	color: var(--hot-colour);
-	list-style-type: none;
+	list-style-type: "";
 	cursor: pointer;
 	&::-webkit-details-marker {
 		display: none;
@@ -521,7 +521,7 @@ button {
 	gap: var(--gap-size);
 	padding-block-start: var(--control-depth);
 	padding-inline-start: 0;
-	list-style-type: none;
+	list-style-type: "";
 	button {
 		block-size: max-content;
 		padding: 0.1em;
@@ -689,7 +689,7 @@ input[type="range"]:active {
 	& > ul {
 		display: flex;
 		inline-size: 33%;
-		list-style-type: none;
+		list-style-type: "";
 		padding-inline-start: 0;
 		text-align: center;
 		flex-direction: column;
@@ -828,7 +828,7 @@ main {
 
 #series-list {
 	padding-inline-start: 0;
-	list-style-type: none;
+	list-style-type: "";
 	& > li {
 		display: flex;
 		flex-direction: column;
@@ -869,7 +869,7 @@ main {
 	font-size: var(--meta-font-size);
 }
 .show-list {
-	list-style-type: none;
+	list-style-type: "";
 	margin-inline: var(--gap-size);
 	padding-inline-start: 0;
 	flex: 1;
@@ -945,7 +945,7 @@ button[data-action="add-show"] {
 
 #settings > ul {
 	padding-inline-start: 0;
-	list-style-type: none;
+	list-style-type: "";
 }
 .toggle {
 	display: grid;
@@ -1054,7 +1054,7 @@ use[href="#svg-toggle-tick"] {
 .post-list {
 	margin-inline-start: 1em;
 	padding-inline-start: 0;
-	list-style-type: none;
+	list-style-type: "";
 	header {
 		margin-inline-start: -1em;
 		a::after {
