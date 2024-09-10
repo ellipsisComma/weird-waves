@@ -338,6 +338,7 @@ const faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" 
 // update setting and its buttons according to chosen value
 function updateStyle(name, option) {
 	document.documentElement.dataset[name] = option;
+	updateFavicon();
 }
 
 // switch favicon
