@@ -443,8 +443,7 @@ a:active {
 	color: var(--hot-colour);
 }
 [rel~="external"]::after {
-	content: "\2206";
-	content: "\2206" / " (external link)"; /* increment */
+	content: "\2206"; /* increment */
 	display: inline-block;
 	font-variant-position: super;
 }
@@ -464,13 +463,13 @@ abbr[title] {
 		display: none;
 	}
 	&::after {
-		content: " (click to show)";
+		content: "\2026"; /* ellipsis */
 	}
 }
 .content-notes[open] > summary {
 	color: var(--cold-colour);
 	&::after {
-		content: " (click to hide):\a0";
+		content: ":";
 	}
 }
 .svg-icon {
@@ -1057,8 +1056,11 @@ use[href="#svg-toggle-tick"] {
 	list-style-type: "";
 	header {
 		margin-inline-start: -1em;
+		a::before {
+			content: "]";
+		}
 		a::after {
-			content: "[link]";
+			content: "[";
 		}
 	}
 	& > :first-child h3 {

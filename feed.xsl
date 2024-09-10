@@ -50,6 +50,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 					<xsl:text>#post-</xsl:text>
 					<xsl:apply-templates select="atom:updated" mode="timestamp-to-id" />
 				</xsl:attribute>
+				<xsl:text>link</xsl:text>
 			</a>
 		</h3>
 		<div class="post-times">
