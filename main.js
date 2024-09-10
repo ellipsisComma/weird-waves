@@ -1,7 +1,7 @@
 /*jshint esversion: 11*/
 
 /*
-SCRIPT CONTROLS: settings global variables to control app behaviour (e.g. default settings)
+SCRIPT CONTROLS: settings to control app behaviour (e.g. default user settings)
 PARAMETERS: initialising internal parameters
 FUNCTIONS
 	UTILITY: general and misc. applications
@@ -72,7 +72,6 @@ const styles = (() => {
 	function initialise() {
 		Object.keys(local).forEach(setStyleButtons)
 		updateFavicon();
-		document.documentElement.addEventListener(`transitionend`, updateFavicon);
 	}
 
 	function setStyleButtons(style) {
@@ -100,6 +99,7 @@ const styles = (() => {
 		setStyleButtons(style);
 		document.documentElement.dataset[style] = local[style];
 		store(`styles`, local);
+		if (style === `theme`) updateFavicon();
 	}
 
 	return {
@@ -649,7 +649,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise settings and styles
 	settings.initialise();
 	styles.initialise();
-	document.documentElement.style.setProperty(`--theme-transition-duration`, `1s`);
 
 	// initialise radio
 	page.getElement(`audio`).paused = true;

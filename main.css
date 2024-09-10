@@ -39,29 +39,6 @@ DEFAULTS
 	THEMES
 ----------- */
 
-/* PROPERTIES */
-
-@property --fore-colour {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: black;
-}
-@property --back-colour {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: white;
-}
-@property --hot-colour {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: blue;
-}
-@property --cold-colour {
-	syntax: "<color>";
-	inherits: true;
-	initial-value: purple;
-}
-
 /* THEME VARIABLES */
 
 [data-theme="dark"] {
@@ -281,14 +258,9 @@ DEFAULTS
 	--meta-font-size: 0.7em;
 
 	--seek-bar-thumb-size: 1em;
-	--toggle-transition-duration: 0.5s;
 	--control-depth: 0.3em;
 
 	--line-width: 1px;
-
-	--theme-transition-duration: 0;
-	transition-property: --fore-colour, --back-colour, --hot-colour, --cold-colour;
-	transition-duration: var(--theme-transition-duration);
 }
 
 /* ----------
@@ -730,9 +702,6 @@ input[type="range"]:active {
 			white-space: nowrap;
 		}
 	}
-	[aria-current="page"] {
-		transition-property: unset;
-	}
 }
 .svg-hot-stroke {
 	stroke: var(--hot-colour);
@@ -969,8 +938,6 @@ button[data-action="add-show"] {
 	}
 }
 .svg-toggle-thumb {
-	transition-property: transform;
-	transition-duration: var(--toggle-transition-duration);
 	&:dir(rtl) {
 		transform: translateX(50%);
 	}
@@ -983,8 +950,6 @@ use[href="#svg-toggle-thumb-top"] {
 }
 use[href="#svg-toggle-tick"] {
 	opacity: 0;
-	transition-property: opacity;
-	transition-duration: var(--toggle-transition-duration);
 }
 [aria-pressed="true"] {
 	.svg-toggle-thumb {
