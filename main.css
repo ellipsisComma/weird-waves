@@ -1024,10 +1024,10 @@ use[href="#svg-toggle-tick"] {
 	header {
 		margin-inline-start: -1em;
 		a::before {
-			content: "]";
+			content: "[";
 		}
 		a::after {
-			content: "[";
+			content: "]";
 		}
 	}
 	& > :first-child h3 {
