@@ -412,7 +412,8 @@ a:visited {
 	}
 }
 a:active {
-	color: var(--hot-colour);
+	color: var(--back-colour);
+	background-color: var(--hot-colour);
 }
 [rel~="external"]::after {
 	content: "\2206"; /* increment */
@@ -685,6 +686,7 @@ input[type="range"]:active {
 			}
 			&:is(:hover, :focus, :active) {
 				color: var(--hot-colour);
+				background-color: unset;
 			}
 		}
 		&:not([href^="#"]) {
@@ -695,7 +697,7 @@ input[type="range"]:active {
 				stroke: var(--cold-colour);
 			}
 			&:active use {
-				stroke: var(--hot-colour);
+				stroke: var(--back-colour);
 			}
 		}
 		& > span {
