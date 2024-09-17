@@ -10,12 +10,12 @@ UTILITIES
 DEFAULTS
 	VARIABLES
 	FONTS
-	
+
 	GENERAL
 	RADIO
 	NAV
 	SECTIONS
-	
+
 	BOOTH
 	ARCHIVE
 	ABOUT
@@ -164,8 +164,8 @@ DEFAULTS
 [data-theme="natron"] {
 	--fore-colour: #f6ecc5;
 	--back-colour: #160d00;
-	--hot-colour: #aaa070;
-	--cold-colour: #f7e280;
+	--hot-colour: #f7e280;
+	--cold-colour: #aaa070;
 }
 [data-theme="gauze"] {
 	--fore-colour: #2a0d0c;
@@ -182,8 +182,8 @@ DEFAULTS
 [data-theme="cellar"] {
 	--fore-colour: #b9b5a7;
 	--back-colour: #010d1c;
-	--hot-colour: #cfab7e;
-	--cold-colour: #829bd2;
+	--hot-colour: #829bd2;
+	--cold-colour: #cfab7e;
 }
 
 /* -------------------
@@ -416,7 +416,7 @@ a:active {
 	background-color: var(--hot-colour);
 }
 [rel~="external"]::after {
-	content: "\2206"; /* increment */
+	content: "\a0 \2206"; /* non-breaking space + increment */
 	display: inline-block;
 	font-variant-position: super;
 }
