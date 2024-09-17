@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="./feed.xsl?v=2024-08-14"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<id>https://weirdwaves.net/</id>
-	<link rel="alternate" href="https://weirdwaves.net/feed.xml" />
+	<link rel="alternate" href="https://weirdwaves.net/" />
 	<link rel="self" href="https://weirdwaves.net/feed.xml" />
 	<title>Weird Waves</title>
 	<subtitle type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Audio horror broadcasting online.</div></subtitle>
@@ -10,7 +10,7 @@
 		<name>Weird Waves</name>
 	</author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-09-06T00:00:01+01:00</updated>
+	<updated>2024-09-17T00:00:01+01:00</updated>
 
 
 
@@ -32,9 +32,19 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 
 
 	<entry>
+		<id>https://weirdwaves.net/?47</id>
+		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-09-17-theme-tweaks" />
+		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Theme tweaks</div></title>
+		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
+			<p>I've swapped the hot and cold colours in each of the new themes Natron and Cellar. They're the same colours (e.g. Natron still uses Marrow's colours via green-blindness), I just think the new arrangements are better at indicating what I use the hot and cold colours for (indicating interactive features that haven't (hot) and have (cold) been interacted with).</p>
+		</div></content>
+		<published>2024-09-17T00:00:01+01:00</published>
+		<updated>2024-09-17T00:00:01+01:00</updated>
+		<category term="features" />
+	</entry>
+	<entry>
 		<id>https://weirdwaves.net/?46</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-09-06-new-themes" />
-		<link rel="related" href="https://weirdwaves.net/feed.xml#incorrect-id" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">New themes</div></title>
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>I've been testing a bookmarklet that simulates colour-blindness using the Weird Waves themes, and found some combinations I decided to add as full themes in themselves&#x2014;with a few minor tweaks to keep the colour contrast high enough for people with poor vision.</p>
