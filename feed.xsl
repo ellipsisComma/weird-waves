@@ -7,9 +7,9 @@
 
 
 
-<!--convert atom timestamp to valid HTML id-->
-<xsl:template match="atom:published | atom:updated" mode="timestamp-to-id">
-<xsl:value-of select="translate(., ':+', '--')" />
+<!--get post id-->
+<xsl:template match="atom:link[@rel='alternate']">
+<xsl:value-of select="substring-after(@href, '#')" />
 </xsl:template>
 
 <!--remove time part of atom timestamp-->
@@ -37,8 +37,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 <li><article>
 	<xsl:if test="$all-news = 'true'">
 		<xsl:attribute name="id">
-			<xsl:text>post-</xsl:text>
-			<xsl:apply-templates select="atom:updated" mode="timestamp-to-id" />
+			<xsl:apply-templates select="atom:link" />
 		</xsl:attribute>
 	</xsl:if>
 	<header>
@@ -47,8 +46,8 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			<xsl:text> </xsl:text>
 			<a>
 				<xsl:attribute name="href">
-					<xsl:text>#post-</xsl:text>
-					<xsl:apply-templates select="atom:updated" mode="timestamp-to-id" />
+					<xsl:text>#</xsl:text>
+					<xsl:apply-templates select="atom:link" />
 				</xsl:attribute>
 				<xsl:text>link</xsl:text>
 			</a>
@@ -73,8 +72,8 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 <dt>
 	<a>
 		<xsl:attribute name="href">
-			<xsl:text>#post-</xsl:text>
-			<xsl:apply-templates select="atom:updated" mode="timestamp-to-id" />
+			<xsl:text>#</xsl:text>
+			<xsl:apply-templates select="atom:link" />
 		</xsl:attribute>
 		<xsl:apply-templates select="atom:updated" mode="timestamp-to-date" />
 	</a>
@@ -348,10 +347,11 @@ function updateFavicon() {
 	page.getElement(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
 }
 
-// update favicons according to theme
+// perform actions that should be performed on DOMContentLoaded, but aren't
 setTimeout(() => {
 	updateFavicon();
-}, 100);
+	location.hash = location.hash;
+}, 10);
 document.documentElement.addEventListener(`transitionend`, updateFavicon);
 
 // update styles if styles change in another browsing context
