@@ -17,7 +17,7 @@
 <time><xsl:value-of select="substring-before(., 'T')" /></time>
 </xsl:template>
 
-<!--deep copy of an xhtml-container's grandchildren-->
+<!--deep copy of an xhtml-container's grandchildren while excluding the inner container div-->
 <xsl:template match="*[@type = 'xhtml']">
 <xsl:copy-of select="xhtml:div/node()" />
 </xsl:template>
@@ -37,7 +37,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 <li><article>
 	<xsl:if test="$all-news = 'true'">
 		<xsl:attribute name="id">
-			<xsl:apply-templates select="atom:link" />
+			<xsl:apply-templates select="atom:link[@rel='alternate']" />
 		</xsl:attribute>
 	</xsl:if>
 	<header>
@@ -47,7 +47,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 			<a>
 				<xsl:attribute name="href">
 					<xsl:text>#</xsl:text>
-					<xsl:apply-templates select="atom:link" />
+					<xsl:apply-templates select="atom:link[@rel='alternate']" />
 				</xsl:attribute>
 				<xsl:text>link</xsl:text>
 			</a>
@@ -73,7 +73,7 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<a>
 		<xsl:attribute name="href">
 			<xsl:text>#</xsl:text>
-			<xsl:apply-templates select="atom:link" />
+			<xsl:apply-templates select="atom:link[@rel='alternate']" />
 		</xsl:attribute>
 		<xsl:apply-templates select="atom:updated" mode="timestamp-to-date" />
 	</a>
