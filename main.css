@@ -363,14 +363,14 @@ body {
 }
 h1 {
 	margin-block-start: 0.2em;
-	margin-block-end: 0.1em;
+	margin-block-end: 0;
 	font-size: 3.5em;
 	text-align: center;
 	letter-spacing: 0.15em;
 }
 h2 {
-	margin-block-start: 0.2em;
-	padding-block-start: 20px;
+	margin-block-start: 0.9em;
+	margin-block-end: 0.7em;
 	font-size: 1.5em;
 	letter-spacing: 0.1em;
 }
@@ -1073,6 +1073,9 @@ use[href="#svg-toggle-tick"] {
 	/* GENERAL */
 	body {
 		font-size: 1.2em;
+	}
+	h1 {
+		margin-block-end: 0.1em;
 	}
 	h1, h2 {
 		--shadow-1: 0.07em 0.07em 0;
