@@ -438,11 +438,17 @@ abbr[title] {
 	&::after {
 		content: "\2026"; /* ellipsis */
 	}
+	:is(&, & *)::selection {
+		background-color: var(--hot-colour);
+	}
 }
 .content-notes[open] > summary {
 	color: var(--cold-colour);
 	&::after {
 		content: ":";
+	}
+	:is(&, & *)::selection {
+		background-color: var(--cold-colour);
 	}
 }
 .svg-icon {
