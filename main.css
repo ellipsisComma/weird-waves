@@ -224,7 +224,7 @@ DEFAULTS
 @layer utilities {
 
 [hidden] {
-	display: none;
+	display: none !important;
 }
 .visually-hidden {
 	clip-path: inset(50%);
@@ -233,6 +233,10 @@ DEFAULTS
 	overflow: hidden;
 	position: absolute;
 	white-space: nowrap;
+}
+#svg-defs {
+	position: absolute;
+	z-index: -1;
 }
 
 /* ================= END UTILITIES */ }
@@ -353,13 +357,6 @@ body {
 	padding-block-end: 2em;
 	padding-inline: var(--main-column-padding);
 	max-inline-size: var(--main-column-max-inline-size);
-}
-#svg-defs {
-	position: absolute;
-	z-index: -1;
-}
-[hidden] {
-	display: none !important;
 }
 h1 {
 	margin-block-start: 0.2em;
