@@ -530,7 +530,7 @@ function buildSeries(series) {
 	series.shows.forEach(show => show.ID = `${series.code}-${show.code}`);
 	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
 
-	return templatedSeries;	
+	return templatedSeries;
 }
 
 // build archive onto page
