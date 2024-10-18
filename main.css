@@ -238,6 +238,9 @@ DEFAULTS
 	position: absolute;
 	z-index: -1;
 }
+#button-list img {
+	height: 31px;
+}
 
 /* ================= END UTILITIES */ }
 
