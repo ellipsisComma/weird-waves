@@ -352,7 +352,7 @@ body {
 	background-color: var(--back-colour);
 	text-orientation: upright;
 	font-family: var(--font-stack);
-	line-height: 1.4;
+	line-height: 1.5;
 	accent-color: var(--cold-colour);
 }
 #container {
