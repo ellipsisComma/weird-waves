@@ -342,10 +342,6 @@ DEFAULTS
 	GENERAL
 ------------ */
 
-::selection {
-	color: var(--back-colour);
-	background-color: var(--cold-colour);
-}
 body {
 	margin: 0;
 	color: var(--fore-colour);
@@ -353,7 +349,6 @@ body {
 	text-orientation: upright;
 	font-family: var(--font-stack);
 	line-height: 1.5;
-	accent-color: var(--cold-colour);
 }
 #container {
 	margin-inline: auto;
@@ -399,17 +394,11 @@ h3 {
 	justify-content: center;
 	gap: 1em;
 }
-:is(a, a *)::selection {
-	background-color: var(--hot-colour);
-}
 a:link {
 	color: var(--hot-colour);
 }
 a:visited {
 	color: var(--cold-colour);
-	:is(&, & *)::selection {
-		background-color: var(--cold-colour);
-	}
 }
 a:active {
 	color: var(--back-colour);
@@ -441,17 +430,11 @@ abbr[title] {
 	&::after {
 		content: "\2026"; /* ellipsis */
 	}
-	:is(&, & *)::selection {
-		background-color: var(--hot-colour);
-	}
 }
 .content-notes[open] > summary {
 	color: var(--cold-colour);
 	&::after {
 		content: ":";
-	}
-	:is(&, & *)::selection {
-		background-color: var(--cold-colour);
 	}
 }
 .svg-icon {
@@ -1091,9 +1074,6 @@ use[href="#svg-toggle-tick"] {
 		--shadow-2: -0.05em -0.05em 0;
 		--shadow-3: 0.1em 0.09em 0;
 		text-shadow: var(--shadow-1) var(--back-colour), var(--shadow-2) var(--back-colour), var(--shadow-3) var(--fore-colour);
-		&::selection {
-			text-shadow: var(--shadow-1) var(--cold-colour), var(--shadow-2) var(--cold-colour), var(--shadow-3) var(--back-colour);
-		}
 	}
 	.code-block {
 		tab-size: 3ch;
