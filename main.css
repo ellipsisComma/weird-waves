@@ -423,6 +423,9 @@ a:active {
 .uppercase {
 	text-transform: uppercase;
 }
+.lowercase {
+	text-transform: lowercase;
+}
 abbr[title] {
 	text-decoration: none;
 	cursor: help;
