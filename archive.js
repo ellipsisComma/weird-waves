@@ -548,6 +548,13 @@ let archive = [
 	"notes": `betrayal, malaria, eaten by piranhas`,
 	"duration": 1770,
 	},
+	{
+	"code": `217-Birds`,
+	"heading": `#217: <cite>The Birds</cite>`,
+	"blurb": `Disaster circles an English family as birds run amok. Adapted from a short story by Daphne du Maurier.`,
+	"notes": `child endangerment`,
+	"duration": 1756,
+	},
 ],
 },
 {

@@ -10,7 +10,7 @@
 		<name>Weird Waves</name>
 	</author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-09-17T00:00:01+01:00</updated>
+	<updated>2024-10-28T00:00:00+00:00</updated>
 
 
 
@@ -31,6 +31,17 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?48</id>
+		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-10-28-new-show" />
+		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">New show: <cite>The Birds</cite></div></title>
+		<published>2024-10-28T00:00:00+00:00</published>
+		<updated>2024-10-28T00:00:00+00:00</updated>
+		<category term="bulletins" />
+		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
+			<p>Added a new show to <cite>Escape</cite>: an adaptation of Daphne du Maurier's short story <cite>The Birds</cite> (later adapted for screen by Alfred Hitchcock).</p>
+		</div></content>
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?47</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-09-17-theme-tweaks" />
