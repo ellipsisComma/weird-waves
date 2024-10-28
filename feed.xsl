@@ -100,8 +100,8 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" type="text/css" media="screen" href="./main.css?v=2024-10-20b" />
 
-	<link rel="icon" href="./images/favicon.ico?v=2024-10-28" sizes="48x48">
-	<link rel="icon" href="./images/favicon.svg?v=2022-10-28" type="image/svg+xml" sizes="any">
+	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48" />
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2026%2026%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%3E%3Canimate%20attributeName%3D%22opacity%22%20values%3D%221%3B%200%3B%200%3B%201%22%20keyTimes%3D%220%3B%200%3B%201%3B%201%22%20dur%3D%221s%22%20repeatCount%3D%221%22%2F%3E%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2228%22%20height%3D%2228%22%20fill%3D%22%23000627%22%2F%3E%3Cpath%20stroke%3D%22%23ff6767%22%20d%3D%22M7%2011a3%203%200%200%201%203%203a3%203%200%200%201%206%200a3%203%200%200%201%203-3%22%2F%3E%3Cpath%20stroke%3D%22%23b9ab00%22%20d%3D%22M7%208a6%206%200%200%201%2012%200v4a6%206%200%200%201-12%200zm12%203h3v1a9%209%200%200%201-18%200v-1h3m6%2010v3m-4%200h8%22%2F%3E%3C%2Fsvg%3E" sizes="any" />
 
 	<script src="./utilities.js?v=2024-08-24"></script>
 	<script src="./initialisation.js?v=2024-08-20"></script>
@@ -322,12 +322,34 @@ const page = (() => {
 })();
 
 page.setElement(`title`, `title`);
+page.setElement(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 
 page.getElement(`title`).dataset.original = document.title;
 if (location.hash) navigateToSection();
 
+// raw favicon template
+const faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+	<rect x="-1" y="-1" width="28" height="28" fill="--back-colour" />
+	<path stroke="--hot-colour" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
+	<path stroke="--cold-colour" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
+</svg>`;
+
+// update setting and its buttons according to chosen value
+function updateStyle(name, option) {
+	document.documentElement.dataset[name] = option;
+	updateFavicon();
+}
+
+// switch favicon
+function updateFavicon() {
+	let faviconNew = faviconRaw;
+	[`fore`, `back`, `hot`, `cold`].forEach(type => faviconNew = faviconNew.replaceAll(`--${type}-colour`, getStyle(`:root`, `--${type}-colour`)));
+	page.getElement(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
+}
+
 // perform actions that should be performed on DOMContentLoaded, but aren't
 setTimeout(() => {
+	updateFavicon();
 	location.hash = location.hash;
 }, 10);
 
@@ -335,8 +357,8 @@ setTimeout(() => {
 window.addEventListener(`storage`, () => {
 	const newValue = JSON.parse(event.newValue);
 	if (event.key === `styles`) {
-		if (document.documentElement.dataset.theme !== newValue.theme) document.documentElement.dataset.theme = newValue.theme;
-		if (document.documentElement.dataset.font !== newValue.font) document.documentElement.dataset.font = newValue.font;
+		if (document.documentElement.dataset.theme !== newValue.theme) updateStyle(`theme`, newValue.theme);
+		if (document.documentElement.dataset.font !== newValue.font) updateStyle(`font`, newValue.font);
 		console.info(`automatically matched style change in another browsing context`);
 	}
 });
