@@ -350,7 +350,7 @@ function updateFavicon() {
 // perform actions that should be performed on DOMContentLoaded, but aren't
 setTimeout(() => {
 	updateFavicon();
-	location.hash = location.hash;
+	if (location.hash.length > 0) location.hash = location.hash;
 }, 10);
 
 // update styles if styles change in another browsing context
