@@ -63,15 +63,8 @@ const styles = (() => {
 	local.theme ??= document.documentElement.dataset.theme;
 	local.font ??= document.documentElement.dataset.font;
 
-	const faviconRaw = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
-		<rect x="-1" y="-1" width="28" height="28" fill="--back-colour" />
-		<path stroke="--hot-colour" d="M7 11a3 3 0 0 1 3 3a3 3 0 0 1 6 0a3 3 0 0 1 3-3" />
-		<path stroke="--cold-colour" d="M7 8a6 6 0 0 1 12 0v4a6 6 0 0 1-12 0zm12 3h3v1a9 9 0 0 1-18 0v-1h3m6 10v3m-4 0h8" />
-	</svg>`;
-
 	function initialise() {
-		Object.keys(local).forEach(setStyleButtons)
-		updateFavicon();
+		Object.keys(local).forEach(setStyleButtons);
 	}
 
 	function setStyleButtons(style) {
@@ -88,18 +81,11 @@ const styles = (() => {
 		} else newButton.press();
 	}
 
-	function updateFavicon() {
-		let faviconNew = faviconRaw;
-		[`fore`, `back`, `hot`, `cold`].forEach(type => faviconNew = faviconNew.replaceAll(`--${type}-colour`, getStyle(`:root`, `--${type}-colour`)));
-		page.getElement(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
-	}
-
 	function updateStyle(style, option) {
 		local[style] = option;
 		setStyleButtons(style);
 		document.documentElement.dataset[style] = local[style];
 		store(`styles`, local);
-		if (style === `theme`) updateFavicon();
 	}
 
 	return {
@@ -126,7 +112,6 @@ const page = (() => {
 
 // head
 page.setElement(`title`, `title`);
-page.setElement(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 
 // radio
 page.setElement(`loadedShow`, `#loaded-show`);
