@@ -601,7 +601,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<updated>2022-08-01T00:00:00+01:00</updated>
 		<category term="history" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
-			<p>Here's another little update on Weird Waves, since I did a little bit more work on it since the <a href="#post-2022-07-22T00-00-00-01-00">last post</a>!</p>
+			<p>Here's another little update on Weird Waves, since I did a little bit more work on it since the last post!</p>
 			<p>The first thing is, it's got the barest skeleton of a layout now: sections in different tabs (but on the same page so the audio keeps running). Here are the different sections so far:</p>
 			<ul>
 				<li>
