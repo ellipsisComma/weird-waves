@@ -390,8 +390,7 @@ h3 {
 	margin-block: 1em;
 	padding-inline-start: 0;
 	list-style-type: "";
-	align-items: center;
-	justify-content: center;
+	place-content: center;
 	gap: 1em;
 }
 a:link {
@@ -505,8 +504,7 @@ button {
 
 #sidebar {
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	place-content: center;
 }
 #radio-app {
 	inline-size: 100%;
@@ -888,15 +886,11 @@ button[data-action="add-show"] {
 -------------- */
 
 .code-block {
-	display: block;
-	margin-block: 1em;
 	padding-inline-start: var(--gap-size);
 	border-inline-start-width: var(--line-width);
 	border-inline-start-style: solid;
 	border-inline-start-color: var(--fore-colour);
 	tab-size: 2ch;
-	overflow-x: auto;
-	white-space: pre;
 }
 
 

@@ -638,7 +638,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-07-22-blog-post-weird-waves-wip" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Blog Post: Weird Waves <abbr aria-label="Work in Progress">WIP</abbr></div></title>
 		<published>2022-07-22T00:00:00+01:00</published>
-		<updated>2022-07-22T00:00:00+01:00</updated>
+		<updated>2024-11-07T00:00:00+01:00</updated>
 		<category term="history" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Here's a little javascript web app I'm working on: <a href="https://weirdwaves.net">Weird Waves</a>, a fake online radio station for horror audiobooks and radio plays! I dunno how far off the final app is. This post's just an explanation of how it works.</p>
@@ -667,7 +667,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 			</ol>
 			<p>The blocks can actually be any number of shows long, but it's neater if they divide evenly into 24 (for 24 hours). Those numbers are 1, 2, 3, 4, 6, 8, 12, or 24 shows per block.</p>
 			<p>Each schedule is a <code>.json</code> file stored separate from the script that contains some info about the schedule, plus the lists of shows for each block:</p>
-			<code class="code-block">{
+			<pre class="code-block"><code>{
 "info": {
 	"title": "Regular Test Schedule",
 	"description": "This is a test schedule loaded from a separate file. It plays a mix of episodes from the 1940s weird fiction/sci-fi/horror radio anthology, &#x3c;cite&#x3e;Quiet, Please&#x3c;/cite&#x3e;.",
@@ -691,7 +691,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		"id": "qp-006"
 	}
 ]
-}</code>
+}</code></pre>
 			<p>The script fetches schedules from the server using their filenames. Each schedule file has a name in this format: <code>schedule-YYYY-MM-DD.json</code>, where <code>YYYY-MM-DD</code> is the date of that week's Monday (in the station's timezone). If the script fails to fetch the schedule then it goes with a default schedule written into the script file itself.</p>
 			<p>Here's what <code>schedule.info</code> is used for:</p>
 			<dl>
@@ -703,7 +703,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 				<dd>Each week has its own intermission track. The schedule provides the filename and the script plays that file between shows.</dd>
 			</dl>
 			<p><code>schedule.weekday</code> and <code>schedule.weekend</code> list the shows in each block. For each show, they have the filename and an ID that points to its metadata, which is written on the app page. For instance, the ID <code>qp-001</code> points to this metadata:</p>
-			<code class="code-block">&#x3c;li id="qp-001"&#x3e;
+			<pre class="code-block"><code>&#x3c;li id="qp-001"&#x3e;
 	&#x3c;h5 class="archive-show-title"&#x3e;Nothing Behind the Door&#x3c;/h5&#x3e;
 	&#x3c;dl class="archive-show-info"&#x3e;
 		&#x3c;dt&#x3e;Episode&#x3c;/dt&#x3e;
@@ -715,7 +715,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		&#x3c;dt&#x3e;Airdate&#x3c;/dt&#x3e;
 		&#x3c;dd&#x3e;&#x3c;time&#x3e;1947-06-08&#x3c;/time&#x3e;&#x3c;/dd&#x3e;
 	&#x3c;/dl&#x3e;
-&#x3c;/li&#x3e;</code>
+&#x3c;/li&#x3e;</code></pre>
 			<p>Which looks (kinda) like this on the page:</p>
 			<ul>
 				<li>

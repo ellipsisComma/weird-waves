@@ -10,6 +10,9 @@ FUNCTIONS
 	RADIO: audio interface
 	PAGE CONSTRUCTION: building page sections and content (e.g. the archive)
 EVENTS: event listeners
+
+REJECTED CHANGES:
+	* adding volume to settings so people can set personal volumes that are remembered across pageloads (unnecessary because audio never starts playing automatically before you have at least one opportunity to change volume, and each show audio file has a different average volume and compression)
 */
 
 
