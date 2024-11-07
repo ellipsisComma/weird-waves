@@ -847,7 +847,7 @@ let archive = [
 	},
 	{
 	"code": `20-Facts`,
-	"heading": `#20: <cite>The Facts in the Case of <abbr lang="fr" aria-label="Monsieur">M.</abbr> Valdemar</cite>`,
+	"heading": `#20: <cite>The Facts in the Case of M. Valdemar</cite>`,
 	"blurb": `A mesmerist preserves a man beyond death. Written by Edgar Allen Poe, read by Tony Scheinman.`,
 	"notes": `extensive descriptions of gore, suicide`,
 	"duration": 1560,
