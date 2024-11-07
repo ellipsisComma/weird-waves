@@ -638,7 +638,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-07-22-blog-post-weird-waves-wip" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Blog Post: Weird Waves <abbr aria-label="Work in Progress">WIP</abbr></div></title>
 		<published>2022-07-22T00:00:00+01:00</published>
-		<updated>2024-11-07T00:00:00+01:00</updated>
+		<updated>2024-11-07T00:00:00+00:00</updated>
 		<category term="history" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Here's a little javascript web app I'm working on: <a href="https://weirdwaves.net">Weird Waves</a>, a fake online radio station for horror audiobooks and radio plays! I dunno how far off the final app is. This post's just an explanation of how it works.</p>
