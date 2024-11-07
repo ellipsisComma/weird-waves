@@ -390,7 +390,7 @@ h3 {
 	margin-block: 1em;
 	padding-inline-start: 0;
 	list-style-type: "";
-	place-content: center;
+	justify-content: center;
 	gap: 1em;
 }
 a:link {
@@ -504,7 +504,7 @@ button {
 
 #sidebar {
 	display: flex;
-	place-content: center;
+	justify-content: center;
 }
 #radio-app {
 	inline-size: 100%;
