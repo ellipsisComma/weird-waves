@@ -891,6 +891,7 @@ button[data-action="add-show"] {
 	border-inline-start-style: solid;
 	border-inline-start-color: var(--fore-colour);
 	tab-size: 2ch;
+	overflow-x: auto;
 }
 
 
