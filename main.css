@@ -235,8 +235,9 @@ DEFAULTS
 	white-space: nowrap;
 }
 #svg-defs {
+	inline-size: 0;
+	block-size: 0;
 	position: absolute;
-	z-index: -1;
 }
 #button-list img {
 	height: 31px;
