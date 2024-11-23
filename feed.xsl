@@ -224,6 +224,18 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 
 
 <main>
+<section id="welcome">
+	<h2>Welcome to the News Archive!</h2>
+	<p>This is a collection of announcements, features and bug-fixes, and even copies of blog posts from the earliest stages of Weird Waves.</p>
+	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+	<h3>Latest updates</h3>
+	<dl id="latest-updates">
+		<xsl:apply-templates select="atom:entry[position() &lt;= $latest-updates-count]" mode="list-latest-updates" />
+	</dl><!--#latest-updates end-->
+</section><!--#welcome end-->
+
+
+
 <section id="all-news">
 	<h2>All News</h2>
 	<p>All the news, all in one place.</p>
@@ -294,18 +306,6 @@ append an HTML id if the template's applied to all news, so hash-links on all co
 		<xsl:apply-templates select="atom:entry[atom:category/@term = 'history']" mode="list-posts" />
 	</ol>
 </section><!--#history end-->
-
-
-
-<section id="welcome">
-	<h2>Welcome to the News Archive!</h2>
-	<p>This is a collection of announcements, features and bug-fixes, and even copies of blog posts from the earliest stages of Weird Waves.</p>
-	<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
-	<h3>Latest updates</h3>
-	<dl id="latest-updates">
-		<xsl:apply-templates select="atom:entry[position() &lt;= $latest-updates-count]" mode="list-latest-updates" />
-	</dl><!--#latest-updates end-->
-</section><!--#welcome end-->
 </main>
 </div><!--#container end-->
 
