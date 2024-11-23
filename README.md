@@ -16,21 +16,25 @@ Add data for new series and shows to `archive.js`. All shows from a given series
 
 The archive as a whole is an array of series objects. Series properties:
 
-* `code`: a simple, unique alphanumeric code for the series, e.g. the code used for "Quiet, Please" is "QP"
-* `heading`: plaintext or HTML series name
-* `blurb`: plaintext or HTML description (**note:** any HTML must be *phrasing content only*, no natively block-level elements)
-* `source`: plaintext or HTML naming or linking to the source for the show audio
-* `copyrightSafe` (optional): boolean `true` if the series has no risk of copyright claims (e.g. illegitimate copyright claims through automated systems), otherwise do not set this property
-* `shows`: an array of show objects
+|Key|Type|Required?|Description|
+|-|-|-|-|
+|`code`|string|yes|a simple, unique alphanumeric code for the series, e.g. the code used for "Quiet, Please" is "QP"|
+|`heading`|string|yes|plaintext or HTML series name|
+|`blurb`|string|yes|plaintext or HTML description (**note:** any HTML must be *phrasing content only*, no natively block-level elements)|
+|`source`|string|yes|plaintext or HTML naming or linking to the source for the show audio|
+|`copyrightSafe`|boolean|no|`true` if the series has no risk of copyright claims (e.g. illegitimate copyright claims through automated systems), otherwise do not set this property|
+|`shows`|array|yes|an array of show objects|
 
 Show properties:
 
-* `code`: a simple, unique alphanumeric code for the show composed of a show number, then a hyphen, then a show keyword, e.g. the code used for "Quiet, Please" episode 1, "Nothing Behind the Door", is "001-Nothing"
-* `heading`: plaintext or HTML show name
-* `blurb`: plaintext or HTML show description (**note:** see above)
-* `notes` (optional): plaintext or HTML content notes
-* `banger` (optional): boolean `true` if you would recommend this show
-* `duration`: integer of the length of the show in seconds, rounded up
+|Key|Type|Required?|Description|
+|-|-|-|-|
+|`code`|string|yes|a simple, unique alphanumeric code for the show composed of a show number, then a hyphen, then a show keyword, e.g. the code used for "Quiet, Please" episode 1, "Nothing Behind the Door", is "001-Nothing"|
+|`heading`|string|yes|plaintext or HTML show name|
+|`blurb`|string|yes|plaintext or HTML show description (**note:** see above)|
+|`notes`|string|no|plaintext or HTML content notes|
+|`banger`|boolean|no|`true` if you would recommend this show|
+|`duration`|integer|yes|length of the show in seconds, rounded up|
 
 ### Shows
 
