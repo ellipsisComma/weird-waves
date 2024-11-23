@@ -10,9 +10,6 @@ FUNCTIONS
 	RADIO: audio interface
 	PAGE CONSTRUCTION: building page sections and content (e.g. the archive)
 EVENTS: event listeners
-
-REJECTED CHANGES:
-	* adding volume to settings so people can set personal volumes that are remembered across pageloads (unnecessary because audio never starts playing automatically before you have at least one opportunity to change volume, and each show audio file has a different average volume and compression)
 */
 
 
@@ -22,8 +19,11 @@ REJECTED CHANGES:
 ==================== */
 
 // show file path builder
-function showPath(ID) {
-	return `./audio/shows/${ID}.mp3`;
+function showPath(showId) {
+	const showIdParts = showId.split(`-`);
+	const seriesCode = showIdParts.shift();
+	const showCode = showIdParts.join(`-`);
+	return `./audio/shows/${seriesCode}/${showCode}.mp3`;
 }
 
 // settings module: handles stored state of each boolean setting and its on-page toggle-switch
