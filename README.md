@@ -18,22 +18,22 @@ The archive as a whole is an array of series objects. Series properties:
 
 |Key|Type|Required?|Description|
 |-|-|-|-|
-|`code`|string|yes|a simple, unique alphanumeric code for the series, e.g. the code used for "Quiet, Please" is "QP"|
+|`code`|string|yes|a unique alphanumeric code for the series, e.g. the code used for "Quiet, Please" is "QP"|
 |`heading`|string|yes|plaintext or HTML series name|
-|`blurb`|string|yes|plaintext or HTML description (**note:** any HTML must be *phrasing content only*, no natively block-level elements)|
-|`source`|string|yes|plaintext or HTML naming or linking to the source for the show audio|
-|`copyrightSafe`|boolean|no|`true` if the series has no risk of copyright claims (e.g. illegitimate copyright claims through automated systems), otherwise do not set this property|
+|`blurb`|string|yes|plaintext or HTML description (**note:** any HTML in the blurb must be *phrasing content only*, no block-level elements)|
+|`source`|string|yes|plaintext or HTML naming or linking to the source for the audio files|
+|`copyrightSafe`|boolean|no|`true` if the series has no risk of copyright claims (e.g. illegitimate claims through automated systems)|
 |`shows`|array|yes|an array of show objects|
 
 Show properties:
 
 |Key|Type|Required?|Description|
 |-|-|-|-|
-|`code`|string|yes|a simple, unique alphanumeric code for the show composed of a show number, then a hyphen, then a show keyword, e.g. the code used for "Quiet, Please" episode 1, "Nothing Behind the Door", is "001-Nothing"|
+|`code`|string|yes|a unique alphanumeric code for the show composed of a show number and a keyword separated by a hyphen, e.g. the code used for "Quiet, Please" #1, "Nothing Behind the Door", is "001-Nothing"|
 |`heading`|string|yes|plaintext or HTML show name|
 |`blurb`|string|yes|plaintext or HTML show description (**note:** see above)|
 |`notes`|string|no|plaintext or HTML content notes|
-|`banger`|boolean|no|`true` if you would recommend this show|
+|`banger`|boolean|no|`true` if you would recommend this show to a visitor|
 |`duration`|integer|yes|length of the show in seconds, rounded up|
 
 ### Shows
@@ -48,7 +48,7 @@ Show numbers don't need to be (only) actual numbers, e.g. "X" is fine for an unk
 
 ### Series and show filepaths
 
-The default filepath for show audio files, relative to the index, is `./audio/shows/[series code]/[show code].mp3`. For example, the filepath from the index page to the show file for "Quiet, Please" episode 1, "Nothing Behind the Door", is `./audio/shows/QP/001-Nothing.mp3`.
+The default filepath for show audio files, relative to the index, is `./audio/shows/[series code]/[show code].mp3`. For example, the filepath from the index page to the show file for "Quiet, Please" #1, "Nothing Behind the Door", is `./audio/shows/QP/001-Nothing.mp3`.
 
 By default, all files are assumed to be MP3 and end in the extension `.mp3`.
 
