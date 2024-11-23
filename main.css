@@ -706,11 +706,11 @@ input[type="range"]:active {
 
 main {
 	& > *,
-	& > :first-child:has(~ :target),
-	& > :first-child:not(:has(:target)):has(~ :target) {
+	& > :target ~ :last-child,
+	& > :has(:target) ~ :last-child {
 		display: none;
 	}
-	& > :first-child,
+	& > :last-child,
 	& > :target,
 	& > :has(:target) {
 		display: block;
