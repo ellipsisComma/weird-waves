@@ -389,7 +389,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<updated>2022-11-30T00:00:00+00:00</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
-			<p>First, I didn't like how the look of the <abbr>Cbox</abbr> chatbox clashed with the look of the site, or how it messed with looping around the page using keyboard navigation, so I removed it (it didn't get any traffic in the time it was up, anyway).</p>
+			<p>First, I didn't like how the look of the <abbr>CBox</abbr> chatbox clashed with the look of the site, or how it messed with looping around the page using keyboard navigation, so I removed it (it didn't get any traffic in the time it was up, anyway).</p>
 			<p>Second, I added a &#x201c;Random Show&#x201d; link that takes you directly to a random show's audio file.</p>
 		</div></content>
 	</entry>
@@ -607,7 +607,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 	<entry>
 		<id>https://weirdwaves.net/?2</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-08-01-blog-post-weird-waves-wip-2" />
-		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Blog Post: Weird Waves <abbr aria-label="Work in Progress">WIP</abbr> 2: New Layout, New Shows</div></title>
+		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Blog Post: Weird Waves <abbr>WIP</abbr> 2: New Layout, New Shows</div></title>
 		<published>2022-08-01T00:00:00+01:00</published>
 		<updated>2022-08-01T00:00:00+01:00</updated>
 		<category term="history" />
@@ -647,7 +647,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 	<entry>
 		<id>https://weirdwaves.net/?1</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-07-22-blog-post-weird-waves-wip" />
-		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Blog Post: Weird Waves <abbr aria-label="Work in Progress">WIP</abbr></div></title>
+		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Blog Post: Weird Waves <abbr>WIP</abbr></div></title>
 		<published>2022-07-22T00:00:00+01:00</published>
 		<updated>2024-11-07T00:00:00+00:00</updated>
 		<category term="history" />
