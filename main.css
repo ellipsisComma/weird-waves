@@ -92,7 +92,7 @@ DEFAULTS
 [data-theme="ash"] {
 	--fore-colour: #33505a;
 	--back-colour: #f6f7f8;
-	--hot-colour: #d40;
+	--hot-colour: #da3B14; /* only meets WCAG AA compliance vs --back-colour */
 	--cold-colour: #000;
 }
 [data-theme="dust"] {
@@ -116,7 +116,7 @@ DEFAULTS
 [data-theme="pico"] {
 	--fore-colour: #00e436;
 	--back-colour: #000;
-	--hot-colour: #ff004d;
+	--hot-colour: #ff004d; /* only meets WCAG AA compliance vs --back-colour */
 	--cold-colour: #29adff;
 }
 [data-theme="sepia"] {
@@ -140,7 +140,7 @@ DEFAULTS
 [data-theme="marrow"] {
 	--fore-colour: #ffe5c4;
 	--back-colour: #260000;
-	--hot-colour: #ff5773;
+	--hot-colour: #ff697f;
 	--cold-colour: #f5e07b;
 }
 [data-theme="org"] {
@@ -150,40 +150,40 @@ DEFAULTS
 	--cold-colour: #085808;
 }
 [data-theme="coalgas"] {
-	--fore-colour: #f7f9ff;
-	--back-colour: #011542;
-	--hot-colour: #fee86a;
-	--cold-colour: #c4d5ff;
+	--fore-colour: #f8faff;
+	--back-colour: #011441;
+	--hot-colour: #fee86b;
+	--cold-colour: #c5d5ff;
 }
 [data-theme="root"] {
 	--fore-colour: #d2dfca;
-	--back-colour: #0d2a22;
-	--hot-colour: #96b7a5;
-	--cold-colour: #96b7a5;
+	--back-colour: #062a22;
+	--hot-colour: #95b7a4;
+	--cold-colour: #95b7a4;
 }
 [data-theme="natron"] {
-	--fore-colour: #f6ecc5;
-	--back-colour: #160d00;
-	--hot-colour: #f7e280;
-	--cold-colour: #aaa070;
+	--fore-colour: #f5ebc5;
+	--back-colour: #141100;
+	--hot-colour: #f7e27f;
+	--cold-colour: #aca06f;
 }
 [data-theme="gauze"] {
-	--fore-colour: #2a0d0c;
+	--fore-colour: #2c0408;
 	--back-colour: #fce0db;
-	--hot-colour: #783737;
-	--cold-colour: #783737;
+	--hot-colour: #783738;
+	--cold-colour: #783738;
 }
 [data-theme="mycelia"] {
 	--fore-colour: #d5f2f3;
-	--back-colour: #163538;
-	--hot-colour: #84f5da;
-	--cold-colour: #9adbce;
+	--back-colour: #143739;
+	--hot-colour: #84f5d9;
+	--cold-colour: #98cbbe;
 }
 [data-theme="cellar"] {
-	--fore-colour: #b9b5a7;
-	--back-colour: #010d1c;
-	--hot-colour: #829bd2;
-	--cold-colour: #cfab7e;
+	--fore-colour: #b9b5a8;
+	--back-colour: #091120;
+	--hot-colour: #859ed3;
+	--cold-colour: #a8ae71;
 }
 
 /* -------------------
