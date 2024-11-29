@@ -386,7 +386,7 @@
 <section id="streaming">
 	<h2>Streaming</h2>
 	<p>This section covers how to use Weird Waves as a livestream widget via broadcast software like <a href="https://obsproject.com/" rel="external">Open Broadcaster Software (<abbr>OBS</abbr>)</a>. Most of this only applies if you want to show Weird Waves visually on-stream. Either way, check the main <a href="#settings">Settings</a> too.</p>
-	<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+	<svg class="svg-icon waveform-spacer" role="separator" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<p><strong>Note:</strong> The Weird Waves stream widget is slightly outdated compared to the web version, as <abbr>OBS</abbr> uses outdated software to run browser sources. However, it looks and works roughly the same.</p>
 
 	<h3>Making a widget</h3>
@@ -422,7 +422,7 @@
 				<use href="#svg-toggle-tick" />
 			</g>
 		</svg>
-		<span>exclude copyright-unsafe material</span>
+		exclude copyright-unsafe material
 	</button>
 	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
 </section><!--#streaming end-->
@@ -444,13 +444,13 @@
 						<use href="#svg-toggle-tick" />
 					</g>
 				</svg>
-				<span>hide show info in Radio</span>
+				hide show info in Radio
 			</button>
 		</li>
 		<li>
 			<h3>Playlist</h3>
 			<button id="auto-play-next-show-toggle" class="toggle" type="button">
-				<svg class="svg-icon" viewBox="0 0 48 24">
+				<svg class="svg-icon" viewBox="0 0 48 24" aria-hidden="true">
 					<use href="#svg-toggle-track" />
 					<g class="svg-toggle-thumb">
 						<use href="#svg-toggle-thumb-side" />
@@ -458,7 +458,8 @@
 						<use href="#svg-toggle-tick" />
 					</g>
 				</svg>
-				<span>start next show automatically when previous show ends</span></button>
+				start next show automatically when previous show ends
+			</button>
 		</li>
 		<li>
 			<h3>Content notes</h3>
@@ -471,7 +472,7 @@
 						<use href="#svg-toggle-tick" />
 					</g>
 				</svg>
-				<span>open all content notes by default</span>
+				open all content notes by default
 			</button>
 		</li>
 		<li>
@@ -479,99 +480,99 @@
 			<!--you found the secret theme notes-->
 			<ul id="theme-buttons" class="flex-list">
 				<li>
-					<button class="push-button" type="button" data-option="dark" aria-pressed="false"><span class="palette" data-theme="dark"></span> Dark</button>
+					<button class="push-button" type="button" data-option="dark" aria-pressed="false"><span class="palette" data-theme="dark" aria-hidden="true"></span> Dark</button>
 				</li>
 				<!--the standard... classy. the sole gen 1 theme-->
 				<li>
-					<button class="push-button" type="button" data-option="goop" aria-pressed="false"><span class="palette" data-theme="goop"></span> Goop</button>
+					<button class="push-button" type="button" data-option="goop" aria-pressed="false"><span class="palette" data-theme="goop" aria-hidden="true"></span> Goop</button>
 				</li>
 				<!--goopy. my default theme. used to have a hard black background. hasty addition to gen 2-->
 				<li>
-					<button class="push-button" type="button" data-option="flame" aria-pressed="false"><span class="palette" data-theme="flame"></span> Flame</button>
+					<button class="push-button" type="button" data-option="flame" aria-pressed="false"><span class="palette" data-theme="flame" aria-hidden="true"></span> Flame</button>
 				</li>
 				<!--Halloween-ish? used to be kinda flat with a black background, but the deep reddish-orange brings something better. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="plasm" aria-pressed="false"><span class="palette" data-theme="plasm"></span> Plasm</button>
+					<button class="push-button" type="button" data-option="plasm" aria-pressed="false"><span class="palette" data-theme="plasm" aria-hidden="true"></span> Plasm</button>
 				</li>
 				<!--oh!! electric! gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="moss" aria-pressed="false"><span class="palette" data-theme="moss"></span> Moss</button>
+					<button class="push-button" type="button" data-option="moss" aria-pressed="false"><span class="palette" data-theme="moss" aria-hidden="true"></span> Moss</button>
 				</li>
 				<!--I really like how the stony blue-grey contrasts the other colours; peaceful, mysterious vibes. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="darker" aria-pressed="false"><span class="palette" data-theme="darker"></span> Darker</button>
+					<button class="push-button" type="button" data-option="darker" aria-pressed="false"><span class="palette" data-theme="darker" aria-hidden="true"></span> Darker</button>
 				</li>
 				<!--between the two greyscale themes I like this one better. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="light" aria-pressed="false"><span class="palette" data-theme="light"></span> Light</button>
+					<button class="push-button" type="button" data-option="light" aria-pressed="false"><span class="palette" data-theme="light" aria-hidden="true"></span> Light</button>
 				</li>
 				<!--used to be so trash. then I redesigned it with 80s-esque colours, which don't quite fit the 30s-to-70s era of most of the shows, but that's fine. gen 2-->
 				<li>
-					<button class="push-button" type="button" data-option="wine" aria-pressed="false"><span class="palette" data-theme="wine"></span> Wine</button>
+					<button class="push-button" type="button" data-option="wine" aria-pressed="false"><span class="palette" data-theme="wine" aria-hidden="true"></span> Wine</button>
 				</li>
 				<!--from the "Roma Wines" ads in Suspense (the second source I started adding to Weird Waves). one of the original 4-->
 				<li>
-					<button class="push-button" type="button" data-option="ash" aria-pressed="false"><span class="palette" data-theme="ash"></span> Ash</button>
+					<button class="push-button" type="button" data-option="ash" aria-pressed="false"><span class="palette" data-theme="ash" aria-hidden="true"></span> Ash</button>
 				</li>
 				<!--damn that orange kinda aggressive. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="dust" aria-pressed="false"><span class="palette" data-theme="dust"></span> Dust</button>
+					<button class="push-button" type="button" data-option="dust" aria-pressed="false"><span class="palette" data-theme="dust" aria-hidden="true"></span> Dust</button>
 				</li>
 				<!--Martian-esque, I guess. used to be a bit incongruous with a whiter background. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="mist" aria-pressed="false"><span class="palette" data-theme="mist"></span> Mist</button>
+					<button class="push-button" type="button" data-option="mist" aria-pressed="false"><span class="palette" data-theme="mist" aria-hidden="true"></span> Mist</button>
 				</li>
 				<!--never really been satisfied with this no matter how much I tweak it, but it fills the "blue-coloured light theme" niche. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="silver" aria-pressed="false"><span class="palette" data-theme="silver"></span> Silver</button>
+					<button class="push-button" type="button" data-option="silver" aria-pressed="false"><span class="palette" data-theme="silver" aria-hidden="true"></span> Silver</button>
 				</li>
 				<!--the lesser of the two greyscale themes IMO. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="pico" aria-pressed="false"><span class="palette" data-theme="pico"></span> Pico</button>
+					<button class="push-button" type="button" data-option="pico" aria-pressed="false"><span class="palette" data-theme="pico" aria-hidden="true"></span> Pico</button>
 				</li>
 				<!--pico8 rep... gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="sepia" aria-pressed="false"><span class="palette" data-theme="sepia"></span> Sepia</button>
+					<button class="push-button" type="button" data-option="sepia" aria-pressed="false"><span class="palette" data-theme="sepia" aria-hidden="true"></span> Sepia</button>
 				</li>
 				<!--inevitable. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="abyss" aria-pressed="false"><span class="palette" data-theme="abyss"></span> Abyss</button>
+					<button class="push-button" type="button" data-option="abyss" aria-pressed="false"><span class="palette" data-theme="abyss" aria-hidden="true"></span> Abyss</button>
 				</li>
 				<!--the point where deep sea meets deep space meets deep in the mind. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="retro" aria-pressed="false"><span class="palette" data-theme="retro"></span> Retro</button>
+					<button class="push-button" type="button" data-option="retro" aria-pressed="false"><span class="palette" data-theme="retro" aria-hidden="true"></span> Retro</button>
 				</li>
 				<!--Games Boy. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="marrow" aria-pressed="false"><span class="palette" data-theme="marrow"></span> Marrow</button>
+					<button class="push-button" type="button" data-option="marrow" aria-pressed="false"><span class="palette" data-theme="marrow" aria-hidden="true"></span> Marrow</button>
 				</li>
 				<!--ooo yeah!! gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="org" aria-pressed="false"><span class="palette" data-theme="org"></span> Org</button>
+					<button class="push-button" type="button" data-option="org" aria-pressed="false"><span class="palette" data-theme="org" aria-hidden="true"></span> Org</button>
 				</li>
 				<!--evil 1980s-90s paperwork colours. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="coalgas" aria-pressed="false"><span class="palette" data-theme="coalgas"></span> Coalgas</button>
+					<button class="push-button" type="button" data-option="coalgas" aria-pressed="false"><span class="palette" data-theme="coalgas" aria-hidden="true"></span> Coalgas</button>
 				</li>
 				<!--based on Plasm with protanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="root" aria-pressed="false"><span class="palette" data-theme="root"></span> Root</button>
+					<button class="push-button" type="button" data-option="root" aria-pressed="false"><span class="palette" data-theme="root" aria-hidden="true"></span> Root</button>
 				</li>
 				<!--based on Retro with tritanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="natron" aria-pressed="false"><span class="palette" data-theme="natron"></span> Natron</button>
+					<button class="push-button" type="button" data-option="natron" aria-pressed="false"><span class="palette" data-theme="natron" aria-hidden="true"></span> Natron</button>
 				</li>
 				<!--based on Marrow with deuteranopia (hot and cold swapped). gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="gauze" aria-pressed="false"><span class="palette" data-theme="gauze"></span> Gauze</button>
+					<button class="push-button" type="button" data-option="gauze" aria-pressed="false"><span class="palette" data-theme="gauze" aria-hidden="true"></span> Gauze</button>
 				</li>
 				<!--based on Sepia with tritanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="mycelia" aria-pressed="false"><span class="palette" data-theme="mycelia"></span> Mycelia</button>
+					<button class="push-button" type="button" data-option="mycelia" aria-pressed="false"><span class="palette" data-theme="mycelia" aria-hidden="true"></span> Mycelia</button>
 				</li>
 				<!--based on Moss with tritanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="cellar" aria-pressed="false"><span class="palette" data-theme="cellar"></span> Cellar</button>
+					<button class="push-button" type="button" data-option="cellar" aria-pressed="false"><span class="palette" data-theme="cellar" aria-hidden="true"></span> Cellar</button>
 				</li>
 				<!--based on Abyss with protanopia (hot and cold swapped). gen 5-->
 			</ul><!--#theme-buttons end-->
@@ -609,7 +610,7 @@
 
 	<h3>Other stations</h3>
 	<ul class="flex-list">
-		<li><a href="https://www.djfullmoon.com/" rel="external">&#127765;</a></li>
+		<li><a href="https://www.djfullmoon.com/" rel="external" aria-label="DJ Full Moon">&#127765;</a></li>
 		<li><a href="https://qc4.fiatlux.tk:8020/soyouz.aac" rel="external">Radio Soyouz</a> (<a href="https://qc4.fiatlux.tk:8020/soyouz.hq.aac" rel="external">128kbps</a>)</li>
 		<li><a href="https://wmbu.neocities.org/" rel="external">Wave <abbr>MBU</abbr></a></li>
 		<li><a href="https://kingposs.com/radio.html" rel="external"><abbr>KP</abbr> Radio</a></li>
@@ -727,7 +728,7 @@
 
 	<h3>Button</h3>
 	<ul class="flex-list">
-		<li><img src="./images/button.png" alt=""></li>
+		<li><img src="./images/button.png" alt="The Weird Waves 88 by 31 pixel button"></li>
 	</ul>
 </section><!--#links end-->
 
@@ -754,7 +755,7 @@
 	<h2>Welcome to Weird Waves!</h2>
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks.</p>
 	<div id="featured-show-container" hidden>
-		<svg class="svg-icon waveform-spacer" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+		<svg class="svg-icon waveform-spacer" role="separator" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 		<h3>Why not try&hellip;</h3>
 		<div id="featured-show" data-show-id=""></div>
 	</div><!--#featured-show-container end-->
