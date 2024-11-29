@@ -214,7 +214,7 @@
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
 			</div><!--#seek-controls end-->
 			<div id="show-controls">
-				<button id="play-toggle" class="push-button" type="button" aria-label="Play show" aria-live="polite" aria-relevant="additions">
+				<button id="play-toggle" class="push-button" type="button" aria-label="Play show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
 				</button>
 				<button id="skip-button" class="push-button" type="button" aria-label="Skip show">
@@ -222,7 +222,7 @@
 				</button>
 			</div><!--#show-controls end-->
 			<div id="audio-controls">
-				<button id="mute-toggle" class="push-button" type="button" aria-label="Mute audio" aria-live="polite" aria-relevant="additions">
+				<button id="mute-toggle" class="push-button" type="button" aria-label="Mute audio">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
 				</button>
 				<input id="volume-control" type="range" value="100" aria-label="Volume">
@@ -231,7 +231,7 @@
 
 		<section>
 			<h3 class="visually-hidden">Loaded show</h3>
-			<article id="loaded-show" aria-live="polite" aria-relevant="additions removals" data-show-id=""></article>
+			<article id="loaded-show" aria-live="polite" data-show-id=""></article>
 			<audio id="show-audio"></audio>
 		</section>
 	</div><!--#radio-app end-->
@@ -332,8 +332,8 @@
 
 	<h3>Import & export</h3>
 	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
-	<textarea id="import-export-data" aria-live="polite" aria-relevant="text" aria-label="Import/export playlist data"></textarea>
-	<div id="import-error-message" aria-live="live" aria-relevant="additions removals" hidden>
+	<textarea id="import-export-data" aria-live="polite" aria-label="Import/export playlist data"></textarea>
+	<div id="import-error-message" aria-live="live" hidden>
 		<p>Invalid show ID(s):</p>
 		<ul id="import-error-list"></ul><!--#import-error-list end-->
 	</div><!--#import-error-message end-->
