@@ -959,6 +959,9 @@ use[href="#svg-toggle-tick"] {
 	inline-size: 12em;
 	border: inherit;
 	background-image: linear-gradient(var(--palette-angle), var(--fore-colour) 25%, var(--back-colour) 25% 50%, var(--hot-colour) 50% 75%, var(--cold-colour) 75%);
+	&[data-colours="3"] {
+		background-image: linear-gradient(var(--palette-angle), var(--fore-colour) 33%, var(--back-colour) 33% 67%, var(--hot-colour) 67%);
+	}
 	&:dir(rtl) {
 		--palette-angle: 270deg;
 	}
