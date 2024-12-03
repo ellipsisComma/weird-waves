@@ -404,11 +404,6 @@ a:active {
 	color: var(--back-colour);
 	background-color: var(--hot-colour);
 }
-[rel~="external"]::after {
-	content: "\a0 \2206"; /* non-breaking space + increment */
-	display: inline-block;
-	font-variant-position: super;
-}
 .uppercase {
 	text-transform: uppercase;
 }
@@ -976,9 +971,6 @@ use[href="#svg-toggle-tick"] {
 
 #call-in, #links, #credits, #welcome {
 	text-align: center;
-}
-.flex-list [rel~="external"]::after {
-	content: unset;
 }
 .waveform-spacer {
 	margin-inline: auto;
