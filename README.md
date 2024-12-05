@@ -90,3 +90,43 @@ Both the path and the filetype can be modified in the `showPath()` function in `
 ### Bangers
 
 Marking a show as with `"banger": true` lets the show be selected at random when pressing the "+ Banger" button in the Booth, and be featured on the welcome section.
+
+## Removed/rejected features
+
+These are features I've considered and decided not to implement, or implemented and removed.
+
+### Download links
+
+Links to download individual shows, present in any or all of: the Archive, the Booth, and the Radio.
+
+1. Show info is already tightly laid out and adding a download link in such a small space tends to complicate it or obstruct other content (e.g. using `position: absolute` to put it in the top-right corner of a show's info).
+2. The audio files used in Weird Waves are optimised for small filesizes rather than audio quality, and better-quality versions can be found in the source links added to each series (in the Archive) and show (in the booth and radio).
+
+A determined user could download all audio files using a combination of the browser inspector (to find the audio source link structure), data export (to get components for all audio show paths), and `curl`.
+
+### Opening/closing all instances of a show's content notes at once
+
+Synchronising the open/closed state of a show's content notes in the Archive, Booth, and Radio, so that when you open its notes in one place, they change in any other places the show info exists.
+
+I don't think this adds any worthwhile functionality.
+
+### Recording audio volume in `localStorage`
+
+Adding volume to settings so a listener can effectively set a personal volume that's applied on pageload.
+
+The audio on the site isn't consistent enough in volume and compression for this to be set automatically, and these properties can't easily be evened out due to the degradation of many of the older audio before it was digitised.
+
+### External link markers
+
+Icons or special characters used to indicate that a link leads to another page (particularly on an external site), and so that clicking the link would interrupt any currently-playing show audio.
+
+1. This is generally already indicated through context (link text, surrounding text, section heading).
+2. Such markers are often hard to style in a way that looks pleasing.
+
+The stylesheet previously included external link markers using the increment symbol (effectively a capital Delta).
+
+### In-depth statistics
+
+Statistics for the total show count and total duration of each series, not just the Archive as a whole.
+
+I decided this was unnecessary.
