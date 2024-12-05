@@ -401,7 +401,6 @@ function loadShow() {
 		// reset and reveal radio controls
 		page.getElement(`seekBar`).value = 0;
 		page.getElement(`showTimeElapsed`).textContent = `00:00`;
-		page.getElement(`audio`).addEventListener(`loadedmetadata`, () => setTimestampFromSeconds(page.getElement(`showTimeTotal`), page.getElement(`audio`).duration));
 		page.getElement(`radioControls`).hidden = false;
 	} else {
 		// empty loaded show and playlist
@@ -451,11 +450,9 @@ function setAudioToggle(toggle, label, code) {
 function togglePlay() {
 	if (page.getElement(`audio`).paused) {
 		page.getElement(`audio`).play();
-		setAudioToggle(page.getElement(`playToggle`), `Pause show`, `pause`);
 	} else {
 		updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
 		page.getElement(`audio`).pause();
-		setAudioToggle(page.getElement(`playToggle`), `Play show`, `play`);
 	}
 }
 
@@ -592,6 +589,13 @@ function buildFeaturedShow() {
 =========== */
 
 // radio audio events
+page.getElement(`audio`).addEventListener(`loadstart`, () => page.getElement(`radioControls`).disabled = true);
+page.getElement(`audio`).addEventListener(`loadedmetadata`, () => {
+	page.getElement(`radioControls`).disabled = false;
+	setTimestampFromSeconds(page.getElement(`showTimeTotal`), page.getElement(`audio`).duration);
+});
+page.getElement(`audio`).addEventListener(`play`, () => setAudioToggle(page.getElement(`playToggle`), `Pause show`, `pause`));
+page.getElement(`audio`).addEventListener(`pause`, () => setAudioToggle(page.getElement(`playToggle`), `Play show`, `play`));
 page.getElement(`audio`).addEventListener(`ended`, loadNextShow);
 
 // radio interface events

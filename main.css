@@ -523,8 +523,15 @@ button {
 	grid-template:
 		"	seek-controls	seek-controls	"
 		"	show-controls	audio-controls	" / auto min-content;
-	margin-block-end: var(--gap-size);
 	row-gap: calc(var(--gap-size) + var(--control-depth));
+	margin-block-start: unset;
+	margin-block-end: var(--gap-size);
+	margin-inline: unset;
+	padding: unset;
+	border: unset;
+	&[disabled] {
+		opacity: 0.5;
+	}
 	& > div {
 		display: flex;
 		gap: var(--gap-size);
