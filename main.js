@@ -577,7 +577,7 @@ function buildFeaturedShow() {
 	featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
 		addShow(event.target.dataset.target);
 		container.hidden = true;
-	});
+	}, {"once": true});
 
 	container.hidden = false;
 }
