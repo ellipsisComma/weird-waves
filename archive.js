@@ -788,7 +788,7 @@ let archive = [
 	},
 	{
 	"code": `08-Naught`,
-	"heading": `#8: <cite><abbr aria-label="2 B R Nought 2 B">2 B R 0 2 B</abbr></cite>`,
+	"heading": `#8: <cite><abbr>2 B R 0 2 B</abbr></cite>`,
 	"blurb": `In a future of immortality and severe population control, a father must find three people willing to die so his newborn triplets can be permitted to live. Written by Kurt Vonnegut, read by Alex Clarke.`,
 	"notes": `gun death, suicide, suicide ideation`,
 	"duration": 1080,
