@@ -290,7 +290,6 @@ window.addEventListener(`storage`, () => {
 	}
 });
 ]]></script>
-<script data-goatcounter="https://weirdwaves.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 
