@@ -224,7 +224,7 @@ DEFAULTS
 @layer utilities {
 
 [hidden] {
-	display: none !important;
+	display: none;
 }
 .visually-hidden {
 	clip-path: inset(50%);
