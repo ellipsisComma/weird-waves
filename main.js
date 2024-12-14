@@ -297,8 +297,13 @@ function importPlaylist() {
 	page.getElement(`importErrorList`).replaceChildren();
 
 	const validIDRegex = /^[A-Z][A-Za-z]{1,2}-\w+-\w+$/m;
-	const importIDs = [...new Set(importList.replace(/[^\S\n\r]/g, ``).split(/\n+/))];
-	const invalidIDs = importIDs.filter(ID => !validIDRegex.test(ID) || !getShowInArchive(ID));
+	const errorMarker = ` -- import error!`;
+	const importIDs = [...new Set(importList.replaceAll(errorMarker, ``).replace(/[^\S\n\r]/g, ``).split(/\n+/))];
+	const invalidIDs = importIDs.filter((ID, i) => {
+		const valid = validIDRegex.test(ID) && getShowInArchive(ID);
+		if (!valid) importIDs[i] += errorMarker;
+		return !valid;
+	});
 
 	page.getElement(`importExport`).value = ``;
 	page.getElement(`importExport`).ariaInvalid = false;
