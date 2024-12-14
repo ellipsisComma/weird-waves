@@ -388,6 +388,10 @@ function removeShow(target) {
 
 // write show parts onto page and load show audio file; if playlist is empty, reset radio
 function loadShow() {
+	if (page.getElement(`playlist`).children.length > 1) fetch(
+		showPath(page.getElement(`playlist`).children[1].dataset.showId),
+		{"cache": `no-cache`}
+	);
 	if (page.getElement(`playlist`).children.length > 0 && page.getElement(`playlist`).firstElementChild.dataset.showId === page.getElement(`loadedShow`).dataset.showId) return;
 
 	setAudioToggle(page.getElement(`playToggle`), `Play audio`, `play`);
