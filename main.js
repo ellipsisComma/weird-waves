@@ -279,6 +279,7 @@ function clearPlaylist() {
 function exportPlaylist() {
 	page.getElement(`importErrorMessage`).hidden = true;
 	page.getElement(`importExport`).value = getShowIDs(page.getElement(`playlist`).children).join(`\n`);
+	page.getElement(`importExport`).ariaInvalid = false;
 }
 
 // import playlist from textbox
@@ -294,6 +295,7 @@ function importPlaylist() {
 	const invalidIDs = importIDs.filter(ID => !validIDRegex.test(ID) || !getShowInArchive(ID));
 
 	page.getElement(`importExport`).value = ``;
+	page.getElement(`importExport`).ariaInvalid = false;
 
 	if (invalidIDs.length === 0) {
 		clearPlaylist();
@@ -301,6 +303,7 @@ function importPlaylist() {
 	} else {
 		invalidIDs.forEach(ID => page.getElement(`importErrorList`).appendChild(document.createElement(`li`)).textContent = ID);
 		page.getElement(`importExport`).value = importIDs.join(`\n`);
+		page.getElement(`importExport`).ariaInvalid = true;
 		page.getElement(`importErrorMessage`).hidden = false;
 		page.getElement(`importErrorMessage`).scrollIntoView();
 	}
@@ -537,7 +540,7 @@ function buildArchive() {
 	page.getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
 	page.getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
 	page.getElement(`seriesList`).addEventListener(`click`, () => {
-		if (!event.target.hasAttribute(`aria-disabled`)) {
+		if (event.target.getAttribute(`aria-disabled`) === `false`) {
 			switch (event.target.dataset.action) {
 			case `add-series`: addSeries(event.target.closest(`#series-list > li`)); break;
 			case `add-show`: addShow(event.target.closest(`.show-list > li`).dataset.showId); break;
@@ -613,14 +616,14 @@ document.getElementById(`random-show-button`).addEventListener(`click`, () => ad
 document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
 document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
 page.getElement(`clearButton`).addEventListener(`click`, () => {
-	if (!page.getElement(`clearButton`).hasAttribute(`aria-disabled`)) revealClearPlaylistControls();
+	if (page.getElement(`clearButton`).getAttribute(`aria-disabled`) === `false`) revealClearPlaylistControls();
 });
 
 document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
 document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
 [`playlist-controls`, `data-controls`].forEach(id => {
 	document.getElementById(id).addEventListener(`click`, () => {
-		if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) hideClearPlaylistControls();
+		if (event.target.tagName === `BUTTON` && event.target.getAttribute(`aria-disabled`) === `false`) hideClearPlaylistControls();
 	});
 });
 page.getElement(`playlist`).addEventListener(`click`, () => {
@@ -643,7 +646,7 @@ for (const setting of [`copyrightSafety`, `flatRadio`, `autoPlayNextShow`, `note
 }
 [`theme`, `font`].forEach(style => {
 	page.getElement(`${style}Buttons`).addEventListener(`click`, () => {
-		if (event.target.tagName === `BUTTON` && !event.target.hasAttribute(`aria-disabled`)) styles.setStyle(style, event.target.dataset.option);
+		if (event.target.tagName === `BUTTON` && event.target.getAttribute(`aria-disabled`) === `false`) styles.setStyle(style, event.target.dataset.option);
 	});
 });
 

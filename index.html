@@ -147,17 +147,17 @@
 	<li data-show-id="">
 		<ul class="show-position-controls icon-button-set">
 			<li>
-				<button class="push-button" type="button" data-action="move-up" aria-label="Move show up">
+				<button class="push-button" type="button" data-action="move-up" aria-controls="playlist radio" aria-label="Move show up">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="remove" aria-label="Remove show">
+				<button class="push-button" type="button" data-action="remove" aria-controls="playlist radio" aria-label="Remove show">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="move-down" aria-label="Move show down">
+				<button class="push-button" type="button" data-action="move-down" aria-controls="playlist radio" aria-label="Move show down">
 					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg>
 				</button>
 			</li>
@@ -173,7 +173,7 @@
 				<p class="series-blurb"></p>
 				<p class="series-source"></p>
 			</div>
-			<button class="push-button" type="button" data-action="add-series" aria-label="Add all shows in series to playlist">+ Series</button>
+			<button class="push-button" type="button" data-action="add-series" aria-controls="playlist radio" aria-label="Add all shows in series to playlist">+ Series</button>
 		</header>
 		<ol class="show-list"></ol>
 	</li>
@@ -189,7 +189,7 @@
 				</details>
 			</div>
 		</article>
-		<button class="push-button" type="button" data-action="add-show" aria-pressed="false" aria-label="Add show to playlist">+ Show</button>
+		<button class="push-button" type="button" data-action="add-show" aria-controls="playlist radio" aria-pressed="false" aria-disabled="false" aria-label="Add show to playlist">+ Show</button>
 	</li>
 </template><!--#archive-show-template end-->
 <!--html templates end-->
@@ -210,22 +210,22 @@
 		<fieldset id="radio-controls" class="icon-button-set" hidden>
 			<h3 class="visually-hidden">Radio controls</h3>
 			<div id="seek-controls">
-				<input id="seek-bar" type="range" value="0" data-seeking="false" aria-label="Go to time in show">
+				<input id="seek-bar" type="range" value="0" data-seeking="false" aria-controls="show-audio" aria-label="Go to time in show">
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
 			</div><!--#seek-controls end-->
 			<div id="show-controls">
-				<button id="play-toggle" class="push-button" type="button" aria-label="Play show">
+				<button id="play-toggle" class="push-button" type="button" aria-controls="show-audio" aria-label="Play show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
 				</button>
-				<button id="skip-button" class="push-button" type="button" aria-label="Skip show">
+				<button id="skip-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Skip show">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-skip" /></svg>
 				</button>
 			</div><!--#show-controls end-->
 			<div id="audio-controls">
-				<button id="mute-toggle" class="push-button" type="button" aria-label="Mute audio">
+				<button id="mute-toggle" class="push-button" type="button" aria-controls="show-audio" aria-label="Mute audio">
 					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
 				</button>
-				<input id="volume-control" type="range" value="100" aria-label="Volume">
+				<input id="volume-control" type="range" value="100" aria-controls="show-audio" aria-label="Volume">
 			</div><!--#audio-controls end-->
 		</fieldset><!--#radio-controls end-->
 
@@ -315,15 +315,15 @@
 	<h3>Playlist</h3>
 	<div id="playlist-and-controls">
 		<ul id="playlist-controls" class="flex-list">
-			<li><button id="random-show-button" class="push-button" type="button" aria-label="Add random show to playlist">+ Show</button></li>
-			<li><button id="random-banger-button" class="push-button" type="button" aria-label="Add random banger to playlist">+ Banger</button></li>
-			<li><button id="shuffle-button" class="push-button" type="button">Shuffle</button></li>
-			<li><button id="clear-button" class="push-button" type="button" aria-pressed="false">Clear</button></li>
+			<li><button id="random-show-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Add random show to playlist">+ Show</button></li>
+			<li><button id="random-banger-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Add random banger to playlist">+ Banger</button></li>
+			<li><button id="shuffle-button" class="push-button" type="button" aria-controls="playlist radio">Shuffle</button></li>
+			<li><button id="clear-button" class="push-button" type="button" aria-controls="clear-playlist-controls" aria-pressed="false" aria-disabled="false">Clear</button></li>
 			<li id="clear-playlist-controls" hidden>
 				<p>Clear playlist?</p>
 				<ul class="flex-list">
-					<li><button id="clear-confirm-button" class="push-button" type="button">Confirm</button></li>
-					<li><button id="clear-cancel-button" class="push-button" type="button">Cancel</button></li>
+					<li><button id="clear-confirm-button" class="push-button" type="button" aria-controls="playlist radio">Confirm</button></li>
+					<li><button id="clear-cancel-button" class="push-button" type="button" aria-controls="clear-playlist-controls">Cancel</button></li>
 				</ul>
 			</li><!--#clear-playlist-controls end-->
 		</ul><!--#playlist-controls end-->
@@ -331,15 +331,15 @@
 	</div><!--#playlist-and-controls end-->
 
 	<h3>Import & export</h3>
-	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist. You can also use this to quickly edit your playlist.</p>
-	<textarea id="import-export-data" aria-live="polite" aria-label="Import/export playlist data"></textarea>
-	<div id="import-error-message" aria-live="live" hidden>
+	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist.</p>
+	<textarea id="import-export-data" aria-errormessage="import-error-message" aria-label="Import/export playlist data" aria-invalid="false"></textarea>
+	<div id="import-error-message" hidden>
 		<p>Invalid show ID(s):</p>
 		<ul id="import-error-list"></ul><!--#import-error-list end-->
 	</div><!--#import-error-message end-->
 	<ul id="data-controls" class="flex-list">
-		<li><button id="export-button" class="push-button" type="button">Export</button></li>
-		<li><button id="import-button" class="push-button" type="button">Import</button></li>
+		<li><button id="export-button" class="push-button" type="button" aria-controls="import-export-data">Export</button></li>
+		<li><button id="import-button" class="push-button" type="button" aria-controls="playlist radio import-export-data">Import</button></li>
 	</ul>
 </section><!--#booth end-->
 
@@ -349,7 +349,7 @@
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
 	<ul class="flex-list">
-		<li><button id="add-archive-button" class="push-button" type="button" aria-label="Add all shows in archive to playlist">+ Archive</button></li>
+		<li><button id="add-archive-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Add all shows in archive to playlist">+ Archive</button></li>
 	</ul>
 	<nav>
 		<ol id="archive-series-links" class="flex-list"></ol><!--#archive-series-links end-->
@@ -480,99 +480,99 @@
 			<!--you found the secret theme notes-->
 			<ul id="theme-buttons" class="flex-list">
 				<li>
-					<button class="push-button" type="button" data-option="dark" aria-pressed="false"><span class="palette" data-theme="dark" data-colours="4" aria-hidden="true"></span> Dark</button>
+					<button class="push-button" type="button" data-option="dark" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="dark" data-colours="4" aria-hidden="true"></span> Dark</button>
 				</li>
 				<!--the standard... classy. the sole gen 1 theme-->
 				<li>
-					<button class="push-button" type="button" data-option="goop" aria-pressed="false"><span class="palette" data-theme="goop" data-colours="4" aria-hidden="true"></span> Goop</button>
+					<button class="push-button" type="button" data-option="goop" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="goop" data-colours="4" aria-hidden="true"></span> Goop</button>
 				</li>
 				<!--goopy. my default theme. used to have a hard black background. hasty addition to gen 2-->
 				<li>
-					<button class="push-button" type="button" data-option="flame" aria-pressed="false"><span class="palette" data-theme="flame" data-colours="4" aria-hidden="true"></span> Flame</button>
+					<button class="push-button" type="button" data-option="flame" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="flame" data-colours="4" aria-hidden="true"></span> Flame</button>
 				</li>
 				<!--Halloween-ish? used to be kinda flat with a black background, but the deep reddish-orange brings something better. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="plasm" aria-pressed="false"><span class="palette" data-theme="plasm" data-colours="4" aria-hidden="true"></span> Plasm</button>
+					<button class="push-button" type="button" data-option="plasm" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="plasm" data-colours="4" aria-hidden="true"></span> Plasm</button>
 				</li>
 				<!--oh!! electric! gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="moss" aria-pressed="false"><span class="palette" data-theme="moss" data-colours="4" aria-hidden="true"></span> Moss</button>
+					<button class="push-button" type="button" data-option="moss" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="moss" data-colours="4" aria-hidden="true"></span> Moss</button>
 				</li>
 				<!--I really like how the stony blue-grey contrasts the other colours; peaceful, mysterious vibes. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="darker" aria-pressed="false"><span class="palette" data-theme="darker" data-colours="3" aria-hidden="true"></span> Darker</button>
+					<button class="push-button" type="button" data-option="darker" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="darker" data-colours="3" aria-hidden="true"></span> Darker</button>
 				</li>
 				<!--between the two greyscale themes I like this one better. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="light" aria-pressed="false"><span class="palette" data-theme="light" data-colours="4" aria-hidden="true"></span> Light</button>
+					<button class="push-button" type="button" data-option="light" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="light" data-colours="4" aria-hidden="true"></span> Light</button>
 				</li>
 				<!--used to be so trash. then I redesigned it with 80s-esque colours, which don't quite fit the 30s-to-70s era of most of the shows, but that's fine. gen 2-->
 				<li>
-					<button class="push-button" type="button" data-option="wine" aria-pressed="false"><span class="palette" data-theme="wine" data-colours="4" aria-hidden="true"></span> Wine</button>
+					<button class="push-button" type="button" data-option="wine" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="wine" data-colours="4" aria-hidden="true"></span> Wine</button>
 				</li>
 				<!--from the "Roma Wines" ads in Suspense (the second source I started adding to Weird Waves). one of the original 4-->
 				<li>
-					<button class="push-button" type="button" data-option="ash" aria-pressed="false"><span class="palette" data-theme="ash" data-colours="4" aria-hidden="true"></span> Ash</button>
+					<button class="push-button" type="button" data-option="ash" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="ash" data-colours="4" aria-hidden="true"></span> Ash</button>
 				</li>
 				<!--damn that orange kinda aggressive. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="dust" aria-pressed="false"><span class="palette" data-theme="dust" data-colours="4" aria-hidden="true"></span> Dust</button>
+					<button class="push-button" type="button" data-option="dust" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="dust" data-colours="4" aria-hidden="true"></span> Dust</button>
 				</li>
 				<!--Martian-esque, I guess. used to be a bit incongruous with a whiter background. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="mist" aria-pressed="false"><span class="palette" data-theme="mist" data-colours="4" aria-hidden="true"></span> Mist</button>
+					<button class="push-button" type="button" data-option="mist" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="mist" data-colours="4" aria-hidden="true"></span> Mist</button>
 				</li>
 				<!--never really been satisfied with this no matter how much I tweak it, but it fills the "blue-coloured light theme" niche. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="silver" aria-pressed="false"><span class="palette" data-theme="silver" data-colours="3" aria-hidden="true"></span> Silver</button>
+					<button class="push-button" type="button" data-option="silver" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="silver" data-colours="3" aria-hidden="true"></span> Silver</button>
 				</li>
 				<!--the lesser of the two greyscale themes IMO. gen 3-->
 				<li>
-					<button class="push-button" type="button" data-option="pico" aria-pressed="false"><span class="palette" data-theme="pico" data-colours="4" aria-hidden="true"></span> Pico</button>
+					<button class="push-button" type="button" data-option="pico" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="pico" data-colours="4" aria-hidden="true"></span> Pico</button>
 				</li>
 				<!--pico8 rep... gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="sepia" aria-pressed="false"><span class="palette" data-theme="sepia" data-colours="3" aria-hidden="true"></span> Sepia</button>
+					<button class="push-button" type="button" data-option="sepia" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="sepia" data-colours="3" aria-hidden="true"></span> Sepia</button>
 				</li>
 				<!--inevitable. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="abyss" aria-pressed="false"><span class="palette" data-theme="abyss" data-colours="4" aria-hidden="true"></span> Abyss</button>
+					<button class="push-button" type="button" data-option="abyss" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="abyss" data-colours="4" aria-hidden="true"></span> Abyss</button>
 				</li>
 				<!--the point where deep sea meets deep space meets deep in the mind. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="retro" aria-pressed="false"><span class="palette" data-theme="retro" data-colours="3" aria-hidden="true"></span> Retro</button>
+					<button class="push-button" type="button" data-option="retro" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="retro" data-colours="3" aria-hidden="true"></span> Retro</button>
 				</li>
 				<!--Games Boy. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="marrow" aria-pressed="false"><span class="palette" data-theme="marrow" data-colours="4" aria-hidden="true"></span> Marrow</button>
+					<button class="push-button" type="button" data-option="marrow" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="marrow" data-colours="4" aria-hidden="true"></span> Marrow</button>
 				</li>
 				<!--ooo yeah!! gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="org" aria-pressed="false"><span class="palette" data-theme="org" data-colours="3" aria-hidden="true"></span> Org</button>
+					<button class="push-button" type="button" data-option="org" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="org" data-colours="3" aria-hidden="true"></span> Org</button>
 				</li>
 				<!--evil 1980s-90s paperwork colours. gen 4-->
 				<li>
-					<button class="push-button" type="button" data-option="coalgas" aria-pressed="false"><span class="palette" data-theme="coalgas" data-colours="4" aria-hidden="true"></span> Coalgas</button>
+					<button class="push-button" type="button" data-option="coalgas" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="coalgas" data-colours="4" aria-hidden="true"></span> Coalgas</button>
 				</li>
 				<!--based on Plasm with protanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="root" aria-pressed="false"><span class="palette" data-theme="root" data-colours="3" aria-hidden="true"></span> Root</button>
+					<button class="push-button" type="button" data-option="root" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="root" data-colours="3" aria-hidden="true"></span> Root</button>
 				</li>
 				<!--based on Retro with tritanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="natron" aria-pressed="false"><span class="palette" data-theme="natron" data-colours="4" aria-hidden="true"></span> Natron</button>
+					<button class="push-button" type="button" data-option="natron" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="natron" data-colours="4" aria-hidden="true"></span> Natron</button>
 				</li>
 				<!--based on Marrow with deuteranopia (hot and cold swapped). gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="gauze" aria-pressed="false"><span class="palette" data-theme="gauze" data-colours="3" aria-hidden="true"></span> Gauze</button>
+					<button class="push-button" type="button" data-option="gauze" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="gauze" data-colours="3" aria-hidden="true"></span> Gauze</button>
 				</li>
 				<!--based on Sepia with tritanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="mycelia" aria-pressed="false"><span class="palette" data-theme="mycelia" data-colours="4" aria-hidden="true"></span> Mycelia</button>
+					<button class="push-button" type="button" data-option="mycelia" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="mycelia" data-colours="4" aria-hidden="true"></span> Mycelia</button>
 				</li>
 				<!--based on Moss with tritanopia. gen 5-->
 				<li>
-					<button class="push-button" type="button" data-option="cellar" aria-pressed="false"><span class="palette" data-theme="cellar" data-colours="4" aria-hidden="true"></span> Cellar</button>
+					<button class="push-button" type="button" data-option="cellar" aria-pressed="false" aria-disabled="false"><span class="palette" data-theme="cellar" data-colours="4" aria-hidden="true"></span> Cellar</button>
 				</li>
 				<!--based on Abyss with protanopia (hot and cold swapped). gen 5-->
 			</ul><!--#theme-buttons end-->
@@ -581,10 +581,10 @@
 			<h3>Site font</h3>
 			<ul id="font-buttons" class="flex-list">
 				<li>
-					<button class="push-button" type="button" data-option="serif" data-font="serif" aria-pressed="false">Serif</button>
+					<button class="push-button" type="button" data-option="serif" data-font="serif" aria-pressed="false" aria-disabled="false">Serif</button>
 				</li>
 				<li>
-					<button class="push-button" type="button" data-option="sans" data-font="sans" aria-pressed="false">Sans</button>
+					<button class="push-button" type="button" data-option="sans" data-font="sans" aria-pressed="false" aria-disabled="false">Sans</button>
 				</li>
 			</ul><!--#font-buttons end-->
 		</li>
@@ -757,7 +757,7 @@
 	<div id="featured-show-container" hidden>
 		<svg class="svg-icon waveform-spacer" role="separator" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 		<h3>Why not try&hellip;</h3>
-		<div id="featured-show" data-show-id=""></div>
+		<div id="featured-show"></div>
 	</div><!--#featured-show-container end-->
 </section><!--#welcome end-->
 </main>

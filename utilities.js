@@ -134,8 +134,10 @@ function store(key, value) {
 
 // set a button's state to unpressed
 HTMLButtonElement.prototype.unpress = function () {
-	this.setAttribute(`aria-pressed`, `false`);
-	this.removeAttribute(`aria-disabled`);
+	this.setAttributes({
+		"aria-pressed": `false`,
+		"aria-disabled": `false`,
+	});
 }
 
 // set a button's state to pressed
