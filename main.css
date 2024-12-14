@@ -599,6 +599,18 @@ input[type="range"] {
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 		transform: translateY(calc(var(--control-depth) * -1));
 	}
+	&:active {
+		&::-moz-range-thumb {
+			border-color: var(--cold-colour);
+			box-shadow: 0 var(--control-depth) var(--cold-colour);
+		}
+		&::-moz-range-progress {
+			background-color: var(--cold-colour);
+		}
+	}
+}
+/* vendor-specific pseudo-elements must be nested separately or they don't apply (at least in this case) */
+input[type="range"] {
 	&::-webkit-slider-runnable-track {
 		background-color: var(--hot-colour);
 		block-size: var(--line-width);
@@ -610,14 +622,7 @@ input[type="range"] {
 		border: var(--hot-line);
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 	}
-	&:active {
-		&::-moz-range-thumb {
-			border-color: var(--cold-colour);
-			box-shadow: 0 var(--control-depth) var(--cold-colour);
-		}
-		&::-moz-range-progress {
-			background-color: var(--cold-colour);
-		}
+	:active {
 		&::-webkit-slider-thumb {
 			border-color: var(--cold-colour);
 			box-shadow: 0 var(--control-depth) var(--cold-colour);
