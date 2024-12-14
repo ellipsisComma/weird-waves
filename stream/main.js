@@ -66,7 +66,13 @@ const styleOptions = {
 		{	"name": `Abyss`,	"code": `abyss`		},
 		{	"name": `Retro`,	"code": `retro`		},
 		{	"name": `Marrow`,	"code": `marrow`	},
-		{	"name": `Org`,		"code": `org`		}
+		{	"name": `Org`,		"code": `org`		},
+		{	"name": `Coalgas`,	"code": `coalgas`	},
+		{	"name": `Root`,		"code": `root`		},
+		{	"name": `Natron`,	"code": `natron`	},
+		{	"name": `Gauze`,	"code": `gauze`		},
+		{	"name": `Mycelia`,	"code": `mycelia`	},
+		{	"name": `Cellar`,	"code": `cellar`	},
 	],
 	"fonts": [
 		{	"name": "Serif",	"code": "serif"	},
