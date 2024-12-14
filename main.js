@@ -174,8 +174,14 @@ templateHTML.setTemplate(`playlistItem`, `playlist-item`);
 templateHTML.setTemplate(`archiveSeries`, `archive-series`);
 templateHTML.setTemplate(`archiveShow`, `archive-show`);
 
-// mutation observer to store playlist changes
-const playlistObserver = new MutationObserver(storePlaylist);
+// mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
+const playlistObserver = new MutationObserver(() => {
+	storePlaylist();
+	if (location.protocol !== `file:` && page.getElement(`playlist`).children.length > 1) fetch(
+		showPath(page.getElement(`playlist`).children[1].dataset.showId),
+		{"cache": `no-cache`}
+	);
+});
 
 function connectPlaylistObserver() {
 	playlistObserver.observe(page.getElement(`playlist`), {"childList": true});
@@ -388,10 +394,6 @@ function removeShow(target) {
 
 // write show parts onto page and load show audio file; if playlist is empty, reset radio
 function loadShow() {
-	if (page.getElement(`playlist`).children.length > 1) fetch(
-		showPath(page.getElement(`playlist`).children[1].dataset.showId),
-		{"cache": `no-cache`}
-	);
 	if (page.getElement(`playlist`).children.length > 0 && page.getElement(`playlist`).firstElementChild.dataset.showId === page.getElement(`loadedShow`).dataset.showId) return;
 
 	setAudioToggle(page.getElement(`playToggle`), `Play audio`, `play`);
