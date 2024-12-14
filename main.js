@@ -506,8 +506,6 @@ function buildShow(show) {
 	if (show.notes) contentNotes.querySelector(`span`).setContent(show.notes);
 	else contentNotes.remove();
 
-	newShow.querySelector(`[data-action="add-show"]`).dataset.target = show.ID;
-
 	return templatedShow;
 }
 
@@ -517,7 +515,6 @@ function buildSeries(series) {
 	const newSeries = templatedSeries.querySelector(`li`);
 	newSeries.setAttributes({
 		"id": `archive-${series.code}`,
-		"data-series-id": series.code,
 		"data-copyright-safe": series.copyrightSafe ? `true` : `false`,
 	});
 
@@ -543,7 +540,7 @@ function buildArchive() {
 		if (!event.target.hasAttribute(`aria-disabled`)) {
 			switch (event.target.dataset.action) {
 			case `add-series`: addSeries(event.target.closest(`#series-list > li`)); break;
-			case `add-show`: addShow(event.target.dataset.target); break;
+			case `add-show`: addShow(event.target.closest(`.show-list > li`).dataset.showId); break;
 			}
 		}
 	});
@@ -569,13 +566,12 @@ function buildFeaturedShow() {
 	const container = document.getElementById(`featured-show-container`);
 	const featuredShow = document.getElementById(`featured-show`);
 	const showInArchive = getShowInArchive(ID);
-	featuredShow.dataset.showId = ID;
 	featuredShow.replaceChildren(...showInArchive.cloneChildren());
 	expandShowInfo(featuredShow, showInArchive.closest(`#series-list > li`));
 
 	// add click event for adding featured show to playlist and removing it from welcome area
 	featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
-		addShow(event.target.dataset.target);
+		addShow(ID);
 		container.hidden = true;
 	}, {"once": true});
 
