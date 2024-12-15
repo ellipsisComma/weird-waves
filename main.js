@@ -35,18 +35,17 @@ const settings = (() => {
 	local.notesOpen ??= false; // if true, open all content notes
 
 	function initialise() {
-		Object.keys(local).forEach(setToggle);
+		Object.keys(local).forEach(setting => {
+			const toggle = document.getElementById(`${setting.camelToKebab()}-toggle`);
+			toggle?.setAttribute(`aria-pressed`, local[setting].toString());
+			toggle?.closest(`.pre-initialised-control`).classList.remove(`pre-initialised-control`);
+		});
 		page.getElement(`loadedShow`).classList.toggle(`flat-radio`, settings.getSetting(`flatRadio`));
-	}
-
-	function setToggle(setting) {
-		const toggle = document.getElementById(`${setting.camelToKebab()}-toggle`);
-		toggle?.setAttribute(`aria-pressed`, local[setting].toString());
 	}
 
 	function toggleSetting(setting) {
 		local[setting] = !local[setting];
-		setToggle(setting);
+		document.getElementById(`${setting.camelToKebab()}-toggle`)?.flip();
 		store(`settings`, local);
 
 		if (setting === `flatRadio`) page.getElement(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
@@ -73,7 +72,10 @@ const styles = (() => {
 	</svg>`;
 
 	function initialise() {
-		Object.keys(local).forEach(setStyleButtons)
+		Object.keys(local).forEach(style => {
+			setStyleButtons(style);
+			page.getElement(`${style}Buttons`)?.classList.remove(`pre-initialised-control`);
+		});
 		updateFavicon();
 	}
 
@@ -403,7 +405,7 @@ function removeShow(target) {
 function loadShow() {
 	if (page.getElement(`playlist`).children.length > 0 && page.getElement(`playlist`).firstElementChild.dataset.showId === page.getElement(`loadedShow`).dataset.showId) return;
 
-	setAudioToggle(page.getElement(`playToggle`), `Play audio`, `play`);
+	setAudioToggle(page.getElement(`playToggle`), `play`);
 	page.getElement(`loadedShow`).replaceChildren();
 
 	if (page.getElement(`playlist`).children.length > 0) {
@@ -428,7 +430,7 @@ function loadShow() {
 		page.getElement(`showTimeElapsed`).textContent = `00:00`;
 		page.getElement(`showTimeTotal`).textContent = `00:00`;
 		page.getElement(`radioControls`).hidden = true;
-		page.getElement(`loadedShow`).setAttribute(`data-show-id`, ``);
+		page.getElement(`loadedShow`).dataset.showId = ``;
 	}
 }
 
@@ -457,8 +459,7 @@ function updateSeekTime(value) {
 }
 
 // set audio toggle icon and aria-label
-function setAudioToggle(toggle, label, code) {
-	toggle.ariaLabel = label;
+function setAudioToggle(toggle, code) {
 	toggle.querySelector(`use`).setAttribute(`href`, `#svg-${code}`);
 }
 
@@ -474,14 +475,11 @@ function togglePlay() {
 
 // toggle audio mute/unmute
 function toggleMute() {
+	page.getElement(`muteToggle`).flip();
 	if (page.getElement(`audio`).muted) {
 		page.getElement(`audio`).muted = false;
-		setAudioToggle(page.getElement(`muteToggle`), `Mute audio`, `mute`);
-		page.getElement(`volumeControl`).value = page.getElement(`audio`).volume * 100;
 	} else {
 		page.getElement(`audio`).muted = true;
-		setAudioToggle(page.getElement(`muteToggle`), `Unmute audio`, `unmute`);
-		page.getElement(`volumeControl`).value = 0;
 	}
 }
 
@@ -499,7 +497,7 @@ PAGE CONSTRUCTION
 function buildSeriesLink(series) {
 	const newSeriesLinkItem = document.createElement(`li`);
 	const newSeriesLink = newSeriesLinkItem.appendChild(document.createElement(`a`));
-	newSeriesLink.setAttribute(`href`, `#archive-${series.code}`);
+	newSeriesLink.href = `#archive-${series.code}`;
 	newSeriesLink.setContent(series.heading);
 	return newSeriesLinkItem;
 }
@@ -610,9 +608,24 @@ page.getElement(`audio`).addEventListener(`loadedmetadata`, () => {
 	page.getElement(`radioControls`).disabled = false;
 	setTimestampFromSeconds(page.getElement(`showTimeTotal`), page.getElement(`audio`).duration);
 });
-page.getElement(`audio`).addEventListener(`play`, () => setAudioToggle(page.getElement(`playToggle`), `Pause show`, `pause`));
-page.getElement(`audio`).addEventListener(`pause`, () => setAudioToggle(page.getElement(`playToggle`), `Play show`, `play`));
+page.getElement(`audio`).addEventListener(`play`, () => {
+	page.getElement(`playToggle`).flip();
+	setAudioToggle(page.getElement(`playToggle`), `pause`);
+});
+page.getElement(`audio`).addEventListener(`pause`, () => {
+	page.getElement(`playToggle`).flip();
+	setAudioToggle(page.getElement(`playToggle`), `play`);
+});
 page.getElement(`audio`).addEventListener(`ended`, loadNextShow);
+page.getElement(`audio`).addEventListener(`volumechange`, () => {
+	if (page.getElement(`audio`).muted || page.getElement(`audio`).volume === 0) {
+		setAudioToggle(page.getElement(`muteToggle`), `unmute`);
+		page.getElement(`volumeControl`).value = 0;
+	} else {
+		setAudioToggle(page.getElement(`muteToggle`), `mute`);
+		page.getElement(`volumeControl`).value = page.getElement(`audio`).volume * 100;
+	}
+});
 
 // radio interface events
 page.getElement(`seekBar`).addEventListener(`change`, () => {

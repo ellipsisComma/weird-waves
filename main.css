@@ -226,6 +226,9 @@ DEFAULTS
 [hidden] {
 	display: none;
 }
+[disabled], [aria-disabled="true"] {
+	cursor: not-allowed;
+}
 .visually-hidden {
 	block-size: 1px;
 	inline-size: 1px;
@@ -233,6 +236,9 @@ DEFAULTS
 	overflow: hidden;
 	white-space: nowrap;
 	clip-path: inset(50%);
+}
+.pre-initialised-control {
+	visibility: hidden;
 }
 #svg-defs {
 	position: absolute;
@@ -450,6 +456,7 @@ button {
 	font-size: 1em;
 	color: inherit;
 	background-color: unset;
+	border: unset;
 	cursor: pointer;
 	* {
 		pointer-events: none;
@@ -465,14 +472,11 @@ button {
 	border: var(--hot-line);
 	box-shadow: 0 var(--control-depth) var(--hot-colour);
 	align-items: center;
-	&:is(:active, [aria-pressed="true"]) {
+	&:is(:active, [aria-disabled="true"]) {
 		top: 0;
 		color: var(--cold-colour);
 		border-color: var(--cold-colour);
 		box-shadow: 0 0;
-	}
-	&[aria-pressed="true"] {
-		pointer-events: none;
 	}
 }
 .icon-button-set {
@@ -584,10 +588,10 @@ button {
 input[type="range"] {
 	all: unset;
 	outline: revert;
-	cursor: pointer;
 	margin: 0;
 	font-size: 1em;
 	border-block-end: var(--hot-line);
+	cursor: pointer;
 	&::-moz-range-progress {
 		background-color: var(--hot-colour);
 		block-size: var(--line-width);
@@ -893,13 +897,12 @@ button[data-action="add-show"] {
 	margin-inline-start: 1em;
 	gap: 0.5em;
 	text-align: start;
-	border: unset;
-	& > svg {
+	& svg {
 		inline-size: auto;
 		padding-block-end: 0.3em;
 		stroke: var(--hot-colour);
 	}
-	&:active use {
+	& > button:active use {
 		&:not([href="#svg-toggle-track"]) {
 			stroke: var(--cold-colour);
 		}
