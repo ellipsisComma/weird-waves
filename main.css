@@ -390,11 +390,12 @@ h3 {
 }
 .flex-list {
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	margin-block: 1em;
 	padding-inline-start: 0;
 	list-style-type: "";
-	justify-content: center;
 	gap: 1em;
 }
 a:link {
@@ -1069,6 +1070,10 @@ use[href="#svg-toggle-tick"] {
 }
 @media (min-width: 600px) {
 	/* GENERAL */
+	.flex-list {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
 	.code-block {
 		tab-size: 4ch;
 	}
