@@ -445,12 +445,20 @@ function loadNextShow() {
 RADIO
 -- */
 
+// change seek bar to match audio unless currently manually seeking or audio metadata unavailable
+function changeSeekBar() {
+	if (
+		page.getElement(`seekBar`).dataset.seeking === `true`
+		|| !page.getElement(`audio`).currentTime
+		|| !page.getElement(`audio`).duration
+	) return;
+	page.getElement(`seekBar`).value = page.getElement(`audio`).currentTime / page.getElement(`audio`).duration * 100;
+	setTimestampFromSeconds(page.getElement(`showTimeElapsed`), page.getElement(`audio`).currentTime);
+}
+
 // if audio is playing, update seek bar and time-elapsed
 function updateSeekBar() {
-	if (!page.getElement(`audio`).paused && page.getElement(`seekBar`).dataset.seeking !== `true` && page.getElement(`audio`).currentTime && page.getElement(`audio`).duration) {
-		page.getElement(`seekBar`).value = page.getElement(`audio`).currentTime / page.getElement(`audio`).duration * 100;
-		setTimestampFromSeconds(page.getElement(`showTimeElapsed`), page.getElement(`audio`).currentTime);
-	}
+	if (!page.getElement(`audio`).paused) changeSeekBar();
 }
 
 // update displayed show time using seek bar
@@ -626,6 +634,7 @@ page.getElement(`audio`).addEventListener(`volumechange`, () => {
 		page.getElement(`volumeControl`).value = page.getElement(`audio`).volume * 100;
 	}
 });
+page.getElement(`audio`).addEventListener(`seeked`, changeSeekBar);
 
 // radio interface events
 page.getElement(`seekBar`).addEventListener(`change`, () => {
