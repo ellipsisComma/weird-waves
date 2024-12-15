@@ -380,11 +380,13 @@ function addRandomShow(showType) {
 
 /* MANIPULATING */
 
+// swap show with previous show on playlist
 function moveShowUp(target) {
 	target.previousElementSibling?.before(target);
 	loadShow();
 }
 
+// swap show with next show on playlist
 function moveShowDown(target) {
 	target.nextElementSibling?.after(target);
 	loadShow();
@@ -536,7 +538,6 @@ function buildSeries(series) {
 	newSeries.querySelector(`.series-heading`).setContent(series.heading);
 	newSeries.querySelector(`.series-blurb`).setContent(series.blurb);
 	newSeries.querySelector(`.series-source`).setContent(`source: ${series.source}`);
-	newSeries.querySelector(`[data-action="add-series"]`).dataset.target = series.code;
 
 	series.shows.forEach(show => show.ID = `${series.code}-${show.code}`);
 	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
@@ -551,12 +552,17 @@ function buildArchive() {
 	page.getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
 	page.getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
 	page.getElement(`seriesList`).addEventListener(`click`, () => {
-		if (event.target.getAttribute(`aria-disabled`) === `false`) {
-			switch (event.target.dataset.action) {
-			case `add-series`: addSeries(event.target.closest(`#series-list > li`)); break;
-			case `add-show`: addShow(event.target.closest(`.show-list > li`).dataset.showId); break;
-			}
-		}
+		if (
+			event.target.tagName === `BUTTON`
+			&& event.target.dataset.action === `add-show`
+			&& event.target.getAttribute(`aria-disabled`) === `false`
+		) addShow(event.target.closest(`.show-list > li`).dataset.showId);
+	});
+	page.getElement(`seriesList`).addEventListener(`click`, () => {
+		if (
+			event.target.tagName === `BUTTON`
+			&& event.target.dataset.action === `add-series`
+		) addSeries(event.target.closest(`#series-list > li`));
 	});
 
 	// build out stats list
