@@ -393,10 +393,10 @@ h3 {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	gap: 1em;
 	margin-block: 1em;
 	padding-inline-start: 0;
 	list-style-type: "";
-	gap: 1em;
 }
 a:link {
 	color: var(--hot-colour);
