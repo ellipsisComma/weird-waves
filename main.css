@@ -614,7 +614,7 @@ input[type="range"] {
 		}
 	}
 }
-/* vendor-specific pseudo-elements must be nested separately or they don't apply (at least in this case) */
+/* vendor-specific pseudo-element selectors must be nested separately */
 input[type="range"] {
 	&::-webkit-slider-runnable-track {
 		background-color: var(--hot-colour);
@@ -627,15 +627,16 @@ input[type="range"] {
 		border: var(--hot-line);
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 	}
-	:active {
-		&::-webkit-slider-thumb {
-			border-color: var(--cold-colour);
-			box-shadow: 0 var(--control-depth) var(--cold-colour);
-		}
-		&::-webkit-slider-runnable-track {
-			background-color: var(--cold-colour);
-			block-size: var(--line-width);
-		}
+}
+/* for some reason webkit vendor pseudo-selectors must be nested separately for both default and active forms */
+input[type="range"]:active {
+	&::-webkit-slider-thumb {
+		border-color: var(--cold-colour);
+		box-shadow: 0 var(--control-depth) var(--cold-colour);
+	}
+	&::-webkit-slider-runnable-track {
+		background-color: var(--cold-colour);
+		block-size: var(--line-width);
 	}
 }
 
