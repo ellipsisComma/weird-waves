@@ -23,7 +23,7 @@
 	<link rel="alternate" type="application/atom+xml" href="https://weirdwaves.net/feed.xml" title="News feed for Weird Waves">
 
 	<script src="./utilities.js?v=2024-12-15b"></script>
-	<script src="./initialisation.js?v=2024-08-20"></script>
+	<script src="./initialisation.js?v=2024-12-17"></script>
 </head>
 
 
@@ -147,18 +147,27 @@
 	<li data-show-id="">
 		<ul class="show-position-controls icon-button-set">
 			<li>
-				<button class="push-button" type="button" data-action="move-up" aria-controls="playlist radio" aria-label="Move show up">
-					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-up" /></svg>
+				<button class="push-button" type="button" data-action="move-up" aria-controls="playlist radio">
+					<svg class="svg-icon" viewBox="0 0 12 12">
+						<title>Move show up</title>
+						<use href="#svg-move-up" />
+					</svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="remove" aria-controls="playlist radio" aria-label="Remove show">
-					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-remove" /></svg>
+				<button class="push-button" type="button" data-action="remove" aria-controls="playlist radio">
+					<svg class="svg-icon" viewBox="0 0 12 12">
+						<title>Remove show</title>
+						<use href="#svg-remove" />
+					</svg>
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="move-down" aria-controls="playlist radio" aria-label="Move show down">
-					<svg class="svg-icon" viewBox="0 0 12 12"><use href="#svg-move-down" /></svg>
+				<button class="push-button" type="button" data-action="move-down" aria-controls="playlist radio">
+					<svg class="svg-icon" viewBox="0 0 12 12">
+						<title>Move show down</title>
+						<use href="#svg-move-down" />
+					</svg>
 				</button>
 			</li>
 		</ul>
@@ -214,18 +223,27 @@
 				<span id="show-time"><span class="timestamp" id="show-time-elapsed">00:00</span> / <span class="timestamp" id="show-time-total">00:00</span></span>
 			</div><!--#seek-controls end-->
 			<div id="show-controls">
-				<button id="play-toggle" class="push-button" type="button" aria-controls="show-audio" aria-label="Play show" aria-pressed="false">
-					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-play" /></svg>
+				<button id="play-toggle" class="push-button" type="button" aria-controls="show-audio" aria-pressed="false">
+					<svg class="svg-icon" viewBox="0 0 18 18">
+						<title>Play show</title>
+						<use href="#svg-play" />
+					</svg>
 				</button>
-				<button id="skip-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Skip show">
-					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-skip" /></svg>
+				<button id="skip-button" class="push-button" type="button" aria-controls="playlist radio">
+					<svg class="svg-icon" viewBox="0 0 18 18">
+						<title>Skip show</title>
+						<use href="#svg-skip" />
+					</svg>
 				</button>
 			</div><!--#show-controls end-->
 			<div id="audio-controls">
-				<button id="mute-toggle" class="push-button" type="button" aria-controls="show-audio" aria-label="Mute audio" aria-pressed="false">
-					<svg class="svg-icon" viewBox="0 0 18 18"><use href="#svg-mute" /></svg>
+				<button id="mute-toggle" class="push-button" type="button" aria-controls="show-audio" aria-pressed="false">
+					<svg class="svg-icon" viewBox="0 0 18 18">
+						<title>Mute audio</title>
+						<use href="#svg-mute" />
+					</svg>
 				</button>
-				<input id="volume-control" type="range" value="100" aria-controls="show-audio" aria-label="Volume">
+				<input id="volume-control" type="range" value="100" aria-controls="show-audio" aria-label="Change audio volume">
 			</div><!--#audio-controls end-->
 		</fieldset><!--#radio-controls end-->
 
@@ -332,8 +350,8 @@
 
 	<h3>Import & export</h3>
 	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist.</p>
-	<textarea id="import-export-data" aria-errormessage="import-error-message" aria-label="Import/export playlist data" aria-invalid="false"></textarea>
-	<div id="import-error-message" hidden>
+	<textarea id="import-export-data" aria-label="Import/export playlist data" aria-errormessage="import-error-message" aria-invalid="false"></textarea>
+	<div id="import-error-message" aria-live="polite" hidden>
 		<p>Invalid show ID(s):</p>
 		<ul id="import-error-list"></ul><!--#import-error-list end-->
 	</div><!--#import-error-message end-->
@@ -414,7 +432,7 @@
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude certain series when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr> selection, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<div class="toggle pre-initialised-control">
-		<button id="copyright-safety-toggle" type="button" aria-label="copyright-safety-toggle-label">
+		<button id="copyright-safety-toggle" type="button" aria-labelledby="copyright-safety-toggle-label">
 			<svg class="svg-icon" viewBox="0 0 48 24" aria-hidden="true">
 				<use href="#svg-toggle-track" />
 				<g class="svg-toggle-thumb">
@@ -438,7 +456,7 @@
 		<li>
 			<h3>Radio</h3>
 			<div class="toggle pre-initialised-control">
-				<button id="flat-radio-toggle" type="button" aria-label="flat-radio-toggle-label">
+				<button id="flat-radio-toggle" type="button" aria-labelledby="flat-radio-toggle-label">
 					<svg class="svg-icon" viewBox="0 0 48 24" aria-hidden="true">
 						<use href="#svg-toggle-track" />
 						<g class="svg-toggle-thumb">
@@ -454,7 +472,7 @@
 		<li>
 			<h3>Playlist</h3>
 			<div class="toggle pre-initialised-control">
-				<button id="auto-play-next-show-toggle" type="button" aria-label="auto-play-next-show-toggle-label">
+				<button id="auto-play-next-show-toggle" type="button" aria-labelledby="auto-play-next-show-toggle-label">
 					<svg class="svg-icon" viewBox="0 0 48 24" aria-hidden="true">
 						<use href="#svg-toggle-track" />
 						<g class="svg-toggle-thumb">
@@ -470,7 +488,7 @@
 		<li>
 			<h3>Content notes</h3>
 			<div class="toggle pre-initialised-control">
-				<button id="notes-open-toggle" type="button" aria-label="notes-open-toggle-label">
+				<button id="notes-open-toggle" type="button" aria-labelledby="notes-open-toggle-label">
 					<svg class="svg-icon" viewBox="0 0 48 24" aria-hidden="true">
 						<use href="#svg-toggle-track" />
 						<g class="svg-toggle-thumb">
