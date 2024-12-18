@@ -323,6 +323,9 @@ DEFAULTS
 	font-style: normal;
 	font-feature-settings: "zero";
 	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
 	src: url("./fonts/fira-sans-regular-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 @font-face {
@@ -330,6 +333,9 @@ DEFAULTS
 	font-weight: bold;
 	font-style: normal;
 	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
 	src: url("./fonts/fira-sans-bold-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 @font-face {
@@ -338,6 +344,9 @@ DEFAULTS
 	font-style: italic;
 	font-feature-settings: "zero";
 	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
 	src: url("./fonts/fira-sans-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 @font-face {
@@ -345,7 +354,20 @@ DEFAULTS
 	font-weight: bold;
 	font-style: italic;
 	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
 	src: url("./fonts/fira-sans-bold-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
+}
+@font-face {
+	font-family: "Fira Mono";
+	font-weight: normal;
+	font-style: regular;
+	font-display: swap;
+	size-adjust: 95%;
+	ascent-override: 80%;
+	descent-override: normal;
+	src: url("./fonts/fira-mono-regular-weirdwaves.woff2?v=2024-12-18") format("woff2");
 }
 
 /* ------------
@@ -419,6 +441,12 @@ a:active {
 }
 .lowercase {
 	text-transform: lowercase;
+}
+code {
+	font-family: "Fira Mono", monospace;
+	:not(.code-block) > & {
+		user-select: all;
+	}
 }
 .content-notes {
 	& > summary {
@@ -877,8 +905,10 @@ button[data-action="add-show"] {
 .code-block {
 	padding-inline-start: var(--gap-size);
 	border-inline-start: var(--fore-line);
-	tab-size: 2ch;
 	overflow-x: auto;
+	& > code {
+		tab-size: 2ch;
+	}
 }
 
 
@@ -1049,7 +1079,7 @@ use[href="#svg-toggle-tick"] {
 		--shadow-3: 0.1em 0.09em 0;
 		text-shadow: var(--shadow-1) var(--back-colour), var(--shadow-2) var(--back-colour), var(--shadow-3) var(--fore-colour);
 	}
-	.code-block {
+	.code-block > code {
 		tab-size: 3ch;
 	}
 
@@ -1078,7 +1108,7 @@ use[href="#svg-toggle-tick"] {
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
-	.code-block {
+	.code-block > code {
 		tab-size: 4ch;
 	}
 
