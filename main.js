@@ -26,6 +26,11 @@ function showPath(showId) {
 	return `./audio/shows/${seriesCode}/${showCode}.mp3`;
 }
 
+// schedule file path builder (date is a Date object)
+function schedulePath(date) {
+	return `./schedules/schedule-${date.toISOString().slice(0, 10)}.json`;
+}
+
 // settings module: handles stored state of each boolean setting and its on-page toggle-switch
 const settings = (() => {
 	const local = retrieve(`settings`, {});
@@ -162,6 +167,10 @@ page.setEl(`seriesList`, `#series-list`);
 page.setEl(`themeButtons`, `#theme-buttons`);
 page.setEl(`fontButtons`, `#font-buttons`);
 
+// schedule
+page.setEl(`schedule`, `#schedule-container`);
+page.setEl(`scheduleDate`, `#schedule-date`);
+
 // template HTML module: handles a collection of permanent template content doc fragments
 const templateHTML = (() => {
 	const templates = {};
@@ -227,20 +236,15 @@ function getShowIDs(subset) {
 	return [...subset].map(show => show.dataset.showId);
 }
 
-// add series name to show heading element and add series source to element info (for playlist and featured show)
-function expandShowInfo(show, seriesInArchive) {
-	const showHeading = show.querySelector(`.show-heading`);
-	showHeading.replaceChildren(
-		...seriesInArchive.querySelector(`.series-heading`).cloneChildren(),
-		document.createTextNode(` `),
-		...showHeading.cloneChildren()
-	);
-	show.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
-}
-
 // store playlist as list of show IDs
 function storePlaylist() {
 	store(`playlist`, getShowIDs(page.getEl(`playlist`).children));
+}
+
+function getWeekStartDate() {
+	const date = new Date();
+	date.setDate(date.getDate() - ((date.getDay() + 6) % 7));
+	return date;
 }
 
 
@@ -350,14 +354,28 @@ function addShow(ID) {
 		return;
 	}
 
+	// error out if show not in Archive
 	const showInArchive = getShowInArchive(ID);
+	if (!showInArchive) {
+		console.error(`show "${ID}" does not exist in Archive`);
+		return;
+	}
 
 	// build new playlist item
+	const seriesInArchive = showInArchive.closest(`#series-list > li`);
 	const templatedShow = templateHTML.cloneTemplate(`playlistItem`);
 	const newShow = templatedShow.querySelector(`li`);
 	newShow.dataset.showId = ID;
 	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
-	expandShowInfo(newShow, showInArchive.closest(`#series-list > li`));
+
+	// expand show info with series title and license
+	const newShowHeading = newShow.querySelector(`.show-heading`);
+	newShowHeading.replaceChildren(
+		...seriesInArchive.querySelector(`.series-heading`).cloneChildren(),
+		document.createTextNode(` `),
+		...newShowHeading.cloneChildren()
+	);
+	newShow.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
 
 	// update page and stored data
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
@@ -586,27 +604,27 @@ function buildArchive() {
 	archive = null;
 }
 
-// add random banger to welcome page, with "add show" button as call to action
-function buildFeaturedShow() {
-	const ID = getRandomShowID(`banger`);
-	if (ID === ``) {
-		console.warn(`can't feature show on welcome: all bangers already on playlist`);
+async function loadSchedule() {
+	const weekStart = getWeekStartDate();
+	const file = await fetch(
+		schedulePath(weekStart),
+		{"cache": `no-cache`}
+	);
+	if (!file.ok) {
+		console.error(`failed to fetch schedule file: ${file.status}`);
 		return;
 	}
+	const schedule = await file.json();
 
-	const container = document.getElementById(`featured-show-container`);
-	const featuredShow = document.getElementById(`featured-show`);
-	const showInArchive = getShowInArchive(ID);
-	featuredShow.replaceChildren(...showInArchive.cloneChildren());
-	expandShowInfo(featuredShow, showInArchive.closest(`#series-list > li`));
-
-	// add click event for adding featured show to playlist and removing it from welcome area
-	featuredShow.querySelector(`[data-action="add-show"]`).addEventListener(`click`, () => {
-		addShow(ID);
-		container.hidden = true;
-	}, {"once": true});
-
-	container.hidden = false;
+	page.getEl(`scheduleDate`).textContent = weekStart.toLocaleDateString();
+	page.getEl(`scheduleDate`).dateTime = weekStart.toISOString().slice(0, 10);
+	document.getElementById(`schedule-title`).setContent(schedule.title);
+	document.getElementById(`schedule-blurb`).setContent(schedule.blurb);
+	document.getElementById(`add-schedule-button`).addEventListener(`click`, () => {
+		schedule.shows.forEach(addShow);
+		page.getEl(`schedule`).remove();
+	});
+	page.getEl(`schedule`).hidden = false;
 }
 
 
@@ -709,7 +727,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// build various page sections
 	buildArchive();
 	loadPlaylist();
-	buildFeaturedShow();
+	loadSchedule();
 
 	// start watching for playlist changes
 	connectPlaylistObserver();
