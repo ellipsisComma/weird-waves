@@ -45,9 +45,9 @@ The archive as a whole is an array of series objects, each of which contains an 
 |Key|Type|Required?|Description|
 |-|-|-|-|
 |`code`|string|yes|a unique alphanumeric code for the series, e.g. the code for "Quiet, Please" is "QP"|
-|`heading`|string|yes|plaintext or HTML series name|
-|`blurb`|string|yes|plaintext or HTML description (**note:** any HTML in the blurb must be *phrasing content only*, no block-level elements)|
-|`source`|string|yes|plaintext or HTML naming or linking to the source for the show audio files|
+|`heading`|string|yes|plaintext or HTML series name (**note:** any HTML in the heading must be *phrasing content only*, no block-level elements)|
+|`blurb`|string|yes|plaintext or HTML description (**note:** see above regarding phrasing content)|
+|`source`|string|yes|plaintext or HTML naming or linking to the source for the show audio files (**note:** see above regarding phrasing content)|
 |`copyrightSafe`|boolean|no|`true` if the series has no risk of copyright claims when played on livestream platforms (e.g. illegitimate claims through automated systems)|
 |`shows`|array|yes|an array of show objects|
 
@@ -56,9 +56,9 @@ The archive as a whole is an array of series objects, each of which contains an 
 |Key|Type|Required?|Description|
 |-|-|-|-|
 |`code`|string|yes|a unique text code for the show, e.g. the code for "Quiet, Please" #1, "Nothing Behind the Door", is "001-Nothing"|
-|`heading`|string|yes|plaintext or HTML show name|
-|`blurb`|string|yes|plaintext or HTML show description (**note:** see above)|
-|`notes`|string|no|plaintext or HTML content notes|
+|`heading`|string|yes|plaintext or HTML show name (**note:** see above regarding phrasing content)|
+|`blurb`|string|yes|plaintext or HTML show description (**note:** see above regarding phrasing content)|
+|`notes`|string|no|plaintext or HTML content notes (**note:** see above regarding phrasing content)|
 |`banger`|boolean|no|`true` if you would recommend this show to a visitor|
 |`duration`|integer|yes|length of the show in seconds, rounded up|
 
@@ -97,8 +97,8 @@ Each schedule file is a JSON file whose name should by default be `schedule-[dat
 
 |Key|Type|Description|
 |-|-|-|
-|`title`|string|plaintext or HTML schedule title|
-|`blurb`|string|plaintext or HTML schedule description (**note:** any HTML in the blurb must be *phrasing content only*, no block-level elements)|
+|`title`|string|plaintext or HTML schedule title (**note:** see above regarding phrasing content)|
+|`blurb`|string|plaintext or HTML schedule description (**note:** see above regarding phrasing content)|
 |`shows`|array|an array of show ID strings|
 
 ## Notes
