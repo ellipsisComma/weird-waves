@@ -73,6 +73,34 @@ The widget differs from the main version in several key ways:
 
 These changes are necessary due to the outdated browser/rendering engine used by popular free broadcasting software (OBS and Streamlabs OBS). In particular, this engine treats all media as streaming media of infinite length, so audio durations must be provided separately from the files.
 
+## Adding schedules
+
+Schedules are themed (or simply random) groups of shows that vary week by week, with each new schedule appearing in the landing/welcome section on Monday at 00:00 (UTC+0). The shows on the schedule can be added to the end of the playlist by clicking the "+ Schedule" button. The schedule section only appears if the schedule file exists, loads, and parses (as JSON).
+
+Each schedule file is a JSON file whose name should by default be `schedule-[date].json`, e.g. `schedule-2024-12-30.json`. The `[date]` is the ISO format date string for that week's Monday. The file should contain an object with three properties:
+
+```json
+{
+	"title": "Mechanical Monstrosities",
+	"blurb": "Tales of robotic nightmares, technological progress, and its hidden&mdash;or not-so-hidden&mdash;costs.",
+	"shows": [
+		"DX-36-Nightmare",
+		"QP-083-Murder",
+		"XMO-068-Lifeboat",
+		"Mw-071-Mask",
+		"LV-07-Wire"
+	]
+}
+```
+
+### Schedule properties
+
+|Key|Type|Description|
+|-|-|-|
+|`title`|string|plaintext or HTML schedule title|
+|`blurb`|string|plaintext or HTML schedule description (**note:** any HTML in the blurb must be *phrasing content only*, no block-level elements)|
+|`shows`|array|an array of show ID strings|
+
 ## Notes
 
 ### Codes
@@ -89,7 +117,7 @@ Both the path and the filetype can be modified in the `showPath()` function in `
 
 ### Bangers
 
-Marking a show as with `"banger": true` lets the show be selected at random when pressing the "+ Banger" button in the Booth, and be featured on the welcome section.
+Marking a show as with `"banger": true` lets the show be selected at random when pressing the "+ Banger" button in the Booth.
 
 ## Removed/rejected features
 
