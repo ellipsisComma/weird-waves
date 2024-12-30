@@ -115,6 +115,12 @@ By default, all files are assumed to be MP3 and end in the extension `.mp3`.
 
 Both the path and the filetype can be modified in the `showPath()` function in `main.js`.
 
+### Schedule filepaths
+
+The default filepath for schedule files, relative to the index page, is `.schedules/schedule-[date].json`.
+
+Both the path and the filetype can be modified in the `schedulePath()` function in `main.js`.
+
 ### Bangers
 
 Marking a show as with `"banger": true` lets the show be selected at random when pressing the "+ Banger" button in the Booth.
