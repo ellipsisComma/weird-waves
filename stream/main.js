@@ -367,7 +367,7 @@ function loadShow() {
 	if (playlistIDs.length > 0) {
 		const show = page.playlist.firstElementChild;
 
-		page.audio.src = paths.show + show.dataset.id + "-" + show.dataset.file + ".mp3";
+		page.audio.src = paths.show + show.dataset.id.split(`-`)[0] + "/" + show.dataset.id.split(`-`)[1] + "-" + show.dataset.file + ".mp3";
 		page.audio.setAttribute("data-duration", show.dataset.duration);
 
 		const loadedShowHeading = page.loadedShow.appendChild(document.createElement("h2"));
