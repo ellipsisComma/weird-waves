@@ -10,7 +10,7 @@
 		<name>Weird Waves</name>
 	</author>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2024-12-30T00:00:00+00:00</updated>
+	<updated>2024-12-31T00:00:00+00:00</updated>
 
 
 
@@ -33,10 +33,10 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 
 	<entry>
 		<id>https://weirdwaves.net/?50</id>
-		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-12-29-" />
-		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Simplified feed</div></title>
+		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-12-31-from-featured-show-to-weekly-schedule" />
+		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">From featured show to weekly schedules</div></title>
 		<published>2024-12-30T00:00:00+00:00</published>
-		<updated>2024-12-30T00:00:00+00:00</updated>
+		<updated>2024-12-31T00:00:00+00:00</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>First, the featured show on the landing page has been replaced with a schedule! This is a throwback to the original form of Weird Waves, which automatically played and updated a scheduled slate of shows while you listened, indefinitely. Now it just works like the featured show slot, suggesting shows from the Archive, but instead of being selected at random they're grouped by theme.</p>
