@@ -145,7 +145,6 @@ append an HTML id matching hash-link
 <div id="container">
 <header>
 	<h1><xsl:value-of select="atom:title" /></h1>
-	<noscript>Sorry, this feed requires JavaScript to display properly! Without it, post titles and content will appear as raw markup, among other minor changes.</noscript>
 </header>
 
 
