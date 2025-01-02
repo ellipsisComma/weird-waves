@@ -1013,6 +1013,9 @@ use[href="#svg-toggle-tick"] {
 #call-in, #links, #credits, #welcome {
 	text-align: center;
 }
+#schedule-container {
+	text-wrap: balance;
+}
 .waveform-spacer {
 	margin-inline: auto;
 	& + h3 {
