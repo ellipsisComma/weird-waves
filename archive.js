@@ -3,6 +3,7 @@
 // bitrate: constant 24kbps; sample rate: 22050Hz
 // banger = good show, but only "part 1" of a multi-show run will be tagged as a banger even if they're all good
 // durations only necessary for stream widget (OBS browser sources treat all media as streaming media, so they can't get audio metadata like duration from the file itself)
+// durations are in seconds, rounded up to next integer
 
 let archive = [
 {
