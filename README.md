@@ -46,6 +46,10 @@ Each series has a code that must be unique among all series, and each show has a
 
 The show ID must be a valid HTML `id` and all characters must be valid in filepaths. The series code must not contain a hyphen, but hyphens are allowed in the show code.
 
+### Filepaths
+
+The functions `showPath()` and `schedulePath()` in `main.js` take arguments and build structured paths for show audio files and schedule files respectively.
+
 ### HTML content
 
 Headings, blurbs, series sources, and show content notes can be pure text or include phrasing content HTML. They can't contain block-level HTML. The elements these properties are inserted into are as follows:
@@ -123,12 +127,6 @@ Unlike the archive file, this is restricted to the JSON format (e.g. no template
 |`title`|string|plaintext or HTML schedule title (**note:** see above regarding phrasing content)|
 |`blurb`|string|plaintext or HTML schedule description (**note:** see above regarding phrasing content)|
 |`shows`|array|an array of show ID strings|
-
-## Notes
-
-### Filepaths
-
-The functions `showPath()` and `schedulePath()` in `main.js` take arguments and build paths for show audio files and schedule files respectively.
 
 ## Removed/rejected features
 
