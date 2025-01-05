@@ -359,9 +359,6 @@ a:visited {
 a:active {
 	color: var(--hot-colour);
 }
-[rel~="external"]::after {
-	content: "\00a0\2206";
-}
 .uppercase {
 	text-transform: uppercase;
 }
@@ -384,10 +381,10 @@ summary::-webkit-details-marker {
 	color: var(--cold-colour);
 }
 .content-notes > summary::after {
-	content: "(click to show)";
+	content: "\2026";
 }
 .content-notes[open] > summary::after {
-	content: "(click to hide):\00a0";
+	content: ":";
 }
 .svg-icon {
 	display: block;
@@ -626,30 +623,18 @@ nav a {
 	text-decoration: none;
 	user-select: none;
 }
-nav a[href$=".rss"] {
+nav a:is(:link, :visited) {
+	color: unset;
+}
+nav a:is(:hover, :focus, :active) {
 	color: var(--hot-colour);
+	background-color: unset;
 }
-nav a[href^="#"] {
-	outline-width: calc(var(--line-width) / 2);
-	outline-style: solid;
-	outline-color: transparent;
-	outline-offset: 0;
-	transition-property: outline-width, outline-color, outline-offset;
-	transition-duration: 0.3s;
-}
-nav a[href^="#"]:is(:hover, :focus, [aria-current="page"]) {
-	outline-width: var(--line-width);
-	outline-color: var(--fore-colour);
-	outline-offset: 0.2em;
+nav a[aria-current="page"] {
+	color: var(--cold-colour);
 }
 nav a > span {
 	white-space: nowrap;
-}
-nav [aria-current="page"] {
-	transition-property: unset;
-}
-nav a[href^="#"]:is(:link, :visited, :active) {
-	color: unset;
 }
 .svg-hot-stroke {
 	stroke: var(--hot-colour);

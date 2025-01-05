@@ -590,7 +590,7 @@ series.blurb +
 			archiveHTML += '<li id="' + id + '" data-file="' + showFile + '" data-duration="' + show.duration + '"><div class="show-info">' +
 '<h4 class="show-heading">' + show.heading + '</h4>' +
 '<div class="show-content">' + show.blurb;
-			if (show.notes) archiveHTML += '<details class="content-notes"' + (settings.notesOpen ? ' open' : "") + "><summary>Content notes </summary>" + show.notes + '</details>';
+			if (show.notes) archiveHTML += '<details class="content-notes"' + (settings.notesOpen ? ' open' : "") + "><summary>Content notes</summary> " + show.notes + '</details>';
 			archiveHTML += "</div></div>" +
 '<button class="push-button" type="button" data-target="' + id + '" data-action="add-show" aria-pressed="false">Add to playlist</button></li>';
 		}
