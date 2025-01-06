@@ -93,7 +93,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 				<li>&#x201c;Mycelia&#x201d; is &#x201c;Moss&#x201d; via blue-blindness</li>
 				<li>&#x201c;Cellar&#x201d; is &#x201c;Abyss&#x201d; via red-blindness</li>
 			</ul>
-			<p>I can't guarantee that the results are <em>exactly</em> what a colour-blind person with that specific form would see, but the results should be pretty close. The colour transformations were taken from <cite><a href="https://www.inf.ufrgs.br/%7Eoliveira/pubs_files/CVD_Simulation/CVD_Simulation.html" rel="external">A Physiologically-based Model for Simulation of Color Vision Deficiency</a></cite> by Machado <i lang="la">et al.</i>, 2009.</p>
+			<p>I can't guarantee that the results are <em>exactly</em> what a colour-blind person with that specific form would see, but the results should be pretty close. The colour transformations were taken from <cite><a href="https://www.inf.ufrgs.br/%7Eoliveira/pubs_files/CVD_Simulation/CVD_Simulation.html">A Physiologically-based Model for Simulation of Color Vision Deficiency</a></cite> by Machado <i lang="la">et al.</i>, 2009.</p>
 		</div></content>
 	</entry>
 	<entry>
@@ -104,7 +104,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<updated>2024-09-02T00:00:01+01:00</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
-			<p>Weird Waves now uses <a href="https://www.goatcounter.com/" rel="external">GoatCounter</a> for analytics&#x2014;it's privacy-friendly and just provides basic anonymised analytics that are more complex that the site's current hosting provides. This is only a test: if GoatCounter doesn't receive any hits, I'll remove the script link.</p>
+			<p>Weird Waves now uses <a href="https://www.goatcounter.com/">GoatCounter</a> for analytics&#x2014;it's privacy-friendly and just provides basic anonymised analytics that are more complex that the site's current hosting provides. This is only a test: if GoatCounter doesn't receive any hits, I'll remove the script link.</p>
 		</div></content>
 	</entry>
 	<entry>
@@ -650,7 +650,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 				</li>
 			</ul>
 			<p>The second thing is, it's got some new shows. I found out about <cite>Suspense</cite> when someone recommended me the episode <cite>Fugue in C Minor</cite> (starring Vincent Price and Ida Lupino), which has a really, <em>really</em> obvious first twist and then takes a bit of a fuckin swerve in the last few minutes. It's on the schedule this weekend (along with <cite>The House in Cypress Canyon</cite>, another decent horror story from the series).</p>
-			<p>It's kinda hard to find episode summaries for the series, but I found a <a href="https://www.escape-suspense.com/" rel="external">blog with episode reviews</a> and picked out ~80 more shows from their &#x201c;Best of <cite>Suspense</cite>&#x201d; post categories&#x2026; out of the 500 in that category (it's more of a thriller series than a horror series). I dunno exactly how many of those'll actually be a good fit for Weird Waves, but they were about evenly split between a &#x201c;probably&#x201d; list and a &#x201c;maybe&#x201d; list. A lot of the ones I didn't pick were noir-ish murder plots, or adultery plots that led to murder, or fraud or embezzlement plots that led to murder, or&#x2026;</p>
+			<p>It's kinda hard to find episode summaries for the series, but I found a <a href="https://www.escape-suspense.com/">blog with episode reviews</a> and picked out ~80 more shows from their &#x201c;Best of <cite>Suspense</cite>&#x201d; post categories&#x2026; out of the 500 in that category (it's more of a thriller series than a horror series). I dunno exactly how many of those'll actually be a good fit for Weird Waves, but they were about evenly split between a &#x201c;probably&#x201d; list and a &#x201c;maybe&#x201d; list. A lot of the ones I didn't pick were noir-ish murder plots, or adultery plots that led to murder, or fraud or embezzlement plots that led to murder, or&#x2026;</p>
 			<p>Also every <cite>Suspense</cite> show seems to have ads for the same vineyard in it (Roma Wines, which sponsored the series for a while). Right now I think it's kinda funny, so I'm leaving them in.</p>
 			<p>Lastly, I added a spoiler effect on the content notes for each show (only the ones with spoilery notes). I tried with <code>:hover</code>, then <code>::selection</code>, but neither was mobile-friendly, and I couldn't do the checkbox hack because show info gets duplicated and you can't have more than one checkbox with the same ID. There were a few fixes I could've done with javascript, but I wanted to keep it simple, so I just went with <code>&#x3c;details&#x3e;/&#x3c;summary&#x3e;</code> widgets&#x2014;specifically set up so when you click the <code>&#x3c;summary&#x3e;</code>, it disappears, leaving the irreversibly-revealed <code>&#x3c;details&#x3e;</code>. It's a neat space-saving effect.</p>
 			<p>So, what's left to do? Pretty much everything on the to-do list on the first post I made about Weird Waves. Still, even just the basic layout's a big step forwards in how the app feels. My plan's to have it all set up and be well into beta by the start of October, hopefully just tweaking things and adding more and more shows by that point.</p>
@@ -673,10 +673,10 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 			</ul>
 			<p>What about those <q>horror audiobooks and radio plays</q>? Here's the kinda stuff I mean:</p>
 			<ul>
-				<li>episodes of old horror radio anthologies like <cite><a href="https://www.quietplease.org" rel="external">Quiet, Please</a></cite>, if they're public domain (or if they might as well be)</li>
-				<li>other radio series dedicated to the public domain, like <cite><a href="https://www.radioechoes.com/?page=series&#x26;genre=OTR-SciFi&#x26;series=Seeing%20Ear%20Theater" rel="external">Seeing Ear Theatre</a></cite> or <cite><a href="https://archive.org/details/Mindwebs_230" rel="external">Mind Webs</a></cite> (only some/a few of these episodes fit into &#x201c;horror&#x201d;, but there's a bunch of sci-fi ones too)</li>
-				<li>serial or anthology horror podcast episodes released under Creative Commons (<abbr>CC</abbr>) licenses, like <cite><a href="https://rustyquill.com/show/the-magnus-archives/" rel="external">The Magnus Archives</a></cite>, <cite><a href="https://www.thesiltverses.com" rel="external">The Silt Verses</a></cite>, or <a href="https://pseudopod.org" rel="external">Pseudopod</a></li>
-				<li>horror audiobooks off places like <a href="https://librivox.org/" rel="external">LibriVox</a> (mixed quality, but some of them are decent), which have readings of older (mostly 19th/early 20th-century) novels and short stories</li>
+				<li>episodes of old horror radio anthologies like <cite><a href="https://www.quietplease.org">Quiet, Please</a></cite>, if they're public domain (or if they might as well be)</li>
+				<li>other radio series dedicated to the public domain, like <cite><a href="https://www.radioechoes.com/?page=series&#x26;genre=OTR-SciFi&#x26;series=Seeing%20Ear%20Theater">Seeing Ear Theatre</a></cite> or <cite><a href="https://archive.org/details/Mindwebs_230">Mind Webs</a></cite> (only some/a few of these episodes fit into &#x201c;horror&#x201d;, but there's a bunch of sci-fi ones too)</li>
+				<li>serial or anthology horror podcast episodes released under Creative Commons (<abbr>CC</abbr>) licenses, like <cite><a href="https://rustyquill.com/show/the-magnus-archives/">The Magnus Archives</a></cite>, <cite><a href="https://www.thesiltverses.com">The Silt Verses</a></cite>, or <a href="https://pseudopod.org">Pseudopod</a></li>
+				<li>horror audiobooks off places like <a href="https://librivox.org/">LibriVox</a> (mixed quality, but some of them are decent), which have readings of older (mostly 19th/early 20th-century) novels and short stories</li>
 				<li>hopefully, book readings from people's youtube channels, if they're okay with it (again, mixed quality, but there's e.g. some real good dry readings of Thomas Ligotti's short stories)</li>
 			</ul>
 			<p><strong>How does it work?</strong> The app works off a weekly schedule that's split into two blocks:</p>
@@ -730,7 +730,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 	&#x3c;h5 class="archive-show-title"&#x3e;Nothing Behind the Door&#x3c;/h5&#x3e;
 	&#x3c;dl class="archive-show-info"&#x3e;
 		&#x3c;dt&#x3e;Episode&#x3c;/dt&#x3e;
-		&#x3c;dd&#x3e;&#x3c;a href="https://www.quietplease.org/episodes/nothing-behind-the-door-1.html" rel="external"&#x3e;Quiet, Please #1&#x3c;/a&#x3e;&#x3c;/dd&#x3e;
+		&#x3c;dd&#x3e;&#x3c;a href="https://www.quietplease.org/episodes/nothing-behind-the-door-1.html"&#x3e;Quiet, Please #1&#x3c;/a&#x3e;&#x3c;/dd&#x3e;
 		&#x3c;dt&#x3e;Blurb&#x3c;/dt&#x3e;
 		&#x3c;dd&#x3e;Bank robbers try to hide the money in a mountain shed that contains nothing. Literally nothing.&#x3c;/dd&#x3e;
 		&#x3c;dt&#x3e;Notes&#x3c;/dt&#x3e;
@@ -745,7 +745,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 					<strong>Nothing Behind the Door</strong>
 					<dl>
 						<dt>Episode</dt>
-						<dd><a href="https://www.quietplease.org/episodes/nothing-behind-the-door-1.html" rel="external">Quiet, Please #1</a></dd>
+						<dd><a href="https://www.quietplease.org/episodes/nothing-behind-the-door-1.html">Quiet, Please #1</a></dd>
 						<dt>Blurb</dt>
 						<dd>Bank robbers try to hide the money in a mountain shed that contains nothing. Literally nothing.</dd>
 						<dt>Notes</dt>

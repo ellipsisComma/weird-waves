@@ -21,7 +21,7 @@ The archive as a whole is an array of series objects, each of which contains an 
 "code": `QP`,
 "heading": `<cite>Quiet, Please</cite>`,
 "blurb": `A 1947&ndash;49 radio horror anthology written by Wyllis Cooper. It starred radio announcer Ernest Chappell (his only acting role), who often spoke informally and directly to the audience.`,
-"source": `<a href="https://www.quietplease.org" rel="external">quietplease.org</a>`,
+"source": `<a href="https://www.quietplease.org">quietplease.org</a>`,
 "copyrightSafe": true,
 "shows": [
 	{

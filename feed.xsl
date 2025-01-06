@@ -155,7 +155,7 @@ append an HTML id matching hash-link
 		<div class="visible-content">
 			<p>This is a preview of the Weird Waves news feed. Read in your browser or subscribe by copying its <abbr>URL</abbr> into your feed reader:</p>
 			<p id="feed-url"><code>https://weirdwaves.net/feed.xml</code></p>
-			<p>New to feeds? They let you follow sites! Read <a href="https://aboutfeeds.com/" rel="external">About Feeds</a> for more info.</p>
+			<p>New to feeds? They let you follow sites! Read <a href="https://aboutfeeds.com/">About Feeds</a> for more info.</p>
 		</div>
 	</section><!--#feed-info end-->
 </aside><!--#sidebar end-->
@@ -191,7 +191,7 @@ append an HTML id matching hash-link
 <section id="about">
 	<h2>About</h2>
 	<p>The Weird Waves Feed provides the station's old and current news! You can find all the posts in <a href="#news">News</a>.</p>
-	<p>This latest version of the news is an <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)" rel="external">Atom</a> feed that's converted into a web page in your browser using the niche, obscure templating language <a href="https://www.w3schools.com/xml/xml_xslt.asp" rel="external"><abbr>XSLT</abbr> (eXtensible Stylesheet Language Transformations)</a>.</p>
+	<p>This latest version of the news is an <a href="https://en.wikipedia.org/wiki/Atom_(web_standard)">Atom</a> feed that's converted into a web page in your browser using the niche, obscure templating language <a href="https://www.w3schools.com/xml/xml_xslt.asp"><abbr>XSLT</abbr> (eXtensible Stylesheet Language Transformations)</a>.</p>
 	<p>The Feed contains:</p>
 	<dl id="stats-list">
 		<div>
