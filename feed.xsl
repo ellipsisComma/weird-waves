@@ -46,6 +46,7 @@ append an HTML id matching hash-link
 					<xsl:text>#</xsl:text>
 					<xsl:apply-templates select="atom:link[@rel='alternate']" />
 				</xsl:attribute>
+				<xsl:attribute name="aria-label">link to this post</xsl:attribute>
 				<xsl:text>link</xsl:text>
 			</a>
 			<xsl:text>]</xsl:text>
