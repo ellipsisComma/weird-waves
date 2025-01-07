@@ -55,7 +55,7 @@ let archive = [
 "code": `BkM`,
 "heading": `<cite>The Black Mass</cite>`,
 "blurb": `A 1963&ndash;67 anthology of mostly gothic and cosmic horror stories adapted for radio, largely performed by Erik Bauersfeld.`,
-"source": `<a href="https://web.archive.org/web/20180409183917/http://www.kpfahistory.info/black_mass_home.html"><abbr>KPFA</abbr> History</a> (via Wayback)<!--the site of John Whiting, technical producer-->`,
+"source": `<a href="https://web.archive.org/web/20240812113659/http://www.kpfahistory.info/black_mass_home.html"><abbr>KPFA</abbr> History</a> (via Wayback)<!--the site of John Whiting, technical producer-->`,
 "copyrightSafe": true,
 "shows": [
 	{
