@@ -459,21 +459,24 @@ code {
 }
 .content-notes {
 	& > summary {
-		display: inline-block;
-		color: var(--hot-colour);
+		--content-notes-marker-width: 1em;
 		list-style-type: "";
-		cursor: pointer;
+		color: var(--hot-colour);
+		cursor: default;
 		&::-webkit-details-marker {
 			display: none;
 		}
-		&::after {
-			content: "\2026"; /* ellipsis */
+		&::before {
+			content: "\2192"; /* right arrow */
+			inline-size: var(--content-notes-marker-width);
+			display: inline-block;
+			text-align: center;
 		}
 	}
 	&[open] > summary {
 		color: var(--cold-colour);
-		&::after {
-			content: ":";
+		&::before {
+			content: "\2193"; /* down arrow */
 		}
 	}
 }
@@ -494,14 +497,13 @@ button {
 	color: inherit;
 	background-color: unset;
 	border: unset;
-	cursor: pointer;
 	* {
 		pointer-events: none;
 	}
 }
 .push-button {
 	position: relative;
-	top: calc(var(--control-depth) * -1);
+	top: calc(-1 * var(--control-depth));
 	padding-block-start: 0.5em;
 	padding-block-end: 0.25em;
 	padding-inline: 0.5em;
@@ -628,7 +630,6 @@ input[type="range"] {
 	margin: 0;
 	font-size: 1em;
 	border-block-end: var(--hot-line);
-	cursor: pointer;
 	&::-moz-range-progress {
 		background-color: var(--hot-colour);
 		block-size: var(--line-width);
@@ -639,7 +640,7 @@ input[type="range"] {
 		border: var(--hot-line);
 		border-radius: 0;
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
-		transform: translateY(calc(var(--control-depth) * -1));
+		transform: translateY(calc(-1 * var(--control-depth)));
 	}
 	&:active {
 		&::-moz-range-thumb {
@@ -1165,7 +1166,7 @@ use[href="#svg-toggle-tick"] {
 	#series-list {
 		header {
 			inline-size: 260px;
-			margin-inline-end: calc(var(--line-width) * -1);
+			margin-inline-end: calc(-1 * var(--line-width));
 			background-color: unset;
 			border-block-end: unset;
 			border-inline-end: var(--fore-line);
