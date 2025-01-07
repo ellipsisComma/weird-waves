@@ -2433,7 +2433,7 @@ let archive = [
 	"code": `092-Victim`,
 	"heading": `#92: <cite>The Seventh Victim</cite>`,
 	"blurb": `After the last World War, peace is kept via man-hunt bloodsport, but not every contender is up to the task. Adapted from a story by Robert Sheckley.`,
-	"notes": `betrayal, gunshots (2:32&ndash;52, 04:25&ndash;26, 11:46&ndash;48, 20:56)`,
+	"notes": `betrayal, gunshots (2:32&ndash;52, 4:25&ndash;26, 11:46&ndash;48, 20:56)`,
 	"duration": 1333,
 	},
 	{
