@@ -371,6 +371,9 @@ DEFAULTS
 	descent-override: 23%;
 	src: url("./fonts/fira-sans-bold-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
+
+/* MONO */
+
 @font-face {
 	font-family: "Fira Mono";
 	font-weight: normal;
