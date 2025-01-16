@@ -634,9 +634,9 @@ async function loadSchedule() {
 =========== */
 
 // radio audio events
-page.getEl(`audio`).addEventListener(`loadstart`, () => page.getEl(`radioControls`).disabled = true);
+page.getEl(`audio`).addEventListener(`loadstart`, () => page.getEl(`playToggle`).disabled = true);
 page.getEl(`audio`).addEventListener(`loadedmetadata`, () => {
-	page.getEl(`radioControls`).disabled = false;
+	page.getEl(`playToggle`).disabled = false;
 	setTimestampFromSeconds(page.getEl(`showTimeTotal`), page.getEl(`audio`).duration);
 });
 page.getEl(`audio`).addEventListener(`play`, () => {

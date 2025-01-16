@@ -229,6 +229,9 @@ DEFAULTS
 [disabled], [aria-disabled="true"] {
 	cursor: not-allowed;
 }
+[disabled] {
+	opacity: 0.5;
+}
 .visually-hidden {
 	block-size: 1px;
 	inline-size: 1px;
@@ -579,9 +582,6 @@ button {
 	margin-inline: unset;
 	padding: unset;
 	border: unset;
-	&[disabled] {
-		opacity: 0.5;
-	}
 	& > div {
 		display: flex;
 		gap: var(--gap-size);
