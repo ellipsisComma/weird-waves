@@ -95,7 +95,7 @@ append an HTML id matching hash-link
 <xsl:template match="atom:feed">
 <html lang="en-GB" data-theme="dark" data-font="serif" dir="auto">
 <head>
-	<title><xsl:value-of select="concat(atom:title, ' Feed')" /></title>
+	<title><xsl:value-of select="atom:title" /></title>
 	<meta name="description" content="The news feed for Weird Waves: Audio horror broadcasting online" />
 
 	<link rel="preload" type="font/woff2" href="./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07" as="font" crossorigin="" />
