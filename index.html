@@ -113,13 +113,13 @@
 		<use href="#svg-play-triangle" />
 		<path d="M16 2v14" />
 	</symbol>
-	<symbol id="svg-unmute">
-		<use href="#svg-speaker" />
-		<path d="M12 7v4m2 2v-8m2-2v12" />
-	</symbol>
-	<symbol id="svg-mute">
+	<symbol id="svg-muted">
 		<use href="#svg-speaker" />
 		<path d="M12 7l4 4m-4 0l4-4" />
+	</symbol>
+	<symbol id="svg-unmuted">
+		<use href="#svg-speaker" />
+		<path d="M12 7v4m2 2v-8m2-2v12" />
 	</symbol>
 
 <!--playlist button icons-->
@@ -242,7 +242,7 @@
 				<button id="mute-toggle" class="push-button" type="button" aria-controls="show-audio" aria-pressed="false">
 					<svg class="svg-icon" viewBox="0 0 18 18">
 						<title>Mute audio</title>
-						<use href="#svg-mute" />
+						<use href="#svg-unmuted" />
 					</svg>
 				</button>
 				<input id="volume-control" type="range" value="100" aria-controls="show-audio" aria-label="Change audio volume">
@@ -802,6 +802,6 @@
 
 
 <script src="./archive.js?v=2025-01-07c"></script>
-<script src="./main.js?v=2025-01-16"></script>
+<script src="./main.js?v=2025-01-19"></script>
 </body>
 </html>

@@ -650,10 +650,10 @@ page.getEl(`audio`).addEventListener(`pause`, () => {
 page.getEl(`audio`).addEventListener(`ended`, loadNextShow);
 page.getEl(`audio`).addEventListener(`volumechange`, () => {
 	if (page.getEl(`audio`).muted || page.getEl(`audio`).volume === 0) {
-		setAudioToggle(page.getEl(`muteToggle`), `unmute`);
+		setAudioToggle(page.getEl(`muteToggle`), `muted`);
 		page.getEl(`volumeControl`).value = 0;
 	} else {
-		setAudioToggle(page.getEl(`muteToggle`), `mute`);
+		setAudioToggle(page.getEl(`muteToggle`), `unmuted`);
 		page.getEl(`volumeControl`).value = page.getEl(`audio`).volume * 100;
 	}
 });
