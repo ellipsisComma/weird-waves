@@ -32,6 +32,17 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 
 
 	<entry>
+		<id>https://weirdwaves.net/?51</id>
+		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2025-01-19-mute-toggle-icon-swap" />
+		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Mute-toggle icon swap</div></title>
+		<published>2025-01-19T00:00:00+00:00</published>
+		<updated>2025-01-19T00:00:00+00:00</updated>
+		<category term="features" />
+		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
+			<p>I've given in and made the Radio's mute/unmute button show a &x201c;muted&x201d; icon when the audio's muted or volume is 0, and an &x201c;unmuted&x201d; icon when the audio's unmuted <em>and</em> the volume's higher than 0. This means they now show the audio's state instead of the action the button triggers; this is far more common (e.g. it's used in YouTube, QuickTime Player, the built-in controls for <abbr>HTML</abbr>'s <code>&#x3c;audio&#x3e;</code> and <code>&#x3c;video&#x3e;</code> elements). The volume controls still work in the exact same way as before&x2014;only the icons have changed.</p>
+		</div></content>
+	</entry>
+	<entry>
 		<id>https://weirdwaves.net/?50</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-12-31-from-featured-show-to-weekly-schedule" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">From featured show to weekly schedules</div></title>
@@ -242,7 +253,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<updated>2024-06-19T00:00:00+01:00</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
-			<p>I've improved the accessibility of the icon buttons and loading spinners by using <code>aria-label</code> attributes.</p>
+			<p>I've improved the accessibility of the icon buttons and loading spinners by using <code>[aria-label]</code> attributes.</p>
 			<p><strong>Update:</strong> I've also improved the accessibility of pressed buttons so they're still focusable and can still be read in order, instead of being completely disabled.</p>
 		</div></content>
 	</entry>
