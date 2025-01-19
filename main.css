@@ -212,6 +212,30 @@ DEFAULTS
 ::after {
 	box-sizing: border-box;
 }
+button {
+	font-family: inherit;
+	font-size: 1em;
+	color: inherit;
+	background-color: unset;
+	border: unset;
+	* {
+		pointer-events: none;
+	}
+}
+fieldset {
+	padding: unset;
+	border: unset;
+}
+input[type="range"] {
+	all: unset;
+	outline: revert;
+	font-size: 1em;
+}
+textarea {
+	font-family: inherit;
+	color: inherit;
+	background-color: unset;
+}
 
 /* ===================== END RESET */ }
 
@@ -294,9 +318,6 @@ DEFAULTS
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
-	size-adjust: 100%;
-	ascent-override: normal;
-	descent-override: normal;
 	src: url("./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 @font-face {
@@ -304,9 +325,6 @@ DEFAULTS
 	font-weight: bold;
 	font-style: normal;
 	font-display: swap;
-	size-adjust: 100%;
-	ascent-override: normal;
-	descent-override: normal;
 	src: url("./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 @font-face {
@@ -314,9 +332,6 @@ DEFAULTS
 	font-weight: normal;
 	font-style: italic;
 	font-display: swap;
-	size-adjust: 100%;
-	ascent-override: normal;
-	descent-override: normal;
 	src: url("./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 @font-face {
@@ -324,9 +339,6 @@ DEFAULTS
 	font-weight: bold;
 	font-style: italic;
 	font-display: swap;
-	size-adjust: 100%;
-	ascent-override: normal;
-	descent-override: normal;
 	src: url("./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
 }
 
@@ -384,7 +396,6 @@ DEFAULTS
 	font-display: swap;
 	size-adjust: 95%;
 	ascent-override: 80%;
-	descent-override: normal;
 	src: url("./fonts/fira-mono-regular-weirdwaves.woff2?v=2024-12-18") format("woff2");
 }
 
@@ -465,16 +476,14 @@ code {
 }
 .content-notes {
 	& > summary {
-		--content-notes-marker-width: 1em;
 		list-style-type: "";
 		color: var(--hot-colour);
-		cursor: default;
 		&::-webkit-details-marker {
 			display: none;
 		}
 		&::before {
 			content: "\2192"; /* right arrow */
-			inline-size: var(--content-notes-marker-width);
+			inline-size: 1em;
 			display: inline-block;
 			text-align: center;
 		}
@@ -495,17 +504,6 @@ code {
 	stroke-width: 1;
 	stroke-linecap: round;
 	stroke-linejoin: round;
-	vector-effect: non-scaling-stroke;
-}
-button {
-	font-family: inherit;
-	font-size: 1em;
-	color: inherit;
-	background-color: unset;
-	border: unset;
-	* {
-		pointer-events: none;
-	}
 }
 .push-button {
 	position: relative;
@@ -521,7 +519,7 @@ button {
 		top: 0;
 		color: var(--cold-colour);
 		border-color: var(--cold-colour);
-		box-shadow: 0 0;
+		box-shadow: unset;
 	}
 }
 .icon-button-set {
@@ -531,7 +529,6 @@ button {
 	padding-inline-start: 0;
 	list-style-type: "";
 	button {
-		block-size: max-content;
 		padding: 0.1em;
 		&:active > .svg-icon {
 			stroke: var(--cold-colour);
@@ -547,20 +544,13 @@ button {
 	RADIO
 ---------- */
 
-#sidebar {
-	display: flex;
-	justify-content: center;
-}
-#radio-app {
-	inline-size: 100%;
-}
 :is(#loaded-show, #playlist):empty::after {
 	content: "Playlist is empty!\a Add shows in Booth or Archive.";
 	display: block;
 	font-style: italic;
 	text-align: center;
 	margin-block-start: 0.5em;
-	padding-block-end: 0.3em;
+	margin-block-end: 0.3em;
 	white-space: pre;
 }
 .show-content {
@@ -577,11 +567,8 @@ button {
 		"	seek-controls	seek-controls	"
 		"	show-controls	audio-controls	" / auto min-content;
 	row-gap: calc(var(--gap-size) + var(--control-depth));
-	margin-block-start: unset;
 	margin-block-end: var(--gap-size);
 	margin-inline: unset;
-	padding: unset;
-	border: unset;
 	& > div {
 		display: flex;
 		gap: var(--gap-size);
@@ -628,10 +615,7 @@ button {
 	}
 }
 input[type="range"] {
-	all: unset;
-	outline: revert;
 	margin: 0;
-	font-size: 1em;
 	border-block-end: var(--hot-line);
 	&::-moz-range-progress {
 		background-color: var(--hot-colour);
@@ -669,7 +653,6 @@ input[type="range"] {
 		box-shadow: 0 var(--control-depth) var(--hot-colour);
 	}
 }
-/* for some reason webkit vendor pseudo-selectors must be nested separately for both default and active forms */
 input[type="range"]:active {
 	&::-webkit-slider-thumb {
 		border-color: var(--cold-colour);
@@ -692,12 +675,11 @@ input[type="range"]:active {
 	border-block: var(--fore-line);
 	& > ul {
 		display: flex;
-		inline-size: 33%;
+		inline-size: 30%;
 		list-style-type: "";
 		padding-inline-start: 0;
 		text-align: center;
 		flex-direction: column;
-		justify-content: center;
 		gap: var(--gap-size);
 	}
 	a {
@@ -765,7 +747,6 @@ main {
 #playlist {
 	display: grid;
 	row-gap: 1em;
-	margin-block: 0;
 	& > li {
 		display: flex;
 		gap: var(--gap-size);
@@ -800,18 +781,15 @@ main {
 	}
 }
 textarea {
-	block-size: 10em;
+	block-size: 10lh;
 	inline-size: 100%;
 	display: block;
 	margin-block: 1em;
 	padding-block-start: 0.5em;
 	padding-block-end: 0.25em;
 	padding-inline: 0.5em;
-	font-family: inherit;
 	font-size: 1em;
 	line-height: 1;
-	color: inherit;
-	background-color: unset;
 	border: var(--fore-line);
 	border-top-width: calc(var(--control-depth) + var(--line-width));
 	resize: none;
@@ -1052,9 +1030,6 @@ use[href="#svg-toggle-tick"] {
 	& > :first-child h3 {
 		margin-block-start: 1em;
 	}
-	article ul > li {
-		list-style-type: "\2013\a0\a0";
-	}
 }
 .post-times {
 	margin-block-end: 0.5em;
@@ -1106,11 +1081,16 @@ use[href="#svg-toggle-tick"] {
 	}
 
 	/* NAV */
-	#main-nav a {
-		padding-block-end: 0.2em;
-		flex-direction: row;
-		span {
-			margin-block-start: 0.2em;
+	#main-nav {
+		& > ul {
+			justify-content: center;
+		}
+		& a {
+			padding-block-end: 0.2em;
+			flex-direction: row;
+			span {
+				margin-block-start: 0.2em;
+			}
 		}
 	}
 
@@ -1144,7 +1124,6 @@ use[href="#svg-toggle-tick"] {
 	/* NAV */
 	#main-nav {
 		display: block;
-		font-size: unset;
 		& > ul {
 			inline-size: unset;
 			margin-inline: auto;
