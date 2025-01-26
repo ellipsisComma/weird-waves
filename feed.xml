@@ -8,10 +8,12 @@
 
 
 	<title>Weird Waves</title>
-	<author><name>Weird Waves</name></author>
+	<author>
+		<name>Weird Waves</name>
+	</author>
 	<subtitle type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Audio horror broadcasting online.</div></subtitle>
 	<icon>https://weirdwaves.net/images/social-card.png</icon>
-	<updated>2025-01-19T00:00:00+00:00</updated>
+	<updated>2025-01-19T00:00:00Z</updated>
 
 
 
@@ -36,8 +38,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?51</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2025-01-19-mute-toggle-icon-swap" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Mute-toggle icon swap</div></title>
-		<published>2025-01-19T00:00:00+00:00</published>
-		<updated>2025-01-19T00:00:00+00:00</updated>
+		<published>2025-01-19T00:00:00Z</published>
+		<updated>2025-01-19T00:00:00Z</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>I've given in and made the Radio's mute/unmute button show a &#x201c;muted&#x201d; icon when the audio's muted or volume is 0, and an &#x201c;unmuted&#x201d; icon when the audio's unmuted <em>and</em> the volume's higher than 0. This means they now show the audio's state instead of the action the button triggers; this is far more common (e.g. it's used in YouTube, QuickTime Player, the built-in controls for <abbr>HTML</abbr>'s <code>&#x3c;audio&#x3e;</code> and <code>&#x3c;video&#x3e;</code> elements). The volume controls still work in the exact same way as before&#x2014;only the icons have changed.</p>
@@ -47,8 +49,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?50</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-12-31-from-featured-show-to-weekly-schedule" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">From featured show to weekly schedules</div></title>
-		<published>2024-12-30T00:00:00+00:00</published>
-		<updated>2024-12-31T00:00:00+00:00</updated>
+		<published>2024-12-30T00:00:00Z</published>
+		<updated>2024-12-31T00:00:00Z</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>First, the featured show on the landing page has been replaced with a schedule! This is a throwback to the original form of Weird Waves, which automatically played and updated a scheduled slate of shows while you listened, indefinitely. Now it just works like the featured show slot, suggesting shows from the Archive, but instead of being selected at random they're grouped by theme.</p>
@@ -59,8 +61,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?49</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-11-23-simplified-feed" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Simplified feed</div></title>
-		<published>2024-11-23T00:00:00+00:00</published>
-		<updated>2024-11-23T00:00:00+00:00</updated>
+		<published>2024-11-23T00:00:00Z</published>
+		<updated>2024-11-23T00:00:00Z</updated>
 		<category term="bulletins" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>The feed now just has one overall category, with post categories being a label per-post. This cuts the content on the page by half (as before it just duplicated each entry from the full feed to the category sub-pages).</p>
@@ -70,8 +72,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?48</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-10-28-new-show" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">New show: <cite>The Birds</cite></div></title>
-		<published>2024-10-28T00:00:00+00:00</published>
-		<updated>2024-10-28T00:00:00+00:00</updated>
+		<published>2024-10-28T00:00:00Z</published>
+		<updated>2024-10-28T00:00:00Z</updated>
 		<category term="bulletins" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Added a new show to <cite>Escape</cite>: an adaptation of Daphne du Maurier's short story <cite>The Birds</cite> (later adapted for screen by Alfred Hitchcock).</p>
@@ -317,8 +319,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?27</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-02-18-new-show" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">New show: <cite>The Abominations of Yondo</cite></div></title>
-		<published>2024-02-18T00:00:00+00:00</published>
-		<updated>2024-02-18T00:00:00+00:00</updated>
+		<published>2024-02-18T00:00:00Z</published>
+		<updated>2024-02-18T00:00:00Z</updated>
 		<category term="bulletins" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Added one new show: <cite>The Abominations of Yondo</cite>, by Clark Ashton Smith, in the LibriVox selection.</p>
@@ -328,8 +330,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?26</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2024-01-28-officially-finished" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Weird Waves is officially finished!</div></title>
-		<published>2024-01-28T00:00:00+00:00</published>
-		<updated>2024-01-28T00:00:00+00:00</updated>
+		<published>2024-01-28T00:00:00Z</published>
+		<updated>2024-01-28T00:00:00Z</updated>
 		<category term="bulletins" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>There may be small future changes (e.g. adding new links to the Links section, like I just did now), but as a rule it's done.</p>
@@ -339,8 +341,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?25</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2023-12-25-nav-bugfix" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Fixed a very weird navigation bug</div></title>
-		<published>2023-12-25T00:00:00+00:00</published>
-		<updated>2024-01-15T00:00:00+00:00</updated>
+		<published>2023-12-25T00:00:00Z</published>
+		<updated>2024-01-15T00:00:00Z</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Fixed a bug that stopped the site from navigating to each section unless you refreshed the page first. Now back to Christmas&#x2026;</p>
@@ -398,8 +400,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?20</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-12-30-faster-pageloads" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Faster page-loading speeds</div></title>
-		<published>2022-12-30T00:00:00+00:00</published>
-		<updated>2022-12-30T00:00:00+00:00</updated>
+		<published>2022-12-30T00:00:00Z</published>
+		<updated>2022-12-30T00:00:00Z</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Did a major behind-the-scenes Archive update that should make the whole site load quicker (fingers crossed), and added a bunch more loading spinners to places where content loads in.</p>
@@ -409,8 +411,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?19</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-11-30-goodbye-chatbox-hello-random-shows" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Goodbye chatbox, hello random shows</div></title>
-		<published>2022-11-30T00:00:00+00:00</published>
-		<updated>2022-11-30T00:00:00+00:00</updated>
+		<published>2022-11-30T00:00:00Z</published>
+		<updated>2022-11-30T00:00:00Z</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>First, I didn't like how the look of the <abbr>CBox</abbr> chatbox clashed with the look of the site, or how it messed with looping around the page using keyboard navigation, so I removed it (it didn't get any traffic in the time it was up, anyway).</p>
@@ -421,8 +423,8 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<id>https://weirdwaves.net/?18</id>
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-11-14-chatbox" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Chatbox!</div></title>
-		<published>2022-11-14T00:00:01+00:00</published>
-		<updated>2022-11-14T00:00:01+00:00</updated>
+		<published>2022-11-14T00:00:01Z</published>
+		<updated>2022-11-14T00:00:01Z</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Added a <abbr>CBox</abbr> chatbox to the site (click the button in the bottom-right corner to open it up) and cut a few unnecessary (e.g. redundant, trivial) content notes.</p>
@@ -673,7 +675,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2022-07-22-blog-post-weird-waves-wip" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Blog Post: Weird Waves <abbr>WIP</abbr></div></title>
 		<published>2022-07-22T00:00:00+01:00</published>
-		<updated>2024-11-07T00:00:00+00:00</updated>
+		<updated>2024-11-07T00:00:00Z</updated>
 		<category term="history" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>Here's a little javascript web app I'm working on: <a href="https://weirdwaves.net">Weird Waves</a>, a fake online radio station for horror audiobooks and radio plays! I dunno how far off the final app is. This post's just an explanation of how it works.</p>
