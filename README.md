@@ -136,7 +136,7 @@ These are features I've considered and decided not to implement, or implemented 
 
 Links to download individual shows, present in any or all of: the Archive, the Booth, and the Radio. These could allow users to download shows for later listening. However:
 
-1. The audio used in Weird Waves is optimised for small filesizes rather than audio quality; better-quality versions can be found at the sources.
+1. The audio used in Weird Waves is optimised for small filesizes rather than quality; better-quality versions can be found at the sources.
 2. Show info is tightly laid out and adding a download link in such a small space tends to complicate it or obstruct other content.
 
 A determined user could still download all audio files using a combination of the browser inspector (to find the `<audio>` element), playlist export (to get IDs for show audio paths), and `wget` in terminal.
