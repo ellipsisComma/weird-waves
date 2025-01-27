@@ -747,6 +747,7 @@ main {
 #playlist {
 	display: grid;
 	row-gap: 1em;
+	margin-block-start: var(--gap-size);
 	& > li {
 		display: flex;
 		gap: var(--gap-size);
