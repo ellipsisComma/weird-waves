@@ -141,7 +141,7 @@ Links to download individual shows, present in any or all of: the Archive, the B
 
 A determined user could still download all audio files using a combination of the browser inspector (to find the `<audio>` element), playlist export (to get IDs for show audio paths), and `wget` in terminal.
 
-### Open/close all instances of a show's content notes at once
+### Sync all instances of a show's content notes
 
 Synchronising a show's content notes in the Archive, Booth, and Radio, so that when you open/close its notes in one place, they change in any other places the show info exists.
 
