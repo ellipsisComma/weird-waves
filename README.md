@@ -139,7 +139,7 @@ Links to download individual shows, present in any or all of: the Archive, the B
 1. The audio used in Weird Waves is optimised for small filesizes rather than audio quality; better-quality versions can be found at the sources.
 2. Show info is tightly laid out and adding a download link in such a small space tends to complicate it or obstruct other content.
 
-A determined user could still download all audio files using a combination of the browser inspector (to find the `<audio>` element), playlist export (to get components for all audio show paths), and `wget` in terminal.
+A determined user could still download all audio files using a combination of the browser inspector (to find the `<audio>` element), playlist export (to get IDs for show audio paths), and `wget` in terminal.
 
 ### Open/close all instances of a show's content notes at once
 
