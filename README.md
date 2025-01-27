@@ -143,7 +143,7 @@ A determined user could still download all audio files using a combination of th
 
 ### Open/close all instances of a show's content notes at once
 
-Synchronising the open/closed state of a show's content notes in the Archive, Booth, and Radio, so that when you open its notes in one place, they change in any other places the show info exists.
+Synchronising the state of a show's content notes in the Archive, Booth, and Radio, so that when you open/close its notes in one place, they change in any other places the show info exists.
 
 Tested, but I couldn't see a clear value.
 
