@@ -194,10 +194,6 @@ const playlistObserver = new MutationObserver(() => {
 	);
 });
 
-function connectPlaylistObserver() {
-	playlistObserver.observe(page.getEl(`playlist`), {"childList": true});
-}
-
 
 
 /* ==============
@@ -241,6 +237,7 @@ function storePlaylist() {
 	store(`playlist`, getShowIDs(page.getEl(`playlist`).children));
 }
 
+// get date of the current week's Monday
 function getWeekStartDate() {
 	const date = new Date();
 	date.setDate(date.getDate() - ((date.getDay() + 6) % 7));
@@ -457,13 +454,6 @@ function loadShow() {
 	}
 }
 
-// replace loaded show with next show on playlist (or reset radio if playlist ends)
-function loadNextShow() {
-	removeShow(page.getEl(`playlist`).firstElementChild);
-	page.getEl(`seekBar`).value = 0;
-	if (page.getEl(`audio`).hasAttribute(`src`) && settings.getSetting(`autoPlayNextShow`) && page.getEl(`audio`).paused) togglePlay();
-}
-
 /* --
 RADIO
 -- */
@@ -647,7 +637,11 @@ page.getEl(`audio`).addEventListener(`pause`, () => {
 	page.getEl(`playToggle`).flip();
 	setAudioToggle(page.getEl(`playToggle`), `play`);
 });
-page.getEl(`audio`).addEventListener(`ended`, loadNextShow);
+page.getEl(`audio`).addEventListener(`ended`, () => {
+	removeShow(page.getEl(`playlist`).firstElementChild);
+	page.getEl(`seekBar`).value = 0;
+	if (page.getEl(`audio`).hasAttribute(`src`) && settings.getSetting(`autoPlayNextShow`) && page.getEl(`audio`).paused) togglePlay();
+});
 page.getEl(`audio`).addEventListener(`volumechange`, () => {
 	if (page.getEl(`audio`).muted || page.getEl(`audio`).volume === 0) {
 		setAudioToggle(page.getEl(`muteToggle`), `muted`);
@@ -669,7 +663,9 @@ page.getEl(`seekBar`).addEventListener(`input`, () => {
 	updateSeekTime(page.getEl(`seekBar`).value); // must set input.value as argument here
 });
 page.getEl(`playToggle`).addEventListener(`click`, togglePlay);
-page.getEl(`skipButton`).addEventListener(`click`, loadNextShow);
+page.getEl(`skipButton`).addEventListener(`click`, () => {
+	page.getEl(`audio`).currentTime = page.getEl(`audio`).duration;
+});
 page.getEl(`muteToggle`).addEventListener(`click`, toggleMute);
 page.getEl(`volumeControl`).addEventListener(`input`, () => setVolume(page.getEl(`volumeControl`).value / 100));
 
@@ -724,13 +720,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	setVolume(page.getEl(`volumeControl`).value / 100);
 	setInterval(updateSeekBar, 1000);
 
+	// start watching for playlist changes
+	playlistObserver.observe(page.getEl(`playlist`), {"childList": true});
+
 	// build various page sections
 	buildArchive();
 	loadPlaylist();
 	loadSchedule();
-
-	// start watching for playlist changes
-	connectPlaylistObserver();
 
 	// update page head data
 	page.getEl(`title`).dataset.original = document.title;
@@ -745,6 +741,7 @@ window.addEventListener(`beforeunload`, () => {
 
 // update settings, styles, and playlist if styles change in another browsing context
 window.addEventListener(`storage`, () => {
+	console.log(`fired`);
 	const newValue = JSON.parse(event.newValue);
 	switch (event.key) {
 	case `settings`:
@@ -762,9 +759,7 @@ window.addEventListener(`storage`, () => {
 	case `playlist`:
 		// could do this with a broadcast channel instead of mutation observer + storage event
 		// however, that adds an extra tech and it'd be less robust than rebuilding the playlist from scratch
-		playlistObserver.disconnect();
 		loadPlaylist();
-		connectPlaylistObserver();
 		page.getEl(`seriesList`).querySelectorAll(`[data-action="add-show"]`).forEach(button => {
 			if (event.newValue.includes(button.dataset.target)) button.press();
 			else button.unpress();
