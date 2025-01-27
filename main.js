@@ -194,10 +194,6 @@ const playlistObserver = new MutationObserver(() => {
 	);
 });
 
-function connectPlaylistObserver() {
-	playlistObserver.observe(page.getEl(`playlist`), {"childList": true});
-}
-
 
 
 /* ==============
@@ -241,6 +237,7 @@ function storePlaylist() {
 	store(`playlist`, getShowIDs(page.getEl(`playlist`).children));
 }
 
+// get date of the current week's Monday
 function getWeekStartDate() {
 	const date = new Date();
 	date.setDate(date.getDate() - ((date.getDay() + 6) % 7));
@@ -724,13 +721,13 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	setVolume(page.getEl(`volumeControl`).value / 100);
 	setInterval(updateSeekBar, 1000);
 
+	// start watching for playlist changes
+	playlistObserver.observe(page.getEl(`playlist`), {"childList": true});
+
 	// build various page sections
 	buildArchive();
 	loadPlaylist();
 	loadSchedule();
-
-	// start watching for playlist changes
-	connectPlaylistObserver();
 
 	// update page head data
 	page.getEl(`title`).dataset.original = document.title;
@@ -762,9 +759,7 @@ window.addEventListener(`storage`, () => {
 	case `playlist`:
 		// could do this with a broadcast channel instead of mutation observer + storage event
 		// however, that adds an extra tech and it'd be less robust than rebuilding the playlist from scratch
-		playlistObserver.disconnect();
 		loadPlaylist();
-		connectPlaylistObserver();
 		page.getEl(`seriesList`).querySelectorAll(`[data-action="add-show"]`).forEach(button => {
 			if (event.newValue.includes(button.dataset.target)) button.press();
 			else button.unpress();
