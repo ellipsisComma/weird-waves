@@ -151,7 +151,7 @@ Tested, but I couldn't see a clear value.
 
 Adding volume to settings so a listener can effectively set a personal volume that's re-applied on pageload.
 
-The levels of the various audio files aren't consistent enough for this to be set automatically, and can't easily be evened out due to the degradation of many of the older audio before it was digitised (baseline noise is too high to compress-and-amplify quieter files without using professional noise reduction plugins).
+The levels of the show audio files aren't consistent enough (due to their separate origins) for this to be set automatically, and can't easily be evened out due to the degradation of many of the older audio before it was digitised (baseline noise is too high to compress-and-amplify quieter files without using professional noise reduction plugins).
 
 ### In-depth statistics
 
