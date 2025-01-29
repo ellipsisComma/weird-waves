@@ -539,6 +539,10 @@ code {
 		stroke: var(--hot-colour);
 	}
 }
+[aria-pressed="true"] .unpressed-icon,
+[aria-pressed="false"] .pressed-icon {
+	opacity: 0;
+}
 
 /* ----------
 	RADIO

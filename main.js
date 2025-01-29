@@ -49,8 +49,10 @@ const settings = (() => {
 	}
 
 	function toggleSetting(setting) {
+		const toggle = document.getElementById(`${setting.camelToKebab()}-toggle`);
+		if (!toggle) return;
 		local[setting] = !local[setting];
-		document.getElementById(`${setting.camelToKebab()}-toggle`)?.flip();
+		toggle.ariaPressed = local[setting] ? `true` : `false`;
 		store(`settings`, local);
 
 		if (setting === `flatRadio`) page.getEl(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
@@ -418,7 +420,7 @@ function removeShow(target) {
 function loadShow() {
 	if (page.getEl(`playlist`).children.length > 0 && page.getEl(`playlist`).firstElementChild.dataset.showId === page.getEl(`loadedShow`).dataset.showId) return;
 
-	setAudioToggle(page.getEl(`playToggle`), `play`);
+	page.getEl(`playToggle`).ariaPressed = `false`;
 	page.getEl(`loadedShow`).replaceChildren();
 
 	if (page.getEl(`playlist`).children.length > 0) {
@@ -452,7 +454,7 @@ function loadShow() {
 }
 
 // replace loaded show with next show on playlist (or reset radio if playlist ends)
-function loadNextShow() {
+function endShow() {
 	removeShow(page.getEl(`playlist`).firstElementChild);
 }
 
@@ -475,11 +477,6 @@ function updateSeekTime(value) {
 	setTimestampFromSeconds(page.getEl(`showTimeElapsed`), page.getEl(`audio`).duration * value / 100);
 }
 
-// set audio toggle icon and aria-label
-function setAudioToggle(toggle, code) {
-	toggle.querySelector(`use`).setAttribute(`href`, `#svg-${code}`);
-}
-
 // toggle audio play/pause
 function togglePlay() {
 	if (page.getEl(`audio`).paused) page.getEl(`audio`).play();
@@ -488,7 +485,6 @@ function togglePlay() {
 
 // toggle audio mute/unmute
 function toggleMute() {
-	page.getEl(`muteToggle`).flip();
 	page.getEl(`audio`).muted = !page.getEl(`audio`).muted;
 }
 
@@ -620,24 +616,22 @@ page.getEl(`audio`).addEventListener(`loadedmetadata`, () => {
 });
 page.getEl(`audio`).addEventListener(`timeupdate`, updateSeekBar);
 page.getEl(`audio`).addEventListener(`play`, () => {
-	page.getEl(`playToggle`).flip();
-	setAudioToggle(page.getEl(`playToggle`), `pause`);
+	page.getEl(`playToggle`).ariaPressed = `true`;
 });
 page.getEl(`audio`).addEventListener(`pause`, () => {
-	page.getEl(`playToggle`).flip();
-	setAudioToggle(page.getEl(`playToggle`), `play`);
+	page.getEl(`playToggle`).ariaPressed = `false`;
 });
 page.getEl(`audio`).addEventListener(`ended`, () => {
 	// autoplay next show if autoplay setting is on
 	if (settings.getSetting(`autoPlayNextShow`)) page.getEl(`audio`).dataset.playNextShow = `true`;
-	loadNextShow();
+	endShow();
 });
 page.getEl(`audio`).addEventListener(`volumechange`, () => {
 	if (page.getEl(`audio`).muted || page.getEl(`audio`).volume === 0) {
-		setAudioToggle(page.getEl(`muteToggle`), `muted`);
+		page.getEl(`muteToggle`).ariaPressed = `true`;
 		page.getEl(`volumeControl`).value = 0;
 	} else {
-		setAudioToggle(page.getEl(`muteToggle`), `unmuted`);
+		page.getEl(`muteToggle`).ariaPressed = `false`;
 		page.getEl(`volumeControl`).value = page.getEl(`audio`).volume * 100;
 	}
 });
@@ -650,7 +644,7 @@ page.getEl(`playToggle`).addEventListener(`click`, togglePlay);
 page.getEl(`skipButton`).addEventListener(`click`, () => {
 	// autoplay next show if current show is playing
 	if (!page.getEl(`audio`).paused) page.getEl(`audio`).dataset.playNextShow = `true`;
-	loadNextShow();
+	endShow();
 });
 page.getEl(`seekBar`).addEventListener(`change`, () => {
 	page.getEl(`seekBar`).dataset.seeking = `false`;

@@ -147,8 +147,3 @@ HTMLButtonElement.prototype.press = function () {
 		"aria-disabled": `true`
 	});
 }
-
-// set a toggle button's state to flipped or unflipped
-HTMLButtonElement.prototype.flip = function () {
-	this.ariaPressed = this.ariaPressed === `true` ? `false` : `true`;
-}
