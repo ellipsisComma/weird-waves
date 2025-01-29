@@ -188,6 +188,7 @@ templateHTML.setTemplate(`archiveShow`, `archive-show`);
 
 // mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
 const playlistObserver = new MutationObserver(() => {
+	loadShow();
 	storePlaylist();
 	if (location.protocol !== `file:` && page.getEl(`playlist`).children.length > 1) fetch(
 		showPath(page.getEl(`playlist`).children[1].dataset.showId),
@@ -257,8 +258,6 @@ function shufflePlaylist() {
 	if (i < 2) return;
 
 	while (i > 0) page.getEl(`playlist`).append(page.getEl(`playlist`).children[Math.floor(Math.random() * i--)]);
-
-	loadShow();
 }
 
 // reveal controls for clearing playlist
@@ -280,7 +279,6 @@ function clearPlaylist() {
 		page.getEl(`playlist`).replaceChildren();
 		page.getEl(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)
 			.forEach(button => button.unpress());
-		loadShow();
 	}
 	if (!page.getEl(`clearPlaylistControls`).hidden) hideClearPlaylistControls();
 }
@@ -333,7 +331,6 @@ function importPlaylist() {
 function loadPlaylist() {
 	page.getEl(`playlist`).replaceChildren();
 	retrieve(`playlist`, []).filter(getShowInArchive).forEach(addShow);
-	loadShow();
 }
 
 /* --
@@ -347,7 +344,6 @@ function addShow(ID) {
 	const showOnPlaylist = getShowOnPlaylist(ID);
 	if (showOnPlaylist) {
 		page.getEl(`playlist`).append(showOnPlaylist);
-		loadShow();
 		console.log(`re-added show: ${ID}`);
 		return;
 	}
@@ -378,7 +374,6 @@ function addShow(ID) {
 	// update page and stored data
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
 	page.getEl(`playlist`).appendChild(templatedShow);
-	loadShow();
 }
 
 // add entire archive to playlist
@@ -406,20 +401,17 @@ function addRandomShow(showType) {
 // swap show with previous show on playlist
 function moveShowUp(target) {
 	target.previousElementSibling?.before(target);
-	loadShow();
 }
 
 // swap show with next show on playlist
 function moveShowDown(target) {
 	target.nextElementSibling?.after(target);
-	loadShow();
 }
 
 // remove show from playlist
 function removeShow(target) {
 	getShowInArchive(target.dataset.showId).querySelector(`[data-action="add-show"]`).unpress();
 	target.remove();
-	loadShow();
 }
 
 // write show parts onto page and load show audio file; if playlist is empty, reset radio
@@ -438,6 +430,10 @@ function loadShow() {
 		page.getEl(`loadedShow`).replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
 
 		// reset and reveal radio controls
+		if (page.getEl(`audio`).dataset.playNextShow === `true`) {
+			page.getEl(`audio`).play();
+			page.getEl(`audio`).dataset.playNextShow = `false`;
+		}
 		page.getEl(`seekBar`).value = 0;
 		page.getEl(`showTimeElapsed`).textContent = `00:00`;
 		page.getEl(`radioControls`).hidden = false;
@@ -447,7 +443,7 @@ function loadShow() {
 
 		// reset radio
 		page.getEl(`audio`).pause(); // otherwise audio continues playing
-		page.getEl(`audio`).removeAttribute(`src`);
+		page.getEl(`audio`).removeAttribute(`src`); // check why this is necessary instead of just emptying [src]
 		page.getEl(`showTimeElapsed`).textContent = `00:00`;
 		page.getEl(`showTimeTotal`).textContent = `00:00`;
 		page.getEl(`radioControls`).hidden = true;
@@ -458,8 +454,6 @@ function loadShow() {
 // replace loaded show with next show on playlist (or reset radio if playlist ends)
 function loadNextShow() {
 	removeShow(page.getEl(`playlist`).firstElementChild);
-	page.getEl(`seekBar`).value = 0;
-	if (page.getEl(`audio`).hasAttribute(`src`) && settings.getSetting(`autoPlayNextShow`) && page.getEl(`audio`).paused) togglePlay();
 }
 
 /* --
@@ -488,21 +482,15 @@ function setAudioToggle(toggle, code) {
 
 // toggle audio play/pause
 function togglePlay() {
-	if (page.getEl(`audio`).paused) {
-		page.getEl(`audio`).play();
-	} else {
-		page.getEl(`audio`).pause();
-	}
+	page.getEl(`playToggle`).flip();
+	if (page.getEl(`audio`).paused) page.getEl(`audio`).play();
+	else page.getEl(`audio`).pause();
 }
 
 // toggle audio mute/unmute
 function toggleMute() {
 	page.getEl(`muteToggle`).flip();
-	if (page.getEl(`audio`).muted) {
-		page.getEl(`audio`).muted = false;
-	} else {
-		page.getEl(`audio`).muted = true;
-	}
+	page.getEl(`audio`).muted = !page.getEl(`audio`).muted;
 }
 
 // set audio volume
@@ -595,6 +583,7 @@ function buildArchive() {
 	archive = null;
 }
 
+// fetch weekly schedule and, if available and valid, load schedule onto page
 async function loadSchedule() {
 	const weekStart = getWeekStartDate();
 	const file = await fetch(
@@ -639,7 +628,11 @@ page.getEl(`audio`).addEventListener(`pause`, () => {
 	page.getEl(`playToggle`).flip();
 	setAudioToggle(page.getEl(`playToggle`), `play`);
 });
-page.getEl(`audio`).addEventListener(`ended`, loadNextShow);
+page.getEl(`audio`).addEventListener(`ended`, () => {
+	// autoplay next show if autoplay setting is on
+	if (settings.getSetting(`autoPlayNextShow`)) page.getEl(`audio`).dataset.playNextShow = `true`;
+	loadNextShow();
+});
 page.getEl(`audio`).addEventListener(`volumechange`, () => {
 	if (page.getEl(`audio`).muted || page.getEl(`audio`).volume === 0) {
 		setAudioToggle(page.getEl(`muteToggle`), `muted`);
@@ -655,7 +648,11 @@ page.getEl(`resetButton`).addEventListener(`click`, () => {
 	page.getEl(`audio`).currentTime = 0;
 });
 page.getEl(`playToggle`).addEventListener(`click`, togglePlay);
-page.getEl(`skipButton`).addEventListener(`click`, loadNextShow);
+page.getEl(`skipButton`).addEventListener(`click`, () => {
+	// autoplay next show if current show is playing
+	if (!page.getEl(`audio`).paused) page.getEl(`audio`).dataset.playNextShow = `true`;
+	loadNextShow();
+});
 page.getEl(`seekBar`).addEventListener(`change`, () => {
 	page.getEl(`seekBar`).dataset.seeking = `false`;
 	page.getEl(`audio`).currentTime = page.getEl(`audio`).duration * page.getEl(`seekBar`).value / 100;
