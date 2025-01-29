@@ -6,13 +6,13 @@ Weird Waves is a client-side library, playlist-maker, and player for a curated c
 
 It's also a sort of baseline web dev whetstone for me.
 
-The app is relatively mature and shouldn't receive large updates in future.
-
 **Note:** This repository doesn't contain the full audio library used on [Weird Waves](https://weirdwaves.net).
+
+For example, series headings are stored as text or HTML
 
 ## Adding audio
 
-Add data for series and shows to `archive.js`. All shows from a given series should ideally be taken from the same location, and that location should ideally be publicly available.
+Add data for series and shows to `archive.js`. All shows taken from a given series should ideally be taken from the same source (website, collection, etc.), and that location should ideally be publicly available. A series on Weird Waves does *not* need to be complete; most of them are curated selections.
 
 The archive as a whole is an array of series objects, each of which contains an array of show objects. For example, the series object for "Quiet, Please", including the show object for the first episode, "Nothing Behind the Door":
 
@@ -48,29 +48,16 @@ The show ID must be a valid HTML `id` and all characters must be valid in filepa
 
 ### Filepaths
 
-The functions `showPath()` and `schedulePath()` in `main.js` take arguments and build structured paths for show audio files and schedule files respectively.
-
-### HTML content
-
-Headings, blurbs, series sources, and show content notes can be pure text or include phrasing content HTML. They can't contain block-level HTML. The elements these properties are inserted into are as follows:
-
-|Property|Element|
-|-|-|
-|series heading|`<h3>`|
-|series blurb|`<p>`|
-|series source|`<p>`|
-|show heading|`<h4>`|
-|show blurb|`<p>`|
-|show content notes|`<span>`|
+The functions `showPath()` and `schedulePath()` in `main.js` return paths for show audio files and schedule files respectively.
 
 ### Series properties
 
 |Key|Type|Required?|Description|
 |-|-|-|-|
 |`code`|string|yes|a unique alphanumeric code for the series, e.g. the code for "Quiet, Please" is "QP"|
-|`heading`|string|yes|plaintext or (phrasing content) HTML series name|
-|`blurb`|string|yes|plaintext or (phrasing content) HTML description|
-|`source`|string|yes|plaintext or (phrasing content) HTML naming or linking to the source for the show audio files|
+|`heading`|string|yes|plaintext or phrasing HTML series name|
+|`blurb`|string|yes|plaintext or phrasing HTML description|
+|`source`|string|yes|plaintext or phrasing HTML naming or linking to the source for the show audio files|
 |`copyrightSafe`|boolean|no|`true` if the series has no risk of copyright claims when played on livestream platforms (e.g. illegitimate claims through automated systems)|
 |`shows`|array|yes|an array of show objects|
 
@@ -79,9 +66,9 @@ Headings, blurbs, series sources, and show content notes can be pure text or inc
 |Key|Type|Required?|Description|
 |-|-|-|-|
 |`code`|string|yes|a unique text code for the show, e.g. the code for "Quiet, Please" #1, "Nothing Behind the Door", is "001-Nothing"|
-|`heading`|string|yes|plaintext or (phrasing content) HTML show name|
-|`blurb`|string|yes|plaintext or (phrasing content) HTML show description|
-|`notes`|string|no|plaintext or (phrasing content) HTML content notes|
+|`heading`|string|yes|plaintext or phrasing HTML show name|
+|`blurb`|string|yes|plaintext or phrasing HTML show description|
+|`notes`|string|no|plaintext or phrasing HTML content notes|
 |`banger`|boolean|no|`true` if the show is recommended|
 |`duration`|integer|yes|length of the show in seconds, rounded up|
 
@@ -96,11 +83,11 @@ The widget differs from the main version in several key ways:
 * It uses an outdated stylesheet and outdated scripts.
 * It requires audio durations to be stored in `archive.js` instead of being retrieved from the files themselves.
 
-These changes are necessary due to the outdated browser/rendering engine used by popular free broadcasting software (OBS and Streamlabs OBS). In particular, this engine treats all media as streaming media of infinite length, so audio durations must be provided separately from the files.
+These changes are necessary due to the outdated browser/rendering engine used by popular free broadcasting software (OBS and Streamlabs OBS). In particular, this engine treats all media as streaming media of infinite length, so audio durations must be provided separately from the audio files and their metadata.
 
 ## Adding schedules
 
-Schedules are themed (or simply random) groups of shows that vary week by week, with each new schedule appearing in the landing/welcome section on Monday at 00:00 (UTC+0). The shows on the schedule can be added to the end of the playlist by clicking the "+ Schedule" button. The schedule section only displays if the schedule file exists, loads, and parses (as JSON), otherwise it remains hidden.
+Schedules are themed (or just random) groups of shows that vary week by week, with each new schedule appearing in the landing/welcome section on Monday at 00:00 (UTC+0). The shows on the schedule can be added to the end of the playlist by clicking the "+ Schedule" button. The schedule section only displays if the schedule file exists, loads, and parses (as JSON), otherwise it remains hidden.
 
 Each schedule file is a JSON file whose name should by default be `schedule-[date].json`, e.g. `schedule-2024-12-30.json`. The `[date]` is the ISO format date string for that week's Monday. The file should contain an object with three properties:
 
@@ -122,11 +109,26 @@ Unlike the archive file, this is restricted to the JSON format (e.g. no template
 
 ### Schedule properties
 
-|Key|Type|Description|
-|-|-|-|
-|`title`|string|plaintext or HTML schedule title (**note:** see above regarding phrasing content)|
-|`blurb`|string|plaintext or HTML schedule description (**note:** see above regarding phrasing content)|
-|`shows`|array|an array of show ID strings|
+|Key|Type|Required?|Description|
+|-|-|-|-|
+|`title`|string|yes|plaintext or phrasing HTML schedule title|
+|`blurb`|string|yes|plaintext or phrasing HTML schedule description|
+|`shows`|array|yes|an array of show ID strings|
+
+## HTML content
+
+Various properties in the archive array and in schedule files are written to the page as HTML, including headings, blurbs, series sources, and show content notes. These can be pure text or include phrasing HTML elements. They can't contain block-level HTML. The elements these properties are inserted into are as follows:
+
+|Property|Element|
+|-|-|
+|series heading|`<h3>`|
+|series blurb|`<p>`|
+|series source|`<p>`|
+|show heading|`<h4>`|
+|show blurb|`<p>`|
+|show content notes|`<span>`|
+|schedule title|`<h3>`|
+|schedule blurb|`<p>`|
 
 ## Removed/rejected features
 
