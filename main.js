@@ -482,7 +482,6 @@ function setAudioToggle(toggle, code) {
 
 // toggle audio play/pause
 function togglePlay() {
-	page.getEl(`playToggle`).flip();
 	if (page.getEl(`audio`).paused) page.getEl(`audio`).play();
 	else page.getEl(`audio`).pause();
 }
