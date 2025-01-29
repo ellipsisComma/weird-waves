@@ -766,7 +766,7 @@ main {
 	inset-block-start: 0;
 	margin-block-start: 0;
 	margin-block-end: var(--gap-size);
-	padding-block-start: calc(var(--gap-size) + var(--control-depth));
+	padding-block-start: var(--control-depth);
 	padding-block-end: var(--gap-size);
 	background-color: var(--back-colour);
 	border-block-end: var(--fore-line);
@@ -1118,8 +1118,8 @@ use[href="#svg-toggle-tick"] {
 	/* RADIO */
 	#radio-controls {
 		grid-template:
-			"seek-controls	show-controls	audio-controls" / auto min-content min-content;
-		column-gap: calc(var(--gap-size) * 3);
+			"show-controls	seek-controls	audio-controls" / min-content auto min-content;
+		column-gap: var(--gap-size);
 	}
 
 	/* NAV */

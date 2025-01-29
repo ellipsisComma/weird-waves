@@ -141,11 +141,12 @@ page.setEl(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 // radio
 page.setEl(`loadedShow`, `#loaded-show`);
 page.setEl(`radioControls`, `#radio-controls`);
+page.setEl(`resetButton`, `#reset-button`);
+page.setEl(`playToggle`, `#play-toggle`);
+page.setEl(`skipButton`, `#skip-button`);
 page.setEl(`seekBar`, `#seek-bar`);
 page.setEl(`showTimeElapsed`, `#show-time-elapsed`);
 page.setEl(`showTimeTotal`, `#show-time-total`);
-page.setEl(`playToggle`, `#play-toggle`);
-page.setEl(`skipButton`, `#skip-button`);
 page.setEl(`muteToggle`, `#mute-toggle`);
 page.setEl(`volumeControl`, `#volume-control`);
 page.setEl(`audio`, `#show-audio`);
@@ -466,22 +467,16 @@ RADIO
 -- */
 
 // change seek bar to match audio unless currently manually seeking or audio metadata unavailable
-function changeSeekBar() {
+function updateSeekBar() {
 	if (
 		page.getEl(`seekBar`).dataset.seeking === `true`
-		|| !page.getEl(`audio`).currentTime
 		|| !page.getEl(`audio`).duration
 	) return;
 	page.getEl(`seekBar`).value = page.getEl(`audio`).currentTime / page.getEl(`audio`).duration * 100;
 	setTimestampFromSeconds(page.getEl(`showTimeElapsed`), page.getEl(`audio`).currentTime);
 }
 
-// if audio is playing, update seek bar and time-elapsed
-function updateSeekBar() {
-	if (!page.getEl(`audio`).paused) changeSeekBar();
-}
-
-// update displayed show time using seek bar
+// update displayed show time while manually seeking using seek bar
 function updateSeekTime(value) {
 	setTimestampFromSeconds(page.getEl(`showTimeElapsed`), page.getEl(`audio`).duration * value / 100);
 }
@@ -496,7 +491,6 @@ function togglePlay() {
 	if (page.getEl(`audio`).paused) {
 		page.getEl(`audio`).play();
 	} else {
-		updateSeekBar(); // otherwise if the audio's paused after less than a second of play, seek bar doesn't update for each second
 		page.getEl(`audio`).pause();
 	}
 }
@@ -636,6 +630,7 @@ page.getEl(`audio`).addEventListener(`loadedmetadata`, () => {
 	page.getEl(`playToggle`).disabled = false;
 	setTimestampFromSeconds(page.getEl(`showTimeTotal`), page.getEl(`audio`).duration);
 });
+page.getEl(`audio`).addEventListener(`timeupdate`, updateSeekBar);
 page.getEl(`audio`).addEventListener(`play`, () => {
 	page.getEl(`playToggle`).flip();
 	setAudioToggle(page.getEl(`playToggle`), `pause`);
@@ -654,9 +649,13 @@ page.getEl(`audio`).addEventListener(`volumechange`, () => {
 		page.getEl(`volumeControl`).value = page.getEl(`audio`).volume * 100;
 	}
 });
-page.getEl(`audio`).addEventListener(`seeked`, changeSeekBar);
 
 // radio interface events
+page.getEl(`resetButton`).addEventListener(`click`, () => {
+	page.getEl(`audio`).currentTime = 0;
+});
+page.getEl(`playToggle`).addEventListener(`click`, togglePlay);
+page.getEl(`skipButton`).addEventListener(`click`, loadNextShow);
 page.getEl(`seekBar`).addEventListener(`change`, () => {
 	page.getEl(`seekBar`).dataset.seeking = `false`;
 	page.getEl(`audio`).currentTime = page.getEl(`audio`).duration * page.getEl(`seekBar`).value / 100;
@@ -665,8 +664,6 @@ page.getEl(`seekBar`).addEventListener(`input`, () => {
 	page.getEl(`seekBar`).dataset.seeking = `true`;
 	updateSeekTime(page.getEl(`seekBar`).value); // must set input.value as argument here
 });
-page.getEl(`playToggle`).addEventListener(`click`, togglePlay);
-page.getEl(`skipButton`).addEventListener(`click`, loadNextShow);
 page.getEl(`muteToggle`).addEventListener(`click`, toggleMute);
 page.getEl(`volumeControl`).addEventListener(`input`, () => setVolume(page.getEl(`volumeControl`).value / 100));
 
@@ -719,7 +716,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	page.getEl(`audio`).paused = true;
 	page.getEl(`seekBar`).value = 0;
 	setVolume(page.getEl(`volumeControl`).value / 100);
-	setInterval(updateSeekBar, 1000);
 
 	// start watching for playlist changes
 	playlistObserver.observe(page.getEl(`playlist`), {"childList": true});
