@@ -1,7 +1,7 @@
 /*jshint esversion: 11*/
 
 // bitrate: constant 24kbps; sample rate: 22050Hz
-// banger = good show, but only "part 1" of a multi-show run will be tagged as a banger even if they're all good
+// banger = good show, but only the first part of a multi-show run will be tagged as a banger even if they're all good
 // durations only necessary for stream widget (OBS browser sources treat all media as streaming media, so they can't get audio metadata like duration from the file itself)
 // durations are in seconds, rounded up to next integer
 
@@ -162,13 +162,13 @@ let archive = [
 	},
 	{
 	"code": `X1-Haunter_pt1`,
-	"heading": `X1: <cite>The Haunter of the Dark</cite>, part 1`,
+	"heading": `X1: <cite>The Haunter of the Dark</cite>, part&nbsp;1`,
 	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft.`,
 	"duration": 1681,
 	},
 	{
 	"code": `X2-Haunter_pt2`,
-	"heading": `X2: <cite>The Haunter of the Dark</cite>, part 2`,
+	"heading": `X2: <cite>The Haunter of the Dark</cite>, part&nbsp;2`,
 	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft.`,
 	"duration": 1482,
 	},
@@ -188,34 +188,34 @@ let archive = [
 "shows": [
 	{
 	"code": `1-Flame_pt1`,
-	"heading": `1: <cite>The City of the Singing Flame</cite>, part 1`,
+	"heading": `1: <cite>The City of the Singing Flame</cite>, part&nbsp;1`,
 	"blurb": `A writer walks between worlds to a city where people sacrifice themselves to a vast, singing flame. Read by Mike Cothran.`,
 	"notes": `self-destructive urges`,
 	"duration": 2907,
 	},
 	{
 	"code": `2-Flame_pt2`,
-	"heading": `2: <cite>The City of the Singing Flame</cite>, part 2`,
+	"heading": `2: <cite>The City of the Singing Flame</cite>, part&nbsp;2`,
 	"blurb": `A writer walks between worlds to a city where people sacrifice themselves to a vast, singing flame. Read by Mike Cothran.`,
 	"notes": `self-destructive urges`,
 	"duration": 1779,
 	},
 	{
 	"code": `3-Flame_pt3`,
-	"heading": `3: <cite>The City of the Singing Flame</cite>, part 3`,
+	"heading": `3: <cite>The City of the Singing Flame</cite>, part&nbsp;3`,
 	"blurb": `A writer walks between worlds to a city where people sacrifice themselves to a vast, singing flame. Read by Mike Cothran.`,
 	"notes": `self-destructive urges`,
 	"duration": 1943,
 	},
 	{
 	"code": `4-Saturn_pt1`,
-	"heading": `4: <cite>The Door to Saturn</cite>, part 1`,
+	"heading": `4: <cite>The Door to Saturn</cite>, part&nbsp;1`,
 	"blurb": `An inquisitor and his occult quarry must unite to survive on an alien world. Read by Zilbethicus.`,
 	"duration": 1426,
 	},
 	{
 	"code": `5-Saturn_pt2`,
-	"heading": `5: <cite>The Door to Saturn</cite>, part 2`,
+	"heading": `5: <cite>The Door to Saturn</cite>, part&nbsp;2`,
 	"blurb": `An inquisitor and his occult quarry must unite to survive on an alien world. Read by Zilbethicus.`,
 	"notes": `alcohol`,
 	"duration": 1978,
@@ -228,13 +228,13 @@ let archive = [
 	},
 	{
 	"code": `7-Eidolon_pt1`,
-	"heading": `7: <cite>The Dark Eidolon</cite>, part 1`,
+	"heading": `7: <cite>The Dark Eidolon</cite>, part&nbsp;1`,
 	"blurb": `A necromancer takes exquisite revenge upon the ruler who wronged him. Read by Mike Cothran.`,
 	"duration": 2390,
 	},
 	{
 	"code": `8-Eidolon_pt2`,
-	"heading": `8: <cite>The Dark Eidolon</cite>, part 2`,
+	"heading": `8: <cite>The Dark Eidolon</cite>, part&nbsp;2`,
 	"blurb": `A necromancer takes exquisite revenge upon the ruler who wronged him. Read by Mike Cothran.`,
 	"notes": `crush death, descriptions of gore, horse trampling, poisoning, possession`,
 	"duration": 2576,
@@ -422,85 +422,85 @@ let archive = [
 "shows": [
 	{
 	"code": `01-Search`,
-	"heading": `part 1`,
+	"heading": `part&nbsp;1`,
 	"blurb": `<cite>The search for the sunset city</cite>.`,
 	"duration": 1743,
 	},
 	{
 	"code": `02-Caravan`,
-	"heading": `part 2`,
+	"heading": `part&nbsp;2`,
 	"blurb": `<cite>Caravan to the sea</cite>.`,
 	"duration": 2076,
 	},
 	{
 	"code": `03-Face`,
-	"heading": `part 3`,
+	"heading": `part&nbsp;3`,
 	"blurb": `<cite>The face on Ngranek</cite>.`,
 	"duration": 2233,
 	},
 	{
 	"code": `04-Ghouls`,
-	"heading": `part 4`,
+	"heading": `part&nbsp;4`,
 	"blurb": `<cite>Dholes. Ghouls. Gugs. Ghasts.</cite>`,
 	"duration": 1829,
 	},
 	{
 	"code": `05-Thran`,
-	"heading": `part 5`,
+	"heading": `part&nbsp;5`,
 	"blurb": `<cite>Traveling to Thran</cite>.`,
 	"duration": 967,
 	},
 	{
 	"code": `06-Kuranes`,
-	"heading": `part 6`,
+	"heading": `part&nbsp;6`,
 	"blurb": `<cite>Reunion with Kuranes</cite>.`,
 	"duration": 1423,
 	},
 	{
 	"code": `07-Inquanok`,
-	"heading": `part 7`,
+	"heading": `part&nbsp;7`,
 	"blurb": `<cite>Inquanok</cite>.`,
 	"duration": 1473,
 	},
 	{
 	"code": `08-Onyx`,
-	"heading": `part 8`,
+	"heading": `part&nbsp;8`,
 	"blurb": `<cite>Onyx not quarried by men</cite>.`,
 	"duration": 2137,
 	},
 	{
 	"code": `09-Sarkomand`,
-	"heading": `part 9`,
+	"heading": `part&nbsp;9`,
 	"blurb": `<cite>Raid on Sarkomand</cite>.`,
 	"duration": 1253,
 	},
 	{
 	"code": `10-Island`,
-	"heading": `part 10`,
+	"heading": `part&nbsp;10`,
 	"blurb": `<cite>Raid on the moonbeast island</cite>.`,
 	"duration": 1340,
 	},
 	{
 	"code": `11-Army`,
-	"heading": `part 11`,
+	"heading": `part&nbsp;11`,
 	"blurb": `<cite>The Ghoulish army escort</cite>.`,
 	"duration": 1135,
 	},
 	{
 	"code": `12-Northward`,
-	"heading": `part 12`,
+	"heading": `part&nbsp;12`,
 	"blurb": `<cite>The rush Northward</cite>.`,
 	"duration": 822,
 	},
 	{
 	"code": `13-Directions`,
-	"heading": `part 13`,
+	"heading": `part&nbsp;13`,
 	"blurb": `<cite>Directions</cite>.`,
 	"duration": 1221,
 	},
 	{
 	"code": `14-City`,
-	"heading": `part 14`,
+	"heading": `part&nbsp;14`,
 	"blurb": `<cite>To the sunset city</cite>.`,
 	"duration": 688,
 	},
@@ -567,7 +567,7 @@ let archive = [
 "shows": [
 	{
 	"code": `1-starts_Assignation`,
-	"heading": `part 1`,
+	"heading": `part&nbsp;1`,
 	"blurb": `From <cite>The Assignation</cite> to <cite>The Unpasturable Fields</cite>.`,
 	"notes": `fall death, poisoning, suicide`,
 	"duration": 2139,
@@ -575,19 +575,19 @@ let archive = [
 	},
 	{
 	"code": `2-starts_Angel`,
-	"heading": `part 2`,
+	"heading": `part&nbsp;2`,
 	"blurb": `From <cite>The Worm and the Angel</cite> to <cite>Spring in Town</cite>.`,
 	"duration": 1854,
 	},
 	{
 	"code": `3-starts_Enemy`,
-	"heading": `part 3`,
+	"heading": `part&nbsp;3`,
 	"blurb": `From <cite>How the Enemy Came to Thlunrana</cite> to <cite>The Reward</cite>.`,
 	"duration": 1834,
 	},
 	{
 	"code": `4-starts_Trouble`,
-	"heading": `part 4`,
+	"heading": `part&nbsp;4`,
 	"blurb": `From <cite>The Trouble in Leafy Green Street</cite> to <cite>The Tomb of Pan</cite>.`,
 	"notes": `animal sacrifice, lynching`,
 	"duration": 2067,
@@ -603,26 +603,26 @@ let archive = [
 "shows": [
 	{
 	"code": `1-Experiment_Memoirs`,
-	"heading": `part 1`,
+	"heading": `part&nbsp;1`,
 	"blurb": `Chapters 1 and 2: <cite>The Experiment</cite> + <cite>Mr. Clarke's Memoirs</cite>.`,
 	"notes": `ableism, brain surgery, child death?, child endangerment`,
 	"duration": 1968,
 	},
 	{
 	"code": `2-City_Street`,
-	"heading": `part 2`,
+	"heading": `part&nbsp;2`,
 	"blurb": `Chapters 3 and 4: <cite>The City of Resurrections</cite> + <cite>The Discovery in Paul Street</cite>.`,
 	"duration": 1745,
 	},
 	{
 	"code": `3-Letter_Suicides`,
-	"heading": `part 3`,
+	"heading": `part&nbsp;3`,
 	"blurb": `Chapters 5 and 6: <cite>The Letter of Advice</cite> + <cite>The Suicides</cite>.`,
 	"duration": 1760,
 	},
 	{
 	"code": `4-Soho_Fragments`,
-	"heading": `part 4`,
+	"heading": `part&nbsp;4`,
 	"blurb": `Chapters 7 and 8: <cite>The Encounter in Soho</cite> + <cite>The Fragments</cite>.`,
 	"notes": `body horror`,
 	"duration": 1659,
@@ -695,21 +695,21 @@ let archive = [
 	},
 	{
 	"code": `1-Repairer_pt1`,
-	"heading": `1: <cite>The Repairer of Reputations</cite>, part 1`,
+	"heading": `1: <cite>The Repairer of Reputations</cite>, part&nbsp;1`,
 	"blurb": `A man losing touch with reality plots to overthrow the aristocratic-fascist government and declare himself supreme leader.`,
 	"notes": `hallucination?, institutionalisation, mention of suicide`,
 	"duration": 1416,
 	},
 	{
 	"code": `2-Repairer_pt2`,
-	"heading": `1: <cite>The Repairer of Reputations</cite>, part 2`,
+	"heading": `1: <cite>The Repairer of Reputations</cite>, part&nbsp;2`,
 	"blurb": `A man losing touch with reality plots to overthrow the aristocratic-fascist government and declare himself supreme leader.`,
 	"notes": `ableism, hallucination, suicide`,
 	"duration": 1774,
 	},
 	{
 	"code": `3-Repairer_pt3`,
-	"heading": `1: <cite>The Repairer of Reputations</cite>, part 3`,
+	"heading": `1: <cite>The Repairer of Reputations</cite>, part&nbsp;3`,
 	"blurb": `A man losing touch with reality plots to overthrow the aristocratic-fascist government and declare himself supreme leader.`,
 	"notes": `animal attack, hallucination?, institutionalisation`,
 	"duration": 1938,
@@ -855,14 +855,14 @@ let archive = [
 	},
 	{
 	"code": `21-Pharoahs_pt1`,
-	"heading": `21: <cite>Imprisoned with the Pharoahs</cite>, part 1`,
+	"heading": `21: <cite>Imprisoned with the Pharoahs</cite>, part&nbsp;1`,
 	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&thinsp;P.&thinsp;Lovecraft with Houdini, read by Ben Tucker.`,
 	"notes": `betrayal, darkness, kidnapping, racism`,
 	"duration": 1911,
 	},
 	{
 	"code": `22-Pharoahs_pt2`,
-	"heading": `22: <cite>Imprisoned with the Pharoahs</cite>, part 2`,
+	"heading": `22: <cite>Imprisoned with the Pharoahs</cite>, part&nbsp;2`,
 	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&thinsp;P.&thinsp;Lovecraft with Houdini, read by Ben Tucker.`,
 	"notes": `betrayal, darkness, kidnapping, racism`,
 	"duration": 2162,
@@ -1133,21 +1133,21 @@ let archive = [
 "shows": [
 	{
 	"code": `1-Ship`,
-	"heading": `part 1`,
+	"heading": `part&nbsp;1`,
 	"blurb": `<cite>The Air-Ship</cite>.`,
 	"duration": 1853,
 	"banger": true,
 	},
 	{
 	"code": `2-Mending`,
-	"heading": `part 2`,
+	"heading": `part&nbsp;2`,
 	"blurb": `<cite>The Mending Apparatus</cite>.`,
 	"notes": `familial breakdown`,
 	"duration": 1561,
 	},
 	{
 	"code": `3-Homeless`,
-	"heading": `part 3`,
+	"heading": `part&nbsp;3`,
 	"blurb": `<cite>The Homeless</cite>.`,
 	"duration": 1424,
 	},
@@ -1161,21 +1161,21 @@ let archive = [
 "shows": [
 	{
 	"code": `01a-Dracula_pt1`,
-	"heading": `1: <cite>Dracula</cite>, part 1`,
+	"heading": `1: <cite>Dracula</cite>, part&nbsp;1`,
 	"blurb": `A solicitor, his wife, and her suitors band together with a vampire hunter to slay Count Dracula. Adapted from a story by Bram Stoker.`,
 	"notes": `confinement`,
 	"duration": 1290,
 	},
 	{
 	"code": `01b-Dracula_pt2`,
-	"heading": `1: <cite>Dracula</cite>, part 2`,
+	"heading": `1: <cite>Dracula</cite>, part&nbsp;2`,
 	"blurb": `A solicitor, his wife, and her suitors band together with a vampire hunter to slay Count Dracula. Adapted from a story by Bram Stoker.`,
 	"notes": `mind control`,
 	"duration": 2262,
 	},
 	{
 	"code": `17a-Worlds_pt1`,
-	"heading": `17: <cite>The War of the Worlds</cite>, part 1`,
+	"heading": `17: <cite>The War of the Worlds</cite>, part&nbsp;1`,
 	"blurb": `An adaptation of H.&thinsp;G.&thinsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.`,
 	"notes": `asphyxiation, cannon-fire (30:39, 30:55, 31:15, 31:49), poison-gassing`,
 	"duration": 2451,
@@ -1183,7 +1183,7 @@ let archive = [
 	},
 	{
 	"code": `17b-Worlds_pt2`,
-	"heading": `17: <cite>The War of the Worlds</cite>, part 2`,
+	"heading": `17: <cite>The War of the Worlds</cite>, part&nbsp;2`,
 	"blurb": `An adaptation of H.&thinsp;G.&thinsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.`,
 	"notes": `asphyxiation, plane crash, poison-gassing`,
 	"duration": 1146,
@@ -1562,62 +1562,62 @@ let archive = [
 "shows": [
 	{
 	"code": `01-GoP_1`,
-	"heading": `book 1: <cite>The Gods of Pegāna</cite>, part 1`,
+	"heading": `book 1: <cite>The Gods of Pegāna</cite>, part&nbsp;1`,
 	"blurb": `From the preface to <cite>Revolt of the Home Gods</cite>. Read by Jason Mills.`,
 	"duration": 2261,
 	},
 	{
 	"code": `02-GoP_2`,
-	"heading": `book 1: <cite>The Gods of Pegāna</cite>, part 2`,
+	"heading": `book 1: <cite>The Gods of Pegāna</cite>, part&nbsp;2`,
 	"blurb": `From <cite>Of Dorozhand</cite> to <cite>Of How the Gods Whelmed Sidith</cite>. Read by Jason Mills.`,
 	"duration": 1708,
 	},
 	{
 	"code": `03-GoP_3`,
-	"heading": `book 1: <cite>The Gods of Pegāna</cite>, part 3`,
+	"heading": `book 1: <cite>The Gods of Pegāna</cite>, part&nbsp;3`,
 	"blurb": `From <cite>Of How Imbaun Became High Prophet in Aradec of All the Gods Save One</cite> to <cite>The Bird of Doom and the End</cite>. Read by Jason Mills.`,
 	"duration": 1731,
 	},
 	{
 	"code": `04-TG_1`,
-	"heading": `book 2: <cite>Time and the Gods</cite>, part 1`,
+	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;1`,
 	"blurb": `From the preface to <cite>A Legend of the Dawn</cite>. Read by KentF.`,
 	"duration": 1889,
 	},
 	{
 	"code": `05-TG_2`,
-	"heading": `book 2: <cite>Time and the Gods</cite>, part 2`,
+	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;2`,
 	"blurb": `From <cite>The Vengeance of Men</cite> to <cite>The Caves of Kai</cite>. Read by KentF, RedToby, and hefyd.`,
 	"duration": 2233,
 	},
 	{
 	"code": `06-TG_3`,
-	"heading": `book 2: <cite>Time and the Gods</cite>, part 3`,
+	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;3`,
 	"blurb": `From <cite>The Sorrow of Search</cite> to <cite>For the Honour of the Gods</cite>. Read by Le Scal and hefyd.`,
 	"duration": 2238,
 	},
 	{
 	"code": `07-TG_4`,
-	"heading": `book 2: <cite>Time and the Gods</cite>, part 4`,
+	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;4`,
 	"blurb": `From <cite>Night and Morning</cite> to <cite>The South Wind</cite>. Read by Måns Broo.`,
 	"duration": 1445,
 	},
 	{
 	"code": `08-TG_5`,
-	"heading": `book 2: <cite>Time and the Gods</cite>, part 5`,
+	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;5`,
 	"blurb": `From <cite>In the Land of Time</cite> to <cite>The Dreams of the Prophet</cite>. Read by RedToby and hefyd.`,
 	"duration": 2274,
 	},
 	{
 	"code": `09-TG_6`,
-	"heading": `book 2: <cite>Time and the Gods</cite>, part 6`,
+	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;6`,
 	"blurb": `<cite>The Journey of the King</cite>, parts &#x2160;&ndash;&#x2166;. Read by Kevin McAsh, Måns Broo, and Robin Cotter.`,
 	"notes": `alcohol`,
 	"duration": 2485,
 	},
 	{
 	"code": `10-TG_7`,
-	"heading": `book 2: <cite>Time and the Gods</cite>, part 7`,
+	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;7`,
 	"blurb": `<cite>The Journey of the King</cite>, parts &#x2167;&ndash;&#x216a;. Readings by Robin Cotter and Elmensdorp.`,
 	"notes": `alcohol`,
 	"duration": 2346,
@@ -1945,7 +1945,7 @@ let archive = [
 "shows": [
 	{
 	"code": `12-Pole_pt1`,
-	"heading": `12: <cite>An Elevator and a Pole</cite>, part 1`,
+	"heading": `12: <cite>An Elevator and a Pole</cite>, part&nbsp;1`,
 	"blurb": `One group gathers round a weird pole in the middle of nowhere; another's stuck in an elevator. They all struggle to understand and control their fates.`,
 	"notes": `broken neck, mental breakdown, falling elevator`,
 	"duration": 1729,
@@ -1953,7 +1953,7 @@ let archive = [
 	},
 	{
 	"code": `13-Pole_pt2`,
-	"heading": `13: <cite>An Elevator and a Pole</cite>, part 2`,
+	"heading": `13: <cite>An Elevator and a Pole</cite>, part&nbsp;2`,
 	"blurb": `One group gathers round a weird pole in the middle of nowhere; another's stuck in an elevator. They all struggle to understand and control their fates.`,
 	"notes": `descriptions of gore, fall death, vomiting, suicide`,
 	"duration": 1666,
@@ -2082,14 +2082,14 @@ let archive = [
 	},
 	{
 	"code": `092-Donovan_pt1`,
-	"heading": `92: <cite>Donovan's Brain</cite>, part 1`,
+	"heading": `92: <cite>Donovan's Brain</cite>, part&nbsp;1`,
 	"blurb": `A scientist rescues a wealthy businessman's life by preserving his brain&mdash;only to fall under its malign sway. Starring Orson Welles.`,
 	"notes": `alcohol adverts, animal bite, animal death, animal experimentation, betrayal, human experimentation, institutionalisation, mind control, paranoia`,
 	"duration": 1767,
 	},
 	{
 	"code": `093-Donovan_pt2`,
-	"heading": `93: <cite>Donovan's Brain</cite>, part 2`,
+	"heading": `93: <cite>Donovan's Brain</cite>, part&nbsp;2`,
 	"blurb": `A scientist rescues a wealthy businessman's life by preserving his brain&mdash;only to fall under its malign sway. Starring Orson Welles.`,
 	"notes": `alcohol adverts, betrayal, human experimentation, institutionalisation, mind control, injection, non-consensual surgery, strangulation, suicide?`,
 	"duration": 1758,
@@ -2299,25 +2299,25 @@ let archive = [
 "shows": [
 	{
 	"code": `1-pt1`,
-	"heading": `part 1`,
+	"heading": `part&nbsp;1`,
 	"blurb": `The narrator and his companion arrive at the island and shrug off warnings to leave.`,
 	"duration": 2480,
 	},
 	{
 	"code": `2-pt2`,
-	"heading": `part 2`,
+	"heading": `part&nbsp;2`,
 	"blurb": `Night falls and premonitions of eerie doom begin.`,
 	"duration": 2066,
 	},
 	{
 	"code": `3-pt3`,
-	"heading": `part 3`,
+	"heading": `part&nbsp;3`,
 	"blurb": `Disaster as the travellers' supplies go missing and their boat is damaged by unknown forces.`,
 	"duration": 2128,
 	},
 	{
 	"code": `4-pt4`,
-	"heading": `part 4`,
+	"heading": `part&nbsp;4`,
 	"blurb": `The horror strikes directly and the travellers confront a world beyond their own.`,
 	"duration": 1739,
 	},
