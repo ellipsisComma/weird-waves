@@ -160,3 +160,9 @@ The levels of the show audio files aren't consistent enough (due to their separa
 Statistics for the total show count and total duration of each series, not just the Archive as a whole.
 
 Long-implemented, but I decided this was unnecessary. The duration stats also rely on the manually-specified durations that only exist in `archive.js` to support the stream widget.
+
+### Increase seek bar resolution
+
+Setting the seek bar's maximum to equal the audio's duration in seconds (rounded up) would increase the resolution to perfect 1-second intervals for every show of any length, and would simplify any script where the seek bar is updated (instead of having to calculate the time as a percentage, all values would just be the audio's current time).
+
+This has limited benefit when seeking with pointer controls, because the seek bar's resolution is partly limited by the screen resolution. It also makes seeking with keyboard controls *much* slower. An extra keyboard control could be added, e.g. holding Shift to change from 1-second intervals to 10-second intervals, but no other part of the app deviates from expected keyboard controls and the extra control would have to be clearly explained to all users.
