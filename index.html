@@ -246,7 +246,7 @@
 			</div><!--#show-controls end-->
 			<div id="seek-controls">
 				<span class="timestamp" id="show-time-elapsed"><span class="visually-hidden">Elapsed time: </span>00:00</span>
-				<input id="seek-bar" type="range" value="0" aria-controls="show-audio" aria-label="Go to time in show" data-targeting="false">
+				<input id="seek-bar" type="range" min="0" max="100" value="0" aria-controls="show-audio" aria-label="Go to time in show">
 				<span class="timestamp" id="show-time-total"><span class="visually-hidden">Total time: </span>00:00</span>
 			</div><!--#seek-controls end-->
 			<div id="audio-controls">
@@ -257,7 +257,7 @@
 						<use class="pressed-icon" href="#svg-muted" />
 					</svg>
 				</button>
-				<input id="volume-control" type="range" value="100" aria-controls="show-audio" aria-label="Change audio volume">
+				<input id="volume-control" type="range" min="0" max="100" value="100" aria-controls="show-audio" aria-label="Change audio volume">
 			</div><!--#audio-controls end-->
 		</fieldset><!--#radio-controls end-->
 
@@ -811,6 +811,6 @@
 
 
 <script src="./archive.js?v=2025-01-30"></script>
-<script src="./main.js?v=2025-01-30b"></script>
+<script src="./main.js?v=2025-01-30c"></script>
 </body>
 </html>

@@ -433,7 +433,7 @@ function loadShow() {
 
 		// reset and reveal radio controls
 		if (page.getEl(`audio`).dataset.playNextShow === `true`) {
-			page.getEl(`audio`).play();
+			if (page.getEl(`audio`).paused) page.getEl(`audio`).play();
 			page.getEl(`audio`).dataset.playNextShow = `false`;
 		} else page.getEl(`audio`).paused = true;
 		page.getEl(`seekBar`).value = 0;
@@ -444,7 +444,7 @@ function loadShow() {
 		page.getEl(`playlist`).replaceChildren();
 
 		// reset radio
-		page.getEl(`audio`).pause(); // otherwise audio continues playing
+		if (!page.getEl(`audio`).paused) page.getEl(`audio`).pause(); // otherwise audio continues playing
 		page.getEl(`audio`).removeAttribute(`src`); // check why this is necessary instead of just emptying [src]
 		page.getEl(`showTimeElapsed`).textContent = `00:00`;
 		page.getEl(`showTimeTotal`).textContent = `00:00`;
@@ -482,28 +482,25 @@ function skipShow() {
 
 // change seek bar to match audio unless audio metadata unavailable
 function updateSeekBar() {
-	if (
-		page.getEl(`seekBar`).dataset.targeting === `true`
-		|| !page.getEl(`audio`).duration
-	) return;
+	if (!page.getEl(`audio`).duration) return;
 	page.getEl(`seekBar`).value = page.getEl(`audio`).currentTime / page.getEl(`audio`).duration * 100;
 	setTimestampFromSeconds(page.getEl(`showTimeElapsed`), page.getEl(`audio`).currentTime);
 }
 
-// move target for manual seeking before seeking
-function moveSeekTarget() {
-	page.getEl(`seekBar`).dataset.targeting = `true`;
-	setTimestampFromSeconds(
-		page.getEl(`showTimeElapsed`),
-		page.getEl(`audio`).duration * page.getEl(`seekBar`).value / 100
-	);
+// manually seek a time in the show
+function startManualSeek() {
+	// ignore seek attempt if audio metadata hasn't loaded or if attempting to seek to end of show
+	if (
+		!page.getEl(`audio`).duration
+		|| page.getEl(`seekBar`).value === page.getEl(`seekBar`).max
+	) return;
+	if (!page.getEl(`audio`).paused) page.getEl(`audio`).pause();
+	page.getEl(`audio`).currentTime = page.getEl(`audio`).duration * page.getEl(`seekBar`).value / 100;
 }
 
-// manually seek (only do so if seek bar is in targeting mode, so "change" and "mouseup" events don't make this function trigger twice)
-function seekTime() {
-	if (page.getEl(`seekBar`).dataset.targeting === `false`) return;
-	page.getEl(`seekBar`).dataset.targeting = `false`;
-	page.getEl(`audio`).currentTime = page.getEl(`audio`).duration * page.getEl(`seekBar`).value / 100;
+// end manual seek by playing audio
+function endManualSeek() {
+	page.getEl(`audio`).play();
 }
 
 // toggle audio mute/unmute
@@ -658,10 +655,8 @@ page.getEl(`audio`).addEventListener(`volumechange`, updateVolumeControls);
 page.getEl(`resetButton`).addEventListener(`click`, resetShow);
 page.getEl(`playToggle`).addEventListener(`click`, togglePlay);
 page.getEl(`skipButton`).addEventListener(`click`, skipShow);
-page.getEl(`seekBar`).addEventListener(`input`, moveSeekTarget);
-page.getEl(`seekBar`).addEventListener(`change`, seekTime);
-// "mouseup" is backup for "change" event, which doesn't fire if you click and drag the thumb but leave it at the same position it started (because the input's value hasn't actually changed)
-page.getEl(`seekBar`).addEventListener(`mouseup`, seekTime);
+page.getEl(`seekBar`).addEventListener(`input`, startManualSeek);
+page.getEl(`seekBar`).addEventListener(`change`, endManualSeek);
 page.getEl(`muteToggle`).addEventListener(`click`, toggleMute);
 page.getEl(`volumeControl`).addEventListener(`input`, setVolume);
 

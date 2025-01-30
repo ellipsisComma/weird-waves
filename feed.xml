@@ -38,7 +38,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 		<link rel="alternate" href="https://weirdwaves.net/feed.xml#post-2025-01-30-radio-redesign" />
 		<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Radio redesign</div></title>
 		<published>2025-01-30T00:00:00Z</published>
-		<updated>2025-01-30T00:00:00Z</updated>
+		<updated>2025-01-30T00:00:01Z</updated>
 		<category term="features" />
 		<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
 			<p>The Radio's been slightly redesigned and has a bug-fix and a new feature:</p>
@@ -46,6 +46,7 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 				<li>I fixed a bug where the seek bar would stop updating if you clicked and dragged the thumb, but returned the thumb to the time it was at before you clicked.</li>
 				<li>There's a new button that resets the time back to 0.</li>
 			</ul>
+			<p><strong>Update:</strong> I've tweaked the seek bar again, making it more robust at the cost of being unable to seek to the exact end of a show. That's not really much of a cost, though, as being able to seek to the exact end of a show has the potential to cause a bunch of other awkward effects (like accidentally skipping through multiple shows), so really it's a win&#x2013;win.</p>
 		</div></content>
 	</entry>
 	<entry>
