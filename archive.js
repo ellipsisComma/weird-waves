@@ -67,7 +67,7 @@ let archive = [
 	{
 	"code": `02-Ash`,
 	"heading": `2: <cite>The Ash Tree</cite>`,
-	"blurb": `A monstrous ash tree bears a terrible secret&mdash;when the &ldquo;witch&rdquo; who tends it is hanged, its &ldquo;curse&rdquo; falls on her accusers. Adapted from a story by M.&thinsp;R.&thinsp;James.`,
+	"blurb": `A monstrous ash tree bears a terrible secret&mdash;when the &ldquo;witch&rdquo; who tends it is hanged, its &ldquo;curse&rdquo; falls on her accusers. Adapted from a story by M.&nbsp;R.&nbsp;James.`,
 	"notes": `execution, spiders`,
 	"duration": 1821,
 	},
@@ -150,7 +150,7 @@ let archive = [
 	{
 	"code": `21-Outsider`,
 	"heading": `21: <cite>The Outsider</cite>`,
-	"blurb": `A lonely man in a deep, dark forest ponders what lies beyond&mdash;and one day makes his desperate escape. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft.`,
+	"blurb": `A lonely man in a deep, dark forest ponders what lies beyond&mdash;and one day makes his desperate escape. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
 	"duration": 1348,
 	},
 	{
@@ -163,13 +163,13 @@ let archive = [
 	{
 	"code": `X1-Haunter_pt1`,
 	"heading": `X1: <cite>The Haunter of the Dark</cite>, part&nbsp;1`,
-	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft.`,
+	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
 	"duration": 1681,
 	},
 	{
 	"code": `X2-Haunter_pt2`,
 	"heading": `X2: <cite>The Haunter of the Dark</cite>, part&nbsp;2`,
-	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft.`,
+	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
 	"duration": 1482,
 	},
 	{
@@ -378,14 +378,14 @@ let archive = [
 	{
 	"code": `28-Professor`,
 	"heading": `28: <cite>The Professor Was a Thief</cite>`,
-	"blurb": `An eccentric professor causes chaos in New York by stealing landmarks, city blocks, skyscrapers. Adapted from a story by L.&thinsp;Ron Hubbard.`,
+	"blurb": `An eccentric professor causes chaos in New York by stealing landmarks, city blocks, skyscrapers. Adapted from a story by L.&nbsp;Ron Hubbard.`,
 	"notes": `alcohol`,
 	"duration": 1821,
 	},
 	{
 	"code": `31-Universe`,
 	"heading": `31: <cite>Universe</cite>`,
-	"blurb": `The warring peoples of a universe 25 kilometers wide and 100 levels deep must unite to avert disaster. Adapted from a story by Robert A.&thinsp;Heinlein.`,
+	"blurb": `The warring peoples of a universe 25 kilometers wide and 100 levels deep must unite to avert disaster. Adapted from a story by Robert A.&nbsp;Heinlein.`,
 	"notes": `ableism, cult behaviour, gunshots (8:41&ndash;8:42, 26:01, 26:07&ndash;26:10, 27:19, lynching)`,
 	"duration": 1814,
 	},
@@ -416,7 +416,7 @@ let archive = [
 {
 "code": `DQ`,
 "heading": `<cite>The Dream-Quest</cite>`,
-"blurb": `H.&thinsp;P.&thinsp;Lovecraft's 1926 novella <cite>The Dream-Quest of Unknown Kadath</cite>, which tells the story of the writer and dreamer Randolph Carter's journey through the Dreamlands in search of its gods and a wondrous unknown city, read by Maureen S.&thinsp;O'Brien.`,
+"blurb": `H.&nbsp;P.&nbsp;Lovecraft's 1926 novella <cite>The Dream-Quest of Unknown Kadath</cite>, which tells the story of the writer and dreamer Randolph Carter's journey through the Dreamlands in search of its gods and a wondrous unknown city, read by Maureen S.&nbsp;O'Brien.`,
 "source": `<a href="https://archive.org/details/LovecraftKadath">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -523,7 +523,7 @@ let archive = [
 	{
 	"code": `015-Runes`,
 	"heading": `15: <cite>Casting the Runes</cite>`,
-	"blurb": `A scholar pens a scathing review of a crackpot's work, inciting arcane revenge. Adapted from a story by M.&thinsp;R.&thinsp;James.`,
+	"blurb": `A scholar pens a scathing review of a crackpot's work, inciting arcane revenge. Adapted from a story by M.&nbsp;R.&nbsp;James.`,
 	"notes": `food poisoning, stalking`,
 	"duration": 1770,
 	"banger": true,
@@ -531,7 +531,7 @@ let archive = [
 	{
 	"code": `052-Armageddon`,
 	"heading": `52: <cite>A Dream of Armageddon</cite>`,
-	"blurb": `A man dreams of a world rolling inevitably towards annihilation. Adapted from a story by H.&thinsp;G.&thinsp;Wells.`,
+	"blurb": `A man dreams of a world rolling inevitably towards annihilation. Adapted from a story by H.&nbsp;G.&nbsp;Wells.`,
 	"notes": `being eaten while conscious, explosions (13:56&ndash;14:08), gunshots (14:43, 19:48&ndash;50, 22:47&ndash;50), poison gas, stab death, starvation`,
 	"duration": 1770,
 	"banger": true,
@@ -683,7 +683,7 @@ let archive = [
 {
 "code": `KY`,
 "heading": `<cite>The King in Yellow</cite>`,
-"blurb": `A collection of eldritch horror stories from this classic collection, all revolving around an eerie symbol, a bizarre play, a mysterious abomination, and lost Carcosa. Written by Robert W.&thinsp;Chambers, first published in 1895, and read by Eva Staes for LibriVox.`,
+"blurb": `A collection of eldritch horror stories from this classic collection, all revolving around an eerie symbol, a bizarre play, a mysterious abomination, and lost Carcosa. Written by Robert W.&nbsp;Chambers, first published in 1895, and read by Eva Staes for LibriVox.`,
 "source": `<a href="https://librivox.org/king-in-yellow-version-2-by-robert-w-chambers">LibriVox</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -746,7 +746,7 @@ let archive = [
 	{
 	"code": `01-Nameless`,
 	"heading": `1: <cite>The Nameless City</cite>`,
-	"blurb": `An archaeologist journeys to, and within, an ancient, nameless city not built to human proportions. Written by H.&thinsp;P.&thinsp;Lovecraft, read by Dean Delp.`,
+	"blurb": `An archaeologist journeys to, and within, an ancient, nameless city not built to human proportions. Written by H.&nbsp;P.&nbsp;Lovecraft, read by Dean Delp.`,
 	"notes": `claustrophobia, darkness`,
 	"duration": 1735,
 	},
@@ -761,7 +761,7 @@ let archive = [
 	{
 	"code": `03-Ship`,
 	"heading": `3: <cite>The White Ship</cite>`,
-	"blurb": `A lighthouse keeper fantasises of visiting wondrous islands on a white ship&mdash;but his daydream may be more real than he thinks. Written by H.&thinsp;P.&thinsp;Lovecraft, read by D.&thinsp;E.&thinsp;Wittkower.`,
+	"blurb": `A lighthouse keeper fantasises of visiting wondrous islands on a white ship&mdash;but his daydream may be more real than he thinks. Written by H.&nbsp;P.&nbsp;Lovecraft, read by D.&nbsp;E.&nbsp;Wittkower.`,
 	"notes": `animal death, disease, near-drowning, shipwreck`,
 	"duration": 1194,
 	"banger": true,
@@ -776,14 +776,14 @@ let archive = [
 	{
 	"code": `05-Moon_Dagon_Nyarlathotep`,
 	"heading": `5: Gods and Monsters (short works by Lovecraft)`,
-	"blurb": `Three short pieces by H.&thinsp;P.&thinsp;Lovecraft: <cite>What the Moon Brings</cite> (read by Dan Gurzynski), <cite>Dagon</cite> (read by Selim Jamil), and <cite>Nyarlathotep</cite> (read by Tom Hackett).<!--"Nyarlathotep" reader's name on LibriVox site (Tom Hackett) is different to the one given in the file (Peter Bianzo(?))-->`,
+	"blurb": `Three short pieces by H.&nbsp;P.&nbsp;Lovecraft: <cite>What the Moon Brings</cite> (read by Dan Gurzynski), <cite>Dagon</cite> (read by Selim Jamil), and <cite>Nyarlathotep</cite> (read by Tom Hackett).<!--"Nyarlathotep" reader's name on LibriVox site (Tom Hackett) is different to the one given in the file (Peter Bianzo(?))-->`,
 	"notes": `being stranded at sea, drowning, drugs, isolation, near-drowning, nightmares, racism, suicide planning, worms`,
 	"duration": 1719,
 	},
 	{
 	"code": `07-Wire`,
 	"heading": `7: <cite>The Night Wire</cite>`,
-	"blurb": `Graveyard shift telegram operators receive reports from an unknown town beset by mist and monsters. Written by H.&thinsp;F.&thinsp;Arnold, read by Dan Gurzynski.`,
+	"blurb": `Graveyard shift telegram operators receive reports from an unknown town beset by mist and monsters. Written by H.&nbsp;F.&nbsp;Arnold, read by Dan Gurzynski.`,
 	"duration": 1014,
 	"banger": true,
 	},
@@ -817,7 +817,7 @@ let archive = [
 	{
 	"code": `13-Paw`,
 	"heading": `13: <cite>The Monkey's Paw</cite>`,
-	"blurb": `A mummified monkey's paw grants three wishes&mdash;with dread consequences. Written by W.&thinsp;W.&thinsp;Jacobs, read by Travis Baldree.`,
+	"blurb": `A mummified monkey's paw grants three wishes&mdash;with dread consequences. Written by W.&nbsp;W.&nbsp;Jacobs, read by Travis Baldree.`,
 	"duration": 1606,
 	},
 	{
@@ -856,14 +856,14 @@ let archive = [
 	{
 	"code": `21-Pharoahs_pt1`,
 	"heading": `21: <cite>Imprisoned with the Pharoahs</cite>, part&nbsp;1`,
-	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&thinsp;P.&thinsp;Lovecraft with Houdini, read by Ben Tucker.`,
+	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&nbsp;P.&nbsp;Lovecraft with Houdini, read by Ben Tucker.`,
 	"notes": `betrayal, darkness, kidnapping, racism`,
 	"duration": 1911,
 	},
 	{
 	"code": `22-Pharoahs_pt2`,
 	"heading": `22: <cite>Imprisoned with the Pharoahs</cite>, part&nbsp;2`,
-	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&thinsp;P.&thinsp;Lovecraft with Houdini, read by Ben Tucker.`,
+	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&nbsp;P.&nbsp;Lovecraft with Houdini, read by Ben Tucker.`,
 	"notes": `betrayal, darkness, kidnapping, racism`,
 	"duration": 2162,
 	},
@@ -889,26 +889,26 @@ let archive = [
 	{
 	"code": `30-Sarnath`,
 	"heading": `30: <cite>The Doom That Came to Sarnath</cite>`,
-	"blurb": `A young city rises by exterminating its neighbours, until doom descends upon it in turn. Written by H.&thinsp;P.&thinsp;Lovecraft, read by Glen Hallstrom.`,
+	"blurb": `A young city rises by exterminating its neighbours, until doom descends upon it in turn. Written by H.&nbsp;P.&nbsp;Lovecraft, read by Glen Hallstrom.`,
 	"duration": 1043,
 	},
 	{
 	"code": `31-Valley`,
 	"heading": `31: <cite>The Valley of Spiders</cite>`,
-	"blurb": `A lord and his servants pursue a girl into a most deadly valley. Written by H.&thinsp;G.&thinsp;Wells, read by Robert Dixon.`,
+	"blurb": `A lord and his servants pursue a girl into a most deadly valley. Written by H.&nbsp;G.&nbsp;Wells, read by Robert Dixon.`,
 	"notes": `being trapped, betrayal, foot injury`,
 	"duration": 1427,
 	},
 	{
 	"code": `32-Chaos`,
 	"heading": `32: <cite>The Crawling Chaos</cite>`,
-	"blurb": `A man in an opium abyss has a beautiful vision of apocalypse. Written by H.&thinsp;P.&thinsp;Lovecraft, read by D.&thinsp;E&thinsp;Wittkower.`,
+	"blurb": `A man in an opium abyss has a beautiful vision of apocalypse. Written by H.&nbsp;P.&nbsp;Lovecraft, read by D.&nbsp;E.&nbsp;Wittkower.`,
 	"duration": 1529,
 	},
 	{
 	"code": `33-Caterpillars`,
 	"heading": `33: <cite>Caterpillars</cite>`,
-	"blurb": `Monstrous caterpillars haunt the visitor to an isolated villa&mdash;in dream, then reality. Written by E.&thinsp;F.&thinsp;Benson, read by Andy Minter.`,
+	"blurb": `Monstrous caterpillars haunt the visitor to an isolated villa&mdash;in dream, then reality. Written by E.&nbsp;F.&nbsp;Benson, read by Andy Minter.`,
 	"notes": `cancer`,
 	"duration": 1278,
 	},
@@ -946,21 +946,21 @@ let archive = [
 	{
 	"code": `40-Spook_Greeting_Carcosa`,
 	"heading": `40: Haunts and Hollows (short works by Bierce)`,
-	"blurb": `Three short pieces by Ambrose Bierce: <cite>The Spook House</cite> (read by Paul Sigel), <cite>A Cold Greeting</cite> (read by Steve Karafit), and <cite>An Inhabitant of Carcosa</cite> (read by G.&thinsp;C.&thinsp;Fournier).`,
+	"blurb": `Three short pieces by Ambrose Bierce: <cite>The Spook House</cite> (read by Paul Sigel), <cite>A Cold Greeting</cite> (read by Steve Karafit), and <cite>An Inhabitant of Carcosa</cite> (read by G.&nbsp;C.&nbsp;Fournier).`,
 	"notes": `entombment`,
 	"duration": 1484,
 	},
 	{
 	"code": `41-Zann`,
 	"heading": `41: <cite>The Music of Erich Zann</cite>`,
-	"blurb": `A musician plays nightly eldritch harmonies for the void beyond his window. Written by H.&thinsp;P.&thinsp;Lovecraft, read by Cameron Halket.`,
+	"blurb": `A musician plays nightly eldritch harmonies for the void beyond his window. Written by H.&nbsp;P.&nbsp;Lovecraft, read by Cameron Halket.`,
 	"notes": `ableism`,
 	"duration": 1130,
 	},
 	{
 	"code": `42-Polaris_Outer`,
 	"heading": `42: Ancient Man (short works by Lovecraft)`,
-	"blurb": `Two short pieces by H.&thinsp;P.&thinsp;Lovecraft: <cite>Polaris</cite> (read by jpontoli) and <cite>The Outer Gods</cite> (read by Peter Yearsley).`,
+	"blurb": `Two short pieces by H.&nbsp;P.&nbsp;Lovecraft: <cite>Polaris</cite> (read by jpontoli) and <cite>The Outer Gods</cite> (read by Peter Yearsley).`,
 	"notes": `racism`,
 	"duration": 1514,
 	"banger": true,
@@ -1014,7 +1014,7 @@ let archive = [
 	{
 	"code": `50-Chair_Blood`,
 	"heading": `50: Human Brutality`,
-	"blurb": `<cite>The Chair</cite> (written by Harry E.&thinsp;Mereness, read by Desearls) and <cite>The City of Blood</cite> (written by Anna Bonus Kingsford, read by Claudia Caldi).`,
+	"blurb": `<cite>The Chair</cite> (written by Harry E.&nbsp;Mereness, read by Desearls) and <cite>The City of Blood</cite> (written by Anna Bonus Kingsford, read by Claudia Caldi).`,
 	"notes": `domestic abuse, electrocution`,
 	"duration": 1049,
 	},
@@ -1027,7 +1027,7 @@ let archive = [
 	{
 	"code": `52-Beyond`,
 	"heading": `52: <cite>From Beyond</cite>`,
-	"blurb": `An unstable scientist builds a machine to let humans see the unfathomable. Written by H.&thinsp;P.&thinsp;Lovecraft, read by Andrew Busto.`,
+	"blurb": `An unstable scientist builds a machine to let humans see the unfathomable. Written by H.&nbsp;P.&nbsp;Lovecraft, read by Andrew Busto.`,
 	"notes": `betrayal`,
 	"duration": 1288,
 	},
@@ -1128,7 +1128,7 @@ let archive = [
 {
 "code": `MS`,
 "heading": `<cite>The Machine Stops</cite>`,
-"blurb": `A mother and son's bond is tested by their differing views of the gargantuan Machine that facilitates&mdash;and limits&mdash;human life in the inhospitable future. Written by E.&thinsp;M.&thinsp;Forster, first published in 1909, and read by Elizabeth Klett for LibriVox.`,
+"blurb": `A mother and son's bond is tested by their differing views of the gargantuan Machine that facilitates&mdash;and limits&mdash;human life in the inhospitable future. Written by E.&nbsp;M.&nbsp;Forster, first published in 1909, and read by Elizabeth Klett for LibriVox.`,
 "source": `<a href="https://librivox.org/the-machine-stops-version-3-by-e-m-forster/">LibriVox</a>`,
 "shows": [
 	{
@@ -1176,7 +1176,7 @@ let archive = [
 	{
 	"code": `17a-Worlds_pt1`,
 	"heading": `17: <cite>The War of the Worlds</cite>, part&nbsp;1`,
-	"blurb": `An adaptation of H.&thinsp;G.&thinsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.`,
+	"blurb": `An adaptation of H.&nbsp;G.&nbsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.`,
 	"notes": `asphyxiation, cannon-fire (30:39, 30:55, 31:15, 31:49), poison-gassing`,
 	"duration": 2451,
 	"banger": true,
@@ -1184,7 +1184,7 @@ let archive = [
 	{
 	"code": `17b-Worlds_pt2`,
 	"heading": `17: <cite>The War of the Worlds</cite>, part&nbsp;2`,
-	"blurb": `An adaptation of H.&thinsp;G.&thinsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.`,
+	"blurb": `An adaptation of H.&nbsp;G.&nbsp;Wells' story of Martians invading Earth; some listeners infamously believed it was a description of real current events.`,
 	"notes": `asphyxiation, plane crash, poison-gassing`,
 	"duration": 1146,
 	},
@@ -1207,7 +1207,7 @@ let archive = [
 	{
 	"code": `003-Descending`,
 	"heading": `3: <cite>Descending</cite>`,
-	"blurb": `A bullshit artist on a department store spending spree winds up in a never-ending escalator ride&hellip; Written by Thomas M.&thinsp;Disch.`,
+	"blurb": `A bullshit artist on a department store spending spree winds up in a never-ending escalator ride&hellip; Written by Thomas M.&nbsp;Disch.`,
 	"notes": `head injury, mental breakdown, starvation`,
 	"duration": 1808,
 	"banger": true,
@@ -1230,13 +1230,13 @@ let archive = [
 	{
 	"code": `025-Garden`,
 	"heading": `25: <cite>The Garden of Time</cite>`,
-	"blurb": `A nobleman and his wife cut the flowers of time to set back the vast waves of humanity that press down on their villa. Written by J.&thinsp;G.&thinsp;Ballard.`,
+	"blurb": `A nobleman and his wife cut the flowers of time to set back the vast waves of humanity that press down on their villa. Written by J.&nbsp;G.&nbsp;Ballard.`,
 	"duration": 1809,
 	},
 	{
 	"code": `026-Test_Names`,
 	"heading": `26: <cite>Test</cite> + <cite>The Nine Billion Names of God</cite>`,
-	"blurb": `A man passes, then fails, a driving test. Technology helps Tibetan monks write the many names of god. Written by Theodore Thomas and Arthur C.&thinsp;Clarke.`,
+	"blurb": `A man passes, then fails, a driving test. Technology helps Tibetan monks write the many names of god. Written by Theodore Thomas and Arthur C.&nbsp;Clarke.`,
 	"notes": `car crash, institutionalisation`,
 	"duration": 1862,
 	"banger": true,
@@ -1244,7 +1244,7 @@ let archive = [
 	{
 	"code": `031-Abyss`,
 	"heading": `31: <cite>In the Abyss</cite>`,
-	"blurb": `Wondrous and deadly secrets await the first human explorer to the ocean floor. Written by H.&thinsp;G.&thinsp;Wells.`,
+	"blurb": `Wondrous and deadly secrets await the first human explorer to the ocean floor. Written by H.&nbsp;G.&nbsp;Wells.`,
 	"notes": `claustrophobia, darkness, drowning`,
 	"duration": 1853,
 	},
@@ -1274,7 +1274,7 @@ let archive = [
 	{
 	"code": `057-End`,
 	"heading": `57: <cite>The End</cite>`,
-	"blurb": `One man keeps building, at the end of all things. Written by Ursula K.&thinsp;Le Guin.`,
+	"blurb": `One man keeps building, at the end of all things. Written by Ursula K.&nbsp;Le Guin.`,
 	"duration": 1834,
 	"banger": true,
 	},
@@ -1295,7 +1295,7 @@ let archive = [
 	{
 	"code": `075-Walk`,
 	"heading": `75: <cite>A Walk in the Dark</cite>`,
-	"blurb": `A lost astronaut takes a six mile walk back to base on a dark dead planet. How dangerous could it be? Written by Arthur C.&thinsp;Clarke.`,
+	"blurb": `A lost astronaut takes a six mile walk back to base on a dark dead planet. How dangerous could it be? Written by Arthur C.&nbsp;Clarke.`,
 	"duration": 1867,
 	},
 	{
@@ -1336,7 +1336,7 @@ let archive = [
 	{
 	"code": `099-Ghosts_Diggers`,
 	"heading": `99: <cite>Ghosts</cite> + <cite>The Diggers</cite>`,
-	"blurb": `Robots struggle with reproduction. A woman seeks the mysterious Diggers for love of mystery itself. Written by Robert F.&thinsp;Young and Don Stern.`,
+	"blurb": `Robots struggle with reproduction. A woman seeks the mysterious Diggers for love of mystery itself. Written by Robert F.&nbsp;Young and Don Stern.`,
 	"notes": `suicide`,
 	"duration": 1819,
 	},
@@ -1355,7 +1355,7 @@ let archive = [
 	{
 	"code": `110-Noon_Quandary`,
 	"heading": `110: <cite>Appointment at Noon</cite> + <cite>Man in a Quandary</cite>`,
-	"blurb": `A suspicious man has a suspicious visitor. Someone writes to an advice column for help with a unique problem. Written by Eric Russell and L.&thinsp;J.&thinsp;Stecher.`,
+	"blurb": `A suspicious man has a suspicious visitor. Someone writes to an advice column for help with a unique problem. Written by Eric Russell and L.&nbsp;J.&nbsp;Stecher.`,
 	"notes": `ableism`,
 	"duration": 1852,
 	},
@@ -1466,7 +1466,7 @@ let archive = [
 	{
 	"code": `237-Star_Gift`,
 	"heading": `237: <cite>The Star</cite> + <cite>The Gift</cite>`,
-	"blurb": `An apocalyptic blaze&mdash;a guiding star. A boy receives a wondrous Christmas gift. Written by Arthur C.&thinsp;Clarke and Ray Bradbury.`,
+	"blurb": `An apocalyptic blaze&mdash;a guiding star. A boy receives a wondrous Christmas gift. Written by Arthur C.&nbsp;Clarke and Ray Bradbury.`,
 	"duration": 1773,
 	},
 ],
@@ -2036,7 +2036,7 @@ let archive = [
 	{
 	"code": `15-Beelzy_Book`,
 	"heading": `15: <cite>Thus I Refute Beelzy</cite><!--Note: show title in source uses the wrong name ("Bealsley" instead of "Beelzy")--> and <cite>The Bookshop</cite>`,
-	"blurb": `A boy's imaginary friend takes offense at his cruel father. A struggling writer finds a shop of impossible books. Written by John Collier and Nelson S.&thinsp;Bond.`,
+	"blurb": `A boy's imaginary friend takes offense at his cruel father. A struggling writer finds a shop of impossible books. Written by John Collier and Nelson S.&nbsp;Bond.`,
 	"notes": `child abuse, dismemberment, traffic accident`,
 	"duration": 1713,
 	"banger": true,
@@ -2044,7 +2044,7 @@ let archive = [
 	{
 	"code": `17-Gray_Gift`,
 	"heading": `17: <cite>The Woman in Gray</cite> + <cite>A Suspicious Gift</cite>`,
-	"blurb": `A man invents a spectre of hatred. A stranger gives a too-perfect gift. Written by Walker G.&thinsp;Everett and Algernon Blackwood.`,
+	"blurb": `A man invents a spectre of hatred. A stranger gives a too-perfect gift. Written by Walker G.&nbsp;Everett and Algernon Blackwood.`,
 	"notes": `apparent suicide, fall death, traffic accidents`,
 	"duration": 1713,
 	},
@@ -2112,7 +2112,7 @@ let archive = [
 	{
 	"code": `165-Dunwich`,
 	"heading": `165: <cite>The Dunwich Horror</cite>`,
-	"blurb": `A union of human woman and alien god produces terrible, eldritch offspring. Adapted from a story by H.&thinsp;P.&thinsp;Lovecraft, starring Robert Colman.`,
+	"blurb": `A union of human woman and alien god produces terrible, eldritch offspring. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft, starring Robert Colman.`,
 	"notes": `ableism, alcohol adverts, animal attack, body horror, cattle mutilation`,
 	"duration": 1618,
 	},
@@ -2373,7 +2373,7 @@ let archive = [
 	{
 	"code": `037-Cave`,
 	"heading": `37: <cite>The Cave of Night</cite>`,
-	"blurb": `The world unites to rescue an astronaut adrift in the void&mdash;but he may not want to return. Adapted from a story by James E.&thinsp;Gunn.`,
+	"blurb": `The world unites to rescue an astronaut adrift in the void&mdash;but he may not want to return. Adapted from a story by James E.&nbsp;Gunn.`,
 	"notes": `suicide`,
 	"duration": 1700,
 	"banger": true,
@@ -2389,7 +2389,7 @@ let archive = [
 	{
 	"code": `042-Dinosaur`,
 	"heading": `42: <cite>A Gun for Dinosaur</cite>`,
-	"blurb": `A time-travelling hunting guide explains why he's so selective about who he helps hunt dinosaur. Adapted from a story by L.&thinsp;Sprague de Camp.`,
+	"blurb": `A time-travelling hunting guide explains why he's so selective about who he helps hunt dinosaur. Adapted from a story by L.&nbsp;Sprague de Camp.`,
 	"notes": `adultery, brawl, gunshots (7:17, 11:02, 13:18&ndash;13:20, 15:29, 18:17, 19:36&ndash;38, 20:05)`,
 	"duration": 1776,
 	},
@@ -2403,7 +2403,7 @@ let archive = [
 	{
 	"code": `063-Student`,
 	"heading": `63: <cite>Student Body</cite>`,
-	"blurb": `An all-consuming, rapidly-evolving species of alien mice poses an existential challenge to humanity. Adapted from a story by F.&thinsp;L.&thinsp;Wallace.`,
+	"blurb": `An all-consuming, rapidly-evolving species of alien mice poses an existential challenge to humanity. Adapted from a story by F.&nbsp;L.&nbsp;Wallace.`,
 	"notes": `gunshots (21:55&ndash;57)`,
 	"duration": 1720,
 	},
@@ -2424,7 +2424,7 @@ let archive = [
 	{
 	"code": `071-Colony`,
 	"heading": `71: <cite>Colony</cite>`,
-	"blurb": `Everyday objects turn deadly against colonists on an alien planet. Adapted from a story by Philip K.&thinsp;Dick.`,
+	"blurb": `Everyday objects turn deadly against colonists on an alien planet. Adapted from a story by Philip K.&nbsp;Dick.`,
 	"notes": `being digested alive, gunshots (10:28, 15:24&ndash;34, 19:16), strangulation`,
 	"duration": 1782,
 	"banger": true,
