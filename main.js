@@ -435,7 +435,8 @@ function loadShow() {
 		if (page.getEl(`audio`).dataset.playNextShow === `true`) {
 			page.getEl(`audio`).play();
 			page.getEl(`audio`).dataset.playNextShow = `false`;
-		}
+		} else page.getEl(`audio`).paused = true;
+		page.getEl(`seekBar`).blur();
 		page.getEl(`seekBar`).value = 0;
 		page.getEl(`showTimeElapsed`).textContent = `00:00`;
 		page.getEl(`radioControls`).hidden = false;
@@ -453,8 +454,9 @@ function loadShow() {
 	}
 }
 
-// replace loaded show with next show on playlist (or reset radio if playlist ends)
+// remove loaded show and autoplay next one if setting is on
 function endShow() {
+	if (settings.getSetting(`autoPlayNextShow`)) page.getEl(`audio`).dataset.playNextShow = `true`;
 	removeShow(page.getEl(`playlist`).firstElementChild);
 }
 
@@ -462,19 +464,9 @@ function endShow() {
 RADIO
 -- */
 
-// change seek bar to match audio unless currently manually seeking or audio metadata unavailable
-function updateSeekBar() {
-	if (
-		page.getEl(`seekBar`).dataset.seeking === `true`
-		|| !page.getEl(`audio`).duration
-	) return;
-	page.getEl(`seekBar`).value = page.getEl(`audio`).currentTime / page.getEl(`audio`).duration * 100;
-	setTimestampFromSeconds(page.getEl(`showTimeElapsed`), page.getEl(`audio`).currentTime);
-}
-
-// update displayed show time while manually seeking using seek bar
-function updateSeekTime(value) {
-	setTimestampFromSeconds(page.getEl(`showTimeElapsed`), page.getEl(`audio`).duration * value / 100);
+// reset show time to 0
+function resetShow() {
+	page.getEl(`audio`).currentTime = 0;
 }
 
 // toggle audio play/pause
@@ -483,15 +475,44 @@ function togglePlay() {
 	else page.getEl(`audio`).pause();
 }
 
+// end current show and autoplay next show if current show was playing
+function skipShow() {
+	if (!page.getEl(`audio`).paused) page.getEl(`audio`).dataset.playNextShow = `true`;
+	removeShow(page.getEl(`playlist`).firstElementChild);
+}
+
+// change seek bar to match audio unless audio metadata unavailable
+function updateSeekBar() {
+	if (!page.getEl(`audio`).duration) return;
+	page.getEl(`seekBar`).value = page.getEl(`audio`).currentTime / page.getEl(`audio`).duration * 100;
+	setTimestampFromSeconds(page.getEl(`showTimeElapsed`), page.getEl(`audio`).currentTime);
+}
+
+// manually seek
+function seekTime() {
+	page.getEl(`audio`).currentTime = page.getEl(`audio`).duration * page.getEl(`seekBar`).value / 100;
+}
+
 // toggle audio mute/unmute
 function toggleMute() {
 	page.getEl(`audio`).muted = !page.getEl(`audio`).muted;
 }
 
 // set audio volume
-function setVolume(newVolume) {
-	page.getEl(`audio`).volume = newVolume;
+function setVolume() {
+	page.getEl(`audio`).volume = page.getEl(`volumeControl`).value / 100;
 	if (page.getEl(`audio`).muted) toggleMute();
+}
+
+// update satte of mute button and volume slider to match show audio state
+function updateVolumeControls() {
+	if (page.getEl(`audio`).muted || page.getEl(`audio`).volume === 0) {
+		page.getEl(`volumeControl`).value = 0;
+		page.getEl(`muteToggle`).ariaPressed = `true`;
+	} else {
+		page.getEl(`volumeControl`).value = page.getEl(`audio`).volume * 100;
+		page.getEl(`muteToggle`).ariaPressed = `false`;
+	}
 }
 
 /* --------------
@@ -615,47 +636,18 @@ page.getEl(`audio`).addEventListener(`loadedmetadata`, () => {
 	setTimestampFromSeconds(page.getEl(`showTimeTotal`), page.getEl(`audio`).duration);
 });
 page.getEl(`audio`).addEventListener(`timeupdate`, updateSeekBar);
-page.getEl(`audio`).addEventListener(`play`, () => {
-	page.getEl(`playToggle`).ariaPressed = `true`;
-});
-page.getEl(`audio`).addEventListener(`pause`, () => {
-	page.getEl(`playToggle`).ariaPressed = `false`;
-});
-page.getEl(`audio`).addEventListener(`ended`, () => {
-	// autoplay next show if autoplay setting is on
-	if (settings.getSetting(`autoPlayNextShow`)) page.getEl(`audio`).dataset.playNextShow = `true`;
-	endShow();
-});
-page.getEl(`audio`).addEventListener(`volumechange`, () => {
-	if (page.getEl(`audio`).muted || page.getEl(`audio`).volume === 0) {
-		page.getEl(`muteToggle`).ariaPressed = `true`;
-		page.getEl(`volumeControl`).value = 0;
-	} else {
-		page.getEl(`muteToggle`).ariaPressed = `false`;
-		page.getEl(`volumeControl`).value = page.getEl(`audio`).volume * 100;
-	}
-});
+page.getEl(`audio`).addEventListener(`play`, () => page.getEl(`playToggle`).ariaPressed = `true`);
+page.getEl(`audio`).addEventListener(`pause`, () => page.getEl(`playToggle`).ariaPressed = `false`);
+page.getEl(`audio`).addEventListener(`ended`, endShow);
+page.getEl(`audio`).addEventListener(`volumechange`, updateVolumeControls);
 
 // radio interface events
-page.getEl(`resetButton`).addEventListener(`click`, () => {
-	page.getEl(`audio`).currentTime = 0;
-});
+page.getEl(`resetButton`).addEventListener(`click`, resetShow);
 page.getEl(`playToggle`).addEventListener(`click`, togglePlay);
-page.getEl(`skipButton`).addEventListener(`click`, () => {
-	// autoplay next show if current show is playing
-	if (!page.getEl(`audio`).paused) page.getEl(`audio`).dataset.playNextShow = `true`;
-	endShow();
-});
-page.getEl(`seekBar`).addEventListener(`change`, () => {
-	page.getEl(`seekBar`).dataset.seeking = `false`;
-	page.getEl(`audio`).currentTime = page.getEl(`audio`).duration * page.getEl(`seekBar`).value / 100;
-});
-page.getEl(`seekBar`).addEventListener(`input`, () => {
-	page.getEl(`seekBar`).dataset.seeking = `true`;
-	updateSeekTime(page.getEl(`seekBar`).value); // must set input.value as argument here
-});
+page.getEl(`skipButton`).addEventListener(`click`, skipShow);
+page.getEl(`seekBar`).addEventListener(`input`, seekTime);
 page.getEl(`muteToggle`).addEventListener(`click`, toggleMute);
-page.getEl(`volumeControl`).addEventListener(`input`, () => setVolume(page.getEl(`volumeControl`).value / 100));
+page.getEl(`volumeControl`).addEventListener(`input`, setVolume);
 
 // booth interface events
 document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
@@ -687,9 +679,9 @@ document.getElementById(`import-button`).addEventListener(`click`, importPlaylis
 document.getElementById(`add-archive-button`).addEventListener(`click`, addArchive);
 
 // settings interface events (general)
-for (const setting of [`copyrightSafety`, `flatRadio`, `autoPlayNextShow`, `notesOpen`]) {
+[`copyrightSafety`, `flatRadio`, `autoPlayNextShow`, `notesOpen`].forEach(setting => {
 	document.getElementById(`${setting.camelToKebab()}-toggle`).addEventListener(`click`, () => settings.toggle(setting));
-}
+});
 [`theme`, `font`].forEach(style => {
 	page.getEl(`${style}Buttons`).addEventListener(`click`, () => {
 		if (event.target.tagName === `BUTTON` && event.target.getAttribute(`aria-disabled`) === `false`) styles.setStyle(style, event.target.dataset.option);
@@ -701,11 +693,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise settings and styles
 	settings.initialise();
 	styles.initialise();
-
-	// initialise radio
-	page.getEl(`audio`).paused = true;
-	page.getEl(`seekBar`).value = 0;
-	setVolume(page.getEl(`volumeControl`).value / 100);
 
 	// start watching for playlist changes
 	playlistObserver.observe(page.getEl(`playlist`), {"childList": true});

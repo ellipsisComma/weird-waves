@@ -581,9 +581,6 @@ code {
 #seek-controls {
 	grid-area: seek-controls;
 }
-#show-time {
-	white-space: nowrap;
-}
 #show-controls {
 	grid-area: show-controls;
 }
