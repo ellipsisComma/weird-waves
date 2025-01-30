@@ -447,12 +447,12 @@ h3 {
 }
 .flex-list {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
 	gap: 1em;
 	margin-block: 1em;
-	padding-inline-start: 0;
+	padding-inline: 1em;
 	list-style-type: "";
 }
 a:link {
@@ -1110,8 +1110,7 @@ use[href="#svg-toggle-tick"] {
 @media (min-width: 600px) {
 	/* GENERAL */
 	.flex-list {
-		flex-direction: row;
-		flex-wrap: wrap;
+		padding-inline: 0;
 	}
 	.code-block > code {
 		tab-size: 4ch;
