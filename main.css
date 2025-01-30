@@ -477,6 +477,7 @@ code {
 .content-notes {
 	& > summary {
 		list-style-type: "";
+		display: inline-block;
 		color: var(--hot-colour);
 		&::-webkit-details-marker {
 			display: none;
