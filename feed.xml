@@ -46,7 +46,6 @@ HTML entities must be in numbered forms (decimal or hexadecimal when in type="xh
 				<li>I fixed a bug where the seek bar would stop updating if you clicked and dragged the thumb, but returned the thumb to the time it was at before you clicked.</li>
 				<li>There's a new button that resets the time back to 0.</li>
 			</ul>
-			<p>Clicking and dragging the seek bar now updates the show audio time whenever you drag it, not just when you release it. This may be slightly jarring, but it completely avoids the bug described above; keeping the old behaviour <em>and</em> fixing the bug required some slightly awkward code that would've been harder to maintain.</p>
 		</div></content>
 	</entry>
 	<entry>
