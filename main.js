@@ -55,8 +55,14 @@ const settings = (() => {
 		toggle.ariaPressed = local[setting] ? `true` : `false`;
 		store(`settings`, local);
 
-		if (setting === `flatRadio`) page.getEl(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
-		else if (setting === `notesOpen`) document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = settings.getSetting(`notesOpen`));
+		switch (setting) {
+		case `flatRadio`:
+			page.getEl(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
+			break;
+		case `notesOpen`:
+			document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = settings.getSetting(`notesOpen`));
+			break;
+		}
 	}
 
 	return {
@@ -189,7 +195,7 @@ templateHTML.setTemplate(`archiveSeries`, `archive-series`);
 templateHTML.setTemplate(`archiveShow`, `archive-show`);
 
 // mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
-const playlistObserver = new MutationObserver(() => {
+const playlistObserver = new MutationObserver((mutations) => {
 	loadShow();
 	storePlaylist();
 	if (location.protocol !== `file:` && page.getEl(`playlist`).children.length > 1) fetch(
@@ -254,7 +260,7 @@ function getWeekStartDate() {
 PLAYLIST
 ----- */
 
-// shuffle playlist if it has at least 2 entries
+// shuffle playlist if it has at least 2 entries (FYK-ish shuffle)
 function shufflePlaylist() {
 	let i = page.getEl(`playlist`).children.length;
 	if (i < 2) return;
