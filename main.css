@@ -704,7 +704,7 @@ input[type="range"]:active {
 				background-color: unset;
 			}
 		}
-		&:not([href^="#"]) {
+		&[href$="feed.xml"] {
 			&:link use {
 				stroke: var(--hot-colour);
 			}
