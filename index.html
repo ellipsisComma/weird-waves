@@ -91,15 +91,12 @@
 		<path class="svg-hot-stroke" d="M12 11c0 4-4 4-4 8a4 4 0 0 0 8 0c0-4-4-4-4-8" />
 	</symbol>
 
-<!--various icon and toggle parts-->
+<!--radio button icons-->
 	<defs>
-		<path id="svg-toggle-tick" d="M7 11l3 3 7-7" />
 		<path id="svg-play-triangle" d="M2 2v14l14-7z" />
 		<path id="svg-speaker" d="M4 7h-2v4h2l4 5h2v-14h-2z" />
 		<path id="svg-chevron" d="M1 8l5-5 5 5" />
 	</defs>
-
-<!--radio button icons-->
 	<symbol id="svg-play">
 		<use href="#svg-play-triangle" />
 	</symbol>
@@ -447,10 +444,7 @@
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude certain series when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr> selection, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
-	<div class="setting-toggle pre-initialised-control">
-		<button id="copyright-safety-toggle" type="button" aria-labelledby="copyright-safety-toggle-label"></button>
-		<span id="copyright-safety-toggle-label">exclude copyright-unsafe material</span>
-	</div>
+	<button id="copyright-safety-toggle" class="setting-toggle pre-initialised-control">exclude copyright-unsafe material</button>
 	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
 </section><!--#streaming end-->
 
