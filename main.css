@@ -640,7 +640,6 @@ input[type="range"] {
 		}
 	}
 }
-/* vendor-specific pseudo-element selectors must be nested separately */
 input[type="range"] {
 	&::-webkit-slider-runnable-track {
 		background-color: var(--hot-colour);
@@ -670,13 +669,13 @@ input[type="range"]:active {
 -------- */
 
 #main-nav {
-	display: flex;
-	justify-content: space-evenly;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: var(--gap-size);
 	padding-block-start: 0.2em;
 	border-block: var(--fore-line);
 	& > ul {
 		display: flex;
-		inline-size: 30%;
 		list-style-type: "";
 		padding-inline-start: 0;
 		text-align: center;
@@ -686,7 +685,6 @@ input[type="range"]:active {
 	a {
 		display: inline-flex;
 		flex-direction: column;
-		padding-block-start: 0.2em;
 		padding-inline: 0.2em;
 		align-items: center;
 		gap: 0.2em;
@@ -1065,6 +1063,7 @@ textarea {
 
 	/* NAV */
 	#main-nav {
+		padding-block-start: var(--gap-size);
 		& > ul {
 			justify-content: center;
 		}
