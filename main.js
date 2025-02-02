@@ -617,6 +617,8 @@ function buildArchive() {
 
 // fetch weekly schedule and, if available and valid, load schedule onto page
 async function loadSchedule() {
+	if (!page.getEl(`schedule`)) return;
+
 	const weekStart = getWeekStartDate();
 	const file = await fetch(
 		schedulePath(weekStart),
