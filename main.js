@@ -291,7 +291,7 @@ function clearPlaylist() {
 	if (!page.getEl(`clearPlaylistControls`).hidden) hideClearPlaylistControls();
 }
 
-// 
+// reset import-export invalidity
 function setValidImport() {
 	page.getEl(`importErrorMessage`).hidden = true;
 	page.getEl(`importExport`).ariaInvalid = false;
