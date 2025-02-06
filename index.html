@@ -239,9 +239,15 @@
 				</button>
 			</div><!--#show-controls end-->
 			<div id="seek-controls">
-				<output class="timestamp" id="show-time-elapsed"><span class="visually-hidden">Elapsed time: </span>00:00</output>
+				<output>
+					<span class="visually-hidden">Elapsed time: </span>
+					<span id="show-time-elapsed" class="timestamp">00:00</span>
+				</output>
 				<input id="seek-bar" type="range" min="0" max="100" value="0" aria-controls="show-audio" aria-label="Go to time in show">
-				<span class="timestamp" id="show-time-total"><span class="visually-hidden">Total time: </span>00:00</span>
+				<span aria-live="polite">
+					<span class="visually-hidden">Total time: </span>
+					<span id="show-time-total" class="timestamp">00:00</span>
+				</span>
 			</div><!--#seek-controls end-->
 			<div id="audio-controls">
 				<button id="mute-toggle" class="push-button" type="button" aria-controls="show-audio" aria-pressed="false">
