@@ -11,7 +11,7 @@
 	<author>
 		<name>Weird Waves</name>
 	</author>
-	<updated>2025-01-30T00:00:01Z</updated>
+	<updated>2025-02-08T00:00:52Z</updated>
 
 
 
@@ -20,7 +20,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-01-30-radio-redesign" />
 		<title type="html"><![CDATA[Radio redesign]]></title>
 		<published>2025-01-30T00:00:00Z</published>
-		<updated>2025-01-30T00:00:01Z</updated>
+		<updated>2025-02-08T00:00:52Z</updated>
 		<content type="html"><![CDATA[
 			<p>The Radio's been slightly redesigned and has a bug-fix and a new feature:</p>
 			<ul>
@@ -35,7 +35,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-01-19-mute-toggle-icon-swap" />
 		<title type="html"><![CDATA[Mute-toggle icon swap]]></title>
 		<published>2025-01-19T00:00:00Z</published>
-		<updated>2025-01-19T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:51Z</updated>
 		<content type="html"><![CDATA[
 			<p>I've given in and made the Radio's mute/unmute button show a &ldquo;muted&rdquo; icon when the audio's muted or volume is 0, and an &ldquo;unmuted&rdquo; icon when the audio's unmuted <em>and</em> the volume's higher than 0. This means they now show the audio's state instead of the action the button triggers; this is far more common (e.g. it's used in YouTube, QuickTime Player, the built-in controls for <abbr>HTML</abbr>'s <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> elements). The volume controls still work in the exact same way as before&mdash;only the icons have changed.</p>
 		]]></content>
@@ -45,7 +45,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-12-31-from-featured-show-to-weekly-schedule" />
 		<title type="html"><![CDATA[From featured show to weekly schedules]]></title>
 		<published>2024-12-30T00:00:00Z</published>
-		<updated>2024-12-31T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:50Z</updated>
 		<content type="html"><![CDATA[
 			<p>First, the featured show on the landing page has been replaced with a schedule! This is a throwback to the original form of Weird Waves, which automatically played and updated a scheduled slate of shows while you listened, indefinitely. Now it just works like the featured show slot, suggesting shows from the Archive, but instead of being selected at random they're grouped by theme.</p>
 			<p>I've also fixed a bug in the stream widget introduced by a recent change in the show file structure.</p>
@@ -56,7 +56,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-11-23-simplified-feed" />
 		<title type="html"><![CDATA[Simplified feed]]></title>
 		<published>2024-11-23T00:00:00Z</published>
-		<updated>2024-11-23T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:49Z</updated>
 		<content type="html"><![CDATA[
 			<p>The feed now just has one overall category, with post categories being a label per-post. This cuts the content on the page by half (as before it just duplicated each entry from the full feed to the category sub-pages).</p>
 		]]></content>
@@ -66,7 +66,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-10-28-new-show" />
 		<title type="html"><![CDATA[New show: <cite>The Birds</cite>]]></title>
 		<published>2024-10-28T00:00:00Z</published>
-		<updated>2024-10-28T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:48Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a new show to <cite>Escape</cite>: an adaptation of Daphne du Maurier's short story <cite>The Birds</cite> (later adapted for screen by Alfred Hitchcock).</p>
 		]]></content>
@@ -76,7 +76,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-09-17-theme-tweaks" />
 		<title type="html"><![CDATA[Theme tweaks]]></title>
 		<published>2024-09-17T00:00:01+01:00</published>
-		<updated>2024-09-17T00:00:01+01:00</updated>
+		<updated>2025-02-08T00:00:47Z</updated>
 		<content type="html"><![CDATA[
 			<p>I've swapped the hot and cold colours in each of the new themes Natron and Cellar. They're the same colours (e.g. Natron still uses Marrow's colours via green-blindness), I just think the new arrangements are better at indicating what I use the hot and cold colours for (indicating interactive features that haven't (hot) and have (cold) been interacted with).</p>
 		]]></content>
@@ -86,7 +86,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-09-06-new-themes" />
 		<title type="html"><![CDATA[New themes]]></title>
 		<published>2024-09-06T00:00:01+01:00</published>
-		<updated>2024-09-06T00:00:01+01:00</updated>
+		<updated>2025-02-08T00:00:46Z</updated>
 		<content type="html"><![CDATA[
 			<p>I've been testing a bookmarklet that simulates colour-blindness using the Weird Waves themes, and found some combinations I decided to add as full themes in themselves&mdash;with a few minor tweaks to keep the colour contrast high enough for people with poor vision.</p>
 			<ul>
@@ -105,7 +105,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-09-02-goatcounter" />
 		<title type="html"><![CDATA[Privacy-friendly analytics via GoatCounter]]></title>
 		<published>2024-09-02T00:00:01+01:00</published>
-		<updated>2024-09-02T00:00:01+01:00</updated>
+		<updated>2025-02-08T00:00:45Z</updated>
 		<content type="html"><![CDATA[
 			<p>Weird Waves now uses <a href="https://www.goatcounter.com/">GoatCounter</a> for analytics&mdash;it's privacy-friendly and just provides basic anonymised analytics that are more complex that the site's current hosting provides. This is only a test: if GoatCounter doesn't receive any hits, I'll remove the script link.</p>
 		]]></content>
@@ -115,7 +115,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-08-27-rtl-support" />
 		<title type="html"><![CDATA[Right-to-left script support]]></title>
 		<published>2024-08-27T00:00:01+01:00</published>
-		<updated>2024-08-27T00:00:01+01:00</updated>
+		<updated>2025-02-08T00:00:44Z</updated>
 		<content type="html"><![CDATA[
 			<p>Made a few small tweaks to support right-to-left scripts (e.g. if someone translates Weird Waves using a machine translation app). Toggle switch thumbs and theme palettes are flipped horizontally, and text should follow the script's typical direction (so if the page is shown in its default script, Latin, then it'll display left-to-right, and if it's displayed in e.g. Arabic, it'll display right-to-left).</p>
 		]]></content>
@@ -125,7 +125,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-07-21-new-series" />
 		<title type="html"><![CDATA[New series: <cite>The Machine Stops</cite>]]></title>
 		<published>2024-07-21T00:00:01+01:00</published>
-		<updated>2024-07-21T00:00:01+01:00</updated>
+		<updated>2025-02-08T00:00:43Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a new series: <cite>The Machine Stops</cite>, by E.&nbsp;M.&nbsp;Forster, from LibriVox, in 3 parts.</p>
 		]]></content>
@@ -135,7 +135,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-07-21-one-last-bugfix" />
 		<title type="html"><![CDATA[One last bug-fix for the road]]></title>
 		<published>2024-07-21T00:00:00+01:00</published>
-		<updated>2024-07-21T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:42Z</updated>
 		<content type="html"><![CDATA[
 			<p>The last big problem with the site is the way it stores and recalls your data (settings and playlist). If you opened Weird Waves in two tabs and changed theme in one, the change wouldn't cross over to the other. In fact, the theme would only be saved when you closed or refreshed the page, so if you had two pages open with different themes, and refreshed each page, both pages would stay with their own themes.</p>
 			<p>The problems with settings were, at worst, a little annoying, but the playlist was another matter. Changes made to the playlist in one tab wouldn't echo into other tabs, and the version that won out was the playlist in the last Weird Waves tab you closed/refreshed. For the most part I've ignored this, because the site's really just one page (with the feed on the side), so there's minimal need to have multiple tabs open, but just to be on the safe side I've closed this functional hole. Now, if you change your settings or playlist in one tab, the changes will immediately echo into all other open tabs (and settings/playlist are saved when the changes happen, not when you close/refresh). The easiest way to check this is to open two tabs, change the theme in one, and see the tab icon change in both.</p>
@@ -147,7 +147,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-07-19-putting-a-pin-in-weird-waves" />
 		<title type="html"><![CDATA[Putting a pin in Weird Waves]]></title>
 		<published>2024-07-19T00:00:00+01:00</published>
-		<updated>2024-07-19T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:41Z</updated>
 		<content type="html"><![CDATA[
 			<p>At some point I've gotta just stop. The site looks and works fine, has all the features I wanted, builds quickly and runs smoothly, and generally has solid code (semantic <abbr>HTML</abbr> and <abbr>CSS</abbr>, <em>relatively</em> readable JavaScript). Sure, I could keep tweaking the site forever a few times a week, making trivial improvements, but there's honestly so little I can do without just going in circles. Therefore, this is the really, truly final dev update on Weird Waves. I have other projects I need to focus on! When those go live, I might post about them here. Beyond that, don't expect to see any updates except the occasional new shows. It's time for me to get other shit done.</p>
 		]]></content>
@@ -157,7 +157,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-07-16-tidying-up-and-autoplay-bugfix" />
 		<title type="html"><![CDATA[Tidying up and auto-play bug-fix]]></title>
 		<published>2024-07-16T00:00:00+01:00</published>
-		<updated>2024-07-16T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:40Z</updated>
 		<content type="html"><![CDATA[
 			<p>Fixed a bug caused by a recent code change that broke the auto-play setting. I've also streamlined the code a little, one side-effect of which is that the stats in <a href="./index.html#about">About</a> no longer include the total hours of audio in the archive.</p>
 		]]></content>
@@ -167,7 +167,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-07-14-theme-changes" />
 		<title type="html"><![CDATA[Theme changes]]></title>
 		<published>2024-07-14T00:00:00+01:00</published>
-		<updated>2024-07-14T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:39Z</updated>
 		<content type="html"><![CDATA[
 			<p>This one's been a long time coming: about half the themes have updated colours: small tweaks to one colour (Goop, Flame, Abyss, and Marrow); Silver's lightened up even more; Org's now green and grey; Dust's a lot more reddish; and the default Light theme's been overhauled completely. I felt like some were too similar and others just had minor or major problems.</p>
 		]]></content>
@@ -177,7 +177,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-07-09-import-add-bugfixes" />
 		<title type="html"><![CDATA[Import/add-show bug-fixes]]></title>
 		<published>2024-07-09T00:00:00+01:00</published>
-		<updated>2024-07-09T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:38Z</updated>
 		<content type="html"><![CDATA[
 			<p>Fixed some bugs with importing shows or adding random shows using the &ldquo;+ Show/Banger&rdquo; buttons. These (mostly) didn't affect how the app worked, they just caused errors behind the scenes.</p>
 		]]></content>
@@ -187,7 +187,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-07-03-tightening-up" />
 		<title type="html"><![CDATA[Tightening up the site]]></title>
 		<published>2024-07-03T00:00:00+01:00</published>
-		<updated>2024-07-05T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:37Z</updated>
 		<content type="html"><![CDATA[
 			<p>I've made a few tweaks you won't see, and one you might: I've removed a few shows from the bangers list (which is used to pick featured shows and when you click the &ldquo;+ Banger&rdquo; button in the <a href="./index.html#booth">Booth</a>). One was a script read I recorded of a lost <cite>Quiet, Please</cite> episode&mdash;I tagged it because I like the script and want to give it more exposure, but my reading's not up to the same standards. The rest were all the second or later parts of multi-part series, e.g. <cite>The Mercury Theatre</cite> #17: <cite>The War of the Worlds</cite>, part 2. It never felt right that you could randomly roll a show from the <em>middle</em> of a story.</p>
 			<p><strong>Update:</strong> Just done a bunch more behind-the-scenes trimming. We are now firmly in the &ldquo;cleanup and refactoring&rdquo; part of the cycle of Weird Waves development. This might really be it for major Weird Waves updates&mdash;I've resolved every big question mark left in the code. I know I've said I'm done so many times, but those were cases of abandoning something functional, but rough. This time, if I wanted to make more major changes (besides adding shows) I'd have to start cutting things instead of adding or tweaking them. We'll see!</p>
@@ -198,7 +198,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-06-30-the-new-news-archive" />
 		<title type="html"><![CDATA[Meet the new News Archive]]></title>
 		<published>2024-06-30T00:00:00+01:00</published>
-		<updated>2024-06-30T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:36Z</updated>
 		<content type="html"><![CDATA[
 			<p>Thanks to the incredible power of the niche, obscure templating language eXtensible Stylesheet Language (<abbr>XSLT</abbr>), you can see a preview of the news feed as a web page in your browser! In fact, if you clicked through to the Feed from the main Weird Waves page then you're looking at the preview right now. I decided to make the most of this change by fleshing out the feed with a lotta past posts, including some very early blog posts.</p>
 			<p>Unfortunately, this move forced me to change the feed's file extension from <code>.rss</code> to <code>.xml</code> so browsers open it as a page instead of trying to download the raw file. This'll break the connection for anyone subscribed to the old feed. I can't do anything about that other than put a big alert in the old file pointing people to the new one and wait a while before deleting it.</p>
@@ -210,7 +210,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-06-23-what-next-again" />
 		<title type="html"><![CDATA[What next (again)?]]></title>
 		<published>2024-06-23T00:00:00+01:00</published>
-		<updated>2024-06-23T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:35Z</updated>
 		<content type="html"><![CDATA[
 			<p>I think the latest burst of activity on this site's mostly over, now that I've fixed the long-term issues (a few accessibility and rendering problems, persistent low-level bugs, and the stream widget).</p>
 		]]></content>
@@ -220,7 +220,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-06-21-stream-widget" />
 		<title type="html"><![CDATA[Stream widget]]></title>
 		<published>2024-06-21T00:00:00+01:00</published>
-		<updated>2024-06-22T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:34Z</updated>
 		<content type="html"><![CDATA[
 			<p>I've found that Weird Waves no longer works as a browser source in the Open Broadcaster Software (<abbr>OBS</abbr>)&mdash;the code's too modern for <abbr>OBS</abbr>' outdated mini-browser and <abbr>OBS</abbr> makes it a pain to see what's happening under a browser source's hood, so I've just added a note to the Streaming section explaining the situation (and that there's no real solution).</p>
 			<p><strong>Update:</strong> Okay, I couldn't leave the <abbr>OBS</abbr> situation like that, so I pulled up the code from the last time I know Weird Waves worked on stream and cut it down to a stream widget (see <a href="./index.html#streaming">Streaming</a> for more info). It shares stored settings etc. with the web version, but has a separate playlist, due to its outdated code.</p>
@@ -231,7 +231,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-06-09-accessibility-improvements" />
 		<title type="html"><![CDATA[Accessibility improvements]]></title>
 		<published>2024-06-09T00:00:00+01:00</published>
-		<updated>2024-06-19T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:33Z</updated>
 		<content type="html"><![CDATA[
 			<p>I've improved the accessibility of the icon buttons and loading spinners by using <code>[aria-label]</code> attributes.</p>
 			<p><strong>Update:</strong> I've also improved the accessibility of pressed buttons so they're still focusable and can still be read in order, instead of being completely disabled.</p>
@@ -242,7 +242,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-06-08-new-themes" />
 		<title type="html"><![CDATA[Half a dozen new themes!]]></title>
 		<published>2024-06-08T00:00:00+01:00</published>
-		<updated>2024-06-08T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:32Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added 6 new themes in the Settings section: Pico, Sepia, Abyss, Retro, Marrow, and Org.</p>
 		]]></content>
@@ -252,7 +252,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-06-03-seek-bar-bugfix" />
 		<title type="html"><![CDATA[Audio seek bar bug-fix]]></title>
 		<published>2024-06-03T00:00:00+01:00</published>
-		<updated>2024-06-03T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:31Z</updated>
 		<content type="html"><![CDATA[
 			<p>Fixed a bug with the audio seek bar where it would keep returning to the current audio position instead of letting you drag it to a different time under certain conditions. Also fixed a bug where a nav link would stay selected if you clicked one of them and then clicked &ldquo;Back&rdquo; to the landing page.</p>
 		]]></content>
@@ -262,7 +262,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-06-02-featured-show" />
 		<title type="html"><![CDATA[Featured show on the landing page]]></title>
 		<published>2024-06-02T00:00:00+01:00</published>
-		<updated>2024-06-02T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:30Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a new &ldquo;featured show&rdquo; feature that adds a random show to the landing page, with a button to add it to the playlist. Hopefully this'll give new visitors an easier time getting into Weird Waves.</p>
 		]]></content>
@@ -272,7 +272,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-05-26-new-shows" />
 		<title type="html"><![CDATA[New shows: <cite>The Dream-Quest of Unknown Kadath</cite> and more]]></title>
 		<published>2024-05-26T00:00:00+01:00</published>
-		<updated>2024-05-26T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:29Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a new series, <cite>The Dream-Quest of Unknown Kadath</cite> by H.&nbsp;P.&nbsp;Lovecraft (read by Maureen S.&nbsp;O'Brien), and a few new shows to the LibriVox selection, starting with #50 (a 2-in-1 named &ldquo;Human Brutality&rdquo;).</p>
 		]]></content>
@@ -282,7 +282,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-05-12-font-rendering-bugfix" />
 		<title type="html"><![CDATA[Fixed that goddamn font rendering bug]]></title>
 		<published>2024-05-12T00:00:00+01:00</published>
-		<updated>2024-05-12T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:28Z</updated>
 		<content type="html"><![CDATA[
 			<p>Fixed a font rendering problem in Chrome and Safari on <abbr>MacOS</abbr>, in which text displayed with more space above than below.</p>
 		]]></content>
@@ -292,7 +292,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-02-18-new-show" />
 		<title type="html"><![CDATA[New show: <cite>The Abominations of Yondo</cite>]]></title>
 		<published>2024-02-18T00:00:00Z</published>
-		<updated>2024-02-18T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:27Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added one new show: <cite>The Abominations of Yondo</cite>, by Clark Ashton Smith, in the LibriVox selection.</p>
 		]]></content>
@@ -302,7 +302,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2024-01-28-officially-finished" />
 		<title type="html"><![CDATA[Weird Waves is officially finished!]]></title>
 		<published>2024-01-28T00:00:00Z</published>
-		<updated>2024-01-28T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:26Z</updated>
 		<content type="html"><![CDATA[
 			<p>There may be small future changes (e.g. adding new links to the Links section, like I just did now), but as a rule it's done.</p>
 		]]></content>
@@ -312,7 +312,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2023-12-25-nav-bugfix" />
 		<title type="html"><![CDATA[Fixed a very weird navigation bug]]></title>
 		<published>2023-12-25T00:00:00Z</published>
-		<updated>2024-01-15T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:25Z</updated>
 		<content type="html"><![CDATA[
 			<p>Fixed a bug that stopped the site from navigating to each section unless you refreshed the page first. Now back to Christmas&hellip;</p>
 			<p><strong>Update:</strong> Fixed the same damn bug from Christmas. For some reason the offline copy of the site worked fine, but the online version still had the bug despite using the exact same code. This should now be fixed. I've also made a few other tweaks, the most obvious being that I've cut all the button images (including the Weird Waves buttons) in the Links section.</p>
@@ -323,7 +323,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2023-10-27-from-news-archive-to-feed" />
 		<title type="html"><![CDATA[Shifting all news to the feed file]]></title>
 		<published>2023-10-27T00:00:00+01:00</published>
-		<updated>2023-10-27T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:24Z</updated>
 		<content type="html"><![CDATA[
 			<p>Removed the News Archive page. This <abbr>RSS</abbr> feed is now the only place I'll add news updates (if I even write any more regularly&mdash;I think that's pretty unlikely). Any future news updates'll probably be just me adding some new shows now and then, tweaking content notes, or updating the info about which shows are known/possible copyright risks on streaming services.</p>
 		]]></content>
@@ -333,7 +333,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2023-08-28-copyright-safe-mode" />
 		<title type="html"><![CDATA[Copyright-safe mode]]></title>
 		<published>2023-08-28T00:00:00+01:00</published>
-		<updated>2023-08-28T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:23Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a &ldquo;copyright-safe&rdquo; mode that ignores more-recent copyright material when adding random shows or the entire archive to the playlist.</p>
 		]]></content>
@@ -343,7 +343,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2023-08-21-overhaul" />
 		<title type="html"><![CDATA[Weird Waves just had a massive overhaul]]></title>
 		<published>2023-08-21T00:00:00+01:00</published>
-		<updated>2023-08-21T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:22Z</updated>
 		<content type="html"><![CDATA[
 			<p>Weird Waves has undergone a <em>major</em> overhaul from playing scheduled shows to letting you build your own playlist! Check it out on the site.</p>
 		]]></content>
@@ -353,7 +353,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2023-06-07-what-next" />
 		<title type="html"><![CDATA[What next for Weird Waves?]]></title>
 		<published>2023-06-07T00:00:00+01:00</published>
-		<updated>2023-06-07T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:21Z</updated>
 		<content type="html"><![CDATA[
 			<p>There are 366 shows in the Archive, meeting my goal, and I'm pretty happy with the site's content and features. It feels weird to say, after almost a year of work, but it's done.</p>
 			<p>What next? There's a few more schedules lined up through to the anniversary. After that, the weekly schedules'll go on hiatus. I wanna take a break from updates.</p>
@@ -366,7 +366,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-12-30-faster-pageloads" />
 		<title type="html"><![CDATA[Faster page-loading speeds]]></title>
 		<published>2022-12-30T00:00:00Z</published>
-		<updated>2022-12-30T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:20Z</updated>
 		<content type="html"><![CDATA[
 			<p>Did a major behind-the-scenes Archive update that should make the whole site load quicker (fingers crossed), and added a bunch more loading spinners to places where content loads in.</p>
 		]]></content>
@@ -376,7 +376,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-11-30-goodbye-chatbox-hello-random-shows" />
 		<title type="html"><![CDATA[Goodbye chatbox, hello random shows]]></title>
 		<published>2022-11-30T00:00:00Z</published>
-		<updated>2022-11-30T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:19Z</updated>
 		<content type="html"><![CDATA[
 			<p>First, I didn't like how the look of the <abbr>CBox</abbr> chatbox clashed with the look of the site, or how it messed with looping around the page using keyboard navigation, so I removed it (it didn't get any traffic in the time it was up, anyway).</p>
 			<p>Second, I added a &ldquo;Random Show&rdquo; link that takes you directly to a random show's audio file.</p>
@@ -387,7 +387,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-11-14-chatbox" />
 		<title type="html"><![CDATA[Chatbox!]]></title>
 		<published>2022-11-14T00:00:01Z</published>
-		<updated>2022-11-14T00:00:01Z</updated>
+		<updated>2025-02-08T00:00:18Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a <abbr>CBox</abbr> chatbox to the site (click the button in the bottom-right corner to open it up) and cut a few unnecessary (e.g. redundant, trivial) content notes.</p>
 		]]></content>
@@ -397,7 +397,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-21-new-settings" />
 		<title type="html"><![CDATA[Font picker and personal primetime]]></title>
 		<published>2022-10-21T00:00:00+01:00</published>
-		<updated>2022-10-21T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:17Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a font picker! The default's the serif font <cite>Bitter</cite>; the new sans font's <cite>Fira Sans</cite>.</p>
 			<p>I've also added a &ldquo;personal primetime&rdquo; feature that lets you highlight a range of shows on the Forecast. To make adding this feature easier, I also forced the Forecast to update after every show. This also fixes an issue where the mini-Forecast on the landing page would only show the first 6 shows of the week if the Forecast was in static (non-updating) mode.</p>
@@ -408,7 +408,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-17-new-themes" />
 		<title type="html"><![CDATA[Three times the themes]]></title>
 		<published>2022-10-17T00:00:01+01:00</published>
-		<updated>2022-10-17T00:00:01+01:00</updated>
+		<updated>2025-02-08T00:00:16Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added 8 more themes: Flame, Plasm, Moss, Darker, Ash, Dust, Mist, and Silver. I also swapped the detail colours in the Wine theme.</p>
 		]]></content>
@@ -418,7 +418,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-13-landing-page-and-theme-picker" />
 		<title type="html"><![CDATA[A proper landing page! And theme picker]]></title>
 		<published>2022-10-13T00:00:00+01:00</published>
-		<updated>2022-10-13T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:15Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a landing page with some recent info from each of the Schedule, Forecast, and News sections (instead of just dropping you in the News) and a theme picker with 4 different sets of colours (Dark, Light, Goop, Wine).</p>
 		]]></content>
@@ -428,7 +428,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-11-theme-picker-preview" />
 		<title type="html"><![CDATA[Theme picker preview]]></title>
 		<published>2022-10-11T00:00:00+01:00</published>
-		<updated>2022-10-11T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:14Z</updated>
 		<content type="html"><![CDATA[
 			<p>Updated how the settings were displayed a little to make them more concise and easier to read.</p>
 			<p>I've been testing out alternate colour themes, so the theme picker'll probably be the next major feature I add. Here's the default colours and the other two themes I've been working on:</p>
@@ -444,7 +444,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-05-tidying-up" />
 		<title type="html"><![CDATA[Tidying up post-move]]></title>
 		<published>2022-10-05T00:00:00+01:00</published>
-		<updated>2022-10-05T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:13Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added some links to the Links section to start off with. They're a mix of general horror/old media/weird stuff, other tiny online radio stations, and little games/toys/tools/apps. I've also made some Weird Waves buttons for anyone who wants to link to the site from elsewhere. Finally, there's now a Ko-fi button in the Support section.</p>
 		]]></content>
@@ -454,7 +454,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-04-upcoming-features" />
 		<title type="html"><![CDATA[Upcoming features]]></title>
 		<published>2022-10-04T00:00:01+01:00</published>
-		<updated>2022-10-04T00:00:01+01:00</updated>
+		<updated>2025-02-08T00:00:12Z</updated>
 		<content type="html"><![CDATA[
 			<p>Here are my feature plans for the near future:</p>
 			<ul>
@@ -473,7 +473,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-03-tune-out-bug-failure" />
 		<title type="html"><![CDATA[Last-hour tune-out bug]]></title>
 		<published>2022-10-03T00:00:00+01:00</published>
-		<updated>2022-10-04T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:11Z</updated>
 		<content type="html"><![CDATA[
 			<p>Fixed a bug caused by adding the tune-out button, which caused the wrong show to load in the last hour of the week (last hour of a schedule).</p>
 			<p><strong>Update:</strong> Turns out I did not fix the bug, and I'm probably gonna have to remove a minor feature (the &ldquo;Tune Out&rdquo; button) to fix it for real (since the bug's only present because I added the ability to tune in, then out, then back in again).</p>
@@ -485,7 +485,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-10-02-rss-feed-and-new-features" />
 		<title type="html"><![CDATA[RSS feed and some new on-site features]]></title>
 		<published>2022-10-02T00:00:00+01:00</published>
-		<updated>2022-10-02T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:10Z</updated>
 		<content type="html"><![CDATA[
 			<p>Here's the first <abbr>RSS</abbr> post for Weird Waves! I've also made some changes on the site itself: added a simple loading spinner for when the station's getting the schedule and tuning in; fixed a bug with the settings toggles; and moved all the old news to a news archive page.</p>
 		]]></content>
@@ -495,7 +495,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-09-30-neocities-move" />
 		<title type="html"><![CDATA[NeoCities move]]></title>
 		<published>2022-09-30T00:00:00+01:00</published>
-		<updated>2022-10-01T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:09Z</updated>
 		<content type="html"><![CDATA[
 			<p>The move to NeoCities hosting is in progress!</p>
 			<p><strong>Update:</strong> I'm having some <abbr>HTTP</abbr> Strict Transport Security (<abbr>HSTS</abbr>) trouble, but I think that's just on my end and should work itself out once my computer stops caching the address of the old hosting.</p>
@@ -507,7 +507,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-09-29-move-prep" />
 		<title type="html"><![CDATA[Prepping for the move]]></title>
 		<published>2022-09-29T00:00:00+01:00</published>
-		<updated>2022-09-29T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:08Z</updated>
 		<content type="html"><![CDATA[
 			<p>The Call In, Support, and Links sections now have some basic info in them! Super-placeholder-y, but a little more than before. I just wanted every section to be nominally complete before the upcoming hosting move.</p>
 			<p>I also brought back intermission audio, since otherwise there's just dead silence and it's hard to tell whether that's fine or an audio error.</p>
@@ -518,7 +518,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-09-27-fleshing-out" />
 		<title type="html"><![CDATA[Fleshing things out]]></title>
 		<published>2022-09-27T00:00:00+01:00</published>
-		<updated>2022-09-27T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:07Z</updated>
 		<content type="html"><![CDATA[
 			<p>Added a &ldquo;Tune Out&rdquo; button, so you can stop audio downloads without closing the page.</p>
 			<p>You can't see it directly on the site, but I also added a new favicon and a social media card!</p>
@@ -529,7 +529,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-09-08-all-coming-together" />
 		<title type="html"><![CDATA[It's all coming together]]></title>
 		<published>2022-09-18T00:00:00+01:00</published>
-		<updated>2022-09-25T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:06Z</updated>
 		<content type="html"><![CDATA[
 			<p>I've cut the Archive's content per-show down to just the bare minimum (blurbs and content notes), which saves a bunch of data and overhead.</p>
 			<p><strong>Update:</strong> Intermission audio is gone. I figured I probably wouldn't change it using the option to do so in the schedule files and thought it'd be simpler to just get rid of it.</p>
@@ -551,7 +551,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-09-01-schedule-bugfix" />
 		<title type="html"><![CDATA[Schedule rollover bugfix]]></title>
 		<published>2022-09-01T00:00:00+01:00</published>
-		<updated>2022-09-01T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:05Z</updated>
 		<content type="html"><![CDATA[
 			<p>Just discovered and fixed a bug where the script would set the date wrong when the week's schedule started in one month and ended in the next.</p>
 		]]></content>
@@ -561,7 +561,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-08-26-re-arranging-the-page" />
 		<title type="html"><![CDATA[Re-arranging the page]]></title>
 		<published>2022-08-26T00:00:00+01:00</published>
-		<updated>2022-08-26T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:04Z</updated>
 		<content type="html"><![CDATA[
 			<p>First, the content of the Stats section is now at the end of the About section. Second, the News is now on the top of the nav bar with the Schedule and Forecast (other sections that change regularly) and the Archive is in the middle with the other more-or-less static content (About, <abbr>FAQ</abbr>, Settings). Links elsewhere (Contact, Support, and a catch-all Links) are on the bottom.</p>
 		]]></content>
@@ -571,7 +571,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-08-10-safari-audio-bugfix" />
 		<title type="html"><![CDATA[Safari audio bugfix]]></title>
 		<published>2022-08-10T00:00:00+01:00</published>
-		<updated>2022-08-10T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:03Z</updated>
 		<content type="html"><![CDATA[
 			<p>Turns out Safari (at least on <abbr>MacOS</abbr>) had an issue with getting audio file times, and, with the way the script was set up, the browser couldn't load a show from anywhere but the beginning (even if you tuned in halfway through). This is fixed now, at the cost of making all browsers take maybe up to a second to tune in.</p>
 			<p>I also did some broad layout. The Help section's been rolled into the <abbr>FAQ</abbr> and I've added (still-empty) sections for contact links (Call In), tipping (Support), and all other links (Links), plus a basic Stats section that pulls data from the Archive to show things like how many series and shows there are (maybe more complex stuff later).</p>
@@ -582,7 +582,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-08-01-blog-post-weird-waves-wip-2" />
 		<title type="html"><![CDATA[Blog Post: Weird Waves <abbr>WIP</abbr> 2: New Layout, New Shows]]></title>
 		<published>2022-08-01T00:00:00+01:00</published>
-		<updated>2022-08-01T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:02Z</updated>
 		<content type="html"><![CDATA[
 			<p><strong>Note:</strong> This isn't a real feed post, just a blog post from the early stages of Weird Waves' development (before the site existed).</p>
 			<p>Here's another little update on Weird Waves, since I did a little bit more work on it since the last post!</p>
@@ -622,7 +622,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-07-22-blog-post-weird-waves-wip" />
 		<title type="html"><![CDATA[Blog Post: Weird Waves <abbr>WIP</abbr>]]></title>
 		<published>2022-07-22T00:00:00+01:00</published>
-		<updated>2024-11-07T00:00:00Z</updated>
+		<updated>2025-02-08T00:00:01Z</updated>
 		<content type="html"><![CDATA[
 			<p><strong>Note:</strong> This isn't a real feed post, just a blog post from the early stages of Weird Waves' development (before the site existed).</p>
 			<p>Here's a little javascript web app I'm working on: <a href="https://weirdwaves.net">Weird Waves</a>, a fake online radio station for horror audiobooks and radio plays! I dunno how far off the final app is. This post's just an explanation of how it works.</p>
@@ -746,7 +746,7 @@
 		<link rel="alternate" href="https://weirdwaves.net/#news-2022-05-24-the-beginning" />
 		<title type="html"><![CDATA[The beginning]]></title>
 		<published>2022-05-24T00:00:00+01:00</published>
-		<updated>2022-06-25T00:00:00+01:00</updated>
+		<updated>2025-02-08T00:00:00Z</updated>
 		<content type="html"><![CDATA[
 			<p><strong>Note:</strong> This isn't a real feed post, just some key dates from the very beginning of development on Weird Waves that I added to the bottom of the file for context!</p>
 			<p>I first put the idea for Weird Waves on paper on the 24th of May, 2022.</p>
