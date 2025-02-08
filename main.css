@@ -871,6 +871,12 @@ textarea {
 #news-list {
 	padding-inline-start: 0;
 	list-style-type: "";
+	&:empty::after {
+		content: attr(data-empty);
+		display: block;
+		text-align: center;
+		font-style: italic;
+	}
 	& > :first-child h3 {
 		margin-block-start: 1em;
 	}
@@ -878,10 +884,9 @@ textarea {
 		margin-inline-start: 1em;
 	}
 }
-.post-times {
+.news-item-published {
+	display: block;
 	margin-block-end: 0.5em;
-	font-size: var(--meta-font-size);
-	font-style: italic;
 }
 
 /* ----------
