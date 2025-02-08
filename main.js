@@ -627,15 +627,12 @@ function buildArchive() {
 function buildNewsItem(item) {
 	const templatedNews = templateHTML.cloneTemplate(`templatedNews`);
 
-	templatedNews.querySelector(`li`).id = item.querySelector(`link[rel="alternate"]`).getAttribute(`href`).split(`#`)[1];
+	const newsID = item.querySelector(`link[rel="alternate"]`).getAttribute(`href`).split(`#`)[1];
+
+	templatedNews.querySelector(`li`).id = newsID;
 	templatedNews.querySelector(`.news-item-heading`).setContent(item.querySelector(`title`).textContent);
-	templatedNews.querySelector(`h3 > a`).href = `#${templatedNews.id}`;
-
-	[`published`, `updated`].forEach(time => {
-		templatedNews.querySelector(`.news-item-${time}`).textContent = item.querySelector(time).textContent.split(`T`)[0];
-	});
-	if (item.querySelector(`published`).textContent === item.querySelector(`updated`).textContent) templatedNews.querySelector(`.news-item-updated-note`).remove();
-
+	templatedNews.querySelector(`h3 > a`).href = `#${newsID}`;
+	templatedNews.querySelector(`.news-item-published`).textContent = item.querySelector(`published`).textContent.split(`T`)[0];
 	templatedNews.querySelector(`.news-item-content`).setContent(item.querySelector(`content`).textContent);
 
 	return templatedNews;
@@ -649,13 +646,17 @@ async function loadNews() {
 	);
 	if (!file.ok) {
 		console.error(`failed to fetch news feed file`);
-//		document.getElementById(`this-weeks-schedule`).innerHTML = `Error: feed not fetched.`;
+		page.getEl(`newsList`).dataset.error = `Error: couldn't load news feed,`;
 		return;
 	}
 	const XML = await file.text();
 	const news = new DOMParser().parseFromString(XML, `text/xml`);
 
 	page.getEl(`newsList`).replaceChildren(...[...news.querySelectorAll(`entry`)].map(buildNewsItem));
+
+	// must reset hash so navigateToSection() will apply if the hash is for a news item
+	// (as news items are loaded onto page asynchronously, the browser may not recognise that they exist when navigateToSection() is called)
+	location.hash = location.hash;
 }
 
 /* SCHEDULE */
