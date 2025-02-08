@@ -41,12 +41,11 @@ append an HTML id matching hash-link
 		<h3>
 			<xsl:apply-templates select="atom:title" />
 			<xsl:text> [</xsl:text>
-			<a>
+			<a aria-label="Link to this post">
 				<xsl:attribute name="href">
 					<xsl:text>#</xsl:text>
 					<xsl:apply-templates select="atom:link[@rel='alternate']" />
 				</xsl:attribute>
-				<xsl:attribute name="aria-label">link to this post</xsl:attribute>
 				<xsl:text>link</xsl:text>
 			</a>
 			<xsl:text>]</xsl:text>
@@ -244,15 +243,15 @@ append an HTML id matching hash-link
 const page = (() => {
 	const elements = {};
 	return {
-		"setElement": (key, query) => elements[key] ??= document.querySelector(query),
-		"getElement": (key) => elements[key],
+		"setEl": (key, query) => elements[key] ??= document.querySelector(query),
+		"getEl": (key) => elements[key],
 	};
 })();
 
-page.setElement(`title`, `title`);
-page.setElement(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
+page.setEl(`title`, `title`);
+page.setEl(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 
-page.getElement(`title`).dataset.original = document.title;
+page.getEl(`title`).dataset.original = document.title;
 if (location.hash) navigateToSection();
 
 // raw favicon template
@@ -272,7 +271,7 @@ function updateStyle(name, option) {
 function updateFavicon() {
 	let faviconNew = faviconRaw;
 	[`fore`, `back`, `hot`, `cold`].forEach(type => faviconNew = faviconNew.replaceAll(`--${type}-colour`, getStyle(`:root`, `--${type}-colour`)));
-	page.getElement(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
+	page.getEl(`SVGFavicon`).href = `data:image/svg+xml,${encodeURIComponent(faviconNew)}`;
 }
 
 // perform actions that should be performed on DOMContentLoaded, but aren't
