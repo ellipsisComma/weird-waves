@@ -16,6 +16,16 @@
 
 
 	<entry>
+		<id>https://weirdwaves.net/?53</id>
+		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-08-shifted-feed-back-to-index" />
+		<title type="html"><![CDATA[Shifted the news feed back to the main page]]></title>
+		<published>2025-02-08T00:01:00Z</published>
+		<updated>2025-02-08T00:01:00Z</updated>
+		<content type="html"><![CDATA[
+			<p>I decided to simplify how the site handles the news feed, so now it's been shifted from its own separate page back to the main (now only) page on the site. As part of this change I had to update every feed entry's updated-time (but not published-time) and there's a few minor stylistic changes in the news list, but otherwise it's the same content as before.</p>
+		]]></content>
+	</entry>
+	<entry>
 		<id>https://weirdwaves.net/?52</id>
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-01-30-radio-redesign" />
 		<title type="html"><![CDATA[Radio redesign]]></title>
