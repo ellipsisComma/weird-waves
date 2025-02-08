@@ -13,7 +13,7 @@
 	<link rel="preload" type="font/woff2" href="./fonts/fira-mono-regular-weirdwaves.woff2?v=2024-12-18" as="font" crossorigin>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" media="screen" href="./main.css?v=2025-02-01">
+	<link rel="stylesheet" type="text/css" media="screen" href="./main.css?v=2025-02-08">
 
 	<link rel="icon" href="./images/default-favicon.ico?v=2022-09-27" sizes="48x48">
 	<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2026%2026%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20vector-effect%3D%22non-scaling-stroke%22%3E%3Canimate%20attributeName%3D%22opacity%22%20values%3D%221%3B%200%3B%200%3B%201%22%20keyTimes%3D%220%3B%200%3B%201%3B%201%22%20dur%3D%221s%22%20repeatCount%3D%221%22%2F%3E%3Crect%20x%3D%22-1%22%20y%3D%22-1%22%20width%3D%2228%22%20height%3D%2228%22%20fill%3D%22%23000627%22%2F%3E%3Cpath%20stroke%3D%22%23ff6767%22%20d%3D%22M7%2011a3%203%200%200%201%203%203a3%203%200%200%201%206%200a3%203%200%200%201%203-3%22%2F%3E%3Cpath%20stroke%3D%22%23b9ab00%22%20d%3D%22M7%208a6%206%200%200%201%2012%200v4a6%206%200%200%201-12%200zm12%203h3v1a9%209%200%200%201-18%200v-1h3m6%2010v3m-4%200h8%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml" sizes="any">
@@ -24,7 +24,7 @@
 	<link rel="alternate" type="application/atom+xml" href="https://weirdwaves.net/feed.xml" title="News feed for Weird Waves">
 
 	<script src="./utilities.js?v=2025-01-29"></script>
-	<script src="./initialisation.js?v=2024-12-17"></script>
+	<script src="./initialisation.js?v=2025-02-08"></script>
 </head>
 
 
@@ -43,8 +43,9 @@
 			<circle cx="15" cy="11" r="1" />
 		</g>
 	</symbol>
-	<symbol id="svg-feed">
-		<path d="M1 13a10 10 0 0 0 10 10zm2 2h6v6m-3-3l3-3m0-3a3 3 0 0 1 3 3m5 0a8 8 0 0 0 -8-8m0-5a13 13 0 0 1 13 13" />
+	<symbol id="svg-news">
+		<path d="M4 20v-11a8-8 0 0 1 16 0v11m2 0v2h-20v-2z" />
+		<path class="svg-hot-stroke" d="M6 15v-6h2a2 2 0 0 1 0 4a2 2 0 0 1 2 2m2 0v-6m2 6v-6h2a2 2 0 0 1 0 4" />
 	</symbol>
 	<symbol id="svg-about">
 		<path d="M15 2v6l2 15m1 0h-12m5 0v-4a1 1 0 0 1 2 0v4m-7 0m1 0l2-15v-6m-1 0a10 10 0 0 1 8 0zm0 6h8" />
@@ -78,7 +79,7 @@
 		<rect x="13" y="7" width="8" height="4" />
 		<path class="svg-hot-stroke" d="M6 6l-5-1m5 13l-1 5" />
 	</symbol>
-	<symbol id="svg-call-in">
+	<symbol id="svg-contact">
 		<path class="svg-hot-stroke" d="M7 1l-3 10m4 0l3-10m1 3h-8m-1 4h8" />
 		<path d="M23 6a20 20 0 0 1-17 17a7 7 0 0 1-5-4a7 7 0 0 1 5-4l4 3a14 14 0 0 0 8-8l-3-4a7 7 0 0 1 4-5a7 7 0 0 1 4 5" />
 	</symbol>
@@ -200,6 +201,19 @@
 		<button class="push-button" type="button" data-action="add-show" aria-controls="playlist radio" aria-pressed="false" aria-disabled="false" aria-label="Add show to playlist">+ Show</button>
 	</li>
 </template><!--#archive-show-template end-->
+<!--#news-->
+<template id="news-item-template">
+	<li id=""><article>
+		<header>
+			<h3><span class="news-item-heading"></span> <a href="" aria-label="Link to this post">#</a></h3>
+			<div class="post-times">
+				posted <time class="news-item-published timestamp"></time>
+				<span class="news-item-updated-note"> / last updated <time class="news-item-updated timestamp"></span>
+			</div>
+		</header>
+		<div class="news-item-content"></div>
+	</article></li>
+</template><!--#news-item-template end-->
 <!--html templates end-->
 
 
@@ -287,9 +301,9 @@
 		</li>
 
 		<li>
-			<a href="./feed.xml">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-feed" /></svg>
-				<span>Feed</span>
+			<a href="#news">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-news" /></svg>
+				<span>News</span>
 			</a>
 		</li>
 	</ul>
@@ -317,9 +331,9 @@
 
 	<ul>
 		<li>
-			<a href="#call-in">
-				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-call-in" /></svg>
-				<span>Call In</span>
+			<a href="#contact">
+				<svg class="svg-icon" viewBox="0 0 24 24"><use href="#svg-contact" /></svg>
+				<span>Contact</span>
 			</a>
 		</li>
 		<li>
@@ -387,6 +401,17 @@
 		<ol id="archive-series-links" class="flex-list"></ol><!--#archive-series-links end-->
 	</nav>
 	<ol id="series-list"></ol><!--#series-list end-->
+</section><!--#archive end-->
+
+
+
+<section id="news">
+	<h2>News</h2>
+	<p>This is a preview of the Weird Waves news feed. Read in your browser or subscribe by copying its <abbr>URL</abbr> into your feed reader:</p>
+	<p id="feed-url"><code>https://weirdwaves.net/feed.xml</code></p>
+	<p>New to feeds? They let you follow sites! Read <a href="https://aboutfeeds.com/">About Feeds</a> for more info.</p>
+	<svg class="svg-icon waveform-spacer" role="separator" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
+	<ol id="news-list" reversed=""></ol>
 </section><!--#archive end-->
 
 
@@ -590,14 +615,14 @@
 
 
 
-<section id="call-in">
-	<h2>Call In</h2>
+<section id="contact">
+	<h2>Contact</h2>
 	<p>Got questions, feedback, requests?</p>
 	<ul class="flex-list">
 		<li><a href="https://neocities.org/site/weirdwaves" rel="me">Neocities</a></li>
 		<li><a href="mailto:maintenance@weirdwaves.net" rel="reply-to me">maintenance@weirdwaves.net</a></li>
 	</ul>
-</section><!--#call-in end-->
+</section><!--#contact end-->
 
 
 
@@ -763,6 +788,6 @@
 
 
 <script src="./archive.js?v=2025-01-30"></script>
-<script src="./main.js?v=2025-02-02"></script>
+<script src="./main.js?v=2025-02-08"></script>
 </body>
 </html>

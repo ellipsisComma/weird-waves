@@ -18,11 +18,11 @@ DEFAULTS
 
 	BOOTH
 	ARCHIVE
+	NEWS
 	ABOUT
 	STREAMING
 	SETTINGS
-	CALL IN/LINKS/CREDITS/WELCOME
-	FEED
+	CONTACT/LINKS/CREDITS/WELCOME
 */
 
 @layer reset, defaults, user, utilities;
@@ -430,11 +430,12 @@ h2 {
 h1, h2 {
 	text-transform: uppercase;
 	font-feature-settings: "case";
-	text-wrap: balance;
+	text-wrap-style: balance;
 }
 h3 {
 	margin-block-start: 2.4em;
 	margin-block-end: 0.4em;
+	text-wrap-style: balance;
 	& + * {
 		margin-block-start: 0;
 	}
@@ -688,30 +689,17 @@ input[type="range"]:active {
 		padding-inline: 0.2em;
 		align-items: center;
 		gap: 0.2em;
-		&[href^="#"] {
-			text-decoration: none;
-			user-select: none;
-			&:is(:link, :visited) {
-				color: unset;
-			}
-			&[aria-current="page"] {
-				color: var(--cold-colour);
-			}
-			&:is(:hover, :focus, :active) {
-				color: var(--hot-colour);
-				background-color: unset;
-			}
+		text-decoration: none;
+		user-select: none;
+		&:is(:link, :visited) {
+			color: unset;
 		}
-		&[href$="feed.xml"] {
-			&:link use {
-				stroke: var(--hot-colour);
-			}
-			&:visited use {
-				stroke: var(--cold-colour);
-			}
-			&:active use {
-				stroke: var(--back-colour);
-			}
+		&[aria-current="page"] {
+			color: var(--cold-colour);
+		}
+		&:is(:hover, :focus, :active) {
+			color: var(--hot-colour);
+			background-color: unset;
 		}
 		& > span {
 			white-space: nowrap;
@@ -873,6 +861,29 @@ textarea {
 	margin-inline-start: var(--gap-size);
 }
 
+/* ---------
+	NEWS
+--------- */
+
+#feed-url {
+	text-align: center;
+}
+#news-list {
+	padding-inline-start: 0;
+	list-style-type: "";
+	& > :first-child h3 {
+		margin-block-start: 1em;
+	}
+	.news-item-content {
+		margin-inline-start: 1em;
+	}
+}
+.post-times {
+	margin-block-end: 0.5em;
+	font-size: var(--meta-font-size);
+	font-style: italic;
+}
+
 /* ----------
 	ABOUT
 ---------- */
@@ -970,72 +981,19 @@ textarea {
 }
 
 /* ----------------------------------
-	CALL IN/LINKS/CREDITS/WELCOME
+	CONTACT/LINKS/CREDITS/WELCOME
 ---------------------------------- */
 
-#call-in, #links, #credits, #welcome {
+#contact, #links, #credits, #welcome {
 	text-align: center;
 }
 #schedule-container {
-	text-wrap: balance;
+	text-wrap-style: balance;
 }
 .waveform-spacer {
 	margin-inline: auto;
 	& + h3 {
 		margin-block-start: 1em;
-	}
-}
-
-/* ---------
-	FEED
---------- */
-
-#feed-info {
-	margin-block-end: 0.3em;
-	margin-inline: var(--gap-size);
-	text-align: center;
-	& > :first-child {
-		margin-block-start: 0;
-	}
-	& > :last-child {
-		margin-block-end: 0;
-	}
-}
-.post-list {
-	margin-inline-start: 1em;
-	padding-inline-start: 0;
-	list-style-type: "";
-	header {
-		margin-inline-start: -1em;
-	}
-	& > :first-child h3 {
-		margin-block-start: 1em;
-	}
-}
-.post-times {
-	margin-block-end: 0.5em;
-	font-size: var(--meta-font-size);
-	font-style: italic;
-	& > time {
-		font-variant-numeric: tabular-nums;
-		&::before {
-			content: "\2022 \a0";
-			content: "\2022 \a0" / ""; /* bullet point + non-breaking space */
-			color: var(--cold-colour);
-		}
-		&:last-of-type::before {
-			color: var(--hot-colour);
-		}
-	}
-}
-#latest-updates {
-	display: grid;
-	row-gap: 0.5em;
-	dt {
-		font-variant-numeric: tabular-nums;
-	}
-	dd {
-		margin-inline-start: 0;
 	}
 }
 
@@ -1197,15 +1155,6 @@ textarea {
 	/* BOOTH */
 	#playlist {
 		margin-inline: 0;
-	}
-
-	/* FEED */
-	#feed-info {
-		margin-block-start: 0.5em;
-		text-align: left;
-	}
-	#feed-url {
-		text-align: center;
 	}
 }
 

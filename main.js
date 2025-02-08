@@ -172,6 +172,9 @@ page.setEl(`importErrorList`, `#import-error-list`);
 page.setEl(`seriesLinks`, `#archive-series-links`);
 page.setEl(`seriesList`, `#series-list`);
 
+// news
+page.setEl(`newsList`, `#news-list`);
+
 // settings
 page.setEl(`themeButtons`, `#theme-buttons`);
 page.setEl(`fontButtons`, `#font-buttons`);
@@ -193,6 +196,7 @@ const templateHTML = (() => {
 templateHTML.setTemplate(`playlistItem`, `playlist-item`);
 templateHTML.setTemplate(`archiveSeries`, `archive-series`);
 templateHTML.setTemplate(`archiveShow`, `archive-show`);
+templateHTML.setTemplate(`templatedNews`, `news-item`);
 
 // mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
 const playlistObserver = new MutationObserver((mutations) => {
@@ -535,6 +539,8 @@ function updateVolumeControls() {
 PAGE CONSTRUCTION
 -------------- */
 
+/* ARCHIVE */
+
 // build an archive nav-link
 function buildSeriesLink(series) {
 	const newSeriesLinkItem = document.createElement(`li`);
@@ -615,6 +621,45 @@ function buildArchive() {
 	archive = null;
 }
 
+/* NEWS */
+
+// build HTML for news item
+function buildNewsItem(item) {
+	const templatedNews = templateHTML.cloneTemplate(`templatedNews`);
+
+	templatedNews.querySelector(`li`).id = item.querySelector(`link[rel="alternate"]`).getAttribute(`href`).split(`#`)[1];
+	templatedNews.querySelector(`.news-item-heading`).setContent(item.querySelector(`title`).textContent);
+	templatedNews.querySelector(`h3 > a`).href = `#${templatedNews.id}`;
+
+	[`published`, `updated`].forEach(time => {
+		templatedNews.querySelector(`.news-item-${time}`).textContent = item.querySelector(time).textContent.split(`T`)[0];
+	});
+	if (item.querySelector(`published`).textContent === item.querySelector(`updated`).textContent) templatedNews.querySelector(`.news-item-updated-note`).remove();
+
+	templatedNews.querySelector(`.news-item-content`).setContent(item.querySelector(`content`).textContent);
+
+	return templatedNews;
+}
+
+// fetch news feed file and, if available and valid, build news list onto page
+async function loadNews() {
+	const file = await fetch(
+		`./feed.xml`,
+		{"cache": `no-cache`}
+	);
+	if (!file.ok) {
+		console.error(`failed to fetch news feed file`);
+//		document.getElementById(`this-weeks-schedule`).innerHTML = `Error: feed not fetched.`;
+		return;
+	}
+	const XML = await file.text();
+	const news = new DOMParser().parseFromString(XML, `text/xml`);
+
+	page.getEl(`newsList`).replaceChildren(...[...news.querySelectorAll(`entry`)].map(buildNewsItem));
+}
+
+/* SCHEDULE */
+
 // fetch weekly schedule and, if available and valid, load schedule onto page
 async function loadSchedule() {
 	if (!page.getEl(`schedule`)) return;
@@ -639,6 +684,23 @@ async function loadSchedule() {
 		page.getEl(`schedule`).remove();
 	});
 	page.getEl(`schedule`).hidden = false;
+}
+
+/* ---------------
+	NAVIGATION
+--------------- */
+
+// update title and currently-marked nav-link depending on hash
+function navigateToSection() {
+	document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
+	const section = document.querySelector(location.hash.length > 0 ? location.hash : null)?.closest(`main > *`);
+
+	// if targeted section exists, switch aria-current to its nav-link and update document title
+	if (section) {
+		const navLink = document.querySelector(`nav a[href="#${section.id}"]`);
+		document.title = `${navLink.innerText} / ${page.getEl(`title`).dataset.original}`;
+		navLink.setAttribute(`aria-current`, `page`);
+	} else document.title = page.getEl(`title`).dataset.original;
 }
 
 
@@ -707,6 +769,9 @@ document.getElementById(`add-archive-button`).addEventListener(`click`, addArchi
 	});
 });
 
+// navigation events
+window.addEventListener(`hashchange`, navigateToSection);
+
 // on pageload, execute various tasks
 document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise settings and styles
@@ -719,6 +784,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// build various page sections
 	buildArchive();
 	loadPlaylist();
+	loadNews();
 	loadSchedule();
 
 	// update page head data
