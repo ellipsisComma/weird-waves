@@ -701,9 +701,6 @@ input[type="range"]:active {
 			color: var(--hot-colour);
 			background-color: unset;
 		}
-		& > span {
-			white-space: nowrap;
-		}
 	}
 }
 .svg-hot-stroke {
