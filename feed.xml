@@ -11,10 +11,22 @@
 	<author>
 		<name>Weird Waves</name>
 	</author>
-	<updated>2025-02-08T00:00:52Z</updated>
+	<updated>2025-02-11T00:00:00Z</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?54</id>
+		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-11-folded-stream-widget-into-site" />
+		<title type="html"><![CDATA[Folded the stream widget into the main site]]></title>
+		<published>2025-02-11T00:00:00Z</published>
+		<updated>2025-02-11T00:00:00Z</updated>
+		<content type="html"><![CDATA[
+			<p>I've removed the stream widget previously available at <code>https://weirdwaves.net/stream/widget.html</code>; anyone using it in livestreams should check the new advice in the <a href="#streaming">Streaming</a> section to update how they set up their browser source.</p>
+			<p>It had a good run, but the main reason I added it was because the popular livestream software <abbr>OBS</abbr> had some problems with the way it treated media files (audio and video). These problems were unusual, and irrelevant to how most people use the software, but prevented Weird Waves from running properly.</p>
+			<p>These problems now seem to have been fixed, and keeping the widget around added some extra overhead (a few extra files, extra audio metadata, and two versions of the site's stylesheet), so it made more sense ot get rid of it.</p>
+		]]></content>
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?53</id>
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-08-shifted-feed-back-to-index" />

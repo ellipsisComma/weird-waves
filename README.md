@@ -28,7 +28,6 @@ The archive as a whole is an array of series objects, each of which contains an 
 	"code": `001-Nothing`,
 	"heading": `#1: <cite>Nothing Behind the Door</cite>`,
 	"blurb": `Bank robbers try to hide the money in a mountain shed that contains&mdash;literally&mdash;nothing.`,
-	"duration": 1770,
 	"banger": true,
 	},
 ],
@@ -70,20 +69,8 @@ The functions `showPath()` and `schedulePath()` in `main.js` return paths for sh
 |`blurb`|string|yes|plaintext or phrasing HTML show description|
 |`notes`|string|no|plaintext or phrasing HTML content notes|
 |`banger`|boolean|no|`true` if the show is recommended|
-|`duration`|integer|yes|length of the show in seconds, rounded up|
 
 The "+ Show" button in the Booth section adds a randomly-selected show to the playlist; the "+ Banger" button does the same, but only picks from shows for which `banger` is set to `true`.
-
-## Livestream widget
-
-A livestreamer-friendly widget version of the site is available at `./stream/widget.html`. The widget only includes the Booth, Archive, and Settings sections (including the copyright-safe setting, copied from the index's Streaming section).
-
-The widget differs from the main version in several key ways:
-
-* It uses an outdated stylesheet and outdated scripts.
-* It requires audio durations to be stored in `archive.js` instead of being retrieved from the files themselves.
-
-These changes are necessary due to the outdated browser/rendering engine used by popular free broadcasting software (OBS and Streamlabs OBS). In particular, this engine treats all media as streaming media of infinite length, so audio durations must be provided separately from the audio files and their metadata.
 
 ## Adding schedules
 
@@ -166,3 +153,12 @@ Long-implemented, but I decided this was unnecessary. The duration stats also re
 Setting the seek bar's maximum to equal the audio's duration in seconds (rounded up) would increase the resolution to perfect 1-second intervals for every show of any length, and would simplify any script where the seek bar is updated (instead of having to calculate the time as a percentage, all values would just be the audio's current time).
 
 This has limited benefit when seeking with pointer controls, because the seek bar's resolution is partly limited by the screen resolution. It also makes seeking with keyboard controls *much* slower. An extra keyboard control could be added, e.g. holding Shift to change from 1-second intervals to 10-second intervals, but no other part of the app deviates from expected keyboard controls and the extra control would have to be clearly explained to all users.
+
+### Livestream widget
+
+A livestreamer-friendly widget version of the site was previously available at `./stream/widget.html`. The widget only included the Booth, Archive, and Settings sections (including the copyright-safe setting, copied from the index's Streaming section). The main reason for having a separate page was due to the open-source broadcast software, OBS, treating all media as infinitely-long streaming media. This prevented it from properly retrieving time-related data about audio files and exposing that data through Media Element API properties like `.duration` and `.currentTime`.
+
+This problem with OBS now seems to be fixed (aside from when viewing a local copy of Weird Waves in OBS), so the stream widget has been removed. The downside is that the main site isn't as focused as the stream widget was, but there are two further upsides:
+
+* no longer any need to include show audio durations in `archive.js`
+* browser source CSS recommendations can be made consistent with the main page's CSS

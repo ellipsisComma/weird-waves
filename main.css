@@ -1121,7 +1121,7 @@ textarea {
 	}
 
 	/* RADIO */
-	#sidebar {
+	#radio-container {
 		grid-area: radio;
 		block-size: max-content;
 		position: sticky;
