@@ -23,7 +23,7 @@
 
 	<link rel="alternate" type="application/atom+xml" href="https://weirdwaves.net/feed.xml" title="News feed for Weird Waves">
 
-	<script src="./utilities.js?v=2025-01-29"></script>
+	<script src="./utilities.js?v=2025-02-18"></script>
 	<script src="./initialisation.js?v=2025-02-08"></script>
 </head>
 
@@ -172,6 +172,11 @@
 		</ul>
 	</li>
 </template><!--#playlist-item-template end-->
+<template id="import-error-list-item-template">
+	<li>
+		<code class="invalid-show-id"></code> (closest match: <code class="matched-show-id"></code>)
+	</li>
+</template><!--#error-list-item-template end-->
 <!--archive-->
 <template id="archive-series-template">
 	<li id="" data-series-id="">
@@ -374,11 +379,12 @@
 	</div><!--#playlist-and-controls end-->
 
 	<h3>Import & export</h3>
-	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist.</p>
+	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. The output is one ID per line. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist.</p>
 	<textarea id="import-export-data" aria-label="Import/export playlist data" aria-errormessage="import-error-message" aria-invalid="false"></textarea>
 	<div id="import-error-message" aria-live="polite" hidden>
 		<p>Invalid show ID(s):</p>
 		<ul id="import-error-list"></ul><!--#import-error-list end-->
+		<p>The import error notes are ignored when you attempt to import a list of show IDs, so you don't need to remove them.</p>
 	</div><!--#import-error-message end-->
 	<ul id="data-controls" class="flex-list">
 		<li><button id="export-button" class="push-button" type="button" aria-controls="import-export-data">Export</button></li>
@@ -784,6 +790,6 @@
 
 
 <script src="./archive.js?v=2025-02-11"></script>
-<script src="./main.js?v=2025-02-08fix"></script>
+<script src="./main.js?v=2025-02-18"></script>
 </body>
 </html>

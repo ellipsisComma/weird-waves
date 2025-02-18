@@ -194,9 +194,10 @@ const templateHTML = (() => {
 })();
 
 templateHTML.setTemplate(`playlistItem`, `playlist-item`);
+templateHTML.setTemplate(`importErrorItem`, `import-error-list-item`);
 templateHTML.setTemplate(`archiveSeries`, `archive-series`);
 templateHTML.setTemplate(`archiveShow`, `archive-show`);
-templateHTML.setTemplate(`templatedNews`, `news-item`);
+templateHTML.setTemplate(`newsItem`, `news-item`);
 
 // mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
 const playlistObserver = new MutationObserver((mutations) => {
@@ -207,6 +208,10 @@ const playlistObserver = new MutationObserver((mutations) => {
 		{"cache": `no-cache`}
 	);
 });
+
+// set of all show IDs
+// ONLY use this for validating whether an ID is valid (as opposed to checking the archive's DOM)
+const allShowIDs = new Set();
 
 
 
@@ -227,18 +232,17 @@ function setTimestampFromSeconds(element, time) {
 
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type = ``) {
-	const pool = page.getEl(`seriesList`).querySelectorAll(`${settings.getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li${type === `banger` ? `[data-banger="true"]` : ``}:not(:has([data-action="add-show"][aria-pressed="true"]))`);
+	const pool = page.getEl(`seriesList`).querySelectorAll(`${
+		settings.getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``
+	} .show-list > li${
+		type === `banger` ? `[data-banger="true"]` : ``
+	}:not(:has([data-action="add-show"][aria-pressed="true"]))`);
 	return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)].dataset.showId : ``;
 }
 
 // get show element in archive
 function getShowInArchive(ID) {
 	return page.getEl(`seriesList`).querySelector(`.show-list > [data-show-id="${ID}"]`);
-}
-
-// get show element on playlist
-function getShowOnPlaylist(ID) {
-	return page.getEl(`playlist`).querySelector(`:scope > [data-show-id="${ID}"]`);
 }
 
 // get array of all show IDs, from a set of HTML show elements
@@ -307,18 +311,41 @@ function exportPlaylist() {
 	page.getEl(`importExport`).value = getShowIDs(page.getEl(`playlist`).children).join(`\n`);
 }
 
+// get closest string match to an invalid show ID during import attempt, as long as its similarity exceeds a minimum threshold
+function matchInvalidShowID(invalidID) {
+	const threshold = 0.85;
+	const match = {
+		"id": `N/A`,
+		"similarity": 0,
+	};
+
+	// iteratively find most-similar valid ID by Jaro similarity (compare lowercase so the algorithm ignores case errors)
+	for (const validID of allShowIDs) {
+		const similarity = getJaroSimilarity(validID.toLowerCase(), invalidID.toLowerCase());
+		if (similarity > threshold && similarity > match.similarity) {
+			match.id = validID;
+			match.similarity = similarity;
+		}
+	}
+
+	return match.id;
+}
+
 // import playlist from textbox
 function importPlaylist() {
 	const importList = page.getEl(`importExport`).value.trim();
+
+	// hide error message (done before guard, so error message disappears on import attempt even if textbox is empty)
+	page.getEl(`importErrorMessage`).hidden = true;
 	if (importList.length === 0) return;
 
-	const validIDRegex = /^[A-Z][A-Za-z]{1,2}-\w+-\w+$/m;
+	// remove import error markers from text, remove horizontal whitespace, and validate IDs
 	const errorMarker = ` -- import error!`;
 	const importIDs = [...new Set(importList.replaceAll(errorMarker, ``).replace(/[^\S\n\r]/g, ``).split(/\n+/))];
 	const invalidIDs = importIDs.filter((ID, i) => {
-		const valid = validIDRegex.test(ID) && getShowInArchive(ID);
-		if (!valid) importIDs[i] += errorMarker;
-		return !valid;
+		const invalid = !allShowIDs.has(ID);
+		if (invalid) importIDs[i] += errorMarker;
+		return invalid;
 	});
 
 	if (invalidIDs.length === 0) {
@@ -328,8 +355,9 @@ function importPlaylist() {
 		importIDs.forEach(addShow);
 	} else {
 		page.getEl(`importErrorList`).replaceChildren(...invalidIDs.map(ID => {
-			const IDitem = document.createElement(`li`);
-			IDitem.textContent = ID;
+			const IDitem = templateHTML.cloneTemplate(`importErrorItem`);
+			IDitem.querySelector(`.invalid-show-id`).textContent = ID;
+			IDitem.querySelector(`.matched-show-id`).textContent = matchInvalidShowID(ID);
 			return IDitem;
 		}));
 		page.getEl(`importExport`).value = importIDs.join(`\n`);
@@ -342,7 +370,7 @@ function importPlaylist() {
 // load playlist from local storage
 function loadPlaylist() {
 	page.getEl(`playlist`).replaceChildren();
-	retrieve(`playlist`, []).filter(getShowInArchive).forEach(addShow);
+	retrieve(`playlist`, []).filter(ID => allShowIDs.has(ID)).forEach(addShow);
 }
 
 /* --
@@ -353,7 +381,7 @@ SHOWS
 
 // add show to playlist; if playlist was previously empty, load top show
 function addShow(ID) {
-	const showOnPlaylist = getShowOnPlaylist(ID);
+	const showOnPlaylist = page.getEl(`playlist`).querySelector(`:scope > [data-show-id="${ID}"]`);
 	if (showOnPlaylist) {
 		page.getEl(`playlist`).append(showOnPlaylist);
 		console.log(`re-added show: ${ID}`);
@@ -374,7 +402,7 @@ function addShow(ID) {
 	newShow.dataset.showId = ID;
 	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
 
-	// expand show info with series title and license
+	// expand show info with series title and source
 	const newShowHeading = newShow.querySelector(`.show-heading`);
 	newShowHeading.replaceChildren(
 		...seriesInArchive.querySelector(`.series-heading`).cloneChildren(),
@@ -585,7 +613,12 @@ function buildSeries(series) {
 	newSeries.querySelector(`.series-blurb`).setContent(series.blurb);
 	newSeries.querySelector(`.series-source`).setContent(`source: ${series.source}`);
 
-	series.shows.forEach(show => show.ID = `${series.code}-${show.code}`);
+	// add show ID to show data and list of all show IDs
+	series.shows.forEach(show => {
+		showID = `${series.code}-${show.code}`
+		show.ID = showID;
+		allShowIDs.add(showID);
+	});
 	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
 
 	return templatedSeries;
@@ -625,7 +658,7 @@ function buildArchive() {
 
 // build HTML for news item
 function buildNewsItem(item) {
-	const templatedNews = templateHTML.cloneTemplate(`templatedNews`);
+	const templatedNews = templateHTML.cloneTemplate(`newsItem`);
 
 	const newsID = item.querySelector(`link[rel="alternate"]`).getAttribute(`href`).split(`#`)[1];
 
@@ -738,7 +771,6 @@ document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlayl
 page.getEl(`clearButton`).addEventListener(`click`, () => {
 	if (page.getEl(`clearButton`).getAttribute(`aria-disabled`) === `false`) revealClearPlaylistControls();
 });
-
 document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
 document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
 [`playlist-controls`, `data-controls`].forEach(id => {

@@ -98,6 +98,52 @@ String.prototype.kebabToCamel = function () {
 	return this.replaceAll(/-([a-z])/g, (match) => match.slice(1).toUpperCase());
 }
 
+// calculate the Jaro similarity of two strings (0 = totally unalike, 1 = identical)
+function getJaroSimilarity(str1, str2) {
+	const matched1 = Array(str1.length).fill(false);
+	const matched2 = Array(str2.length).fill(false);
+	const range = Math.floor(Math.max(str1.length, str2.length) / 2 - 1);
+
+	for (let i = 0; i < str1.length; i++) {
+		const lowerBound = Math.max(0, i - range);
+		const upperBound = Math.min(str2.length, i + range);
+
+		for (let j = lowerBound; j < upperBound; j++) {
+			// if the two characters match and the second hasn't been matched yet, mark both as matched and break the loop (no need to continue checking for matches)
+			if (str1[i] === str2[j] && matched2[j] !== true) {
+				matched1[i] = true;
+				matched2[j] = true;
+				break;
+			}
+		}
+	}
+
+	// where "matched" is true get character from string and push to "shared"
+	const shared1 = [];
+	const shared2 = [];
+	matched1.forEach((match, i) => {
+		if (match) shared1.push(str1[i]);
+	});
+	matched2.forEach((match, i) => {
+		if (match) shared2.push(str2[i]);
+	});
+
+	// get transposition count
+	let transPos = 0;
+	for (let i = 0; i < shared1.length; i++) {
+		if (shared1[i] !== shared2[i]) transPos++;
+	}
+
+	const matches = shared1.length;
+	const similarity = (
+		matches / str1.length
+		+ matches / str2.length 
+		+ (matches - transPos / 2) / matches
+		) / 3;
+
+	return similarity;
+}
+
 
 
 /* =========
