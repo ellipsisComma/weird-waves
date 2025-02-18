@@ -218,6 +218,7 @@ button {
 	color: inherit;
 	background-color: unset;
 	border: unset;
+	user-select: none;
 	* {
 		pointer-events: none;
 	}
@@ -294,6 +295,7 @@ textarea {
 	--main-column-padding: calc(2 * var(--gap-size));
 
 	--meta-font-size: 0.7em;
+	--font-stack-mono: "Fira Mono", monospace;
 
 	--seek-bar-thumb-size: 1em;
 	--control-depth: 6px;
@@ -400,6 +402,9 @@ textarea {
 	GENERAL
 ------------ */
 
+* {
+	scrollbar-color: var(--hot-colour) var(--back-colour);
+}
 body {
 	margin: 0;
 	color: var(--fore-colour);
@@ -407,6 +412,7 @@ body {
 	text-orientation: upright;
 	font-family: var(--font-stack);
 	line-height: 1.5;
+	accent-color: var(--cold-colour);
 }
 #container {
 	margin-inline: auto;
@@ -455,6 +461,15 @@ h3 {
 }
 a:link {
 	color: var(--hot-colour);
+	text-decoration-thickness: 0.075em;
+	text-underline-offset: 0.15em;
+	&:focus-visible {
+		text-decoration-line: none;
+		outline-offset: 0.1em;
+		&:hover {
+			text-decoration-line: underline;
+		}
+	}
 }
 a:visited {
 	color: var(--cold-colour);
@@ -470,7 +485,7 @@ a:active {
 	text-transform: lowercase;
 }
 code {
-	font-family: "Fira Mono", monospace;
+	font-family: var(--font-stack-mono);
 }
 .content-notes {
 	& > summary {
@@ -673,7 +688,6 @@ input[type="range"]:active {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: var(--gap-size);
-	padding-block-start: 0.2em;
 	border-block: var(--fore-line);
 	& > ul {
 		display: flex;
@@ -686,6 +700,7 @@ input[type="range"]:active {
 	a {
 		display: inline-flex;
 		flex-direction: column;
+		padding-block-start: 0.3em;
 		padding-inline: 0.2em;
 		align-items: center;
 		gap: 0.2em;
@@ -774,13 +789,11 @@ textarea {
 	padding-block-end: 0.25em;
 	padding-inline: 0.5em;
 	font-size: 1em;
+	font-family: var(--font-stack-mono);
 	line-height: 1;
 	border: var(--fore-line);
 	border-top-width: calc(var(--control-depth) + var(--line-width));
 	resize: none;
-}
-#import-error-message {
-	color: var(--hot-colour);
 }
 #import-error-list {
 	overflow-wrap: break-word;
@@ -937,7 +950,9 @@ textarea {
 	align-items: baseline;
 	gap: 0.5em;
 	margin-inline-start: 1em;
+	padding-block-start: 0.25em;
 	text-align: start;
+	user-select: auto;
 	&::before {
 		content: "+" / "";
 		display: block;
@@ -1023,13 +1038,13 @@ textarea {
 
 	/* NAV */
 	#main-nav {
-		padding-block-start: var(--gap-size);
+		padding-block-start: 0.2em;
 		& > ul {
 			justify-content: center;
 		}
 		& a {
-			padding-block-end: 0.2em;
 			flex-direction: row;
+			padding-block: 0.1em;
 			span {
 				margin-block-start: 0.2em;
 			}
