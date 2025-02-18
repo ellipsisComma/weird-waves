@@ -405,6 +405,7 @@ textarea {
 * {
 	scrollbar-color: var(--hot-colour) var(--back-colour);
 	&:focus-visible {
+		outline-width: var(--line-width);
 		outline-style: solid;
 		outline-color: var(--cold-colour);
 		outline-offset: 0.1em;
