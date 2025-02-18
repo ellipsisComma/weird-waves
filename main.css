@@ -404,6 +404,11 @@ textarea {
 
 * {
 	scrollbar-color: var(--hot-colour) var(--back-colour);
+	&:focus-visible {
+		outline-style: solid;
+		outline-color: var(--cold-colour);
+		outline-offset: 0.1em;
+	}
 }
 body {
 	margin: 0;
@@ -465,7 +470,6 @@ a:link {
 	text-underline-offset: 0.15em;
 	&:focus-visible {
 		text-decoration-line: none;
-		outline-offset: 0.1em;
 		&:hover {
 			text-decoration-line: underline;
 		}
