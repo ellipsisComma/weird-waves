@@ -5,10 +5,15 @@ SCRIPT CONTROLS: settings to control app behaviour (e.g. default user settings)
 PARAMETERS: initialising internal parameters
 FUNCTIONS
 	UTILITY: general and misc. applications
-	PLAYLIST: building and altering the playlist
-	SHOWS: adding, moving, removing, and loading shows
+	PLAYLIST: building and altering the playlist as a whole
+	SHOWS:
+		ADDING: adding single or multiple shows to playlist
+		MANIPULATING: loading, moving, and removing shows already on playlist
 	RADIO: audio interface
-	PAGE CONSTRUCTION: building page sections and content (e.g. the archive)
+	PAGE CONSTRUCTION:
+		ARCHIVE: building archive onto page and filtering data from it for later use
+		SCHEDULE: fetching and building schedule
+		NEWS: fetching and building news feed
 EVENTS: event listeners
 */
 
@@ -134,6 +139,12 @@ const styles = (() => {
 =============== */
 
 // page module: handles a collection of stable on-page element references
+/*
+	features of this vs just using querySelector and getElementById:
+		* provides a list of all elements relevant to script
+		* allows flexibility of querySelector with limited set of getElementById
+		* items can't be overwritten (this could be set on a per-element basis with a little more work)
+*/
 const page = (() => {
 	const elements = {};
 	return {
@@ -344,7 +355,7 @@ function importPlaylist() {
 	const importIDs = [...new Set(importList.replaceAll(errorMarker, ``).replace(/[^\S\n\r]/g, ``).split(/\n+/))];
 	const invalidIDs = importIDs.filter((ID, i) => {
 		const invalid = !allShowIDs.has(ID);
-		if (invalid) importIDs[i] += errorMarker;
+		if (invalid) importIDs[i] += errorMarker; // side-effect
 		return invalid;
 	});
 
@@ -379,7 +390,7 @@ SHOWS
 
 /* ADDING */
 
-// add show to playlist; if playlist was previously empty, load top show
+// add show to playlist
 function addShow(ID) {
 	const showOnPlaylist = page.getEl(`playlist`).querySelector(`:scope > [data-show-id="${ID}"]`);
 	if (showOnPlaylist) {
@@ -411,7 +422,7 @@ function addShow(ID) {
 	);
 	newShow.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
 
-	// update page and stored data
+	// update page
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
 	page.getEl(`playlist`).appendChild(templatedShow);
 }
@@ -419,7 +430,6 @@ function addShow(ID) {
 // add entire archive to playlist
 function addArchive() {
 	getShowIDs(page.getEl(`seriesList`).querySelectorAll(`${settings.getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
-	storePlaylist();
 }
 
 // add entire series to playlist
@@ -450,8 +460,8 @@ function moveShowDown(target) {
 
 // remove show from playlist
 function removeShow(target) {
-	getShowInArchive(target.dataset.showId).querySelector(`[data-action="add-show"]`).unpress();
 	target.remove();
+	getShowInArchive(target.dataset.showId).querySelector(`[data-action="add-show"]`).unpress();
 }
 
 // write show parts onto page and load show audio file; if playlist is empty, reset radio
@@ -514,6 +524,7 @@ function togglePlay() {
 
 // end current show and autoplay next show if current show was playing
 function skipShow() {
+	if (page.getEl(`playlist`).children.length === 0) return;
 	if (!page.getEl(`audio`).paused) page.getEl(`audio`).dataset.playNextShow = `true`;
 	removeShow(page.getEl(`playlist`).firstElementChild);
 }
@@ -552,7 +563,7 @@ function setVolume() {
 	if (page.getEl(`audio`).muted) toggleMute();
 }
 
-// update satte of mute button and volume slider to match show audio state
+// update state of mute button and volume slider to match show audio state
 function updateVolumeControls() {
 	if (page.getEl(`audio`).muted || page.getEl(`audio`).volume === 0) {
 		page.getEl(`volumeControl`).value = 0;
@@ -593,7 +604,7 @@ function buildShow(show) {
 
 	// if show has content notes, add them to show-info, otherwise remove empty content notes element
 	const contentNotes = newShow.querySelector(`.content-notes`);
-	if (show.notes) contentNotes.querySelector(`span`).setContent(show.notes);
+	if (show.notes) contentNotes.querySelector(`div`).setContent(show.notes);
 	else contentNotes.remove();
 
 	return templatedShow;
@@ -615,16 +626,15 @@ function buildSeries(series) {
 
 	// add show ID to show data and list of all show IDs
 	series.shows.forEach(show => {
-		showID = `${series.code}-${show.code}`
+		showID = `${series.code}-${show.code}`;
 		show.ID = showID;
-		allShowIDs.add(showID);
 	});
 	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
 
 	return templatedSeries;
 }
 
-// build archive onto page
+// build archive onto page and runtime
 function buildArchive() {
 	templateHTML.getTemplate(`archiveShow`).querySelector(`.content-notes`).open = settings.getSetting(`notesOpen`);
 
@@ -643,6 +653,9 @@ function buildArchive() {
 			&& event.target.dataset.action === `add-series`
 		) addSeries(event.target.closest(`#series-list > li`));
 	});
+
+	// build list of all show IDs
+	archive.forEach(series => series.shows.forEach(show => allShowIDs.add(`${series.code}-${show.code}`)));
 
 	// build out stats list
 	Object.entries({
