@@ -40,7 +40,11 @@ async function loadNews() {
 
 	// must reset hash so navigateToSection() will apply if the hash is for a news item
 	// (as news items are loaded onto page asynchronously, the browser won't recognise that they exist when navigateToSection() is called on DOMContentLoaded)
-	location.hash = location.hash;
+	if (location.hash) {
+		const storedHash = location.hash;
+		location.hash = ``;
+		location.hash = storedHash;
+	}
 }
 
 export {
