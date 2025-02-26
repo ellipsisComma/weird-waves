@@ -11,10 +11,20 @@
 	<author>
 		<name>Weird Waves</name>
 	</author>
-	<updated>2025-02-11T00:00:00Z</updated>
+	<updated>2025-02-26T00:00:00Z</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?55</id>
+		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-behind-the-scenes-changes-that-might-cause-bugs" />
+		<title type="html"><![CDATA[Behind-the-scenes changes that might cause bugs]]></title>
+		<published>2025-02-26T00:00:00Z</published>
+		<updated>2025-02-26T00:00:00Z</updated>
+		<content type="html"><![CDATA[
+			<p>There's been a major behind-the-scenes change to how the various parts of the player and other more-dynamic site sections work. It shouldn't affect how the site works, just make it easier for me to maintain. However, if you notice anything unusual, send me a message (see <a href="#contact">Contact</a> for more info).</p>
+		]]></content>
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?54</id>
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-11-folded-stream-widget-into-site" />
