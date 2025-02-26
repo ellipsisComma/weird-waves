@@ -302,6 +302,7 @@ textarea {
 
 	--line-width: 1px;
 	--fore-line: var(--line-width) solid var(--fore-colour);
+	--back-line: var(--line-width) solid var(--back-colour);
 	--hot-line: var(--line-width) solid var(--hot-colour);
 	--cold-line: var(--line-width) solid var(--cold-colour);
 }
@@ -959,22 +960,25 @@ textarea {
 	text-align: start;
 	user-select: auto;
 	&::before {
-		content: "+" / "";
+		content: "\a0"; /* non-breaking space */
 		display: block;
 		text-align: center;
 		color: var(--back-colour);
-		border: var(--hot-line);
+		border: var(--back-line);
+		outline: var(--hot-line);
 		transform: translateY(-0.1em);
 	}
 	&:active::before {
-		border-color: var(--cold-colour);
+		outline-color: var(--cold-colour);
 	}
 	&[aria-pressed="true"] {
 		&::before {
 			color: var(--hot-colour);
+			background-color: var(--hot-colour);
 		}
 		&:active::before {
 			color: var(--cold-colour);
+			background-color: var(--cold-colour);
 		}
 	}
 }
