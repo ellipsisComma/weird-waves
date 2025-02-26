@@ -271,7 +271,7 @@ function loadShow() {
 		if (getElement(`audio`).dataset.playNextShow === `true`) {
 			if (getElement(`audio`).paused) getElement(`audio`).play();
 			getElement(`audio`).dataset.playNextShow = `false`;
-		} else getElement(`audio`).pause();
+		} else getElement(`audio`).paused = true;
 		getElement(`seekBar`).value = 0;
 		getElement(`showTimeElapsed`).textContent = `00:00`;
 		getElement(`radioControls`).hidden = false;
