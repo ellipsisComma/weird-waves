@@ -1,5 +1,13 @@
 /*jshint esversion: 11*/
 
+/*
+	player module:
+		* handles all audio playlist processing (adding, removing, shuffling, clearing shows)
+		* handles playlist import-export
+		* handles radio interface and audio pre-fetching
+		* matches playlist across browsing contexts
+*/
+
 import {
 	getElement,
 } from "./page.js";
@@ -362,7 +370,7 @@ function updateVolumeControls() {
 	}
 }
 
-
+// initialise all player events and interactions, and prepare playlist
 function initialise() {
 	// radio audio events
 	getElement(`audio`).addEventListener(`loadstart`, () => getElement(`playToggle`).disabled = true);
@@ -434,7 +442,7 @@ function initialise() {
 }
 
 
-// update settings, styles, and playlist if styles change in another browsing context
+// update playlist if playlist changes in another browsing context
 window.addEventListener(`storage`, () => {
 	if (event.key !== `playlist`) return;
 

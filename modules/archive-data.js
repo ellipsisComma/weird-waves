@@ -1,5 +1,11 @@
 /*jshint esversion: 11*/
 
+/*
+	archive data module:
+		* contains series and show metadata
+		* performs basic processing before export
+*/
+
 // bitrate: constant 24kbps; sample rate: 22050Hz
 // banger = good show, but in a multi-show run only first part will be marked as a banger
 
@@ -2138,6 +2144,7 @@ let archive = [
 },
 ];
 
+// build show ID for each show (helps during archive-building, because all relevant data is inside each show object instead of split between show object and series metadata)
 archive.forEach(series => {
 	series.shows.forEach(show => {
 		show.ID = `${series.code}-${show.code}`;

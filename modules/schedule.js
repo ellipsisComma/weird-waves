@@ -1,5 +1,10 @@
 /*jshint esversion: 11*/
 
+/*
+	schedule module:
+		* loads the week's schedule onto welcome area
+*/
+
 import {
 	getElement,
 } from "./page.js";

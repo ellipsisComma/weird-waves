@@ -1,5 +1,12 @@
 /*jshint esversion: 11*/
 
+/*
+	archive module:
+		* builds archive
+		* builds list of all show IDs
+		* includes getShowInArchive() (theoretically it could be used without the audio player)
+*/
+
 import {
 	getElement,
 } from "./page.js";

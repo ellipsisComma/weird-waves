@@ -1,5 +1,12 @@
 /*jshint esversion: 11*/
 
+/*
+	settings module:
+		* stores and updates settings
+		* updates toggle switch states to match settings
+		* matches settings across browsing contexts
+*/
+
 import {
 	getElement,
 } from "./page.js";
@@ -7,8 +14,10 @@ import {
 	getTemplate,
 } from "./templates.js";
 
+// initialise local settings object
 const local = retrieve(`settings`, {});
 
+// toggle a setting and its toggle switch and apply any immediate effects
 function toggleSetting(setting) {
 	const toggle = document.getElementById(`${setting.camelToKebab()}-toggle`);
 	if (!toggle) return;
@@ -26,10 +35,12 @@ function toggleSetting(setting) {
 	}
 }
 
+// get value of setting (TRUE or FALSE)
 function getSetting(setting) {
 	return local[setting];
 }
 
+// initialise settings
 function initialise() {
 	local.copyrightSafety ??= false; // if true, exclude certain series from being added to the playlist during addArchive() or addRandomShow()
 	local.flatRadio ??= false; // if true, hide all show info except show-heading in radio
@@ -51,7 +62,7 @@ function initialise() {
 	});
 }
 
-// update settings, styles, and playlist if styles change in another browsing context
+// update settings if settings change in another browsing context
 window.addEventListener(`storage`, () => {
 	if (event.key !== `settings`) return;
 

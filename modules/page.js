@@ -1,7 +1,9 @@
 /*jshint esversion: 11*/
 
-// page module: handles a collection of stable on-page element references
 /*
+	page module:
+		* handles a collection of stable on-page element references
+
 	features of this vs just using querySelector and getElementById:
 		* provides a list of all elements relevant to script
 		* allows flexibility of querySelector with limited set of getElementById

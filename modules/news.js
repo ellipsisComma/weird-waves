@@ -1,5 +1,11 @@
 /*jshint esversion: 11*/
 
+/*
+	news module:
+		* loads news feed onto page
+		* handles resetting the hash if hash points to a news item
+*/
+
 import {
 	getElement,
 } from "./page.js";

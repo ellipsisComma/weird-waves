@@ -1,5 +1,10 @@
 /*jshint esversion: 11*/
 
+/*
+	navigation module:
+		* modifies metadata and nav links according to site navigation
+*/
+
 import {
 	getElement,
 } from "./page.js";
@@ -17,17 +22,17 @@ function navigateToSection() {
 	} else document.title = getElement(`title`).dataset.original;
 }
 
-// navigation events
-window.addEventListener(`hashchange`, navigateToSection);
-
-
+// initialise navigation
 function initialise() {
 	// update page head data
 	getElement(`title`).dataset.original = document.title;
 
-	//
+	// update metadata for initial hash
 	if (location.hash) navigateToSection();
 }
+
+// navigation events
+window.addEventListener(`hashchange`, navigateToSection);
 
 export {
 	initialise,

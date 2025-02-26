@@ -1,22 +1,5 @@
 /*jshint esversion: 11*/
 
-/*
-SCRIPT CONTROLS: settings to control app behaviour (e.g. default user settings)
-PARAMETERS: initialising internal parameters
-FUNCTIONS
-	UTILITY: general and misc. applications
-	PLAYLIST: building and altering the playlist as a whole
-	SHOWS:
-		ADDING: adding single or multiple shows to playlist
-		MANIPULATING: loading, moving, and removing shows already on playlist
-	RADIO: audio interface
-	PAGE CONSTRUCTION:
-		ARCHIVE: building archive onto page and filtering data from it for later use
-		SCHEDULE: fetching and building schedule
-		NEWS: fetching and building news feed
-EVENTS: event listeners
-*/
-
 import {
 	initialise as initialiseSettings,
 } from "./modules/settings.js";
