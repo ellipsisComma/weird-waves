@@ -46,11 +46,6 @@ Element.prototype.addText = function (string, after = true) {
 	else this.prepend(document.createTextNode(string));
 };
 
-// get computed value of a style property of an element
-function getStyle(query, property) {
-	return getComputedStyle(document.querySelector(query)).getPropertyValue(property);
-}
-
 
 
 /* ===========
