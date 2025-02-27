@@ -20,7 +20,7 @@ import {
 } from "./modules/schedule.js";
 import {
 	loadNews,
-} from "./modules/news.js";
+} from "./modules/news.js?v=2025-02-27";
 import {
 	initialise as initialiseNav,
 } from "./modules/navigation.js";
