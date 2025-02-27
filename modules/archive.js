@@ -9,16 +9,16 @@
 
 import {
 	getElement,
-} from "./page.js";
+} from "./page.js?v=2025-02-26";
 import {
 	cloneTemplate,
-} from "./templates.js";
+} from "./templates.js?v=2025-02-26";
 import {
 	getSetting,
-} from "./settings.js";
+} from "./settings.js?v=2025-02-26";
 import {
 	archive
-} from "./archive-data.js";
+} from "./archive-data.js?v=2025-02-26";
 
 // set of all show IDs
 // ONLY use this for validating whether an ID is valid (as opposed to checking the archive's DOM)

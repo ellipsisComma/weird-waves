@@ -10,17 +10,17 @@
 
 import {
 	getElement,
-} from "./page.js";
+} from "./page.js?v=2025-02-26";
 import {
 	cloneTemplate,
-} from "./templates.js";
+} from "./templates.js?v=2025-02-26";
 import {
 	getSetting,
-} from "./settings.js";
+} from "./settings.js?v=2025-02-26";
 import {
 	getShowInArchive,
 	allShowIDs,
-} from "./archive.js";
+} from "./archive.js?v=2025-02-26";
 
 // mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
 const playlistObserver = new MutationObserver((mutations) => {

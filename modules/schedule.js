@@ -7,10 +7,10 @@
 
 import {
 	getElement,
-} from "./page.js";
+} from "./page.js?v=2025-02-26";
 import {
 	addShow,
-} from "./player.js";
+} from "./player.js?v=2025-02-26";
 
 // schedule file path builder (date is a Date object)
 function schedulePath(date) {
