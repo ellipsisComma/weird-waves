@@ -20,7 +20,7 @@ function buildNewsItem(item) {
 	const newsID = item.querySelector(`link[rel="alternate"]`).getAttribute(`href`).split(`#`)[1];
 
 	templatedNews.querySelector(`li`).id = newsID;
-	templatedNews.querySelector(`.news-item-heading`).setContent(item.querySelector(`title`).textContent);
+	templatedNews.querySelector(`h3 > a`).setContent(item.querySelector(`title`).textContent);
 	templatedNews.querySelector(`h3 > a`).href = `#${newsID}`;
 	templatedNews.querySelector(`.news-item-published`).textContent = item.querySelector(`published`).textContent.split(`T`)[0];
 	templatedNews.querySelector(`.news-item-content`).setContent(item.querySelector(`content`).textContent);
