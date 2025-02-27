@@ -8,11 +8,9 @@ It's also a sort of baseline web dev whetstone for me.
 
 **Note:** This repository doesn't contain the full audio library used on [Weird Waves](https://weirdwaves.net).
 
-For example, series headings are stored as text or HTML
-
 ## Adding audio
 
-Add data for series and shows to `archive.js`. All shows taken from a given series should ideally be taken from the same source (website, collection, etc.), and that location should ideally be publicly available. A series on Weird Waves does *not* need to be complete; most of them are curated selections.
+Add data for series and shows to `./modules/archive-data.js`. All shows taken from a given series should ideally be taken from the same source (website, collection, etc.), and that location should ideally be publicly available. A series on Weird Waves does *not* need to be complete; most of them are curated selections.
 
 The archive as a whole is an array of series objects, each of which contains an array of show objects. For example, the series object for "Quiet, Please", including the show object for the first episode, "Nothing Behind the Door":
 
@@ -47,7 +45,7 @@ The show ID must be a valid HTML `id` and all characters must be valid in filepa
 
 ### Filepaths
 
-The functions `showPath()` and `schedulePath()` in `main.js` return paths for show audio files and schedule files respectively.
+The functions `showPath()` in `./modules/player.js` and `schedulePath()` in `./modules/schedule.js` return paths for show audio files and schedule files respectively.
 
 ### Series properties
 
@@ -76,7 +74,7 @@ The "+ Show" button in the Booth section adds a randomly-selected show to the pl
 
 Schedules are themed (or just random) groups of shows that vary week by week, with each new schedule appearing in the landing/welcome section on Monday at 00:00 (UTC+0). The shows on the schedule can be added to the end of the playlist by clicking the "+ Schedule" button. The schedule section only displays if the schedule file exists, loads, and parses (as JSON), otherwise it remains hidden.
 
-Each schedule file is a JSON file whose name should by default be `schedule-[date].json`, e.g. `schedule-2024-12-30.json`. The `[date]` is the ISO format date string for that week's Monday. The file should contain an object with three properties:
+Each schedule file is a JSON file whose name should by default be `schedule-[date].json`, e.g. `schedule-2024-12-30.json`. The `[date]` is the ISO format date string for that week's Monday. The file is fetched in a way that busts the browser's cache, so you don't need to use any further cache-busting in the file's URL. The file should contain an object with three properties:
 
 ```json
 {
@@ -102,6 +100,12 @@ Unlike the archive file, this is restricted to the JSON format (e.g. no template
 |`blurb`|string|yes|plaintext or phrasing HTML schedule description|
 |`shows`|array|yes|an array of show ID strings|
 
+## Adding news
+
+The news feed is an Atom feed of updates that can be previewed on the site or read independently using a feed reader. The file is fetched in a way that busts the browser's cache, so you don't need to use any further cache-busting in the file's URL.
+
+Text from the Atom entries (specifically, in `<title>` or `<content>` elements) is written to the page using `.innerHTML` if it contains any HTML elements, entities, or comments.
+
 ## HTML content
 
 Various properties in the archive array and in schedule files are written to the page as HTML, including headings, blurbs, series sources, and show content notes. These can be pure text or include phrasing HTML elements. They can't contain block-level HTML. The elements these properties are inserted into are as follows:
@@ -116,6 +120,9 @@ Various properties in the archive array and in schedule files are written to the
 |show content notes|`<span>`|
 |schedule title|`<h3>`|
 |schedule blurb|`<p>`|
+|news title|`<h3><a>`|
+|news timestamp|`<time>`|
+|news content|`<div>`|
 
 ## Removed/rejected features
 
