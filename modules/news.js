@@ -8,10 +8,10 @@
 
 import {
 	getElement,
-} from "./page.js";
+} from "./page.js?v=2025-02-26";
 import {
 	cloneTemplate,
-} from "./templates.js";
+} from "./templates.js?v=2025-02-26";
 
 // build HTML for news item
 function buildNewsItem(item) {
@@ -36,7 +36,7 @@ async function loadNews() {
 	);
 	if (!file.ok) {
 		console.error(`failed to fetch news feed file`);
-		getElement(`newsList`).dataset.error = `Error: couldn't load news feed,`;
+		getElement(`newsList`).dataset.empty = `Error: Couldn't load news feed.`;
 		return;
 	}
 	const XML = await file.text();

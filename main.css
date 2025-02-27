@@ -896,13 +896,13 @@ textarea {
 	& > :first-child h3 {
 		margin-block-start: 1em;
 	}
-	.news-item-content {
-		margin-inline-start: 1em;
-	}
 }
 .news-item-published {
 	display: block;
 	margin-block-end: 0.5em;
+}
+.news-item-content {
+	margin-inline-start: 1em;
 }
 
 /* ----------
