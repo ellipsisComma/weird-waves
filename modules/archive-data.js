@@ -6,10 +6,12 @@
 		* performs basic processing before export
 */
 
-// bitrate: constant 24kbps; sample rate: 22050Hz
+// bitrate: constant 24kbps
+// sample rate: max of  22050Hz or existing sample rate
+
 // banger = good show, but in a multi-show run only first part will be marked as a banger
 
-let archive = [
+const archive = [
 {
 "code": `ByM`,
 "heading": `<cite>Beyond Midnight</cite>`,
