@@ -28,6 +28,199 @@ DEFAULTS
 @layer reset, defaults, user, utilities;
 
 
+/* ====================================
+	FONTS
+==================================== */
+
+/* -------------
+	WEBFONTS
+------------- */
+
+/* SERIF */
+
+@font-face {
+	font-family: Bitter;
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src:
+		url("./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+@font-face {
+	font-family: Bitter;
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	src:
+		url("./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+@font-face {
+	font-family: Bitter;
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
+	src:
+		url("./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+@font-face {
+	font-family: Bitter;
+	font-weight: bold;
+	font-style: italic;
+	font-display: swap;
+	src:
+		url("./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+
+/* SANS */
+
+@font-face {
+	font-family: "Fira Sans";
+	font-weight: normal;
+	font-style: normal;
+	font-variant-numeric: slashed-zero;
+	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
+	src:
+		url("./fonts/fira-sans-regular-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
+	src:
+		url("./fonts/fira-sans-bold-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-weight: normal;
+	font-style: italic;
+	font-variant-numeric: slashed-zero;
+	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
+	src:
+		url("./fonts/fira-sans-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+@font-face {
+	font-family: "Fira Sans";
+	font-weight: bold;
+	font-style: italic;
+	font-display: swap;
+	size-adjust: 103%;
+	ascent-override: 77%;
+	descent-override: 23%;
+	src:
+		url("./fonts/fira-sans-bold-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
+}
+
+/* MONO */
+
+@font-face {
+	font-family: "Fira Mono";
+	font-weight: normal;
+	font-style: regular;
+	font-display: swap;
+	size-adjust: 95%;
+	ascent-override: 80%;
+	src:
+		url("./fonts/fira-mono-regular-weirdwaves.woff2?v=2024-12-18")
+		format("woff2");
+}
+
+/* --------------
+	FALLBACKS
+-------------- */
+
+/* SERIF */
+
+@font-face {
+	font-family: "fallback Georgia"; /* general websafe */
+	size-adjust: 104%;
+	ascent-override: 75%;
+	descent-override: 25%;
+	src:
+		local("Georgia");
+}
+@font-face {
+	font-family: "fallback Droid Serif"; /* Android */
+	ascent-override: 86%;
+	descent-override: 36%;
+	src:
+		local("Droid Serif");
+}
+@font-face {
+	font-family: "fallback Caladea"; /* ChromeOS */
+	size-adjust: 111%;
+	ascent-override: 70%;
+	descent-override: 30%;
+	src:
+		local("Caladea");
+}
+
+/* SANS */
+
+@font-face {
+	font-family: "fallback Verdana"; /* general websafe */
+	size-adjust: 95%;
+	ascent-override: 95%;
+	descent-override: 35%;
+	src:
+		local("Verdana");
+}
+@font-face {
+	font-family: "fallback Droid Sans"; /* Android */
+	ascent-override: 86%;
+	descent-override: 36%;
+	src:
+		local("Droid Sans");
+}
+@font-face {
+	font-family: "fallback Carlito"; /* ChromeOS */
+	size-adjust: 108%;
+	ascent-override: 70%;
+	descent-override: 30%;
+	src:
+		local("Carlito");
+}
+
+/* MONO */
+
+@font-face {
+	font-family: "fallback Courier New"; /* general websafe */
+	size-adjust: 105%;
+	src:
+		local("Courier New");
+}
+@font-face {
+	font-family: "fallback Droid Sans Mono"; /* Android */
+	ascent-override: 86%;
+	descent-override: 36%;
+	src:
+		local("Droid Sans Mono");
+}
+@font-face {
+	font-family: "fallback Cousine"; /* ChromeOS */
+	size-adjust: 105%;
+	src:
+		local("Cousine");
+}
+
+
 
 /* ====================================
 	USER
@@ -191,10 +384,16 @@ DEFAULTS
 ------------------- */
 
 [data-font="serif"] {
-	--font-stack: Bitter, Georgia, Garamond, "Times New Roman", Times, serif;
+	--font-stack-body:
+		Bitter,
+		"fallback Georgia", "fallback Droid Serif", "fallback Caladea",
+		Garamond, "Times New Roman", Times, serif;
 }
 [data-font="sans"] {
-	--font-stack: "Fira Sans", Tahoma, Verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font-stack-body:
+		"Fira Sans",
+		"fallback Verdana", "fallback Droid Sans", "fallback Carlito",
+		Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* ====================== END USER */ }
@@ -295,7 +494,10 @@ textarea {
 	--main-column-padding: calc(2 * var(--gap-size));
 
 	--meta-font-size: 0.7em;
-	--font-stack-mono: "Fira Mono", monospace;
+	--font-stack-mono:
+		"Fira Mono",
+		"fallback Courier New", "fallback Droid Sans Mono", "fallback Cousine",
+		monospace;
 
 	--seek-bar-thumb-size: 1em;
 	--control-depth: 6px;
@@ -305,116 +507,6 @@ textarea {
 	--back-line: var(--line-width) solid var(--back-colour);
 	--hot-line: var(--line-width) solid var(--hot-colour);
 	--cold-line: var(--line-width) solid var(--cold-colour);
-}
-
-/* ----------
-	FONTS
----------- */
-
-/* SERIF */
-
-@font-face {
-	font-family: Bitter;
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-	src:
-		url("./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-@font-face {
-	font-family: Bitter;
-	font-weight: bold;
-	font-style: normal;
-	font-display: swap;
-	src:
-		url("./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-@font-face {
-	font-family: Bitter;
-	font-weight: normal;
-	font-style: italic;
-	font-display: swap;
-	src:
-		url("./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-@font-face {
-	font-family: Bitter;
-	font-weight: bold;
-	font-style: italic;
-	font-display: swap;
-	src:
-		url("./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-
-/* SANS */
-
-@font-face {
-	font-family: "Fira Sans";
-	font-weight: normal;
-	font-style: normal;
-	font-variant-numeric: slashed-zero;
-	font-display: swap;
-	size-adjust: 103%;
-	ascent-override: 77%;
-	descent-override: 23%;
-	src:
-		url("./fonts/fira-sans-regular-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-@font-face {
-	font-family: "Fira Sans";
-	font-weight: bold;
-	font-style: normal;
-	font-display: swap;
-	size-adjust: 103%;
-	ascent-override: 77%;
-	descent-override: 23%;
-	src:
-		url("./fonts/fira-sans-bold-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-@font-face {
-	font-family: "Fira Sans";
-	font-weight: normal;
-	font-style: italic;
-	font-variant-numeric: slashed-zero;
-	font-display: swap;
-	size-adjust: 103%;
-	ascent-override: 77%;
-	descent-override: 23%;
-	src:
-		url("./fonts/fira-sans-italic-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-@font-face {
-	font-family: "Fira Sans";
-	font-weight: bold;
-	font-style: italic;
-	font-display: swap;
-	size-adjust: 103%;
-	ascent-override: 77%;
-	descent-override: 23%;
-	src:
-		url("./fonts/fira-sans-bold-italic-weirdwaves.woff2?v=2024-06-07")
-		format("woff2");
-}
-
-/* MONO */
-
-@font-face {
-	font-family: "Fira Mono";
-	font-weight: normal;
-	font-style: regular;
-	font-display: swap;
-	size-adjust: 95%;
-	ascent-override: 80%;
-	src:
-		url("./fonts/fira-mono-regular-weirdwaves.woff2?v=2024-12-18")
-		format("woff2");
 }
 
 /* ------------
@@ -435,7 +527,7 @@ body {
 	color: var(--fore-colour);
 	background-color: var(--back-colour);
 	text-orientation: upright;
-	font-family: var(--font-stack);
+	font-family: var(--font-stack-body);
 	line-height: 1.5;
 	accent-color: var(--cold-colour);
 }
@@ -1019,7 +1111,7 @@ textarea {
 	}
 }
 #font-buttons button {
-	font-family: var(--font-stack);
+	font-family: var(--font-stack-body);
 }
 
 /* ----------------------------------
