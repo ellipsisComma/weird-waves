@@ -318,28 +318,36 @@ textarea {
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;
-	src: url("./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/bitter-regular-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 @font-face {
 	font-family: Bitter;
 	font-weight: bold;
 	font-style: normal;
 	font-display: swap;
-	src: url("./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/bitter-bold-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 @font-face {
 	font-family: Bitter;
 	font-weight: normal;
 	font-style: italic;
 	font-display: swap;
-	src: url("./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/bitter-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 @font-face {
 	font-family: Bitter;
 	font-weight: bold;
 	font-style: italic;
 	font-display: swap;
-	src: url("./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/bitter-bold-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 
 /* SANS */
@@ -353,7 +361,9 @@ textarea {
 	size-adjust: 103%;
 	ascent-override: 77%;
 	descent-override: 23%;
-	src: url("./fonts/fira-sans-regular-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/fira-sans-regular-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 @font-face {
 	font-family: "Fira Sans";
@@ -363,7 +373,9 @@ textarea {
 	size-adjust: 103%;
 	ascent-override: 77%;
 	descent-override: 23%;
-	src: url("./fonts/fira-sans-bold-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/fira-sans-bold-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 @font-face {
 	font-family: "Fira Sans";
@@ -374,7 +386,9 @@ textarea {
 	size-adjust: 103%;
 	ascent-override: 77%;
 	descent-override: 23%;
-	src: url("./fonts/fira-sans-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/fira-sans-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 @font-face {
 	font-family: "Fira Sans";
@@ -384,7 +398,9 @@ textarea {
 	size-adjust: 103%;
 	ascent-override: 77%;
 	descent-override: 23%;
-	src: url("./fonts/fira-sans-bold-italic-weirdwaves.woff2?v=2024-06-07") format("woff2");
+	src:
+		url("./fonts/fira-sans-bold-italic-weirdwaves.woff2?v=2024-06-07")
+		format("woff2");
 }
 
 /* MONO */
@@ -396,7 +412,9 @@ textarea {
 	font-display: swap;
 	size-adjust: 95%;
 	ascent-override: 80%;
-	src: url("./fonts/fira-mono-regular-weirdwaves.woff2?v=2024-12-18") format("woff2");
+	src:
+		url("./fonts/fira-mono-regular-weirdwaves.woff2?v=2024-12-18")
+		format("woff2");
 }
 
 /* ------------
