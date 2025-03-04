@@ -493,7 +493,7 @@ textarea {
 	--gap-size: 10px;
 	--main-column-padding: calc(2 * var(--gap-size));
 
-	--meta-font-size: 0.7em;
+	--meta-font-size: 1em;
 	--font-stack-mono:
 		"Fira Mono",
 		"fallback Courier New", "fallback Droid Sans Mono", "fallback Cousine",
@@ -1138,6 +1138,7 @@ textarea {
 @media (min-width: 500px) {
 	/* GENERAL */
 	body {
+		--meta-font-size: 0.75em;
 		font-size: 1.2em;
 	}
 	h1 {

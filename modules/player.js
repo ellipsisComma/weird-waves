@@ -20,7 +20,7 @@ import {
 import {
 	getShowInArchive,
 	allShowIDs,
-} from "./archive.js?v=2025-02-26";
+} from "./archive.js?v=2025-03-04";
 
 // mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
 const playlistObserver = new MutationObserver((mutations) => {

@@ -67,7 +67,7 @@ function buildSeries(series) {
 	if (series.copyrightSafe) newSeries.dataset.copyrightSafe = `true`;
 	newSeries.querySelector(`.series-heading`).setContent(series.heading);
 	newSeries.querySelector(`.series-blurb`).setContent(series.blurb);
-	newSeries.querySelector(`.series-source`).setContent(`source: ${series.source}`);
+	newSeries.querySelector(`.series-source`).setContent(`Source: ${series.source}`);
 	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
 
 	return templatedSeries;
