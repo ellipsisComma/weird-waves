@@ -18,7 +18,7 @@ import {
 } from "./settings.js?v=2025-02-26";
 import {
 	archive
-} from "./archive-data.js?v=2025-02-26";
+} from "./archive-data.js?v=2025-03-04";
 
 // set of all show IDs
 // ONLY use this for validating whether an ID is valid (as opposed to checking the archive's DOM)
@@ -29,7 +29,7 @@ archive.forEach(series => series.shows.forEach(show => allShowIDs.add(`${series.
 function buildSeriesLink(series) {
 	const newSeriesLinkItem = document.createElement(`li`);
 	const newSeriesLink = newSeriesLinkItem.appendChild(document.createElement(`a`));
-	newSeriesLink.href = `#archive-${series.code}`;
+	newSeriesLink.href = `#${series.elementId}`;
 	newSeriesLink.setContent(series.heading);
 	return newSeriesLinkItem;
 }
@@ -59,8 +59,9 @@ function buildShow(show) {
 function buildSeries(series) {
 	const templatedSeries = cloneTemplate(`archiveSeries`);
 	const newSeries = templatedSeries.querySelector(`li`);
+
 	newSeries.setAttributes({
-		"id": `archive-${series.code}`,
+		"id": series.elementId,
 		"data-copyright-safe": series.copyrightSafe ? `true` : `false`,
 	});
 
@@ -69,6 +70,7 @@ function buildSeries(series) {
 	newSeries.querySelector(`.series-blurb`).setContent(series.blurb);
 	newSeries.querySelector(`.series-source`).setContent(`Source: ${series.source}`);
 	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
+	newSeries.querySelector(`.series-return-link`).href = `#${series.elementId}`;
 
 	return templatedSeries;
 }
