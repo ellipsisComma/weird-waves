@@ -9,7 +9,7 @@
 
 import {
 	getElement,
-} from "./page.js?v=2025-02-26";
+} from "./page.js?v=2025-03-05";
 
 // initialise local styles object
 const local = retrieve(`styles`, {});

@@ -9,13 +9,13 @@
 
 import {
 	getElement,
-} from "./page.js?v=2025-02-26";
+} from "./page.js?v=2025-03-05";
 import {
 	cloneTemplate,
-} from "./templates.js?v=2025-02-26";
+} from "./templates.js?v=2025-03-05";
 import {
 	getSetting,
-} from "./settings.js?v=2025-02-26";
+} from "./settings.js?v=2025-03-05";
 import {
 	archive
 } from "./archive-data.js?v=2025-03-04";
