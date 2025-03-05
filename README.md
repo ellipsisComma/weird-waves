@@ -153,7 +153,9 @@ The levels of the show audio files aren't consistent enough (due to their separa
 
 Setting the seek bar's maximum to equal the audio's duration in seconds (rounded up) would increase the resolution to perfect 1-second intervals for every show of any length, and would simplify any script where the seek bar is updated (instead of having to calculate the time as a percentage, all values would just be the audio's current time).
 
-This has limited benefit when seeking with pointer controls, because the seek bar's resolution is partly limited by the screen resolution. It also makes seeking with keyboard controls *much* slower. An extra keyboard control could be added, e.g. holding Shift to change from 1-second intervals to 10-second intervals, but no other part of the app deviates from expected keyboard controls and the extra control would have to be clearly explained to all users.
+This has limited benefit when seeking with pointer controls, because the seek bar's resolution is partly limited by the screen resolution. For example, the show audio may be 1800 seconds long, but the seek bar may only be 300 pixels wide and therefore can't represent all possible timepoints (in seconds) through pointer interactions alone.
+
+Increasing the resolution also makes seeking with keyboard controls *much* slower. An extra keyboard control could be added, e.g. holding Shift to change from 1-second intervals to 10-second intervals, but no other part of the app deviates from expected keyboard controls and the extra control would have to be clearly explained to all users.
 
 ### Livestream widget
 
