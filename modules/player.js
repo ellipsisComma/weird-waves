@@ -83,27 +83,13 @@ function shuffleQueue() {
 	while (i > 0) getElement(`queue`).append(getElement(`queue`).children[Math.floor(Math.random() * i--)]);
 }
 
-// reveal controls for clearing queue
-function revealClearQueueControls() {
-	getElement(`clearButton`).press();
-	getElement(`clearQueueControls`).hidden = false;
-	getElement(`clearQueueControls`).focus();
-}
-
-// hide controls for clearing queue
-function hideClearQueueControls() {
-	getElement(`clearButton`).unpress();
-	getElement(`clearQueueControls`).hidden = true;
-}
-
-// clear queue and hide clear controls again
+// clear queue
 function clearQueue() {
 	if (getElement(`queue`).children.length > 0) {
 		getElement(`queue`).replaceChildren();
 		getElement(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)
 			.forEach(button => button.unpress());
 	}
-	if (!getElement(`clearQueueControls`).hidden) hideClearQueueControls();
 }
 
 // reset import-export invalidity
@@ -144,7 +130,12 @@ function importQueue() {
 
 	// hide error message (done before guard, so error message disappears on import attempt even if textbox is empty)
 	getElement(`importErrorMessage`).hidden = true;
-	if (importList.length === 0) return;
+
+	// if import is empty, just clear queue instead
+	if (importList.length === 0) {
+		clearQueue();
+		return;
+	}
 
 	// remove import error markers from text, remove horizontal whitespace, and validate IDs
 	const errorMarker = ` -- import error!`;
@@ -221,11 +212,6 @@ function addShow(ID) {
 	// update page
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
 	getElement(`queue`).appendChild(templatedShow);
-}
-
-// add entire archive to queue
-function addArchive() {
-	getShowIDs(getElement(`seriesList`).querySelectorAll(`${getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
 }
 
 // add entire series to queue
@@ -397,16 +383,7 @@ function initialise() {
 	document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
 	document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
 	document.getElementById(`shuffle-button`).addEventListener(`click`, shuffleQueue);
-	getElement(`clearButton`).addEventListener(`click`, () => {
-		if (getElement(`clearButton`).getAttribute(`aria-disabled`) === `false`) revealClearQueueControls();
-	});
-	document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearQueueControls);
-	document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearQueue);
-	[`queue-controls`, `data-controls`].forEach(id => {
-		document.getElementById(id).addEventListener(`click`, () => {
-			if (event.target.tagName === `BUTTON` && event.target.getAttribute(`aria-disabled`) === `false`) hideClearQueueControls();
-		});
-	});
+	getElement(`clearButton`).addEventListener(`click`, clearQueue);
 	getElement(`queue`).addEventListener(`click`, () => {
 		const target = event.target.closest(`#queue > li`);
 		switch (event.target.dataset.action) {
@@ -419,7 +396,6 @@ function initialise() {
 	document.getElementById(`import-button`).addEventListener(`click`, importQueue);
 	
 	// archive interface events
-	document.getElementById(`add-archive-button`).addEventListener(`click`, addArchive);
 	getElement(`seriesList`).addEventListener(`click`, () => {
 		if (
 			event.target.tagName === `BUTTON`

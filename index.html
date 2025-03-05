@@ -374,14 +374,7 @@
 			<li><button id="random-show-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add random show to queue">+ Show</button></li>
 			<li><button id="random-banger-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add random banger to queue">+ Banger</button></li>
 			<li><button id="shuffle-button" class="push-button" type="button" aria-controls="queue radio">Shuffle</button></li>
-			<li><button id="clear-button" class="push-button" type="button" aria-controls="clear-queue-controls" aria-pressed="false" aria-disabled="false">Clear</button></li>
-			<li id="clear-queue-controls" hidden>
-				<p>Clear queue?</p>
-				<ul class="flex-list">
-					<li><button id="clear-confirm-button" class="push-button" type="button" aria-controls="queue radio">Confirm</button></li>
-					<li><button id="clear-cancel-button" class="push-button" type="button" aria-controls="clear-queue-controls">Cancel</button></li>
-				</ul>
-			</li><!--#clear-queue-controls end-->
+			<li><button id="clear-button" class="push-button" type="button" aria-controls="queue radio" aria-pressed="false" aria-disabled="false">Clear</button></li>
 		</ul><!--#queue-controls end-->
 		<ol id="queue" class="show-list"></ol>
 	</div><!--#queue-and-controls end-->
@@ -405,9 +398,6 @@
 <section id="archive">
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
-	<ul class="flex-list">
-		<li><button id="add-archive-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add all shows in archive to queue">+ Archive</button></li>
-	</ul>
 	<nav>
 		<ol id="archive-series-links" class="flex-list"></ol>
 	</nav>

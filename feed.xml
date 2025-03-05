@@ -11,10 +11,26 @@
 	<author>
 		<name>Weird Waves</name>
 	</author>
-	<updated>2025-02-26T00:00:00Z</updated>
+	<updated>2025-03-05T00:00:00Z</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?56</id>
+		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-05-simplifying-controls" />
+		<title type="html"><![CDATA[Simplifying controls]]></title>
+		<published>2025-003-05T00:00:00Z</published>
+		<updated>2025-03-05T00:00:00Z</updated>
+		<content type="html"><![CDATA[
+			<p>I've simplified the queue controls in a few ways.</p>
+			<p><strong>First, there's no more &ldquo;add archive&rdquo; button.</strong> This has felt out-of-place for a long time&mdash;the archive isn't perfectly serial, it's a mix of stand-alone shows and small series. There's no reason to include an option to add all shows to the queue, in order, beyond letting indecisive people avoid having to find things that interest them in the <a href="#archive">Archive</a>. You can't add the archive and then shuffle it to get a fully-randomised playlist in the queue, because that splits up the small series that need to be together and in the right order.</p>
+			<p>Any purpose the button might have is already provided in the two random-show buttons, which can cut through choice paralysis, and the schedule, which points people toward a set of shows to listen to right away.</p>
+			<p><strong>Second, there's no more &ldquo;confirm clear&rdquo; dialog in the queue.</strong> Now that it's not so easy to add hundreds of shows to the queue, there's less need to worry about the consequences of someone accidentally clearing it.</p>
+			<p>Weird Waves isn't the best tool for building a large, stable playlist of audio. Everything happens in your browser; there's no user accounts, no complex backend, and a computer crash might wipe the data for the site. That's why I added the import-export controls; if you really want to keep your queue safe, you can save your data, then load it back in later or elsewhere. Using browser storage for this is really a safety net in case of an accidental click or refresh or crash, and shouldn't be treated as a safe, long-term storage (that's more of a message for me going forward).</p>
+			<p><strong>Third, it's possible to empty your queue by importing an empty box.</strong> This follows on from the second change.</p>
+			<p><strong>Overall</strong>, these changes are pretty small, and just reflect a shift in how I'm framing the site and working on its code.</p>
+		]]></content>
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?55</id>
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-26-behind-the-scenes-changes-that-might-cause-bugs" />
