@@ -8,7 +8,7 @@
 
 import {
 	getElement,
-} from "./page.js?v=2025-03-05";
+} from "./page.js?v=2025-03-05b";
 import {
 	cloneTemplate,
 } from "./templates.js?v=2025-03-05";

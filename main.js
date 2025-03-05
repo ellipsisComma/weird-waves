@@ -14,7 +14,7 @@ import {
 } from "./modules/archive.js?v=2025-03-04";
 import {
 	initialise as initialisePlayer,
-} from "./modules/player.js?v=2025-03-05b";
+} from "./modules/player.js?v=2025-03-05c";
 import {
 	loadSchedule,
 } from "./modules/schedule.js?v=2025-02-26";
