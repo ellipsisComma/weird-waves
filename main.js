@@ -2,7 +2,7 @@
 
 import {
 	initialise as initialiseSettings,
-} from "./modules/settings.js?v=2025-02-26";
+} from "./modules/settings.js?v=2025-03-05";
 import {
 	initialise as initialiseStyles,
 	getStyle,
@@ -14,7 +14,7 @@ import {
 } from "./modules/archive.js?v=2025-03-04";
 import {
 	initialise as initialisePlayer,
-} from "./modules/player.js?v=2025-03-05";
+} from "./modules/player.js?v=2025-03-05b";
 import {
 	loadSchedule,
 } from "./modules/schedule.js?v=2025-02-26";

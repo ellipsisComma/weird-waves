@@ -25,7 +25,7 @@ function cloneTemplate(key) {
 }
 
 // set templates
-setTemplate(`playlistItem`, `playlist-item`);
+setTemplate(`queueItem`, `queue-item`);
 setTemplate(`importErrorItem`, `import-error-list-item`);
 setTemplate(`archiveSeries`, `archive-series`);
 setTemplate(`archiveShow`, `archive-show`);

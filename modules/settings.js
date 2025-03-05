@@ -9,10 +9,10 @@
 
 import {
 	getElement,
-} from "./page.js?v=2025-02-26";
+} from "./page.js?v=2025-03-05";
 import {
 	getTemplate,
-} from "./templates.js?v=2025-02-26";
+} from "./templates.js?v=2025-03-05";
 
 // initialise local settings object
 const local = retrieve(`settings`, {});
@@ -42,7 +42,7 @@ function getSetting(setting) {
 
 // initialise settings
 function initialise() {
-	local.copyrightSafety ??= false; // if true, exclude certain series from being added to the playlist during addArchive() or addRandomShow()
+	local.copyrightSafety ??= false; // if true, exclude certain series from being added to the queue during addArchive() or addRandomShow()
 	local.flatRadio ??= false; // if true, hide all show info except show-heading in radio
 	local.autoPlayNextShow ??= true; // if true, start playing next show when previous show runs to completion
 	local.notesOpen ??= false; // if true, open all content notes

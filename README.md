@@ -68,11 +68,11 @@ The functions `showPath()` in `./modules/player.js` and `schedulePath()` in `./m
 |`notes`|string|no|plaintext or phrasing HTML content notes|
 |`banger`|boolean|no|`true` if the show is recommended|
 
-The "+ Show" button in the Booth section adds a randomly-selected show to the playlist; the "+ Banger" button does the same, but only picks from shows for which `banger` is set to `true`.
+The "+ Show" button in the Booth section adds a randomly-selected show to the queue; the "+ Banger" button does the same, but only picks from shows for which `banger` is set to `true`.
 
 ## Adding schedules
 
-Schedules are themed (or just random) groups of shows that vary week by week, with each new schedule appearing in the landing/welcome section on Monday at 00:00 (UTC+0). The shows on the schedule can be added to the end of the playlist by clicking the "+ Schedule" button. The schedule section only displays if the schedule file exists, loads, and parses (as JSON), otherwise it remains hidden.
+Schedules are themed (or just random) groups of shows that vary week by week, with each new schedule appearing in the landing/welcome section on Monday at 00:00 (UTC+0). The shows on the schedule can be added to the end of the queue by clicking the "+ Schedule" button. The schedule section only displays if the schedule file exists, loads, and parses (as JSON), otherwise it remains hidden.
 
 Each schedule file is a JSON file whose name should by default be `schedule-[date].json`, e.g. `schedule-2024-12-30.json`. The `[date]` is the ISO format date string for that week's Monday. The file is fetched in a way that busts the browser's cache, so you don't need to use any further cache-busting in the file's URL. The file should contain an object with three properties:
 
@@ -135,7 +135,7 @@ Links to download individual shows, present in any or all of: the Archive, the B
 1. The audio used in Weird Waves is optimised for small filesizes rather than quality; better-quality versions can be found at the sources.
 2. Show info is tightly laid out and adding a download link in such a small space tends to complicate it or obstruct other content.
 
-A determined user could still download all audio files using a combination of the browser inspector (to find the `<audio>` element), playlist export (to get IDs for show audio paths), and `wget` in terminal.
+A determined user could still download all audio files using a combination of the browser inspector (to find the `<audio>` element), queue export (to get IDs for show audio paths), and `wget` in terminal.
 
 ### Sync all instances of a show's content notes
 

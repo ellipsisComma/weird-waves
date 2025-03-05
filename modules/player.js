@@ -2,32 +2,32 @@
 
 /*
 	player module:
-		* handles all audio playlist processing (adding, removing, shuffling, clearing shows)
-		* handles playlist import-export
+		* handles all audio queue processing (adding, removing, shuffling, clearing shows)
+		* handles queue import-export
 		* handles radio interface and audio pre-fetching
-		* matches playlist across browsing contexts
+		* matches queue across browsing contexts
 */
 
 import {
 	getElement,
-} from "./page.js?v=2025-02-26";
+} from "./page.js?v=2025-03-05";
 import {
 	cloneTemplate,
-} from "./templates.js?v=2025-02-26";
+} from "./templates.js?v=2025-03-05";
 import {
 	getSetting,
-} from "./settings.js?v=2025-02-26";
+} from "./settings.js?v=2025-03-05";
 import {
 	getShowInArchive,
 	allShowIDs,
 } from "./archive.js?v=2025-03-04";
 
-// mutation observer to store playlist changes and prefetch second show on playlist (if it has at least 2 shows)
-const playlistObserver = new MutationObserver((mutations) => {
+// mutation observer to store queue changes and prefetch second show on queue (if it has at least 2 shows)
+const queueObserver = new MutationObserver((mutations) => {
 	loadShow();
-	storePlaylist();
-	if (location.protocol !== `file:` && getElement(`playlist`).children.length > 1) fetch(
-		showPath(getElement(`playlist`).children[1].dataset.showId),
+	storeQueue();
+	if (location.protocol !== `file:` && getElement(`queue`).children.length > 1) fetch(
+		showPath(getElement(`queue`).children[1].dataset.showId),
 		{"cache": `no-cache`}
 	);
 });
@@ -61,9 +61,9 @@ function getRandomShowID(type = ``) {
 	return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)].dataset.showId : ``;
 }
 
-// store playlist as list of show IDs
-function storePlaylist() {
-	store(`playlist`, getShowIDs(getElement(`playlist`).children));
+// store queue as list of show IDs
+function storeQueue() {
+	store(`shows`, getShowIDs(getElement(`queue`).children));
 }
 
 // get array of all show IDs, from a set of HTML show elements
@@ -71,39 +71,39 @@ function getShowIDs(subset) {
 	return [...subset].map(show => show.dataset.showId);
 }
 
-/* -----
-PLAYLIST
------ */
+/* --
+QUEUE
+-- */
 
-// shuffle playlist if it has at least 2 entries (FYK-ish shuffle)
-function shufflePlaylist() {
-	let i = getElement(`playlist`).children.length;
+// shuffle queue if it has at least 2 entries (FYK-ish shuffle)
+function shuffleQueue() {
+	let i = getElement(`queue`).children.length;
 	if (i < 2) return;
 
-	while (i > 0) getElement(`playlist`).append(getElement(`playlist`).children[Math.floor(Math.random() * i--)]);
+	while (i > 0) getElement(`queue`).append(getElement(`queue`).children[Math.floor(Math.random() * i--)]);
 }
 
-// reveal controls for clearing playlist
-function revealClearPlaylistControls() {
+// reveal controls for clearing queue
+function revealClearQueueControls() {
 	getElement(`clearButton`).press();
-	getElement(`clearPlaylistControls`).hidden = false;
-	getElement(`clearPlaylistControls`).focus();
+	getElement(`clearQueueControls`).hidden = false;
+	getElement(`clearQueueControls`).focus();
 }
 
-// hide controls for clearing playlist
-function hideClearPlaylistControls() {
+// hide controls for clearing queue
+function hideClearQueueControls() {
 	getElement(`clearButton`).unpress();
-	getElement(`clearPlaylistControls`).hidden = true;
+	getElement(`clearQueueControls`).hidden = true;
 }
 
-// clear playlist and hide clear controls again
-function clearPlaylist() {
-	if (getElement(`playlist`).children.length > 0) {
-		getElement(`playlist`).replaceChildren();
+// clear queue and hide clear controls again
+function clearQueue() {
+	if (getElement(`queue`).children.length > 0) {
+		getElement(`queue`).replaceChildren();
 		getElement(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)
 			.forEach(button => button.unpress());
 	}
-	if (!getElement(`clearPlaylistControls`).hidden) hideClearPlaylistControls();
+	if (!getElement(`clearQueueControls`).hidden) hideClearQueueControls();
 }
 
 // reset import-export invalidity
@@ -112,10 +112,10 @@ function setValidImport() {
 	getElement(`importExport`).ariaInvalid = false;
 }
 
-// list playlist of show IDs line-by-line in import-export box
-function exportPlaylist() {
+// list queue of show IDs line-by-line in import-export box
+function exportQueue() {
 	setValidImport();
-	getElement(`importExport`).value = getShowIDs(getElement(`playlist`).children).join(`\n`);
+	getElement(`importExport`).value = getShowIDs(getElement(`queue`).children).join(`\n`);
 }
 
 // get closest string match to an invalid show ID during import attempt, as long as its similarity exceeds a minimum threshold
@@ -138,8 +138,8 @@ function matchInvalidShowID(invalidID) {
 	return match.id;
 }
 
-// import playlist from textbox
-function importPlaylist() {
+// import queue from textbox
+function importQueue() {
 	const importList = getElement(`importExport`).value.trim();
 
 	// hide error message (done before guard, so error message disappears on import attempt even if textbox is empty)
@@ -157,7 +157,7 @@ function importPlaylist() {
 
 	if (invalidIDs.length === 0) {
 		setValidImport();
-		clearPlaylist();
+		clearQueue();
 		getElement(`importExport`).value = ``;
 		importIDs.forEach(addShow);
 	} else {
@@ -174,10 +174,10 @@ function importPlaylist() {
 	}
 }
 
-// load playlist from local storage
-function loadPlaylist() {
-	getElement(`playlist`).replaceChildren();
-	retrieve(`playlist`, []).filter(ID => allShowIDs.has(ID)).forEach(addShow);
+// load queue from local storage
+function loadQueue() {
+	getElement(`queue`).replaceChildren();
+	retrieve(`shows`, []).filter(ID => allShowIDs.has(ID)).forEach(addShow);
 }
 
 /* --
@@ -186,11 +186,11 @@ SHOWS
 
 /* ADDING */
 
-// add show to playlist
+// add show to queue
 function addShow(ID) {
-	const showOnPlaylist = getElement(`playlist`).querySelector(`:scope > [data-show-id="${ID}"]`);
-	if (showOnPlaylist) {
-		getElement(`playlist`).append(showOnPlaylist);
+	const showOnQueue = getElement(`queue`).querySelector(`:scope > [data-show-id="${ID}"]`);
+	if (showOnQueue) {
+		getElement(`queue`).append(showOnQueue);
 		console.log(`re-added show: ${ID}`);
 		return;
 	}
@@ -202,9 +202,9 @@ function addShow(ID) {
 		return;
 	}
 
-	// build new playlist item
+	// build new queue item
 	const seriesInArchive = showInArchive.closest(`#series-list > li`);
-	const templatedShow = cloneTemplate(`playlistItem`);
+	const templatedShow = cloneTemplate(`queueItem`);
 	const newShow = templatedShow.querySelector(`li`);
 	newShow.dataset.showId = ID;
 	newShow.appendChild(showInArchive.querySelector(`.show-info`).cloneNode(true));
@@ -220,55 +220,55 @@ function addShow(ID) {
 
 	// update page
 	showInArchive.querySelector(`[data-action="add-show"]`).press();
-	getElement(`playlist`).appendChild(templatedShow);
+	getElement(`queue`).appendChild(templatedShow);
 }
 
-// add entire archive to playlist
+// add entire archive to queue
 function addArchive() {
 	getShowIDs(getElement(`seriesList`).querySelectorAll(`${getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``} .show-list > li`)).forEach(addShow);
 }
 
-// add entire series to playlist
+// add entire series to queue
 function addSeries(seriesInArchive) {
 	getShowIDs(seriesInArchive.querySelectorAll(`.show-list > li`)).forEach(addShow);
 }
 
-// add a random show or banger to the playlist
+// add a random show or banger to the queue
 function addRandomShow(showType) {
 	const ID = getRandomShowID(showType);
 	if (ID !== ``) {
 		addShow(ID);
-		window.scrollTo(0, getElement(`playlist`).lastElementChild.offsetTop - getElement(`playlistControls`).clientHeight);
-	} else console.warn(`can't add new show of type "${showType}": all shows of that type already on playlist`);
+		window.scrollTo(0, getElement(`queue`).lastElementChild.offsetTop - getElement(`queueControls`).clientHeight);
+	} else console.warn(`can't add new show of type "${showType}": all shows of that type already on queue`);
 }
 
 /* MANIPULATING */
 
-// swap show with previous show on playlist
+// swap show with previous show on queue
 function moveShowUp(target) {
 	target.previousElementSibling?.before(target);
 }
 
-// swap show with next show on playlist
+// swap show with next show on queue
 function moveShowDown(target) {
 	target.nextElementSibling?.after(target);
 }
 
-// remove show from playlist
+// remove show from queue
 function removeShow(target) {
 	target.remove();
 	getShowInArchive(target.dataset.showId).querySelector(`[data-action="add-show"]`).unpress();
 }
 
-// write show parts onto page and load show audio file; if playlist is empty, reset radio
+// write show parts onto page and load show audio file; if queue is empty, reset radio
 function loadShow() {
-	if (getElement(`playlist`).children.length > 0 && getElement(`playlist`).firstElementChild.dataset.showId === getElement(`loadedShow`).dataset.showId) return;
+	if (getElement(`queue`).children.length > 0 && getElement(`queue`).firstElementChild.dataset.showId === getElement(`loadedShow`).dataset.showId) return;
 
 	getElement(`playToggle`).ariaPressed = `false`;
 	getElement(`loadedShow`).replaceChildren();
 
-	if (getElement(`playlist`).children.length > 0) {
-		const show = getElement(`playlist`).firstElementChild;
+	if (getElement(`queue`).children.length > 0) {
+		const show = getElement(`queue`).firstElementChild;
 		getElement(`loadedShow`).dataset.showId = show.dataset.showId;
 
 		// load audio file and show data
@@ -284,8 +284,8 @@ function loadShow() {
 		getElement(`showTimeElapsed`).textContent = `00:00`;
 		getElement(`radioControls`).hidden = false;
 	} else {
-		// empty loaded show and playlist
-		getElement(`playlist`).replaceChildren();
+		// empty loaded show and queue
+		getElement(`queue`).replaceChildren();
 
 		// reset radio
 		if (!getElement(`audio`).paused) getElement(`audio`).pause(); // otherwise audio continues playing
@@ -300,7 +300,7 @@ function loadShow() {
 // remove loaded show and autoplay next one if setting is on
 function endShow() {
 	if (getSetting(`autoPlayNextShow`)) getElement(`audio`).dataset.playNextShow = `true`;
-	removeShow(getElement(`playlist`).firstElementChild);
+	removeShow(getElement(`queue`).firstElementChild);
 }
 
 /* --
@@ -320,9 +320,9 @@ function togglePlay() {
 
 // end current show and autoplay next show if current show was playing
 function skipShow() {
-	if (getElement(`playlist`).children.length === 0) return;
+	if (getElement(`queue`).children.length === 0) return;
 	if (!getElement(`audio`).paused) getElement(`audio`).dataset.playNextShow = `true`;
-	removeShow(getElement(`playlist`).firstElementChild);
+	removeShow(getElement(`queue`).firstElementChild);
 }
 
 // change seek bar to match audio unless audio metadata unavailable
@@ -370,7 +370,7 @@ function updateVolumeControls() {
 	}
 }
 
-// initialise all player events and interactions, and prepare playlist
+// initialise all player events and interactions, and prepare queue
 function initialise() {
 	// radio audio events
 	getElement(`audio`).addEventListener(`loadstart`, () => getElement(`playToggle`).disabled = true);
@@ -396,27 +396,27 @@ function initialise() {
 	// booth interface events
 	document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
 	document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
-	document.getElementById(`shuffle-button`).addEventListener(`click`, shufflePlaylist);
+	document.getElementById(`shuffle-button`).addEventListener(`click`, shuffleQueue);
 	getElement(`clearButton`).addEventListener(`click`, () => {
-		if (getElement(`clearButton`).getAttribute(`aria-disabled`) === `false`) revealClearPlaylistControls();
+		if (getElement(`clearButton`).getAttribute(`aria-disabled`) === `false`) revealClearQueueControls();
 	});
-	document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearPlaylistControls);
-	document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearPlaylist);
-	[`playlist-controls`, `data-controls`].forEach(id => {
+	document.getElementById(`clear-cancel-button`).addEventListener(`click`, hideClearQueueControls);
+	document.getElementById(`clear-confirm-button`).addEventListener(`click`, clearQueue);
+	[`queue-controls`, `data-controls`].forEach(id => {
 		document.getElementById(id).addEventListener(`click`, () => {
-			if (event.target.tagName === `BUTTON` && event.target.getAttribute(`aria-disabled`) === `false`) hideClearPlaylistControls();
+			if (event.target.tagName === `BUTTON` && event.target.getAttribute(`aria-disabled`) === `false`) hideClearQueueControls();
 		});
 	});
-	getElement(`playlist`).addEventListener(`click`, () => {
-		const target = event.target.closest(`#playlist > li`);
+	getElement(`queue`).addEventListener(`click`, () => {
+		const target = event.target.closest(`#queue > li`);
 		switch (event.target.dataset.action) {
 		case `move-up`: moveShowUp(target); break;
 		case `remove`: removeShow(target); break;
 		case `move-down`: moveShowDown(target); break;
 		}
 	});
-	document.getElementById(`export-button`).addEventListener(`click`, exportPlaylist);
-	document.getElementById(`import-button`).addEventListener(`click`, importPlaylist);
+	document.getElementById(`export-button`).addEventListener(`click`, exportQueue);
+	document.getElementById(`import-button`).addEventListener(`click`, importQueue);
 	
 	// archive interface events
 	document.getElementById(`add-archive-button`).addEventListener(`click`, addArchive);
@@ -434,28 +434,28 @@ function initialise() {
 		) addSeries(event.target.closest(`#series-list > li`));
 	});
 
-	// start watching for playlist changes
-	playlistObserver.observe(getElement(`playlist`), {"childList": true});
+	// start watching for queue changes
+	queueObserver.observe(getElement(`queue`), {"childList": true});
 
-	// load playlist from storage
-	loadPlaylist();
+	// load queue from storage
+	loadQueue();
 }
 
 
-// update playlist if playlist changes in another browsing context
+// update queue if queue changes in another browsing context
 window.addEventListener(`storage`, () => {
-	if (event.key !== `playlist`) return;
+	if (event.key !== `queue`) return;
 
-	const newPlaylist = JSON.parse(event.newValue);
+	const newQueue = JSON.parse(event.newValue);
 
 	// could do this with a broadcast channel instead of mutation observer + storage event
-	// however, that adds an extra tech and it'd be less robust than rebuilding the playlist from scratch
-	loadPlaylist();
+	// however, that adds an extra tech and it'd be less robust than rebuilding the queue from scratch
+	loadQueue();
 	getElement(`seriesList`).querySelectorAll(`[data-action="add-show"]`).forEach(button => {
-		if (newPlaylist.includes(button.dataset.target)) button.press();
+		if (newQueue.includes(button.dataset.target)) button.press();
 		else button.unpress();
 	})
-	console.info(`automatically matched playlist change in another browsing context`);
+	console.info(`automatically matched queue change in another browsing context`);
 });
 
 // on closing window/browser tab, preserve audio level

@@ -678,8 +678,8 @@ code {
 	RADIO
 ---------- */
 
-:is(#loaded-show, #playlist):empty::after {
-	content: "Playlist is empty!\a Add shows in Booth or Archive.";
+:is(#loaded-show, #queue):empty::after {
+	content: "Queue is empty!\a Add shows in Booth or Archive.";
 	display: block;
 	font-style: italic;
 	text-align: center;
@@ -859,7 +859,7 @@ main {
 	BOOTH
 ---------- */
 
-#playlist {
+#queue {
 	display: grid;
 	row-gap: 1em;
 	margin-block-start: var(--gap-size);
@@ -875,7 +875,7 @@ main {
 .show-position-controls {
 	flex-direction: column;
 }
-#playlist-controls {
+#queue-controls {
 	z-index: 3;
 	position: sticky;
 	inset-block-start: 0;
@@ -886,7 +886,7 @@ main {
 	background-color: var(--back-colour);
 	border-block-end: var(--fore-line);
 }
-#clear-playlist-controls {
+#clear-queue-controls {
 	inline-size: 100%;
 	text-align: center;
 	& > :first-child {
@@ -1294,7 +1294,7 @@ textarea {
 	}
 
 	/* BOOTH */
-	#playlist {
+	#queue {
 		margin-inline: 0;
 	}
 }

@@ -120,7 +120,7 @@
 		<path d="M12 7v4m2 2v-8m2-2v12" />
 	</symbol>
 
-<!--playlist button icons-->
+<!--queue button icons-->
 	<symbol id="svg-remove">
 		<path d="M2 2l8 8m0-8l-8 8" />
 	</symbol>
@@ -142,11 +142,11 @@
 
 <!--html templates begin-->
 <!--booth-->
-<template id="playlist-item-template">
+<template id="queue-item-template">
 	<li data-show-id="">
 		<ul class="show-position-controls icon-button-set">
 			<li>
-				<button class="push-button" type="button" data-action="move-up" aria-controls="playlist radio">
+				<button class="push-button" type="button" data-action="move-up" aria-controls="queue radio">
 					<svg class="svg-icon" viewBox="0 0 12 12">
 						<title>Move show up</title>
 						<use href="#svg-move-up" />
@@ -154,7 +154,7 @@
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="remove" aria-controls="playlist radio">
+				<button class="push-button" type="button" data-action="remove" aria-controls="queue radio">
 					<svg class="svg-icon" viewBox="0 0 12 12">
 						<title>Remove show</title>
 						<use href="#svg-remove" />
@@ -162,7 +162,7 @@
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="move-down" aria-controls="playlist radio">
+				<button class="push-button" type="button" data-action="move-down" aria-controls="queue radio">
 					<svg class="svg-icon" viewBox="0 0 12 12">
 						<title>Move show down</title>
 						<use href="#svg-move-down" />
@@ -171,7 +171,7 @@
 			</li>
 		</ul>
 	</li>
-</template><!--#playlist-item-template end-->
+</template><!--#queue-item-template end-->
 <template id="import-error-list-item-template">
 	<li>
 		<code class="invalid-show-id"></code> (closest match: <code class="matched-show-id"></code>)
@@ -187,7 +187,7 @@
 					<p class="series-blurb"></p>
 					<p class="series-source"></p>
 				</div>
-				<button class="push-button" type="button" data-action="add-series" aria-controls="playlist radio" aria-label="Add all shows in series to playlist">+ Series</button>
+				<button class="push-button" type="button" data-action="add-series" aria-controls="queue radio" aria-label="Add all shows in series to queue">+ Series</button>
 			</header>
 			<ol class="show-list"></ol>
 		</article>
@@ -209,7 +209,7 @@
 				</details>
 			</div>
 		</article>
-		<button class="push-button" type="button" data-action="add-show" aria-controls="playlist radio" aria-pressed="false" aria-disabled="false" aria-label="Add show to playlist">+ Show</button>
+		<button class="push-button" type="button" data-action="add-show" aria-controls="queue radio" aria-pressed="false" aria-disabled="false" aria-label="Add show to queue">+ Show</button>
 	</li>
 </template><!--#archive-show-template end-->
 <!--#news-->
@@ -255,7 +255,7 @@
 						<use class="pressed-icon" href="#svg-pause" />
 					</svg>
 				</button>
-				<button id="skip-button" class="push-button" type="button" aria-controls="playlist radio">
+				<button id="skip-button" class="push-button" type="button" aria-controls="queue radio">
 					<svg class="svg-icon" viewBox="0 0 18 18">
 						<title>Skip show</title>
 						<use href="#svg-skip" />
@@ -366,37 +366,37 @@
 <main>
 <section id="booth">
 	<h2>Booth</h2>
-	<p>Control your playlist here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
+	<p>Control your queue here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
 
-	<h3>Playlist</h3>
-	<div id="playlist-and-controls">
-		<ul id="playlist-controls" class="flex-list">
-			<li><button id="random-show-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Add random show to playlist">+ Show</button></li>
-			<li><button id="random-banger-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Add random banger to playlist">+ Banger</button></li>
-			<li><button id="shuffle-button" class="push-button" type="button" aria-controls="playlist radio">Shuffle</button></li>
-			<li><button id="clear-button" class="push-button" type="button" aria-controls="clear-playlist-controls" aria-pressed="false" aria-disabled="false">Clear</button></li>
-			<li id="clear-playlist-controls" hidden>
-				<p>Clear playlist?</p>
+	<h3>Qeuue</h3>
+	<div id="queue-and-controls">
+		<ul id="queue-controls" class="flex-list">
+			<li><button id="random-show-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add random show to queue">+ Show</button></li>
+			<li><button id="random-banger-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add random banger to queue">+ Banger</button></li>
+			<li><button id="shuffle-button" class="push-button" type="button" aria-controls="queue radio">Shuffle</button></li>
+			<li><button id="clear-button" class="push-button" type="button" aria-controls="clear-queue-controls" aria-pressed="false" aria-disabled="false">Clear</button></li>
+			<li id="clear-queue-controls" hidden>
+				<p>Clear queue?</p>
 				<ul class="flex-list">
-					<li><button id="clear-confirm-button" class="push-button" type="button" aria-controls="playlist radio">Confirm</button></li>
-					<li><button id="clear-cancel-button" class="push-button" type="button" aria-controls="clear-playlist-controls">Cancel</button></li>
+					<li><button id="clear-confirm-button" class="push-button" type="button" aria-controls="queue radio">Confirm</button></li>
+					<li><button id="clear-cancel-button" class="push-button" type="button" aria-controls="clear-queue-controls">Cancel</button></li>
 				</ul>
-			</li><!--#clear-playlist-controls end-->
-		</ul><!--#playlist-controls end-->
-		<ol id="playlist" class="show-list"></ol><!--#playlist end-->
-	</div><!--#playlist-and-controls end-->
+			</li><!--#clear-queue-controls end-->
+		</ul><!--#queue-controls end-->
+		<ol id="queue" class="show-list"></ol>
+	</div><!--#queue-and-controls end-->
 
 	<h3>Import & export</h3>
-	<p>To export your playlist, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. The output is one ID per line. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the playlist.</p>
-	<textarea id="import-export-data" aria-label="Import/export playlist data" aria-errormessage="import-error-message" aria-invalid="false"></textarea>
+	<p>To export your queue, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. The output is one ID per line. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the queue.</p>
+	<textarea id="import-export-data" aria-label="Import/export queue data" aria-errormessage="import-error-message" aria-invalid="false"></textarea>
 	<div id="import-error-message" aria-live="polite" hidden>
 		<p>Invalid show ID(s):</p>
-		<ul id="import-error-list"></ul><!--#import-error-list end-->
+		<ul id="import-error-list"></ul>
 		<p>The import error notes are ignored when you attempt to import a list of show IDs, so you don't need to remove them.</p>
 	</div><!--#import-error-message end-->
 	<ul id="data-controls" class="flex-list">
 		<li><button id="export-button" class="push-button" type="button" aria-controls="import-export-data">Export</button></li>
-		<li><button id="import-button" class="push-button" type="button" aria-controls="playlist radio import-export-data">Import</button></li>
+		<li><button id="import-button" class="push-button" type="button" aria-controls="queue radio import-export-data">Import</button></li>
 	</ul>
 </section><!--#booth end-->
 
@@ -406,12 +406,12 @@
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
 	<ul class="flex-list">
-		<li><button id="add-archive-button" class="push-button" type="button" aria-controls="playlist radio" aria-label="Add all shows in archive to playlist">+ Archive</button></li>
+		<li><button id="add-archive-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add all shows in archive to queue">+ Archive</button></li>
 	</ul>
 	<nav>
-		<ol id="archive-series-links" class="flex-list"></ol><!--#archive-series-links end-->
+		<ol id="archive-series-links" class="flex-list"></ol>
 	</nav>
-	<ol id="series-list"></ol><!--#series-list end-->
+	<ol id="series-list"></ol>
 </section><!--#archive end-->
 
 
@@ -429,7 +429,7 @@
 
 <section id="about">
 	<h2>About</h2>
-	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your playlist in the <a href="#booth">Booth</a>, and listen to them in the Radio. Have fun!</p>
+	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your queue in the <a href="#booth">Booth</a>, and listen to them in the Radio. Have fun!</p>
 	<p>The Archive contains:</p>
 	<dl id="stats-list">
 		<div>
@@ -446,7 +446,7 @@
 	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older series.</p>
 
 	<h3>Web archival</h3>
-	<p>The latest-archived most-functional version of Weird Waves confirmed in the Internet Archive is from <a href="https://web.archive.org/web/20240330201059/https://weirdwaves.net/"><time datetime="2024-03-30">the 30th of March, 2024</time></a> (audio may load slowly or need to be loaded twice, by adding, removing, and adding the same show to the playlist).</p>
+	<p>The latest-archived most-functional version of Weird Waves confirmed in the Internet Archive is from <a href="https://web.archive.org/web/20240330201059/https://weirdwaves.net/"><time datetime="2024-03-30">the 30th of March, 2024</time></a> (audio may load slowly or need to be loaded twice, by adding, removing, and adding the same show to the queue).</p>
 </section><!--#about end-->
 
 
@@ -484,7 +484,7 @@
 
 	<h3>Copyright?</h3>
 	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
-	<p>If you're still concerned, switch on the following toggle to exclude certain series when adding random shows or the entire archive to the playlist: <abbr>CAS</abbr> selection, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
+	<p>If you're still concerned, switch on the following toggle to exclude certain series when adding random shows or the entire archive to the queue: <abbr>CAS</abbr> selection, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<button id="copyright-safety-toggle" class="setting-toggle pre-initialised-control">exclude copyright-unsafe material</button>
 	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
 </section><!--#streaming end-->
@@ -500,7 +500,7 @@
 			<button id="flat-radio-toggle" class="setting-toggle pre-initialised-control">hide show info in Radio</button>
 		</li>
 		<li>
-			<h3>Playlist</h3>
+			<h3>Queue</h3>
 			<button id="auto-play-next-show-toggle" class="setting-toggle pre-initialised-control">start next show when previous show ends</button>
 		</li>
 		<li>
@@ -787,7 +787,7 @@
 		<p>Why not try the schedule for the week starting <time id="schedule-date"></time>:</p>
 		<h3>Schedule: <span id="schedule-title"></span></h3>
 		<p id="schedule-blurb"></p>
-		<button id="add-schedule-button" class="push-button" type="button" aria-label="Add scheduled shows to playlist">+ Schedule</button>
+		<button id="add-schedule-button" class="push-button" type="button" aria-label="Add scheduled shows to queue">+ Schedule</button>
 	</div><!--#schedule-container end-->
 </section><!--#welcome end-->
 </main>
@@ -795,6 +795,7 @@
 
 
 
+<script src="./temp-fixes.js?v=2025-03-05"></script>
 <script type="module" src="./main.js?v=2025-03-05"></script>
 </body>
 </html>
