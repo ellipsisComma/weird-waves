@@ -149,12 +149,6 @@ Adding volume to settings so a listener can effectively set a personal volume th
 
 The levels of the show audio files aren't consistent enough (due to their separate origins) for this to be set automatically, and can't easily be evened out due to the degradation of many of the older audio before it was digitised (baseline noise is too high to compress-and-amplify quieter files without using professional noise reduction plugins).
 
-### In-depth statistics
-
-Statistics for the total show count and total duration of each series, not just the Archive as a whole.
-
-Long-implemented, but I decided this was unnecessary. The duration stats also rely on the manually-specified durations that only exist in `archive.js` to support the stream widget.
-
 ### Increase seek bar resolution
 
 Setting the seek bar's maximum to equal the audio's duration in seconds (rounded up) would increase the resolution to perfect 1-second intervals for every show of any length, and would simplify any script where the seek bar is updated (instead of having to calculate the time as a percentage, all values would just be the audio's current time).
@@ -167,5 +161,5 @@ A livestreamer-friendly widget version of the site was previously available at `
 
 This problem with OBS now seems to be fixed (aside from when viewing a local copy of Weird Waves in OBS), so the stream widget has been removed. The downside is that the main site isn't as focused as the stream widget was, but there are two further upsides:
 
-* no longer any need to include show audio durations in `archive.js`
+* no longer any need to include show audio durations in `archive-data.js`
 * browser source CSS recommendations can be made consistent with the main page's CSS
