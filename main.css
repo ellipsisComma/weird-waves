@@ -1045,6 +1045,14 @@ textarea {
 		}
 	}
 }
+#q-a {
+	& > dt {
+		font-weight: bold;
+	}
+	& > dd {
+		margin-inline-start: 1em;
+	}
+}
 
 /* --------------
 	STREAMING
