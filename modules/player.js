@@ -54,7 +54,7 @@ function setTimestampFromSeconds(element, time) {
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type = ``) {
 	const pool = getElement(`seriesList`).querySelectorAll(`${
-		getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"] >` : ``
+		getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"]` : ``
 	} .show-list > li${
 		type === `banger` ? `[data-banger="true"]` : ``
 	}:not(:has([data-action="add-show"][aria-pressed="true"]))`);
