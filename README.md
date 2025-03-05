@@ -165,3 +165,11 @@ This problem with OBS now seems to be fixed (aside from when viewing a local cop
 
 * no longer any need to include show audio durations in `archive-data.js`
 * browser source CSS recommendations can be made consistent with the main page's CSS
+
+### On major queue changes, copy existing queue state to import-export box
+
+Currently, clearing the queue requires clicking through a confirmation. This is a useful catch, but is inconsistent with other major changes (import and shuffle), which don't ask for confirmation. For users who actually do mean to clear their queue, the confirmation could be a frustrating speed bump.
+
+This could be avoided by copying the existing state of the queue to the import-export box during any major queue changes, so a user who accidentally shuffled, cleared, or overwrote their queue could undo the changes. This would be a simpler alternative to a full undo/redo action queue.
+
+However, the solution would use an existing part of the interface with a clearly-delineated purpose for a new, undocumented purpose. This new purpose would have to be communicated not only in general, but specifically after major changes to the queue, to remind users of the option to undo. The conceptual complexity of this reminder would almost certainly cause more slowdown than the simple confirmation, and be more frustrating to users who intended to clear their playlist.
