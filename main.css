@@ -436,6 +436,12 @@ textarea {
 	color: inherit;
 	background-color: unset;
 }
+::marker {
+	font-family: inherit;
+}
+ul {
+	list-style-type: disc;
+}
 
 /* ===================== END RESET */ }
 
