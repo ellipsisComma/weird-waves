@@ -72,6 +72,7 @@ function initialise() {
 		if (!buttons) return;
 
 		// initialise buttons
+		buttons.querySelectorAll(`button`).forEach(button => button.unpress());
 		setStyleButtons(style);
 		buttons.classList.remove(`pre-initialised-control`);
 
