@@ -29,7 +29,7 @@ const queueObserver = new MutationObserver((mutations) => {
 
 	// list queue of show IDs line-by-line in queue data box
 	setValidImport();
-	getElement(`queueData`).value = getShowIDs(getElement(`queue`).children).join(`\n`);
+	getElement(`queueData`).value = getShowIDs(getElement(`queue`)).join(`\n`);
 
 	if (location.protocol !== `file:` && getElement(`queue`).children.length > 1) fetch(
 		showPath(getElement(`queue`).children[1].dataset.showId),
@@ -68,12 +68,12 @@ function getRandomShowID(type = ``) {
 
 // store queue as list of show IDs
 function storeQueue() {
-	store(`shows`, getShowIDs(getElement(`queue`).children));
+	store(`shows`, getShowIDs(getElement(`queue`)));
 }
 
-// get array of all show IDs, from a set of HTML show elements
-function getShowIDs(subset) {
-	return [...subset].map(show => show.dataset.showId);
+// get array of all show IDs on elements within a container
+function getShowIDs(container) {
+	return [...container.querySelectorAll(`[data-show-id]`)].map(show => show.dataset.showId);
 }
 
 /* --
@@ -184,14 +184,14 @@ function addShow(ID) {
 	const showOnQueue = getElement(`queue`).querySelector(`:scope > [data-show-id="${ID}"]`);
 	if (showOnQueue) {
 		getElement(`queue`).append(showOnQueue);
-		console.log(`re-added show: ${ID}`);
+		console.info(`re-added show: ${ID}`);
 		return;
 	}
 
 	// error out if show not in Archive
 	const showInArchive = getShowInArchive(ID);
 	if (!showInArchive) {
-		console.error(`show "${ID}" does not exist in Archive`);
+		console.error(`show ID does not exist in Archive: ${ID}`);
 		return;
 	}
 
@@ -218,7 +218,7 @@ function addShow(ID) {
 
 // add entire series to queue
 function addSeries(seriesInArchive) {
-	getShowIDs(seriesInArchive.querySelectorAll(`.show-list > li`)).forEach(addShow);
+	getShowIDs(seriesInArchive).forEach(addShow);
 }
 
 // add a random show or banger to the queue
