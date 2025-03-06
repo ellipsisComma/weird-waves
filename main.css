@@ -439,9 +439,6 @@ textarea {
 ::marker {
 	font-family: inherit;
 }
-ul {
-	list-style-type: disc;
-}
 
 /* ===================== END RESET */ }
 
@@ -581,6 +578,9 @@ h3 {
 	margin-block: 1em;
 	padding-inline: 1em;
 	list-style-type: "";
+}
+ul {
+	list-style-type: disc;
 }
 a:link {
 	color: var(--hot-colour);
