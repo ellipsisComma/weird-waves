@@ -11,10 +11,20 @@
 	<author>
 		<name>Weird Waves</name>
 	</author>
-	<updated>2025-03-05T00:00:00Z</updated>
+	<updated>2025-03-06T00:00:00Z</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?57</id>
+		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-06-import-export-updates" />
+		<title type="html"><![CDATA[Import/export updates]]></title>
+		<published>2025-03-06T00:00:00Z</published>
+		<updated>2025-03-06T00:00:00Z</updated>
+		<content type="html"><![CDATA[
+			<p>Queue data now updates automatically whenever the queue changes (when shows are added, moved, or removed; when the queue is shuffled or cleared). The &ldquo;Export&rdquo; button has been replaced with a &ldquo;Copy&rdquo; button that copies the data to your clipboard. Finally, the explanations around the data (and in the error message for import errors) have been updated to be a little clearer.</p>
+		]]></content>
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?56</id>
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-05-simplifying-controls" />
