@@ -3,7 +3,7 @@
 /*
 	player module:
 		* handles all audio queue processing (adding, removing, shuffling, clearing shows)
-		* handles queue import-export
+		* handles queue data
 		* handles radio interface and audio pre-fetching
 		* matches queue across browsing contexts
 */
@@ -26,9 +26,14 @@ import {
 const queueObserver = new MutationObserver((mutations) => {
 	loadShow();
 	storeQueue();
+
+	// list queue of show IDs line-by-line in queue data box
+	setValidImport();
+	getElement(`queueData`).value = getShowIDs(getElement(`queue`).children).join(`\n`);
+
 	if (location.protocol !== `file:` && getElement(`queue`).children.length > 1) fetch(
 		showPath(getElement(`queue`).children[1].dataset.showId),
-		{"cache": `no-cache`}
+		{"cache": `no-cache`},
 	);
 });
 
@@ -92,16 +97,15 @@ function clearQueue() {
 	}
 }
 
-// reset import-export invalidity
-function setValidImport() {
-	getElement(`importErrorMessage`).hidden = true;
-	getElement(`importExport`).ariaInvalid = false;
+// copy current queue data to clipboard
+function copyQueue() {
+	navigator.clipboard.writeText(getElement(`queueData`).value);
 }
 
-// list queue of show IDs line-by-line in import-export box
-function exportQueue() {
-	setValidImport();
-	getElement(`importExport`).value = getShowIDs(getElement(`queue`).children).join(`\n`);
+// reset import validity invalidity
+function setValidImport() {
+	getElement(`importErrorMessage`).hidden = true;
+	getElement(`queueData`).ariaInvalid = false;
 }
 
 // get closest string match to an invalid show ID during import attempt, as long as its similarity exceeds a minimum threshold
@@ -126,7 +130,7 @@ function matchInvalidShowID(invalidID) {
 
 // import queue from textbox
 function importQueue() {
-	const importList = getElement(`importExport`).value.trim();
+	const importList = getElement(`queueData`).value.trim();
 
 	// hide error message (done before guard, so error message disappears on import attempt even if textbox is empty)
 	getElement(`importErrorMessage`).hidden = true;
@@ -138,18 +142,16 @@ function importQueue() {
 	}
 
 	// remove import error markers from text, remove horizontal whitespace, and validate IDs
-	const errorMarker = ` -- import error!`;
-	const importIDs = [...new Set(importList.replaceAll(errorMarker, ``).replace(/[^\S\n\r]/g, ``).split(/\n+/))];
+	const importIDs = [...new Set(importList.replaceAll(/\/\/.+$/gm, ``).replace(/[^\S\n\r]/g, ``).split(/\n+/))];
 	const invalidIDs = importIDs.filter((ID, i) => {
 		const invalid = !allShowIDs.has(ID);
-		if (invalid) importIDs[i] += errorMarker; // side-effect
+		if (invalid) importIDs[i] += ` // import error!`; // side-effect
 		return invalid;
 	});
 
 	if (invalidIDs.length === 0) {
 		setValidImport();
 		clearQueue();
-		getElement(`importExport`).value = ``;
 		importIDs.forEach(addShow);
 	} else {
 		getElement(`importErrorList`).replaceChildren(...invalidIDs.map(ID => {
@@ -158,8 +160,8 @@ function importQueue() {
 			IDitem.querySelector(`.matched-show-id`).textContent = matchInvalidShowID(ID);
 			return IDitem;
 		}));
-		getElement(`importExport`).value = importIDs.join(`\n`);
-		getElement(`importExport`).ariaInvalid = true;
+		getElement(`queueData`).value = importIDs.join(`\n`);
+		getElement(`queueData`).ariaInvalid = true;
 		getElement(`importErrorMessage`).hidden = false;
 		getElement(`importErrorMessage`).scrollIntoView();
 	}
@@ -392,7 +394,7 @@ function initialise() {
 		case `move-down`: moveShowDown(target); break;
 		}
 	});
-	document.getElementById(`export-button`).addEventListener(`click`, exportQueue);
+	document.getElementById(`copy-button`).addEventListener(`click`, copyQueue);
 	document.getElementById(`import-button`).addEventListener(`click`, importQueue);
 	
 	// archive interface events

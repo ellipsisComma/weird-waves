@@ -44,7 +44,7 @@ setElement(`audio`, `#show-audio`);
 setElement(`queue`, `#queue`);
 setElement(`queueControls`, `#queue-controls`);
 setElement(`clearButton`, `#clear-button`);
-setElement(`importExport`, `#import-export-data`);
+setElement(`queueData`, `#queue-data`);
 setElement(`importErrorMessage`, `#import-error-message`);
 setElement(`importErrorList`, `#import-error-list`);
 

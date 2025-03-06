@@ -379,17 +379,19 @@
 		<ol id="queue" class="show-list"></ol>
 	</div><!--#queue-and-controls end-->
 
-	<h3>Import & export</h3>
-	<p>To export your queue, click the &ldquo;Export&rdquo; button and copy the output data to a safe place. The output is one ID per line. To import, paste the data into the box, then click the &ldquo;Import&rdquo; button to rebuild the queue.</p>
-	<textarea id="import-export-data" aria-label="Import/export queue data" aria-errormessage="import-error-message" aria-invalid="false"></textarea>
+	<h3>Data</h3>
+	<p>The data below updates automatically every time the playlist changes.</p>
+	<p>To save your data, copy the text (you can also click the &ldquo;Copy&rdquo; button to copy it to clipboard) and paste it somewhere safe.</p>
+	<p>To import your data, paste the data into the box, then click the &ldquo;Import&rdquo; button. If there are any errors</p>
+	<textarea id="queue-data" aria-label="Queue data" aria-errormessage="import-error-message" aria-invalid="false"></textarea>
 	<div id="import-error-message" aria-live="polite" hidden>
-		<p>Invalid show ID(s):</p>
+		<p>The following show ID(s) are invalid, but there may be similar valid IDs you can copy and paste into your data:</p>
 		<ul id="import-error-list"></ul>
-		<p>The import error notes are ignored when you attempt to import a list of show IDs, so you don't need to remove them.</p>
+		<p>You don't have to delete the import error messages from the data; they're removed automatically when you try to import the data.</p>
 	</div><!--#import-error-message end-->
 	<ul id="data-controls" class="flex-list">
-		<li><button id="export-button" class="push-button" type="button" aria-controls="import-export-data">Export</button></li>
-		<li><button id="import-button" class="push-button" type="button" aria-controls="queue radio import-export-data">Import</button></li>
+		<li><button id="copy-button" class="push-button" type="button">Copy</button></li>
+		<li><button id="import-button" class="push-button" type="button" aria-controls="queue radio import-error-message">Import</button></li>
 	</ul>
 </section><!--#booth end-->
 
