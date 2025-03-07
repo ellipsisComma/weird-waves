@@ -87,11 +87,11 @@ function isObject(variable) {
 
 String.prototype.camelToKebab = function () {
 	return this.replaceAll(/([A-Z])/g, (match) => `-${match.toLowerCase()}`);
-}
+};
 
 String.prototype.kebabToCamel = function () {
 	return this.replaceAll(/-([a-z])/g, (match) => match.slice(1).toUpperCase());
-}
+};
 
 // calculate the Jaro similarity of two strings (0 = totally unalike, 1 = identical)
 function getJaroSimilarity(str1, str2) {
@@ -199,7 +199,7 @@ HTMLButtonElement.prototype.unpress = function () {
 		"aria-pressed": `false`,
 		"aria-disabled": `false`,
 	});
-}
+};
 
 // set a button's state to pressed
 HTMLButtonElement.prototype.press = function () {
@@ -207,4 +207,4 @@ HTMLButtonElement.prototype.press = function () {
 		"aria-pressed": `true`,
 		"aria-disabled": `true`
 	});
-}
+};
