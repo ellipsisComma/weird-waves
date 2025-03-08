@@ -525,6 +525,10 @@ textarea {
 		outline-offset: 0.1em;
 	}
 }
+::selection {
+	color: var(--back-colour);
+	background-color: var(--cold-colour);
+}
 body {
 	margin: 0;
 	color: var(--fore-colour);
