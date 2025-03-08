@@ -248,7 +248,7 @@ DEFAULTS
 }
 [data-theme="flame"] {
 	--fore-colour: #f8f095;
-	--back-colour: #281800;
+	--back-colour: #203;
 	--hot-colour: #fe1;
 	--cold-colour: #ff842d;
 }
@@ -298,7 +298,7 @@ DEFAULTS
 	--fore-colour: #000;
 	--back-colour: #f0faff;
 	--hot-colour: #00614d;
-	--cold-colour: #3446b4;
+	--cold-colour: #2a4f91;
 }
 [data-theme="silver"] {
 	--fore-colour: #595959;
