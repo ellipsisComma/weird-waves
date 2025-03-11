@@ -15,7 +15,7 @@ const archive = [
 {
 "code": `ByM`,
 "heading": `<cite>Beyond Midnight</cite>`,
-"blurb": `A 1968&ndash;70 anthology of supernatural dramas and horror stories adapted by the writer Michael McCabe and broadcast by the first commercial radio station in South Africa: Springbok Radio.`,
+"blurb": `A 1968&ndash;70 anthology of supernatural dramas and horror stories adapted by the writer Michael McCabe and broadcast by South Africa's Springbok Radio.`,
 "source": `<a href="https://radioechoes.com/?page=series&genre=OTR-Thriller&series=Beyond%20Midnight">Radio Echoes</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -40,7 +40,7 @@ const archive = [
 {
 "code": `BC`,
 "heading": `<cite>The Black Chapel</cite>`,
-"blurb": `A 1937&ndash;39 horror anthology hosted and narrated by the insane organist of a derelict church (played by Ted Osbourne); only two episodes survive.`,
+"blurb": `A 1937&ndash;39 horror series hosted and narrated by the insane organist of a derelict church (played by Ted Osbourne); only two episodes survive.`,
 "source": `<a href="https://www.radioechoes.com/?page=series&genre=OTR-Thriller&series=The%20Black%20Chapel">Radio Echoes</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -241,7 +241,7 @@ const archive = [
 {
 "code": `CW`,
 "heading": `<cite>Columbia Workshop</cite>`,
-"blurb": `A 1936&ndash;47 anthology of experimental radio plays organised by Irving Reis to push the narrative and technical boundaries of contemporary radio; succeeded by the <cite><abbr>CBS</abbr> Radio Workshop</cite>.`,
+"blurb": `A 1936&ndash;47 anthology of experimental radio plays organised by Irving Reis to push the boundaries of the medium; succeeded by the <cite><abbr>CBS</abbr> Radio Workshop</cite>.`,
 "source": `<a href="https://www.radioechoes.com/?page=series&genre=OTR-Drama&series=Columbia%20Workshop">Radio Echoes</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -290,7 +290,7 @@ const archive = [
 {
 "code": `DX`,
 "heading": `<cite>Dimension X</cite>`,
-"blurb": `(X X x x x&hellip;) A 1950&ndash;51 sci-fi anthology of originals and adaptations, mostly scripted by Ernest Kinoy and George Lefferts; the fore-runner to their later series <cite>X Minus One</cite>.`,
+"blurb": `(X X x x x&hellip;) A 1950&ndash;51 sci-fi series of adaptations and originals mostly scripted by George Lefferts and Ernest Kinoy; fore-runner to <cite>X Minus One</cite>.`,
 "source": `<a href="https://archive.org/details/OTRR_Dimension_X_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -373,7 +373,7 @@ const archive = [
 {
 "code": `DQ`,
 "heading": `<cite>The Dream-Quest</cite>`,
-"blurb": `H.&nbsp;P.&nbsp;Lovecraft's 1926 novella <cite>The Dream-Quest of Unknown Kadath</cite>, which tells the story of the writer and dreamer Randolph Carter's journey through the Dreamlands in search of its gods and a wondrous unknown city, read by Maureen S.&nbsp;O'Brien.`,
+"blurb": `Randolph Carter journeys through the Dreamlands in search of a sublime city. Written by H.&nbsp;P.&nbsp;Lovecraft, published in 1926, read by Maureen S.&nbsp;O'Brien.`,
 "source": `<a href="https://archive.org/details/LovecraftKadath">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -452,7 +452,7 @@ const archive = [
 {
 "code": `Esc`,
 "heading": `<cite>Escape</cite>`,
-"blurb": `A 1947&ndash;54 anthology of escapist radio plays that shared its talent with the longer-running <cite>Suspense</cite>, and more often delved into the supernatural or science-fiction.`,
+"blurb": `A 1947&ndash;54 anthology of escapist radio plays that shared its talent with <cite>Suspense</cite>, and more often delved into horror and science fiction.`,
 "source": `<a href="https://archive.org/details/OTRR_Escape_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -498,7 +498,7 @@ const archive = [
 {
 "code": `FOT`,
 "heading": `<cite>Fifty-One Tales</cite>`,
-"blurb": `A collection of fifty-one short tales of myth and fantasy by Lord Dunsany, first published in 1915 and read by Rosslyn Carlyle for LibriVox.`,
+"blurb": `Short myths and fables by Lord Dunsany, published in 1915, read by Rosslyn Carlyle.`,
 "source": `<a href="https://librivox.org/fifty-one-tales-by-lord-dunsany">LibriVox</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -530,7 +530,7 @@ const archive = [
 {
 "code": `GGP`,
 "heading": `<cite>The Great God Pan</cite>`,
-"blurb": `A doctor lets the universe into a woman's brain. A village girl lures children into chaos. A seductress drives high society men to suicide. Written by Arthur Machen, first published in 1894, and read by Ethan Rampton for LibriVox.`,
+"blurb": `A doctor opens a woman's brain to the cosmos, with dire results. Written by Arthur Machen, published in 1894, read by Ethan Rampton.`,
 "source": `<a href="https://librivox.org/the-great-god-pan-by-arthur-machen">LibriVox</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -561,7 +561,7 @@ const archive = [
 {
 "code": `HF`,
 "heading": `<cite>The Hall of Fantasy</cite>`,
-"blurb": `A series of supernatural horror stories originally broadcast in Utah, later nationally syndicated in 1952&ndash;53. The series was written and directed by Richard Thorne.`,
+"blurb": `A series of supernatural stories broadcast in Utah in 1949 and nationally in 1952&ndash;53. The series was written and directed by Richard Thorne.`,
 "source": `<a href="https://archive.org/details/470213ThePerfectScript">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -606,7 +606,7 @@ const archive = [
 {
 "code": `KY`,
 "heading": `<cite>The King in Yellow</cite>`,
-"blurb": `A collection of eldritch horror stories from this classic collection, all revolving around an eerie symbol, a bizarre play, a mysterious abomination, and lost Carcosa. Written by Robert W.&nbsp;Chambers, first published in 1895, and read by Eva Staes for LibriVox.`,
+"blurb": `Horror stories revolving around a bizarre play and lost Carcosa. Written by Robert W.&nbsp;Chambers, published in 1895, read by Eva Staes.`,
 "source": `<a href="https://librivox.org/king-in-yellow-version-2-by-robert-w-chambers">LibriVox</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -655,7 +655,7 @@ const archive = [
 {
 "code": `LV`,
 "heading": `LibriVox selection`,
-"blurb": `LibriVox is a catalogue of public domain audiobook readings, including a selection of weird fiction and horror classics from decades and centuries ago.`,
+"blurb": `LibriVox is a catalogue of public domain audiobook readings, including many weird fiction and horror classics from decades and centuries ago.`,
 "source": `<a href="https://librivox.org">LibriVox</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -926,7 +926,7 @@ const archive = [
 {
 "code": `LO`,
 "heading": `<cite>Lights Out</cite>`,
-"blurb": `One of the earliest radio horror shows, started by Wyllis Cooper in 1934, later headed by Arch Oboler until 1947. Often more camp than scary, by modern standards.`,
+"blurb": `A foundational horror series, began by Wyllis Cooper in 1934, headed by Arch Oboler until 1947.`,
 "source": `<a href="https://archive.org/details/LightsOutoldTimeRadio">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -989,7 +989,7 @@ const archive = [
 {
 "code": `MS`,
 "heading": `<cite>The Machine Stops</cite>`,
-"blurb": `A mother and son's bond is tested by their differing views of the gargantuan Machine that facilitates&mdash;and limits&mdash;human life in the inhospitable future. Written by E.&nbsp;M.&nbsp;Forster, first published in 1909, and read by Elizabeth Klett for LibriVox.`,
+"blurb": `A mother and son's bond is tested by the Machine that governs life in the future. Written by E.&nbsp;M.&nbsp;Forster, published in 1909, read by Elizabeth Klett.`,
 "source": `<a href="https://librivox.org/the-machine-stops-version-3-by-e-m-forster/">LibriVox</a>`,
 "shows": [
 	{
@@ -1014,7 +1014,7 @@ const archive = [
 {
 "code": `McT`,
 "heading": `<cite>The Mercury Theatre</cite>`,
-"blurb": `A 1938 extension of Orson Welles' Mercury Theatre to adapt classic fiction to the airwaves, with each show starring Welles himself in a major role.`,
+"blurb": `A 1938 extension of Orson Welles' Mercury Theatre; adapted classic fiction to the airwaves, with Welles starring in each show.`,
 "source": `<a href="https://archive.org/details/OrsonWelles_MercuryTheatre">Internet Archive</a>`,
 "shows": [
 	{
@@ -1047,7 +1047,7 @@ const archive = [
 {
 "code": `Mw`,
 "heading": `<cite>Mindwebs</cite>`,
-"blurb": `A 1975&ndash;84 series of sci-fi, fantasy, and horror short story readings by Michael Hanson, who also chose the often-jazzy musical accompaniment for each episode.`,
+"blurb": `A 1975&ndash;84 series of sci-fi, fantasy, and horror short story readings by Michael Hanson, who also chose the often-jazzy musical accompaniment.`,
 "source": `<a href="https://archive.org/details/MindWebs_201410">Internet Archive</a>`,
 "shows": [
 	{
@@ -1289,7 +1289,7 @@ const archive = [
 {
 "code": `MsT`,
 "heading": `<cite>The Mysterious Traveler</cite>`,
-"blurb": `A 1943&ndash;52 anthology of horror stories hosted and narrated by the titular Mysterious Traveler riding a train racing through the night.`,
+"blurb": `A 1943&ndash;52 anthology of horror stories hosted and narrated by the titular traveler riding a train racing through the night.`,
 "source": `<a href="https://archive.org/details/OTRR_Mysterious_Traveler_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -1362,7 +1362,7 @@ const archive = [
 {
 "code": `PC`,
 "heading": `The Pegāna Cycle`,
-"blurb": `Lord Dunsany's mythology cycle of weird and terrible gods and their deeds and misdeeds: <cite>The Gods of Pegāna</cite> (1905), <cite>Time and the Gods</cite> (1906), and the dream-stories collected in <cite>Tales of Three Hemispheres</cite> (1919).`,
+"blurb": `Lord Dunsany's myth cycle of weird gods: <cite>The Gods of Pegāna</cite> (1905), <cite>Time and the Gods</cite> (1906), and the dream-stories in <cite>Tales of Three Hemispheres</cite> (1919).`,
 "source": `<a href="https://librivox.org">LibriVox</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -1441,7 +1441,7 @@ const archive = [
 {
 "code": `QP`,
 "heading": `<cite>Quiet, Please</cite>`,
-"blurb": `A 1947&ndash;49 radio horror anthology written by Wyllis Cooper. It starred radio announcer Ernest Chappell (his only acting role), who often spoke informally and directly to the audience.`,
+"blurb": `A 1947&ndash;49 radio horror anthology written by Wyllis Cooper, starring radio announcer Ernest Chappell in roles speaking directly to the audience.`,
 "source": `<a href="https://www.quietplease.org">quietplease.org</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -1961,7 +1961,7 @@ const archive = [
 {
 "code": `TF`,
 "heading": `<cite>Theater 5</cite>`,
-"blurb": `A 1964&ndash;65 anthology of dramas presented by the American Broadcasting Company (<abbr>ABC</abbr>) in an attempted revival of the radio play tradition after the rise of television.`,
+"blurb": `A 1964&ndash;65 anthology of radio dramas made in an attempt to revive the tradition after the rise of television.`,
 "source": `<a href="https://archive.org/details/OTRR_Theater_Five_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -2005,7 +2005,7 @@ const archive = [
 {
 "code": `Wil`,
 "heading": `<cite>The Willows</cite>`,
-"blurb": `Two travellers become trapped on a river island in an eerie sea of willows where the walls of reality are fragile and vast things peer through. Written by Algernon Blackwood, first published in 1907, and read by Phil Chenevart for LibriVox.`,
+"blurb": `Two travellers find a place where the world's walls are weak and thin. Written by Algernon Blackwood, published in 1907, read by Phil Chenevart.`,
 "source": `<a href="https://librivox.org/the-willows-by-algernon-blackwood-2">LibriVox</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -2071,7 +2071,7 @@ const archive = [
 {
 "code": `XMO`,
 "heading": `<cite>X Minus One</cite>`,
-"blurb": `5, 4, 3, 2&hellip; X minus 1. A 1955&ndash;58 anthology of original and adapted sci-fi stories, mostly scripted by Ernest Kinoy and George Lefferts; the successor to their earlier series <cite>Dimension X</cite>.`,
+"blurb": `5, 4, 3, 2&hellip; x minus 1. A 1955&ndash;58 sci-fi series of adaptions and originals mostly scripted by George Lefferts and Ernest Kinoy; successor to <cite>Dimension X</cite>.`,
 "source": `<a href="https://archive.org/details/OTRR_X_Minus_One_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
