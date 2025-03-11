@@ -709,7 +709,7 @@
 			</ol>
 			<p>The blocks can actually be any number of shows long, but it's neater if they divide evenly into 24 (for 24 hours). Those numbers are 1, 2, 3, 4, 6, 8, 12, or 24 shows per block.</p>
 			<p>Each schedule is a <code>.json</code> file stored separate from the script that contains some info about the schedule, plus the lists of shows for each block:</p>
-			<pre class="code-block"><code>{
+			<pre class="code-block" tabindex="0"><code>{
 "info": {
 	"title": "Regular Test Schedule",
 	"description": "This is a test schedule loaded from a separate file. It plays a mix of episodes from the 1940s weird fiction/sci-fi/horror radio anthology, &lt;cite&gt;Quiet, Please&lt;/cite&gt;.",
@@ -745,7 +745,7 @@
 				<dd>Each week has its own intermission track. The schedule provides the filename and the script plays that file between shows.</dd>
 			</dl>
 			<p><code>schedule.weekday</code> and <code>schedule.weekend</code> list the shows in each block. For each show, they have the filename and an ID that points to its metadata, which is written on the app page. For instance, the ID <code>qp-001</code> points to this metadata:</p>
-			<pre class="code-block"><code>&lt;li id="qp-001"&gt;
+			<pre class="code-block" tabindex="0"><code>&lt;li id="qp-001"&gt;
 	&lt;h5 class="archive-show-title"&gt;Nothing Behind the Door&lt;/h5&gt;
 	&lt;dl class="archive-show-info"&gt;
 		&lt;dt&gt;Episode&lt;/dt&gt;
