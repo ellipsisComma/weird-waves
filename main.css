@@ -518,12 +518,12 @@ textarea {
 
 * {
 	scrollbar-color: var(--hot-colour) var(--back-colour);
-	&:focus-visible {
-		outline-width: var(--line-width);
-		outline-style: solid;
-		outline-color: var(--cold-colour);
-		outline-offset: 0.1em;
-	}
+}
+:focus-visible {
+	outline-width: var(--line-width);
+	outline-style: solid;
+	outline-color: var(--cold-colour);
+	outline-offset: 0.1em;
 }
 ::selection {
 	color: var(--back-colour);
@@ -590,12 +590,6 @@ a:link {
 	color: var(--hot-colour);
 	text-decoration-thickness: 0.075em;
 	text-underline-offset: 0.15em;
-	&:focus-visible {
-		text-decoration-line: none;
-		&:hover {
-			text-decoration-line: underline;
-		}
-	}
 }
 a:visited {
 	color: var(--cold-colour);
