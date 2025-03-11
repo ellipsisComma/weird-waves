@@ -141,7 +141,7 @@ function getJaroSimilarity(str1, str2) {
 
 // fast, modern string hash
 // cyrb53 (c) 2018 bryc (github.com/bryc)
-String.prototype.hashCode = function (seed = 0) {
+String.prototype.toHash = function (seed = 0) {
 	let h1 = 0xdeadbeef ^ seed;
 	let h2 = 0x41c6ce57 ^ seed;
 
@@ -155,7 +155,7 @@ String.prototype.hashCode = function (seed = 0) {
 	h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
 	h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
 	h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-	
+
 	return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
