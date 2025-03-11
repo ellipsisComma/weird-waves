@@ -24,6 +24,7 @@ function buildNewsItem(item) {
 	templatedNews.querySelector(`h3 > a`).href = `#${newsID}`;
 	templatedNews.querySelector(`.news-item-published`).textContent = item.querySelector(`published`).textContent.split(`T`)[0];
 	templatedNews.querySelector(`.news-item-content`).setContent(item.querySelector(`content`).textContent);
+	templatedNews.querySelector(`.item-return-link`).href = `#${newsID}`;
 
 	return templatedNews;
 }

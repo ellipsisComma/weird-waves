@@ -70,7 +70,7 @@ function buildSeries(series) {
 	newSeries.querySelector(`.series-blurb`).setContent(series.blurb);
 	newSeries.querySelector(`.series-source`).setContent(`Source: ${series.source}`);
 	newSeries.querySelector(`.show-list`).replaceChildren(...series.shows.map(buildShow));
-	newSeries.querySelector(`.series-return-link`).href = `#${series.elementId}`;
+	newSeries.querySelector(`.item-return-link`).href = `#${series.elementId}`;
 
 	return templatedSeries;
 }

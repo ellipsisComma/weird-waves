@@ -932,17 +932,17 @@ textarea {
 		margin-block-end: calc(-1 * var(--line-width));
 		border-block-end: var(--fore-line);
 	}
-	& .return-links {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		margin-block-start: 1lh;
-		margin-block-end: 3lh;
-		text-align: center;
-	}
 	& > :last-child > .return-links {
 		margin-block-end: 0;
 	}
+}
+.return-links {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-block-start: 1lh;
+	margin-block-end: 3lh;
+	text-align: center;
 }
 .series-content {
 	padding: var(--gap-size);
@@ -1247,6 +1247,9 @@ textarea {
 			margin-inline: 0;
 			border-inline-start: var(--fore-line);
 		}
+	}
+	.return-links {
+		margin-block-end: 1lh;
 	}
 	.series-content {
 		padding-inline-start: 0;
