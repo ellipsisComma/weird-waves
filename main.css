@@ -662,7 +662,7 @@ code {
 	padding-block-start: var(--control-depth);
 	padding-inline-start: 0;
 	list-style-type: "";
-	button {
+	& button {
 		padding: 0.1em;
 		&:active > .svg-icon {
 			stroke: var(--cold-colour);
@@ -691,13 +691,11 @@ code {
 	margin-block-end: 0.3em;
 	white-space: pre;
 }
-.show-content {
-	#loaded-show > & {
-		padding-inline-end: var(--gap-size);
-	}
-	.flat-radio > & {
-		display: none;
-	}
+#loaded-show > .show-content {
+	padding-inline-end: var(--gap-size);
+}
+.flat-radio > .show-content {
+	display: none;
 }
 #radio-controls {
 	display: grid;
@@ -817,7 +815,7 @@ input[type="range"]:active {
 		flex-direction: column;
 		gap: var(--gap-size);
 	}
-	a {
+	& a {
 		display: inline-flex;
 		flex-direction: column;
 		padding-block-start: 0.3em;
@@ -926,10 +924,10 @@ textarea {
 #series-list {
 	padding-inline-start: 0;
 	list-style-type: "";
-	.series {
+	& .series {
 		display: grid;
 	}
-	header {
+	& header {
 		position: sticky;
 		inset-block-start: 0;
 		z-index: 3;
@@ -937,7 +935,7 @@ textarea {
 		background-color: var(--back-colour);
 		border-block-end: var(--fore-line);
 	}
-	.return-links {
+	& .return-links {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -1041,7 +1039,7 @@ textarea {
 		flex-direction: row-reverse;
 		justify-content: flex-end;
 	}
-	dd {
+	& dd {
 		margin-inline-start: 0;
 		font-weight: bold;
 		&::after {
@@ -1232,19 +1230,17 @@ textarea {
 		font-size: 1em;
 		text-align: end;
 	}
-	#series-list {
-		.series {
-			grid-template-columns: 260px auto;
-			border-block-end: var(--fore-line);
-		}
-		header {
+	.series {
+		grid-template-columns: 260px auto;
+		border-block-end: var(--fore-line);
+		& > header {
 			align-self: start;
 			margin-inline-end: calc(-1 * var(--line-width));
 			background-color: unset;
 			border-block-end: unset;
 			border-inline-end: var(--fore-line);
 		}
-		.show-list {
+		& > .show-list {
 			margin-inline: 0;
 			border-inline-start: var(--fore-line);
 		}
