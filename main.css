@@ -1230,17 +1230,19 @@ textarea {
 		font-size: 1em;
 		text-align: end;
 	}
-	.series {
-		grid-template-columns: 260px auto;
-		border-block-end: var(--fore-line);
-		& > header {
+	#series-list {
+		& .series {
+			grid-template-columns: 260px auto;
+			border-block-end: var(--fore-line);
+		}
+		& header {
 			align-self: start;
 			margin-inline-end: calc(-1 * var(--line-width));
 			background-color: unset;
 			border-block-end: unset;
 			border-inline-end: var(--fore-line);
 		}
-		& > .show-list {
+		& .show-list {
 			margin-inline: 0;
 			border-inline-start: var(--fore-line);
 		}
