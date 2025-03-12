@@ -963,6 +963,10 @@ textarea {
 	margin-inline: var(--gap-size);
 	padding-inline-start: 0;
 }
+#series-list .show-list {
+	--archive-show-list-padding: calc(1.5em + var(--gap-size));
+	padding-inline-start: var(--archive-show-list-padding);
+}
 .show-heading {
 	display: inline-block;
 }
@@ -1204,6 +1208,11 @@ textarea {
 		block-size: 1em;
 	}
 
+	/* ARCHIVE */
+	#series-list .show-list {
+		--archive-show-list-padding: calc(1em + var(--gap-size));
+	}
+
 	/* SETTINGS */
 	.palette {
 		inline-size: 4em;
@@ -1247,6 +1256,7 @@ textarea {
 		}
 		& .show-list {
 			margin-inline: 0;
+			padding-inline: 0;
 			border-inline-start: var(--fore-line);
 		}
 	}
