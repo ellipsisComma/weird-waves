@@ -490,6 +490,8 @@ textarea {
 	VARIABLES
 -------------- */
 
+/* GENERAL */
+
 :root {
 	--widescreen-max-inline-size: 1200px;
 	--main-column-max-inline-size: 800px;
@@ -506,10 +508,40 @@ textarea {
 	--control-depth: 6px;
 
 	--line-width: 1px;
-	--fore-line: var(--line-width) solid var(--fore-colour);
-	--back-line: var(--line-width) solid var(--back-colour);
-	--hot-line: var(--line-width) solid var(--hot-colour);
-	--cold-line: var(--line-width) solid var(--cold-colour);
+}
+
+/* COLOUR PATCH */
+
+:root {
+	--text-colour: var(--fore-colour);
+	--background-colour: var(--back-colour);
+
+	--text-link-default-colour: var(--hot-colour);
+	--text-link-visited-colour: var(--cold-colour);
+	--text-link-active-text-colour: var(--back-colour);
+	--text-link-active-background-colour: var(--cold-colour);
+
+	--title-text-colour: var(--back-colour);
+	--title-background-colour: var(--fore-colour);
+
+	--control-default-colour: var(--hot-colour);
+	--control-interacted-colour: var(--cold-colour);
+	--focus-ring-colour: var(--cold-colour);
+
+	--selection-text-colour: var(--back-colour);
+	--selection-background-colour: var(--cold-colour);
+	--scrollbar-thumb-colour: var(--hot-colour);
+	--scrollbar-gutter-colour: var(--back-colour);
+
+	--box-border-colour: var(--fore-colour);
+	--scroll-shadow-colour: var(--hot-colour);
+
+	--nav-link-default-colour: var(--fore-colour);
+	--nav-link-current-page-colour: var(--cold-colour);
+	--nav-link-navigating-colour: var(--hot-colour);
+
+	--icon-main-colour: var(--cold-colour);
+	--icon-accent-colour: var(--hot-colour);
 }
 
 /* ------------
@@ -517,26 +549,25 @@ textarea {
 ------------ */
 
 * {
-	scrollbar-color: var(--hot-colour) var(--back-colour);
+	scrollbar-color: var(--scrollbar-thumb-colour) var(--scrollbar-gutter-colour);
 }
 :focus-visible {
 	outline-width: var(--line-width);
 	outline-style: solid;
-	outline-color: var(--cold-colour);
+	outline-color: var(--focus-ring-colour);
 	outline-offset: 0.1em;
 }
 ::selection {
-	color: var(--back-colour);
-	background-color: var(--cold-colour);
+	color: var(--selection-text-colour);
+	background-color: var(--selection-background-colour);
 }
 body {
 	margin: 0;
-	color: var(--fore-colour);
-	background-color: var(--back-colour);
+	color: var(--text-colour);
+	background-color: var(--background-colour);
 	text-orientation: upright;
 	font-family: var(--font-stack-body);
 	line-height: 1.5;
-	accent-color: var(--cold-colour);
 }
 #container {
 	margin-inline: auto;
@@ -587,16 +618,16 @@ ul {
 	list-style-type: disc;
 }
 a:link {
-	color: var(--hot-colour);
+	color: var(--text-link-default-colour);
 	text-decoration-thickness: 0.075em;
 	text-underline-offset: 0.15em;
 }
 a:visited {
-	color: var(--cold-colour);
+	color: var(--text-link-visited-colour);
 }
 a:active {
-	color: var(--back-colour);
-	background-color: var(--hot-colour);
+	color: var(--text-link-active-text-colour);
+	background-color: var(--text-link-active-background-colour);
 }
 .uppercase {
 	text-transform: uppercase;
@@ -611,7 +642,7 @@ code {
 	& > summary {
 		list-style-type: "";
 		display: inline-block;
-		color: var(--hot-colour);
+		color: var(--control-default-colour);
 		&::-webkit-details-marker {
 			display: none;
 		}
@@ -623,7 +654,7 @@ code {
 		}
 	}
 	&[open] > summary {
-		color: var(--cold-colour);
+		color: var(--control-interacted-colour);
 		&::before {
 			content: "\2193"; /* down arrow */
 		}
@@ -634,10 +665,13 @@ code {
 	block-size: 2em;
 	inline-size: auto;
 	fill: none;
-	stroke: var(--cold-colour);
+	stroke: var(--icon-main-colour);
 	stroke-width: 1;
 	stroke-linecap: round;
 	stroke-linejoin: round;
+}
+.svg-accent-stroke { /* must be outside .svg-icon, because it's applied in the <symbol> elements, not in the <svg class="svg-icon"> elements */
+	stroke: var(--icon-accent-colour);
 }
 .push-button {
 	position: relative;
@@ -645,14 +679,16 @@ code {
 	padding-block-start: 0.5em;
 	padding-block-end: 0.25em;
 	padding-inline: 0.5em;
-	color: var(--hot-colour);
-	border: var(--hot-line);
-	box-shadow: 0 var(--control-depth) var(--hot-colour);
+	color: var(--control-default-colour);
+	border-width: var(--line-width);
+	border-style: solid;
+	border-color: var(--control-default-colour);
+	box-shadow: 0 var(--control-depth) var(--control-default-colour);
 	align-items: center;
 	&:is(:active, [aria-disabled="true"]) {
 		top: 0;
-		color: var(--cold-colour);
-		border-color: var(--cold-colour);
+		color: var(--control-interacted-colour);
+		border-color: var(--control-interacted-colour);
 		box-shadow: unset;
 	}
 }
@@ -662,15 +698,15 @@ code {
 	padding-block-start: var(--control-depth);
 	padding-inline-start: 0;
 	list-style-type: "";
+	.svg-icon {
+		block-size: 1.5em;
+		stroke: var(--control-default-colour);
+	}
 	& button {
 		padding: 0.1em;
 		&:active > .svg-icon {
-			stroke: var(--cold-colour);
+			stroke: var(--control-interacted-colour);
 		}
-	}
-	.svg-icon {
-		block-size: 1.5em;
-		stroke: var(--hot-colour);
 	}
 }
 [aria-pressed="true"] .unpressed-icon,
@@ -751,49 +787,53 @@ code {
 }
 input[type="range"] {
 	margin: 0;
-	border-block-end: var(--hot-line);
+	border-block-end-width: var(--line-width);
+	border-block-end-style: solid;
+	border-block-end-color: var(--box-border-colour);
 	&::-moz-range-progress {
-		background-color: var(--hot-colour);
+		background-color: var(--control-default-colour);
 		block-size: var(--line-width);
 	}
 	&::-moz-range-thumb {
 		box-sizing: border-box;
-		background-color: var(--back-colour);
-		border: var(--hot-line);
+		background-color: var(--background-colour);
+		border-width: var(--line-width);
+		border-style: solid;
+		border-color: var(--control-default-colour);
 		border-radius: 0;
-		box-shadow: 0 var(--control-depth) var(--hot-colour);
+		box-shadow: 0 var(--control-depth) var(--control-default-colour);
 		transform: translateY(calc(-1 * var(--control-depth)));
 	}
 	&:active {
 		&::-moz-range-thumb {
-			border-color: var(--cold-colour);
-			box-shadow: 0 var(--control-depth) var(--cold-colour);
+			border-color: var(--control-interacted-colour);
+			box-shadow: 0 var(--control-depth) var(--control-interacted-colour);
 		}
 		&::-moz-range-progress {
-			background-color: var(--cold-colour);
+			background-color: var(--control-interacted-colour);
 		}
 	}
 }
 input[type="range"] {
 	&::-webkit-slider-runnable-track {
-		background-color: var(--hot-colour);
+		background-color: var(--control-default-colour);
 		block-size: var(--line-width);
 	}
 	&::-webkit-slider-thumb {
 		-webkit-appearance: none;
 		appearance: none;
-		background-color: var(--back-colour);
-		border: var(--hot-line);
-		box-shadow: 0 var(--control-depth) var(--hot-colour);
+		background-color: var(--background-colour);
+		border: var(--control-default-line);
+		box-shadow: 0 var(--control-depth) var(--control-default-colour);
 	}
 }
 input[type="range"]:active {
 	&::-webkit-slider-thumb {
-		border-color: var(--cold-colour);
-		box-shadow: 0 var(--control-depth) var(--cold-colour);
+		border-color: var(--control-interacted-colour);
+		box-shadow: 0 var(--control-depth) var(--control-interacted-colour);
 	}
 	&::-webkit-slider-runnable-track {
-		background-color: var(--cold-colour);
+		background-color: var(--control-interacted-colour);
 		block-size: var(--line-width);
 	}
 }
@@ -806,7 +846,9 @@ input[type="range"]:active {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: var(--gap-size);
-	border-block: var(--fore-line);
+	border-block-width: var(--line-width);
+	border-block-style: solid;
+	border-block-color: var(--box-border-colour);
 	& > ul {
 		display: flex;
 		list-style-type: "";
@@ -828,16 +870,13 @@ input[type="range"]:active {
 			color: unset;
 		}
 		&[aria-current="page"] {
-			color: var(--cold-colour);
+			color: var(--nav-link-current-page-colour);
 		}
 		&:is(:hover, :focus, :active) {
-			color: var(--hot-colour);
+			color: var(--nav-link-navigating-colour);
 			background-color: unset;
 		}
 	}
-}
-.svg-hot-stroke {
-	stroke: var(--hot-colour);
 }
 
 /* -------------
@@ -885,8 +924,10 @@ main {
 	margin-block-end: var(--gap-size);
 	padding-block-start: var(--control-depth);
 	padding-block-end: var(--gap-size);
-	background-color: var(--back-colour);
-	border-block-end: var(--fore-line);
+	background-color: var(--background-colour);
+	border-block-end-width: var(--line-width);
+	border-block-end-style: solid;
+	border-block-end-color: var(--box-border-colour);
 }
 textarea {
 	block-size: 10lh;
@@ -899,8 +940,10 @@ textarea {
 	font-size: 1em;
 	font-family: var(--font-stack-mono);
 	line-height: 1;
-	border: var(--fore-line);
-	border-top-width: calc(var(--control-depth) + var(--line-width));
+	border-width: var(--line-width);
+	border-style: solid;
+	border-color: var(--box-border-colour);
+	border-block-start-width: calc(var(--control-depth) + var(--line-width));
 	resize: none;
 }
 #import-error-list {
@@ -916,11 +959,15 @@ textarea {
 	list-style-type: "";
 	& .series {
 		display: grid;
-		border-block-end: var(--fore-line);
+		border-block-end-width: var(--line-width);
+		border-block-end-style: solid;
+		border-block-end-color: var(--box-border-colour);
 	}
 	& header {
 		margin-block-end: calc(-1 * var(--line-width));
-		border-block-end: var(--fore-line);
+		border-block-end-width: var(--line-width);
+		border-block-end-style: solid;
+		border-block-end-color: var(--box-border-colour);
 	}
 	& > :last-child > .return-links {
 		margin-block-end: 0;
@@ -951,8 +998,8 @@ textarea {
 	padding-block-start: 0.35em;
 	padding-block-end: 0.1em;
 	padding-inline: 0.5em;
-	color: var(--back-colour);
-	background-color: var(--fore-colour);
+	color: var(--title-text-colour);
+	background-color: var(--title-background-colour);
 }
 .series-source {
 	margin-block-start: 0.3em;
@@ -1054,7 +1101,6 @@ textarea {
 -------------- */
 
 .code-block {
-	--scroll-shadow-colour: var(--hot-colour);
 	--scroll-shadow-spacing: 15px;
 	--scroll-shadow-gradient: repeating-linear-gradient(-45deg,
 		transparent var(--scroll-shadow-spacing),
@@ -1062,11 +1108,13 @@ textarea {
 		transparent calc(var(--scroll-shadow-spacing) + 2 * var(--line-width)) calc(2 * var(--scroll-shadow-spacing))
 	);
 	padding-inline-start: var(--gap-size);
-	border-inline-start: var(--fore-line);
+	border-inline-start-width: var(--line-width);
+	border-inline-start-style: solid;
+	border-inline-start-color: var(--box-border-colour);
 	overflow-x: auto;
 	background-image:
-		linear-gradient(var(--back-colour)),
-		linear-gradient(var(--back-colour)),
+		linear-gradient(var(--background-colour)),
+		linear-gradient(var(--background-colour)),
 		var(--scroll-shadow-gradient),
 		var(--scroll-shadow-gradient);
 	background-position: left center, right center, left center, right center;
@@ -1089,32 +1137,39 @@ textarea {
 .setting-toggle {
 	display: grid;
 	grid-template-columns: 1lh auto;
-	align-items: baseline;
+	align-items: center;
 	gap: 0.5em;
 	margin-inline-start: 1em;
 	padding-block-start: 0.25em;
 	text-align: start;
 	user-select: auto;
 	&::before {
-		content: "\a0"; /* non-breaking space */
-		display: block;
+		--toggle-gutter-size: var(--line-width);
+		content: ""; /* non-breaking space */
+		display: grid;
+		place-content: center;
+		aspect-ratio: 1;
+		block-size: 1lh;
 		text-align: center;
-		color: var(--back-colour);
-		border: var(--back-line);
-		outline: var(--hot-line);
-		transform: translateY(-0.1em);
+		color: transparent;
+		border-width: var(--toggle-gutter-size);
+		border-style: solid;
+		border-color: var(--background-colour);
+		outline-width: var(--line-width);
+		outline-style: solid;
+		outline-color: var(--control-default-colour);
 	}
 	&:active::before {
-		outline-color: var(--cold-colour);
+		outline-color: var(--control-interacted-colour);
 	}
 	&[aria-pressed="true"] {
 		&::before {
-			color: var(--hot-colour);
-			background-color: var(--hot-colour);
+			color: var(--control-default-colour);
+			background-color: var(--control-default-colour);
 		}
 		&:active::before {
-			color: var(--cold-colour);
-			background-color: var(--cold-colour);
+			color: var(--control-interacted-colour);
+			background-color: var(--control-interacted-colour);
 		}
 	}
 }
@@ -1178,7 +1233,7 @@ textarea {
 		--shadow-1: 0.07em 0.07em 0;
 		--shadow-2: -0.05em -0.05em 0;
 		--shadow-3: 0.1em 0.09em 0;
-		text-shadow: var(--shadow-1) var(--back-colour), var(--shadow-2) var(--back-colour), var(--shadow-3) var(--fore-colour);
+		text-shadow: var(--shadow-1) var(--background-colour), var(--shadow-2) var(--background-colour), var(--shadow-3) var(--text-colour);
 	}
 	.code-block > code {
 		tab-size: 3ch;
@@ -1252,12 +1307,16 @@ textarea {
 			margin-inline-end: calc(-1 * var(--line-width));
 			background-color: unset;
 			border-block-end: unset;
-			border-inline-end: var(--fore-line);
+			border-inline-end-width: var(--line-width);
+			border-inline-end-style: solid;
+			border-inline-end-color: var(--box-border-colour);
 		}
 		& .show-list {
 			margin-inline: 0;
 			padding-inline: 0;
-			border-inline-start: var(--fore-line);
+			border-inline-start-width: var(--line-width);
+			border-inline-start-style: solid;
+			border-inline-start-color: var(--box-border-colour);
 		}
 	}
 	.return-links {
@@ -1292,7 +1351,9 @@ textarea {
 		position: sticky;
 		inline-size: calc(var(--widescreen-max-inline-size) - var(--main-column-max-inline-size) - var(--gap-size));
 		inset-block-start: var(--gap-size);
-		border: var(--fore-line);
+		border-width: var(--line-width);
+		border-style: solid;
+		border-color: var(--box-border-colour);
 	}
 	#radio-app {
 		overflow-y: auto;
