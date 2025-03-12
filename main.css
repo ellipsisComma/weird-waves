@@ -888,16 +888,6 @@ main {
 	background-color: var(--back-colour);
 	border-block-end: var(--fore-line);
 }
-#clear-queue-controls {
-	inline-size: 100%;
-	text-align: center;
-	& > :first-child {
-		margin-block-start: 0;
-	}
-	& > :last-child {
-		margin-block-end: var(--gap);
-	}
-}
 textarea {
 	block-size: 10lh;
 	inline-size: 100%;
