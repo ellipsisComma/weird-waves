@@ -1060,9 +1060,25 @@ textarea {
 -------------- */
 
 .code-block {
+	--scroll-shadow-colour: var(--hot-colour);
+	--scroll-shadow-spacing: 15px;
+	--scroll-shadow-gradient: repeating-linear-gradient(-45deg,
+		transparent var(--scroll-shadow-spacing),
+		var(--scroll-shadow-colour) var(--scroll-shadow-spacing) calc(var(--scroll-shadow-spacing) + 2 * var(--line-width)),
+		transparent calc(var(--scroll-shadow-spacing) + 2 * var(--line-width)) calc(2 * var(--scroll-shadow-spacing))
+	);
 	padding-inline-start: var(--gap-size);
 	border-inline-start: var(--fore-line);
 	overflow-x: auto;
+	background-image:
+		linear-gradient(var(--back-colour)),
+		linear-gradient(var(--back-colour)),
+		var(--scroll-shadow-gradient),
+		var(--scroll-shadow-gradient);
+	background-position: left center, right center, left center, right center;
+	background-repeat: no-repeat;
+	background-size: calc(2 * var(--scroll-shadow-spacing)) 100%, calc(2 * var(--scroll-shadow-spacing)) 100%, var(--gap-size) 100%, var(--gap-size) 100%;
+	background-attachment: local, local, scroll, scroll;
 	& > code {
 		tab-size: 2ch;
 	}
