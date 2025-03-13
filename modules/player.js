@@ -437,7 +437,7 @@ function initialise() {
 
 // update queue if queue changes in another browsing context
 window.addEventListener(`storage`, () => {
-	if (event.key !== `queue`) return;
+	if (event.key !== `shows`) return;
 
 	const newQueue = JSON.parse(event.newValue);
 
