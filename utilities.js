@@ -100,10 +100,7 @@ function getJaroSimilarity(str1, str2) {
 	const range = Math.floor(Math.max(str1.length, str2.length) / 2 - 1);
 
 	for (let i = 0; i < str1.length; i++) {
-		const lowerBound = Math.max(0, i - range);
-		const upperBound = Math.min(str2.length, i + range);
-
-		for (let j = lowerBound; j < upperBound; j++) {
+		for (let j = Math.max(0, i - range); j < Math.min(str2.length, i + range); j++) {
 			// if the two characters match and the second hasn't been matched yet, mark both as matched and break the loop (no need to continue checking for matches)
 			if (str1[i] === str2[j] && matched2[j] !== true) {
 				matched1[i] = true;
@@ -116,12 +113,8 @@ function getJaroSimilarity(str1, str2) {
 	// where "matched" is true get character from string and push to "shared"
 	const shared1 = [];
 	const shared2 = [];
-	matched1.forEach((match, i) => {
-		if (match) shared1.push(str1[i]);
-	});
-	matched2.forEach((match, i) => {
-		if (match) shared2.push(str2[i]);
-	});
+	for (let i = 0; i < matched1.length; i++) if (matched1[i]) shared1.push(str1[i]);
+	for (let i = 0; i < matched2.length; i++) if (matched2[i]) shared2.push(str2[i]);
 
 	// get transposition count
 	let transPos = 0;
