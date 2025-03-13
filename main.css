@@ -475,6 +475,68 @@ textarea {
 	block-size: 0;
 	inline-size: 0;
 }
+@media (forced-colors: active) or (prefers-contrast: more) {
+	/*
+	In Firefox, the colour patch can be as follows
+	because the browser automatically applies forced-colours in forced-colours mode,
+	but Safari and Chrome don't change anything automatically,
+	so all forced-colors changed need to be explicit here.
+		--control-default-colour: CanvasText;
+		--control-interacted-colour: VisitedText;
+		--nav-link-default-colour: CanvasText;
+		--box-border-colour: CanvasText;
+		--icon-main-colour: CanvasText;
+		--icon-accent-colour: CanvasText;
+	*/
+	:root {
+		--text-colour: CanvasText;
+		--background-colour: Canvas;
+
+		--text-link-default-colour: LinkText;
+		--text-link-visited-colour: VisitedText;
+		--text-link-active-text-colour: ActiveText;
+		--text-link-active-background-colour: transparent;
+
+		--title-text-colour: CanvasText;
+		--title-background-colour: Canvas;
+
+		--control-default-colour: CanvasText;
+		--control-interacted-colour: VisitedText;
+		--focus-ring-colour: unset;
+
+		--selection-text-colour: unset;
+		--selection-background-colour: unset;
+		--scrollbar-thumb-colour: unset;
+		--scrollbar-gutter-colour: unset;
+
+		--box-border-colour: CanvasText;
+		--scroll-shadow-colour: CanvasText;
+
+		--nav-link-default-colour: CanvasText;
+		--nav-link-current-page-colour: VisitedText;
+		--nav-link-navigating-colour: LinkText;
+
+		--icon-main-colour: CanvasText;
+		--icon-accent-colour: CanvasText;
+
+		--line-width: 2px;
+		--control-depth: 0px;
+	}
+	:focus-visible {
+		outline: revert;
+	}
+	.setting-toggle::before {
+		border-color: Canvas;
+		outline-color: CanvasText;
+	}
+	@media (min-width: 700px) {
+		.series {
+			border-block-start-width: var(--line-width);
+			border-block-start-style: solid;
+			border-block-start-color: var(--box-border-colour);
+		}
+	}
+}
 
 /* ================= END UTILITIES */ }
 
@@ -759,30 +821,32 @@ code {
 	inline-size: 100%;
 	padding-block-end: calc(var(--control-depth) * 0.6);
 	&::-webkit-slider-thumb {
-		inline-size: var(--seek-bar-thumb-size);
 		block-size: var(--seek-bar-thumb-size);
+		inline-size: var(--seek-bar-thumb-size);
 		border-width: calc(2 * var(--line-width));
 		border-radius: 50%;
 		transform: translateY(calc(-1 * calc(var(--seek-bar-thumb-size) / 2 + var(--control-depth))));
 	}
 	&::-moz-range-thumb {
-		block-size: 1em;
-		inline-size: 1em;
-		border-width: calc(2 * var(--line-width));
+		block-size: var(--seek-bar-thumb-size);
+		inline-size: var(--seek-bar-thumb-size);
+		border-width:  var(--line-width);
 		border-radius: 50%;
 	}
 }
 #volume-control {
+	--thumb-block-size: 1.2em;
+	--thumb-inline-size: 0.75em;
 	inline-size: 5em;
 	padding-block-end: var(--control-depth);
 	&::-webkit-slider-thumb {
-		inline-size: 0.75em;
-		block-size: 1.2em;
+		block-size: var(--thumb-block-size);
+		inline-size: var(--thumb-inline-size);
 		transform: translateY(-1em);
 	}
 	&::-moz-range-thumb {
-		block-size: 1.2em;
-		inline-size: 0.75em;
+		block-size: var(--thumb-block-size);
+		inline-size: var(--thumb-inline-size);
 	}
 }
 input[type="range"] {
@@ -823,7 +887,9 @@ input[type="range"] {
 		-webkit-appearance: none;
 		appearance: none;
 		background-color: var(--background-colour);
-		border: var(--control-default-line);
+		border-width: var(--line-width);
+		border-style: solid;
+		border-color: var(--control-default-colour);
 		box-shadow: 0 var(--control-depth) var(--control-default-colour);
 	}
 }
@@ -867,7 +933,7 @@ input[type="range"]:active {
 		text-decoration: none;
 		user-select: none;
 		&:is(:link, :visited) {
-			color: unset;
+			color: var(--nav-link-default-colour);
 		}
 		&[aria-current="page"] {
 			color: var(--nav-link-current-page-colour);
@@ -1103,9 +1169,14 @@ textarea {
 .code-block {
 	--scroll-shadow-spacing: 15px;
 	--scroll-shadow-gradient: repeating-linear-gradient(-45deg,
-		transparent var(--scroll-shadow-spacing),
-		var(--scroll-shadow-colour) var(--scroll-shadow-spacing) calc(var(--scroll-shadow-spacing) + 2 * var(--line-width)),
-		transparent calc(var(--scroll-shadow-spacing) + 2 * var(--line-width)) calc(2 * var(--scroll-shadow-spacing))
+		transparent
+			var(--scroll-shadow-spacing),
+		var(--scroll-shadow-colour)
+			var(--scroll-shadow-spacing)
+			calc(var(--scroll-shadow-spacing) + 2 * var(--line-width)),
+		transparent
+			calc(var(--scroll-shadow-spacing) + 2 * var(--line-width))
+			calc(2 * var(--scroll-shadow-spacing))
 	);
 	padding-inline-start: var(--gap-size);
 	border-inline-start-width: var(--line-width);
@@ -1158,6 +1229,7 @@ textarea {
 		outline-width: var(--line-width);
 		outline-style: solid;
 		outline-color: var(--control-default-colour);
+		transform: translateY(-0.15em);
 	}
 	&:active::before {
 		outline-color: var(--control-interacted-colour);
@@ -1189,6 +1261,7 @@ textarea {
 	inline-size: 12em;
 	border: inherit;
 	background-image: linear-gradient(var(--palette-angle), var(--fore-colour) 25%, var(--back-colour) 25% 50%, var(--hot-colour) 50% 75%, var(--cold-colour) 75%);
+	forced-color-adjust: none;
 	&[data-colours="3"] {
 		background-image: linear-gradient(var(--palette-angle), var(--fore-colour) 33%, var(--back-colour) 33% 67%, var(--hot-colour) 67%);
 	}
