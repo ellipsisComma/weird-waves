@@ -502,12 +502,12 @@ textarea {
 
 		--control-default-colour: CanvasText;
 		--control-interacted-colour: VisitedText;
-		--focus-ring-colour: unset;
+		--focus-ring-colour: revert;
 
-		--selection-text-colour: unset;
-		--selection-background-colour: unset;
-		--scrollbar-thumb-colour: unset;
-		--scrollbar-gutter-colour: unset;
+		--selection-text-colour: revert;
+		--selection-background-colour: revert;
+		--scrollbar-thumb-colour: revert;
+		--scrollbar-gutter-colour: revert;
 
 		--box-border-colour: CanvasText;
 		--scroll-shadow-colour: CanvasText;
