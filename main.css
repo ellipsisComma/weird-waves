@@ -806,7 +806,7 @@ code {
 	row-gap: calc(var(--gap-size) + var(--control-depth));
 	margin-block-end: var(--gap-size);
 	margin-inline: unset;
-	& > div {
+	& > * {
 		display: flex;
 		gap: var(--gap-size);
 	}

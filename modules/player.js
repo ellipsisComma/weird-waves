@@ -30,11 +30,6 @@ const queueObserver = new MutationObserver((mutations) => {
 	// list queue of show IDs line-by-line in queue data box
 	setValidImport();
 	getElement(`queueData`).value = getShowIDs(getElement(`queue`)).join(`\n`);
-
-	if (location.protocol !== `file:` && getElement(`queue`).children.length > 1) fetch(
-		showPath(getElement(`queue`).children[1].dataset.showId),
-		{"cache": `no-cache`},
-	);
 });
 
 /* ------
@@ -331,11 +326,6 @@ function startManualSeek() {
 	getElement(`audio`).currentTime = getElement(`audio`).duration * getElement(`seekBar`).value / 100;
 }
 
-// end manual seek by playing audio
-function endManualSeek() {
-	getElement(`audio`).play();
-}
-
 // toggle audio mute/unmute
 function toggleMute() {
 	getElement(`audio`).muted = !getElement(`audio`).muted;
@@ -358,12 +348,30 @@ function updateVolumeControls() {
 	}
 }
 
+// disable/enable radio controls that interfere with audio fetching while fetching is in progress
+function disableRadioControls() {
+	getElement(`resetButton`).disabled = true;
+	getElement(`playToggle`).disabled = true;
+	getElement(`seekControls`).disabled = true;
+}
+function enableRadioControls() {
+	getElement(`resetButton`).disabled = false;
+	getElement(`playToggle`).disabled = false;
+	getElement(`seekControls`).disabled = false;
+}
+
+/* -------
+INITIALISE
+------- */
+
 // initialise all player events and interactions, and prepare queue
 function initialise() {
 	// radio audio events
-	getElement(`audio`).addEventListener(`loadstart`, () => getElement(`playToggle`).disabled = true);
+	getElement(`audio`).addEventListener(`loadstart`, () => {
+		disableRadioControls();
+	});
 	getElement(`audio`).addEventListener(`loadedmetadata`, () => {
-		getElement(`playToggle`).disabled = false;
+		enableRadioControls();
 		setTimestampFromSeconds(getElement(`showTimeTotal`), getElement(`audio`).duration);
 	});
 	getElement(`audio`).addEventListener(`timeupdate`, updateSeekBar);
@@ -377,7 +385,14 @@ function initialise() {
 	getElement(`playToggle`).addEventListener(`click`, togglePlay);
 	getElement(`skipButton`).addEventListener(`click`, skipShow);
 	getElement(`seekBar`).addEventListener(`input`, startManualSeek);
-	getElement(`seekBar`).addEventListener(`change`, endManualSeek);
+	getElement(`audio`).addEventListener(`seeking`, () => {
+		getElement(`audio`).pause();
+		disableRadioControls();
+	});
+	getElement(`audio`).addEventListener(`seeked`, () => {
+		getElement(`audio`).play();
+		enableRadioControls();
+	});
 	getElement(`muteToggle`).addEventListener(`click`, toggleMute);
 	getElement(`volumeControl`).addEventListener(`input`, setVolume);
 	

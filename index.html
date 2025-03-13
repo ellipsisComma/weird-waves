@@ -247,7 +247,8 @@
 	<div id="radio-app">
 		<fieldset id="radio-controls" class="icon-button-set" hidden>
 			<legend class="visually-hidden">Radio controls</legend>
-			<div id="show-controls">
+			<fieldset id="show-controls">
+				<legend class="visually-hidden">Show controls</legend>
 				<button id="reset-button" class="push-button" type="button" aria-controls="show-audio">
 					<svg class="svg-icon" viewBox="0 0 18 18">
 						<title>Reset show</title>
@@ -267,8 +268,9 @@
 						<use href="#svg-skip" />
 					</svg>
 				</button>
-			</div><!--#show-controls end-->
-			<div id="seek-controls">
+			</fieldset><!--#show-controls end-->
+			<fieldset id="seek-controls">
+				<legend class="visually-hidden">Seek controls</legend>
 				<output>
 					<span class="visually-hidden">Elapsed time: </span>
 					<span id="show-time-elapsed" class="timestamp">00:00</span>
@@ -278,8 +280,9 @@
 					<span class="visually-hidden">Total time: </span>
 					<span id="show-time-total" class="timestamp">00:00</span>
 				</span>
-			</div><!--#seek-controls end-->
-			<div id="audio-controls">
+			</fieldset><!--#seek-controls end-->
+			<fieldset id="audio-controls">
+				<legend class="visually-hidden">Volume controls</legend>
 				<button id="mute-toggle" class="push-button" type="button" aria-controls="show-audio" aria-pressed="false">
 					<svg class="svg-icon" viewBox="0 0 18 18">
 						<title>Mute audio</title>
@@ -288,7 +291,7 @@
 					</svg>
 				</button>
 				<input id="volume-control" type="range" min="0" max="100" value="100" aria-controls="show-audio" aria-label="Change audio volume">
-			</div><!--#audio-controls end-->
+			</fieldset><!--#audio-controls end-->
 		</fieldset><!--#radio-controls end-->
 
 		<section>

@@ -30,12 +30,15 @@ setElement(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 // radio
 setElement(`loadedShow`, `#loaded-show`);
 setElement(`radioControls`, `#radio-controls`);
+setElement(`showControls`, `#show-controls`);
 setElement(`resetButton`, `#reset-button`);
 setElement(`playToggle`, `#play-toggle`);
 setElement(`skipButton`, `#skip-button`);
+setElement(`seekControls`, `#seek-controls`);
 setElement(`seekBar`, `#seek-bar`);
 setElement(`showTimeElapsed`, `#show-time-elapsed`);
 setElement(`showTimeTotal`, `#show-time-total`);
+setElement(`volumeControls`, `#volume-controls`);
 setElement(`muteToggle`, `#mute-toggle`);
 setElement(`volumeControl`, `#volume-control`);
 setElement(`audio`, `#show-audio`);
