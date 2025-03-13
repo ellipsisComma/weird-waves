@@ -9,10 +9,10 @@
 
 import {
 	getElement,
-} from "./page.js?type=module,v=2025-03-11";
+} from "./page.js?type=module,v=2025-03-13";
 import {
 	getTemplate,
-} from "./templates.js?type=module,v=2025-03-11";
+} from "./templates.js?type=module,v=2025-03-13";
 
 // initialise local settings object
 const local = retrieve(`settings`, {});

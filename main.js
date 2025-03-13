@@ -2,28 +2,28 @@
 
 import {
 	initialise as initialiseSettings,
-} from "./modules/settings.js?type=module,v=2025-03-11";
+} from "./modules/settings.js?type=module,v=2025-03-13";
 import {
 	initialise as initialiseStyles,
 	getStyle,
 	setStyle,
-} from "./modules/styles.js?type=module,v=2025-03-11";
+} from "./modules/styles.js?type=module,v=2025-03-13";
 import {
 	buildArchive,
 	allShowIDs,
-} from "./modules/archive.js?type=module,v=2025-03-11";
+} from "./modules/archive.js?type=module,v=2025-03-13";
 import {
 	initialise as initialisePlayer,
-} from "./modules/player.js?type=module,v=2025-03-11b";
+} from "./modules/player.js?type=module,v=2025-03-13b";
 import {
 	loadSchedule,
-} from "./modules/schedule.js?type=module,v=2025-03-11";
+} from "./modules/schedule.js?type=module,v=2025-03-13";
 import {
 	loadNews,
-} from "./modules/news.js?type=module,v=2025-03-11b";
+} from "./modules/news.js?type=module,v=2025-03-13b";
 import {
 	initialise as initialiseNav,
-} from "./modules/navigation.js?type=module,v=2025-03-11";
+} from "./modules/navigation.js?type=module,v=2025-03-13";
 
 // on pageload, execute various tasks
 document.addEventListener(`DOMContentLoaded`, () => {
