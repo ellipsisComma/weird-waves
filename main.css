@@ -11,6 +11,7 @@ UTILITIES
 
 DEFAULTS
 	VARIABLES
+	COLOUR PATCH
 
 	GENERAL
 	RADIO
@@ -447,7 +448,7 @@ button {
 	background-color: unset;
 	border: unset;
 	user-select: none;
-	* {
+	& > * {
 		pointer-events: none;
 	}
 }
