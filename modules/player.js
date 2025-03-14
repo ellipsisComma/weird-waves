@@ -379,7 +379,7 @@ function initialise() {
 	getElement(`audio`).addEventListener(`pause`, () => getElement(`playToggle`).ariaPressed = `false`);
 	getElement(`audio`).addEventListener(`ended`, endShow);
 	getElement(`audio`).addEventListener(`volumechange`, updateVolumeControls);
-	
+
 	// radio interface events
 	getElement(`resetButton`).addEventListener(`click`, resetShow);
 	getElement(`playToggle`).addEventListener(`click`, togglePlay);
@@ -395,7 +395,7 @@ function initialise() {
 	});
 	getElement(`muteToggle`).addEventListener(`click`, toggleMute);
 	getElement(`volumeControl`).addEventListener(`input`, setVolume);
-	
+
 	// booth interface events
 	document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
 	document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
@@ -411,7 +411,7 @@ function initialise() {
 	});
 	document.getElementById(`copy-button`).addEventListener(`click`, copyQueue);
 	document.getElementById(`import-button`).addEventListener(`click`, importQueue);
-	
+
 	// archive interface events
 	getElement(`seriesList`).addEventListener(`click`, () => {
 		if (

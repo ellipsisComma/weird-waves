@@ -125,7 +125,7 @@ function getJaroSimilarity(str1, str2) {
 	const matches = shared1.length;
 	const similarity = (
 		matches / str1.length
-		+ matches / str2.length 
+		+ matches / str2.length
 		+ (matches - transPos / 2) / matches
 		) / 3;
 
