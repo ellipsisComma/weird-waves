@@ -1278,7 +1278,7 @@ var::after {
 	user-select: auto;
 	&::before {
 		--toggle-gutter-size: var(--line-width);
-		content: ""; /* non-breaking space */
+		content: "";
 		display: grid;
 		place-content: center;
 		aspect-ratio: 1;
