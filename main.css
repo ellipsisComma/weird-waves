@@ -1214,6 +1214,28 @@ textarea {
 -------------- */
 
 .code-block {
+	padding-inline-start: var(--gap-size);
+	border-inline-start-width: var(--line-width);
+	border-inline-start-style: solid;
+	border-inline-start-color: var(--box-border-colour);
+	overflow-x: auto;
+	& > code {
+		tab-size: 2ch;
+	}
+}
+var {
+	font-style: normal;
+}
+var::before {
+	content: "[[ ";
+}
+var::after {
+	content: " ]]";
+}
+
+/* CODE-BLOCK SCROLL SHADOW */
+
+.code-block {
 	--scroll-shadow-thickness: var(--gap-size);
 	--scroll-shadow-spacing: 1em;
 	--scroll-shadow-gradient: repeating-linear-gradient(-45deg,
@@ -1226,11 +1248,6 @@ textarea {
 			calc(var(--scroll-shadow-spacing) + 2 * var(--line-width))
 			calc(2 * var(--scroll-shadow-spacing))
 	);
-	padding-inline-start: var(--gap-size);
-	border-inline-start-width: var(--line-width);
-	border-inline-start-style: solid;
-	border-inline-start-color: var(--box-border-colour);
-	overflow-x: auto;
 	background-image:
 		linear-gradient(var(--background-colour)),
 		linear-gradient(var(--background-colour)),
@@ -1240,9 +1257,6 @@ textarea {
 	background-repeat: no-repeat;
 	background-size: calc(2 * var(--scroll-shadow-thickness)) 100%, calc(2 * var(--scroll-shadow-thickness)) 100%, var(--scroll-shadow-thickness) 100%, var(--scroll-shadow-thickness) 100%;
 	background-attachment: local, local, scroll, scroll;
-	& > code {
-		tab-size: 2ch;
-	}
 }
 
 /* -------------
