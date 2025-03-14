@@ -232,6 +232,35 @@ DEFAULTS
 	THEMES
 ----------- */
 
+/* DEFINITIONS AND INITIALISATION */
+
+@property --fore-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: CanvasText;
+}
+@property --back-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: Canvas;
+}
+@property --hot-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: LinkText;
+}
+@property --cold-colour {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: VisitedText;
+}
+:root {
+	--fore-colour: initial;
+	--back-colour: initial;
+	--hot-colour: initial;
+	--cold-colour: initial;	
+}
+
 /* THEME VARIABLES */
 
 [data-theme="dark"] {
@@ -637,6 +666,8 @@ textarea {
 }
 :root {
 	font-size: 100%;
+	transition-property: --fore-colour, --back-colour, --hot-colour, --cold-colour;
+	transition-duration: 1s;
 }
 body {
 	margin: 0;
