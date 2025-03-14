@@ -25,7 +25,6 @@ function getElement(key) {
 
 // head
 setElement(`title`, `title`);
-setElement(`SVGFavicon`, `[rel="icon"][type="image/svg+xml"]`);
 
 // radio
 setElement(`loadedShow`, `#loaded-show`);
