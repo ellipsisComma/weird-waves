@@ -520,7 +520,7 @@ textarea {
 		--icon-accent-colour: CanvasText;
 
 		--line-width: 2px;
-		--control-depth: 0px;
+		--control-depth: 0;
 	}
 	:focus-visible {
 		outline: revert;
@@ -532,7 +532,8 @@ textarea {
 	.palette {
 		forced-color-adjust: none;
 	}
-	@media (min-width: 700px) {
+	/* at :root font-size 100%, 43.75rem = 700px */
+	@media (min-width: 43.75rem) {
 		.series {
 			border-block-start-width: var(--line-width);
 			border-block-start-style: solid;
@@ -558,9 +559,17 @@ textarea {
 /* GENERAL */
 
 :root {
-	--widescreen-max-inline-size: 1200px;
-	--main-column-max-inline-size: 800px;
-	--gap-size: 10px;
+	--px-to-rem-260px: 16.25rem;
+	--px-to-rem-500px: 31.25rem;
+	--px-to-rem-600px: 37.5rem;
+	--px-to-rem-700px: 43.75rem;
+	--px-to-rem-800px: 50rem;
+	--px-to-rem-1200px: 75rem;
+	--px-to-rem-1240px: 77.5rem;
+
+	--widescreen-max-inline-size: var(--px-to-rem-1200px);
+	--main-column-max-inline-size: var(--px-to-rem-800px);
+	--gap-size: 0.5rem;
 	--main-column-padding: calc(2 * var(--gap-size));
 
 	--meta-font-size: 1em;
@@ -570,7 +579,7 @@ textarea {
 		monospace;
 
 	--seek-bar-thumb-size: 1em;
-	--control-depth: 6px;
+	--control-depth: 0.35em;
 
 	--line-width: 1px;
 }
@@ -620,11 +629,14 @@ textarea {
 	outline-width: var(--line-width);
 	outline-style: solid;
 	outline-color: var(--focus-ring-colour);
-	outline-offset: 0.1em;
+	outline-offset: var(--gap-size);
 }
 ::selection {
 	color: var(--selection-text-colour);
 	background-color: var(--selection-background-colour);
+}
+:root {
+	font-size: 100%;
 }
 body {
 	margin: 0;
@@ -1170,7 +1182,8 @@ textarea {
 -------------- */
 
 .code-block {
-	--scroll-shadow-spacing: 15px;
+	--scroll-shadow-thickness: var(--gap-size);
+	--scroll-shadow-spacing: 1em;
 	--scroll-shadow-gradient: repeating-linear-gradient(-45deg,
 		transparent
 			var(--scroll-shadow-spacing),
@@ -1193,7 +1206,7 @@ textarea {
 		var(--scroll-shadow-gradient);
 	background-position: left center, right center, left center, right center;
 	background-repeat: no-repeat;
-	background-size: calc(2 * var(--scroll-shadow-spacing)) 100%, calc(2 * var(--scroll-shadow-spacing)) 100%, var(--gap-size) 100%, var(--gap-size) 100%;
+	background-size: calc(2 * var(--scroll-shadow-thickness)) 100%, calc(2 * var(--scroll-shadow-thickness)) 100%, var(--scroll-shadow-thickness) 100%, var(--scroll-shadow-thickness) 100%;
 	background-attachment: local, local, scroll, scroll;
 	& > code {
 		tab-size: 2ch;
@@ -1295,7 +1308,8 @@ textarea {
 
 /* site is fine down to 300px wide, then various things overflow horizontally around 275px */
 
-@media (min-width: 500px) {
+/* at :root font-size 100%, 31.25rem = 500px */
+@media (min-width: 31.25rem) {
 	/* GENERAL */
 	body {
 		--meta-font-size: 0.75em;
@@ -1348,7 +1362,9 @@ textarea {
 		inline-size: 4em;
 	}
 }
-@media (min-width: 600px) {
+
+/* at :root font-size 100%, 37.5rem = 600px */
+@media (min-width: 37.5rem) {
 	/* GENERAL */
 	.flex-list {
 		padding-inline: 0;
@@ -1364,7 +1380,9 @@ textarea {
 		column-gap: var(--gap-size);
 	}
 }
-@media (min-width: 700px) {
+
+/* at :root font-size 100%, 43.75rem = 700px */
+@media (min-width: 43.75rem) {
 	/* ARCHIVE */
 	.series-heading {
 		font-size: 1em;
@@ -1372,7 +1390,7 @@ textarea {
 	}
 	#series-list {
 		& .series {
-			grid-template-columns: 260px auto;
+			grid-template-columns: var(--px-to-rem-260px) auto;
 		}
 		& header {
 			position: sticky;
@@ -1404,7 +1422,9 @@ textarea {
 		margin-inline-start: 0;
 	}
 }
-@media (min-width: 1240px) {
+
+/* at :root font-size 100%, 77.5rem = 1240px */
+@media (min-width: 77.5rem) {
 	/* GENERAL */
 	#container {
 		max-inline-size: var(--widescreen-max-inline-size);
