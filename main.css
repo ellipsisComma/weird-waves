@@ -780,6 +780,12 @@ a:active {
 .svg-accent-stroke { /* must be outside .svg-icon, because it's applied in the <symbol> elements, not in the <svg class="svg-icon"> elements */
 	stroke: var(--icon-accent-colour);
 }
+.waveform-spacer {
+	margin-inline: auto;
+	& + h3 {
+		margin-block-start: 1em;
+	}
+}
 .push-button {
 	position: relative;
 	top: calc(-1 * var(--control-depth));
@@ -1347,12 +1353,6 @@ textarea {
 }
 #schedule-container {
 	text-wrap-style: balance;
-}
-.waveform-spacer {
-	margin-inline: auto;
-	& + h3 {
-		margin-block-start: 1em;
-	}
 }
 
 /* -----------------
