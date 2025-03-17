@@ -201,7 +201,7 @@ function addShow(ID) {
 	newShowHeading.replaceChildren(
 		...seriesInArchive.querySelector(`.series-heading`).cloneChildren(),
 		document.createTextNode(` `),
-		...newShowHeading.cloneChildren()
+		...newShowHeading.cloneChildren(),
 	);
 	newShow.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
 
