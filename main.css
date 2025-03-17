@@ -811,7 +811,7 @@ a:active {
 	padding-block-start: var(--control-depth);
 	padding-inline-start: 0;
 	list-style-type: "";
-	.svg-icon {
+	& .svg-icon {
 		block-size: 1.5em;
 		stroke: var(--control-default-colour);
 	}
@@ -933,7 +933,7 @@ code var::after {
 	&::-webkit-slider-thumb {
 		block-size: var(--seek-bar-thumb-size);
 		inline-size: var(--seek-bar-thumb-size);
-		border-width: calc(2 * var(--line-width));
+		border-width: var(--line-width);
 		border-radius: 50%;
 		transform: translateY(calc(-1 * calc(var(--seek-bar-thumb-size) / 2 + var(--control-depth))));
 	}
