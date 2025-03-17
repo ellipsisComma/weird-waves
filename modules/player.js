@@ -87,8 +87,7 @@ function shuffleQueue() {
 function clearQueue() {
 	if (getElement(`queue`).children.length > 0) {
 		getElement(`queue`).replaceChildren();
-		getElement(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)
-			.forEach(button => button.unpress());
+		for (const button of getElement(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)) button.unpress();
 	}
 }
 
@@ -147,7 +146,7 @@ function importQueue() {
 	if (invalidIDs.length === 0) {
 		setValidImport();
 		clearQueue();
-		importIDs.forEach(addShow);
+		for (const ID of importIDs) addShow(ID);
 	} else {
 		getElement(`importErrorList`).replaceChildren(...invalidIDs.map(ID => {
 			const IDitem = cloneTemplate(`importErrorItem`);
@@ -165,7 +164,7 @@ function importQueue() {
 // load queue from local storage
 function loadQueue() {
 	getElement(`queue`).replaceChildren();
-	localStorageGet(`shows`, []).filter(ID => allShowIDs.has(ID)).forEach(addShow);
+	for (const ID of localStorageGet(`shows`, []).filter(ID => allShowIDs.has(ID))) addShow(ID);
 }
 
 /* --
@@ -213,7 +212,7 @@ function addShow(ID) {
 
 // add entire series to queue
 function addSeries(seriesInArchive) {
-	getShowIDs(seriesInArchive).forEach(addShow);
+	for (const ID of getShowIDs(seriesInArchive)) addShow(ID);
 }
 
 // add a random show or banger to the queue
@@ -444,10 +443,10 @@ window.addEventListener(`storage`, () => {
 	// could do this with a broadcast channel instead of mutation observer + storage event
 	// however, that adds an extra tech and it'd be less robust than rebuilding the queue from scratch
 	loadQueue();
-	getElement(`seriesList`).querySelectorAll(`[data-action="add-show"]`).forEach(button => {
+	for (const button of getElement(`seriesList`).querySelectorAll(`[data-action="add-show"]`)) {
 		if (newQueue.includes(button.dataset.target)) button.press();
 		else button.unpress();
-	})
+	}
 	console.info(`automatically matched queue change in another browsing context`);
 });
 

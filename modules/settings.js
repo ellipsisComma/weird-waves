@@ -30,7 +30,7 @@ function toggleSetting(setting) {
 		getElement(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
 		break;
 	case `notesOpen`:
-		document.querySelectorAll(`.content-notes`).forEach(notes => notes.open = getSetting(`notesOpen`));
+		for (const notes of document.querySelectorAll(`.content-notes`)) notes.open = getSetting(`notesOpen`);
 		break;
 	}
 }
@@ -49,17 +49,15 @@ function initialise() {
 
 	getTemplate(`archiveShow`).querySelector(`.content-notes`).open = local.notesOpen;
 
-	Object.keys(local).forEach(setting => {
+	for (const setting of Object.keys(local)) {
 		const toggle = document.getElementById(`${setting.camelToKebab()}-toggle`);
-		toggle?.setAttribute(`aria-pressed`, local[setting].toString());
-		toggle?.closest(`.pre-initialised-control`).classList.remove(`pre-initialised-control`);
-	});
-	getElement(`loadedShow`).classList.toggle(`flat-radio`, getSetting(`flatRadio`));
+		if (!toggle) continue;
 
-	// settings interface events (general)
-	[`copyrightSafety`, `flatRadio`, `autoPlayNextShow`, `notesOpen`].forEach(setting => {
-		document.getElementById(`${setting.camelToKebab()}-toggle`).addEventListener(`click`, () => toggleSetting(setting));
-	});
+		toggle.setAttribute(`aria-pressed`, local[setting].toString());
+		toggle.addEventListener(`click`, () => toggleSetting(setting));
+		toggle.closest(`.pre-initialised-control`).classList.remove(`pre-initialised-control`);
+	}
+	getElement(`loadedShow`).classList.toggle(`flat-radio`, getSetting(`flatRadio`));
 }
 
 // update settings if settings change in another browsing context

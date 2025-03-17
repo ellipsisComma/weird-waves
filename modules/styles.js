@@ -52,12 +52,12 @@ function initialise() {
 	local.theme ??= document.documentElement.dataset.theme;
 	local.font ??= document.documentElement.dataset.font;
 
-	Object.keys(local).forEach(style => {
+	for (const style of Object.keys(local)) {
 		const buttons = getElement(`${style}Buttons`);
 		if (!buttons) return;
 
 		// initialise buttons
-		buttons.querySelectorAll(`button`).forEach(button => button.unpress());
+		for (const button of buttons.querySelectorAll(`button`)) button.unpress();
 		setStyleButtons(style);
 		buttons.classList.remove(`pre-initialised-control`);
 
@@ -68,7 +68,7 @@ function initialise() {
 				&& event.target.getAttribute(`aria-disabled`) === `false`
 			) setStyle(style, event.target.dataset.option);
 		});
-	});
+	}
 }
 
 // update styles if styles change in another browsing context

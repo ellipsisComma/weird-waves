@@ -44,7 +44,7 @@ async function loadSchedule() {
 	document.getElementById(`schedule-title`).setContent(schedule.title);
 	document.getElementById(`schedule-blurb`).setContent(schedule.blurb);
 	document.getElementById(`add-schedule-button`).addEventListener(`click`, () => {
-		schedule.shows.forEach(addShow);
+		for (const ID of schedule.shows) addShow(ID);
 		getElement(`schedule`).remove();
 	});
 	getElement(`schedule`).hidden = false;

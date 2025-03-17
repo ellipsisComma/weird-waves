@@ -23,7 +23,7 @@ import {
 // set of all show IDs
 // ONLY use this for validating whether an ID is valid (as opposed to checking the archive's DOM)
 const allShowIDs = new Set();
-archive.forEach(series => series.shows.forEach(show => allShowIDs.add(`${series.code}-${show.code}`)));
+for (const series of archive) for (const show of series.shows) allShowIDs.add(`${series.code}-${show.code}`);
 
 // build an archive nav-link
 function buildSeriesLink(series) {
@@ -81,10 +81,8 @@ function buildArchive() {
 	getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
 
 	// build out stats list
-	Object.entries({
-		"series": archive.length,
-		"shows": archive.reduce((a, series) => a + series.shows.length, 0),
-	}).forEach(([name, value]) => document.getElementById(`stats-${name}`).textContent = value);
+	document.getElementById(`stats-series`).textContent = archive.length;
+	document.getElementById(`stats-shows`).textContent = archive.reduce((a, series) => a + series.shows.length, 0);
 }
 
 // get show element in archive

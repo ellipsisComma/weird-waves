@@ -20,12 +20,12 @@ function make(element) {
 
 // add an object of attributes to an Element
 Element.prototype.setAttributes = function (attrs) {
-	Object.entries(attrs).forEach(([name, value]) => this.setAttribute(name, value));
+	for (const [name, value] of Object.entries(attrs)) this.setAttribute(name, value);
 };
 
 // remove an array of attributes from an Element
 Element.prototype.removeAttributes = function (attrs) {
-	attrs.forEach(attr => this.removeAttribute(attr));
+	for (const attr of attrs) this.removeAttribute(attr);
 };
 
 // create an array of nodes cloned from the target

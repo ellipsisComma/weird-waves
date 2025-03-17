@@ -2147,13 +2147,13 @@ const archive = [
 ];
 
 // build series element ID for linking; build show ID for each show (helps during archive-building, because all relevant data is inside each show object instead of split between show object and series metadata)
-archive.forEach(series => {
+for (const series of archive) {
 	series.elementId = `archive-${series.code}`;
 
-	series.shows.forEach(show => {
+	for (const show of series.shows) {
 		show.ID = `${series.code}-${show.code}`;
-	});
-});
+	}
+}
 
 export {
 	archive,
