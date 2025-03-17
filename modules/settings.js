@@ -15,7 +15,7 @@ import {
 } from "./templates.js?type=module,v=2025-03-14";
 
 // initialise local settings object
-const local = retrieve(`settings`, {});
+const local = localStorageGet(`settings`, {});
 
 // toggle a setting and its toggle switch and apply any immediate effects
 function toggleSetting(setting) {
@@ -23,7 +23,7 @@ function toggleSetting(setting) {
 	if (!toggle) return;
 	local[setting] = !local[setting];
 	toggle.ariaPressed = local[setting] ? `true` : `false`;
-	store(`settings`, local);
+	localStorageSet(`settings`, local);
 
 	switch (setting) {
 	case `flatRadio`:

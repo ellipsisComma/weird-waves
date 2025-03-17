@@ -171,12 +171,12 @@ Set.prototype.toggle = function (item) {
 ============ */
 
 // get something from localStorage or set a default value if no value stored
-function retrieve(key, defaultValue) {
+function localStorageGet(key, defaultValue) {
 	return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
 }
 
 // set something in localStorage
-function store(key, value) {
+function localStorageSet(key, value) {
 	localStorage.setItem(key, JSON.stringify(value));
 }
 

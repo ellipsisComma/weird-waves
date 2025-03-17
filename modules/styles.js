@@ -12,7 +12,7 @@ import {
 } from "./page.js?type=module,v=2025-03-14";
 
 // initialise local styles object
-const local = retrieve(`styles`, {});
+const local = localStorageGet(`styles`, {});
 
 // get computed value of a style property of an element
 function getElementStyle(query, property) {
@@ -39,7 +39,7 @@ function setStyle(style, option) {
 	local[style] = option;
 	setStyleButtons(style);
 	document.documentElement.dataset[style] = local[style];
-	store(`styles`, local);
+	localStorageSet(`styles`, local);
 }
 
 // get current value of style

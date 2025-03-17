@@ -63,7 +63,7 @@ function getRandomShowID(type = ``) {
 
 // store queue as list of show IDs
 function storeQueue() {
-	store(`shows`, getShowIDs(getElement(`queue`)));
+	localStorageSet(`shows`, getShowIDs(getElement(`queue`)));
 }
 
 // get array of all show IDs on elements within a container
@@ -165,7 +165,7 @@ function importQueue() {
 // load queue from local storage
 function loadQueue() {
 	getElement(`queue`).replaceChildren();
-	retrieve(`shows`, []).filter(ID => allShowIDs.has(ID)).forEach(addShow);
+	localStorageGet(`shows`, []).filter(ID => allShowIDs.has(ID)).forEach(addShow);
 }
 
 /* --
