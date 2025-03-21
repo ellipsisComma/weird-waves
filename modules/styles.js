@@ -9,7 +9,7 @@
 
 import {
 	getElement,
-} from "./page.js?type=module,v=2025-03-17";
+} from "./page.js?type=module,v=2025-03-21";
 
 // initialise local styles object
 const local = localStorageGet(`styles`, {});
@@ -54,7 +54,7 @@ function initialise() {
 
 	for (const style of Object.keys(local)) {
 		const buttons = getElement(`${style}Buttons`);
-		if (!buttons) return;
+		if (!buttons) continue;
 
 		// initialise buttons
 		for (const button of buttons.querySelectorAll(`button`)) button.unpress();
