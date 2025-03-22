@@ -863,7 +863,8 @@ code var::after {
 /* CODE-BLOCK SCROLL SHADOW */
 
 .code-block {
-	--scroll-shadow-thickness: var(--gap-size);
+	--scroll-shadow-width: var(--gap-size);
+	--scroll-shadow-cover-width: calc(2 * var(--scroll-shadow-width));
 	--scroll-shadow-spacing: 1em;
 	--scroll-shadow-gradient: repeating-linear-gradient(-45deg,
 		transparent
@@ -882,7 +883,7 @@ code var::after {
 		var(--scroll-shadow-gradient);
 	background-position: left center, right center, left center, right center;
 	background-repeat: no-repeat;
-	background-size: calc(2 * var(--scroll-shadow-thickness)) 100%, calc(2 * var(--scroll-shadow-thickness)) 100%, var(--scroll-shadow-thickness) 100%, var(--scroll-shadow-thickness) 100%;
+	background-size: var(--scroll-shadow-cover-width) 100%, var(--scroll-shadow-cover-width) 100%, var(--scroll-shadow-width) 100%, var(--scroll-shadow-width) 100%;
 	background-attachment: local, local, scroll, scroll;
 }
 
