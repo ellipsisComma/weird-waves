@@ -80,9 +80,10 @@ function buildArchive() {
 	getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
 	getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
 
-	// build out stats list
+	// build out and reveal stats
 	document.getElementById(`stats-series`).textContent = archive.length;
 	document.getElementById(`stats-shows`).textContent = archive.reduce((a, series) => a + series.shows.length, 0);
+	document.getElementById(`stats`).hidden = false;
 }
 
 // get show element in archive

@@ -1247,23 +1247,6 @@ textarea {
 	ABOUT
 ---------- */
 
-#stats-list {
-	display: grid;
-	gap: 0.5em;
-	margin-inline-start: 1em;
-	& > * {
-		display: flex;
-		flex-direction: row-reverse;
-		justify-content: flex-end;
-	}
-	& dd {
-		margin-inline-start: 0;
-		font-weight: bold;
-		&::after {
-			content: "\a0"; /* non-breaking space */
-		}
-	}
-}
 #q-a {
 	& > dt {
 		font-weight: bold;
