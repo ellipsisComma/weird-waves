@@ -4,6 +4,7 @@
 	archive module:
 		* builds archive
 		* builds list of all show IDs
+		* calculates archive stats
 		* includes getShowInArchive() (theoretically it could be used without the audio player)
 */
 
