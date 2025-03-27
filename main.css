@@ -1360,6 +1360,9 @@ textarea {
 		--shadow-2: -0.05em -0.05em 0;
 		--shadow-3: 0.1em 0.09em 0;
 		text-shadow: var(--shadow-1) var(--background-colour), var(--shadow-2) var(--background-colour), var(--shadow-3) var(--text-colour);
+		&::selection, & ::selection {
+			text-shadow: var(--shadow-1) var(--selection-background-colour), var(--shadow-2) var(--selection-background-colour), var(--shadow-3) var(--selection-text-colour);
+		}
 	}
 	.code-block > code {
 		tab-size: 3ch;
