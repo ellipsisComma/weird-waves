@@ -836,14 +836,14 @@ code {
 }
 :not(.code-block) > code {
 	text-decoration-line: underline;
-	text-decoration-style: dotted;
+	text-decoration-style: dashed;
 	text-decoration-color: var(--box-border-colour);
 	text-underline-offset: var(--text-underline-offset);
 }
 .code-block {
 	padding-inline-start: var(--gap-size);
 	border-inline-start-width: var(--line-width);
-	border-inline-start-style: solid;
+	border-inline-start-style: dashed;
 	border-inline-start-color: var(--box-border-colour);
 	overflow-x: auto;
 	& > code {
@@ -854,10 +854,10 @@ code var {
 	font-style: normal;
 }
 code var::before {
-	content: "[[ ";
+	content: "[[\a0 ";
 }
 code var::after {
-	content: " ]]";
+	content: "\a0 ]]";
 }
 
 /* CODE-BLOCK SCROLL SHADOW */
