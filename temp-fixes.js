@@ -11,6 +11,8 @@ if (localStorage.getItem(`playlist`) !== null) {
 	localStorage.removeItem(`playlist`);
 }
 
+// in localStorage, update settings property "flatRadio" property to to more general term "flatPlayer"
+// applied 2025-03-28
 if (localStorage.getItem(`settings`) !== null) {
 	const tempSettings = localStorageGet(`settings`, {});
 	if (tempSettings.flatRadio) {
