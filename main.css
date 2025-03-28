@@ -781,6 +781,7 @@ a:active {
 	stroke: var(--icon-accent-colour);
 }
 .waveform-spacer {
+	margin-block: 3em;
 	margin-inline: auto;
 	& + h3 {
 		margin-block-start: 1em;
