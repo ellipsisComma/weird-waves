@@ -130,7 +130,7 @@ These are features I've considered and decided not to implement, or implemented 
 
 ### Download links
 
-Links to download individual shows, present in any or all of: the Archive, the Booth, and the Radio. These could allow users to download shows for later listening. However:
+Links to download individual shows, present in any or all of: the Archive, the Booth, and the Player. These could allow users to download shows for later listening. However:
 
 1. The audio used in Weird Waves is optimised for small filesizes rather than quality; better-quality versions can be found at the sources.
 2. Show info is tightly laid out and adding a download link in such a small space tends to complicate it or obstruct other content.
@@ -139,7 +139,7 @@ A determined user could still download all audio files using a combination of th
 
 ### Sync all instances of a show's content notes
 
-Synchronising a show's content notes in the Archive, Booth, and Radio, so that when you open/close its notes in one place, they change in any other places the show info exists.
+Synchronising a show's content notes in the Archive, Booth, and Player, so that when you open/close its notes in one place, they change in any other places the show info exists.
 
 Tested, but I couldn't see a clear value.
 

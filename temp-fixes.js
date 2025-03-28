@@ -10,3 +10,12 @@ if (localStorage.getItem(`playlist`) !== null) {
 	localStorage.setItem(`shows`, localStorage.getItem(`playlist`));
 	localStorage.removeItem(`playlist`);
 }
+
+if (localStorage.getItem(`settings`) !== null) {
+	const tempSettings = localStorageGet(`settings`, {});
+	if (tempSettings.flatRadio) {
+		tempSettings.flatPlayer = tempSettings.flatRadio;
+		delete tempSettings.flatRadio;
+	}
+	localStorageSet(`settings`, tempSettings);
+}

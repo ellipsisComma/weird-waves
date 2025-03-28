@@ -4,7 +4,7 @@
 	player module:
 		* handles all audio queue processing (adding, removing, shuffling, clearing shows)
 		* handles queue data
-		* handles radio interface and audio pre-fetching
+		* handles player interface and audio pre-fetching
 		* matches queue across browsing contexts
 */
 
@@ -242,7 +242,7 @@ function removeShow(target) {
 	getShowInArchive(target.dataset.showId).querySelector(`[data-action="add-show"]`).unpress();
 }
 
-// write show parts onto page and load show audio file; if queue is empty, reset radio
+// write show parts onto page and load show audio file; if queue is empty, reset player
 function loadShow() {
 	if (getElement(`queue`).children.length > 0 && getElement(`queue`).firstElementChild.dataset.showId === getElement(`loadedShow`).dataset.showId) return;
 
@@ -257,24 +257,24 @@ function loadShow() {
 		getElement(`audio`).src = showPath(show.dataset.showId);
 		getElement(`loadedShow`).replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
 
-		// reset and reveal radio controls
+		// reset and reveal player controls
 		if (getElement(`audio`).dataset.playNextShow === `true`) {
 			if (getElement(`audio`).paused) getElement(`audio`).play();
 			getElement(`audio`).dataset.playNextShow = `false`;
 		} else getElement(`audio`).pause();
 		getElement(`seekBar`).value = 0;
 		getElement(`showTimeElapsed`).textContent = `00:00`;
-		getElement(`radioControls`).hidden = false;
+		getElement(`playerControls`).hidden = false;
 	} else {
 		// empty loaded show and queue
 		getElement(`queue`).replaceChildren();
 
-		// reset radio
+		// reset player
 		if (!getElement(`audio`).paused) getElement(`audio`).pause(); // otherwise audio continues playing
 		getElement(`audio`).removeAttribute(`src`); // check why this is necessary instead of just emptying [src]
 		getElement(`showTimeElapsed`).textContent = `00:00`;
 		getElement(`showTimeTotal`).textContent = `00:00`;
-		getElement(`radioControls`).hidden = true;
+		getElement(`playerControls`).hidden = true;
 		getElement(`loadedShow`).dataset.showId = ``;
 	}
 }
@@ -285,9 +285,9 @@ function endShow() {
 	removeShow(getElement(`queue`).firstElementChild);
 }
 
-/* --
-RADIO
--- */
+/* ---
+PLAYER
+--- */
 
 // reset show time to 0
 function resetShow() {
@@ -358,7 +358,7 @@ INITIALISE
 
 // initialise all player events and interactions, and prepare queue
 function initialise() {
-	// radio audio events
+	// player audio events
 	getElement(`audio`).addEventListener(`loadstart`, () => {
 		getElement(`playToggle`).disabled = true;
 	});
@@ -372,7 +372,7 @@ function initialise() {
 	getElement(`audio`).addEventListener(`ended`, endShow);
 	getElement(`audio`).addEventListener(`volumechange`, updateVolumeControls);
 
-	// radio interface events
+	// player interface events
 	getElement(`resetButton`).addEventListener(`click`, resetShow);
 	getElement(`playToggle`).addEventListener(`click`, togglePlay);
 	getElement(`skipButton`).addEventListener(`click`, skipShow);

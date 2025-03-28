@@ -26,9 +26,9 @@ function getElement(key) {
 // head
 setElement(`title`, `title`);
 
-// radio
+// player
 setElement(`loadedShow`, `#loaded-show`);
-setElement(`radioControls`, `#radio-controls`);
+setElement(`playerControls`, `#player-controls`);
 setElement(`showControls`, `#show-controls`);
 setElement(`resetButton`, `#reset-button`);
 setElement(`playToggle`, `#play-toggle`);

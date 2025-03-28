@@ -14,7 +14,7 @@ DEFAULTS
 	COLOUR PATCH
 
 	GENERAL
-	RADIO
+	PLAYER
 	NAV
 	SECTIONS
 
@@ -887,9 +887,9 @@ code var::after {
 	background-attachment: local, local, scroll, scroll;
 }
 
-/* ----------
-	RADIO
----------- */
+/* -----------
+	PLAYER
+----------- */
 
 :is(#loaded-show, #queue):empty::after {
 	content: "Queue is empty!\a Add shows in Booth or Archive.";
@@ -903,10 +903,10 @@ code var::after {
 #loaded-show > .show-content {
 	padding-inline-end: var(--gap-size);
 }
-.flat-radio > .show-content {
+.flat-player > .show-content {
 	display: none;
 }
-#radio-controls {
+#player-controls {
 	display: grid;
 	grid-template:
 		"	seek-controls	seek-controls	"
@@ -1413,8 +1413,8 @@ textarea {
 		tab-size: 4ch;
 	}
 
-	/* RADIO */
-	#radio-controls {
+	/* PLAYER */
+	#player-controls {
 		grid-template:
 			"show-controls	seek-controls	audio-controls" / min-content auto min-content;
 		column-gap: var(--gap-size);
@@ -1470,18 +1470,18 @@ textarea {
 		max-inline-size: var(--widescreen-max-inline-size);
 		display: grid;
 		grid-template:
-			"	radio	heading		"
-			"	radio	nav			"
-			"	radio	sections	";
+			"	player	heading		"
+			"	player	nav			"
+			"	player	sections	";
 		column-gap: var(--gap-size);
 	}
 	#container > header {
 		grid-area: heading;
 	}
 
-	/* RADIO */
-	#radio-container {
-		grid-area: radio;
+	/* PLAYER */
+	#player-container {
+		grid-area: player;
 		block-size: max-content;
 		position: sticky;
 		inline-size: calc(var(--widescreen-max-inline-size) - var(--main-column-max-inline-size) - var(--gap-size));
@@ -1490,14 +1490,14 @@ textarea {
 		border-style: solid;
 		border-color: var(--box-border-colour);
 	}
-	#radio-app {
+	#player-app {
 		overflow-y: auto;
 		max-block-size: calc(100vh - calc(2 * var(--gap-size)));
 	}
 	#loaded-show > .show-heading {
 		display: block;
 	}
-	#radio-controls {
+	#player-controls {
 		margin: var(--gap-size);
 		grid-template:
 			"	seek-controls	seek-controls	"

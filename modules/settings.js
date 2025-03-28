@@ -26,8 +26,8 @@ function toggleSetting(setting) {
 	localStorageSet(`settings`, local);
 
 	switch (setting) {
-	case `flatRadio`:
-		getElement(`loadedShow`).classList.toggle(`flat-radio`, local.flatRadio);
+	case `flatPlayer`:
+		getElement(`loadedShow`).classList.toggle(`flat-player`, local.flatPlayer);
 		break;
 	case `notesOpen`:
 		for (const notes of document.querySelectorAll(`.content-notes`)) notes.open = getSetting(`notesOpen`);
@@ -43,7 +43,7 @@ function getSetting(setting) {
 // initialise settings
 function initialise() {
 	local.copyrightSafety ??= false; // if true, exclude certain series from being added to the queue during addArchive() or addRandomShow()
-	local.flatRadio ??= false; // if true, hide all show info except show-heading in radio
+	local.flatPlayer ??= false; // if true, hide all show info except show-heading in player
 	local.autoPlayNextShow ??= true; // if true, start playing next show when previous show runs to completion
 	local.notesOpen ??= false; // if true, open all content notes
 
@@ -57,7 +57,7 @@ function initialise() {
 		toggle.addEventListener(`click`, () => toggleSetting(setting));
 		toggle.closest(`.pre-initialised-control`).classList.remove(`pre-initialised-control`);
 	}
-	getElement(`loadedShow`).classList.toggle(`flat-radio`, getSetting(`flatRadio`));
+	getElement(`loadedShow`).classList.toggle(`flat-player`, getSetting(`flatPlayer`));
 }
 
 // update settings if settings change in another browsing context
@@ -67,7 +67,7 @@ window.addEventListener(`storage`, () => {
 	const newSettings = JSON.parse(event.newValue);
 
 	if (getSetting(`copyrightSafety`) !== newSettings.copyrightSafety) toggleSetting(`copyrightSafety`);
-	if (getSetting(`flatRadio`) !== newSettings.flatRadio) toggleSetting(`flatRadio`);
+	if (getSetting(`flatPlayer`) !== newSettings.flatPlayer) toggleSetting(`flatPlayer`);
 	if (getSetting(`autoPlayNextShow`) !== newSettings.autoPlayNextShow) toggleSetting(`autoPlayNextShow`);
 	if (getSetting(`notesOpen`) !== newSettings.notesOpen) toggleSetting(`notesOpen`);
 	console.info(`automatically matched settings change in another browsing context`);

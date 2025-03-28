@@ -111,7 +111,7 @@
 		<path class="svg-accent-stroke" d="M12 11c0 4-4 4-4 8a4 4 0 0 0 8 0c0-4-4-4-4-8" />
 	</symbol>
 
-<!--radio button icons-->
+<!--player button icons-->
 	<defs>
 		<path id="svg-play-triangle" d="M2 2v14l14-7z" />
 		<path id="svg-speaker" d="M4 7h-2v4h2l4 5h2v-14h-2z" />
@@ -165,7 +165,7 @@
 	<li data-show-id="">
 		<ul class="show-position-controls icon-button-set">
 			<li>
-				<button class="push-button" type="button" data-action="move-up" aria-controls="queue radio">
+				<button class="push-button" type="button" data-action="move-up" aria-controls="queue player">
 					<svg class="svg-icon" viewBox="0 0 12 12">
 						<title>Move show up</title>
 						<use href="#svg-move-up" />
@@ -173,7 +173,7 @@
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="remove" aria-controls="queue radio">
+				<button class="push-button" type="button" data-action="remove" aria-controls="queue player">
 					<svg class="svg-icon" viewBox="0 0 12 12">
 						<title>Remove show</title>
 						<use href="#svg-remove" />
@@ -181,7 +181,7 @@
 				</button>
 			</li>
 			<li>
-				<button class="push-button" type="button" data-action="move-down" aria-controls="queue radio">
+				<button class="push-button" type="button" data-action="move-down" aria-controls="queue player">
 					<svg class="svg-icon" viewBox="0 0 12 12">
 						<title>Move show down</title>
 						<use href="#svg-move-down" />
@@ -207,7 +207,7 @@
 					<p class="series-blurb"></p>
 					<p class="series-source"></p>
 				</div>
-				<button class="push-button" type="button" data-action="add-series" aria-controls="queue radio" aria-label="Add all shows in series to queue">+ Series</button>
+				<button class="push-button" type="button" data-action="add-series" aria-controls="queue player" aria-label="Add all shows in series to queue">+ Series</button>
 			</header>
 			<ol class="show-list"></ol>
 		</article>
@@ -229,7 +229,7 @@
 				</details>
 			</div>
 		</article>
-		<button class="push-button" type="button" data-action="add-show" aria-controls="queue radio" aria-label="Add show to queue" aria-pressed="false" aria-disabled="false">+ Show</button>
+		<button class="push-button" type="button" data-action="add-show" aria-controls="queue player" aria-label="Add show to queue" aria-pressed="false" aria-disabled="false">+ Show</button>
 	</li>
 </template><!--#archive-show-template end-->
 
@@ -261,11 +261,11 @@
 
 
 
-<aside id="radio-container">
-	<h2 id="radio" class="visually-hidden">Radio</h2>
-	<div id="radio-app">
-		<fieldset id="radio-controls" class="icon-button-set" hidden>
-			<legend class="visually-hidden">Radio controls</legend>
+<aside id="player-container">
+	<h2 id="player" class="visually-hidden">Audio Player</h2>
+	<div id="player-app">
+		<fieldset id="player-controls" class="icon-button-set" hidden>
+			<legend class="visually-hidden">Player controls</legend>
 			<fieldset id="show-controls">
 				<legend class="visually-hidden">Show controls</legend>
 				<button id="reset-button" class="push-button" type="button" aria-controls="show-audio">
@@ -281,7 +281,7 @@
 						<use class="pressed-icon" href="#svg-pause" />
 					</svg>
 				</button>
-				<button id="skip-button" class="push-button" type="button" aria-controls="queue radio">
+				<button id="skip-button" class="push-button" type="button" aria-controls="queue player">
 					<svg class="svg-icon" viewBox="0 0 18 18">
 						<title>Skip show</title>
 						<use href="#svg-skip" />
@@ -311,7 +311,7 @@
 				</button>
 				<input id="volume-control" type="range" min="0" max="100" value="100" aria-controls="show-audio" aria-label="Change audio volume">
 			</fieldset><!--#audio-controls end-->
-		</fieldset><!--#radio-controls end-->
+		</fieldset><!--#player-controls end-->
 
 		<section>
 			<h3 class="visually-hidden">Loaded show</h3>
@@ -319,8 +319,8 @@
 			<audio id="show-audio" preload="metadata" data-play-next-show="false"></audio>
 			<!--<audio>[data-play-next-show] exists because there are conditions other than settings.autoPlayNextShow that affect whether the next show is automatically played-->
 		</section>
-	</div><!--#radio-app end-->
-</aside><!--#radio-container end-->
+	</div><!--#player-app end-->
+</aside><!--#player-container end-->
 
 
 
@@ -400,10 +400,10 @@
 	<h3>Queue</h3>
 	<div id="queue-and-controls">
 		<ul id="queue-controls" class="flex-list">
-			<li><button id="random-show-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add random show to queue">+ Show</button></li>
-			<li><button id="random-banger-button" class="push-button" type="button" aria-controls="queue radio" aria-label="Add random banger to queue">+ Banger</button></li>
-			<li><button id="shuffle-button" class="push-button" type="button" aria-controls="queue radio">Shuffle</button></li>
-			<li><button id="clear-button" class="push-button" type="button" aria-controls="queue radio">Clear</button></li>
+			<li><button id="random-show-button" class="push-button" type="button" aria-controls="queue player" aria-label="Add random show to queue">+ Show</button></li>
+			<li><button id="random-banger-button" class="push-button" type="button" aria-controls="queue player" aria-label="Add random banger to queue">+ Banger</button></li>
+			<li><button id="shuffle-button" class="push-button" type="button" aria-controls="queue player">Shuffle</button></li>
+			<li><button id="clear-button" class="push-button" type="button" aria-controls="queue player">Clear</button></li>
 		</ul><!--#queue-controls end-->
 		<ol id="queue" class="show-list"></ol>
 	</div><!--#queue-and-controls end-->
@@ -420,7 +420,7 @@
 	</div><!--#import-error-message end-->
 	<ul id="data-controls" class="flex-list">
 		<li><button id="copy-button" class="push-button" type="button">Copy</button></li>
-		<li><button id="import-button" class="push-button" type="button" aria-controls="queue radio import-error-message">Import</button></li>
+		<li><button id="import-button" class="push-button" type="button" aria-controls="queue player import-error-message">Import</button></li>
 	</ul>
 </section><!--#booth end-->
 
@@ -450,7 +450,7 @@
 
 <section id="about">
 	<h2>About</h2>
-	<p>Weird Waves is a fake radio station broadcasting horror and weird fiction! You can find shows in the <a href="#archive">Archive</a>, check or re-order your queue in the <a href="#booth">Booth</a>, and listen to them in the Radio. Have fun!</p>
+	<p>Weird Waves is a curated radio play and audiobook archive of horror, sci-fi, fantasy, and weird fiction! Find shows in the <a href="#archive">Archive</a>, check or re-order your queue in the <a href="#booth">Booth</a>, and listen to them in the Player. Have fun!</p>
 	<p id="stats" hidden>The Archive contains <strong id="stats-series"></strong> series and <strong id="stats-shows"></strong> shows.</p>
 
 	<h3>Content notes</h3>
@@ -488,8 +488,8 @@
 		<li>Resize and crop it.</li>
 		<li>Right-click it and select &ldquo;Interact&rdquo; to use it just like you are now.</li>
 	</ol>
-	<p>Optionally, replace the custom <abbr>CSS</abbr> with the following to add space above and below the radio area, to more easily isolate it in an overlay:</p>
-	<pre class="code-block" tabindex="0"><code>#radio-container {
+	<p>Optionally, replace the custom <abbr>CSS</abbr> with the following to add space above and below the player, to more easily isolate it in an overlay:</p>
+	<pre class="code-block" tabindex="0"><code>#player-container {
 	margin-block: 100vh;
 }</code></pre>
 
@@ -520,8 +520,8 @@
 	<p>Control how Weird Waves looks and functions here.</p>
 	<ul>
 		<li>
-			<h3>Radio</h3>
-			<button type="button" id="flat-radio-toggle" class="setting-toggle pre-initialised-control">hide show info in Radio</button>
+			<h3>Player</h3>
+			<button type="button" id="flat-player-toggle" class="setting-toggle pre-initialised-control">hide show info in Player</button>
 		</li>
 		<li>
 			<h3>Queue</h3>
@@ -665,7 +665,7 @@
 	<h2>Links</h2>
 	<p>If you like Weird Waves, you might like some of these places too:</p>
 
-	<h3>Other stations</h3>
+	<h3>Indie web radio</h3>
 	<ul class="flex-list">
 		<li><a href="https://www.radioisaforeigncountry.org/">Radio is a Foreign Country</a></li>
 		<li><a href="https://www.polushon.com/">Polushon</a></li>
