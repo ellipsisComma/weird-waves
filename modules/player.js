@@ -10,17 +10,17 @@
 
 import {
 	getElement,
-} from "./page.js?type=module,v=2025-03-27";
+} from "./page.js?type=module,v=2025-03-28";
 import {
 	cloneTemplate,
-} from "./templates.js?type=module,v=2025-03-27";
+} from "./templates.js?type=module,v=2025-03-28";
 import {
 	getSetting,
-} from "./settings.js?type=module,v=2025-03-27";
+} from "./settings.js?type=module,v=2025-03-28";
 import {
 	getShowInArchive,
 	allShowIDs,
-} from "./archive.js?type=module,v=2025-03-27";
+} from "./archive.js?type=module,v=2025-03-28";
 
 // mutation observer to store queue changes and prefetch second show on queue (if it has at least 2 shows)
 const queueObserver = new MutationObserver((mutations) => {
