@@ -559,9 +559,6 @@ textarea {
 		border-color: Canvas;
 		outline-color: CanvasText;
 	}
-	.palette {
-		forced-color-adjust: none;
-	}
 	/* at :root font-size 100%, 43.75rem = 700px */
 	@media (min-width: 43.75rem) {
 		.series {
@@ -1388,11 +1385,6 @@ select {
 	/* ARCHIVE */
 	#series-list .show-list {
 		--archive-show-list-padding: calc(1em + var(--gap-size));
-	}
-
-	/* SETTINGS */
-	.palette {
-		inline-size: 4em;
 	}
 }
 
