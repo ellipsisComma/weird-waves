@@ -184,25 +184,3 @@ function localStorageGet(key, defaultValue) {
 function localStorageSet(key, value) {
 	localStorage.setItem(key, JSON.stringify(value));
 }
-
-
-
-/* ================
-	INTERACTION
-================ */
-
-// set a button's state to unpressed
-HTMLButtonElement.prototype.unpress = function () {
-	this.setAttributes({
-		"aria-pressed": `false`,
-		"aria-disabled": `false`,
-	});
-};
-
-// set a button's state to pressed
-HTMLButtonElement.prototype.press = function () {
-	this.setAttributes({
-		"aria-pressed": `true`,
-		"aria-disabled": `true`
-	});
-};

@@ -483,7 +483,7 @@ textarea {
 [hidden] {
 	display: none;
 }
-[disabled], [aria-disabled="true"] {
+[disabled] {
 	cursor: not-allowed;
 }
 [disabled] {
@@ -799,7 +799,7 @@ a:active {
 	border-color: var(--control-default-colour);
 	box-shadow: 0 var(--control-depth) var(--control-default-colour);
 	align-items: center;
-	&:is(:active, [aria-disabled="true"]) {
+	&:is(:active) {
 		top: 0;
 		color: var(--control-interacted-colour);
 		border-color: var(--control-interacted-colour);

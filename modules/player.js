@@ -18,7 +18,6 @@ import {
 	getSetting,
 } from "./settings.js?type=module,v=2025-03-28";
 import {
-	getShowInArchive,
 	allShowIDs,
 } from "./archive.js?type=module,v=2025-03-28";
 
@@ -51,13 +50,22 @@ function setTimestampFromSeconds(element, time) {
 	element.textContent = `${minutes}:${seconds}`;
 }
 
+// get show element if it's in the queue
+function getShowInQueue(ID) {
+	return getElement(`queue`).querySelector(`:scope > [data-show-id="${ID}"]`);
+}
+
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type = ``) {
-	const pool = getElement(`seriesList`).querySelectorAll(`${
+	// get pool, adjusted for copyright safety, then filter out shows already on queue
+	const pool = [...getElement(`seriesList`).querySelectorAll(`${
 		getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"]` : ``
 	} .show-list > li${
 		type === `banger` ? `[data-banger="true"]` : ``
-	}:not(:has([data-action="add-show"][aria-pressed="true"]))`);
+	}`)].filter(show => {
+		const showInQueue = getShowInQueue(show.dataset.showId);
+		return showInQueue === null || showInQueue === undefined;
+	});
 	return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)].dataset.showId : ``;
 }
 
@@ -85,10 +93,7 @@ function shuffleQueue() {
 
 // clear queue
 function clearQueue() {
-	if (getElement(`queue`).children.length > 0) {
-		getElement(`queue`).replaceChildren();
-		for (const button of getElement(`seriesList`).querySelectorAll(`[data-action="add-show"][aria-pressed="true"]`)) button.unpress();
-	}
+	if (getElement(`queue`).children.length > 0) getElement(`queue`).replaceChildren();
 }
 
 // copy current queue data to clipboard
@@ -175,7 +180,7 @@ SHOWS
 
 // add show to queue
 function addShow(ID) {
-	const showOnQueue = getElement(`queue`).querySelector(`:scope > [data-show-id="${ID}"]`);
+	const showOnQueue = getShowInQueue(ID);
 	if (showOnQueue) {
 		getElement(`queue`).append(showOnQueue);
 		console.info(`re-added show: ${ID}`);
@@ -206,7 +211,6 @@ function addShow(ID) {
 	newShow.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
 
 	// update page
-	showInArchive.querySelector(`[data-action="add-show"]`).press();
 	getElement(`queue`).appendChild(templatedShow);
 }
 
@@ -239,7 +243,6 @@ function moveShowDown(target) {
 // remove show from queue
 function removeShow(target) {
 	target.remove();
-	getShowInArchive(target.dataset.showId).querySelector(`[data-action="add-show"]`).unpress();
 }
 
 // write show parts onto page and load show audio file; if queue is empty, reset player
@@ -402,7 +405,6 @@ function initialise() {
 		if (
 			event.target.tagName === `BUTTON`
 			&& event.target.dataset.action === `add-show`
-			&& event.target.getAttribute(`aria-disabled`) === `false`
 		) addShow(event.target.closest(`.show-list > li`).dataset.showId);
 	});
 	getElement(`seriesList`).addEventListener(`click`, () => {
@@ -429,10 +431,6 @@ window.addEventListener(`storage`, () => {
 	// could do this with a broadcast channel instead of mutation observer + storage event
 	// however, that adds an extra tech and it'd be less robust than rebuilding the queue from scratch
 	loadQueue();
-	for (const button of getElement(`seriesList`).querySelectorAll(`[data-action="add-show"]`)) {
-		if (newQueue.includes(button.dataset.target)) button.press();
-		else button.unpress();
-	}
 	console.info(`automatically matched queue change in another browsing context`);
 });
 
