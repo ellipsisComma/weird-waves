@@ -790,12 +790,18 @@ a:active {
 	border-color: var(--control-default-colour);
 	box-shadow: 0 var(--control-depth) var(--control-default-colour);
 	align-items: center;
+	& .svg-icon {
+		stroke: var(--control-default-colour);
+	}
 	&:is(:active, [disabled]) {
 		top: 0;
 		color: var(--control-interacted-colour);
 		border-color: var(--control-interacted-colour);
 		box-shadow: unset;
 		cursor: not-allowed;
+		& .svg-icon {
+			stroke: var(--control-interacted-colour);
+		}
 	}
 }
 .icon-button-set {
@@ -806,13 +812,9 @@ a:active {
 	list-style-type: "";
 	& .svg-icon {
 		block-size: 1.5em;
-		stroke: var(--control-default-colour);
 	}
 	& button {
 		padding: 0.1em;
-		&:active > .svg-icon {
-			stroke: var(--control-interacted-colour);
-		}
 	}
 }
 [aria-pressed="true"] .unpressed-icon,
