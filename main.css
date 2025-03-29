@@ -758,7 +758,7 @@ a:active {
 		}
 	}
 }
-.svg-icon {
+.icon {
 	display: block;
 	block-size: 2em;
 	inline-size: auto;
@@ -768,7 +768,7 @@ a:active {
 	stroke-linecap: round;
 	stroke-linejoin: round;
 }
-.svg-accent-stroke { /* must be outside .svg-icon, because it's applied in the <symbol> elements, not in the <svg class="svg-icon"> elements */
+.svg-accent-stroke { /* must be outside .icon, because it's applied in the <symbol> elements, not in the <svg class="svg-icon"> elements */
 	stroke: var(--icon-accent-colour);
 }
 .waveform-spacer {
@@ -790,7 +790,7 @@ a:active {
 	border-color: var(--control-default-colour);
 	box-shadow: 0 var(--control-depth) var(--control-default-colour);
 	align-items: center;
-	& .svg-icon {
+	& .icon {
 		stroke: var(--control-default-colour);
 	}
 	&:is(:active, [disabled]) {
@@ -798,10 +798,15 @@ a:active {
 		color: var(--control-interacted-colour);
 		border-color: var(--control-interacted-colour);
 		box-shadow: unset;
-		cursor: not-allowed;
-		& .svg-icon {
+		& .icon {
 			stroke: var(--control-interacted-colour);
 		}
+	}
+	&[disabled] {
+		cursor: not-allowed;
+	}
+	&:not(.icon-button) {
+		min-inline-size: 6em;
 	}
 }
 .icon-button-set {
@@ -810,7 +815,7 @@ a:active {
 	padding-block-start: var(--control-depth);
 	padding-inline-start: 0;
 	list-style-type: "";
-	& .svg-icon {
+	& .icon {
 		block-size: 1.5em;
 	}
 	& button {
@@ -1375,7 +1380,7 @@ select {
 	}
 
 	/* BOOTH */
-	.show-position-controls .svg-icon {
+	.show-position-controls .icon {
 		block-size: 1em;
 	}
 
