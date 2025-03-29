@@ -19,6 +19,7 @@ import {
 } from "./settings.js?type=module,v=2025-03-28";
 import {
 	allShowIDs,
+	getShowInArchive,
 } from "./archive.js?type=module,v=2025-03-28";
 
 // mutation observer to store queue changes
