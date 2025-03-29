@@ -47,6 +47,7 @@ setElement(`queue`, `#queue`);
 setElement(`queueControls`, `#queue-controls`);
 setElement(`clearButton`, `#clear-button`);
 setElement(`queueData`, `#queue-data`);
+setElement(`copyButton`, `#copy-button`);
 setElement(`importErrorMessage`, `#import-error-message`);
 setElement(`importErrorList`, `#import-error-list`);
 

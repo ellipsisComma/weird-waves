@@ -100,6 +100,7 @@ function clearQueue() {
 // copy current queue data to clipboard
 function copyQueue() {
 	navigator.clipboard.writeText(getElement(`queueData`).value);
+	getElement(`copyButton`).success(`Copied`);
 }
 
 // reset import validity invalidity
@@ -398,17 +399,21 @@ function initialise() {
 		case `move-down`: moveShowDown(target); break;
 		}
 	});
-	document.getElementById(`copy-button`).addEventListener(`click`, copyQueue);
+	getElement(`copyButton`).addEventListener(`click`, copyQueue);
 	document.getElementById(`import-button`).addEventListener(`click`, importQueue);
 
 	// archive interface events
 	getElement(`seriesList`).addEventListener(`click`, () => {
 		if (event.target.tagName === `BUTTON` && `action` in event.target.dataset) {
-			const action = event.target.dataset.action;
-			switch (event.target.dataset.action) {
-			case `add-show`: addShow(event.target.closest(`.show-list > li`).dataset.showId); break;
-			case `add-series`: addSeries(event.target.closest(`#series-list > li`)); break;
+			const button = event.target;
+			const action = button.dataset.action;
+
+			switch (action) {
+			case `add-show`: addShow(button.closest(`.show-list > li`).dataset.showId); break;
+			case `add-series`: addSeries(button.closest(`#series-list > li`)); break;
 			}
+
+			button.success(`Added`);
 		}
 	});
 

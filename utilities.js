@@ -184,3 +184,19 @@ function localStorageGet(key, defaultValue) {
 function localStorageSet(key, value) {
 	localStorage.setItem(key, JSON.stringify(value));
 }
+
+
+
+/* ==================
+	INTERACTIVITY
+================== */
+
+HTMLButtonElement.prototype.success = function(successMessage) {
+	const buttonInnerHTML = this.innerHTML;
+	this.innerHTML = successMessage;
+	this.disabled = true;
+	setTimeout(() => {
+		this.innerHTML = buttonInnerHTML;
+		this.disabled = false;
+	}, 3000);
+}

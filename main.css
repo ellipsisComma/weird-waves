@@ -483,12 +483,6 @@ textarea {
 [hidden] {
 	display: none;
 }
-[disabled] {
-	cursor: not-allowed;
-}
-[disabled] {
-	opacity: 0.5;
-}
 .visually-hidden {
 	block-size: 1px;
 	inline-size: 1px;
@@ -796,11 +790,12 @@ a:active {
 	border-color: var(--control-default-colour);
 	box-shadow: 0 var(--control-depth) var(--control-default-colour);
 	align-items: center;
-	&:is(:active) {
+	&:is(:active, [disabled]) {
 		top: 0;
 		color: var(--control-interacted-colour);
 		border-color: var(--control-interacted-colour);
 		box-shadow: unset;
+		cursor: not-allowed;
 	}
 }
 .icon-button-set {
