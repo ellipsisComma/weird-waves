@@ -518,62 +518,55 @@
 <section id="settings">
 	<h2>Settings</h2>
 	<p>Control how Weird Waves looks and functions here.</p>
-	<ul>
-		<li>
-			<h3>Player</h3>
-			<button type="button" id="flat-player-toggle" class="setting-toggle pre-initialised-control">hide show info in Player</button>
-		</li>
-		<li>
-			<h3>Queue</h3>
-			<button type="button" id="auto-play-next-show-toggle" class="setting-toggle pre-initialised-control">start next show when previous show ends</button>
-		</li>
-		<li>
-			<h3>Content notes</h3>
-			<button type="button" id="notes-open-toggle" class="setting-toggle pre-initialised-control">open all content notes by default</button>
-		</li>
-		<li>
-			<h3>Site theme</h3>
-			<select id="theme-select" class="pre-initialised-control" name="theme">
-				<!--you found the secret theme notes-->
-				<optgroup label="Dark">
-					<option value="dark" selected>Dark</option><!--classy. gen 1-->
-					<option value="goop">Goop</option><!--my default. gen 2-->
-					<option value="flame">Flame</option><!--Halloween-ish? gen 3-->
-					<option value="plasm">Plasm</option><!--oh!! electric! gen 3-->
-					<option value="moss">Moss</option><!--peaceful, mysterious. gen 3-->
-					<option value="darker">Darker</option><!--better than Silver. gen 3-->
-					<option value="pico">Pico</option><!--pico8 rep... gen 4-->
-					<option value="abyss">Abyss</option><!--sea, space, brain. gen 4-->
-					<option value="retro">Retro</option><!--Games Boy. gen 4-->
-					<option value="marrow">Marrow</option><!--ooo yeah!! gen 4-->
-					<option value="coalgas">Coalgas</option><!--Plasm/protanopia. gen 5-->
-					<option value="root">Root</option><!--Retro/tritanopia. gen 5-->
-					<option value="natron">Natron</option><!--Marrow/deuteranopia (hot+cold swapped). gen 5-->
-					<option value="mycelia">Mycelia</option><!--Moss/tritanopia. gen 5-->
-					<option value="cellar">Cellar</option><!--Abyss/protanopia (hot+cold swapped). gen 5-->
-				</optgroup><!--optgroup Dark end-->
-				<optgroup label="Light">
-					<option value="light">Light</option><!--mediocre 'til I spruced it up. gen 2-->
-					<option value="wine">Wine</option><!--inspired by Suspense's "Roma Wines" ads. gen 2-->
-					<option value="ash">Ash</option><!--damn that orange aggressive. gen 3-->
-					<option value="dust">Dust</option><!--Martian-esque. gen 3-->
-					<option value="mist">Mist</option><!--never been satisfied with this, but it fills the "blue-ish light theme" niche. gen 3-->
-					<option value="silver">Silver</option><!--worse than Darker. gen 3-->
-					<option value="sepia">Sepia</option><!--inevitable. gen 4-->
-					<option value="org">Org</option><!--evil 1980s paperwork. gen 4-->
-					<option value="gauze">Gauze</option><!--Sepia/tritanopia. gen 5-->
-				</optgroup><!--optgroup Light end-->
-			</select><!--#theme-select end-->
-			<p id="site-theme-forced-colors-message"><strong>Note:</strong> Themes have no effect on the page in forced-colours or high-contrast mode.</p>
-		</li>
-		<li>
-			<h3>Site font</h3>
-			<select id="font-select" class="pre-initialised-control" name="font">
-				<option value="serif" selected>Serif</option>
-				<option value="sans">Sans</option>
-			</select><!--#font-select end-->
-		</li>
-	</ul>
+
+	<h3>Player</h3>
+	<button type="button" id="flat-player-toggle" class="setting-toggle pre-initialised-control">hide show info in Player</button>
+
+	<h3>Queue</h3>
+	<button type="button" id="auto-play-next-show-toggle" class="setting-toggle pre-initialised-control">start next show when previous show ends</button>
+
+	<h3>Content notes</h3>
+	<button type="button" id="notes-open-toggle" class="setting-toggle pre-initialised-control">open all content notes by default</button>
+
+	<h3>Site theme</h3>
+	<select id="theme-select" class="pre-initialised-control" name="theme">
+		<!--you found the secret theme notes-->
+		<optgroup label="Dark">
+			<option value="dark" selected>Dark</option><!--classy. gen 1-->
+			<option value="goop">Goop</option><!--my default. gen 2-->
+			<option value="flame">Flame</option><!--Halloween-ish? gen 3-->
+			<option value="plasm">Plasm</option><!--oh!! electric! gen 3-->
+			<option value="moss">Moss</option><!--peaceful, mysterious. gen 3-->
+			<option value="darker">Darker</option><!--better than Silver. gen 3-->
+			<option value="pico">Pico</option><!--pico8 rep... gen 4-->
+			<option value="abyss">Abyss</option><!--sea, space, brain. gen 4-->
+			<option value="retro">Retro</option><!--Games Boy. gen 4-->
+			<option value="marrow">Marrow</option><!--ooo yeah!! gen 4-->
+			<option value="coalgas">Coalgas</option><!--Plasm/protanopia. gen 5-->
+			<option value="root">Root</option><!--Retro/tritanopia. gen 5-->
+			<option value="natron">Natron</option><!--Marrow/deuteranopia (hot+cold swapped). gen 5-->
+			<option value="mycelia">Mycelia</option><!--Moss/tritanopia. gen 5-->
+			<option value="cellar">Cellar</option><!--Abyss/protanopia (hot+cold swapped). gen 5-->
+		</optgroup><!--optgroup Dark end-->
+		<optgroup label="Light">
+			<option value="light">Light</option><!--mediocre 'til I spruced it up. gen 2-->
+			<option value="wine">Wine</option><!--inspired by Suspense's "Roma Wines" ads. gen 2-->
+			<option value="ash">Ash</option><!--damn that orange aggressive. gen 3-->
+			<option value="dust">Dust</option><!--Martian-esque. gen 3-->
+			<option value="mist">Mist</option><!--never been satisfied with this, but it fills the "blue-ish light theme" niche. gen 3-->
+			<option value="silver">Silver</option><!--worse than Darker. gen 3-->
+			<option value="sepia">Sepia</option><!--inevitable. gen 4-->
+			<option value="org">Org</option><!--evil 1980s paperwork. gen 4-->
+			<option value="gauze">Gauze</option><!--Sepia/tritanopia. gen 5-->
+		</optgroup><!--optgroup Light end-->
+	</select><!--#theme-select end-->
+	<p id="site-theme-forced-colors-message"><strong>Note:</strong> Themes have no effect on the page in forced-colours or high-contrast mode.</p>
+
+	<h3>Site font</h3>
+	<select id="font-select" class="pre-initialised-control" name="font">
+		<option value="serif" selected>Serif</option>
+		<option value="sans">Sans</option>
+	</select><!--#font-select end-->
 </section><!--#settings end-->
 
 
