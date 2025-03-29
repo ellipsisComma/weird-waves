@@ -78,6 +78,15 @@ function buildSeries(series) {
 
 // build archive onto page and runtime
 function buildArchive() {
+	// build series element ID for linking; build show ID for each show (helps during archive-building, because all relevant data is inside each show object instead of split between show object and series metadata)
+	for (const series of archive) {
+		series.elementId = `archive-${series.code}`;
+	
+		for (const show of series.shows) {
+			show.ID = `${series.code}-${show.code}`;
+		}
+	}
+
 	getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
 	getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
 
