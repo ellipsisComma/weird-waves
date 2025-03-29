@@ -21,7 +21,7 @@ import {
 	allShowIDs,
 } from "./archive.js?type=module,v=2025-03-28";
 
-// mutation observer to store queue changes and prefetch second show on queue (if it has at least 2 shows)
+// mutation observer to store queue changes and prefetch second show in queue (if it has at least 2 shows)
 const queueObserver = new MutationObserver((mutations) => {
 	loadShow();
 	storeQueue();
@@ -57,7 +57,7 @@ function getShowInQueue(ID) {
 
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type = ``) {
-	// get pool, adjusted for copyright safety, then filter out shows already on queue
+	// get pool, adjusted for copyright safety, then filter out shows already in queue
 	const pool = [...getElement(`seriesList`).querySelectorAll(`${
 		getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"]` : ``
 	} .show-list > li${
@@ -180,9 +180,9 @@ SHOWS
 
 // add show to queue
 function addShow(ID) {
-	const showOnQueue = getShowInQueue(ID);
-	if (showOnQueue) {
-		getElement(`queue`).append(showOnQueue);
+	const showInQueue = getShowInQueue(ID);
+	if (showInQueue) {
+		getElement(`queue`).append(showInQueue);
 		console.info(`re-added show: ${ID}`);
 		return;
 	}
@@ -225,17 +225,17 @@ function addRandomShow(showType) {
 	if (ID !== ``) {
 		addShow(ID);
 		window.scrollTo(0, getElement(`queue`).lastElementChild.offsetTop - getElement(`queueControls`).clientHeight);
-	} else console.warn(`can't add new show of type "${showType}": all shows of that type already on queue`);
+	} else console.warn(`can't add new show of type "${showType}": all shows of that type already in queue`);
 }
 
 /* MANIPULATING */
 
-// swap show with previous show on queue
+// swap show with previous show in queue
 function moveShowUp(target) {
 	target.previousElementSibling?.before(target);
 }
 
-// swap show with next show on queue
+// swap show with next show in queue
 function moveShowDown(target) {
 	target.nextElementSibling?.after(target);
 }
