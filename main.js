@@ -5,8 +5,6 @@ import {
 } from "./modules/settings.js?type=module,v=2025-03-28";
 import {
 	initialise as initialiseStyles,
-	getStyle,
-	setStyle,
 } from "./modules/styles.js?type=module,v=2025-03-28";
 import {
 	buildArchive,

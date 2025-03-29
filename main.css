@@ -441,16 +441,16 @@ DEFAULTS
 ::after {
 	box-sizing: border-box;
 }
-button {
+button, select {
 	font-family: inherit;
 	font-size: 1em;
 	color: inherit;
 	background-color: unset;
 	border: unset;
 	user-select: none;
-	& > * {
-		pointer-events: none;
-	}
+}
+button > * {
+	pointer-events: none;
 }
 fieldset {
 	padding: unset;
@@ -1305,28 +1305,20 @@ textarea {
 		}
 	}
 }
-#theme-buttons button {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5em;
-}
-.palette {
-	&:dir(ltr) {
-		--palette-angle: 90deg;
+select {
+	margin-inline-start: 1em;
+	padding-block-start: 0.5em;
+	padding-block-end: 0.25em;
+	padding-inline: 0.5em;
+	color: var(--control-default-colour);
+	border-width: var(--line-width);
+	border-style: solid;
+	border-color: var(--control-default-colour);
+	user-select: none;
+	&:is(:active, :open) {
+		color: var(--control-interacted-colour);
+		border-color: var(--control-interacted-colour);
 	}
-	&:dir(rtl) {
-		--palette-angle: 270deg;
-	}
-	block-size: 1em;
-	inline-size: 12em;
-	border: inherit;
-	background-image: linear-gradient(var(--palette-angle), var(--fore-colour) 25%, var(--back-colour) 25% 50%, var(--hot-colour) 50% 75%, var(--cold-colour) 75%);
-	&[data-colours="3"] {
-		background-image: linear-gradient(var(--palette-angle), var(--fore-colour) 33%, var(--back-colour) 33% 67%, var(--hot-colour) 67%);
-	}
-}
-#font-buttons button {
-	font-family: var(--font-stack-body);
 }
 
 /* ----------------------------------

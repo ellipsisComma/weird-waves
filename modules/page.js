@@ -58,8 +58,8 @@ setElement(`seriesList`, `#series-list`);
 setElement(`newsList`, `#news-list`);
 
 // settings
-setElement(`themeButtons`, `#theme-buttons`);
-setElement(`fontButtons`, `#font-buttons`);
+setElement(`themeSelect`, `#theme-select`);
+setElement(`fontSelect`, `#font-select`);
 
 // schedule
 setElement(`schedule`, `#schedule-container`);

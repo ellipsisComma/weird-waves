@@ -14,60 +14,35 @@ import {
 // initialise local styles object
 const local = localStorageGet(`styles`, {});
 
-// get computed value of a style property of an element
-function getElementStyle(query, property) {
-	return getComputedStyle(document.querySelector(query)).getPropertyValue(property);
-}
-
-// update style buttons so aria-pressed state reflects current style value in local
-function setStyleButtons(style) {
-	const buttons = getElement(`${style}Buttons`);
-	if (!buttons) return;
-
-	buttons.querySelector(`[aria-pressed="true"]`)?.unpress();
-	const newButton = buttons.querySelector(`[data-option="${local[style]}"]`);
-
-	if (!newButton) {
-		const defaultButton = buttons.querySelector(`button`);
-		local[style] = defaultButton.dataset.option;
-		defaultButton.press();
-	} else newButton.press();
-}
-
 // update a style when triggered
 function setStyle(style, option) {
 	local[style] = option;
-	setStyleButtons(style);
+	getElement(`${style}Select`).value = option;
 	document.documentElement.dataset[style] = local[style];
 	localStorageSet(`styles`, local);
 }
 
-// get current value of style
-function getStyle(style) {
-	return local[style];
-}
-
-// initialise styles
+// initialise style controls
 function initialise() {
-	local.theme ??= document.documentElement.dataset.theme;
-	local.font ??= document.documentElement.dataset.font;
+	// get pre-initialised values for styles
+	local.theme = document.documentElement.dataset.theme;
+	local.font = document.documentElement.dataset.font;
 
 	for (const style of Object.keys(local)) {
-		const buttons = getElement(`${style}Buttons`);
-		if (!buttons) continue;
+		const select = getElement(`${style}Select`);
+		if (!select) continue;
 
-		// initialise buttons
-		for (const button of buttons.querySelectorAll(`button`)) button.unpress();
-		setStyleButtons(style);
-		buttons.classList.remove(`pre-initialised-control`);
+		// initialise select input (if stored theme doesn't exist, switch to default theme)
+		if (select.querySelector(`[value="${local[style]}"]`)) select.value = local[style];
+		else setStyle(style, select.querySelector(`[selected]`).value);
+// Note: If the stored theme is invalid, then the page will be painted in the initial
+// colour palette, *then* repainted in the default theme. This is unavoidable, since the
+// DOM has to load (and be painted) before we can check the theme's validity.
 
-		// add event listener to buttons for updating styles
-		buttons.addEventListener(`click`, () => {
-			if (
-				event.target.tagName === `BUTTON`
-				&& event.target.getAttribute(`aria-disabled`) === `false`
-			) setStyle(style, event.target.dataset.option);
-		});
+		select.classList.remove(`pre-initialised-control`);
+
+		// add event listener to update site style when selected style changes
+		select.addEventListener(`change`, () => setStyle(style, select.value));
 	}
 }
 
@@ -77,13 +52,13 @@ window.addEventListener(`storage`, () => {
 
 	const newStyles = JSON.parse(event.newValue);
 
-	if (getStyle(`theme`) !== newStyles.theme) setStyle(`theme`, newStyles.theme);
-	if (getStyle(`font`) !== newStyles.font) setStyle(`font`, newStyles.font);
+	setStyle(`theme`, newStyles.theme);
+	setStyle(`font`, newStyles.font);
+
 	console.info(`automatically matched style change in another browsing context`);
 });
 
 export {
 	initialise,
-	getStyle,
 	setStyle,
 };
