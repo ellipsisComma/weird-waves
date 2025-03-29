@@ -21,7 +21,7 @@ import {
 	allShowIDs,
 } from "./archive.js?type=module,v=2025-03-28";
 
-// mutation observer to store queue changes and prefetch second show in queue (if it has at least 2 shows)
+// mutation observer to store queue changes
 const queueObserver = new MutationObserver((mutations) => {
 	loadShow();
 	storeQueue();
