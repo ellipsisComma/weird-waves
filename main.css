@@ -1312,6 +1312,7 @@ textarea {
 	}
 }
 select {
+	min-inline-size: 8em;
 	margin-inline-start: 1em;
 	padding-block-start: 0.5em;
 	padding-block-end: 0.25em;
