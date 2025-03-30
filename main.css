@@ -843,7 +843,6 @@ code {
 :not(.code-block) > code {
 	text-decoration-line: underline;
 	text-decoration-style: dashed;
-	text-decoration-color: var(--box-border-colour);
 	text-underline-offset: var(--text-underline-offset);
 }
 .code-block {
