@@ -399,7 +399,7 @@
 
 	<h3>Queue</h3>
 	<div id="queue-and-controls">
-		<ul id="queue-controls" class="flex-list">
+		<ul id="queue-controls" class="flex-list control-list">
 			<li><button id="random-show-button" class="push-button" type="button" aria-controls="queue player" aria-label="Add random show to queue">+ Show</button></li>
 			<li><button id="random-banger-button" class="push-button" type="button" aria-controls="queue player" aria-label="Add random banger to queue">+ Banger</button></li>
 			<li><button id="shuffle-button" class="push-button" type="button" aria-controls="queue player">Shuffle</button></li>
@@ -418,7 +418,7 @@
 		<ul id="import-error-list"></ul>
 		<p>You don't have to delete the import error messages from the data; they're removed automatically when you try to import the data.</p>
 	</div><!--#import-error-message end-->
-	<ul id="data-controls" class="flex-list">
+	<ul id="data-controls" class="flex-list control-list">
 		<li><button id="copy-button" class="push-button" type="button">Copy</button></li>
 		<li><button id="import-button" class="push-button" type="button" aria-controls="queue player import-error-message">Import</button></li>
 	</ul>
@@ -430,7 +430,7 @@
 	<h2>Archive</h2>
 	<p>This list includes information about every show available on the site.</p>
 	<nav>
-		<ol id="archive-series-links" class="flex-list"></ol>
+		<ol id="archive-series-links" class="flex-list link-cloud"></ol>
 	</nav>
 	<ol id="series-list"></ol>
 </section><!--#archive end-->
@@ -573,10 +573,10 @@
 
 <section id="contact">
 	<h2>Contact</h2>
-	<p>Got questions, feedback, requests?</p>
-	<ul class="flex-list">
-		<li><a href="https://neocities.org/site/weirdwaves" rel="me">Neocities</a></li>
-		<li><a href="mailto:maintenance@weirdwaves.net" rel="reply-to me">maintenance@weirdwaves.net</a></li>
+	<p>Know a great radio show or audiobook to add to the Archive?</p>
+	<p>Got questions, feedback, feature requests?</p>
+	<p>Need technical assistance with the site?</p>
+	<p>Call in at <a href="mailto:maintenance@weirdwaves.net" rel="reply-to me">maintenance@weirdwaves.net</a>!</p>
 	</ul>
 </section><!--#contact end-->
 
@@ -587,7 +587,7 @@
 	<p>If you like Weird Waves, you might like some of these places too:</p>
 
 	<h3>Indie web radio</h3>
-	<ul class="flex-list">
+	<ul class="flex-list link-cloud">
 		<li><a href="https://www.radioisaforeigncountry.org/">Radio is a Foreign Country</a></li>
 		<li><a href="https://www.polushon.com/">Polushon</a></li>
 		<li><a href="http://www.hbr1.com/"><abbr>HBR1</abbr> - Music on Futurenet</a></li>
@@ -607,7 +607,7 @@
 	</ul>
 
 	<h3>Old Time Radio (<abbr>OTR</abbr>) info</h3>
-	<ul class="flex-list">
+	<ul class="flex-list link-cloud">
 		<li><a href="https://www.otrplotspot.com/"><abbr>OTR</abbr> Plot Spot</a></li>
 		<li><a href="https://web.archive.org/web/20230210154338/http://www.digitaldeliftp.com/">The Digital Deli</a> (via Wayback)</li>
 		<li><a href="https://www.awakeatmidnight.com/otr/">Awake at Midnight</a></li>
@@ -617,7 +617,7 @@
 	</ul>
 
 	<h3>Toys, tools, apps, games</h3>
-	<ul class="flex-list">
+	<ul class="flex-list link-cloud">
 		<li><a href="https://aidn.jp/jingle"><abbr>AC</abbr>-chan</a> (<a href="https://aidn.jp/jingle/e/dq3nt3h2">&</a>)</li>
 		<li><a href="https://www.ynoproject.net/"><cite>Yumi Nikki</cite> Online Project</a></li>
 		<li><a href="https://mynoise.net/NoiseMachines/dustyScratchedVinylNoiseGenerator.php">Dust & Scratches</a></li>
@@ -639,7 +639,7 @@
 	</ul>
 
 	<h3>Streamers</h3>
-	<ul class="flex-list">
+	<ul class="flex-list link-cloud">
 		<li><a href="https://twitch.tv/ecdycis">Ecdysis</a> (<a href="https://www.youtube.com/@Ecdycis">archive</a>)</li>
 		<li><a href="https://twitch.tv/ecto">ecto</a> (<a href="https://www.youtube.com/@ratbackflip">archive</a>)</li>
 		<li><a href="https://twitch.tv/grimmivt">Grimmi</a> (<a href="https://www.youtube.com/@GrimmiVault">archive</a>)</li>
@@ -651,7 +651,7 @@
 	</ul>
 
 	<h3>Webcomics</h3>
-	<ul class="flex-list">
+	<ul class="flex-list link-cloud">
 		<li><cite><a href="https://watashi.neocities.org/">Watashi</a></cite></li>
 		<li><cite><a href="https://aghoststorycomic.com/">A Ghost Story</a></cite></li>
 		<li><cite><a href="https://bybloemen.com/">Bybloemen</a></cite></li>
@@ -674,7 +674,7 @@
 	</ul>
 
 	<h3>Anything else</h3>
-	<ul class="flex-list">
+	<ul class="flex-list link-cloud">
 		<li><a href="https://whitedesert.neocities.org/">White Desert</a></li>
 		<li><a href="https://homevideohorrors.com/">Home Video Horrors</a></li>
 		<li><a href="https://horrorgifs.neocities.org/">The Horror Gif Necronomicon</a></li>
@@ -700,9 +700,7 @@
 	</ul>
 
 	<h3>Button</h3>
-	<ul class="flex-list">
-		<li><img src="./images/button.png" alt="the Weird Waves 88 by 31 pixel button"></li>
-	</ul>
+	<img src="./images/button.png" alt="the Weird Waves 88 by 31 pixel button">
 </section><!--#links end-->
 
 
@@ -712,15 +710,15 @@
 	<p>Want to know where things came from?</p>
 
 	<h3>Shows</h3>
-	<p>check the <a href="#archive">Archive</a></p>
+	<p>You can find links to all series sources in the <a href="#archive">Archive</a>.</p>
 
 	<h3>Fonts</h3>
-	<p>serif font subset from <cite><a href="https://www.solmatas.com/bitter">Bitter</a></cite> (<a href="./licenses/OFL-Bitter.txt">Open Font License</a>) by <a href="https://www.solmatas.com/">Sol Matas</a></p>
-	<p>sans-serif font subset from <cite><a href="https://mozilla.github.io/Fira/">Fira Sans</a></cite> (<a href="./licenses/OFL-FiraSans.txt">Open Font License</a>) by <a href="https://carrois.com/">Carrois Type Design</a></p>
-	<p>code font subset from <cite><a href="https://mozilla.github.io/Fira/">Fira Mono</a></cite> (<a href="./licenses/OFL-FiraMono.txt">Open Font License</a>) by <a href="https://carrois.com/">Carrois Type Design</a></p>
+	<p>The serif font is subset from <cite><a href="https://www.solmatas.com/bitter">Bitter</a></cite> (<a href="./licenses/OFL-Bitter.txt">Open Font License</a>) by <a href="https://www.solmatas.com/">Sol Matas</a>.</p>
+	<p>The sans-serif font is subset from <cite><a href="https://mozilla.github.io/Fira/">Fira Sans</a></cite> (<a href="./licenses/OFL-FiraSans.txt">Open Font License</a>) by <a href="https://carrois.com/">Carrois Type Design</a>.</p>
+	<p>The code font is subset from <cite><a href="https://mozilla.github.io/Fira/">Fira Mono</a></cite> (<a href="./licenses/OFL-FiraMono.txt">Open Font License</a>) by <a href="https://carrois.com/">Carrois Type Design</a>.</p>
 
 	<h3>Hosting</h3>
-	<p><a href="https://neocities.org">Neocities</a></p>
+	<p>The site is currently hosted on <a href="https://neocities.org">Neocities</a>.</p>
 </section><!--#credits end-->
 
 
@@ -730,8 +728,10 @@
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks.</p>
 	<svg class="icon waveform-spacer" role="separator" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 	<div id="schedule-container" hidden>
-		<p>Why not try the schedule for the week starting <time id="schedule-date"></time>:</p>
-		<h3>Schedule: <span id="schedule-title"></span></h3>
+		<h3>
+			This week's schedule:
+			<br><span id="schedule-title"></span>
+		</h3>
 		<p id="schedule-blurb"></p>
 		<button id="add-schedule-button" class="push-button" type="button" aria-label="Add scheduled shows to queue">+ Schedule</button>
 	</div><!--#schedule-container end-->

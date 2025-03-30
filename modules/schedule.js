@@ -39,11 +39,9 @@ async function loadSchedule() {
 	}
 	const schedule = await file.json();
 
-	getElement(`scheduleDate`).textContent = weekStart.toLocaleDateString();
-	getElement(`scheduleDate`).dateTime = weekStart.toISOString().slice(0, 10);
-	document.getElementById(`schedule-title`).setContent(schedule.title);
-	document.getElementById(`schedule-blurb`).setContent(schedule.blurb);
-	document.getElementById(`add-schedule-button`).addEventListener(`click`, () => {
+	document.getElementById(`schedule-title`)?.setContent(schedule.title);
+	document.getElementById(`schedule-blurb`)?.setContent(schedule.blurb);
+	document.getElementById(`add-schedule-button`)?.addEventListener(`click`, () => {
 		for (const ID of schedule.shows) addShow(ID);
 		getElement(`schedule`).remove();
 	});

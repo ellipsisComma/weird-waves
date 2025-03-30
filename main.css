@@ -709,11 +709,17 @@ h3 {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	margin-block: 1em;
+	padding-inline: 0;
+	list-style-type: "";
+}
+.control-list {
+	row-gap: calc(var(--gap-size) + var(--control-depth));
+	column-gap: var(--gap-size);
+}
+.link-cloud {
 	justify-content: center;
 	gap: 1em;
-	margin-block: 1em;
-	padding-inline: 1em;
-	list-style-type: "";
 }
 ul {
 	list-style-type: disc;
@@ -892,12 +898,14 @@ code var::after {
 ----------- */
 
 :is(#loaded-show, #queue):empty::after {
-	content: "Queue is empty!\a Add shows in Booth or Archive.";
+	content: "Queue is empty!\0a Add shows in Booth or Archive.";
 	display: block;
 	font-style: italic;
-	text-align: center;
+}
+#loaded-show:empty::after {
 	margin-block-start: 0.5em;
 	margin-block-end: 0.3em;
+	text-align: center;
 	white-space: pre;
 }
 #loaded-show > .show-content {
@@ -1184,7 +1192,6 @@ textarea {
 }
 .show-list {
 	list-style-type: "";
-	margin-inline: var(--gap-size);
 	padding-inline-start: 0;
 }
 #series-list .show-list {
@@ -1320,14 +1327,12 @@ select {
 	}
 }
 
-/* ----------------------------------
-	CONTACT/LINKS/CREDITS/WELCOME
----------------------------------- */
+/* ------------
+	WELCOME
+------------ */
 
-#contact, #links, #credits, #welcome {
-	text-align: center;
-}
 #schedule-container {
+	text-align: center;
 	text-wrap-style: balance;
 }
 
@@ -1393,9 +1398,6 @@ select {
 /* at :root font-size 100%, 37.5rem = 600px */
 @media (min-width: 37.5rem) {
 	/* GENERAL */
-	.flex-list {
-		padding-inline: 0;
-	}
 	.code-block > code {
 		tab-size: 4ch;
 	}
