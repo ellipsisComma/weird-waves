@@ -21,6 +21,7 @@ function schedulePath(date) {
 function getWeekStartDate() {
 	const date = new Date();
 	date.setDate(date.getDate() - ((date.getDay() + 6) % 7));
+	date.setMinutes(date.getMinutes()-date.getTimezoneOffset());
 	return date;
 }
 
