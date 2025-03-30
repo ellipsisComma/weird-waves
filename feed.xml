@@ -11,10 +11,35 @@
 	<author>
 		<name>Weird Waves</name>
 	</author>
-	<updated>2025-03-06T00:00:00Z</updated>
+	<updated>2025-03-30T00:00:00Z</updated>
 
 
 
+	<entry>
+		<id>https://weirdwaves.net/?58</id>
+		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-30-lots-of-little-layout-changes" />
+		<title type="html"><![CDATA[Lots of little layout changes]]></title>
+		<published>2025-03-30T00:00:00Z</published>
+		<updated>2025-03-30T00:00:00Z</updated>
+		<content type="html"><![CDATA[
+			<p>I've made a lot of small, and a few not-so-small, adjustments to the site's layout and design. Here are the bigger ones:</p>
+			<ul>
+				<li>
+					<p>I've replaced the theme- and font-picker buttons with selection menus (they're simpler to implement and have accessibility baked in).</p>
+				</li>
+				<li>
+					<p>Some things that used to be aligned or justified to the centre are now aligned or justified to the start of lines of text. This affects all text in the <a href="#contact">Contact</a>, <a href="#links">Links</a>, and <a href="#credits">Credits</a> sections aside from link clouds, the introduction in the <a href="#welcome">Welcome</a> section, and the queue and import controls and empty-queue message in the <a href="#booth">Booth</a>.</p>
+				</li>
+				<li>
+					<p>The &ldquo;+ Show&rdquo; buttons in the <a href="#archive">Archive</a> no longer stay pushed-in/disabled/deactivated when the matching show's in the queue.</p>
+				</li>
+				<li>
+					<p>The &ldquo;+ Show&rdquo; and &ldquo;+ Series&rdquo; buttons in the Archive and &ldquo;Copy&rdquo; button in the Booth now temporarily change text to let you know the action succeeded when you push them.</p>
+				</li>
+			</ul>
+			<p>There's a few more minor changes coming, and one or two bigger ones, when I have the time to work on them.</p>
+		]]></content>
+	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?57</id>
 		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-06-import-export-updates" />
