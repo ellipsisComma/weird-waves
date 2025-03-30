@@ -10,16 +10,16 @@
 
 import {
 	getElement,
-} from "./page.js?type=module,v=2025-03-28";
+} from "./page.js?type=module,v=2025-03-29";
 import {
 	cloneTemplate,
-} from "./templates.js?type=module,v=2025-03-28";
+} from "./templates.js?type=module,v=2025-03-29";
 import {
 	getSetting,
-} from "./settings.js?type=module,v=2025-03-28";
+} from "./settings.js?type=module,v=2025-03-29";
 import {
 	archive
-} from "./archive-data.js?type=module,v=2025-03-28";
+} from "./archive-data.js?type=module,v=2025-03-29";
 
 // set of all show IDs
 // ONLY use this for validating whether an ID is valid (as opposed to checking the archive's DOM)
