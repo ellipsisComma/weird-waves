@@ -8,10 +8,10 @@
 
 import {
 	getElement,
-} from "./page.js?type=module,v=2025-03-29";
+} from "./page.js?type=module,v=2025-03-31";
 import {
 	cloneTemplate,
-} from "./templates.js?type=module,v=2025-03-29";
+} from "./templates.js?type=module,v=2025-03-31";
 
 // build HTML for news item
 function buildNewsItem(item) {
