@@ -34,4 +34,4 @@ setTemplate(`newsItem`, `news-item`);
 export {
 	getTemplate,
 	cloneTemplate,
-}
+};
