@@ -89,7 +89,7 @@ function getShowIDs(container) {
 QUEUE
 -- */
 
-// shuffle queue if it has at least 2 entries (FYK-ish shuffle)
+// shuffle queue if it has at least 2 entries
 function shuffleQueue() {
 	let i = getElement(`queue`).children.length;
 	if (i < 2) return;
