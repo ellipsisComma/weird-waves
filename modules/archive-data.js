@@ -1778,7 +1778,7 @@ const archive = [
 	},
 	{
 	"code": `15-Beelzy_Book`,
-	"heading": `15: <cite>Thus I Refute Beelzy</cite><!--Note: show title in source uses the wrong name ("Bealsley" instead of "Beelzy")--> and <cite>The Bookshop</cite>`,
+	"heading": `15: <cite>Thus I Refute Beelzy</cite><!--Note: show title in source uses the wrong name ("Bealsley" instead of "Beelzy")--> + <cite>The Bookshop</cite>`,
 	"blurb": `A boy's imaginary friend takes offense at his cruel father. A struggling writer finds a shop of impossible books. Written by John Collier and Nelson S.&nbsp;Bond.`,
 	"notes": `child abuse, dismemberment, traffic accident`,
 	"banger": true,
