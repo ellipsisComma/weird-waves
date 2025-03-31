@@ -724,6 +724,12 @@ h3 {
 ul {
 	list-style-type: disc;
 }
+dt {
+	font-weight: bold;
+}
+dd {
+	margin-inline-start: 1em;
+}
 a:link {
 	color: var(--text-link-default-colour);
 	text-decoration-thickness: 0.075em;
@@ -857,6 +863,7 @@ code {
 }
 code var {
 	font-style: normal;
+	white-space: nowrap;
 }
 code var::before {
 	content: "[[\a0 ";
@@ -1247,19 +1254,6 @@ textarea {
 }
 .news-item-content {
 	margin-inline-start: 1em;
-}
-
-/* ----------
-	ABOUT
----------- */
-
-#q-a {
-	& > dt {
-		font-weight: bold;
-	}
-	& > dd {
-		margin-inline-start: 1em;
-	}
 }
 
 /* -------------
