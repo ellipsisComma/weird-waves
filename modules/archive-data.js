@@ -1514,7 +1514,7 @@ const archive = [
 	{
 	"code": `038-Coat`,
 	"heading": `38: <cite>Wear the Dead Man's Coat</cite>`,
-	"blurb": `A homeless beggar kills a man for his coat, then remembers a saying: <q>Wear the dead man's coat, none will take note</q>.`,
+	"blurb": `A homeless beggar kills a man for his coat, then remembers a saying: &ldquo;Wear the dead man's coat, none will take note&rdquo;.`,
 	"notes": `alcohol, betrayal`,
 	"banger": true,
 	},
@@ -1616,7 +1616,7 @@ const archive = [
 	{
 	"code": `081-Snow`,
 	"heading": `81: <cite>The Time of the Big Snow</cite>`,
-	"blurb": `Two young children lose their way in a blizzard and discover the truth behind the old saying about snow: <q>The old woman's picking her geese</q>.`,
+	"blurb": `Two young children lose their way in a blizzard and discover the truth behind the old saying about snow: &ldquo;The old woman's picking her geese&rdquo;.`,
 	},
 	{
 	"code": `083-Murder`,
