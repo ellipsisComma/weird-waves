@@ -8,7 +8,6 @@ import {
 } from "./modules/styles.js?type=module,v=2025-03-31";
 import {
 	buildArchive,
-	allShowIDs,
 } from "./modules/archive.js?type=module,v=2025-03-31";
 import {
 	initialise as initialisePlayer,
