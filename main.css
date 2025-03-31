@@ -1482,6 +1482,9 @@ select {
 			"	seek-controls	seek-controls	"
 			"	show-controls	audio-controls	" / auto min-content;
 	}
+	#seek-controls {
+		padding-block-start: var(--control-depth);
+	}
 
 	/* NAV */
 	#main-nav {
