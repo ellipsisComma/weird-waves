@@ -17,10 +17,6 @@ import {
 import {
 	getSetting,
 } from "./settings.js?type=module,v=2025-03-31";
-import {
-	allShowIDs,
-	getShowInArchive,
-} from "./archive.js?type=module,v=2025-03-31";
 
 // mutation observer to store queue changes
 const queueObserver = new MutationObserver((mutations) => {
@@ -31,6 +27,10 @@ const queueObserver = new MutationObserver((mutations) => {
 	setValidImport();
 	getElement(`queueData`).value = getShowIDs(getElement(`queue`)).join(`\n`);
 });
+
+// set of all show IDs
+// ONLY use this for validating whether an ID is valid (as opposed to checking the archive's DOM)
+const allShowIDs = new Set();
 
 /* ------
 UTILITIES
@@ -49,6 +49,11 @@ function setTimestampFromSeconds(element, time) {
 	const minutes = Math.floor(time / 60).toString().padStart(2, `0`);
 	const seconds = Math.floor(time % 60).toString().padStart(2, `0`);
 	element.textContent = `${minutes}:${seconds}`;
+}
+
+// get show element in archive
+function getShowInArchive(ID) {
+	return getElement(`seriesList`).querySelector(`.show-list > [data-show-id="${ID}"]`);
 }
 
 // get show element if it's in the queue
@@ -419,6 +424,10 @@ function initialise() {
 
 	// start watching for queue changes
 	queueObserver.observe(getElement(`queue`), {"childList": true});
+
+	// build up all show IDs from archive
+	const allShowsInArchive = getElement(`seriesList`).querySelectorAll(`.show-list > [data-show-id]`);
+	for (const show of allShowsInArchive) allShowIDs.add(show.dataset.showId);
 
 	// load queue from storage
 	loadQueue();

@@ -3,9 +3,7 @@
 /*
 	archive module:
 		* builds archive
-		* builds list of all show IDs
 		* calculates archive stats
-		* includes getShowInArchive() (theoretically it could be used without the audio player)
 */
 
 import {
@@ -20,11 +18,6 @@ import {
 import {
 	archive
 } from "./archive-data.js?type=module,v=2025-03-31";
-
-// set of all show IDs
-// ONLY use this for validating whether an ID is valid (as opposed to checking the archive's DOM)
-const allShowIDs = new Set();
-for (const series of archive) for (const show of series.shows) allShowIDs.add(`${series.code}-${show.code}`);
 
 // build an archive nav-link
 function buildSeriesLink(series) {
@@ -96,13 +89,6 @@ function buildArchive() {
 	document.getElementById(`stats`).hidden = false;
 }
 
-// get show element in archive
-function getShowInArchive(ID) {
-	return getElement(`seriesList`).querySelector(`.show-list > [data-show-id="${ID}"]`);
-}
-
 export {
 	buildArchive,
-	getShowInArchive,
-	allShowIDs,
 };
