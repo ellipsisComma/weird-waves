@@ -46,7 +46,7 @@ async function loadSchedule() {
 		for (const ID of schedule.shows) addShow(ID);
 		getElement(`schedule`).remove();
 	});
-	getElement(`schedule`).hidden = false;
+	getElement(`schedule`)?.removeAttribute(`hidden`);
 }
 
 export {

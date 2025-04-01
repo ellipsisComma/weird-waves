@@ -2146,6 +2146,20 @@ const archive = [
 },
 ];
 
+// build series element ID for linking
+// build show ID for each show (helps during archive-building, because all relevant data is inside each show object instead of split between show object and series metadata)
+// add negatives for series.copyrightSafe, show.notes, and show.banger
+for (const series of archive) {
+	series.elementId = `archive-${series.code}`;
+	if (typeof series.copyrightSafe === `undefined`) series.copyrightSafe = false;
+
+	for (const show of series.shows) {
+		show.ID = `${series.code}-${show.code}`;
+		if (typeof show.notes === `undefined`) show.notes = ``;
+		if (typeof show.banger === `undefined`) show.banger = false;
+	}
+}
+
 export {
 	archive,
 };

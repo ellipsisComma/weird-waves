@@ -84,6 +84,18 @@ function isObject(variable) {
 	return variable instanceof Object && variable.constructor === Object;
 }
 
+// check whether an object has certain keys, and that the value of each key matches a given type
+// keysToTypes is an object in which each key is a key that should be in the target, and each value is the type of the target's value
+Object.prototype.validate = function (keysToTypes) {	
+	return Object.entries(keysToTypes).every(([key, type]) => {
+		return type === `array`
+			? Array.isArray(this[key])
+		: type === `object`
+			? isObject(this[key])
+			: this[key] !== `undefined` && typeof this[key] === type;
+	});
+};
+
 
 
 /* ============
@@ -175,9 +187,14 @@ Set.prototype.toggle = function (item) {
 	STORAGE
 ============ */
 
-// get something from localStorage or set a default value if no value stored
+// get something from localStorage or set a default value if no value stored (or if stored value is an empty string or otherwise erroneous for JSON.parse)
 function localStorageGet(key, defaultValue) {
-	return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
+	try {
+		return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
+	} catch {
+		console.error(`failed to retrieve stored value for key "${key}" correctly (either no value was stored, or the value was empty) so returned default value instead`);
+		return defaultValue;
+	}
 }
 
 // set something in localStorage

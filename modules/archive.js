@@ -21,8 +21,15 @@ import {
 
 // build an archive nav-link
 function buildSeriesLink(series) {
+	// return if series is improperly defined or hasn't been built onto page
+	if (!isObject(series) || !series.validate({
+		"heading": `string`,
+		"elementId": `string`,
+	}) || !document.getElementById(series.elementId)) return ``;
+
 	const newSeriesLinkItem = document.createElement(`li`);
 	const newSeriesLink = newSeriesLinkItem.appendChild(document.createElement(`a`));
+
 	newSeriesLink.href = `#${series.elementId}`;
 	newSeriesLink.setContent(series.heading);
 	return newSeriesLinkItem;
@@ -30,6 +37,15 @@ function buildSeriesLink(series) {
 
 // build HTML for archive show item
 function buildShow(show) {
+	// return if show is improperly defined
+	if (!isObject(show) || !show.validate({
+		"heading": `string`,
+		"ID": `string`,
+		"blurb": `string`,
+		"notes": `string`,
+		"banger": `boolean`,
+	})) return ``;
+
 	// add show details to series' show list
 	const templatedShow = cloneTemplate(`archiveShow`);
 	const newShow = templatedShow.querySelector(`li`);
@@ -43,7 +59,7 @@ function buildShow(show) {
 
 	// if show has content notes, add them to show-info, otherwise remove empty content notes element
 	const contentNotes = newShow.querySelector(`.content-notes`);
-	if (show.notes) contentNotes.querySelector(`div`).setContent(show.notes);
+	if (show.notes.length > 0) contentNotes.querySelector(`div`).setContent(show.notes);
 	else contentNotes.remove();
 
 	return templatedShow;
@@ -51,6 +67,16 @@ function buildShow(show) {
 
 // build HTML for archive series item and its list of shows
 function buildSeries(series) {
+	// return if series is improperly defined
+	if (!isObject(series) || !series.validate({
+		"elementId": `string`,
+		"heading": `string`,
+		"blurb": `string`,
+		"source": `string`,
+		"copyrightSafe": `boolean`,
+		"shows": `array`,
+	})) return ``;
+
 	const templatedSeries = cloneTemplate(`archiveSeries`);
 	const newSeries = templatedSeries.querySelector(`li`);
 
@@ -71,22 +97,16 @@ function buildSeries(series) {
 
 // build archive onto page and runtime
 function buildArchive() {
-	// build series element ID for linking; build show ID for each show (helps during archive-building, because all relevant data is inside each show object instead of split between show object and series metadata)
-	for (const series of archive) {
-		series.elementId = `archive-${series.code}`;
-	
-		for (const show of series.shows) {
-			show.ID = `${series.code}-${show.code}`;
-		}
-	}
+	// return if archive is improperly defined
+	if (!Array.isArray(archive)) return;
 
-	getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
 	getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
+	getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
 
 	// build out and reveal stats
-	document.getElementById(`stats-series`).textContent = archive.length;
-	document.getElementById(`stats-shows`).textContent = archive.reduce((a, series) => a + series.shows.length, 0);
-	document.getElementById(`stats`).hidden = false;
+	document.getElementById(`stats-series`)?.setContent(String(archive.length));
+	document.getElementById(`stats-shows`)?.setContent(String(archive.reduce((a, series) => a + series.shows.length, 0)));
+	document.getElementById(`stats`)?.removeAttribute(`hidden`);
 }
 
 export {

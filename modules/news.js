@@ -17,14 +17,14 @@ import {
 function buildNewsItem(item) {
 	const templatedNews = cloneTemplate(`newsItem`);
 
-	const newsID = item.querySelector(`link[rel="alternate"]`).getAttribute(`href`).split(`#`)[1];
+	const newsID = item.querySelector(`link[rel="alternate"]`)?.getAttribute(`href`).split(`#`)[1] ?? ``;
 
-	templatedNews.querySelector(`li`).id = newsID;
-	templatedNews.querySelector(`h3 > a`).setContent(item.querySelector(`title`).textContent);
-	templatedNews.querySelector(`h3 > a`).href = `#${newsID}`;
-	templatedNews.querySelector(`.news-item-published`).textContent = item.querySelector(`published`).textContent.split(`T`)[0];
-	templatedNews.querySelector(`.news-item-content`).setContent(item.querySelector(`content`).textContent);
-	templatedNews.querySelector(`.item-return-link`).href = `#${newsID}`;
+	templatedNews.querySelector(`li`)?.setAttribute(`id`, newsID);
+	templatedNews.querySelector(`h3 > a`)?.setContent(item.querySelector(`title`).textContent);
+	templatedNews.querySelector(`h3 > a`)?.setAttribute(`href`, `#${newsID}`);
+	templatedNews.querySelector(`.news-item-published`)?.setContent(item.querySelector(`published`).textContent.split(`T`)[0]);
+	templatedNews.querySelector(`.news-item-content`)?.setContent(item.querySelector(`content`).textContent);
+	templatedNews.querySelector(`.item-return-link`)?.setAttribute(`href`, `#${newsID}`);
 
 	return templatedNews;
 }

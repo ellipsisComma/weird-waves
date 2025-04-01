@@ -32,9 +32,10 @@ function initialise() {
 		const select = getElement(`${style}Select`);
 		if (!select) continue;
 
-		// initialise select input (if stored theme doesn't exist, switch to default theme)
+		// initialise select input (if stored theme doesn't exist, switch to default theme, and if no theme's set as default, switch to first theme)
+		const defaultOption = select.querySelector(`[selected]`) ?? select.querySelector(`option`);
 		if (select.querySelector(`[value="${local[style]}"]`)) select.value = local[style];
-		else setStyle(style, select.querySelector(`[selected]`).value);
+		else setStyle(style, defaultOption.value);
 // Note: If the stored theme is invalid, then the page will be painted in the initial
 // colour palette, *then* repainted in the default theme. This is unavoidable, since the
 // DOM has to load (and be painted) before we can check the theme's validity.

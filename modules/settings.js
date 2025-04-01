@@ -21,16 +21,17 @@ const local = localStorageGet(`settings`, {});
 function toggleSetting(setting) {
 	const toggle = document.getElementById(`${setting.camelToKebab()}-toggle`);
 	if (!toggle) return;
+
 	local[setting] = !local[setting];
 	toggle.ariaPressed = local[setting] ? `true` : `false`;
 	localStorageSet(`settings`, local);
 
 	switch (setting) {
 	case `flatPlayer`:
-		getElement(`loadedShow`).classList.toggle(`flat-player`, local.flatPlayer);
+		getElement(`loadedShow`)?.classList.toggle(`flat-player`, local.flatPlayer);
 		break;
 	case `notesOpen`:
-		for (const notes of document.querySelectorAll(`.content-notes`)) notes.open = getSetting(`notesOpen`);
+		for (const notes of document.querySelectorAll(`.content-notes`)) notes.toggleAttribute(`open`, getSetting(`notesOpen`));
 		break;
 	}
 }
@@ -47,7 +48,8 @@ function initialise() {
 	local.autoPlayNextShow ??= true; // if true, start playing next show when previous show runs to completion
 	local.notesOpen ??= false; // if true, open all content notes
 
-	getTemplate(`archiveShow`).querySelector(`.content-notes`).open = local.notesOpen;
+	// modify archive show template so notes are preemptively in the selected state
+	getTemplate(`archiveShow`)?.querySelector(`.content-notes`)?.toggleAttribute(`open`, local.notesOpen);
 
 	for (const setting of Object.keys(local)) {
 		const toggle = document.getElementById(`${setting.camelToKebab()}-toggle`);
@@ -57,7 +59,7 @@ function initialise() {
 		toggle.addEventListener(`click`, () => toggleSetting(setting));
 		toggle.closest(`.pre-initialised-control`).classList.remove(`pre-initialised-control`);
 	}
-	getElement(`loadedShow`).classList.toggle(`flat-player`, getSetting(`flatPlayer`));
+	getElement(`loadedShow`)?.classList.toggle(`flat-player`, getSetting(`flatPlayer`));
 }
 
 // update settings if settings change in another browsing context
