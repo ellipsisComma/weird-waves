@@ -1321,8 +1321,10 @@ select {
 	WELCOME
 ------------ */
 
-#schedule-container {
+#welcome {
 	text-align: center;
+}
+#schedule-container {
 	text-wrap-style: balance;
 }
 
