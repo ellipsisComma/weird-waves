@@ -126,7 +126,7 @@ Various properties in the archive array and in schedule files are written to the
 
 ## Removed/rejected features
 
-These are features I've considered and decided not to implement, or implemented and removed.
+These are significant features I've considered and decided not to implement, or implemented and removed.
 
 ### Download links
 
