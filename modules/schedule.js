@@ -29,16 +29,30 @@ function getWeekStartDate() {
 async function loadSchedule() {
 	if (!getElement(`schedule`)) return;
 
-	const weekStart = getWeekStartDate();
+	const path = schedulePath(getWeekStartDate());
 	const file = await fetch(
-		schedulePath(weekStart),
+		path,
 		{"cache": `no-cache`}
 	);
 	if (!file.ok) {
 		console.error(`failed to fetch schedule file: ${file.status}`);
 		return;
 	}
+
 	const schedule = await file.json();
+	if (!schedule.validate({
+		"title": [true, `string`],
+		"blurb": [true, `string`],
+		"shows": [true, `array`],
+	})) {
+		console.error(`schedule file with path "${path}" lacked required data`);
+		return;
+	}
+	schedule.shows = schedule.shows.filter(ID => {
+		const valid = typeof ID === `string`;
+		if (!valid) console.warn(`removed show ID "${ID}" from schedule: this ID is not string data`);
+		return valid;
+	});
 
 	document.getElementById(`schedule-title`)?.setContent(schedule.title);
 	document.getElementById(`schedule-blurb`)?.setContent(schedule.blurb);
