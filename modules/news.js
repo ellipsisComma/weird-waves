@@ -48,7 +48,7 @@ function buildNewsItem(item) {
 async function loadNews() {
 	const file = await fetch(
 		`./feed.xml`,
-		{"cache": `no-cache`}
+		{"cache": `no-cache`},
 	);
 	if (!file.ok) {
 		console.error(`failed to fetch news feed file`);
