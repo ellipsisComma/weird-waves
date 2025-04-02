@@ -15,16 +15,31 @@ import {
 
 // build HTML for news item
 function buildNewsItem(item) {
+	const newsItemProps = {
+		"ID": item.querySelector(`link[rel="alternate"]`)?.getAttribute(`href`)?.split(`#`)[1],
+		"title": item.querySelector(`title`)?.textContent,
+		"published": item.querySelector(`published`)?.textContent,
+		"content": item.querySelector(`content`)?.textContent,
+	};
+
+	if (!newsItemProps.validate({
+		"ID": [true, `string`],
+		"title": [true, `string`],
+		"published": [true, `string`],
+		"content": [true, `string`],
+	})) {
+		console.warn(`removed news entry "${newsItemProps.ID ?? newsItemProps.title ?? newsItemProps.published ?? `unknown`}" from feed: this news entry lacks required data (link, title, published-date, content)`);
+		return ``;
+	}
+
 	const templatedNews = cloneTemplate(`newsItem`);
 
-	const newsID = item.querySelector(`link[rel="alternate"]`)?.getAttribute(`href`).split(`#`)[1] ?? ``;
-
-	templatedNews.querySelector(`li`)?.setAttribute(`id`, newsID);
-	templatedNews.querySelector(`h3 > a`)?.setContent(item.querySelector(`title`).textContent);
-	templatedNews.querySelector(`h3 > a`)?.setAttribute(`href`, `#${newsID}`);
-	templatedNews.querySelector(`.news-item-published`)?.setContent(item.querySelector(`published`).textContent.split(`T`)[0]);
-	templatedNews.querySelector(`.news-item-content`)?.setContent(item.querySelector(`content`).textContent);
-	templatedNews.querySelector(`.item-return-link`)?.setAttribute(`href`, `#${newsID}`);
+	templatedNews.querySelector(`li`)?.setAttribute(`id`, newsItemProps.ID);
+	templatedNews.querySelector(`h3 > a`)?.setContent(newsItemProps.title);
+	templatedNews.querySelector(`h3 > a`)?.setAttribute(`href`, `#${newsItemProps.ID}`);
+	templatedNews.querySelector(`.news-item-published`)?.setContent(newsItemProps.published.split(`T`)[0]);
+	templatedNews.querySelector(`.news-item-content`)?.setContent(newsItemProps.content);
+	templatedNews.querySelector(`.item-return-link`)?.setAttribute(`href`, `#${newsItemProps.ID}`);
 
 	return templatedNews;
 }
