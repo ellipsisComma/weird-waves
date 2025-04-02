@@ -2144,7 +2144,39 @@ const archive = [
 	},
 ],
 },
-];
+]
+// remove invalid series data
+.filter(series => {
+	const valid = isObject(series) && series.validate({
+		"code": [true, `string`],
+		"heading": [true, `string`],
+		"blurb": [true, `string`],
+		"source": [true, `string`],
+		"banger": [false, `boolean`],
+		"shows": [true, `array`],
+	});
+
+	if (!valid) console.warn(`invalid series "${series.code ?? series.heading ?? series.source ?? series.blurb ?? `unknown`}" filtered out of archive`);
+
+	return valid;
+})
+// remove invalid show data
+.map(series => {
+	series.shows = series.shows.filter(show => {
+		const valid = isObject(show) && show.validate({
+			"code": [true, `string`],
+			"heading": [true, `string`],
+			"blurb": [true, `string`],
+			"notes": [false, `string`],
+			"banger": [false, `boolean`],
+		});
+
+		if (!valid) console.warn(`invalid show "${show.code ?? show.heading ?? show.blurb ?? `unknown`}" filtered out of archive series "${series.code}"`);
+
+		return valid;
+	});
+	return series;
+});
 
 // build series element ID for linking
 // build show ID for each show (helps during archive-building, because all relevant data is inside each show object instead of split between show object and series metadata)

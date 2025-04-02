@@ -85,14 +85,16 @@ function isObject(variable) {
 }
 
 // check whether an object has certain keys, and that the value of each key matches a given type
-// keysToTypes is an object in which each key is a key that should be in the target, and each value is the type of the target's value
-Object.prototype.validate = function (keysToTypes) {	
-	return Object.entries(keysToTypes).every(([key, type]) => {
-		return type === `array`
-			? Array.isArray(this[key])
+// keysToTypes is an object in which each key is a key that should be in the target, and each value is a boolean of whether the target is required and the type of the target's value
+Object.prototype.validate = function (keysToTypes) {
+	return Object.entries(keysToTypes).every(([key, [required, type]]) => {
+		return !required && this[key] === undefined
+			? true // if the target's not required and not present, return true
+		: type === `array`
+			? Array.isArray(this[key]) // if the target's a required array, return if it's an array
 		: type === `object`
-			? isObject(this[key])
-			: this[key] !== `undefined` && typeof this[key] === type;
+			? isObject(this[key]) // if the target's a required object, return if it's an object (not null, array, etc.)
+			: (this[key] !== undefined && typeof this[key] === type); // otherwise, if the target's required, return if it matches the specified type
 	});
 };
 

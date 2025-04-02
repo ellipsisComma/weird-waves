@@ -21,12 +21,6 @@ import {
 
 // build an archive nav-link
 function buildSeriesLink(series) {
-	// return if series is improperly defined or hasn't been built onto page
-	if (!isObject(series) || !series.validate({
-		"heading": `string`,
-		"elementId": `string`,
-	}) || !document.getElementById(series.elementId)) return ``;
-
 	const newSeriesLinkItem = document.createElement(`li`);
 	const newSeriesLink = newSeriesLinkItem.appendChild(document.createElement(`a`));
 
@@ -37,15 +31,6 @@ function buildSeriesLink(series) {
 
 // build HTML for archive show item
 function buildShow(show) {
-	// return if show is improperly defined
-	if (!isObject(show) || !show.validate({
-		"heading": `string`,
-		"ID": `string`,
-		"blurb": `string`,
-		"notes": `string`,
-		"banger": `boolean`,
-	})) return ``;
-
 	// add show details to series' show list
 	const templatedShow = cloneTemplate(`archiveShow`);
 	const newShow = templatedShow.querySelector(`li`);
@@ -67,16 +52,6 @@ function buildShow(show) {
 
 // build HTML for archive series item and its list of shows
 function buildSeries(series) {
-	// return if series is improperly defined
-	if (!isObject(series) || !series.validate({
-		"elementId": `string`,
-		"heading": `string`,
-		"blurb": `string`,
-		"source": `string`,
-		"copyrightSafe": `boolean`,
-		"shows": `array`,
-	})) return ``;
-
 	const templatedSeries = cloneTemplate(`archiveSeries`);
 	const newSeries = templatedSeries.querySelector(`li`);
 
