@@ -1300,21 +1300,34 @@ textarea {
 		}
 	}
 }
-select {
-	min-inline-size: 8em;
+.select-wrapper {
+	position: relative;
+	display: inline-block;
 	margin-inline-start: 1em;
-	padding-block-start: 0.5em;
-	padding-block-end: 0.25em;
-	padding-inline: 0.5em;
 	color: var(--control-default-colour);
 	border-width: var(--line-width);
 	border-style: solid;
 	border-color: var(--control-default-colour);
-	user-select: none;
-	&:is(:active, :open) {
+	&::after {
+		content: "\2195";
+		position: absolute;
+		inset-block-start: 0.3em;
+		inset-inline-end: 0.5em;
+		pointer-events: none;
+	}
+	&:active, &:has(:open) {
 		color: var(--control-interacted-colour);
 		border-color: var(--control-interacted-colour);
 	}
+}
+select {
+	appearance: none;
+	min-inline-size: 8em;
+	padding-block-start: 0.5em;
+	padding-block-end: 0.25em;
+	padding-inline: 0.5em;
+	border-radius: 0;
+	user-select: none;
 }
 
 /* ------------
