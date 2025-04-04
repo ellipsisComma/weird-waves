@@ -1301,6 +1301,7 @@ textarea {
 	}
 }
 .select-wrapper {
+	--padding-inline: 0.5em;
 	position: relative;
 	display: inline-block;
 	margin-inline-start: 1em;
@@ -1312,7 +1313,7 @@ textarea {
 		content: "\2195";
 		position: absolute;
 		inset-block-start: 0.3em;
-		inset-inline-end: 0.5em;
+		inset-inline-end: var(--padding-inline);
 		pointer-events: none;
 	}
 	&:active, &:has(:open) {
@@ -1325,7 +1326,7 @@ select {
 	min-inline-size: 8em;
 	padding-block-start: 0.5em;
 	padding-block-end: 0.25em;
-	padding-inline: 0.5em;
+	padding-inline: var(--padding-inline);
 	border-radius: 0;
 	user-select: none;
 }
