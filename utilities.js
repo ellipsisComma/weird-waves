@@ -85,18 +85,62 @@ function isObject(variable) {
 }
 
 // check whether an object has certain keys, and that the value of each key matches a given type
-// keysToTypes is an object in which each key is a key that should be in the target, and each value is a boolean of whether the target is required and the type of the target's value
+// keysToTypes is an object in which each key is a key that should be in the target
+// and each value is a boolean of whether the target is required and the target's valid type as a string
+// valid types:
+	// null, NaN, undefined,
+	// string, number, bigint, boolean, symbol,
+	// array, object, function, class, regex
 Object.prototype.validate = function (keysToTypes) {
-	return Object.entries(keysToTypes).every(([key, [required, type]]) => {
-		return !required && this[key] === undefined
-			? true // if the target's not required and not present, return true
-		: type === `array`
-			? Array.isArray(this[key]) // if the target's a required array, return if it's an array
-		: type === `object`
-			? isObject(this[key]) // if the target's a required object, return if it's an object (not null, array, etc.)
-			: (this[key] !== undefined && typeof this[key] === type); // otherwise, if the target's required, return if it matches the specified type
+	return Object.entries(keysToTypes).every(([key, [validType, required]]) => {
+		let valid = false;
+		if (!required && this[key] === undefined) return true;
+
+		switch (validType) {
+		case `null`:		valid = this[key] === null; break;
+		case `NaN`:			valid = isNaN(this[key]); break;
+		case `array`:		valid = Array.isArray(this[key]); break;
+		case `object`:		valid = isObject(this[key]); break;
+		case `function`:	valid = typeof this[key] === `function` && !String(this[key]).startsWith(`class`); break;
+		case `class`:		valid = typeof this[key] === `function` && String(this[key]).startsWith(`class`); break;
+		case `regex`:		valid = typeof this[key] === `object` && String(this[key]).startsWith(`/`); break;
+		default:			valid = typeof this[key] === validType;
+		}
+
+		return valid;
 	});
 };
+
+/*
+// test with this, adjusting the .validate() argument properties:
+x = {
+  "string": "abc",
+  "number": 123,
+  "bool": true,
+  "function": () => {},
+  "undefined": undefined,
+  "null": null,
+  "NaN": NaN,
+  "array": [],
+  "object": {},
+  "classy": class testClass {},
+  "regex": /regex/,
+};
+
+x.validate({
+  "string": [true, `string`],
+  "number": [true, `number`],
+  "bool": [true, `boolean`],
+  "function": [true, `function`],
+  "undefined": [true, `undefined`],
+  "null": [true, `null`],
+  "NaN": [true, `NaN`],
+  "array": [true, `array`],
+  "object": [true, `object`],
+  "classy": [true, `class`],
+  "regex": [true, `regex`],
+})
+*/
 
 
 

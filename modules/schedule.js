@@ -41,9 +41,9 @@ async function loadSchedule() {
 
 	const schedule = await file.json();
 	if (!schedule.validate({
-		"title": [true, `string`],
-		"blurb": [true, `string`],
-		"shows": [true, `array`],
+		"title": [`string`, true],
+		"blurb": [`string`, true],
+		"shows": [`array`, true],
 	})) {
 		console.error(`schedule file with path "${path}" lacked required data`);
 		return;

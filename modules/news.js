@@ -23,10 +23,10 @@ function buildNewsItem(item) {
 	};
 
 	if (!newsItemProps.validate({
-		"ID": [true, `string`],
-		"title": [true, `string`],
-		"published": [true, `string`],
-		"content": [true, `string`],
+		"ID": [`string`, true],
+		"title": [`string`, true],
+		"published": [`string`, true],
+		"content": [`string`, true],
 	})) {
 		console.warn(`removed news entry "${newsItemProps.ID ?? newsItemProps.title ?? newsItemProps.published ?? `unknown`}" from feed: this news entry lacks required data (link, title, published-date, content)`);
 		return ``;

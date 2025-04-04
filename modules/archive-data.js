@@ -2148,12 +2148,12 @@ const archive = [
 // remove invalid series data
 .filter(series => {
 	const valid = isObject(series) && series.validate({
-		"code": [true, `string`],
-		"heading": [true, `string`],
-		"blurb": [true, `string`],
-		"source": [true, `string`],
-		"banger": [false, `boolean`],
-		"shows": [true, `array`],
+		"code": [`string`, true],
+		"heading": [`string`, true],
+		"blurb": [`string`, true],
+		"source": [`string`, true],
+		"banger": [`boolean`, false],
+		"shows": [`array`, true],
 	});
 
 	if (!valid) console.warn(`invalid series "${series.code ?? series.heading ?? series.source ?? series.blurb ?? `unknown`}" filtered out of archive`);
@@ -2164,11 +2164,11 @@ const archive = [
 .map(series => {
 	series.shows = series.shows.filter(show => {
 		const valid = isObject(show) && show.validate({
-			"code": [true, `string`],
-			"heading": [true, `string`],
-			"blurb": [true, `string`],
-			"notes": [false, `string`],
-			"banger": [false, `boolean`],
+			"code": [`string`, true],
+			"heading": [`string`, true],
+			"blurb": [`string`, true],
+			"notes": [`string`, false],
+			"banger": [`boolean`, false],
 		});
 
 		if (!valid) console.warn(`invalid show "${show.code ?? show.heading ?? show.blurb ?? `unknown`}" filtered out of archive series "${series.code}"`);
