@@ -51,9 +51,8 @@ async function loadNews() {
 		{"cache": `no-cache`},
 	);
 	if (!file.ok) {
-		console.error(`failed to fetch news feed file`);
 		getElement(`newsList`).dataset.empty = `Error: Couldn't load news feed.`;
-		return;
+		throw `Failed to fetch news feed file. Status: ${file.status}.`;
 	}
 	const XML = await file.text();
 	const news = new DOMParser().parseFromString(XML, `text/xml`);

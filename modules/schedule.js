@@ -34,20 +34,15 @@ async function loadSchedule() {
 		path,
 		{"cache": `no-cache`}
 	);
-	if (!file.ok) {
-		console.error(`failed to fetch schedule file: ${file.status}`);
-		return;
-	}
+	if (!file.ok) throw `Failed to fetch schedule file at "${path}". Status: ${file.status}.`;
 
 	const schedule = await file.json();
 	if (!schedule.validate({
 		"title": [`string`, true],
 		"blurb": [`string`, true],
 		"shows": [`array`, true],
-	})) {
-		console.error(`schedule file with path "${path}" lacked required data`);
-		return;
-	}
+	})) throw `Schedule file at "${path}" is invalid (requires title (string), blurb (string), and shows (array)).`;
+
 	schedule.shows = schedule.shows.filter(ID => {
 		const valid = typeof ID === `string`;
 		if (!valid) console.warn(`removed show ID "${ID}" from schedule: this ID is not string data`);

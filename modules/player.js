@@ -196,10 +196,7 @@ function addShow(ID) {
 
 	// error out if show not in Archive
 	const showInArchive = getShowInArchive(ID);
-	if (!showInArchive) {
-		console.error(`show ID does not exist in Archive: ${ID}`);
-		return;
-	}
+	if (!showInArchive) throw `Show ID does not exist in Archive: ${ID}.`;
 
 	// build new queue item
 	const seriesInArchive = showInArchive.closest(`#series-list > li`);
