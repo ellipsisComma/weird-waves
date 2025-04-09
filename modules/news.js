@@ -28,7 +28,13 @@ function buildNewsItem(item) {
 		"published": [`string`, true],
 		"content": [`string`, true],
 	})) {
-		console.warn(`Removed invalid news entry from feed (required props: ID (string, from link[rel="alternate"].href), title (string), published date (string), content (string)):`, item);
+		console.warn(`Removed invalid news entry from feed.
+Required props:
+	ID (string, from link[rel="alternate"].href)
+	title (string)
+	published date (string)
+	content (string)
+`, newsItemProps);
 		return ``;
 	}
 
@@ -44,6 +50,20 @@ function buildNewsItem(item) {
 	return templatedNews;
 }
 
+// build news feed onto page
+function buildNewsFeed(news) {
+	getElement(`newsList`).replaceChildren(...[...news.querySelectorAll(`entry`)].map(buildNewsItem));
+	getElement(`newsList`).dataset.empty = `News feed is empty.`;
+
+	// must reset hash so navigateToSection() will apply if the hash is for a news item
+	// (as news items are loaded onto page asynchronously, the browser won't recognise that they exist when navigateToSection() is called on DOMContentLoaded)
+	if (location.hash) {
+		const storedHash = location.hash;
+		location.hash = ``;
+		location.hash = storedHash;
+	}
+}
+
 // fetch news feed file and, if available and valid, build news list onto page
 async function loadNews() {
 	const file = await fetch(
@@ -55,17 +75,13 @@ async function loadNews() {
 		console.error(`Failed to fetch news feed file. Status: ${file.status}.`);
 		return;
 	}
-	const XML = await file.text();
-	const news = new DOMParser().parseFromString(XML, `text/xml`);
 
-	getElement(`newsList`).replaceChildren(...[...news.querySelectorAll(`entry`)].map(buildNewsItem));
-
-	// must reset hash so navigateToSection() will apply if the hash is for a news item
-	// (as news items are loaded onto page asynchronously, the browser won't recognise that they exist when navigateToSection() is called on DOMContentLoaded)
-	if (location.hash) {
-		const storedHash = location.hash;
-		location.hash = ``;
-		location.hash = storedHash;
+	try {
+		const XML = await file.text();
+		const news = new DOMParser().parseFromString(XML, `text/xml`);
+		buildNewsFeed(news);
+	} catch {
+		console.error(`News feed is not a text file.`);
 	}
 }
 

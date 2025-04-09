@@ -2156,7 +2156,16 @@ const archive = [
 		"shows": [`array`, true],
 	});
 
-	if (!valid) console.warn(`Invalid series filtered out of archive (required props: code (string), heading (string), blurb (string), source (string), shows (array); optional props: banger (boolean)):`, series);
+	if (!valid) console.warn(`Invalid series filtered out of archive.
+Required props:
+	code (string)
+	heading (string)
+	blurb (string)
+	source (string)
+	shows (array)
+Optional props:
+	banger (boolean)
+`, series);
 
 	return valid;
 })
@@ -2171,7 +2180,15 @@ const archive = [
 			"banger": [`boolean`, false],
 		});
 
-		if (!valid) console.warn(`Invalid show filtered out of archive series "${series.code}" (required props: code (string), heading (string), blurb (string); optional props: notes (string), banger (boolean)):`, show);
+		if (!valid) console.warn(`Invalid show filtered out of archive series "${series.code}".
+Required props:
+	code (string)
+	heading (string)
+	blurb (string)
+Optional props:
+	notes (string)
+	banger (boolean)
+`, show);
 
 		return valid;
 	});

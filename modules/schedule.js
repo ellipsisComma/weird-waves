@@ -25,27 +25,19 @@ function getWeekStartDate() {
 	return date;
 }
 
-// fetch weekly schedule and, if available and valid, load schedule onto page
-async function loadSchedule() {
-	if (!getElement(`schedule`)) return;
-
-	const path = schedulePath(getWeekStartDate());
-	const file = await fetch(
-		path,
-		{"cache": `no-cache`}
-	);
-	if (!file.ok) {
-		console.error(`Failed to fetch schedule file at "${path}". Status: ${file.status}.`);
-		return;
-	}
-
-	const schedule = await file.json();
-	if (!schedule.validate({
+// build schedule onto page
+function buildSchedule(schedule) {
+	if (!isObject(schedule) || !schedule.validate({
 		"title": [`string`, true],
 		"blurb": [`string`, true],
 		"shows": [`array`, true],
 	})) {
-		console.error(`Schedule file at "${path}" is invalid (required props: title (string), blurb (string), shows (array)).`);
+		console.error(`Schedule file at "${path}" is invalid.
+Required props:
+	title (string)
+	blurb (string)
+	shows (array)
+`, schedule);
 		return;
 	}
 
@@ -62,6 +54,27 @@ async function loadSchedule() {
 		getElement(`schedule`).remove();
 	});
 	getElement(`schedule`)?.removeAttribute(`hidden`);
+}
+
+// fetch and parse weekly schedule
+async function loadSchedule() {
+	if (!getElement(`schedule`)) return;
+
+	const path = schedulePath(getWeekStartDate());
+	const file = await fetch(
+		path,
+		{"cache": `no-cache`}
+	);
+	if (!file.ok) {
+		console.error(`Failed to fetch schedule file at path "${path}". Status: ${file.status}.`);
+		return;
+	}
+
+	try {
+		buildSchedule(await file.json());
+	} catch {
+		console.error(`Schedule file at path "${path}" is not valid JSON.`);
+	}
 }
 
 export {
