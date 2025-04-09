@@ -190,13 +190,16 @@ function addShow(ID) {
 	const showInQueue = getShowInQueue(ID);
 	if (showInQueue) {
 		getElement(`queue`).append(showInQueue);
-		console.info(`re-added show: ${ID}`);
+		console.info(`re-added show:`, ID);
 		return;
 	}
 
 	// error out if show not in Archive
 	const showInArchive = getShowInArchive(ID);
-	if (!showInArchive) throw `Show ID does not exist in Archive: ${ID}.`;
+	if (!showInArchive) {
+		console.error(`Show does not exist in Archive:`, ID);
+		return;
+	}
 
 	// build new queue item
 	const seriesInArchive = showInArchive.closest(`#series-list > li`);
@@ -229,7 +232,7 @@ function addRandomShow(showType) {
 	if (ID !== ``) {
 		addShow(ID);
 		window.scrollTo(0, getElement(`queue`).lastElementChild.offsetTop - getElement(`queueControls`).clientHeight);
-	} else console.warn(`can't add new show of type "${showType}": all shows of that type already in queue`);
+	} else console.warn(`Can't add new show of type "${showType}": all shows of that type already in queue.`);
 }
 
 /* MANIPULATING */

@@ -28,7 +28,7 @@ function buildNewsItem(item) {
 		"published": [`string`, true],
 		"content": [`string`, true],
 	})) {
-		console.warn(`removed news entry "${newsItemProps.ID ?? newsItemProps.title ?? newsItemProps.published ?? `unknown`}" from feed: this news entry lacks required data (link, title, published-date, content)`);
+		console.warn(`Removed invalid news entry from feed (required props: ID (string, from link[rel="alternate"].href), title (string), published date (string), content (string)):`, item);
 		return ``;
 	}
 
@@ -52,7 +52,8 @@ async function loadNews() {
 	);
 	if (!file.ok) {
 		getElement(`newsList`).dataset.empty = `Error: Couldn't load news feed.`;
-		throw `Failed to fetch news feed file. Status: ${file.status}.`;
+		console.error(`Failed to fetch news feed file. Status: ${file.status}.`);
+		return;
 	}
 	const XML = await file.text();
 	const news = new DOMParser().parseFromString(XML, `text/xml`);

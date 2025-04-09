@@ -34,18 +34,24 @@ async function loadSchedule() {
 		path,
 		{"cache": `no-cache`}
 	);
-	if (!file.ok) throw `Failed to fetch schedule file at "${path}". Status: ${file.status}.`;
+	if (!file.ok) {
+		console.error(`Failed to fetch schedule file at "${path}". Status: ${file.status}.`);
+		return;
+	}
 
 	const schedule = await file.json();
 	if (!schedule.validate({
 		"title": [`string`, true],
 		"blurb": [`string`, true],
 		"shows": [`array`, true],
-	})) throw `Schedule file at "${path}" is invalid (requires title (string), blurb (string), and shows (array)).`;
+	})) {
+		console.error(`Schedule file at "${path}" is invalid (required props: title (string), blurb (string), shows (array)).`);
+		return;
+	}
 
 	schedule.shows = schedule.shows.filter(ID => {
 		const valid = typeof ID === `string`;
-		if (!valid) console.warn(`removed show ID "${ID}" from schedule: this ID is not string data`);
+		if (!valid) console.warn(`Removed show ID "${ID}" from schedule: this ID is not string data.`);
 		return valid;
 	});
 

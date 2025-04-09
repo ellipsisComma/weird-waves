@@ -238,7 +238,7 @@ function localStorageGet(key, defaultValue) {
 	try {
 		return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
 	} catch {
-		console.error(`Failed to retrieve stored value for key "${key}" correctly (either no value was stored, or the value was empty) so returned default value instead.`);
+		console.log(`Failed to retrieve locally-stored value for key "${key}" (stored value was empty or nothing was stored) so used default value "${defaultValue}" instead.`);
 		return defaultValue;
 	}
 }
