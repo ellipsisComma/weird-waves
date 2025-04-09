@@ -233,13 +233,16 @@ Set.prototype.toggle = function (item) {
 	STORAGE
 ============ */
 
-// get something from localStorage or set a default value if no value stored (or if stored value is an empty string or otherwise erroneous for JSON.parse)
+// get something from localStorage
+// use default value if: stored value doesn't exist, stored value is invalid JSON, or stored value is valid JSON null or undefined
 function localStorageGet(key, defaultValue) {
+	let value;
 	try {
-		return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
+		value = JSON.parse(localStorage.getItem(key));
 	} catch {
-		console.log(`Failed to retrieve locally-stored value for key "${key}" (stored value was empty or nothing was stored) so used default value "${defaultValue}" instead.`);
-		return defaultValue;
+		console.warn(`Failed to retrieve locally-stored value for key "${key}" (either nothing was stored for that key or stored value was invalid JSON), so returned default value "${defaultValue}" instead.`);
+	} finally {
+		return value ?? defaultValue;
 	}
 }
 
