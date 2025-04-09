@@ -8,16 +8,16 @@
 
 import {
 	getElement,
-} from "./page.js?type=module,v=2025-04-08";
+} from "./page.js?type=module,v=2025-04-09";
 import {
 	cloneTemplate,
-} from "./templates.js?type=module,v=2025-04-08";
+} from "./templates.js?type=module,v=2025-04-09";
 import {
 	getSetting,
-} from "./settings.js?type=module,v=2025-04-08";
+} from "./settings.js?type=module,v=2025-04-09";
 import {
 	archive
-} from "./archive-data.js?type=module,v=2025-04-08";
+} from "./archive-data.js?type=module,v=2025-04-09";
 
 // build an archive nav-link
 function buildSeriesLink(series) {

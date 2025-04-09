@@ -7,7 +7,7 @@
 
 import {
 	getElement,
-} from "./page.js?type=module,v=2025-04-08";
+} from "./page.js?type=module,v=2025-04-09";
 
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
