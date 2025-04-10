@@ -861,13 +861,6 @@ code {
 }
 code var {
 	font-style: normal;
-	white-space: nowrap;
-}
-code var::before {
-	content: "[[\a0 ";
-}
-code var::after {
-	content: "\a0 ]]";
 }
 
 /* CODE-BLOCK SCROLL SHADOW */
