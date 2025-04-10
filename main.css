@@ -502,9 +502,9 @@ textarea {
 @media (forced-colors: active) or (prefers-contrast: more) {
 	/*
 	In Firefox, the colour patch can be as follows
-	because the browser automatically applies forced-colours in forced-colours mode,
+	because the browser automatically applies forced colours in forced-colors mode,
 	but Safari and Chrome don't change anything automatically,
-	so all forced-colors changed need to be explicit here.
+	so all forced-colors changes need to be explicit here.
 		--control-default-colour: CanvasText;
 		--control-interacted-colour: VisitedText;
 		--nav-link-default-colour: CanvasText;
@@ -544,14 +544,13 @@ textarea {
 		--icon-accent-colour: CanvasText;
 
 		--line-width: 2px;
-		--control-depth: 0;
+		--control-depth: 0px;
 	}
 	:focus-visible {
 		outline: revert;
 	}
-	.setting-toggle::before {
-		border-color: Canvas;
-		outline-color: CanvasText;
+	#volume-control::-webkit-slider-thumb {
+		transform: translateY(calc(-1.5 * var(--gap-size)));
 	}
 	/* at :root font-size 100%, 43.75rem = 700px */
 	@media (min-width: 43.75rem) {
@@ -1008,7 +1007,6 @@ input[type="range"] {
 		block-size: var(--line-width);
 	}
 	&::-webkit-slider-thumb {
-		-webkit-appearance: none;
 		appearance: none;
 		background-color: var(--background-colour);
 		border-width: var(--line-width);
