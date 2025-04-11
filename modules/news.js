@@ -40,12 +40,9 @@ Required props:
 
 	const templatedNews = cloneTemplate(`newsItem`);
 
-	templatedNews.querySelector(`li`)?.setAttribute(`id`, newsItemProps.ID);
-	templatedNews.querySelector(`h3 > a`)?.setContent(newsItemProps.title);
-	templatedNews.querySelector(`h3 > a`)?.setAttribute(`href`, `#${newsItemProps.ID}`);
+	templatedNews.querySelector(`h3`)?.setContent(newsItemProps.title);
 	templatedNews.querySelector(`.news-item-published`)?.setContent(newsItemProps.published.split(`T`)[0]);
 	templatedNews.querySelector(`.news-item-content`)?.setContent(newsItemProps.content);
-	templatedNews.querySelector(`.item-return-link`)?.setAttribute(`href`, `#${newsItemProps.ID}`);
 
 	return templatedNews;
 }

@@ -16,76 +16,43 @@
 
 
 	<entry>
+		<id>https://weirdwaves.net/?59</id>
+		<link rel="alternate" href="https://weirdwaves.net/#news" />
+		<title type="html"><![CDATA[Many little fixes, plus a much shorter feed]]></title>
+		<published>2025-04-11T00:00:00+01:00</published>
+		<updated>2025-04-11T00:00:00+01:00</updated>
+		<content type="html"><![CDATA[The Contact and Credits sections are gone (I moved the info elsewhere) and the news feed preview's much shorter! Later, I'll write some kinda &ldquo;Weird Waves history&rdquo;; for now, I just wanted it to be more readable in feed readers.]]></content>
+	</entry>
+	<entry>
 		<id>https://weirdwaves.net/?58</id>
-		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-30-lots-of-little-layout-changes" />
+		<link rel="alternate" href="https://weirdwaves.net/#news" />
 		<title type="html"><![CDATA[Lots of little layout changes]]></title>
 		<published>2025-03-30T00:00:00Z</published>
 		<updated>2025-03-30T00:00:00Z</updated>
-		<content type="html"><![CDATA[
-			<p>I've made a lot of small, and a few not-so-small, adjustments to the site's layout and design. Here are the bigger ones:</p>
-			<ul>
-				<li>
-					<p>I've replaced the theme- and font-picker buttons with selection menus (they're simpler to implement and have accessibility baked in).</p>
-				</li>
-				<li>
-					<p>Some things that used to be aligned or justified to the centre are now aligned or justified to the start of lines of text. This affects all text in the Contact, <a href="#links">Links</a>, and Credits sections aside from link clouds, the introduction in the <a href="#welcome">Welcome</a> section, and the queue and import controls and empty-queue message in the <a href="#booth">Booth</a>.</p>
-				</li>
-				<li>
-					<p>The &ldquo;+ Show&rdquo; buttons in the <a href="#archive">Archive</a> no longer stay pushed-in/disabled/deactivated when the matching show's in the queue.</p>
-				</li>
-				<li>
-					<p>The &ldquo;+ Show&rdquo; and &ldquo;+ Series&rdquo; buttons in the Archive and &ldquo;Copy&rdquo; button in the Booth now temporarily change text to let you know the action succeeded when you push them.</p>
-				</li>
-			</ul>
-			<p>There's a few more minor changes coming, and one or two bigger ones, when I have the time to work on them.</p>
-		]]></content>
+		<content type="html"><![CDATA[I've tweaked the site's design: the theme- and font-pickers are now more-accessible select menus; various things are now left-aligned instead of centred; and the &ldquo;+ Show&rdquo; buttons in the archive no longer stay pushed in.]]></content>
 	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?57</id>
-		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-06-import-export-updates" />
+		<link rel="alternate" href="https://weirdwaves.net/#news" />
 		<title type="html"><![CDATA[Import/export updates]]></title>
 		<published>2025-03-06T00:00:00Z</published>
 		<updated>2025-03-06T00:00:00Z</updated>
-		<content type="html"><![CDATA[
-			<p>Queue data now updates automatically whenever the queue changes (when shows are added, moved, or removed; when the queue is shuffled or cleared). The &ldquo;Export&rdquo; button has been replaced with a &ldquo;Copy&rdquo; button that copies the data to your clipboard. Finally, the explanations around the data (and in the error message for import errors) have been updated to be a little clearer.</p>
-		]]></content>
+		<content type="html"><![CDATA[Queue data now updates automatically whenever the queue changes, and the &ldquo;Export&rdquo; button that originally got you that data manually has been replaced with a &ldquo;Copy&rdquo; button to copy the data to your clipboard.]]></content>
 	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?56</id>
-		<link rel="alternate" href="https://weirdwaves.net/#news-2025-03-05-simplifying-controls" />
+		<link rel="alternate" href="https://weirdwaves.net/#news" />
 		<title type="html"><![CDATA[Simplifying controls]]></title>
 		<published>2025-03-05T00:00:00Z</published>
 		<updated>2025-03-05T00:00:00Z</updated>
-		<content type="html"><![CDATA[
-			<p>I've simplified the queue controls in a few ways.</p>
-			<p><strong>First, there's no more &ldquo;add archive&rdquo; button.</strong> This has felt out-of-place for a long time&mdash;the archive isn't perfectly serial, it's a mix of stand-alone shows and small series. There's no reason to include an option to add all shows to the queue, in order, beyond letting indecisive people avoid having to find things that interest them in the <a href="#archive">Archive</a>. You can't add the archive and then shuffle it to get a fully-randomised playlist in the queue, because that splits up the small series that need to be together and in the right order.</p>
-			<p>Any purpose the button might have is already provided in the two random-show buttons, which can cut through choice paralysis, and the schedule, which points people toward a set of shows to listen to right away.</p>
-			<p><strong>Second, there's no more &ldquo;confirm clear&rdquo; dialog in the queue.</strong> Now that it's not so easy to add hundreds of shows to the queue, there's less need to worry about the consequences of someone accidentally clearing it.</p>
-			<p>Weird Waves isn't the best tool for building a large, stable playlist of audio. Everything happens in your browser; there's no user accounts, no complex backend, and a computer crash might wipe the data for the site. That's why I added the import-export controls; if you really want to keep your queue safe, you can save your data, then load it back in later or elsewhere. Using browser storage for this is really a safety net in case of an accidental click or refresh or crash, and shouldn't be treated as a safe, long-term storage (that's more of a message for me going forward).</p>
-			<p><strong>Third, it's possible to empty your queue by importing an empty box.</strong> This follows on from the second change.</p>
-			<p><strong>Overall</strong>, these changes are pretty small, and just reflect a shift in how I'm framing the site and working on its code.</p>
-		]]></content>
+		<content type="html"><![CDATA[First, I got rid of the &ldquo;+ Archive&rdquo; button. Second, there's no more confirmation step when you clear the queue. Finally, you can now clear your queue by importing a blank box.]]></content>
 	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?55</id>
-		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-26-behind-the-scenes-changes-that-might-cause-bugs" />
+		<link rel="alternate" href="https://weirdwaves.net/#news" />
 		<title type="html"><![CDATA[Behind-the-scenes changes that might cause bugs]]></title>
 		<published>2025-02-26T00:00:00Z</published>
 		<updated>2025-02-26T00:00:00Z</updated>
-		<content type="html"><![CDATA[
-			<p>There's been a major behind-the-scenes change to how the various parts of the player and other more-dynamic site sections work. It shouldn't affect how the site works, just make it easier for me to maintain. However, if you notice anything unusual, send me a message.</p>
-		]]></content>
-	</entry>
-	<entry>
-		<id>https://weirdwaves.net/?54</id>
-		<link rel="alternate" href="https://weirdwaves.net/#news-2025-02-11-folded-stream-widget-into-site" />
-		<title type="html"><![CDATA[Folded the stream widget into the main site]]></title>
-		<published>2025-02-11T00:00:00Z</published>
-		<updated>2025-02-11T00:00:00Z</updated>
-		<content type="html"><![CDATA[
-			<p>I've removed the stream widget previously available at <code>https://weirdwaves.net/stream/widget.html</code>; anyone using it in livestreams should check the new advice in the <a href="#streaming">Streaming</a> section to update how they set up their browser source.</p>
-			<p>It had a good run, but the main reason I added it was because the popular livestream software <abbr>OBS</abbr> had some problems with the way it treated media files (audio and video). These problems were unusual, and irrelevant to how most people use the software, but prevented Weird Waves from running properly.</p>
-			<p>These problems now seem to have been fixed, and keeping the widget around added some extra overhead (a few extra files, extra audio metadata, and two versions of the site's stylesheet), so it made more sense ot get rid of it.</p>
-		]]></content>
+		<content type="html"><![CDATA[There's been a major behind-the-scenes change to how the site works. It shouldn't affect the experience from the front, just make it easier for me to maintain. If you notice anything unusual, send me a message.]]></content>
 	</entry>
 </feed>
