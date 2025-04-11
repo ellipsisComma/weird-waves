@@ -4,7 +4,7 @@ Audio horror broadcasting online!
 
 Weird Waves is a client-side playlist-maker and audio player for a curated collection of horror, weird fiction, and SFF audiobooks and radio plays. It has no dependencies/is built on the web platform.
 
-It's also a sort of baseline web dev whetstone for me.
+It's also a sort of web platform whetstone for me.
 
 **Note:** This repository doesn't contain the full audio library used on [Weird Waves](https://weirdwaves.net).
 
@@ -120,7 +120,7 @@ Various properties in the archive array and in schedule files are written to the
 |show content notes|`<span>`|
 |schedule title|`<h3>`|
 |schedule blurb|`<p>`|
-|news title|`<h3><a>`|
+|news title|`<h3>`|
 |news timestamp|`<time>`|
 |news content|`<div>`|
 
