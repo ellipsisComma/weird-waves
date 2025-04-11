@@ -110,6 +110,7 @@ function copyQueue() {
 
 // reset import validity invalidity
 function setValidImport() {
+	getElement(`importErrorList`).replaceChildren();
 	getElement(`importErrorMessage`).hidden = true;
 	getElement(`queueData`).ariaInvalid = false;
 }
@@ -138,8 +139,8 @@ function matchInvalidShowID(invalidID) {
 function importQueue() {
 	const importList = getElement(`queueData`).value.trim();
 
-	// hide error message (done before guard, so error message disappears on import attempt even if textbox is empty)
-	getElement(`importErrorMessage`).hidden = true;
+	// reset import 
+	setValidImport();
 
 	// if import is empty, just clear queue instead
 	if (importList.length === 0) {
@@ -156,7 +157,6 @@ function importQueue() {
 	});
 
 	if (invalidIDs.length === 0) {
-		setValidImport();
 		clearQueue();
 		for (const ID of importIDs) addShow(ID);
 	} else {
