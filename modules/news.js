@@ -49,9 +49,7 @@ Required props:
 
 // build news feed onto page
 function buildNewsFeed(news) {
-	const newsCount = 5;
-
-	getElement(`newsList`).replaceChildren(...[...news.querySelectorAll(`entry:nth-of-type(-n + ${newsCount})`)].map(buildNewsItem));
+	getElement(`newsList`).replaceChildren(...[...news.querySelectorAll(`entry`)].map(buildNewsItem));
 	getElement(`newsList`).dataset.empty = `News feed is empty.`;
 
 	// must reset hash so navigateToSection() will apply if the hash is for a news item
