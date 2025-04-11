@@ -1081,6 +1081,9 @@ main {
 		display: block;
 	}
 }
+main > * > :last-child {
+	margin-block-end: 0;
+}
 
 /* ----------
 	BOOTH
@@ -1245,6 +1248,7 @@ textarea {
 	margin-block-end: 0.5em;
 }
 .news-item-content {
+	margin-block-end: 0;
 	margin-inline-start: var(--text-indent);
 }
 
@@ -1343,7 +1347,7 @@ select {
 ----------- */
 
 #page-footer {
-	margin-block-start: 3lh;
+	margin-block-start: 1lh;
 	padding-block-start: 1lh;
 	text-align: center;
 	font-size: var(--meta-font-size);
