@@ -1333,6 +1333,23 @@ select {
 	text-wrap-style: balance;
 }
 
+/* -----------
+	FOOTER
+----------- */
+
+#page-footer {
+	margin-block-start: 3lh;
+	padding-block-start: 1lh;
+	text-align: center;
+	font-size: var(--meta-font-size);
+	border-block-start-width: var(--line-width);
+	border-block-start-style: solid;
+	border-block-start-color: var(--box-border-colour);
+	& > :first-child {
+		margin-block-start: 0;
+	}
+}
+
 /* -----------------
 	RESPONSIVITY
 ----------------- */
@@ -1458,11 +1475,15 @@ select {
 		grid-template:
 			"	player	heading		"
 			"	player	nav			"
-			"	player	sections	";
+			"	player	sections	"
+			"	player	footer		";
 		column-gap: var(--gap-size);
 	}
-	#container > header {
+	#page-header {
 		grid-area: heading;
+	}
+	#page-footer {
+		grid-area: footer;
 	}
 
 	/* PLAYER */
