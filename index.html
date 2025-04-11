@@ -98,17 +98,9 @@
 		<rect x="13" y="7" width="8" height="4" />
 		<path class="svg-accent-stroke" d="M6 6l-5-1m5 13l-1 5" />
 	</symbol>
-	<symbol id="svg-contact">
-		<path class="svg-accent-stroke" d="M7 1l-3 10m4 0l3-10m1 3h-8m-1 4h8" />
-		<path d="M23 6a20 20 0 0 1-17 17a7 7 0 0 1-5-4a7 7 0 0 1 5-4l4 3a14 14 0 0 0 8-8l-3-4a7 7 0 0 1 4-5a7 7 0 0 1 4 5" />
-	</symbol>
 	<symbol id="svg-links">
 		<path d="M12 2a10 10 0 0 0 0 20v-20a5 10 0 0 0 0 20m-10-10h15" />
 		<path class="svg-accent-stroke" d="M12 2a10 10 0 0 1 0 20a5 10 0 0 0 0-20" />
-	</symbol>
-	<symbol id="svg-credits">
-		<path d="M12 4c-2-4 -11,-4 -11,4a11 11 0 0 0 7 10m4-14c2-4 11,-4 11,4a11 11 0 0 1-7 10" />
-		<path class="svg-accent-stroke" d="M12 11c0 4-4 4-4 8a4 4 0 0 0 8 0c0-4-4-4-4-8" />
 	</symbol>
 
 <!--player button icons-->
@@ -252,7 +244,7 @@
 
 
 <div id="container">
-<header>
+<header id="page-header">
 	<h1>Weird Waves</h1>
 	<noscript>
 		<p>Sorry, this site requires JavaScript! Some content will be hidden, and the audio app won't work.</p>
@@ -370,21 +362,9 @@
 
 	<ul>
 		<li>
-			<a href="#contact">
-				<svg class="icon" viewBox="0 0 24 24"><use href="#svg-contact" /></svg>
-				<span>Contact</span>
-			</a>
-		</li>
-		<li>
 			<a href="#links">
 				<svg class="icon" viewBox="0 0 24 24"><use href="#svg-links" /></svg>
 				<span>Links</span>
-			</a>
-		</li>
-		<li>
-			<a href="#credits">
-				<svg class="icon" viewBox="0 0 24 24"><use href="#svg-credits" /></svg>
-				<span>Credits</span>
 			</a>
 		</li>
 	</ul>
@@ -395,8 +375,6 @@
 <main>
 <section id="booth">
 	<h2>Booth</h2>
-	<p>Control your queue here&mdash;you can also add shows or series from the <a href="#archive">Archive</a>.</p>
-
 	<h3>Queue</h3>
 	<div id="queue-and-controls">
 		<ul id="queue-controls" class="flex-list control-list">
@@ -409,14 +387,14 @@
 	</div><!--#queue-and-controls end-->
 
 	<h3>Data</h3>
-	<p>The data below updates automatically every time the playlist changes.</p>
-	<p>To save your data, copy the text (you can also click the &ldquo;Copy&rdquo; button to copy it to clipboard) and paste it somewhere safe.</p>
-	<p>To import your data, paste the data into the box, then click the &ldquo;Import&rdquo; button.</p>
+	<p>This updates automatically every time the queue changes.</p>
+	<p><strong>To save your data,</strong> copy the text (you can also click the &ldquo;Copy&rdquo; button to copy it to clipboard) and paste it somewhere safe.</p>
+	<p><strong>To import your data,</strong> paste it into the box, then click the &ldquo;Import&rdquo; button.</p>
 	<textarea id="queue-data" aria-label="Queue data" aria-errormessage="import-error-message" aria-invalid="false"></textarea>
 	<div id="import-error-message" aria-live="polite" hidden>
 		<p>The following show ID(s) are invalid, but there may be similar valid IDs you can copy and paste into your data:</p>
 		<ul id="import-error-list"></ul>
-		<p>You don't have to delete the import error messages from the data; they're removed automatically when you try to import the data.</p>
+		<p><strong>You don't have to delete the import error messages from the data;</strong> they're removed automatically when you try to import the data.</p>
 	</div><!--#import-error-message end-->
 	<ul id="data-controls" class="flex-list control-list">
 		<li><button id="copy-button" class="push-button" type="button">Copy</button></li>
@@ -428,7 +406,6 @@
 
 <section id="archive">
 	<h2>Archive</h2>
-	<p>This list includes information about every show available on the site.</p>
 	<nav>
 		<ol id="archive-series-links" class="flex-list link-cloud"></ol>
 	</nav>
@@ -439,7 +416,7 @@
 
 <section id="news">
 	<h2>News</h2>
-	<p>This is a preview of the Weird Waves news feed, showing the latest 5 entries. Read in your browser or subscribe by copying its <abbr>URL</abbr> into your feed reader:</p>
+	<p>This is a preview of the latest entries on the Weird Waves news feed. Subscribe by copying its <abbr>URL</abbr> into your feed reader:</p>
 	<p id="feed-url"><code>https://weirdwaves.net/feed.xml</code></p>
 	<p>New to feeds? They let you follow sites! Read <a href="https://aboutfeeds.com/">About Feeds</a> for more info.</p>
 	<svg class="icon waveform-spacer" role="separator" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
@@ -450,79 +427,59 @@
 
 <section id="about">
 	<h2>About</h2>
-	<p>Weird Waves is a curated radio play and audiobook archive of horror, sci-fi, fantasy, and weird fiction! Find shows in the <a href="#archive">Archive</a>, check or re-order your queue in the <a href="#booth">Booth</a>, and listen to them in the Player. Have fun!</p>
+	<p>Weird Waves is a curated radio play and audiobook archive of horror, sci-fi, fantasy, and weird fiction! Find shows in the <a href="#archive">Archive</a>, check or re-order your queue in the <a href="#booth">Booth</a>, and listen to them in the player. Have fun!</p>
 	<p id="stats" hidden>The Archive contains <strong id="stats-series"></strong> series and <strong id="stats-shows"></strong> shows.</p>
 
 	<h3>Content notes</h3>
-	<p>The Archive has content notes for individual shows, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older series.</p>
+	<p>The Archive has content notes for individual shows where I think they need them, but there's a few general ones: <strong>death</strong> and worse fates, and <strong>implicit bigotry</strong> in the older series. I rejected anything truly awful, but the ones I did pick are still products of their time.</p>
 
-	<h3>Small details</h3>
-	<dl>
-		<dt>Show numbers in the <a href="#archive-LV">LibriVox selection</a></dt>
-		<dd>
-			<p>The <a href="https://librivox.org">LibriVox</a> audiobooks here are a tiny selection from that site, numbered in the order I added them here. The reason there are gaps (e.g. no &ldquo;LibriVox selection 6&rdquo;) is because I've occasionally removed shows from the Archive, but renumbering would throw off any saved queues.</p>
-		</dd>
-		<dt>Bangers (the &ldquo;+ Banger&rdquo; button)</dt>
-		<dd>
-			<p>This is an extra layer of curation. These are, in my opinion, the best shows in the <a href="#archive">Archive</a>&mdash;about the top quarter. I've tried to pick diverse kinds of shows from as many series as possible. My opinions change now and then.</p>
-		</dd>
-		<dt>Colour-blindness themes</dt>
-		<dd>
-			<p>Six themes (Coalgas, Root, Natron, Gauze, Mycelia, and Cellar) are based on other themes under <a href="https://www.inf.ufrgs.br/%7Eoliveira/pubs_files/CVD_Simulation/CVD_Simulation.html">simulated colour-blindness</a>. They're not necessarily <em>better</em> for people with colour deficiencies, though most of the themes have good contrast and should be legible to almost anyone.</p>
-		</dd>
-	</dl>
+	<h3>Font credits</h3>
+	<p>The serif font is <cite><a href="https://www.solmatas.com/bitter">Bitter</a></cite> by <a href="https://www.solmatas.com/">Sol Matas</a>.</p>
+	<p>The sans-serif font is <cite><a href="https://mozilla.github.io/Fira/">Fira Sans</a></cite> by <a href="https://carrois.com/">Carrois Type Design</a>.</p>
+	<p>The code font is <cite><a href="https://mozilla.github.io/Fira/">Fira Mono</a></cite> by <a href="https://carrois.com/">Carrois Type Design</a>.</p>
 </section><!--#about end-->
 
 
 
 <section id="streaming">
 	<h2>Streaming</h2>
-	<p>This section covers how to use Weird Waves as a livestream widget via broadcast software like <a href="https://obsproject.com/">Open Broadcaster Software (<abbr>OBS</abbr>)</a>. Most of this only applies if you want to show Weird Waves visually on-stream. Either way, check the main <a href="#settings">Settings</a> too.</p>
+	<p>Want to use Weird Waves in your own video or audio livestreams? Here are some tips on how to convert it into an on-screen widget (for video) and advice on copyright (for either). Make sure you check the main <a href="#settings">Settings</a> too!</p>
 	<svg class="icon waveform-spacer" role="separator" viewBox="0 0 96 24"><use href="#svg-waveform" /></svg>
 
 	<h3>Making a widget</h3>
+	<p>If you use <abbr>OBS</abbr> or any app based on it, then you can add Weird Waves to your stream in a few easy steps.</p>
 	<ol>
 		<li>Create a browser source.</li>
 		<li>Set its <abbr>URL</abbr> to <code>https://weirdwaves.net/</code>.</li>
 		<li>Delete its default custom <abbr>CSS</abbr>.</li>
-		<li>Resize and crop it.</li>
 		<li>Right-click it and select &ldquo;Interact&rdquo; to use it just like you are now.</li>
 	</ol>
-	<p>Optionally, replace the custom <abbr>CSS</abbr> with the following to add space above and below the player, to more easily isolate it in an overlay:</p>
+	<p><strong>Make the audio player easier to crop</strong> by adding this custom <abbr>CSS</abbr>:</p>
 	<pre class="code-block" tabindex="0"><code>#player-container {
 	margin-block: 100vh;
 }</code></pre>
-
-	<h3>Customising the style</h3>
-	<p>Set the theme to &ldquo;Dark&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
+	<p><strong>Customise the theme</strong> by setting it to &ldquo;Dark&rdquo; in <a href="#settings">Settings</a>, adding this custom <abbr>CSS</abbr>, and writing in your chosen colour values:</p>
 	<pre class="code-block" tabindex="0"><code>[data-theme="dark"] {
 	--fore-colour: <var>(your foreground colour)</var>;
 	--back-colour: <var>(your background colour)</var>;
 	--hot-colour: <var>(your hot colour)</var>;
 	--cold-colour: <var>(your cold colour)</var>;
 }</code></pre>
-	<p>Replace <code><var>(your * colour)</var></code> with your own colour values. These can be any valid <abbr>CSS</abbr> colours: hex codes, <abbr>RGB</abbr> values, <abbr>HTML</abbr> colour names, etc.</p>
-
-	<h3>Customising the font</h3>
-	<p>Set the font to &ldquo;Serif&rdquo;, then add this custom <abbr>CSS</abbr>:</p>
+	<p><strong>Customise the font</strong> by setting it to &ldquo;Serif&rdquo; in <a href="#settings">Settings</a>, adding this custom <abbr>CSS</abbr>, and writing the name of any font installed on your computer (if it includes spaces, wrap it in quotes, e.g. <code>"Comic Sans"</code>):</p>
 	<pre class="code-block" tabindex="0"><code>[data-font="serif"] {
 	--font-stack: <var>(your font)</var>;
 }</code></pre>
-	<p>Replace <code><var>(your font)</var></code> with the name of any font installed on your computer. If the name includes a space, wrap the whole name in quotes (e.g. <code>"Comic Sans"</code>).</p>
 
 	<h3>Copyright?</h3>
-	<p>All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
+	<p>Getting the easy answes out of the way first: All LibriVox recordings are in the public domain. The copyright status of old radio broadcasts is murky, but virtually any person or organisation who could press a claim is long dead or gone, and almost nobody cares about the atom-thin penny shavings you'd make from streaming ancient, commercially-irrelevant radio broadcasts on Twitch.</p>
 	<p>If you're still concerned, switch on the following toggle to exclude certain series when adding random shows or the entire archive to the queue: <abbr>CAS</abbr> selection, <cite>The Mercury Theatre</cite>, <cite>Mindwebs</cite>, <cite>Nightfall</cite>, and <cite>Seeing Ear Theater</cite>.</p>
 	<button type="button" id="copyright-safety-toggle" class="setting-toggle pre-initialised-control">exclude copyright-unsafe material</button>
-	<p>Some of these (<cite>The Mercury Theatre</cite> and <cite>Nightfall</cite>) are muted on Twitch due to copyright claims. The others are possible, but unconfirmed, risks.</p>
 </section><!--#streaming end-->
 
 
 
 <section id="settings">
 	<h2>Settings</h2>
-	<p>Control how Weird Waves looks and functions here.</p>
-
 	<h3>Player</h3>
 	<button type="button" id="flat-player-toggle" class="setting-toggle pre-initialised-control">hide show info in Player</button>
 
@@ -576,17 +533,6 @@
 		</select><!--#font-select end-->
 	</div>
 </section><!--#settings end-->
-
-
-
-<section id="contact">
-	<h2>Contact</h2>
-	<p>Know a great radio show or audiobook to add to the Archive?</p>
-	<p>Got questions, feedback, feature requests?</p>
-	<p>Need technical assistance with the site?</p>
-	<p>Call in at <a href="mailto:maintenance@weirdwaves.net" rel="reply-to me">maintenance@weirdwaves.net</a>!</p>
-	</ul>
-</section><!--#contact end-->
 
 
 
@@ -717,24 +663,6 @@
 
 
 
-<section id="credits">
-	<h2>Credits</h2>
-	<p>Want to know where things came from?</p>
-
-	<h3>Shows</h3>
-	<p>You can find links to all series sources in the <a href="#archive">Archive</a>.</p>
-
-	<h3>Fonts</h3>
-	<p>The serif font is subset from <cite><a href="https://www.solmatas.com/bitter">Bitter</a></cite> (<a href="./licenses/OFL-Bitter.txt">Open Font License</a>) by <a href="https://www.solmatas.com/">Sol Matas</a>.</p>
-	<p>The sans-serif font is subset from <cite><a href="https://mozilla.github.io/Fira/">Fira Sans</a></cite> (<a href="./licenses/OFL-FiraSans.txt">Open Font License</a>) by <a href="https://carrois.com/">Carrois Type Design</a>.</p>
-	<p>The code font is subset from <cite><a href="https://mozilla.github.io/Fira/">Fira Mono</a></cite> (<a href="./licenses/OFL-FiraMono.txt">Open Font License</a>) by <a href="https://carrois.com/">Carrois Type Design</a>.</p>
-
-	<h3>Hosting</h3>
-	<p>The site is currently hosted on <a href="https://neocities.org">Neocities</a>.</p>
-</section><!--#credits end-->
-
-
-
 <section id="welcome">
 	<h2>Welcome to Weird Waves!</h2>
 	<p><strong>Weird Waves</strong> is an audio horror site where you can explore the classics and hidden gems of 20th-century radio plays and public-domain audiobooks.</p>
@@ -749,6 +677,12 @@
 	</div><!--#schedule-container end-->
 </section><!--#welcome end-->
 </main>
+
+
+
+<footer id="page-footer">
+	<p>Got questions, feedback, or requests? Call in at <a href="mailto:maintenance@weirdwaves.net" rel="reply-to me">maintenance@weirdwaves.net</a>!</p>	
+</footer>
 </div><!--#container end-->
 
 
