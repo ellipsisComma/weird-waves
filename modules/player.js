@@ -254,7 +254,10 @@ function removeShow(target) {
 
 // write show parts onto page and load show audio file; if queue is empty, reset player
 function loadShow() {
-	if (getElement(`queue`).children.length > 0 && getElement(`queue`).firstElementChild.dataset.showId === getElement(`loadedShow`).dataset.showId) return;
+	// don't load show if first show in queue is already loaded
+	const firstShowID = getElement(`queue`).firstElementChild?.dataset.showId;
+	const loadedShowID = getElement(`loadedShow`).dataset.showId;
+	if (getElement(`queue`).children.length > 0 && firstShowID === loadedShowID) return;
 
 	getElement(`playToggle`).ariaPressed = `false`;
 	getElement(`loadedShow`).replaceChildren();
@@ -276,9 +279,6 @@ function loadShow() {
 		getElement(`showTimeElapsed`).textContent = `00:00`;
 		getElement(`playerControls`).hidden = false;
 	} else {
-		// empty loaded show and queue
-		getElement(`queue`).replaceChildren();
-
 		// reset player
 		if (!getElement(`audio`).paused) getElement(`audio`).pause(); // otherwise audio continues playing
 		getElement(`audio`).removeAttribute(`src`); // check why this is necessary instead of just emptying [src]
