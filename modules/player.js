@@ -279,6 +279,9 @@ function loadShow() {
 		getElement(`showTimeElapsed`).textContent = `00:00`;
 		getElement(`playerControls`).hidden = false;
 	} else {
+		// remove all queue children (including text nodes) so CSS :empty pseudo-class will apply
+		getElement(`queue`).replaceChildren();
+
 		// reset player
 		if (!getElement(`audio`).paused) getElement(`audio`).pause(); // otherwise audio continues playing
 		getElement(`audio`).removeAttribute(`src`); // check why this is necessary instead of just emptying [src]
