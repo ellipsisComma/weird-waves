@@ -28,7 +28,7 @@
 					<p>I've replaced the theme- and font-picker buttons with selection menus (they're simpler to implement and have accessibility baked in).</p>
 				</li>
 				<li>
-					<p>Some things that used to be aligned or justified to the centre are now aligned or justified to the start of lines of text. This affects all text in the <a href="#contact">Contact</a>, <a href="#links">Links</a>, and <a href="#credits">Credits</a> sections aside from link clouds, the introduction in the <a href="#welcome">Welcome</a> section, and the queue and import controls and empty-queue message in the <a href="#booth">Booth</a>.</p>
+					<p>Some things that used to be aligned or justified to the centre are now aligned or justified to the start of lines of text. This affects all text in the Contact, <a href="#links">Links</a>, and Credits sections aside from link clouds, the introduction in the <a href="#welcome">Welcome</a> section, and the queue and import controls and empty-queue message in the <a href="#booth">Booth</a>.</p>
 				</li>
 				<li>
 					<p>The &ldquo;+ Show&rdquo; buttons in the <a href="#archive">Archive</a> no longer stay pushed-in/disabled/deactivated when the matching show's in the queue.</p>
@@ -73,7 +73,7 @@
 		<published>2025-02-26T00:00:00Z</published>
 		<updated>2025-02-26T00:00:00Z</updated>
 		<content type="html"><![CDATA[
-			<p>There's been a major behind-the-scenes change to how the various parts of the player and other more-dynamic site sections work. It shouldn't affect how the site works, just make it easier for me to maintain. However, if you notice anything unusual, send me a message (see <a href="#contact">Contact</a> for more info).</p>
+			<p>There's been a major behind-the-scenes change to how the various parts of the player and other more-dynamic site sections work. It shouldn't affect how the site works, just make it easier for me to maintain. However, if you notice anything unusual, send me a message.</p>
 		]]></content>
 	</entry>
 	<entry>
