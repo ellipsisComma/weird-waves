@@ -27,7 +27,7 @@ function getWeekStartDate() {
 
 // build schedule onto page
 function buildSchedule(schedule) {
-	if (!isObject(schedule) || !schedule.validate({
+	if (!isObject(schedule) || !validateObject(schedule, {
 		"title": [`string`, true],
 		"blurb": [`string`, true],
 		"shows": [`array`, true],

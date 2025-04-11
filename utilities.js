@@ -91,20 +91,20 @@ function isObject(variable) {
 	// null, NaN, undefined,
 	// string, number, bigint, boolean, symbol,
 	// array, object, function, class, regex
-Object.prototype.validate = function (keysToTypes) {
+function validateObject(obj, keysToTypes) {
 	return Object.entries(keysToTypes).every(([key, [validType, required]]) => {
 		let valid = false;
-		if (!required && this[key] === undefined) return true;
+		if (!required && obj[key] === undefined) return true;
 
 		switch (validType) {
-		case `null`:		valid = this[key] === null; break;
-		case `NaN`:			valid = isNaN(this[key]); break;
-		case `array`:		valid = Array.isArray(this[key]); break;
-		case `object`:		valid = isObject(this[key]); break;
-		case `function`:	valid = typeof this[key] === `function` && !String(this[key]).startsWith(`class`); break;
-		case `class`:		valid = typeof this[key] === `function` && String(this[key]).startsWith(`class`); break;
-		case `regex`:		valid = typeof this[key] === `object` && String(this[key]).startsWith(`/`); break;
-		default:			valid = typeof this[key] === validType;
+		case `null`:		valid = obj[key] === null; break;
+		case `NaN`:			valid = isNaN(obj[key]); break;
+		case `array`:		valid = Array.isArray(obj[key]); break;
+		case `object`:		valid = isObject(obj[key]); break;
+		case `function`:	valid = typeof obj[key] === `function` && !String(obj[key]).startsWith(`class`); break;
+		case `class`:		valid = typeof obj[key] === `function` && String(obj[key]).startsWith(`class`); break;
+		case `regex`:		valid = typeof obj[key] === `object` && String(obj[key]).startsWith(`/`); break;
+		default:			valid = typeof obj[key] === validType;
 		}
 
 		return valid;
@@ -112,7 +112,7 @@ Object.prototype.validate = function (keysToTypes) {
 };
 
 /*
-// test with this, adjusting the .validate() argument properties:
+// test with this
 x = {
   "string": "abc",
   "number": 123,
@@ -127,7 +127,7 @@ x = {
   "regex": /regex/,
 };
 
-x.validate({
+validateObject(x, {
   "string": [true, `string`],
   "number": [true, `number`],
   "bool": [true, `boolean`],

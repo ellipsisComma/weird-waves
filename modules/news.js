@@ -22,7 +22,7 @@ function buildNewsItem(item) {
 		"content": item.querySelector(`content`)?.textContent,
 	};
 
-	if (!newsItemProps.validate({
+	if (!validateObject(newsItemProps, {
 		"ID": [`string`, true],
 		"title": [`string`, true],
 		"published": [`string`, true],

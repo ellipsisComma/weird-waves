@@ -2147,7 +2147,7 @@ const archive = [
 ]
 // remove invalid series data
 .filter(series => {
-	const valid = isObject(series) && series.validate({
+	const valid = isObject(series) && validateObject(series, {
 		"code": [`string`, true],
 		"heading": [`string`, true],
 		"blurb": [`string`, true],
@@ -2172,7 +2172,7 @@ Optional props:
 // remove invalid show data
 .map(series => {
 	series.shows = series.shows.filter(show => {
-		const valid = isObject(show) && show.validate({
+		const valid = isObject(show) && validateObject(show, {
 			"code": [`string`, true],
 			"heading": [`string`, true],
 			"blurb": [`string`, true],
