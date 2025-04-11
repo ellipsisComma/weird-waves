@@ -14,11 +14,16 @@ function navigateToSection() {
 	document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
 	const section = document.querySelector(location.hash.length > 0 ? location.hash : null)?.closest(`main > *`);
 
-	// if targeted section exists, switch aria-current to its nav-link and update document title
+	// if targeted section exists...
 	if (section) {
 		const navLink = document.querySelector(`nav a[href="#${section.id}"]`);
-		document.title = `${navLink.innerText} / ${getElement(`title`).dataset.original}`;
-		navLink.setAttribute(`aria-current`, `page`);
+
+		// if it's a proper site section, update doc title to match and mark its nav-link as the current one
+		// else, return doc title to original
+		if (navLink) {
+			document.title = `${navLink.innerText} / ${getElement(`title`).dataset.original}`;
+			navLink.setAttribute(`aria-current`, `page`);
+		} else document.title = getElement(`title`).dataset.original;
 	} else document.title = getElement(`title`).dataset.original;
 }
 
