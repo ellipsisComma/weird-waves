@@ -23,6 +23,7 @@ import {
 } from "./modules/navigation.js?type=module,v=2025-04-11";
 
 // on pageload, execute various tasks
+// sync tasks
 document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise support
 	initialiseSettings();
@@ -30,8 +31,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
 
 	// build various page sections
 	buildArchive();
-	loadNews();
-	loadSchedule();
 
 	// initialise app
 	initialisePlayer();
@@ -39,3 +38,7 @@ document.addEventListener(`DOMContentLoaded`, () => {
 	// initialise navigation
 	initialiseNav();
 });
+
+// async tasks
+document.addEventListener(`DOMContentLoaded`, loadNews);
+document.addEventListener(`DOMContentLoaded`, loadSchedule);
