@@ -768,6 +768,9 @@ a:active {
 		&::-webkit-details-marker {
 			display: none;
 		}
+		&:active {
+			color: var(--control-interacted-colour);
+		}
 		&::before {
 			content: "\2192"; /* right arrow */
 			inline-size: 1em;
@@ -777,6 +780,9 @@ a:active {
 	}
 	&[open] > summary {
 		color: var(--control-interacted-colour);
+		&:active {
+			color: var(--control-default-colour);
+		}
 		&::before {
 			content: "\2193"; /* down arrow */
 		}
