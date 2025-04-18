@@ -58,6 +58,7 @@ function getElementStyle(query, property) {
 =========== */
 
 // shuffle array (mutates)
+// uses Fisher Yates shuffle and returns "this" for flexibility (use on left or right side of expression)
 Array.prototype.shuffle = function () {
 	let i = this.length;
 	while (i-- > 0) {
@@ -70,6 +71,7 @@ Array.prototype.shuffle = function () {
 }
 
 // return a shuffled copy of the array (doesn't mutate)
+// uses Fisher Yates shuffle, must be used on the right hand
 Array.prototype.toShuffled = function () {
 	const arr = structuredClone(this);
 	let i = arr.length;
