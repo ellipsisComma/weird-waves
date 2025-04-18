@@ -57,6 +57,31 @@ function getElementStyle(query, property) {
 	ARRAYS
 =========== */
 
+// shuffle array (mutates)
+Array.prototype.shuffle = function () {
+	let i = this.length;
+	while (i-- > 0) {
+		const r = Math.floor(Math.random() * this.length);
+		const t = this[r];
+		this[r] = this[i];
+		this[i] = t;
+	}
+	return this;
+}
+
+// return a shuffled copy of the array (doesn't mutate)
+Array.prototype.toShuffled = function () {
+	const arr = structuredClone(this);
+	let i = arr.length;
+	while (i-- > 0) {
+		const r = Math.floor(Math.random() * arr.length);
+		const t = arr[r];
+		arr[r] = arr[i];
+		arr[i] = t;
+	}
+	return arr;
+}
+
 // sum a numerical array
 Array.prototype.sum = function () {
 	return this.reduce((a, b) => a + b, 0);
