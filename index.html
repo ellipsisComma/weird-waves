@@ -192,21 +192,15 @@
 <!--archive-->
 <template id="archive-series-template">
 	<li id="">
-		<article class="series">
-			<header>
-				<h3 class="series-heading"></h3>
-				<div class="series-content">
-					<p class="series-blurb"></p>
-					<p class="series-source"></p>
-				</div>
-				<button class="push-button" type="button" data-action="add-series" aria-controls="queue player" aria-label="Add all shows in series to queue">+ Series</button>
-			</header>
-			<ol class="show-list"></ol>
-		</article>
-		<div class="return-links">
-			<a class="item-return-link" href="" rel="return">Return to top (Series)</a>
-			<a href="#archive" rel="return">Return to top (Archive)</a>
-		</div>
+		<header>
+			<h3 class="series-heading"></h3>
+			<div class="series-content">
+				<p class="series-blurb"></p>
+				<p class="series-source"></p>
+			</div>
+			<button class="push-button" type="button" data-action="add-series" aria-controls="queue player" aria-label="Add all shows in series to queue">+ Series</button>
+		</header>
+		<ol class="show-list"></ol>
 	</li>
 </template><!--#archive-series-template end-->
 <template id="archive-show-template">
@@ -406,6 +400,9 @@
 		<ol id="archive-series-links" class="flex-list link-cloud"></ol>
 	</nav>
 	<ol id="series-list"></ol>
+	<nav style="text-align: center;">
+		<a href="#archive">Return to top</a>
+	</nav>
 </section><!--#archive end-->
 
 
