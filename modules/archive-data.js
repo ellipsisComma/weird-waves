@@ -2164,7 +2164,7 @@ Required props:
 	source (string)
 	shows (array)
 Optional props:
-	banger (boolean)
+	copyrightSafe (boolean)
 `, series);
 
 	return valid;
