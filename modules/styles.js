@@ -40,7 +40,7 @@ function initialise() {
 // colour palette, *then* repainted in the default theme. This is unavoidable, since the
 // DOM has to load (and be painted) before we can check the theme's validity.
 
-		select.classList.remove(`pre-initialised-control`);
+		select.closest(`.pre-initialised-control`).classList.remove(`pre-initialised-control`);
 
 		// add event listener to update site style when selected style changes
 		select.addEventListener(`change`, () => setStyle(style, select.value));
