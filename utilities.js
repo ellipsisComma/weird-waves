@@ -121,7 +121,7 @@ function isObject(variable) {
 function validateObject(obj, keysToTypes) {
 	return Object.entries(keysToTypes).every(([key, [validType, required]]) => {
 		let valid = false;
-		if (!required && obj[key] === undefined) return true;
+		if (!Object.hasOwn(obj, key)) return !required;
 
 		switch (validType) {
 		case `null`:		valid = obj[key] === null; break;
@@ -155,17 +155,17 @@ x = {
 };
 
 validateObject(x, {
-  "string": [true, `string`],
-  "number": [true, `number`],
-  "bool": [true, `boolean`],
-  "function": [true, `function`],
-  "undefined": [true, `undefined`],
-  "null": [true, `null`],
-  "NaN": [true, `NaN`],
-  "array": [true, `array`],
-  "object": [true, `object`],
-  "classy": [true, `class`],
-  "regex": [true, `regex`],
+  "string": [`string`, true],
+  "number": [`number`, true],
+  "bool": [`boolean`, true],
+  "function": [`function`, true],
+  "undefined": [`undefined`, true],
+  "null": [`null`, true],
+  "NaN": [`NaN`, true],
+  "array": [`array`, true],
+  "object": [`object`, true],
+  "classy": [`class`, true],
+  "regex": [`regex`, true],
 })
 */
 
