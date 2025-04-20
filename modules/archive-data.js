@@ -2152,7 +2152,7 @@ const archive = [
 		"heading": [`string`, true],
 		"blurb": [`string`, true],
 		"source": [`string`, true],
-		"banger": [`boolean`, false],
+		"copyrightSafe": [`boolean`, false],
 		"shows": [`array`, true],
 	});
 
