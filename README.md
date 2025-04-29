@@ -18,14 +18,14 @@ The archive as a whole is an array of series objects, each of which contains an 
 {
 "code": `QP`,
 "heading": `<cite>Quiet, Please</cite>`,
-"blurb": `A 1947&ndash;49 radio horror anthology written by Wyllis Cooper. It starred radio announcer Ernest Chappell (his only acting role), who often spoke informally and directly to the audience.`,
+"blurb": `A 1947–49 radio horror anthology written by Wyllis Cooper. It starred radio announcer Ernest Chappell (his only acting role), who often spoke informally and directly to the audience.`,
 "source": `<a href="https://www.quietplease.org">quietplease.org</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `001-Nothing`,
 	"heading": `#1: <cite>Nothing Behind the Door</cite>`,
-	"blurb": `Bank robbers try to hide the money in a mountain shed that contains&mdash;literally&mdash;nothing.`,
+	"blurb": `Bank robbers try to hide the money in a mountain shed that contains—literally—nothing.`,
 	"banger": true,
 	},
 ],
@@ -79,7 +79,7 @@ Each schedule file is a JSON file whose name should by default be `schedule-[dat
 ```json
 {
 	"title": "Mechanical Monstrosities",
-	"blurb": "Tales of robotic nightmares, technological progress, and its hidden&mdash;or not-so-hidden&mdash;costs.",
+	"blurb": "Tales of robotic nightmares, technological progress, and its hidden—or not-so-hidden—costs.",
 	"shows": [
 		"DX-36-Nightmare",
 		"QP-083-Murder",

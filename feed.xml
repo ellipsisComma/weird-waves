@@ -21,7 +21,7 @@
 		<title type="html"><![CDATA[Many little fixes, plus a much shorter feed]]></title>
 		<published>2025-04-11T00:00:00+01:00</published>
 		<updated>2025-04-11T00:00:00+01:00</updated>
-		<content type="html"><![CDATA[The Contact and Credits sections are gone (I moved the info elsewhere) and the news feed preview's much shorter! Later, I'll write some kinda &ldquo;Weird Waves history&rdquo;; for now, I just wanted it to be more readable in feed readers.]]></content>
+		<content type="html"><![CDATA[The Contact and Credits sections are gone (I moved the info elsewhere) and the news feed preview's much shorter! Later, I'll write some kinda “Weird Waves history”; for now, I just wanted it to be more readable in feed readers.]]></content>
 	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?58</id>
@@ -29,7 +29,7 @@
 		<title type="html"><![CDATA[Lots of little layout changes]]></title>
 		<published>2025-03-30T00:00:00Z</published>
 		<updated>2025-03-30T00:00:00Z</updated>
-		<content type="html"><![CDATA[I've tweaked the site's design: the theme- and font-pickers are now more-accessible select menus; various things are now left-aligned instead of centred; and the &ldquo;+ Show&rdquo; buttons in the archive no longer stay pushed in.]]></content>
+		<content type="html"><![CDATA[I've tweaked the site's design: the theme- and font-pickers are now more-accessible select menus; various things are now left-aligned instead of centred; and the “+ Show” buttons in the archive no longer stay pushed in.]]></content>
 	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?57</id>
@@ -37,7 +37,7 @@
 		<title type="html"><![CDATA[Import/export updates]]></title>
 		<published>2025-03-06T00:00:00Z</published>
 		<updated>2025-03-06T00:00:00Z</updated>
-		<content type="html"><![CDATA[Queue data now updates automatically whenever the queue changes, and the &ldquo;Export&rdquo; button that originally got you that data manually has been replaced with a &ldquo;Copy&rdquo; button to copy the data to your clipboard.]]></content>
+		<content type="html"><![CDATA[Queue data now updates automatically whenever the queue changes, and the “Export” button that originally got you that data manually has been replaced with a “Copy” button to copy the data to your clipboard.]]></content>
 	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?56</id>
@@ -45,7 +45,7 @@
 		<title type="html"><![CDATA[Simplifying controls]]></title>
 		<published>2025-03-05T00:00:00Z</published>
 		<updated>2025-03-05T00:00:00Z</updated>
-		<content type="html"><![CDATA[First, I got rid of the &ldquo;+ Archive&rdquo; button. Second, there's no more confirmation step when you clear the queue. Finally, you can now clear your queue by importing a blank box.]]></content>
+		<content type="html"><![CDATA[First, I got rid of the “+ Archive” button. Second, there's no more confirmation step when you clear the queue. Finally, you can now clear your queue by importing a blank box.]]></content>
 	</entry>
 	<entry>
 		<id>https://weirdwaves.net/?55</id>

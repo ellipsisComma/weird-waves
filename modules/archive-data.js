@@ -15,7 +15,7 @@ const archive = [
 {
 "code": `ByM`,
 "heading": `<cite>Beyond Midnight</cite>`,
-"blurb": `A 1968&ndash;70 anthology of supernatural dramas and horror stories adapted by the writer Michael McCabe and broadcast by South Africa's Springbok Radio.`,
+"blurb": `A 1968–70 anthology of supernatural dramas and horror stories adapted by the writer Michael McCabe and broadcast by South Africa's Springbok Radio.`,
 "source": `<a href="https://radioechoes.com/?page=series&genre=OTR-Thriller&series=Beyond%20Midnight">Radio Echoes</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -40,14 +40,14 @@ const archive = [
 {
 "code": `BC`,
 "heading": `<cite>The Black Chapel</cite>`,
-"blurb": `A 1937&ndash;39 horror series hosted and narrated by the insane organist of a derelict church (played by Ted Osbourne); only two episodes survive.`,
+"blurb": `A 1937–39 horror series hosted and narrated by the insane organist of a derelict church (played by Ted Osbourne); only two episodes survive.`,
 "source": `<a href="https://www.radioechoes.com/?page=series&genre=OTR-Thriller&series=The%20Black%20Chapel">Radio Echoes</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `X-Coffin`,
 	"heading": `X: <cite>The Mahogany Coffin</cite>`,
-	"blurb": `A gravedigger makes lavish preparations for his own burial&hellip; and an unlikely graveyard friend of his takes ghoulish revenge when a rival thwarts his plans.`,
+	"blurb": `A gravedigger makes lavish preparations for his own burial… and an unlikely graveyard friend of his takes ghoulish revenge when a rival thwarts his plans.`,
 	"notes": `entombment`,
 	"banger": true,
 	},
@@ -56,7 +56,7 @@ const archive = [
 {
 "code": `BkM`,
 "heading": `<cite>The Black Mass</cite>`,
-"blurb": `A 1963&ndash;67 anthology of mostly gothic and cosmic horror stories adapted for radio, largely performed by Erik Bauersfeld.`,
+"blurb": `A 1963–67 anthology of mostly gothic and cosmic horror stories adapted for radio, largely performed by Erik Bauersfeld.`,
 "source": `<a href="https://web.archive.org/web/20240812113659/http://www.kpfahistory.info/black_mass_home.html"><abbr>KPFA</abbr> History</a> (via Wayback)<!--the site of John Whiting, technical producer-->`,
 "copyrightSafe": true,
 "shows": [
@@ -68,7 +68,7 @@ const archive = [
 	{
 	"code": `02-Ash`,
 	"heading": `2: <cite>The Ash Tree</cite>`,
-	"blurb": `A monstrous ash tree bears a terrible secret&mdash;when the &ldquo;witch&rdquo; who tends it is hanged, its &ldquo;curse&rdquo; falls on her accusers. Adapted from a story by M.&nbsp;R.&nbsp;James.`,
+	"blurb": `A monstrous ash tree bears a terrible secret—when the “witch” who tends it is hanged, its “curse” falls on her accusers. Adapted from a story by M.&nbsp;R.&nbsp;James.`,
 	"notes": `execution, spiders`,
 	},
 	{
@@ -80,7 +80,7 @@ const archive = [
 	{
 	"code": `07-Oil`,
 	"heading": `7: <cite>Oil of Dog</cite>`,
-	"blurb": `A young man helps his father make dog oil and his mother dispose of unwanted babies&mdash;and combines his duties to disastrous effect. Adapted from a story by Ambrose Bierce.`,
+	"blurb": `A young man helps his father make dog oil and his mother dispose of unwanted babies—and combines his duties to disastrous effect. Adapted from a story by Ambrose Bierce.`,
 	"notes": `animal abuse, infanticide, kidnapping, murder-suicide`,
 	"banger": true,
 	},
@@ -98,7 +98,7 @@ const archive = [
 	{
 	"code": `11-Predicament_Heart`,
 	"heading": `11: <cite>A Predicament</cite> + <cite>The Tell-Tale Heart</cite>`,
-	"blurb": `A murderer hears his victim's still-beating heart. A wealthy woman finds herself in a&hellip; predicament. Adapted from stories by Edgar Allen Poe.`,
+	"blurb": `A murderer hears his victim's still-beating heart. A wealthy woman finds herself in a… predicament. Adapted from stories by Edgar Allen Poe.`,
 	"notes": `animal death, gore, obsession`,
 	},
 	{
@@ -139,7 +139,7 @@ const archive = [
 	{
 	"code": `21-Outsider`,
 	"heading": `21: <cite>The Outsider</cite>`,
-	"blurb": `A lonely man in a deep, dark forest ponders what lies beyond&mdash;and one day makes his desperate escape. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
+	"blurb": `A lonely man in a deep, dark forest ponders what lies beyond—and one day makes his desperate escape. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
 	},
 	{
 	"code": `22-Moonlit`,
@@ -150,12 +150,12 @@ const archive = [
 	{
 	"code": `X1-Haunter_pt1`,
 	"heading": `X1: <cite>The Haunter of the Dark</cite>, part&nbsp;1`,
-	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
+	"blurb": `A young writer seeks inspiration from an old cult's derelict church—he finds more than he bargained for. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
 	},
 	{
 	"code": `X2-Haunter_pt2`,
 	"heading": `X2: <cite>The Haunter of the Dark</cite>, part&nbsp;2`,
-	"blurb": `A young writer seeks inspiration from an old cult's derelict church&mdash;he finds more than he bargained for. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
+	"blurb": `A young writer seeks inspiration from an old cult's derelict church—he finds more than he bargained for. Adapted from a story by H.&nbsp;P.&nbsp;Lovecraft.`,
 	},
 	{
 	"code": `X5-Proof_Crowd`,
@@ -225,7 +225,7 @@ const archive = [
 {
 "code": `CRW`,
 "heading": `<cite><abbr>CBS</abbr> Radio Workshop</cite>`,
-"blurb": `A brief 1956&ndash;57 revival of the <cite>Columbia Workshop</cite> series' experimental radio tradition, by the Columbia Broadcasting System.`,
+"blurb": `A brief 1956–57 revival of the <cite>Columbia Workshop</cite> series' experimental radio tradition, by the Columbia Broadcasting System.`,
 "source": `<a href="https://archive.org/details/OTRR_CBS_Radio_Workshop_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -241,7 +241,7 @@ const archive = [
 {
 "code": `CW`,
 "heading": `<cite>Columbia Workshop</cite>`,
-"blurb": `A 1936&ndash;47 anthology of experimental radio plays organised by Irving Reis to push the boundaries of the medium; succeeded by the <cite><abbr>CBS</abbr> Radio Workshop</cite>.`,
+"blurb": `A 1936–47 anthology of experimental radio plays organised by Irving Reis to push the boundaries of the medium; succeeded by the <cite><abbr>CBS</abbr> Radio Workshop</cite>.`,
 "source": `<a href="https://www.radioechoes.com/?page=series&genre=OTR-Drama&series=Columbia%20Workshop">Radio Echoes</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -253,7 +253,7 @@ const archive = [
 	{
 	"code": `A034-Fall`,
 	"heading": `A34: <cite>The Fall of the City</cite>`,
-	"blurb": `Prophets, hierophants, and generals give grandiose speeches while the master of war descends on their &ldquo;free&rdquo; city. Featuring a young Orson Welles.`,
+	"blurb": `Prophets, hierophants, and generals give grandiose speeches while the master of war descends on their “free” city. Featuring a young Orson Welles.`,
 	"notes": `human sacrifice, mass panic`,
 	"banger": true,
 	},
@@ -269,7 +269,7 @@ const archive = [
 {
 "code": `DF`,
 "heading": `<cite>Dark Fantasy</cite>`,
-"blurb": `A 1941&ndash;42 anthology of original horror stories and thrillers written by Scott Bishop, who also wrote for <cite>The Mysterious Traveler</cite>.`,
+"blurb": `A 1941–42 anthology of original horror stories and thrillers written by Scott Bishop, who also wrote for <cite>The Mysterious Traveler</cite>.`,
 "source": `<a href="https://archive.org/details/OTRR_Dark_Fantasy_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -290,26 +290,26 @@ const archive = [
 {
 "code": `DX`,
 "heading": `<cite>Dimension X</cite>`,
-"blurb": `(X X x x x&hellip;) A 1950&ndash;51 sci-fi series of adaptations and originals mostly scripted by George Lefferts and Ernest Kinoy; fore-runner to <cite>X Minus One</cite>.`,
+"blurb": `(X X x x x…) A 1950–51 sci-fi series of adaptations and originals mostly scripted by George Lefferts and Ernest Kinoy; fore-runner to <cite>X Minus One</cite>.`,
 "source": `<a href="https://archive.org/details/OTRR_Dimension_X_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `11-Rains_Zero`,
 	"heading": `11: <cite>There Will Come Soft Rains</cite> + <cite>Zero Hour</cite>`,
-	"blurb": `An automated house goes through the motions after nuclear holocaust. Children play &ldquo;invasion&rdquo;, a game with deadly consequences. Adapted from stories by Ray Bradbury.`,
+	"blurb": `An automated house goes through the motions after nuclear holocaust. Children play “invasion”, a game with deadly consequences. Adapted from stories by Ray Bradbury.`,
 	"notes": `animal death, mentions of corporal punishment, fire, high-pitched sounds`,
 	},
 	{
 	"code": `14-Heaven`,
 	"heading": `14: <cite>Mars Is Heaven!</cite>`,
-	"blurb": `The first humans on Mars find the alien world is a lot more familiar&mdash;a lot more like home&mdash;than anyone expected. Adapted from a story by Ray Bradbury.`,
-	"notes": `alcohol, betrayal, food adverts, gunshots (8:50&ndash;8:53), Holocaust mention, uncanny valley`,
+	"blurb": `The first humans on Mars find the alien world is a lot more familiar—a lot more like home—than anyone expected. Adapted from a story by Ray Bradbury.`,
+	"notes": `alcohol, betrayal, food adverts, gunshots (8:50–8:53), Holocaust mention, uncanny valley`,
 	},
 	{
 	"code": `15-Moon`,
 	"heading": `15: <cite>The Man in the Moon</cite>`,
-	"blurb": `The Missing Persons Bureau receives calls for help&mdash;beamed straight from the moon.`,
+	"blurb": `The Missing Persons Bureau receives calls for help—beamed straight from the moon.`,
 	"notes": `abduction, betrayal, food adverts, gunshots (20:00), sanism`,
 	},
 	{
@@ -321,13 +321,13 @@ const archive = [
 	{
 	"code": `21-Parade`,
 	"heading": `21: <cite>The Parade</cite>`,
-	"blurb": `A wealthy client hires an ad firm to announce an alien invasion&mdash;ending in a Martian military parade.`,
+	"blurb": `A wealthy client hires an ad firm to announce an alien invasion—ending in a Martian military parade.`,
 	"notes": `food adverts, gunshot? (26:54), panic`,
 	},
 	{
 	"code": `25-Sanitorium`,
 	"heading": `25: <cite>Dr. Grimshaw's Sanitorium</cite>`,
-	"blurb": `A patient vanishes from a sanitorium&mdash;the doctors say he's dead, but a detective's not so sure. Adapted from a story by Fletcher Pratt.`,
+	"blurb": `A patient vanishes from a sanitorium—the doctors say he's dead, but a detective's not so sure. Adapted from a story by Fletcher Pratt.`,
 	"notes": `ableism, alcoholism, betrayal, animal attack, car crash, human experiments, injection, mention of suicide, Naziism, non-consensual surgery, sanism`,
 	},
 	{
@@ -347,7 +347,7 @@ const archive = [
 	"code": `31-Universe`,
 	"heading": `31: <cite>Universe</cite>`,
 	"blurb": `The warring peoples of a universe 25 kilometers wide and 100 levels deep must unite to avert disaster. Adapted from a story by Robert A.&nbsp;Heinlein.`,
-	"notes": `ableism, cult behaviour, gunshots (8:41&ndash;8:42, 26:01, 26:07&ndash;26:10, 27:19, lynching)`,
+	"notes": `ableism, cult behaviour, gunshots (8:41–8:42, 26:01, 26:07–26:10, 27:19, lynching)`,
 	},
 	{
 	"code": `36-Nightmare`,
@@ -452,7 +452,7 @@ const archive = [
 {
 "code": `Esc`,
 "heading": `<cite>Escape</cite>`,
-"blurb": `A 1947&ndash;54 anthology of escapist radio plays that shared its talent with <cite>Suspense</cite>, and more often delved into horror and science fiction.`,
+"blurb": `A 1947–54 anthology of escapist radio plays that shared its talent with <cite>Suspense</cite>, and more often delved into horror and science fiction.`,
 "source": `<a href="https://archive.org/details/OTRR_Escape_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -473,13 +473,13 @@ const archive = [
 	"code": `052-Armageddon`,
 	"heading": `52: <cite>A Dream of Armageddon</cite>`,
 	"blurb": `A man dreams of a world rolling inevitably towards annihilation. Adapted from a story by H.&nbsp;G.&nbsp;Wells.`,
-	"notes": `being eaten while conscious, explosions (13:56&ndash;14:08), gunshots (14:43, 19:48&ndash;50, 22:47&ndash;50), poison gas, stab death, starvation`,
+	"notes": `being eaten while conscious, explosions (13:56–14:08), gunshots (14:43, 19:48–50, 22:47–50), poison gas, stab death, starvation`,
 	"banger": true,
 	},
 	{
 	"code": `053-Primrose`,
 	"heading": `53: <cite>Evening Primrose</cite>`,
-	"blurb": `A poet rejects society to live unseen in a department store&mdash;but he's not the first. Adapted from a story by John Collier, starring William Conrad.`,
+	"blurb": `A poet rejects society to live unseen in a department store—but he's not the first. Adapted from a story by John Collier, starring William Conrad.`,
 	},
 	{
 	"code": `117-Bath`,
@@ -561,7 +561,7 @@ const archive = [
 {
 "code": `HF`,
 "heading": `<cite>The Hall of Fantasy</cite>`,
-"blurb": `A series of supernatural stories broadcast in Utah in 1949 and nationally in 1952&ndash;53. The series was written and directed by Richard Thorne.`,
+"blurb": `A series of supernatural stories broadcast in Utah in 1949 and nationally in 1952–53. The series was written and directed by Richard Thorne.`,
 "source": `<a href="https://archive.org/details/470213ThePerfectScript">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -581,24 +581,24 @@ const archive = [
 	{
 	"code": `C10-Masks`,
 	"heading": `C10: <cite>The Masks of Ashor</cite>`,
-	"blurb": `A couple receive a curio from their world-travelling uncle&mdash;two golden masks belonging to an ancient devil of death.`,
+	"blurb": `A couple receive a curio from their world-travelling uncle—two golden masks belonging to an ancient devil of death.`,
 	"notes": `animal attack`,
 	},
 	{
 	"code": `C12-Fog`,
 	"heading": `C12: <cite>The Night the Fog Came</cite>`,
-	"blurb": `Scientists discover microbes that spread by fog and drown anyone they touch&mdash;and the fog is spreading in a wave of death.`,
+	"blurb": `Scientists discover microbes that spread by fog and drown anyone they touch—and the fog is spreading in a wave of death.`,
 	},
 	{
 	"code": `C27-Black`,
 	"heading": `C27: <cite>The Man in Black</cite>`,
-	"blurb": `Two friends catch the eye of the nocturnal evil, the &ldquo;man in black&rdquo;.`,
+	"blurb": `Two friends catch the eye of the nocturnal evil, the “man in black”.`,
 	"banger": true,
 	},
 	{
 	"code": `C43-Follows`,
 	"heading": `C43: <cite>He Who Follows Me</cite>`,
-	"blurb": `A couple disturb a sleeping evil in the grounds of an abandoned mansion&mdash;the &ldquo;Death That Walks&rdquo;.`,
+	"blurb": `A couple disturb a sleeping evil in the grounds of an abandoned mansion—the “Death That Walks”.`,
 	"notes": `stalking`,
 	},
 ],
@@ -675,14 +675,14 @@ const archive = [
 	{
 	"code": `03-Ship`,
 	"heading": `3: <cite>The White Ship</cite>`,
-	"blurb": `A lighthouse keeper fantasises of visiting wondrous islands on a white ship&mdash;but his daydream may be more real than he thinks. Written by H.&nbsp;P.&nbsp;Lovecraft, read by D.&nbsp;E.&nbsp;Wittkower.`,
+	"blurb": `A lighthouse keeper fantasises of visiting wondrous islands on a white ship—but his daydream may be more real than he thinks. Written by H.&nbsp;P.&nbsp;Lovecraft, read by D.&nbsp;E.&nbsp;Wittkower.`,
 	"notes": `animal death, disease, near-drowning, shipwreck`,
 	"banger": true,
 	},
 	{
 	"code": `04-Heights`,
 	"heading": `4: <cite>The Horror of the Heights</cite>`,
-	"blurb": `An aviator investigates the unsolved deaths of pilots who broke the altitude record&mdash;and discovers an ecosystem in the sky. Written by Arthur Conan Doyle, read by Mike Harris.`,
+	"blurb": `An aviator investigates the unsolved deaths of pilots who broke the altitude record—and discovers an ecosystem in the sky. Written by Arthur Conan Doyle, read by Mike Harris.`,
 	"notes": `being hunted, decapitation, isolation, jellyfish`,
 	},
 	{
@@ -723,7 +723,7 @@ const archive = [
 	{
 	"code": `13-Paw`,
 	"heading": `13: <cite>The Monkey's Paw</cite>`,
-	"blurb": `A mummified monkey's paw grants three wishes&mdash;with dread consequences. Written by W.&nbsp;W.&nbsp;Jacobs, read by Travis Baldree.`,
+	"blurb": `A mummified monkey's paw grants three wishes—with dread consequences. Written by W.&nbsp;W.&nbsp;Jacobs, read by Travis Baldree.`,
 	},
 	{
 	"code": `15-Disappearances`,
@@ -756,13 +756,13 @@ const archive = [
 	{
 	"code": `21-Pharoahs_pt1`,
 	"heading": `21: <cite>Imprisoned with the Pharoahs</cite>, part&nbsp;1`,
-	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&nbsp;P.&nbsp;Lovecraft with Houdini, read by Ben Tucker.`,
+	"blurb": `A “true” story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&nbsp;P.&nbsp;Lovecraft with Houdini, read by Ben Tucker.`,
 	"notes": `betrayal, darkness, kidnapping, racism`,
 	},
 	{
 	"code": `22-Pharoahs_pt2`,
 	"heading": `22: <cite>Imprisoned with the Pharoahs</cite>, part&nbsp;2`,
-	"blurb": `A &ldquo;true&rdquo; story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&nbsp;P.&nbsp;Lovecraft with Houdini, read by Ben Tucker.`,
+	"blurb": `A “true” story of escape artist Harry Houdini's dark encounter under the Sphinx of Giza. Written by H.&nbsp;P.&nbsp;Lovecraft with Houdini, read by Ben Tucker.`,
 	"notes": `betrayal, darkness, kidnapping, racism`,
 	},
 	{
@@ -800,7 +800,7 @@ const archive = [
 	{
 	"code": `33-Caterpillars`,
 	"heading": `33: <cite>Caterpillars</cite>`,
-	"blurb": `Monstrous caterpillars haunt the visitor to an isolated villa&mdash;in dream, then reality. Written by E.&nbsp;F.&nbsp;Benson, read by Andy Minter.`,
+	"blurb": `Monstrous caterpillars haunt the visitor to an isolated villa—in dream, then reality. Written by E.&nbsp;F.&nbsp;Benson, read by Andy Minter.`,
 	"notes": `cancer`,
 	},
 	{
@@ -857,7 +857,7 @@ const archive = [
 	{
 	"code": `44-Babbulkund`,
 	"heading": `44: <cite>The Fall of Babbulkund</cite>`,
-	"blurb": `Babbulkund, City of Marvel, city of wonders, city on travellers' lips&mdash;Babbulkund has fallen, decayed, died. Written by Lord Dunsany, read by Alex Clarke.`,
+	"blurb": `Babbulkund, City of Marvel, city of wonders, city on travellers' lips—Babbulkund has fallen, decayed, died. Written by Lord Dunsany, read by Alex Clarke.`,
 	"banger": true,
 	},
 	{
@@ -933,7 +933,7 @@ const archive = [
 	{
 	"code": `A009-Money`,
 	"heading": `A9: <cite>Money, Money, Money</cite>`,
-	"blurb": `A sailor murders his colleague for a winning lottery ticket and takes an offshore salvage-diving job to escape the law&mdash;but he can't escape revenge.`,
+	"blurb": `A sailor murders his colleague for a winning lottery ticket and takes an offshore salvage-diving job to escape the law—but he can't escape revenge.`,
 	"notes": `narcosis`,
 	},
 	{
@@ -946,7 +946,7 @@ const archive = [
 	{
 	"code": `A071-Christmas`,
 	"heading": `A71: <cite>Christmas Story</cite>`,
-	"blurb": `Three soldiers meet in a train on Christmas Eve, 1918, but they feel like they've met before&hellip;`,
+	"blurb": `Three soldiers meet in a train on Christmas Eve, 1918, but they feel like they've met before…`,
 	},
 	{
 	"code": `A076-Oxychloride`,
@@ -963,7 +963,7 @@ const archive = [
 	{
 	"code": `B07-Bank`,
 	"heading": `B7: <cite>Come to the Bank</cite>`,
-	"blurb": `A man walks through a bank wall using mental power&mdash;but gets trapped halfway, to his colleague's mounting terror.`,
+	"blurb": `A man walks through a bank wall using mental power—but gets trapped halfway, to his colleague's mounting terror.`,
 	"notes": `institutionalisation, mental breakdown`,
 	},
 	{
@@ -1047,7 +1047,7 @@ const archive = [
 {
 "code": `Mw`,
 "heading": `<cite>Mindwebs</cite>`,
-"blurb": `A 1975&ndash;84 series of sci-fi, fantasy, and horror short story readings by Michael Hanson, who also chose the often-jazzy musical accompaniment.`,
+"blurb": `A 1975–84 series of sci-fi, fantasy, and horror short story readings by Michael Hanson, who also chose the often-jazzy musical accompaniment.`,
 "source": `<a href="https://archive.org/details/MindWebs_201410">Internet Archive</a>`,
 "shows": [
 	{
@@ -1060,7 +1060,7 @@ const archive = [
 	{
 	"code": `003-Descending`,
 	"heading": `3: <cite>Descending</cite>`,
-	"blurb": `A bullshit artist on a department store spending spree winds up in a never-ending escalator ride&hellip; Written by Thomas M.&nbsp;Disch.`,
+	"blurb": `A bullshit artist on a department store spending spree winds up in a never-ending escalator ride… Written by Thomas M.&nbsp;Disch.`,
 	"notes": `head injury, mental breakdown, starvation`,
 	"banger": true,
 	},
@@ -1124,7 +1124,7 @@ const archive = [
 	{
 	"code": `066-Desertion`,
 	"heading": `66: <cite>Desertion</cite>`,
-	"blurb": `Human minds are transposed into Jupiter's fauna to explore and colonise the planet&mdash;but they all desert the mission. Written by Clifford Simak.`,
+	"blurb": `Human minds are transposed into Jupiter's fauna to explore and colonise the planet—but they all desert the mission. Written by Clifford Simak.`,
 	"banger": true,
 	},
 	{
@@ -1141,7 +1141,7 @@ const archive = [
 	{
 	"code": `076-See`,
 	"heading": `76: <cite>When We Went To See The End Of The World</cite>`,
-	"blurb": `Time-travelling tourists boast about seeing the end of the world&mdash;until they realise they didn't all see the <em>same</em> end&hellip; Written by Robert Silverberg.`,
+	"blurb": `Time-travelling tourists boast about seeing the end of the world—until they realise they didn't all see the <em>same</em> end… Written by Robert Silverberg.`,
 	},
 	{
 	"code": `082-Plot_Express`,
@@ -1216,7 +1216,7 @@ const archive = [
 	{
 	"code": `125-Rules`,
 	"heading": `125: <cite>The Rules of the Road</cite>`,
-	"blurb": `An alien ship lands in the desert. None who enter survive&mdash;until one man finds within it the awful secrets of the universe. Written by Norman Spinrad.`,
+	"blurb": `An alien ship lands in the desert. None who enter survive—until one man finds within it the awful secrets of the universe. Written by Norman Spinrad.`,
 	"notes": `imprisonment, psychological torture`,
 	"banger": true,
 	},
@@ -1282,21 +1282,21 @@ const archive = [
 	{
 	"code": `237-Star_Gift`,
 	"heading": `237: <cite>The Star</cite> + <cite>The Gift</cite>`,
-	"blurb": `An apocalyptic blaze&mdash;a guiding star. A boy receives a wondrous Christmas gift. Written by Arthur C.&nbsp;Clarke and Ray Bradbury.`,
+	"blurb": `An apocalyptic blaze—a guiding star. A boy receives a wondrous Christmas gift. Written by Arthur C.&nbsp;Clarke and Ray Bradbury.`,
 	},
 ],
 },
 {
 "code": `MsT`,
 "heading": `<cite>The Mysterious Traveler</cite>`,
-"blurb": `A 1943&ndash;52 anthology of horror stories hosted and narrated by the titular traveler riding a train racing through the night.`,
+"blurb": `A 1943–52 anthology of horror stories hosted and narrated by the titular traveler riding a train racing through the night.`,
 "source": `<a href="https://archive.org/details/OTRR_Mysterious_Traveler_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `111-Locomotive`,
 	"heading": `111: <cite>The Locomotive Ghost</cite>`,
-	"blurb": `Two men derail and rob a payday train, only to suffer the wrath of the Judgement Special&mdash;a ghostly train that hunts those who defile the railways.`,
+	"blurb": `Two men derail and rob a payday train, only to suffer the wrath of the Judgement Special—a ghostly train that hunts those who defile the railways.`,
 	"notes": `asphyxiation, gunshots (6:44, 7:28), rail crash, paranoia`,
 	"banger": true,
 	},
@@ -1304,14 +1304,14 @@ const archive = [
 	"code": `256-Red`,
 	"heading": `256: <cite>The Lady in Red</cite>`,
 	"blurb": `A reporter follows a trail of mob murders attended by a mysterious woman in a striking red dress.`,
-	"notes": `alcohol, fall death, gunshots (4:38&ndash;40, 4:50&ndash;53, 24:06)`,
+	"notes": `alcohol, fall death, gunshots (4:38–40, 4:50–53, 24:06)`,
 	},
 ],
 },
 {
 "code": `Nf`,
 "heading": `<cite>Nightfall</cite>`,
-"blurb": `A 1980&ndash;83 Canadian series of original and adapted horror stories created by Bill Howell.`,
+"blurb": `A 1980–83 Canadian series of original and adapted horror stories created by Bill Howell.`,
 "source": `<a href="https://archive.org/details/CBC_NightfallOTR">Internet Archive</a>`,
 "shows": [
 	{
@@ -1324,7 +1324,7 @@ const archive = [
 	"code": `014-Ship`,
 	"heading": `14: <cite>The Stone Ship</cite>`,
 	"blurb": `A ship finds a massive vessel of stone out on the open sea, full of treasures and monsters. Adapted from a story by William Hope Hodgson.`,
-	"notes": `drowning, gunshots (19:24&ndash;29)`,
+	"notes": `drowning, gunshots (19:24–29)`,
 	},
 	{
 	"code": `018-Ringing`,
@@ -1336,7 +1336,7 @@ const archive = [
 	{
 	"code": `034-Hell`,
 	"heading": `34: <cite>The Book of Hell</cite>`,
-	"blurb": `Three publishers read the &ldquo;Book of Hell&rdquo;, an account of infernal torment written by a man who's been dead for years.`,
+	"blurb": `Three publishers read the “Book of Hell”, an account of infernal torment written by a man who's been dead for years.`,
 	"notes": `explosion (24:56), injections, involuntary medical experiments`,
 	"banger": true,
 	},
@@ -1349,7 +1349,7 @@ const archive = [
 	{
 	"code": `062-Sea`,
 	"heading": `62: <cite>The Road Ends at the Sea</cite><!--title listed in the Internet Archive collection appears to be incorrect-->`,
-	"blurb": `A couple of lighthouse keepers' solitude is broken by the arrival of an old &ldquo;friend&rdquo;&mdash;and romantic rival&mdash;and a massive black freighter just offshore.`,
+	"blurb": `A couple of lighthouse keepers' solitude is broken by the arrival of an old “friend”—and romantic rival—and a massive black freighter just offshore.`,
 	},
 	{
 	"code": `075-Lazarus`,
@@ -1409,13 +1409,13 @@ const archive = [
 	{
 	"code": `09-TG_6`,
 	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;6`,
-	"blurb": `<cite>The Journey of the King</cite>, parts &#x2160;&ndash;&#x2166;. Read by Kevin McAsh, Måns Broo, and Robin Cotter.`,
+	"blurb": `<cite>The Journey of the King</cite>, parts &#x2160;–&#x2166;. Read by Kevin McAsh, Måns Broo, and Robin Cotter.`,
 	"notes": `alcohol`,
 	},
 	{
 	"code": `10-TG_7`,
 	"heading": `book 2: <cite>Time and the Gods</cite>, part&nbsp;7`,
-	"blurb": `<cite>The Journey of the King</cite>, parts &#x2167;&ndash;&#x216a;. Readings by Robin Cotter and Elmensdorp.`,
+	"blurb": `<cite>The Journey of the King</cite>, parts &#x2167;–&#x216a;. Readings by Robin Cotter and Elmensdorp.`,
 	"notes": `alcohol`,
 	},
 	{
@@ -1441,32 +1441,32 @@ const archive = [
 {
 "code": `QP`,
 "heading": `<cite>Quiet, Please</cite>`,
-"blurb": `A 1947&ndash;49 radio horror anthology written by Wyllis Cooper, starring radio announcer Ernest Chappell in roles speaking directly to the audience.`,
+"blurb": `A 1947–49 radio horror anthology written by Wyllis Cooper, starring radio announcer Ernest Chappell in roles speaking directly to the audience.`,
 "source": `<a href="https://www.quietplease.org">quietplease.org</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `001-Nothing`,
 	"heading": `1: <cite>Nothing Behind the Door</cite>`,
-	"blurb": `Bank robbers try to hide the money in a mountain shed that contains&mdash;literally&mdash;nothing.`,
+	"blurb": `Bank robbers try to hide the money in a mountain shed that contains—literally—nothing.`,
 	"banger": true,
 	},
 	{
 	"code": `006-Tomorrow`,
 	"heading": `6: <cite>I Remember Tomorrow</cite>`,
-	"blurb": `A time-traveller explains why three criminals must be stopped&mdash;and why <em>you</em> will stop them.`,
+	"blurb": `A time-traveller explains why three criminals must be stopped—and why <em>you</em> will stop them.`,
 	"notes": `alcohol, betrayal, gunshots (26:16)`,
 	},
 	{
 	"code": `007-Inquest`,
 	"heading": `7: <cite>Inquest</cite>`,
-	"blurb": `A heartless man faces a murder inquest like no other&mdash;a jury in costume, an audience of millions, and the mysterious Coroner&hellip;`,
+	"blurb": `A heartless man faces a murder inquest like no other—a jury in costume, an audience of millions, and the mysterious Coroner…`,
 	"notes": `ableism, broken arm (poorly healed), domestic abuse, financial abuse`,
 	},
 	{
 	"code": `009-Mile`,
 	"heading": `9: <cite>A Mile High and a Mile Deep</cite> (script read)`,
-	"blurb": `The Earth takes its due in the mines far below Butte, Montana&mdash;the city a mile high and a mile deep. An amateur reading of this lost episode's script.`,
+	"blurb": `The Earth takes its due in the mines far below Butte, Montana—the city a mile high and a mile deep. An amateur reading of this lost episode's script.`,
 	"notes": `claustrophobia, darkness`,
 	},
 	{
@@ -1478,7 +1478,7 @@ const archive = [
 	{
 	"code": `022-Graveyard`,
 	"heading": `22: <cite>Take Me Out to the Graveyard</cite>`,
-	"blurb": `A taxi driver tells how all his passengers want to go to the graveyard&mdash;and how they die along the way.`,
+	"blurb": `A taxi driver tells how all his passengers want to go to the graveyard—and how they die along the way.`,
 	"banger": true,
 	},
 	{
@@ -1514,7 +1514,7 @@ const archive = [
 	{
 	"code": `038-Coat`,
 	"heading": `38: <cite>Wear the Dead Man's Coat</cite>`,
-	"blurb": `A homeless beggar kills a man for his coat, then remembers a saying: &ldquo;Wear the dead man's coat, none will take note&rdquo;.`,
+	"blurb": `A homeless beggar kills a man for his coat, then remembers a saying: “Wear the dead man's coat, none will take note”.`,
 	"notes": `alcohol, betrayal`,
 	"banger": true,
 	},
@@ -1528,12 +1528,12 @@ const archive = [
 	"code": `042-Forget`,
 	"heading": `42: <cite>A Night to Forget</cite>`,
 	"blurb": `A radio actor has nightmares of his impending death that slowly seep into reality.`,
-	"notes": `funeral arrangements, gunshots (26:10&ndash;26:16), murder`,
+	"notes": `funeral arrangements, gunshots (26:10–26:16), murder`,
 	},
 	{
 	"code": `045-Twelve`,
 	"heading": `45: <cite>12 to 5</cite>`,
-	"blurb": `A graveyard shift radio <abbr>DJ</abbr> has an unusual visitor&mdash;a news-reader who reads the future.`,
+	"blurb": `A graveyard shift radio <abbr>DJ</abbr> has an unusual visitor—a news-reader who reads the future.`,
 	},
 	{
 	"code": `046-Clarissa`,
@@ -1549,7 +1549,7 @@ const archive = [
 	{
 	"code": `048-Mountain`,
 	"heading": `48: <cite>How Beautiful Upon the Mountain</cite>`,
-	"blurb": `Two men seek to summit Everest&mdash;giant mountain&mdash;home of the gods&mdash;beautiful, deadly bride.`,
+	"blurb": `Two men seek to summit Everest—giant mountain—home of the gods—beautiful, deadly bride.`,
 	},
 	{
 	"code": `050-Ray`,
@@ -1573,7 +1573,7 @@ const archive = [
 	"code": `060-Fourble`,
 	"heading": `60: <cite>The Thing on the Fourble Board</cite>`,
 	"blurb": `An oil derrick pulls an invisible creature from the depths of the earth.`,
-	"notes": `betrayal, gunshots (18:58&ndash;18:59), spiders?`,
+	"notes": `betrayal, gunshots (18:58–18:59), spiders?`,
 	"banger": true,
 	},
 	{
@@ -1586,13 +1586,13 @@ const archive = [
 	{
 	"code": `067-Lamp`,
 	"heading": `67: <cite>Light the Lamp for Me</cite>`,
-	"blurb": `An old man's oil lamp lets him travel to the past as often as he likes&mdash;but only once to the future.`,
+	"blurb": `An old man's oil lamp lets him travel to the past as often as he likes—but only once to the future.`,
 	"notes": `disease, loneliness`,
 	},
 	{
 	"code": `068-Meet`,
 	"heading": `68: <cite>Meet John Smith, John</cite>`,
-	"blurb": `A man gives to a beggar who just so happens to share his name&mdash;a lot more than his name, in fact.`,
+	"blurb": `A man gives to a beggar who just so happens to share his name—a lot more than his name, in fact.`,
 	"notes": `adultery, alcohol, murder`,
 	},
 	{
@@ -1609,14 +1609,14 @@ const archive = [
 	{
 	"code": `076-John`,
 	"heading": `76: <cite>My Son, John</cite>`,
-	"blurb": `A bereaved father begs a wise woman for any way to bring his son back&mdash;no matter the danger, the cost.`,
+	"blurb": `A bereaved father begs a wise woman for any way to bring his son back—no matter the danger, the cost.`,
 	"notes": `animal attacks, bite injury`,
 	"banger": true,
 	},
 	{
 	"code": `081-Snow`,
 	"heading": `81: <cite>The Time of the Big Snow</cite>`,
-	"blurb": `Two young children lose their way in a blizzard and discover the truth behind the old saying about snow: &ldquo;The old woman's picking her geese&rdquo;.`,
+	"blurb": `Two young children lose their way in a blizzard and discover the truth behind the old saying about snow: “The old woman's picking her geese”.`,
 	},
 	{
 	"code": `083-Murder`,
@@ -1627,7 +1627,7 @@ const archive = [
 	{
 	"code": `084-Summer`,
 	"heading": `84: <cite>Summer Goodbye</cite>`,
-	"blurb": `Robbers escape from the police&mdash;but can't seem to escape the hitch-hiker they see over and over again.`,
+	"blurb": `Robbers escape from the police—but can't seem to escape the hitch-hiker they see over and over again.`,
 	"notes": `brushfire, gunshots (22:20, 23:48, 24:17), unhealthy romantic relationship`,
 	},
 	{
@@ -1640,7 +1640,7 @@ const archive = [
 	{
 	"code": `088-Ideas`,
 	"heading": `88: <cite>Where Do You Get Your Ideas?</cite>`,
-	"blurb": `Wyllis Cooper, the series' writer, meets a barfly who wonders where he gets his ideas&mdash;and insists Cooper listens to his own strange story.`,
+	"blurb": `Wyllis Cooper, the series' writer, meets a barfly who wonders where he gets his ideas—and insists Cooper listens to his own strange story.`,
 	"notes": `gunshot (12:25)`,
 	},
 	{
@@ -1665,27 +1665,27 @@ const archive = [
 	{
 	"code": `103-Tanglefoot`,
 	"heading": `103: <cite>Tanglefoot</cite>`,
-	"blurb": `A man breeds giant flies whose hunger grows in proportion&hellip; and out of control.`,
+	"blurb": `A man breeds giant flies whose hunger grows in proportion… and out of control.`,
 	"notes": `animal death, betrayal`,
 	},
 	{
 	"code": `106-Quiet`,
 	"heading": `106: <cite>Quiet, Please</cite>`,
-	"blurb": `The last man alive tells a story of love, hate, bigotry, supremacism, and war&mdash;all-consuming war.`,
+	"blurb": `The last man alive tells a story of love, hate, bigotry, supremacism, and war—all-consuming war.`,
 	},
 ],
 },
 {
 "code": `RCP`,
 "heading": `<cite>Radio City Playhouse</cite>`,
-"blurb": `A 1948&ndash;50 anthology of original radio dramas and adaptations, including a few with a touch of the supernatural.`,
+"blurb": `A 1948–50 anthology of original radio dramas and adaptations, including a few with a touch of the supernatural.`,
 "source": `<a href="https://archive.org/details/radio_city_playhouse_202008">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `58-Wind`,
 	"heading": `58: <cite>The Wind</cite>`,
-	"blurb": `A former pilot is deathly afraid of the wind, which he believes is out to kill him, but his friends can't&mdash;or won't&mdash;help. Adapted from a story by Ray Bradbury.`,
+	"blurb": `A former pilot is deathly afraid of the wind, which he believes is out to kill him, but his friends can't—or won't—help. Adapted from a story by Ray Bradbury.`,
 	"notes": `sanism`,
 	"banger": true,
 	},
@@ -1746,7 +1746,7 @@ const archive = [
 	{
 	"code": `53_54-Propagation`,
 	"heading": `53 and 54: <cite>Propagation of Light in a Vacuum</cite>`,
-	"blurb": `A space traveller struggles to stay sane in the world beyond the speed of light&mdash;with the help of his imaginary wife.`,
+	"blurb": `A space traveller struggles to stay sane in the world beyond the speed of light—with the help of his imaginary wife.`,
 	"notes": `drug overdose, murder-suicide, stabbing, starvation`,
 	},
 	{
@@ -1766,14 +1766,14 @@ const archive = [
 {
 "code": `SNM`,
 "heading": `<cite>Sleep No More</cite>`,
-"blurb": `A 1956&ndash;57 anthology of short horror stories read by actor Nelson Olmsted after tightening budgets started to make full radio dramas infeasible.`,
+"blurb": `A 1956–57 anthology of short horror stories read by actor Nelson Olmsted after tightening budgets started to make full radio dramas infeasible.`,
 "source": `<a href="https://archive.org/details/sleep_no_more_radio">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `05-Hill_Hat`,
 	"heading": `5: <cite>Over the Hill</cite> + <cite>The Man in the Black Hat</cite>`,
-	"blurb": `A delusional man &ldquo;escapes&rdquo; his nagging wife. A gambler meets a stranger who gives him unnatural luck. Written by Michael Fessier.`,
+	"blurb": `A delusional man “escapes” his nagging wife. A gambler meets a stranger who gives him unnatural luck. Written by Michael Fessier.`,
 	"notes": `guillotine death, implied domestic violence`,
 	},
 	{
@@ -1794,14 +1794,14 @@ const archive = [
 {
 "code": `Sus`,
 "heading": `<cite>Suspense</cite>`,
-"blurb": `A 1940&ndash;62 anthology made by a bevy of talent. Most shows featured ordinary people thrust into suspenseful&mdash;even supernatural&mdash;situations.`,
+"blurb": `A 1940–62 anthology made by a bevy of talent. Most shows featured ordinary people thrust into suspenseful—even supernatural—situations.`,
 "source": `<a href="https://archive.org/details/OTRR_Suspense_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `011-Hitch`,
 	"heading": `11: <cite>The Hitch-Hiker</cite>`,
-	"blurb": `A man sees the same hitch-hiker calling for him again and again&hellip; and again&hellip; Written by Lucille Fletcher, introduction by and starring Orson Welles.`,
+	"blurb": `A man sees the same hitch-hiker calling for him again and again… and again… Written by Lucille Fletcher, introduction by and starring Orson Welles.`,
 	"notes": `car crash, obsession, traffic death`,
 	"banger": true,
 	},
@@ -1815,25 +1815,25 @@ const archive = [
 	{
 	"code": `087-Barastro`,
 	"heading": `87: <cite>The Marvellous Barastro</cite>`,
-	"blurb": `The world's second-greatest magician announces his plan to take revenge on the first&mdash;his mirror image. Starring Orson Welles.`,
+	"blurb": `The world's second-greatest magician announces his plan to take revenge on the first—his mirror image. Starring Orson Welles.`,
 	"notes": `alcohol adverts, betrayal, stalking, strangulation`,
 	},
 	{
 	"code": `092-Donovan_pt1`,
 	"heading": `92: <cite>Donovan's Brain</cite>, part&nbsp;1`,
-	"blurb": `A scientist rescues a wealthy businessman's life by preserving his brain&mdash;only to fall under its malign sway. Starring Orson Welles.`,
+	"blurb": `A scientist rescues a wealthy businessman's life by preserving his brain—only to fall under its malign sway. Starring Orson Welles.`,
 	"notes": `alcohol adverts, animal bite, animal death, animal experimentation, betrayal, human experimentation, institutionalisation, mind control, paranoia`,
 	},
 	{
 	"code": `093-Donovan_pt2`,
 	"heading": `93: <cite>Donovan's Brain</cite>, part&nbsp;2`,
-	"blurb": `A scientist rescues a wealthy businessman's life by preserving his brain&mdash;only to fall under its malign sway. Starring Orson Welles.`,
+	"blurb": `A scientist rescues a wealthy businessman's life by preserving his brain—only to fall under its malign sway. Starring Orson Welles.`,
 	"notes": `alcohol adverts, betrayal, human experimentation, institutionalisation, mind control, injection, non-consensual surgery, strangulation, suicide?`,
 	},
 	{
 	"code": `094-Fugue`,
 	"heading": `94: <cite>Fugue in C Minor</cite>`,
-	"blurb": `A music-loving widower remarries a woman who shares his passion&hellip; his children have other ideas. Written by Lucille Fletcher, starring Vincent Price and Ida Lupino.`,
+	"blurb": `A music-loving widower remarries a woman who shares his passion… his children have other ideas. Written by Lucille Fletcher, starring Vincent Price and Ida Lupino.`,
 	"notes": `alcohol adverts, asphyxiation, claustrophobia, heart attack`,
 	"banger": true,
 	},
@@ -1865,7 +1865,7 @@ const archive = [
 	{
 	"code": `259-Alphabet`,
 	"heading": `259: <cite>Murder Aboard the Alphabet</cite>`,
-	"blurb": `A ship's crew find their captain's obsession with orderliness harmless until they start disappearing&mdash;in alphabetical order.`,
+	"blurb": `A ship's crew find their captain's obsession with orderliness harmless until they start disappearing—in alphabetical order.`,
 	"notes": `alcohol adverts, disappearance at sea, implied execution, imprisonment, sanism`,
 	},
 	{
@@ -1877,7 +1877,7 @@ const archive = [
 	{
 	"code": `346-Ghost`,
 	"heading": `346: <cite>Ghost Hunt</cite>`,
-	"blurb": `A skeptical radio <abbr>DJ</abbr> and a psychic investigator spend a night in a house nicknamed the &ldquo;Death Trap&rdquo;.`,
+	"blurb": `A skeptical radio <abbr>DJ</abbr> and a psychic investigator spend a night in a house nicknamed the “Death Trap”.`,
 	"notes": `blood, hallucination?, suicide?`,
 	"banger": true,
 	},
@@ -1885,13 +1885,13 @@ const archive = [
 	"code": `379-Salvage`,
 	"heading": `379: <cite>Salvage</cite>`,
 	"blurb": `A pilot, his ex, and her husband get tangled in a fraught expedition to recover sunken gold from the Caribbean. Starring Van Johnson.`,
-	"notes": `betrayal, gunshots (15:23, 20:05, 20:34&ndash;20:40), plane crash`,
+	"notes": `betrayal, gunshots (15:23, 20:05, 20:34–20:40), plane crash`,
 	},
 	{
 	"code": `625-Classified`,
 	"heading": `625: <cite>Classified Secret</cite>`,
 	"blurb": `Spies match money, wits, and steel on an interstate bus, with deadly military secrets in the balance.`,
-	"notes": `gunshots (21:36&ndash;37, 21:48)`,
+	"notes": `gunshots (21:36–37, 21:48)`,
 	"banger": true,
 	},
 	{
@@ -1924,7 +1924,7 @@ const archive = [
 	"code": `689-Peralta`,
 	"heading": `689: <cite>The Peralta Map</cite>`,
 	"blurb": `Treasure hunters contract a local guide to help them find an ancient, legendary, <em>haunted</em> gold mine.`,
-	"notes": `abandonment, betrayal, fall injury, gunshots (25:25&ndash;25:27, 27:29&ndash;27:32)`,
+	"notes": `abandonment, betrayal, fall injury, gunshots (25:25–25:27, 27:29–27:32)`,
 	},
 	{
 	"code": `799-Deep`,
@@ -1948,20 +1948,20 @@ const archive = [
 	"code": `916-Heads`,
 	"heading": `916: <cite>Heads You Lose</cite>`,
 	"blurb": `Detectives take a lucrative case to find a terminally-ill embezzler years after he should've died, and find themselves in over their heads.`,
-	"notes": `cigarette ads, gunshots (19:08&ndash;19:29), entombment, suicide`,
+	"notes": `cigarette ads, gunshots (19:08–19:29), entombment, suicide`,
 	},
 	{
 	"code": `927-Infinity`,
 	"heading": `927: <cite>That Real Crazy Infinity</cite>`,
 	"blurb": `Two beatniks out of money take on a simple delivery job that ends up involving esoteric electronics and the voices of the past.`,
-	"notes": `explosion (20:02&ndash;20:09)`,
+	"notes": `explosion (20:02–20:09)`,
 	},
 ],
 },
 {
 "code": `TF`,
 "heading": `<cite>Theater 5</cite>`,
-"blurb": `A 1964&ndash;65 anthology of radio dramas made in an attempt to revive the tradition after the rise of television.`,
+"blurb": `A 1964–65 anthology of radio dramas made in an attempt to revive the tradition after the rise of television.`,
 "source": `<a href="https://archive.org/details/OTRR_Theater_Five_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -1974,7 +1974,7 @@ const archive = [
 	{
 	"code": `154-Honey`,
 	"heading": `154: <cite>The Land of Milk and Honey</cite>`,
-	"blurb": `A sinner ends up in heaven, where he gets all he ever wanted&mdash;an exasperating paradise.`,
+	"blurb": `A sinner ends up in heaven, where he gets all he ever wanted—an exasperating paradise.`,
 	"notes": `alcohol, betrayal, gunshots (5:32, 17:08)`,
 	"banger": true,
 	},
@@ -1983,14 +1983,14 @@ const archive = [
 {
 "code": `WC`,
 "heading": `<cite>The Weird Circle</cite>`,
-"blurb": `A 1943&ndash;45 anthology that adapted classic horror and supernatural tales to the airwaves, with low budgets limiting the use of music and sound effects.`,
+"blurb": `A 1943–45 anthology that adapted classic horror and supernatural tales to the airwaves, with low budgets limiting the use of music and sound effects.`,
 "source": `<a href="https://archive.org/details/OTRR_Weird_Circle_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `43-Bell`,
 	"heading": `43: <cite>The Bell Tower</cite>`,
-	"blurb": `An arrogant architect brings doom upon himself in the creation of an &ldquo;impossible&rdquo; bell tower. Adapted from a story by Herman Melville.`,
+	"blurb": `An arrogant architect brings doom upon himself in the creation of an “impossible” bell tower. Adapted from a story by Herman Melville.`,
 	"notes": `bludgeon death, crush death`,
 	"banger": true,
 	},
@@ -2034,14 +2034,14 @@ const archive = [
 {
 "code": `WT`,
 "heading": `<cite>The Witch's Tale</cite>`,
-"blurb": `The first broadcast horror anthology (from 1931&ndash;38), written by Alonzo Deen Cole and hosted by the witch &ldquo;Old Nancy&rdquo; and her black cat, Satan.`,
+"blurb": `The first broadcast horror anthology (from 1931–38), written by Alonzo Deen Cole and hosted by the witch “Old Nancy” and her black cat, Satan.`,
 "source": `<a href="https://radioechoes.com/?page=series&genre=OTR-Thriller&series=The%20Witchs%20Tale">Radio Echoes</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `041-Bottle`,
 	"heading": `41: <cite>The Wonderful Bottle</cite>`,
-	"blurb": `A tramp buys a bottle that grants any wish&mdash;but his soul's forfeit unless he sells it for less than he paid. Adapted from a story by Robert Louis Stevenson.`,
+	"blurb": `A tramp buys a bottle that grants any wish—but his soul's forfeit unless he sells it for less than he paid. Adapted from a story by Robert Louis Stevenson.`,
 	"notes": `leprosy, parental death`,
 	},
 	{
@@ -2055,7 +2055,7 @@ const archive = [
 {
 "code": `WBP`,
 "heading": `<cite>With Book and Pipe</cite>`,
-"blurb": `A mostly-lost anthology of radio stories probably broadcast in the 1940s, narrated by &ldquo;the Man with Book and Pipe&rdquo;; only one episode survives.`,
+"blurb": `A mostly-lost anthology of radio stories probably broadcast in the 1940s, narrated by “the Man with Book and Pipe”; only one episode survives.`,
 "source": `<a href="https://archive.org/details/UniqueOldTimeRadioEpisodes/With+Book+and+Pipe+1943.mp3">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
@@ -2071,14 +2071,14 @@ const archive = [
 {
 "code": `XMO`,
 "heading": `<cite>X Minus One</cite>`,
-"blurb": `5, 4, 3, 2&hellip; x minus 1. A 1955&ndash;58 sci-fi series of adaptions and originals mostly scripted by George Lefferts and Ernest Kinoy; successor to <cite>Dimension X</cite>.`,
+"blurb": `5, 4, 3, 2… x minus 1. A 1955–58 sci-fi series of adaptions and originals mostly scripted by George Lefferts and Ernest Kinoy; successor to <cite>Dimension X</cite>.`,
 "source": `<a href="https://archive.org/details/OTRR_X_Minus_One_Singles">Internet Archive</a>`,
 "copyrightSafe": true,
 "shows": [
 	{
 	"code": `037-Cave`,
 	"heading": `37: <cite>The Cave of Night</cite>`,
-	"blurb": `The world unites to rescue an astronaut adrift in the void&mdash;but he may not want to return. Adapted from a story by James E.&nbsp;Gunn.`,
+	"blurb": `The world unites to rescue an astronaut adrift in the void—but he may not want to return. Adapted from a story by James E.&nbsp;Gunn.`,
 	"notes": `suicide`,
 	"banger": true,
 	},
@@ -2093,19 +2093,19 @@ const archive = [
 	"code": `042-Dinosaur`,
 	"heading": `42: <cite>A Gun for Dinosaur</cite>`,
 	"blurb": `A time-travelling hunting guide explains why he's so selective about who he helps hunt dinosaur. Adapted from a story by L.&nbsp;Sprague de Camp.`,
-	"notes": `adultery, brawl, gunshots (7:17, 11:02, 13:18&ndash;13:20, 15:29, 18:17, 19:36&ndash;38, 20:05)`,
+	"notes": `adultery, brawl, gunshots (7:17, 11:02, 13:18–13:20, 15:29, 18:17, 19:36–38, 20:05)`,
 	},
 	{
 	"code": `043-Tunnel`,
 	"heading": `43: <cite>Tunnel Under the World</cite>`,
-	"blurb": `A man wakes up on the 15th of June over and over&mdash;in a silent town utterly dominated by advertising. Adapted from a story by Frederik Pohl.`,
+	"blurb": `A man wakes up on the 15th of June over and over—in a silent town utterly dominated by advertising. Adapted from a story by Frederik Pohl.`,
 	"notes": `bludgeoning death, paranoia, surveillance`,
 	},
 	{
 	"code": `063-Student`,
 	"heading": `63: <cite>Student Body</cite>`,
 	"blurb": `An all-consuming, rapidly-evolving species of alien mice poses an existential challenge to humanity. Adapted from a story by F.&nbsp;L.&nbsp;Wallace.`,
-	"notes": `gunshots (21:55&ndash;57)`,
+	"notes": `gunshots (21:55–57)`,
 	},
 	{
 	"code": `065-Surface`,
@@ -2115,7 +2115,7 @@ const archive = [
 	{
 	"code": `068-Lifeboat`,
 	"heading": `68: <cite>The Lifeboat Mutiny</cite>`,
-	"blurb": `Two planetary surveyors buy an <abbr>AI</abbr> lifeboat that once belonged to an alien navy&mdash;and doesn't know the war's over. Adapted from a story by Robert Sheckley.`,
+	"blurb": `Two planetary surveyors buy an <abbr>AI</abbr> lifeboat that once belonged to an alien navy—and doesn't know the war's over. Adapted from a story by Robert Sheckley.`,
 	"notes": `confinement, suicide threat`,
 	"banger": true,
 	},
@@ -2123,19 +2123,19 @@ const archive = [
 	"code": `071-Colony`,
 	"heading": `71: <cite>Colony</cite>`,
 	"blurb": `Everyday objects turn deadly against colonists on an alien planet. Adapted from a story by Philip K.&nbsp;Dick.`,
-	"notes": `being digested alive, gunshots (10:28, 15:24&ndash;34, 19:16), strangulation`,
+	"notes": `being digested alive, gunshots (10:28, 15:24–34, 19:16), strangulation`,
 	"banger": true,
 	},
 	{
 	"code": `092-Victim`,
 	"heading": `92: <cite>The Seventh Victim</cite>`,
 	"blurb": `After the last World War, peace is kept via man-hunt bloodsport, but not every contender is up to the task. Adapted from a story by Robert Sheckley.`,
-	"notes": `betrayal, gunshots (2:32&ndash;52, 4:25&ndash;26, 11:46&ndash;48, 20:56)`,
+	"notes": `betrayal, gunshots (2:32–52, 4:25–26, 11:46–48, 20:56)`,
 	},
 	{
 	"code": `101-Category`,
 	"heading": `101: <cite>The Category Inventor</cite>`,
-	"blurb": `A musician replaced by a robot scrambles to invent a unique new job&mdash;just like everyone else. Adapted from a story by Arthur Sellings.`,
+	"blurb": `A musician replaced by a robot scrambles to invent a unique new job—just like everyone else. Adapted from a story by Arthur Sellings.`,
 	},
 	{
 	"code": `118-Light`,
