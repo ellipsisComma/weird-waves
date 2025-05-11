@@ -318,15 +318,17 @@ function togglePlay() {
 function skipShow() {
 	if (
 		getElement(`queue`).children.length === 0
-		||
-		!getElement(`audio`).duration
+//		||
+//		!getElement(`audio`).duration
 	) return;
 	if (!getElement(`audio`).paused) getElement(`audio`).dataset.playNextShow = `true`;
-
+	removeShow(getElement(`queue`).firstElementChild);
+/*
 	// seek to 5 seconds before end, unless that's before currentTime
 	if (getElement(`audio`).currentTime < getElement(`audio`).duration - 5) {
 		getElement(`audio`).currentTime = getElement(`audio`).duration - 5;
 	}
+*/
 }
 
 // change seek bar to match audio unless audio metadata unavailable
