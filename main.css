@@ -1134,9 +1134,12 @@ textarea {
 	line-height: 1;
 	border-width: var(--line-width);
 	border-style: solid;
-	border-color: var(--box-border-colour);
+	border-color: var(--control-default-colour);
 	border-block-start-width: calc(var(--control-depth) + var(--line-width));
 	resize: none;
+	&:focus {
+		border-color: var(--control-interacted-colour);
+	}
 }
 #import-error-list {
 	overflow-wrap: break-word;
