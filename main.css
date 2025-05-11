@@ -823,6 +823,10 @@ a:active {
 	& .icon {
 		stroke: var(--control-default-colour);
 	}
+	&:hover {
+		top: calc(-1 * var(--control-depth) + var(--line-width));
+		box-shadow: 0 calc(var(--control-depth) - var(--line-width)) var(--control-default-colour);
+	}
 	&:is(:active, [disabled]) {
 		top: 0;
 		color: var(--control-interacted-colour);
