@@ -1114,7 +1114,7 @@ main > * > :last-child {
 	inset-block-start: 0;
 	margin-block-start: 0;
 	margin-block-end: var(--gap-size);
-	padding-block-start: var(--control-depth);
+	padding-block-start: calc(2 * var(--control-depth));
 	padding-block-end: var(--gap-size);
 	background-color: var(--background-colour);
 	border-block-end-width: var(--line-width);
