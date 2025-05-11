@@ -315,9 +315,17 @@ function togglePlay() {
 
 // end current show and autoplay next show if current show was playing
 function skipShow() {
-	if (getElement(`queue`).children.length === 0) return;
+	if (
+		getElement(`queue`).children.length === 0
+		||
+		!getElement(`audio`).duration
+	) return;
 	if (!getElement(`audio`).paused) getElement(`audio`).dataset.playNextShow = `true`;
-	removeShow(getElement(`queue`).firstElementChild);
+
+	// seek to 5 seconds before end, unless that's before currentTime
+	if (getElement(`audio`).currentTime < getElement(`audio`).duration - 5) {
+		getElement(`audio`).currentTime = getElement(`audio`).duration - 5;
+	}
 }
 
 // change seek bar to match audio unless audio metadata unavailable
@@ -332,7 +340,8 @@ function startManualSeek() {
 	// ignore seek attempt if audio metadata hasn't loaded or if attempting to seek to end of show
 	if (
 		!getElement(`audio`).duration
-		|| getElement(`seekBar`).value === getElement(`seekBar`).max
+		||
+		getElement(`seekBar`).value === getElement(`seekBar`).max
 	) return;
 	if (!getElement(`audio`).paused) getElement(`audio`).pause();
 	getElement(`audio`).currentTime = getElement(`audio`).duration * getElement(`seekBar`).value / 100;
@@ -374,9 +383,11 @@ function initialise() {
 	// player audio events
 	getElement(`audio`).addEventListener(`loadstart`, () => {
 		getElement(`playToggle`).disabled = true;
+		getElement(`skipButton`).disabled = true;
 	});
 	getElement(`audio`).addEventListener(`loadedmetadata`, () => {
 		getElement(`playToggle`).disabled = false;
+		getElement(`skipButton`).disabled = false;
 		setTimestampFromSeconds(getElement(`showTimeTotal`), getElement(`audio`).duration);
 	});
 	getElement(`audio`).addEventListener(`timeupdate`, updateSeekBar);
