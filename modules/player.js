@@ -159,6 +159,7 @@ function importQueue() {
 	if (invalidIDs.length === 0) {
 		clearQueue();
 		for (const ID of importIDs) addShow(ID);
+		getElement(`importButton`).success(`Imported`);
 	} else {
 		getElement(`importErrorList`).replaceChildren(...invalidIDs.map(ID => {
 			const IDitem = cloneTemplate(`importErrorItem`);
@@ -419,7 +420,7 @@ function initialise() {
 		}
 	});
 	getElement(`copyButton`).addEventListener(`click`, copyQueue);
-	document.getElementById(`import-button`).addEventListener(`click`, importQueue);
+	getElement(`importButton`).addEventListener(`click`, importQueue);
 
 	// archive interface events
 	getElement(`seriesList`).addEventListener(`click`, () => {

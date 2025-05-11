@@ -50,6 +50,7 @@ setElement(`queueData`, `#queue-data`);
 setElement(`copyButton`, `#copy-button`);
 setElement(`importErrorMessage`, `#import-error-message`);
 setElement(`importErrorList`, `#import-error-list`);
+setElement(`importButton`, `#import-button`);
 
 // archive
 setElement(`seriesLinks`, `#archive-series-links`);
