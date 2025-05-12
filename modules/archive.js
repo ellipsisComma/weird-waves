@@ -7,9 +7,6 @@
 */
 
 import {
-	getElement,
-} from "./page.js?type=module,v=2025-05-11";
-import {
 	cloneTemplate,
 } from "./templates.js?type=module,v=2025-05-11";
 import {
@@ -74,8 +71,8 @@ function buildArchive() {
 	// return if archive is improperly defined
 	if (!Array.isArray(archive)) return;
 
-	getElement(`seriesList`).replaceChildren(...archive.map(buildSeries));
-	getElement(`seriesLinks`).replaceChildren(...archive.map(buildSeriesLink));
+	document.getElementById(`series-list`).replaceChildren(...archive.map(buildSeries));
+	document.getElementById(`archive-series-links`).replaceChildren(...archive.map(buildSeriesLink));
 
 	// build out and reveal stats
 	document.getElementById(`stats-series`)?.setContent(String(archive.length));

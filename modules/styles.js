@@ -7,17 +7,13 @@
 		* matches styles across browsing contexts
 */
 
-import {
-	getElement,
-} from "./page.js?type=module,v=2025-05-11";
-
 // initialise local styles object
 const local = localStorageGet(`styles`, {});
 
 // update a style when triggered
 function setStyle(style, option) {
 	local[style] = option;
-	getElement(`${style}Select`).value = option;
+	document.getElementById(`${style}-select`).value = option;
 	document.documentElement.dataset[style] = local[style];
 	localStorageSet(`styles`, local);
 }
@@ -29,7 +25,7 @@ function initialise() {
 	local.font = document.documentElement.dataset.font;
 
 	for (const style of Object.keys(local)) {
-		const select = getElement(`${style}Select`);
+		const select = document.getElementById(`${style}-select`);
 		if (!select) continue;
 
 		// initialise select input (if stored theme doesn't exist, switch to default theme, and if no theme's set as default, switch to first theme)

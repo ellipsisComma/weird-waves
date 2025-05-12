@@ -9,9 +9,6 @@
 */
 
 import {
-	getElement,
-} from "./page.js?type=module,v=2025-05-11";
-import {
 	cloneTemplate,
 } from "./templates.js?type=module,v=2025-05-11";
 import {
@@ -25,7 +22,7 @@ const queueObserver = new MutationObserver((mutations) => {
 
 	// list queue of show IDs line-by-line in queue data box
 	setValidImport();
-	getElement(`queueData`).value = getShowIDs(getElement(`queue`)).join(`\n`);
+	document.getElementById(`queue-data`).value = getShowIDs(document.getElementById(`queue`)).join(`\n`);
 });
 
 // set of all show IDs
@@ -53,18 +50,18 @@ function setTimestampFromSeconds(element, time) {
 
 // get show element in archive
 function getShowInArchive(ID) {
-	return getElement(`seriesList`).querySelector(`.show-list > [data-show-id="${ID}"]`);
+	return document.getElementById(`series-list`).querySelector(`.show-list > [data-show-id="${ID}"]`);
 }
 
 // get show element if it's in the queue
 function getShowInQueue(ID) {
-	return getElement(`queue`).querySelector(`:scope > [data-show-id="${ID}"]`);
+	return document.getElementById(`queue`).querySelector(`:scope > [data-show-id="${ID}"]`);
 }
 
 // get show ID from a pool, adjusted for copyright safety
 function getRandomShowID(type = ``) {
 	// get pool, adjusted for copyright safety, then filter out shows already in queue
-	const pool = [...getElement(`seriesList`).querySelectorAll(`${
+	const pool = [...document.getElementById(`series-list`).querySelectorAll(`${
 		getSetting(`copyrightSafety`) ? `[data-copyright-safe="true"]` : ``
 	} .show-list > li${
 		type === `banger` ? `[data-banger="true"]` : ``
@@ -77,7 +74,7 @@ function getRandomShowID(type = ``) {
 
 // store queue as list of show IDs
 function storeQueue() {
-	localStorageSet(`shows`, getShowIDs(getElement(`queue`)));
+	localStorageSet(`shows`, getShowIDs(document.getElementById(`queue`)));
 }
 
 // get array of all show IDs on elements within a container
@@ -91,28 +88,28 @@ QUEUE
 
 // shuffle queue if it has at least 2 entries
 function shuffleQueue() {
-	let i = getElement(`queue`).children.length;
+	let i = document.getElementById(`queue`).children.length;
 	if (i < 2) return;
 
-	while (i > 0) getElement(`queue`).append(getElement(`queue`).children[Math.floor(Math.random() * i--)]);
+	while (i > 0) document.getElementById(`queue`).append(document.getElementById(`queue`).children[Math.floor(Math.random() * i--)]);
 }
 
 // clear queue
 function clearQueue() {
-	if (getElement(`queue`).children.length > 0) getElement(`queue`).replaceChildren();
+	if (document.getElementById(`queue`).children.length > 0) document.getElementById(`queue`).replaceChildren();
 }
 
 // copy current queue data to clipboard
 function copyQueue() {
-	navigator.clipboard.writeText(getElement(`queueData`).value);
-	getElement(`copyButton`).success(`Copied`);
+	navigator.clipboard.writeText(document.getElementById(`queue-data`).value);
+	document.getElementById(`copy-button`).success(`Copied`);
 }
 
 // reset import validity invalidity
 function setValidImport() {
-	getElement(`importErrorList`).replaceChildren();
-	getElement(`importErrorMessage`).hidden = true;
-	getElement(`queueData`).ariaInvalid = false;
+	document.getElementById(`import-error-list`).replaceChildren();
+	document.getElementById(`import-error-message`).hidden = true;
+	document.getElementById(`queue-data`).ariaInvalid = false;
 }
 
 // get closest string match to an invalid show ID during import attempt, as long as its similarity exceeds a minimum threshold
@@ -137,7 +134,7 @@ function matchInvalidShowID(invalidID) {
 
 // import queue from textbox
 function importQueue() {
-	const importList = getElement(`queueData`).value.trim();
+	const importList = document.getElementById(`queue-data`).value.trim();
 
 	// reset import 
 	setValidImport();
@@ -159,24 +156,24 @@ function importQueue() {
 	if (invalidIDs.length === 0) {
 		clearQueue();
 		for (const ID of importIDs) addShow(ID);
-		getElement(`importButton`).success(`Imported`);
+		document.getElementById(`import-button`).success(`Imported`);
 	} else {
-		getElement(`importErrorList`).replaceChildren(...invalidIDs.map(ID => {
+		document.getElementById(`import-error-list`).replaceChildren(...invalidIDs.map(ID => {
 			const IDitem = cloneTemplate(`importErrorItem`);
 			IDitem.querySelector(`.invalid-show-id`).textContent = ID;
 			IDitem.querySelector(`.matched-show-id`).textContent = matchInvalidShowID(ID);
 			return IDitem;
 		}));
-		getElement(`queueData`).value = importIDs.join(`\n`);
-		getElement(`queueData`).ariaInvalid = true;
-		getElement(`importErrorMessage`).hidden = false;
-		getElement(`importErrorMessage`).scrollIntoView();
+		document.getElementById(`queue-data`).value = importIDs.join(`\n`);
+		document.getElementById(`queue-data`).ariaInvalid = true;
+		document.getElementById(`import-error-message`).hidden = false;
+		document.getElementById(`import-error-message`).scrollIntoView();
 	}
 }
 
 // load queue from local storage
 function loadQueue() {
-	getElement(`queue`).replaceChildren();
+	document.getElementById(`queue`).replaceChildren();
 	for (const ID of localStorageGet(`shows`, []).filter(ID => allShowIDs.has(ID))) addShow(ID);
 }
 
@@ -190,7 +187,7 @@ SHOWS
 function addShow(ID) {
 	const showInQueue = getShowInQueue(ID);
 	if (showInQueue) {
-		getElement(`queue`).append(showInQueue);
+		document.getElementById(`queue`).append(showInQueue);
 		console.info(`re-added show:`, ID);
 		return;
 	}
@@ -219,7 +216,7 @@ function addShow(ID) {
 	newShow.querySelector(`.show-content`).appendChild(seriesInArchive.querySelector(`.series-source`).cloneNode(true));
 
 	// update page
-	getElement(`queue`).appendChild(templatedShow);
+	document.getElementById(`queue`).appendChild(templatedShow);
 }
 
 // add entire series to queue
@@ -232,7 +229,7 @@ function addRandomShow(showType) {
 	const ID = getRandomShowID(showType);
 	if (ID !== ``) {
 		addShow(ID);
-		window.scrollTo(0, getElement(`queue`).lastElementChild.offsetTop - getElement(`queueControls`).clientHeight);
+		window.scrollTo(0, document.getElementById(`queue`).lastElementChild.offsetTop - document.getElementById(`queue-controls`).clientHeight);
 	} else console.warn(`Can't add new show of type "${showType}": all shows of that type already in queue.`);
 }
 
@@ -256,47 +253,47 @@ function removeShow(target) {
 // write show parts onto page and load show audio file; if queue is empty, reset player
 function loadShow() {
 	// don't load show if first show in queue is already loaded
-	const firstShowID = getElement(`queue`).firstElementChild?.dataset.showId;
-	const loadedShowID = getElement(`loadedShow`).dataset.showId;
-	if (getElement(`queue`).children.length > 0 && firstShowID === loadedShowID) return;
+	const firstShowID = document.getElementById(`queue`).firstElementChild?.dataset.showId;
+	const loadedShowID = document.getElementById(`loaded-show`).dataset.showId;
+	if (document.getElementById(`queue`).children.length > 0 && firstShowID === loadedShowID) return;
 
-	getElement(`playToggle`).ariaPressed = `false`;
-	getElement(`loadedShow`).replaceChildren();
+	document.getElementById(`play-toggle`).ariaPressed = `false`;
+	document.getElementById(`loaded-show`).replaceChildren();
 
-	if (getElement(`queue`).children.length > 0) {
-		const show = getElement(`queue`).firstElementChild;
-		getElement(`loadedShow`).dataset.showId = show.dataset.showId;
+	if (document.getElementById(`queue`).children.length > 0) {
+		const show = document.getElementById(`queue`).firstElementChild;
+		document.getElementById(`loaded-show`).dataset.showId = show.dataset.showId;
 
 		// load audio file and show data
-		getElement(`audio`).src = showPath(show.dataset.showId);
-		getElement(`loadedShow`).replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
+		document.getElementById(`show-audio`).src = showPath(show.dataset.showId);
+		document.getElementById(`loaded-show`).replaceChildren(...show.querySelector(`.show-info`).cloneChildren());
 
 		// reset and reveal player controls
-		if (getElement(`audio`).dataset.playNextShow === `true`) {
-			if (getElement(`audio`).paused) getElement(`audio`).play();
-			getElement(`audio`).dataset.playNextShow = `false`;
-		} else getElement(`audio`).pause();
-		getElement(`seekBar`).value = 0;
-		getElement(`showTimeElapsed`).textContent = `00:00`;
-		getElement(`playerControls`).hidden = false;
+		if (document.getElementById(`show-audio`).dataset.playNextShow === `true`) {
+			if (document.getElementById(`show-audio`).paused) document.getElementById(`show-audio`).play();
+			document.getElementById(`show-audio`).dataset.playNextShow = `false`;
+		} else document.getElementById(`show-audio`).pause();
+		document.getElementById(`seek-bar`).value = 0;
+		document.getElementById(`show-time-elapsed`).textContent = `00:00`;
+		document.getElementById(`player-controls`).hidden = false;
 	} else {
 		// remove all queue children (including text nodes) so CSS :empty pseudo-class will apply
-		getElement(`queue`).replaceChildren();
+		document.getElementById(`queue`).replaceChildren();
 
 		// reset player
-		if (!getElement(`audio`).paused) getElement(`audio`).pause(); // otherwise audio continues playing
-		getElement(`audio`).removeAttribute(`src`); // check why this is necessary instead of just emptying [src]
-		getElement(`showTimeElapsed`).textContent = `00:00`;
-		getElement(`showTimeTotal`).textContent = `00:00`;
-		getElement(`playerControls`).hidden = true;
-		getElement(`loadedShow`).dataset.showId = ``;
+		if (!document.getElementById(`show-audio`).paused) document.getElementById(`show-audio`).pause(); // otherwise audio continues playing
+		document.getElementById(`show-audio`).removeAttribute(`src`); // check why this is necessary instead of just emptying [src]
+		document.getElementById(`show-time-elapsed`).textContent = `00:00`;
+		document.getElementById(`show-time-total`).textContent = `00:00`;
+		document.getElementById(`player-controls`).hidden = true;
+		document.getElementById(`loaded-show`).dataset.showId = ``;
 	}
 }
 
 // remove loaded show and autoplay next one if setting is on
 function endShow() {
-	if (getSetting(`autoPlayNextShow`)) getElement(`audio`).dataset.playNextShow = `true`;
-	removeShow(getElement(`queue`).firstElementChild);
+	if (getSetting(`autoPlayNextShow`)) document.getElementById(`show-audio`).dataset.playNextShow = `true`;
+	removeShow(document.getElementById(`queue`).firstElementChild);
 }
 
 /* ---
@@ -305,75 +302,75 @@ PLAYER
 
 // reset show time to 0
 function resetShow() {
-	getElement(`audio`).currentTime = 0;
+	document.getElementById(`show-audio`).currentTime = 0;
 }
 
 // toggle audio play/pause
 function togglePlay() {
-	if (getElement(`audio`).paused) getElement(`audio`).play();
-	else getElement(`audio`).pause();
+	if (document.getElementById(`show-audio`).paused) document.getElementById(`show-audio`).play();
+	else document.getElementById(`show-audio`).pause();
 }
 
 // end current show and autoplay next show if current show was playing
 function skipShow() {
 	if (
-		getElement(`queue`).children.length === 0
+		document.getElementById(`queue`).children.length === 0
 //		||
-//		!getElement(`audio`).duration
+//		!document.getElementById(`show-audio`).duration
 	) return;
-	if (!getElement(`audio`).paused) getElement(`audio`).dataset.playNextShow = `true`;
-	removeShow(getElement(`queue`).firstElementChild);
+	if (!document.getElementById(`show-audio`).paused) document.getElementById(`show-audio`).dataset.playNextShow = `true`;
+	removeShow(document.getElementById(`queue`).firstElementChild);
 /*
 	// seek to 5 seconds before end, unless that's before currentTime
-	if (getElement(`audio`).currentTime < getElement(`audio`).duration - 5) {
-		getElement(`audio`).currentTime = getElement(`audio`).duration - 5;
+	if (document.getElementById(`show-audio`).currentTime < document.getElementById(`show-audio`).duration - 5) {
+		document.getElementById(`show-audio`).currentTime = document.getElementById(`show-audio`).duration - 5;
 	}
 */
 }
 
 // change seek bar to match audio unless audio metadata unavailable
 function updateSeekBar() {
-	if (!getElement(`audio`).duration) return;
-	getElement(`seekBar`).value = getElement(`audio`).currentTime / getElement(`audio`).duration * 100;
-	setTimestampFromSeconds(getElement(`showTimeElapsed`), getElement(`audio`).currentTime);
+	if (!document.getElementById(`show-audio`).duration) return;
+	document.getElementById(`seek-bar`).value = document.getElementById(`show-audio`).currentTime / document.getElementById(`show-audio`).duration * 100;
+	setTimestampFromSeconds(document.getElementById(`show-time-elapsed`), document.getElementById(`show-audio`).currentTime);
 }
 
 // manually seek a time in the show
 function startManualSeek() {
 	// ignore seek attempt if audio metadata hasn't loaded or if attempting to seek to end of show
 	if (
-		!getElement(`audio`).duration
+		!document.getElementById(`show-audio`).duration
 		||
-		getElement(`seekBar`).value === getElement(`seekBar`).max
+		document.getElementById(`seek-bar`).value === document.getElementById(`seek-bar`).max
 	) return;
-	if (!getElement(`audio`).paused) getElement(`audio`).pause();
-	getElement(`audio`).currentTime = getElement(`audio`).duration * getElement(`seekBar`).value / 100;
+	if (!document.getElementById(`show-audio`).paused) document.getElementById(`show-audio`).pause();
+	document.getElementById(`show-audio`).currentTime = document.getElementById(`show-audio`).duration * document.getElementById(`seek-bar`).value / 100;
 }
 
 // end manual seek by playing audio
 function endManualSeek() {
-	getElement(`audio`).play();
+	document.getElementById(`show-audio`).play();
 }
 
 // toggle audio mute/unmute
 function toggleMute() {
-	getElement(`audio`).muted = !getElement(`audio`).muted;
+	document.getElementById(`show-audio`).muted = !document.getElementById(`show-audio`).muted;
 }
 
 // set audio volume
 function setVolume() {
-	getElement(`audio`).volume = getElement(`volumeControl`).value / 100;
-	if (getElement(`audio`).muted) toggleMute();
+	document.getElementById(`show-audio`).volume = document.getElementById(`volume-control`).value / 100;
+	if (document.getElementById(`show-audio`).muted) toggleMute();
 }
 
 // update state of mute button and volume slider to match show audio state
 function updateVolumeControls() {
-	if (getElement(`audio`).muted || getElement(`audio`).volume === 0) {
-		getElement(`volumeControl`).value = 0;
-		getElement(`muteToggle`).ariaPressed = `true`;
+	if (document.getElementById(`show-audio`).muted || document.getElementById(`show-audio`).volume === 0) {
+		document.getElementById(`volume-control`).value = 0;
+		document.getElementById(`mute-toggle`).ariaPressed = `true`;
 	} else {
-		getElement(`volumeControl`).value = getElement(`audio`).volume * 100;
-		getElement(`muteToggle`).ariaPressed = `false`;
+		document.getElementById(`volume-control`).value = document.getElementById(`show-audio`).volume * 100;
+		document.getElementById(`mute-toggle`).ariaPressed = `false`;
 	}
 }
 
@@ -384,36 +381,36 @@ INITIALISE
 // initialise all player events and interactions, and prepare queue
 function initialise() {
 	// player audio events
-	getElement(`audio`).addEventListener(`loadstart`, () => {
-		getElement(`playToggle`).disabled = true;
-		getElement(`skipButton`).disabled = true;
+	document.getElementById(`show-audio`).addEventListener(`loadstart`, () => {
+		document.getElementById(`play-toggle`).disabled = true;
+		document.getElementById(`skip-button`).disabled = true;
 	});
-	getElement(`audio`).addEventListener(`loadedmetadata`, () => {
-		getElement(`playToggle`).disabled = false;
-		getElement(`skipButton`).disabled = false;
-		setTimestampFromSeconds(getElement(`showTimeTotal`), getElement(`audio`).duration);
+	document.getElementById(`show-audio`).addEventListener(`loadedmetadata`, () => {
+		document.getElementById(`play-toggle`).disabled = false;
+		document.getElementById(`skip-button`).disabled = false;
+		setTimestampFromSeconds(document.getElementById(`show-time-total`), document.getElementById(`show-audio`).duration);
 	});
-	getElement(`audio`).addEventListener(`timeupdate`, updateSeekBar);
-	getElement(`audio`).addEventListener(`play`, () => getElement(`playToggle`).ariaPressed = `true`);
-	getElement(`audio`).addEventListener(`pause`, () => getElement(`playToggle`).ariaPressed = `false`);
-	getElement(`audio`).addEventListener(`ended`, endShow);
-	getElement(`audio`).addEventListener(`volumechange`, updateVolumeControls);
+	document.getElementById(`show-audio`).addEventListener(`timeupdate`, updateSeekBar);
+	document.getElementById(`show-audio`).addEventListener(`play`, () => document.getElementById(`play-toggle`).ariaPressed = `true`);
+	document.getElementById(`show-audio`).addEventListener(`pause`, () => document.getElementById(`play-toggle`).ariaPressed = `false`);
+	document.getElementById(`show-audio`).addEventListener(`ended`, endShow);
+	document.getElementById(`show-audio`).addEventListener(`volumechange`, updateVolumeControls);
 
 	// player interface events
-	getElement(`resetButton`).addEventListener(`click`, resetShow);
-	getElement(`playToggle`).addEventListener(`click`, togglePlay);
-	getElement(`skipButton`).addEventListener(`click`, skipShow);
-	getElement(`seekBar`).addEventListener(`input`, startManualSeek);
-	getElement(`seekBar`).addEventListener(`change`, endManualSeek);
-	getElement(`muteToggle`).addEventListener(`click`, toggleMute);
-	getElement(`volumeControl`).addEventListener(`input`, setVolume);
+	document.getElementById(`reset-button`).addEventListener(`click`, resetShow);
+	document.getElementById(`play-toggle`).addEventListener(`click`, togglePlay);
+	document.getElementById(`skip-button`).addEventListener(`click`, skipShow);
+	document.getElementById(`seek-bar`).addEventListener(`input`, startManualSeek);
+	document.getElementById(`seek-bar`).addEventListener(`change`, endManualSeek);
+	document.getElementById(`mute-toggle`).addEventListener(`click`, toggleMute);
+	document.getElementById(`volume-control`).addEventListener(`input`, setVolume);
 
 	// booth interface events
 	document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
 	document.getElementById(`random-banger-button`).addEventListener(`click`, () => addRandomShow(`banger`));
 	document.getElementById(`shuffle-button`).addEventListener(`click`, shuffleQueue);
-	getElement(`clearButton`).addEventListener(`click`, clearQueue);
-	getElement(`queue`).addEventListener(`click`, () => {
+	document.getElementById(`clear-button`).addEventListener(`click`, clearQueue);
+	document.getElementById(`queue`).addEventListener(`click`, () => {
 		const target = event.target.closest(`#queue > li`);
 		switch (event.target.dataset.action) {
 		case `move-up`: moveShowUp(target); break;
@@ -421,11 +418,11 @@ function initialise() {
 		case `move-down`: moveShowDown(target); break;
 		}
 	});
-	getElement(`copyButton`).addEventListener(`click`, copyQueue);
-	getElement(`importButton`).addEventListener(`click`, importQueue);
+	document.getElementById(`copy-button`).addEventListener(`click`, copyQueue);
+	document.getElementById(`import-button`).addEventListener(`click`, importQueue);
 
 	// archive interface events
-	getElement(`seriesList`).addEventListener(`click`, () => {
+	document.getElementById(`series-list`).addEventListener(`click`, () => {
 		if (event.target.tagName === `BUTTON` && `action` in event.target.dataset) {
 			const button = event.target;
 			const action = button.dataset.action;
@@ -440,10 +437,10 @@ function initialise() {
 	});
 
 	// start watching for queue changes
-	queueObserver.observe(getElement(`queue`), {"childList": true});
+	queueObserver.observe(document.getElementById(`queue`), {"childList": true});
 
 	// build up all show IDs from archive
-	const allShowsInArchive = getElement(`seriesList`).querySelectorAll(`.show-list > [data-show-id]`);
+	const allShowsInArchive = document.getElementById(`series-list`).querySelectorAll(`.show-list > [data-show-id]`);
 	for (const show of allShowsInArchive) allShowIDs.add(show.dataset.showId);
 
 	// load queue from storage
@@ -466,7 +463,7 @@ window.addEventListener(`storage`, () => {
 // on closing window/browser tab, preserve audio level
 window.addEventListener(`beforeunload`, () => {
 	// if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
-	if (getElement(`audio`).muted) getElement(`volumeControl`).value = getElement(`audio`).volume * 100;
+	if (document.getElementById(`show-audio`).muted) document.getElementById(`volume-control`).value = document.getElementById(`show-audio`).volume * 100;
 });
 
 export {

@@ -7,9 +7,6 @@
 */
 
 import {
-	getElement,
-} from "./page.js?type=module,v=2025-05-11";
-import {
 	cloneTemplate,
 } from "./templates.js?type=module,v=2025-05-11";
 
@@ -49,8 +46,8 @@ Required props:
 
 // build news feed onto page
 function buildNewsFeed(news) {
-	getElement(`newsList`).replaceChildren(...[...news.querySelectorAll(`entry`)].map(buildNewsItem));
-	getElement(`newsList`).dataset.empty = `News feed is empty.`;
+	document.getElementById(`news-list`).replaceChildren(...[...news.querySelectorAll(`entry`)].map(buildNewsItem));
+	document.getElementById(`news-list`).dataset.empty = `News feed is empty.`;
 
 	// must reset hash so navigateToSection() will apply if the hash is for a news item
 	// (as news items are loaded onto page asynchronously, the browser won't recognise that they exist when navigateToSection() is called on DOMContentLoaded)
@@ -68,7 +65,7 @@ async function loadNews() {
 		{"cache": `no-cache`},
 	);
 	if (!file.ok) {
-		getElement(`newsList`).dataset.empty = `Error: Couldn't load news feed.`;
+		document.getElementById(`news-list`).dataset.empty = `Error: Couldn't load news feed.`;
 		console.error(`Failed to fetch news feed file. Status: ${file.status}.`);
 		return;
 	}

@@ -5,10 +5,6 @@
 		* modifies metadata and nav links according to site navigation
 */
 
-import {
-	getElement,
-} from "./page.js?type=module,v=2025-05-11";
-
 // update title and currently-marked nav-link depending on hash
 function navigateToSection() {
 	document.querySelector(`[aria-current="page"]`)?.removeAttribute(`aria-current`);
@@ -21,16 +17,16 @@ function navigateToSection() {
 		// if it's a proper site section, update doc title to match and mark its nav-link as the current one
 		// else, return doc title to original
 		if (navLink) {
-			document.title = `${navLink.innerText} / ${getElement(`title`).dataset.original}`;
+			document.title = `${navLink.innerText} / ${document.head.querySelector(`title`).dataset.original}`;
 			navLink.setAttribute(`aria-current`, `page`);
-		} else document.title = getElement(`title`).dataset.original;
-	} else document.title = getElement(`title`).dataset.original;
+		} else document.title = document.head.querySelector(`title`).dataset.original;
+	} else document.title = document.head.querySelector(`title`).dataset.original;
 }
 
 // initialise navigation
 function initialise() {
 	// update page head data
-	getElement(`title`).dataset.original = document.title;
+	document.head.querySelector(`title`).dataset.original = document.title;
 
 	// update metadata for initial hash
 	if (location.hash) navigateToSection();

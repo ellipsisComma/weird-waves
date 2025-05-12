@@ -8,9 +8,6 @@
 */
 
 import {
-	getElement,
-} from "./page.js?type=module,v=2025-05-11";
-import {
 	getTemplate,
 } from "./templates.js?type=module,v=2025-05-11";
 
@@ -28,7 +25,7 @@ function toggleSetting(setting) {
 
 	switch (setting) {
 	case `flatPlayer`:
-		getElement(`loadedShow`)?.classList.toggle(`flat-player`, local.flatPlayer);
+		document.getElementById(`loaded-show`)?.classList.toggle(`flat-player`, local.flatPlayer);
 		break;
 	case `notesOpen`:
 		for (const notes of document.querySelectorAll(`.content-notes`)) notes.toggleAttribute(`open`, getSetting(`notesOpen`));
@@ -59,7 +56,7 @@ function initialise() {
 		toggle.addEventListener(`click`, () => toggleSetting(setting));
 		toggle.closest(`.pre-initialised-control`).classList.remove(`pre-initialised-control`);
 	}
-	getElement(`loadedShow`)?.classList.toggle(`flat-player`, getSetting(`flatPlayer`));
+	document.getElementById(`loaded-show`)?.classList.toggle(`flat-player`, getSetting(`flatPlayer`));
 }
 
 // update settings if settings change in another browsing context

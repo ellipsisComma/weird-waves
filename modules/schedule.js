@@ -6,9 +6,6 @@
 */
 
 import {
-	getElement,
-} from "./page.js?type=module,v=2025-05-11";
-import {
 	addShow,
 } from "./player.js?type=module,v=2025-05-11";
 
@@ -51,14 +48,14 @@ Required props:
 	document.getElementById(`schedule-blurb`)?.setContent(schedule.blurb);
 	document.getElementById(`add-schedule-button`)?.addEventListener(`click`, () => {
 		for (const ID of schedule.shows) addShow(ID);
-		getElement(`schedule`).remove();
+		document.getElementById(`schedule-container`).remove();
 	});
-	getElement(`schedule`)?.removeAttribute(`hidden`);
+	document.getElementById(`schedule-container`)?.removeAttribute(`hidden`);
 }
 
 // fetch and parse weekly schedule
 async function loadSchedule() {
-	if (!getElement(`schedule`)) return;
+	if (!document.getElementById(`schedule-container`)) return;
 
 	const path = schedulePath(getWeekStartDate());
 	const file = await fetch(
