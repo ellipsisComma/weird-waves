@@ -310,19 +310,9 @@ function togglePlay() {
 
 // end current show and autoplay next show if current show was playing
 function skipShow() {
-	if (
-		document.getElementById(`queue`).children.length === 0
-//		||
-//		!document.getElementById(`show-audio`).duration
-	) return;
+	if (document.getElementById(`queue`).children.length === 0) return;
 	if (!document.getElementById(`show-audio`).paused) document.getElementById(`show-audio`).dataset.playNextShow = `true`;
 	removeShow(document.getElementById(`queue`).firstElementChild);
-/*
-	// seek to 5 seconds before end, unless that's before currentTime
-	if (document.getElementById(`show-audio`).currentTime < document.getElementById(`show-audio`).duration - 5) {
-		document.getElementById(`show-audio`).currentTime = document.getElementById(`show-audio`).duration - 5;
-	}
-*/
 }
 
 // change seek bar to match audio unless audio metadata unavailable
