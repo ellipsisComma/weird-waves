@@ -35,10 +35,7 @@ UTILITIES
 
 // show file path builder
 function showPath(showId) {
-	const showIdParts = showId.split(`-`);
-	const seriesCode = showIdParts.shift();
-	const showCode = showIdParts.join(`-`);
-	return `./audio/shows/${seriesCode}/${showCode}.mp3`;
+	return `./audio/shows/${showId.replace(`-`, `/`)}.mp3`;
 }
 
 // convert time in seconds to minutes:seconds timestamp
