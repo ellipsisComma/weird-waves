@@ -312,7 +312,7 @@ function togglePlay() {
 function skipShow() {
 	if (document.getElementById(`queue`).children.length === 0) return;
 	if (!document.getElementById(`show-audio`).paused) document.getElementById(`show-audio`).dataset.playNextShow = `true`;
-	removeShow(document.getElementById(`queue`).firstElementChild);
+	document.getElementById(`show-audio`).dispatchEvent(new CustomEvent(`ended`));
 }
 
 // change seek bar to match audio unless audio metadata unavailable
