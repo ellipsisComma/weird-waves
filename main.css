@@ -549,7 +549,7 @@ textarea {
 	:focus-visible {
 		outline: revert;
 	}
-	#volume-control::-webkit-slider-thumb {
+	#volume-slider::-webkit-slider-thumb {
 		transform: translateY(calc(-1.5 * var(--gap-size)));
 	}
 	/* at :root font-size 100%, 43.75rem = 700px */
@@ -965,7 +965,7 @@ var {
 		border-radius: 50%;
 	}
 }
-#volume-control {
+#volume-slider {
 	--thumb-block-size: 1.2em;
 	--thumb-inline-size: 0.75em;
 	inline-size: 5em;

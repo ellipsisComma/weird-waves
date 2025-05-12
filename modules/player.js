@@ -359,17 +359,17 @@ function toggleMute() {
 
 // set audio volume
 function setVolume() {
-	document.getElementById(`show-audio`).volume = document.getElementById(`volume-control`).value / 100;
+	document.getElementById(`show-audio`).volume = document.getElementById(`volume-slider`).value / 100;
 	if (document.getElementById(`show-audio`).muted) toggleMute();
 }
 
 // update state of mute button and volume slider to match show audio state
 function updateVolumeControls() {
 	if (document.getElementById(`show-audio`).muted || document.getElementById(`show-audio`).volume === 0) {
-		document.getElementById(`volume-control`).value = 0;
+		document.getElementById(`volume-slider`).value = 0;
 		document.getElementById(`mute-toggle`).ariaPressed = `true`;
 	} else {
-		document.getElementById(`volume-control`).value = document.getElementById(`show-audio`).volume * 100;
+		document.getElementById(`volume-slider`).value = document.getElementById(`show-audio`).volume * 100;
 		document.getElementById(`mute-toggle`).ariaPressed = `false`;
 	}
 }
@@ -403,7 +403,7 @@ function initialise() {
 	document.getElementById(`seek-bar`).addEventListener(`input`, startManualSeek);
 	document.getElementById(`seek-bar`).addEventListener(`change`, endManualSeek);
 	document.getElementById(`mute-toggle`).addEventListener(`click`, toggleMute);
-	document.getElementById(`volume-control`).addEventListener(`input`, setVolume);
+	document.getElementById(`volume-slider`).addEventListener(`input`, setVolume);
 
 	// booth interface events
 	document.getElementById(`random-show-button`).addEventListener(`click`, () => addRandomShow(`all`));
@@ -463,7 +463,7 @@ window.addEventListener(`storage`, () => {
 // on closing window/browser tab, preserve audio level
 window.addEventListener(`beforeunload`, () => {
 	// if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
-	if (document.getElementById(`show-audio`).muted) document.getElementById(`volume-control`).value = document.getElementById(`show-audio`).volume * 100;
+	if (document.getElementById(`show-audio`).muted) document.getElementById(`volume-slider`).value = document.getElementById(`show-audio`).volume * 100;
 });
 
 export {
