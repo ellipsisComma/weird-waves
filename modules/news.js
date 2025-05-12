@@ -65,7 +65,7 @@ async function loadNews() {
 		{"cache": `no-cache`},
 	);
 	if (!file.ok) {
-		document.getElementById(`news-list`).dataset.empty = `Error: Couldn't load news feed.`;
+		document.getElementById(`news-list`).dataset.empty = `Error: Couldn't load news feed. Try refreshing the page.`;
 		console.error(`Failed to fetch news feed file. Status: ${file.status}.`);
 		return;
 	}
