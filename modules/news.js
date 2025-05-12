@@ -8,7 +8,7 @@
 
 import {
 	cloneTemplate,
-} from "./templates.js?type=module,v=2025-05-11";
+} from "./templates.js?type=module,v=2025-05-12";
 
 // build HTML for news item
 function buildNewsItem(item) {

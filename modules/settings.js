@@ -9,7 +9,7 @@
 
 import {
 	getTemplate,
-} from "./templates.js?type=module,v=2025-05-11";
+} from "./templates.js?type=module,v=2025-05-12";
 
 // initialise local settings object
 const local = localStorageGet(`settings`, {});
