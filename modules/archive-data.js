@@ -11,7 +11,7 @@
 
 // banger = good show, but in a multi-show run only first part will be marked as a banger
 
-const archive = [
+const archiveData = [
 {
 "code": `ByM`,
 "heading": `<cite>Beyond Midnight</cite>`,
@@ -2198,7 +2198,7 @@ Optional props:
 // build series element ID for linking
 // build show ID for each show (helps during archive-building, because all relevant data is inside each show object instead of split between show object and series metadata)
 // add negatives for series.copyrightSafe, show.notes, and show.banger
-for (const series of archive) {
+for (const series of archiveData) {
 	series.elementId = `archive-${series.code}`;
 	if (typeof series.copyrightSafe === `undefined`) series.copyrightSafe = false;
 
@@ -2210,5 +2210,5 @@ for (const series of archive) {
 }
 
 export {
-	archive,
+	archiveData,
 };

@@ -13,7 +13,7 @@ import {
 	getSetting,
 } from "./settings.js?type=module,v=2025-05-12";
 import {
-	archive
+	archiveData
 } from "./archive-data.js?type=module,v=2025-05-12";
 
 // build an archive nav-link
@@ -69,14 +69,14 @@ function buildSeries(series) {
 // build archive onto page and runtime
 function buildArchive() {
 	// return if archive is improperly defined
-	if (!Array.isArray(archive)) return;
+	if (!Array.isArray(archiveData)) return;
 
-	document.getElementById(`series-list`).replaceChildren(...archive.map(buildSeries));
-	document.getElementById(`archive-series-links`).replaceChildren(...archive.map(buildSeriesLink));
+	document.getElementById(`series-list`).replaceChildren(...archiveData.map(buildSeries));
+	document.getElementById(`archive-series-links`).replaceChildren(...archiveData.map(buildSeriesLink));
 
 	// build out and reveal stats
-	document.getElementById(`stats-series`)?.setContent(String(archive.length));
-	document.getElementById(`stats-shows`)?.setContent(String(archive.reduce((a, series) => a + series.shows.length, 0)));
+	document.getElementById(`stats-series`)?.setContent(String(archiveData.length));
+	document.getElementById(`stats-shows`)?.setContent(String(archiveData.reduce((a, series) => a + series.shows.length, 0)));
 	document.getElementById(`stats`)?.removeAttribute(`hidden`);
 }
 
