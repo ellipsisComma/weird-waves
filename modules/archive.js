@@ -8,13 +8,13 @@
 
 import {
 	cloneTemplate,
-} from "./templates.js?type=module,v=2025-05-12";
+} from "./templates.js?type=module,v=2025-05-13";
 import {
 	getSetting,
-} from "./settings.js?type=module,v=2025-05-12";
+} from "./settings.js?type=module,v=2025-05-13";
 import {
 	archiveData
-} from "./archive-data.js?type=module,v=2025-05-12";
+} from "./archive-data.js?type=module,v=2025-05-13";
 
 // build an archive nav-link
 function buildSeriesLink(series) {
