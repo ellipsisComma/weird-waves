@@ -447,7 +447,6 @@ button, select {
 	color: inherit;
 	background-color: unset;
 	border: unset;
-	user-select: none;
 }
 button > * {
 	pointer-events: none;
