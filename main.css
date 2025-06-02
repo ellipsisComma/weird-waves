@@ -485,7 +485,7 @@ textarea {
 .visually-hidden {
 	block-size: 1px;
 	inline-size: 1px;
-	position: absolute;
+	position: fixed;
 	overflow: hidden;
 	white-space: nowrap;
 	clip-path: inset(50%);
