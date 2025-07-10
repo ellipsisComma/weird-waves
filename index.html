@@ -74,16 +74,16 @@
 		</g>
 	</symbol>
 	<symbol id="svg-streaming">
-		<clipPath id="svg-tower-clip">
-			<use href="#svg-tower" />
-		</clipPath>
-		<path id="svg-tower" d="M4 23a24 24 0 0 0 8-16a24 24 0 0 0 8 16" />
-		<path d="M0 14h24m0 3h-24m0 3h24" clip-path="url(#svg-tower-clip)" />
-		<circle cx="12" cy="7" r="2" />
 		<defs>
+			<clipPath id="svg-tower-clip">
+				<use href="#svg-tower" />
+			</clipPath>
 			<path id="svg-pre-lightning" class="svg-accent-stroke" d="M-7 0l4 1-1-2 4 1" />
 			<use id="svg-lightning" href="#svg-pre-lightning" x="8" y="7" />
 		</defs>
+		<path id="svg-tower" d="M4 23a24 24 0 0 0 8-16a24 24 0 0 0 8 16" />
+		<path d="M0 14h24m0 3h-24m0 3h24" clip-path="url(#svg-tower-clip)" />
+		<circle cx="12" cy="7" r="2" />
 		<g id="svg-lightning-left">
 			<use href="#svg-lightning" transform="rotate(-30, 12, 7)" />
 			<use href="#svg-lightning" />
