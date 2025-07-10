@@ -493,11 +493,6 @@ textarea {
 .pre-initialised-control {
 	visibility: hidden;
 }
-#svg-defs {
-	position: absolute;
-	block-size: 0;
-	inline-size: 0;
-}
 @media (forced-colors: active) or (prefers-contrast: more) {
 	/*
 	In Firefox, the colour patch can be as follows
