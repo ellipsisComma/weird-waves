@@ -654,7 +654,7 @@ textarea {
 :root {
 	font-size: 100%;
 	transition-property: --fore-colour, --back-colour, --hot-colour, --cold-colour;
-	transition-duration: 1s;
+	transition-duration: 0s;
 }
 body {
 	margin: 0;
