@@ -863,7 +863,7 @@ code {
 	border-inline-start-width: var(--line-width);
 	border-inline-start-style: dashed;
 	border-inline-start-color: var(--box-border-colour);
-	overflow-x: auto;
+	overflow: auto;
 	& > code {
 		tab-size: 2ch;
 	}
@@ -1502,8 +1502,8 @@ select {
 		border-color: var(--box-border-colour);
 	}
 	#player-app {
-		overflow-y: auto;
-		max-block-size: calc(100vh - calc(2 * var(--gap-size)));
+		overflow: auto;
+		max-block-size: calc(100vb - calc(2 * var(--gap-size)));
 	}
 	#loaded-show > .show-heading {
 		display: block;
