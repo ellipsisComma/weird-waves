@@ -2,25 +2,25 @@
 
 import {
 	initialise as initialiseSettings,
-} from "./modules/settings.js?type=module,v=2025-05-13";
+} from "settings";
 import {
 	initialise as initialiseStyles,
-} from "./modules/styles.js?type=module,v=2025-05-13";
+} from "styles";
 import {
 	buildArchive,
-} from "./modules/archive.js?type=module,v=2025-05-13";
+} from "archive";
 import {
 	initialise as initialisePlayer,
-} from "./modules/player.js?type=module,v=2025-05-13";
+} from "player";
 import {
 	loadSchedule,
-} from "./modules/schedule.js?type=module,v=2025-05-13";
+} from "schedule";
 import {
 	loadNews,
-} from "./modules/news.js?type=module,v=2025-05-13";
+} from "news";
 import {
 	initialise as initialiseNav,
-} from "./modules/navigation.js?type=module,v=2025-05-13";
+} from "navigation";
 
 // on pageload, execute various tasks
 // sync tasks

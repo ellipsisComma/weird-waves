@@ -7,7 +7,7 @@
 
 import {
 	addShow,
-} from "./player.js?type=module,v=2025-05-13";
+} from "player";
 
 // schedule file path builder (date is a Date object)
 function schedulePath(date) {

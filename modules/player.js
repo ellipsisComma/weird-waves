@@ -10,10 +10,10 @@
 
 import {
 	cloneTemplate,
-} from "./templates.js?type=module,v=2025-05-13";
+} from "templates";
 import {
 	getSetting,
-} from "./settings.js?type=module,v=2025-05-13";
+} from "settings";
 
 // mutation observer to store queue changes
 const queueObserver = new MutationObserver((mutations) => {
