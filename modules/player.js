@@ -432,6 +432,9 @@ function initialise() {
 
 	// load queue from storage
 	loadQueue();
+
+	// update player state
+	updateVolumeControls();
 }
 
 
@@ -445,12 +448,6 @@ window.addEventListener(`storage`, () => {
 	// however, that adds an extra tech and it'd be less robust than rebuilding the queue from scratch
 	loadQueue();
 	console.info(`automatically matched queue change in another browsing context`);
-});
-
-// on closing window/browser tab, preserve audio level
-window.addEventListener(`beforeunload`, () => {
-	// if someone refreshes the page while audio is muted, the volume slider returns to the unmuted volume before page unloads, so it can load in at the same level when the page reloads
-	if (document.getElementById(`show-audio`).muted) document.getElementById(`volume-slider`).value = document.getElementById(`show-audio`).volume * 100;
 });
 
 export {
